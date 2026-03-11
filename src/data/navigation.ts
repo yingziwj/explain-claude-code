@@ -66,7 +66,7 @@ export const navSections: NavSection[] = [
 	{
 		title: 'Platforms and integrations',
 		items: [
-			{ title: 'Remote Control', path: '/docs/en/remote-control', summary: '远程使唤这个帮手。', description: '人不在跟前，也能安排它干活。' },
+			{ title: 'Remote Control', path: '/docs/en/remote-control', summary: '人离开电脑了，也能用手机或浏览器接着使唤本机里的 Claude Code。', description: '活还是在你自己机器上跑，只是多开了个远程窗户，方便你边走边盯。' },
 			{ title: 'Claude Code on the web', path: '/docs/en/claude-code-on-the-web', summary: '在网页上用。', description: '不用本地折腾太多，也能直接开工。' },
 			{ title: 'Claude Code on desktop', path: '/docs/en/desktop', summary: '在桌面端用。', description: '像平时开软件一样使用 Claude Code。' },
 			{ title: 'Chrome extension (beta)', path: '/docs/en/chrome', summary: '浏览器扩展怎么配合。', description: '把它带进浏览器里帮你看页面和做事。' },
