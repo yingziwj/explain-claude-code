@@ -34,32 +34,32 @@ export const navSections: NavSection[] = [
 			{
 				title: 'How Claude Code works',
 				path: '/docs/en/how-claude-code-works',
-				summary: '讲清楚它怎么听你吩咐、怎么看文件、怎么一步步干活。',
-				description: '把 Claude Code 当成识字快、手脚麻利的助手，先看现场，再按你的话干活。'
+				summary: '讲清楚它咋一边看现场、一边动手、一边验活，不是瞎忙，是有套路地转圈干活。',
+				description: '这一页把 Claude Code 的干活路数讲透：先摸情况，再出手，再回头检查，像靠谱师傅修屋先看漏点、再补缝、再泼水验。'
 			},
 			{
 				title: 'Extend Claude Code',
 				path: '/docs/en/features-overview',
-				summary: '告诉你这个帮手还能接什么工具、长什么本事。',
-				description: '像给拖拉机挂上不同农具，Claude Code 也能接不同能力一起用。'
+				summary: '告诉你怎么给这个帮手加家伙事，把规矩、外援、自动化都接上，不只会干基础活。',
+				description: '像给拖拉机挂犁、挂播种机、挂收割机，Claude Code 也能靠 skills、MCP、hooks、subagents 长出不同本事。'
 			},
 			{
 				title: 'Store instructions and memories',
 				path: '/docs/en/memory',
-				summary: '让它记住家里的规矩，别每次都从头交代。',
-				description: '把常用要求记下来，以后再来干活，它就知道先按什么规矩办。'
+				summary: '让它把家规和干活经验都记住，省得每回开工都从头念一遍。',
+				description: '这一页讲清楚 `CLAUDE.md` 和 auto memory 的分工：一个像墙上家规，一个像老帮工随手记的小本子。'
 			},
 			{
 				title: 'Common workflows',
 				path: '/docs/en/common-workflows',
-				summary: '讲常见干活套路，像修水管、翻地、收庄稼那样有固定步骤。',
-				description: '常见事情怎么让 Claude Code 配合你做，会比瞎试更稳。'
+				summary: '把常见活路拆成顺手套路，像看新地、查毛病、翻旧屋、补测试，都有固定走法。',
+				description: '这一页不讲空话，专讲日常怎么派活给 Claude Code，照着这些套路走，比临时瞎比画稳得多。'
 			},
 			{
 				title: 'Best practices',
 				path: '/docs/en/best-practices',
-				summary: '教你少走弯路，别把好帮手用成乱帮手。',
-				description: '你话说得越清楚、边界定得越明白，它干出来的活就越像样。'
+				summary: '教你怎么把这个好帮手使唤顺，少跑偏、少返工、少把上下文搅成一锅粥。',
+				description: '这一页全是实战窍门：目标说清、尺子给够、规矩写短、会话别搅浑，这样 Claude Code 才越干越顺手。'
 			}
 		]
 	},

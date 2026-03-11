@@ -1,0 +1,122 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('memory');
+
+if (!doc) {
+	throw new Error('Memory doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Core concepts</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">Store instructions and memories 让它记规矩</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/memory" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 Store instructions and memories</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">一句人话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>
+					官方这页讲的是：Claude Code 每次新开工，聊天窗本身是新的，但它并不是完全失忆。
+					你可以靠两样东西，让它下次还记得门道。
+				</p>
+				<p>
+					第一样是你亲手写的 <code>CLAUDE.md</code>，像贴在墙上的家规。
+					第二样是它自己记下来的 auto memory，像老帮工在小本子上记的经验。
+				</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">官方说的两种“记性”</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p><strong>`CLAUDE.md`：</strong> 你写。适合写规则、流程、架构、命名法、测试命令这些明确规矩。</p>
+				<p><strong>Auto memory：</strong> Claude 自己写。适合记它从你纠正里学到的习惯、调试经验、构建命令之类。</p>
+				<p style="color: var(--muted);">
+					官方特别提醒：这两样都算“上下文提示”，不是铁打的硬配置。
+					所以写得越具体、越简短，它照做的稳定性越高。
+				</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">`CLAUDE.md` 该放哪儿</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>官方给了几层位置，各管各的地盘。</p>
+				<p>项目级：`./CLAUDE.md` 或 `./.claude/CLAUDE.md`。这最常用，适合团队共用，能跟着 Git 一起走。</p>
+				<p>个人级：`~/.claude/CLAUDE.md`。这是你自己的偏好，所有项目都能吃到。</p>
+				<p>组织级：系统目录里的 `CLAUDE.md`。适合公司统一下发安全、合规、开发规范。</p>
+				<p>官方还说：目录越具体，通常越更贴近眼前这块活。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">项目里的家规，官方建议写什么</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>适合写进项目 `CLAUDE.md` 的，多半是这些：</p>
+				<p style="color: var(--muted);">怎么 build、怎么 test、代码风格、架构决策、命名约定、常见工作流程、哪些坑容易踩。</p>
+				<p>
+					官方建议先跑 <code>/init</code>，让 Claude 先根据仓库自动起个草稿。
+					你再补上那些它靠读代码看不出来、但团队确实一直这么干的规矩。
+				</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">写规矩别写成裹脚布</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>
+					官方反复提醒：`CLAUDE.md` 不是越长越好。
+					它每次开工都会读，写太多，真正重要的规矩反而会淹没。
+				</p>
+				<p style="color: var(--muted);">
+					所以要写“真会影响结果”的东西，比如必须用哪个命令、必须守哪条流程、这个项目有啥反常识的坑。
+					那些看代码自己就能看出来的、或者大而空的套话，能删就删。
+				</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">官方还给了两招，适合大项目</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>1. 可以用 `@路径` 把别的文件引进来，比如把项目总览、Git 规则另外放。</p>
+				<p>2. 可以用 `.claude/rules/` 把规则拆开，按目录或文件类型分家，不必全挤在一张纸上。</p>
+				<p>
+					这就像大院子不会把猪圈、仓库、菜地规矩全写一张纸上，而是各处贴各处的提醒牌。
+				</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">Auto memory 又是咋回事</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>
+					它不是你手写规矩，而是 Claude 在长期干活过程中，自己总结出来的“小抄”。
+					比如某个项目实际要跑哪条命令、某类报错通常在哪儿查、你平时更喜欢哪种做法。
+				</p>
+				<p style="color: var(--muted);">
+					官方说它按 working tree 记，也就是说，不同工作树、不同并行分支，记下来的经验也能分开。
+					每次开工默认只装前 200 行，避免把整个本子都塞满上下文。
+				</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">这页最实在的结论</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>长期有效、团队共识的规矩，写进 `CLAUDE.md`。</p>
+				<p>零零碎碎、干着干着学出来的经验，让 auto memory 去记。</p>
+				<p>规则太长、太散、太空，效果会变差。宁可短一点，也要句句顶用。</p>
+				<p>如果你发现它老不照规矩办，先别急着怪它，先回头查查你的 `CLAUDE.md` 是不是写糊了、写胖了、写冲突了。</p>
+			</div>
+		</section>
+	</article>
+</Layout>

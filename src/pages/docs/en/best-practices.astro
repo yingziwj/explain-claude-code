@@ -1,0 +1,134 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('best-practices');
+
+if (!doc) {
+	throw new Error('Best practices doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Core concepts</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">Best practices 使唤它的窍门</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/best-practices" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 Best practices</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">一句人话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>
+					官方这一页就是在说：Claude Code 不是“随便喊两句就永远干得漂亮”的神仙，它更像一个很能干、但也要你带得对路的师傅。
+				</p>
+				<p>
+					你带得好，它省你大把力气；你带得乱，它也可能在错误方向上越跑越远。
+					所以这页讲的，就是怎么少返工、少跑偏、少把上下文搅浑。
+				</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">官方最看重的一条：给它验收尺子</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>
+					官方把这条放得很靠前，而且意思非常硬：你最好给 Claude 一个能自查的标准。
+					比如测试、截图、期望输出、lint 结果，这些都行。
+				</p>
+				<p style="color: var(--muted);">
+					没有验收尺子，它就容易做出“看起来像对的，其实没真成”的东西。
+					有了尺子，它能自己反复比、自己修，不用你次次站旁边盯。
+				</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">官方推荐的顺序：先探路，再画图，再施工</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>先 Explore：先读目录、读关键文件、弄懂现在是咋跑的。</p>
+				<p>再 Plan：让它说清楚要改哪些文件、风险在哪儿、顺序怎么排。</p>
+				<p>最后才 Code：方案看着靠谱了，再让它真改。</p>
+				<p>
+					官方甚至专门推荐 Plan Mode 来分开“研究”和“施工”。
+					这很像修房前先量尺画线，不是扛起锤子就砸。
+				</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">话别说虚，要把现场交代明白</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>官方建议 prompt 要具体，最好带上目录、文件、约束、参考样例、期望结果。</p>
+				<p style="color: var(--muted);">
+					比如别只说“修登录问题”，而是说“问题在 `src/auth/`，重点看 session handling，先写失败测试再修”。
+				</p>
+				<p>你话说得越像施工单，它干得越像样；你话说得越像谜语，它就越容易靠猜。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">环境先配顺，后头少打断</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>
+					官方建议尽早把 `CLAUDE.md`、permissions、hooks、MCP、skills 这些基础配好。
+					尤其 `CLAUDE.md`，可以先用 <code>/init</code> 起草。
+				</p>
+				<p style="color: var(--muted);">
+					`CLAUDE.md` 里该放的，是 Claude 看代码自己看不出来、但又经常会影响结果的规矩。
+					写太长会坏事，因为常驻上下文一胖，重要规则就容易被淹。
+				</p>
+				<p>官方还提醒：能用 hook 硬执行的，别全靠文字提醒。比如“每次改完都跑 eslint”，这就很适合 hook。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">上下文是金贵东西，要舍得清</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>官方几乎整页都在围着 context 打转，这不是小题大做。</p>
+				<p>因为上下文一满，Claude 早先的话可能记不牢，判断也会变钝。</p>
+				<p>所以不相关的新活，最好 `/clear` 后再说；长调查尽量用 subagent；大块资料做成按需 skill；别把一次会话搅成大杂烩。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">发现它跑偏，早点扳回来</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>官方建议 course-correct early and often，也就是别等它跑出二里地才喊停。</p>
+				<p style="color: var(--muted);">
+					第一次不对就纠，第二次还不对，就考虑清空上下文，换个更清楚的开头重来。
+					老在一个脏上下文里修修补补，常常越修越乱。
+				</p>
+				<p>另外它有 checkpoint，改坏了能回退，所以别怕试，但也别不验就信。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">官方点名的几个常见坑</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>1. 一个会话里掺太多不相关活，像一个本子里记收成、修屋、借钱，全搅一块。</p>
+				<p>2. 明明已经连续纠错几次了，还在同一摊泥里打滚，不肯重开一局。</p>
+				<p>3. `CLAUDE.md` 写得又长又空，重要规则被废话埋了。</p>
+				<p>4. 只看它写得像不像，不看它到底跑没跑通，掉进“看起来靠谱”的坑。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">最后一句土办法</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>
+					把 Claude Code 当成一个会自己找工具、自己跑流程的熟练工。
+					你最该做的，不是替它敲每一锤，而是把目标、边界、验收标准、院里规矩交代清。
+				</p>
+				<p style="color: var(--muted);">
+					官方这整页绕来绕去，其实就落在这句话上：让它有路可走，有尺可量，有规可守。
+				</p>
+			</div>
+		</section>
+	</article>
+</Layout>

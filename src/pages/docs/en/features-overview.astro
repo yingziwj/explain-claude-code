@@ -1,0 +1,128 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('features-overview');
+
+if (!doc) {
+	throw new Error('Extend Claude Code doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Core concepts</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">Extend Claude Code 给它加本事</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/features-overview" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 Extend Claude Code</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">一句人话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>
+					这一页官方在讲的，其实就是一句：默认的 Claude Code 已经能干不少活，但你还能继续给它装家伙、教规矩、接外援。
+				</p>
+				<p>
+					像拖拉机原本就能跑地，可你再给它挂犁、挂播种机、挂收割机，它能干的活就完全不一样了。
+				</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">官方说的几种“加本事”办法</h2>
+			<div class="mt-6 grid gap-4 md:grid-cols-2">
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="font-semibold text-lg">`CLAUDE.md`</h3>
+					<p class="mt-3 leading-8" style="color: var(--muted);">
+						每次开工都要带上的常驻规矩。比如“统一用 pnpm”“提交前跑测试”“这个目录别乱动”。
+					</p>
+				</div>
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="font-semibold text-lg">Skills</h3>
+					<p class="mt-3 leading-8" style="color: var(--muted);">
+						可重复拿出来用的知识和流程。像一本专门小册子，需要时再翻，不用每次都整本背在身上。
+					</p>
+				</div>
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="font-semibold text-lg">MCP</h3>
+					<p class="mt-3 leading-8" style="color: var(--muted);">
+						给它接外面系统。比如 Jira、Slack、数据库、浏览器、你自家工具，都能接进来。
+					</p>
+				</div>
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="font-semibold text-lg">Hooks / Subagents / Plugins</h3>
+					<p class="mt-3 leading-8" style="color: var(--muted);">
+						Hook 像固定机关，条件一到就自动触发；Subagent 像分出去的小工；Plugin 则像把一整套工具包成箱子，方便复用和分发。
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">先别贪多，官方建议从哪儿开始</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>
+					官方写得很明白：新手先从 <code>CLAUDE.md</code> 开始。
+					因为这是最直接、最稳的一层，先把项目规矩写清，很多问题就已经少一半了。
+				</p>
+				<p style="color: var(--muted);">
+					等你发现“有些知识不是每次都要带着”“有些动作想自动跑”“有些信息在外部系统里”，再上 skills、hooks、MCP 这些更细的家伙。
+				</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">几个容易搞混的东西，官方帮你分了家</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>Skill 和 Subagent 不一样。Skill 像说明书，Subagent 像分出去单干的小工。</p>
+				<p>`CLAUDE.md` 和 Skill 也不一样。前者是每次都带着的常驻规矩，后者是按需翻出来的专题册子。</p>
+				<p>MCP 和 Skill 也别混。Skill 主要教它“怎么想、怎么做”，MCP 是让它“能摸到外面的东西”。</p>
+				<p>Agent team 比 Subagent 更像一群分头干活的人，各自跑独立会话，再互相协作。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">这些能力是怎么叠起来的</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>
+					官方说得很细：有些东西是“叠加”的，有些东西是“同名覆盖”的。
+					比如多个 `CLAUDE.md` 会一起生效，目录越具体，通常越更有分量。
+				</p>
+				<p style="color: var(--muted);">
+					而 skills、subagents、MCP 往往看名字来决定谁压过谁。也就是说，家里、项目里、插件里都可能定义一份，但最后只认优先级更高的那份。
+				</p>
+				<p>这就像村里规矩、队里规矩、你家院里规矩同时存在。大规矩管大面，小规矩管眼前这块地。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">别把车挂太多犁，官方专门提醒了上下文成本</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>官方专门讲了一节 context cost，这点很关键。</p>
+				<p style="color: var(--muted);">
+					不是你装的本事越多越好。因为每加一层，Claude 的上下文窗口都可能更挤，杂音也会更多。
+				</p>
+				<p>
+					`CLAUDE.md` 是每次都带着，成本最高；skills 一开始通常只带简介，用到时才把正文搬进来；MCP 服务器会把工具定义带进每次请求；hooks 基本不吃上下文，因为它在外头跑。
+				</p>
+				<p>所以官方建议：常驻的少而精，偶尔才用的大块内容尽量做成 skills，别全塞进 `CLAUDE.md`。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">怎么搭配，最像样</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>`CLAUDE.md` 管总规矩，skill 放细说明，这是最常见的一套。</p>
+				<p>需要自动化死规矩时，用 hook，比光靠嘴上提醒更硬。</p>
+				<p>要查外部资料、改工单、发消息，就上 MCP。</p>
+				<p>要让它并行研究、隔离长调查、避免主会话撑爆，就用 subagent 或 agent team。</p>
+				<p>要把这些能力打包带到多个仓库，或者给别人装同一套，再考虑 plugin。</p>
+			</div>
+		</section>
+	</article>
+</Layout>
