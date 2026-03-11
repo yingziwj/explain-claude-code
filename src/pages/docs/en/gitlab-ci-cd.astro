@@ -1,0 +1,60 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('gitlab-ci-cd');
+
+if (!doc) {
+	throw new Error('GitLab CI/CD doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Code review &amp; CI/CD</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">GitLab CI/CD GitLab 流水线</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/gitlab-ci-cd" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 GitLab CI/CD</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">一句人话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>跟 GitHub Actions 那页一个路数，只不过这回是把帮工安排进 GitLab 自家的流水线里。</p>
+				<p>像你们村不是用东边合作社，而是用西边粮站，那就按粮站的传送带规矩把工人塞进去，活还是那几样活。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">官方这页最核心的路数</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>1. GitLab 监听触发条件，比如 issue、MR、review 线程里有人提到 <code>@claude</code>。</p>
+				<p>2. 作业把线程上下文和仓库内容收拢起来，拼成提示词交给 Claude Code。</p>
+				<p>3. Claude 在受限容器里跑，最后把结果通过 MR 交回来。</p>
+				<p>这等于整个过程都在流水线箱子里完成，改动最后还是要经过正常 MR 审核。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">它支持哪些“供货渠道”</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>GitLab 这页有个特点，是 provider 讲得更细。</p>
+				<p style="color: var(--muted);">官方说你可以按环境选 Claude API、AWS Bedrock、Google Vertex AI。</p>
+				<p style="color: var(--muted);">所以如果你公司云上规矩多、地区合规要求严，GitLab 方案弹性会比较大。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">最快起步</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>官方给的最短路是：先把 <code>ANTHROPIC_API_KEY</code> 设成 masked CI/CD variable，再往 <code>.gitlab-ci.yml</code> 里加一个 Claude job。</p>
+				<p style="color: var(--muted);">文档示例里直接用 <code>node:24-alpine3.21</code>，并示意你可以按 <code>web</code> 触发、MR 事件触发，或者评论里带 <code>@claude</code> 这种方式触发。</p>
+				<p>意思很简单：先把进场证和工具箱准备好，再把“什么时候上场”写进流水线规则。</p>
+			</div>
+		</section>
+	</article>
+</Layout>

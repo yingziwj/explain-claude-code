@@ -1,0 +1,61 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('github-actions');
+
+if (!doc) {
+	throw new Error('GitHub Actions doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Code review &amp; CI/CD</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">GitHub Actions GitHub 自动流程</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/github-actions" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 GitHub Actions</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">一句人话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>这就是把 Claude Code 塞进 GitHub 的自动流水线里，让代码仓库自己一有动静就喊它干活。</p>
+				<p>像你给合作社立了规矩：谁报了工单、谁在 issue 里喊了帮忙、谁发了某种评论，就自动把活派给那个熟练帮工，不用你手动叫人。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">官方说它值在哪儿</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>1. 你描述需求，它能直接起完整 PR。</p>
+				<p>2. issue 可以一键变成实际代码改动。</p>
+				<p>3. 它会遵守你仓库里的 <code>CLAUDE.md</code> 和现有代码习惯。</p>
+				<p>4. 默认跑在 GitHub runner 上，代码不必离开你熟悉的流水线地盘。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">最快的装法</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>官方推荐的最快办法，是在终端里打开 Claude，直接跑：</p>
+				<pre class="overflow-x-auto rounded-2xl px-4 py-4 text-sm leading-7" style="background: var(--ink); color: var(--paper);"><code>/install-github-app</code></pre>
+				<p style="color: var(--muted);">这个命令会带你装 GitHub app、配需要的 secrets。</p>
+				<p style="color: var(--muted);">但它要求你是仓库管理员，而且这个 quick setup 只适合直接用 Claude API 的人。走 Bedrock、Vertex AI 的，要看官方另外那套配置。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">适合什么活</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>适合那些“规则固定、触发明确”的活，比如从 issue 生代码、自动修补、自动起 PR、按评论继续返工。</p>
+				<p>不太适合那种一会儿改主意、一会儿换方向、需要你边看边拧把手的复杂探索活。</p>
+				<p>所以它更像定时雇工，不像坐你旁边一起商量的搭子。</p>
+			</div>
+		</section>
+	</article>
+</Layout>

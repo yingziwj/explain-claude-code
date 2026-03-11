@@ -1,0 +1,80 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('slack');
+
+if (!doc) {
+	throw new Error('Slack doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Platforms and integrations</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">Claude Code in Slack Slack 里招呼它</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/slack" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 Claude Code in Slack</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">一句人话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>这功能的意思是，你在 Slack 群里 @Claude，说一句修啥、查啥，它就能把这段聊天当任务背景，去网页版 Claude Code 那边起一局活。</p>
+				<p>像大家在院坝里议论“哪块水管又漏了”，你一回头喊帮工一句，他就带着刚才大家说过的话，直接去现场看。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">先决条件</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>1. 账号得是 Pro、Max、Teams，或者有 Claude Code 权限的 Enterprise premium seats。</p>
+				<p>2. Claude Code on the web 得先能用。</p>
+				<p>3. GitHub 账号得已经连到网页版 Claude Code，而且至少有一个仓库完成认证。</p>
+				<p>4. 你的 Slack 账号还得通过 Claude app 跟 Claude 账号绑上。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">怎么装起来</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>官方顺序是这样的：</p>
+				<p style="color: var(--muted);">先让工作区管理员从 Slack App Marketplace 装 Claude app。</p>
+				<p style="color: var(--muted);">然后每个用户自己去 Slack 里的 Claude App Home 点 Connect，把 Slack 和 Claude 账号绑起来。</p>
+				<p style="color: var(--muted);">再去 <code>claude.ai/code</code> 确认 GitHub 和仓库已经连好。</p>
+				<p style="color: var(--muted);">最后别忘了把 Claude 邀进具体频道：<code>/invite @Claude</code>。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">它在 Slack 里怎么判断你是不是要写代码</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>官方说它会自动判断 coding intent，也就是你这句 @Claude 到底是在闲聊、写文案，还是在派代码活。</p>
+				<p style="color: var(--muted);">如果你设成 <code>Code only</code>，那所有 @mentions 都直接走 Claude Code。</p>
+				<p style="color: var(--muted);">如果你设成 <code>Code + Chat</code>，它会自己分流，分错了你还能点 “Retry as Code” 重来。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">它会带走哪些上下文</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>这页一个很重要的提醒是：它会读线程和频道里的相关对话上下文。</p>
+				<p style="color: var(--muted);">在线程里 @ 它，它会把整个线程拿来参考；在频道里直接 @，它会看最近相关消息。</p>
+				<p style="color: var(--muted);">所以官方提醒，只该在可信的 Slack 对话里用，因为它可能会跟着上下文里的指令走。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">整个流程长啥样</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>官方给的流程是：你 @Claude 提任务，它判断是不是代码活，接着在网页版创建新 session，然后在 Slack 线程里持续发进度，完成后再 @你，给你 “View Session” 或 “Create PR” 这些按钮。</p>
+				<p>简单说，就是 Slack 负责喊人和报进度，真正干活还是网页版 Claude Code 在后面跑。</p>
+				<p style="color: var(--muted);">另外它只支持频道和线程，不支持 DM。</p>
+			</div>
+		</section>
+	</article>
+</Layout>

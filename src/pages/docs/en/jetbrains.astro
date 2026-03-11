@@ -1,0 +1,57 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('jetbrains');
+
+if (!doc) {
+	throw new Error('JetBrains doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Platforms and integrations</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">JetBrains IDEs JetBrains 系列工具</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/jetbrains" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 JetBrains IDEs</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">一句人话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>如果你主力用 IntelliJ、PyCharm、WebStorm 这些，那这一页就是教你把帮工请进自家作坊，而不是让他总站在门外终端口头交流。</p>
+				<p>官方支持的 IDE 包括 IntelliJ IDEA、PyCharm、Android Studio、WebStorm、PhpStorm、GoLand 等大多数 JetBrains 家工具。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">它进 IDE 以后多了啥</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>官方列出的能力很接地气：快捷键一键叫出 Claude、改动直接用 IDE diff 看、当前选中的代码自动带给 Claude、快捷插文件引用、IDE 里的 lint 和语法报错也会顺手共享过去。</p>
+				<p>这就像帮工站在你身边，你手指哪块木板、哪条裂缝，他立刻知道你说的是哪儿，不用你反复描述。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">怎么装</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>官方推荐去 JetBrains Marketplace 装 Claude Code plugin，装完后重启 IDE。</p>
+				<p style="color: var(--muted);">有时不是“重载一下窗口”就够，而是要整个 IDE 彻底关掉再开一遍，插件才真正生效。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">怎么开始用</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>最简单的是在 IDE 自带终端里直接跑 <code>claude</code>，这样集成功能会自动活起来。</p>
+				<p style="color: var(--muted);">如果你是从外部终端开的 Claude，就在会话里敲 <code>/ide</code>，把它接回 JetBrains。</p>
+				<p style="color: var(--muted);">官方还提醒了一句很关键的话：Claude 启动目录最好和 IDE 项目根目录一致，不然它看到的文件范围可能对不上。</p>
+			</div>
+		</section>
+	</article>
+</Layout>

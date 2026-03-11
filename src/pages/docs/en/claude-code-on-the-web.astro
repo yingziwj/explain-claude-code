@@ -1,0 +1,103 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('claude-code-on-the-web');
+
+if (!doc) {
+	throw new Error('Claude Code on the web doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Platforms and integrations</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">Claude Code on the web 网页上干活</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/claude-code-on-the-web" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 Claude Code on the web</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">一句人话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>这不是在你自己电脑里叫帮工，而是把活交给 Anthropic 管的云上工棚去做。</p>
+				<p>像你没把农具带在身边，但村里合作社那边有现成院子、有工具、有工人。你把任务单递过去，它自己去把仓库拉下来、干活、验活，干完再把结果交回来。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">这种用法最适合啥场景</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>官方列得很实在：问代码架构、修边界清楚的小 bug、并行开几件活、仓库没拉到本机、后端改动要顺手跑测试，这些都适合放网页上跑。</p>
+				<p>它特别适合“你先把话说清，后面少插手”的活。像你把地块编号、种子、肥料都交代好了，让帮工自己去忙，忙完回来报账。</p>
+				<p>如果你特别依赖本地数据库、本地私有工具、本地没上传的文件，那还是更适合本机或 Remote Control。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">谁能用</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>按官方文档，这个功能现在还是 research preview。</p>
+				<p style="color: var(--muted);">能用的人包括：Pro、Max、Team，以及带 premium seats 或 Chat + Claude Code seats 的 Enterprise 用户。</p>
+				<p style="color: var(--muted);">另外它现在只认 GitHub 仓库。GitLab 或别的代码托管仓库，网页云会话暂时不接。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">怎么开工</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>官方给的起步顺序是 6 步：</p>
+				<p style="color: var(--muted);">1. 打开 <code>claude.ai/code</code>。</p>
+				<p style="color: var(--muted);">2. 连上 GitHub 账号。</p>
+				<p style="color: var(--muted);">3. 给 Claude GitHub app 装到你的仓库里。</p>
+				<p style="color: var(--muted);">4. 选默认环境。</p>
+				<p style="color: var(--muted);">5. 提交任务。</p>
+				<p style="color: var(--muted);">6. 在 diff 里看改了啥，确认后建 PR。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">它背后怎么跑</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>官方流程可以翻成人话这样看：</p>
+				<p style="color: var(--muted);">先把你的仓库克隆到 Anthropic 管的虚拟机，再按你配的 setup script 把环境搭起来，然后照你的网络设置决定能不能出网。</p>
+				<p style="color: var(--muted);">接着 Claude 才开始看代码、改代码、跑测试、自己检查。干完以后把改动推到一个分支上，等你建 PR。</p>
+				<p>也就是说，网页版不是“纯聊天”，是真有一台隔离开的机器在替你干活。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">能不能和终端来回接力</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>可以，但方向要记清。</p>
+				<p style="color: var(--muted);">官方说得很明确：你能从终端用 <code>--remote</code> 新开一个网页云会话，也能把网页会话拉回本地终端继续干。</p>
+				<p style="color: var(--muted);">但你不能把“已经在本地跑着的老会话”直接推上云。它不是整车搬走，而是重新开一台云上车。</p>
+				<p style="color: var(--muted);">官方还建议，复杂活先在本地开 plan mode 把路数商量清楚，再用 <code>claude --remote "..."</code> 让云上去执行。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">看改动方便不方便</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>方便。官方专门做了 diff view。</p>
+				<p style="color: var(--muted);">你能一份文件一份文件地看哪里加了、哪里删了，还能对着具体改动留言，让它再改一轮。</p>
+				<p>这就像收割机回来以后，不是整车粮食一股脑倒进仓，而是先摊开看杂不杂、湿不湿，不合适就让它回去再整。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">安全和限制</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>官方强调了几件事：</p>
+				<p style="color: var(--muted);">1. 每个会话都跑在隔离的 Anthropic 虚拟机里。</p>
+				<p style="color: var(--muted);">2. 网络默认受限，也能关掉。</p>
+				<p style="color: var(--muted);">3. 敏感凭证不会直接塞进 Claude 干活那个沙箱里，鉴权走的是代理和限定范围的凭证。</p>
+				<p style="color: var(--muted);">4. 多开并行任务会按比例多吃 rate limit，不是白送的。</p>
+			</div>
+		</section>
+	</article>
+</Layout>

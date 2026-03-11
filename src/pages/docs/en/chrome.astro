@@ -1,0 +1,71 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('chrome');
+
+if (!doc) {
+	throw new Error('Chrome doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Platforms and integrations</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">Chrome extension 浏览器扩展</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/chrome" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 Chrome extension</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">一句人话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>这个扩展相当于给 Claude Code 配了一双能进浏览器里转悠的眼睛和手。</p>
+				<p>它不只是看网页文字，还能开新标签、点按钮、填表单、看控制台报错、抓页面数据。像你让帮工不只在屋里画图纸，还真去门店现场看货架摆得对不对。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">能干啥</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>官方列了几类典型活：看 console 报错再回头修代码、照着设计稿验 UI、跑表单和用户流程、操作你已经登录的网站、抽取网页数据、自动做重复浏览器任务，还能录成 GIF。</p>
+				<p>这就像帮工修完门，还会自己去推一推、拉一拉、看看门缝漏不漏风，不是只在纸上说“应该没问题”。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">前提条件</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>官方要求是这些：</p>
+				<p style="color: var(--muted);">1. 浏览器得是 Google Chrome 或 Microsoft Edge。</p>
+				<p style="color: var(--muted);">2. 装好 Claude in Chrome 扩展，版本至少 1.0.36。</p>
+				<p style="color: var(--muted);">3. Claude Code 版本至少 2.0.73。</p>
+				<p style="color: var(--muted);">4. 账号得是直接 Anthropic 套餐，Pro、Max、Teams 或 Enterprise。</p>
+				<p style="color: var(--muted);">5. Brave、Arc 这些别的 Chromium 浏览器暂不支持，WSL 也不支持。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">怎么连起来</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>在 CLI 里，官方给的入口很直接：</p>
+				<pre class="overflow-x-auto rounded-2xl px-4 py-4 text-sm leading-7" style="background: var(--ink); color: var(--paper);"><code>claude --chrome</code></pre>
+				<p style="color: var(--muted);">如果你已经在会话里，也能敲 <code>/chrome</code> 开启。</p>
+				<p style="color: var(--muted);">想每次默认都带浏览器能力，就在 <code>/chrome</code> 里选 “Enabled by default”。不过官方提醒，这样会更吃上下文。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">使用时要记住两件事</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>第一，它会借用你浏览器已经登录好的状态，所以能进你已经登录的网站。</p>
+				<p>第二，遇到登录页或验证码，官方说它会停下来让你自己处理，不会硬闯。</p>
+				<p>这点很像请人去替你办事。柜台前面排队、出示证件、输验证码，关键身份动作还是得你本人来。</p>
+			</div>
+		</section>
+	</article>
+</Layout>

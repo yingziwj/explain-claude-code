@@ -1,0 +1,79 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('vs-code');
+
+if (!doc) {
+	throw new Error('VS Code doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Platforms and integrations</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">Visual Studio Code VS Code 集成</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/vs-code" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 Visual Studio Code</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">一句人话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>这就是把 Claude Code 直接塞进 VS Code 里，让你边写边喊，不用老在编辑器和终端之间来回跑。</p>
+				<p>像木匠干活时，把尺子、铅笔、刨子都挂在腰上，而不是每用一次都得回工具箱翻一趟。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">官方推荐不推荐</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>推荐。官方原话意思就是：在 VS Code 里，扩展版是推荐用法。</p>
+				<p style="color: var(--muted);">它提供原生图形界面，有 inline diff、@ 文件、计划审查、键盘快捷操作这些能力。</p>
+				<p style="color: var(--muted);">同时扩展里还带着 CLI，所以你真要用命令行独有功能，也不用离开 VS Code 集成终端。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">安装前先看门槛</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>1. VS Code 要 1.98.0 或更高。</p>
+				<p>2. 需要 Anthropic 账号，第一次打开扩展时登录。</p>
+				<p>3. 如果你公司是走 Bedrock、Vertex AI 这类第三方 provider，官方另有专门配置法。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">怎么打开它</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>装好以后，官方给了三条常用途径：</p>
+				<p style="color: var(--muted);">1. 点编辑器右上角那个 Spark 图标，这是最快的。</p>
+				<p style="color: var(--muted);">2. 点左边 Activity Bar 里的 Spark 图标，进会话列表。</p>
+				<p style="color: var(--muted);">3. 走命令面板，搜 Claude Code。</p>
+				<p>哪条顺手用哪条，核心就是让它在你改文件的地方随叫随到。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">它和 CLI 怎么分工</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>官方很坦白：扩展不是把 CLI 全部搬过来，而是“大部分常用功能在图形界面里，少数高级功能还得去 CLI”。</p>
+				<p style="color: var(--muted);">比如命令和 skills 在扩展里是子集，<code>!</code> bash 快捷写法、tab completion 这些还是 CLI 独有。</p>
+				<p style="color: var(--muted);">要补这些功能，你就在 VS Code 集成终端里跑 <code>claude</code>；如果你是外部终端，就敲 <code>/ide</code> 把它接进 VS Code。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">安全上别太大意</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>官方特别提醒了一点：如果你开了自动编辑权限，它是能改 VS Code 配置文件的，比如 <code>settings.json</code>、<code>tasks.json</code>。</p>
+				<p style="color: var(--muted);">所以碰到不可信工作区，最好开 VS Code Restricted Mode，用手动批准模式，并认真看改动。</p>
+				<p>这和把家门钥匙交给帮工一个道理。熟人能省事，陌生人就得先留一手。</p>
+			</div>
+		</section>
+	</article>
+</Layout>
