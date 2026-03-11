@@ -1,0 +1,26 @@
+<button
+	id="theme-toggle"
+	type="button"
+	class="rounded-full border px-3 py-2 text-sm transition hover:scale-[1.02]"
+	style="border-color: var(--line); background: var(--panel);"
+>
+	<span class="theme-label">切到夜里模式</span>
+</button>
+
+<script is:inline>
+	const root = document.documentElement;
+	const button = document.getElementById('theme-toggle');
+	const label = button?.querySelector('.theme-label');
+	const saved = localStorage.getItem('theme');
+	const preferredDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+	const isDark = saved ? saved === 'dark' : preferredDark;
+	root.classList.toggle('dark', isDark);
+	if (label) label.textContent = isDark ? '切到白天模式' : '切到夜里模式';
+
+	button?.addEventListener('click', () => {
+		const nextDark = !root.classList.contains('dark');
+		root.classList.toggle('dark', nextDark);
+		localStorage.setItem('theme', nextDark ? 'dark' : 'light');
+		if (label) label.textContent = nextDark ? '切到白天模式' : '切到夜里模式';
+	});
+</script>

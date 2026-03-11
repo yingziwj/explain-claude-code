@@ -1,0 +1,58 @@
+---
+const { title, summary, description, section } = Astro.props as {
+	title: string;
+	summary: string;
+	description: string;
+	section: string;
+};
+---
+
+<article class="space-y-8">
+	<header class="card rounded-[32px] p-8 shadow-card">
+		<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">{section}</p>
+		<h1 class="mt-3 font-display text-4xl font-semibold">{title}</h1>
+		<p class="mt-4 max-w-3xl text-lg leading-8">{summary}</p>
+	</header>
+
+	<section class="card rounded-[32px] p-8 shadow-card">
+		<h2 class="font-display text-2xl font-semibold">简要总结</h2>
+		<p class="mt-4 leading-8">{summary}</p>
+		<p class="mt-3 leading-8">{description}</p>
+	</section>
+
+	<section class="card rounded-[32px] p-8 shadow-card">
+		<h2 class="font-display text-2xl font-semibold">通俗解释版</h2>
+		<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+			<p>你可以把这一页当成“翻译成人话”的说明书。原文里那些拗口说法，后面都会改成像在院子里聊天一样的中文。</p>
+			<p>现在这个基础版本先把架子搭好，后续会按原文逐页补齐重点步骤、注意事项和生活化比喻，保证导航一个不漏。</p>
+			<p>做法上会坚持两件事：一是不乱改原网站目录，二是不端着说术语，能说“像请帮工”就不说抽象词。</p>
+		</div>
+	</section>
+
+	<section class="card rounded-[32px] p-8 shadow-card">
+		<h2 class="font-display text-2xl font-semibold">插画</h2>
+		<div class="mt-6 rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+			<pre class="overflow-x-auto text-sm leading-6" style="color: var(--accent-strong);">
+{String.raw`  你张嘴交代
+        |
+        v
+  [ Claude Code ]
+    /    |     \
+ 看文件 改东西 跑命令
+        |
+        v
+   把结果交回来`}
+			</pre>
+			<p class="mt-4 leading-8" style="color: var(--muted);">意思很简单：你负责说清楚，它负责照着看、照着改、照着干。</p>
+		</div>
+	</section>
+
+	<section class="card rounded-[32px] p-8 shadow-card">
+		<h2 class="font-display text-2xl font-semibold">后续补充</h2>
+		<p class="mt-4 leading-8" style="color: var(--muted);">
+			这一页现在是基础占位稿。下一步会从原始文档抓取内容，再逐页改写成完整的通俗中文版。
+		</p>
+	</section>
+
+	<!-- Google AdSense: content bottom slot -->
+</article>

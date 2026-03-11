@@ -1,0 +1,46 @@
+---
+import type { NavSection } from '../data/navigation';
+
+const { sections, currentPath } = Astro.props as {
+	sections: NavSection[];
+	currentPath: string;
+};
+---
+
+<aside class="card sticky top-4 h-[calc(100vh-2rem)] overflow-y-auto rounded-[28px] p-5 shadow-card">
+	<div class="mb-6">
+		<p class="font-display text-xl font-semibold">通俗版 Claude Code</p>
+		<p class="mt-2 text-sm" style="color: var(--muted);">原导航不动，内容换成大白话。</p>
+	</div>
+
+	<nav aria-label="文档导航" class="space-y-6">
+		{
+			sections.map((section) => (
+				<section>
+					<h2 class="mb-3 text-xs font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">
+						{section.title}
+					</h2>
+					<ul class="space-y-1">
+						{section.items.map((item) => {
+							const active = currentPath === item.path;
+							return (
+								<li>
+									<a
+										href={item.path}
+										class={`block rounded-2xl px-3 py-2 text-sm transition ${
+											active ? 'font-semibold' : ''
+										}`}
+										style={active ? 'background: var(--bg-strong); color: var(--accent-strong);' : 'color: var(--text);'}
+									>
+										{item.title}
+									</a>
+								</li>
+							);
+						})}
+					</ul>
+				</section>
+			))
+		}
+	</nav>
+	<!-- Google AdSense: sidebar slot -->
+</aside>

@@ -1,0 +1,131 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('overview');
+
+if (!doc) {
+	throw new Error('Overview doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Getting started</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">Claude Code 是个啥</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/overview" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 Overview</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">一句人话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>
+					你可以把 Claude Code 当成一个电子帮工。它不是只会陪你聊天，而是真的能下地干活:
+					进你家地里转一圈看情况（读代码仓库），按你的话修修补补（改文件），再亲自试一遍好不好使（运行命令）。
+				</p>
+				<p>
+					而且这个帮工不只待在一个地方。你在终端里能喊它，在编辑器里能喊它，在网页、桌面端、手机边上也能接着喊，像同一个人跟着你从院里走到地头，再走到工棚。
+				</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">它能帮你干什么活</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>官方这页重点在说四件事，我给你翻成大白话：</p>
+				<p>1. 看现场。先把你这个项目从头到尾瞅一遍，知道哪块地种了啥，哪面墙裂了缝。</p>
+				<p>2. 动手修。你说“把这个毛病修好”，它会去改文件，不是只会出主意。</p>
+				<p>3. 自己试。改完还能跑命令、看结果，像修完抽水泵先打一桶水试试。</p>
+				<p>4. 到处接活。同一个会干活的帮手，终端、VS Code、JetBrains、桌面端、网页端都能用。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">常见用法，像请帮工时会说的话</h2>
+			<div class="mt-6 grid gap-4 md:grid-cols-2">
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="font-semibold text-lg">先让它把院子看明白</h3>
+					<p class="mt-3 leading-8" style="color: var(--muted);">
+						比如你可以让它先看看项目结构、哪些地方最要紧。就像新来的帮工先绕院一圈，知道仓库、工具间、牲口棚都在哪。
+					</p>
+				</div>
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="font-semibold text-lg">让它修一个明明白白的毛病</h3>
+					<p class="mt-3 leading-8" style="color: var(--muted);">
+						比如“这个按钮点了没反应，帮我查查并修好”。你别只说“有点不对”，要像指着漏雨的屋檐说哪儿在滴水。
+					</p>
+				</div>
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="font-semibold text-lg">让它做重复活</h3>
+					<p class="mt-3 leading-8" style="color: var(--muted);">
+						原文举了不少例子，像盯日志、批量检查文件、自动翻译新文案。这些都像秋收时一筐一筐搬粮食，活不难，就是多。
+					</p>
+				</div>
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="font-semibold text-lg">让它顺着流水干</h3>
+					<p class="mt-3 leading-8" style="color: var(--muted);">
+						它还能接进自动流程里。就像你定好了“谁送来报修单，谁先检查，谁修完再回话”，以后照流程走，不用次次人盯着。
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">能在哪些地方用</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>这一页专门强调: 不是换个平台就换了一个帮工，而是同一个帮工换个干活地点。</p>
+				<p>终端：像站在工地中央，张嘴就安排活，最直接。</p>
+				<p>VS Code、JetBrains：像把帮工请进你常用的工作台边上，边写边修，不用来回跑。</p>
+				<p>桌面端、网页端、手机：像你人不在院里，也能隔空接着安排，不会刚干到一半就断了线。</p>
+				<p>Slack、GitHub Actions、GitLab CI/CD、Chrome 扩展：像把这个帮工派到群里、流水线上、浏览器里干专门的差事。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">“走到哪干到哪”这件事，原文怎么说</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>原文有个重点特别实用：活儿不用绑死在一个地方。</p>
+				<p>你可以先在网页或手机上发起一个长活，回到终端再接着干。</p>
+				<p>也可以人在外头，用远程控制继续看家里的终端会话，像人去了集市，还能叫家里帮工继续照着清单干。</p>
+				<p>如果团队在 Slack 里报问题，还能直接把问题丢给 Claude Code，让它把修补结果变成可提交的改动。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">这页给你的实际提醒</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>第一，别把它当问答机，要把它当能下手的帮工。</p>
+				<p>第二，你交代活时越具体越好。像“把东墙裂缝补好，再泼桶水试试漏不漏”，这就比“你看看哪里不对”强得多。</p>
+				<p>第三，如果你换地方干活，不用担心像换了个人。原文说同一套说明文件、设置、扩展能力都能跟着走。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">看完这页，下一步去哪</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>
+					1. 先看
+					<a href="/docs/en/quickstart" class="underline decoration-dotted underline-offset-4">Quickstart</a>
+					：照着走一遍，从安装到做第一件真活。
+				</p>
+				<p>
+					2. 再看
+					<a href="/docs/en/memory" class="underline decoration-dotted underline-offset-4">Store instructions and memories</a>
+					：把家里规矩写下来，省得每次重新交代。
+				</p>
+				<p>
+					3. 接着看
+					<a href="/docs/en/common-workflows" class="underline decoration-dotted underline-offset-4">Common workflows</a>
+					和
+					<a href="/docs/en/best-practices" class="underline decoration-dotted underline-offset-4">Best practices</a>
+					：学会怎么把这个帮工使唤得更顺手。
+				</p>
+			</div>
+		</section>
+	</article>
+</Layout>

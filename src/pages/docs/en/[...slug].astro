@@ -1,0 +1,23 @@
+---
+import DocPage from '../../../components/DocPage.astro';
+import Layout from '../../../layouts/Layout.astro';
+import { allDocs, getDocBySlug } from '../../../data/navigation';
+
+export function getStaticPaths() {
+	return allDocs.map((doc) => ({
+		params: { slug: doc.slug }
+	}));
+}
+
+const slugParam = Astro.params.slug;
+const slug = Array.isArray(slugParam) ? slugParam.join('/') : slugParam ?? '';
+const doc = getDocBySlug(slug);
+
+if (!doc) {
+	throw new Error(`Unknown doc slug: ${slug}`);
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<DocPage title={doc.title} summary={doc.summary} description={doc.description} section={doc.section} />
+</Layout>

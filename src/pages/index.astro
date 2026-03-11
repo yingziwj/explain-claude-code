@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="通俗版 Claude Code 文档"
+	description="把 Claude Code 官方文档翻成农村长辈也能听懂的中文说明。"
+	pathname="/"
+>
+	<section class="grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
+		<div class="space-y-6">
+			<section class="card rounded-[32px] p-8 shadow-card">
+				<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">首页</p>
+				<h1 class="mt-3 font-display text-4xl font-semibold">先把文档站的地基打好</h1>
+				<p class="mt-4 max-w-3xl text-lg leading-8">
+					这个站会照着 Claude Code 官方文档的目录来排，一页不少；只是内容不再端着说，而是改成直白中文。
+				</p>
+			</section>
+
+			<section class="card rounded-[32px] p-8 shadow-card">
+				<h2 class="font-display text-2xl font-semibold">当前进度</h2>
+				<div class="mt-4 space-y-3 leading-8" style="color: var(--muted);">
+					<p>现在已经把基础结构、完整导航、响应式布局、深浅色切换和 SEO 骨架先立起来。</p>
+					<p>下一步会抓官方文档内容，再按每一页分别改写成“人话版”。</p>
+				</div>
+			</section>
+		</div>
+
+		<aside class="card rounded-[32px] p-6 shadow-card">
+			<h2 class="font-display text-xl font-semibold">施工说明</h2>
+			<p class="mt-4 leading-8" style="color: var(--muted);">
+				目前属于第一步：先搭框架，不急着把全部正文一次写完。
+			</p>
+			<!-- Google AdSense: home aside slot -->
+		</aside>
+	</section>
+</Layout>
