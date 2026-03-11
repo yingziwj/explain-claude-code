@@ -23,7 +23,7 @@ export const navSections: NavSection[] = [
 			{
 				title: 'Quickstart',
 				path: '/docs/en/quickstart',
-				summary: '一步一步教你把这个工具装上，像把新农具开箱上手。',
+				summary: '手把手带你把电子帮工领进门，从装工具到交第一件活，像新农具下地先试一垄。',
 				description: '这一页主要讲最短路径：安装、登录、进项目、下第一道命令。'
 			}
 		]
