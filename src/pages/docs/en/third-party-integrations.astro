@@ -1,0 +1,90 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('third-party-integrations');
+
+if (!doc) {
+	throw new Error('Deployment doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Deployment</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">Deployment 第三方集成和部署</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/third-party-integrations" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 Third-party integrations</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">一句人话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>这一页讲的不是“Claude Code 自己怎么用”，而是“怎么把它接到别人家院子里去干活”。</p>
+				<p>像你家里有个能干的师傅，平时在院里修东西；现在你想让他也能去仓库、工地、流水线、群里、编辑器里搭把手，这就叫第三方集成。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">官方这页想告诉你的核心</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>Claude Code 不只待在终端里，它还能接到很多现成工具上，变成你工作流里的一环。</p>
+				<p>接法不止一种：有的是装在编辑器里，有的是挂进代码托管平台，有的是放进聊天工具，有的是跑在自动化流水线上。</p>
+				<p>所以“部署”在这里，不一定是把网站发上线，更像是把这个帮工安排到不同岗位上。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">常见能接的地方</h2>
+			<div class="mt-4 space-y-5 leading-8">
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="text-lg font-semibold">开发工具里</h3>
+					<p class="mt-3" style="color: var(--muted);">像 VS Code、JetBrains 这种 IDE。好处是你写代码的地方就能直接喊它，不用来回切窗。</p>
+				</div>
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="text-lg font-semibold">代码平台里</h3>
+					<p class="mt-3" style="color: var(--muted);">像 GitHub、GitLab。适合自动 review、自动修 bug、从 issue 直接起 PR，属于“仓库一有动静就自动派活”。</p>
+				</div>
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="text-lg font-semibold">聊天工具里</h3>
+					<p class="mt-3" style="color: var(--muted);">像 Slack。适合团队里直接喊它查情况、做总结、继续某个任务，像在群里叫师傅过来看看。</p>
+				</div>
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="text-lg font-semibold">网页和远程环境里</h3>
+					<p class="mt-3" style="color: var(--muted);">像 Claude Code on the web、Remote Control。意思是人不一定守在本机旁，也能远程把活接着干下去。</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">怎么判断该接哪一种</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>如果你主要是自己写代码，就优先接编辑器，顺手。</p>
+				<p>如果你想让很多重复活自动跑，就优先接 GitHub Actions、GitLab CI/CD 这类流水线。</p>
+				<p>如果你想让团队里的人都能在群里招呼它，就接 Slack。</p>
+				<p style="color: var(--muted);">说白了，别一上来全装满。先看你最常在哪个地方干活，就先把帮工安插到那个岗位。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">部署前要先想清三件事</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>1. 权限给到哪儿。它能不能读仓库、改文件、发评论、起 PR，这些都得先划线。</p>
+				<p>2. 活是手动喊，还是自动触发。自动化越多，越省事，但也越要把规矩写清楚。</p>
+				<p>3. 凭证和网络怎么管。API key、组织策略、出网限制、审计要求，这些都属于管理员要盯的地盘。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">最后一句土话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>第三方集成不是多学几条命令，而是给 Claude Code 安岗位、发钥匙、定规矩。</p>
+				<p style="color: var(--muted);">岗位安对了，它就是帮你省腿省手的熟练工；岗位安乱了，它就可能在不该动的地方也开始抡锤子。</p>
+			</div>
+		</section>
+	</article>
+</Layout>
