@@ -1,0 +1,86 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('devcontainer');
+
+if (!doc) {
+	throw new Error('Devcontainer doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Deployment</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">Devcontainer 开发容器</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/devcontainer" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 Devcontainer</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">一句人话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>devcontainer 就是把开发环境打包成容器，团队成员环境一致，减少"在我机器上能跑"的问题。</p>
+				<p>Claude Code 可以在 devcontainer 里跑，和你在容器里开发一样。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">啥时候用 devcontainer</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p><strong>1. 团队环境统一</strong> — 所有人用一样的 Node、Python、依赖版本。</p>
+				<p><strong>2. 快速上手</strong> — 新人拉代码，一键启动容器，环境自动配好。</p>
+				<p><strong>3. 隔离依赖</strong> — 不同项目用不同容器，互不干扰。</p>
+				<p><strong>4. CI/CD 一致</strong> — 本地容器和 CI 环境一样，减少环境问题。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">怎么配置</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>在项目里加 <code class="px-2 py-1 rounded bg-code">.devcontainer/devcontainer.json</code>：</p>
+				<div class="mt-4 rounded-[24px] border p-6 font-mono text-sm overflow-x-auto" style="border-color: var(--line); background: var(--panel-strong);">
+<pre><![CDATA[{
+  "name": "My Project",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:20",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code"
+      ]
+    }
+  }
+}]]></pre>
+				</div>
+				<p style="color: var(--muted);">然后在 VS Code 里点"Reopen in Container"，或者用 <code class="px-2 py-1 rounded bg-code">docker-compose up</code> 启动。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">在容器里用 Claude Code</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>Claude Code 在容器里跑和本地一样，只是：</p>
+				<ul class="list-disc list-inside space-y-2 mt-2">
+					<li>凭证要挂载进容器（<code class="px-2 py-1 rounded bg-code">~/.config/claude-code</code>）</li>
+					<li>网络要能通（容器能访问外网）</li>
+					<li>文件挂载要对（项目目录挂载进容器）</li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">最后一句土话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>devcontainer 就是把开发环境打包成"集装箱"，走到哪开到哪。团队开发、CI/CD、新人上手都方便。</p>
+				<p style="color: var(--muted);">个人项目用不上，别为了炫技强行容器化。</p>
+			</div>
+		</section>
+	</article>
+</Layout>

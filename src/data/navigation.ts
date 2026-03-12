@@ -29,6 +29,77 @@ export const navSections: NavSection[] = [
 		]
 	},
 	{
+		title: '用 Claude Code 搞构建',
+		items: [
+			{
+				title: '创建自定义子代理',
+				path: '/docs/en/sub-agents',
+				summary: '教怎么养一堆专门干特定活的小帮工，各管一摊，互不搅和。',
+				description: '子代理就是专门干特定活的 AI 小帮工。每个子代理有自己的系统提示、工具权限和独立上下文。遇到匹配的活，Claude 会自动派给它。'
+			},
+			{
+				title: '运行代理团队',
+				path: '/docs/en/agent-teams',
+				summary: '让多个代理并行干活、互相配合，像包工头带施工队。',
+				description: '代理团队让多个 Claude 实例在独立会话里并行工作，还能互相通信。适合大规模探索、多任务并发。'
+			},
+			{
+				title: '创建插件',
+				path: '/docs/en/plugins',
+				summary: '把子代理、技能、配置打包成插件，分享给别人或跨项目用。',
+				description: '插件是打包好的扩展包，可以包含子代理、技能、MCP 服务器配置。一次打包，到处安装。'
+			},
+			{
+				title: '发现和安装现成插件',
+				path: '/docs/en/discover-plugins',
+				summary: '别人打包好的插件去哪找、怎么装、怎么管。',
+				description: '不用重复造轮子。去插件市场找现成的，装上就能用。也能把自己写的分享出去。'
+			},
+			{
+				title: '用技能扩展 Claude',
+				path: '/docs/en/skills',
+				summary: '技能就是预先写好的绝活，遇到特定活路直接喊它使出来。',
+				description: '技能是预先写好的指令模板，遇到特定场景就能调用。比如"写单元测试"、"审查代码"、"写 API 文档"。'
+			},
+			{
+				title: '定时运行提示',
+				path: '/docs/en/scheduled-tasks',
+				summary: '让 Claude 按时自动干活，比如每天早上拉取日报、每周检查依赖。',
+				description: '定时任务让你可以设置 cron 表达式，到点自动执行指定提示。适合周期性检查、报告生成。'
+			},
+			{
+				title: '输出风格',
+				path: '/docs/en/output-styles',
+				summary: '控制 Claude 输出成什么样：纯文本、Markdown、JSON、XML 随便选。',
+				description: '不同场景需要不同输出格式。可以指定 Claude 用纯文本、Markdown、JSON、XML 等格式回答。'
+			},
+			{
+				title: '用钩子自动化',
+				path: '/docs/en/hooks-guide',
+				summary: '钩子就是在特定时刻自动触发的脚本，像门禁规则。',
+				description: '钩子让你在工具使用前、会话开始前、任务完成后等时刻插入自定义逻辑。适合做权限检查、自动备份、通知等。'
+			},
+			{
+				title: '编程方式调用',
+				path: '/docs/en/headless',
+				summary: '在脚本或程序里调用 Claude Code，把它当命令行工具或库来用。',
+				description: '无头模式让你在 CI/CD、自动化脚本、其他程序里调用 Claude Code。可以传参数、捕获输出、集成到现有流程。'
+			},
+			{
+				title: '模型上下文协议 (MCP)',
+				path: '/docs/en/mcp',
+				summary: 'MCP 是标准接口，让 Claude 能连外部数据源和工具，像给帮工配外接设备。',
+				description: 'MCP 让 Claude 能连数据库、API、文件系统、第三方服务。有现成连接器，也能自己写。'
+			},
+			{
+				title: '故障排查',
+				path: '/docs/en/troubleshooting',
+				summary: '常见问题和解决办法，卡壳了先来这里看看。',
+				description: '收集了常见报错、性能问题、连接问题的诊断步骤和解决方案。'
+			}
+		]
+	},
+	{
 		title: '核心概念',
 		items: [
 			{
@@ -81,7 +152,13 @@ export const navSections: NavSection[] = [
 	{
 		title: '部署',
 		items: [
-			{ title: '第三方集成', path: '/docs/en/third-party-integrations', summary: '讲第三方集成和部署出门。', description: '把 Claude Code 接到别的地方去用。' }
+			{ title: '第三方集成', path: '/docs/en/third-party-integrations', summary: '讲第三方集成和部署出门。', description: '把 Claude Code 接到别的地方去用。' },
+			{ title: 'Amazon Bedrock', path: '/docs/en/amazon-bedrock', summary: '在 AWS Bedrock 上部署，适合 AWS 原生团队。', description: '用 AWS 的账号和计费，跑在 AWS 基础设施上。适合已经在用 AWS 生态的团队。' },
+			{ title: 'Google Vertex AI', path: '/docs/en/google-vertex-ai', summary: '在 GCP Vertex AI 上部署，适合 GCP 原生团队。', description: '用 GCP 的账号和计费，跑在 Google 云上。适合已经在用 GCP 生态的团队。' },
+			{ title: 'Microsoft Foundry', path: '/docs/en/microsoft-foundry', summary: '在 Azure Foundry 上部署，适合 Azure 原生团队。', description: '用 Azure 的账号和计费，跑在微软云上。适合已经在用 Azure 生态的团队。' },
+			{ title: '网络配置', path: '/docs/en/network-config', summary: '企业网络环境下的配置，比如代理、防火墙、出网限制。', description: '大公司通常有代理服务器、防火墙规则、出网限制。这一页讲怎么在这些环境下配置 Claude Code。' },
+			{ title: 'LLM 网关', path: '/docs/en/llm-gateway', summary: '用网关统一管理多个 LLM 请求，适合集中管控。', description: 'LLM 网关帮你集中管理认证、限流、计费、审计。适合多团队共用、需要统一管控的场景。' },
+			{ title: '开发容器', path: '/docs/en/devcontainer', summary: '在容器化开发环境里部署，保证环境一致。', description: '用 devcontainer 把开发环境打包成容器，团队成员环境一致，减少"在我机器上能跑"的问题。' }
 		]
 	},
 	{

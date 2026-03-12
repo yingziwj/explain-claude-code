@@ -1,0 +1,112 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('headless');
+
+if (!doc) {
+	throw new Error('Headless doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Build with Claude Code</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">Headless 编程方式调用</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/headless" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 Headless</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">一句人话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>无头模式就是在脚本或程序里调用 Claude Code，把它当命令行工具或库来用。</p>
+				<p>适合 CI/CD、自动化脚本、集成到其他应用里。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">基本用法</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>用命令行直接调用：</p>
+				<div class="mt-4 rounded-[24px] border p-6 font-mono text-sm overflow-x-auto" style="border-color: var(--line); background: var(--panel-strong);">
+<pre># 简单调用
+claude "给这个文件写单元测试"
+
+# 带输入文件
+claude --input-prompt prompt.txt
+
+# 输出到文件
+claude "审查这个 PR" > review.txt
+
+# 非交互模式（适合脚本）
+claude --print "分析这个代码库"</pre>
+				</div>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">在 CI/CD 里用</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>GitHub Actions 示例：</p>
+				<div class="mt-4 rounded-[24px] border p-6 font-mono text-sm overflow-x-auto" style="border-color: var(--line); background: var(--panel-strong);">
+<pre><![CDATA[name: Code Review
+on: [pull_request]
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+      - name: Review PR
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: claude --print "Review this PR for bugs and style issues"]]></pre>
+				</div>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">在脚本里用</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>Bash 脚本示例：</p>
+				<div class="mt-4 rounded-[24px] border p-6 font-mono text-sm overflow-x-auto" style="border-color: var(--line); background: var(--panel-strong);">
+<pre>#!/bin/bash
+# 自动代码审查脚本
+
+for file in $(git diff --name-only HEAD~1); do
+  echo "Reviewing $file..."
+  claude --print "Review $file for bugs" >> review.txt
+done
+
+echo "Review complete!"</pre>
+				</div>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">输出格式</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>用 <code class="px-2 py-1 rounded bg-code">--output</code> 指定输出格式：</p>
+				<ul class="list-disc list-inside space-y-2 mt-2" style="color: var(--muted);">
+					<li><code class="px-2 py-1 rounded bg-code">text</code> — 纯文本（默认）</li>
+					<li><code class="px-2 py-1 rounded bg-code">json</code> — JSON 格式，方便程序解析</li>
+					<li><code class="px-2 py-1 rounded bg-code">markdown</code> — Markdown 格式</li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">最后一句土话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>无头模式就是把 Claude Code 当命令行工具使。脚本、CI/CD、自动化流程都能用。</p>
+				<p style="color: var(--muted);">记得在脚本里处理好错误和超时，别让它卡住整个流程。</p>
+			</div>
+		</section>
+	</article>
+</Layout>

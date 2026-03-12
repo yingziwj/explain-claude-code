@@ -1,0 +1,109 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('troubleshooting');
+
+if (!doc) {
+	throw new Error('Troubleshooting doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Build with Claude Code</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">Troubleshooting 故障排查</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/troubleshooting" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 Troubleshooting</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">常见问题和解决办法</h2>
+			<div class="mt-4 space-y-6 leading-8">
+				
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="text-lg font-semibold">1. 认证失败 / 登录不上</h3>
+					<p class="mt-3" style="color: var(--muted);"><strong>可能原因：</strong>凭证过期、网络问题、代理配置错误。</p>
+					<p class="mt-2" style="color: var(--muted);"><strong>解决办法：</strong></p>
+					<ul class="list-disc list-inside space-y-1 mt-2" style="color: var(--muted);">
+						<li>运行 <code class="px-2 py-1 rounded bg-code">claude auth login</code> 重新登录</li>
+						<li>检查 <code class="px-2 py-1 rounded bg-code">~/.config/claude-code/config.json</code> 里的凭证</li>
+						<li>如果用代理，确认代理配置正确</li>
+					</ul>
+				</div>
+
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="text-lg font-semibold">2. 响应慢 / 超时</h3>
+					<p class="mt-3" style="color: var(--muted);"><strong>可能原因：</strong>网络慢、上下文太长、模型负载高。</p>
+					<p class="mt-2" style="color: var(--muted);"><strong>解决办法：</strong></p>
+					<ul class="list-disc list-inside space-y-1 mt-2" style="color: var(--muted);">
+						<li>检查网络连接</li>
+						<li>减少上下文长度，用 <code class="px-2 py-1 rounded bg-code">/clear</code> 清空对话</li>
+						<li>换用更快的模型（Haiku）</li>
+						<li>避开高峰期</li>
+					</ul>
+				</div>
+
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="text-lg font-semibold">3. 文件权限错误</h3>
+					<p class="mt-3" style="color: var(--muted);"><strong>可能原因：</strong>文件被占用、权限不足、路径不对。</p>
+					<p class="mt-2" style="color: var(--muted);"><strong>解决办法：</strong></p>
+					<ul class="list-disc list-inside space-y-1 mt-2" style="color: var(--muted);">
+						<li>确认文件没被其他程序占用</li>
+						<li>检查文件权限 <code class="px-2 py-1 rounded bg-code">ls -la filename</code></li>
+						<li>用 <code class="px-2 py-1 rounded bg-code">/permissions</code> 查看当前权限设置</li>
+					</ul>
+				</div>
+
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="text-lg font-semibold">4. MCP 服务器连不上</h3>
+					<p class="mt-3" style="color: var(--muted);"><strong>可能原因：</strong>配置错误、依赖没装、端口冲突。</p>
+					<p class="mt-2" style="color: var(--muted);"><strong>解决办法：</strong></p>
+					<ul class="list-disc list-inside space-y-1 mt-2" style="color: var(--muted);">
+						<li>检查 MCP 配置文件语法</li>
+						<li>确认依赖已安装 <code class="px-2 py-1 rounded bg-code">npm list -g</code></li>
+						<li>查看 MCP 服务器日志</li>
+						<li>重启 Claude Code</li>
+					</ul>
+				</div>
+
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="text-lg font-semibold">5. 子代理不工作</h3>
+					<p class="mt-3" style="color: var(--muted);"><strong>可能原因：</strong>配置文件错误、名称冲突、没重启。</p>
+					<p class="mt-2" style="color: var(--muted);"><strong>解决办法：</strong></p>
+					<ul class="list-disc list-inside space-y-1 mt-2" style="color: var(--muted);">
+						<li>用 <code class="px-2 py-1 rounded bg-code">/agents</code> 查看子代理列表</li>
+						<li>检查 frontmatter 语法</li>
+						<li>确认名称唯一</li>
+						<li>重启会话或重新加载</li>
+					</ul>
+				</div>
+
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">获取帮助</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>如果以上方法都不行：</p>
+				<ul class="list-disc list-inside space-y-2 mt-2">
+					<li>查看官方文档 <a href="https://docs.anthropic.com/claude-code" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">docs.anthropic.com</a></li>
+					<li>搜索 GitHub Issues</li>
+					<li>联系 Anthropic 支持</li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">最后一句土话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>遇到问题别慌，按步骤排查：先看报错信息，再查配置，最后找官方。</p>
+				<p style="color: var(--muted);">90% 的问题都是配置错误，仔细读报错信息通常能找到线索。</p>
+			</div>
+		</section>
+	</article>
+</Layout>

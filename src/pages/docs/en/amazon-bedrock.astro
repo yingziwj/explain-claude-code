@@ -1,0 +1,86 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('amazon-bedrock');
+
+if (!doc) {
+	throw new Error('Amazon Bedrock doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Deployment</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">Amazon Bedrock</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/amazon-bedrock" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 Amazon Bedrock</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">一句人话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>Amazon Bedrock 就是 AWS 版的 Claude Code。用 AWS 账号登录，走 AWS 计费，跑在 AWS 基础设施上。</p>
+				<p>适合已经在用 AWS 生态的团队，统一账号、统一计费、统一权限管理。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">啥时候选 Bedrock</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p><strong>1. 已经在用 AWS</strong> — 账号、计费、权限都在 AWS 里，不用另外搞一套。</p>
+				<p><strong>2. 数据合规要求</strong> — 数据不能出 AWS 环境，Bedrock 满足这个要求。</p>
+				<p><strong>3. 企业管控</strong> — 要用 AWS IAM 做权限管理，用 CloudTrail 做审计。</p>
+				<p><strong>4. 成本优化</strong> — AWS 里有承诺用量折扣，能比直接买便宜。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">怎么配置</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>设置环境变量启用 Bedrock：</p>
+				<div class="mt-4 rounded-[24px] border p-6 font-mono text-sm overflow-x-auto" style="border-color: var(--line); background: var(--panel-strong);">
+<pre># 启用 Bedrock
+export CLAUDE_CODE_USE_BEDROCK=1
+export AWS_REGION=us-east-1
+
+# 如果有 AWS 凭证文件，确保已配置
+# ~/.aws/credentials 或 AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY</pre>
+				</div>
+				<p style="color: var(--muted);">配置完后，Claude Code 会通过 AWS SDK 调用 Bedrock API，而不是直接连 Anthropic。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">和直接用的区别</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p><strong>计费</strong> — Bedrock 按 AWS 的定价，走 AWS 账单；直接用按 Anthropic 定价，走 Claude.com 账单。</p>
+				<p><strong>模型</strong> — Bedrock 上的模型版本可能比 Anthropic 官网慢半拍更新。</p>
+				<p><strong>功能</strong> — 某些新功能可能先在 Anthropic 官网发布，过段时间才同步到 Bedrock。</p>
+				<p><strong>网页版</strong> — Bedrock 不包含 Claude 网页版访问，只给 API 访问。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">企业最佳实践</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p><strong>1. 用 IAM Role</strong> — 别用长期凭证，用 IAM Role 临时凭证更安全。</p>
+				<p><strong>2. 固定模型版本</strong> — 用 <code class="px-2 py-1 rounded bg-code">ANTHROPIC_DEFAULT_SONNET_MODEL</code> 等环境变量固定模型，避免新版本不兼容。</p>
+				<p><strong>3. 配置 VPC</strong> — 需要的话可以把 Bedrock 调用限制在 VPC 内。</p>
+				<p><strong>4. 开启 CloudTrail</strong> — 审计所有 API 调用，满足合规要求。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">最后一句土话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>Bedrock 就是 AWS 生态里的 Claude Code。已经在用 AWS 就选它，不在 AWS 生态就直接用 Claude.com。</p>
+				<p style="color: var(--muted);">别为了"看起来专业"强行上 Bedrock，直接用更简单便宜。</p>
+			</div>
+		</section>
+	</article>
+</Layout>

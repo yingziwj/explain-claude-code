@@ -1,0 +1,109 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('hooks-guide');
+
+if (!doc) {
+	throw new Error('Hooks guide doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Build with Claude Code</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">Hooks 用钩子自动化</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/hooks-guide" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 Hooks</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">一句人话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>钩子就是在特定时刻自动触发的脚本，像门禁规则。</p>
+				<p>比如：每次写文件前先备份、每次运行命令前先检查权限、每次会话开始前加载配置。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">钩子类型</h2>
+			<div class="mt-4 space-y-5 leading-8">
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="text-lg font-semibold">PreToolUse</h3>
+					<p class="mt-3" style="color: var(--muted);">工具使用前触发。适合做权限检查、参数验证、自动备份。</p>
+				</div>
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="text-lg font-semibold">PostToolUse</h3>
+					<p class="mt-3" style="color: var(--muted);">工具使用后触发。适合做日志记录、通知、清理。</p>
+				</div>
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="text-lg font-semibold">SessionInit</h3>
+					<p class="mt-3" style="color: var(--muted);">会话开始前触发。适合加载配置、设置环境变量。</p>
+				</div>
+				<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+					<h3 class="text-lg font-semibold">SessionEnd</h3>
+					<p class="mt-3" style="color: var(--muted);">会话结束后触发。适合做总结、清理临时文件。</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">配置钩子</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>钩子配置在 <code class="px-2 py-1 rounded bg-code">~/.claude/settings.json</code> 或项目级 <code class="px-2 py-1 rounded bg-code">.claude/settings.json</code>：</p>
+				<div class="mt-4 rounded-[24px] border p-6 font-mono text-sm overflow-x-auto" style="border-color: var(--line); background: var(--panel-strong);">
+<pre><![CDATA[{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./scripts/backup-before-write.sh"
+          }
+        ]
+      }
+    ]
+  }
+}]]></pre>
+				</div>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">钩子脚本怎么写</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>钩子脚本从 stdin 接收 JSON 输入，包含工具名、参数等信息。</p>
+				<p>退出码决定行为：</p>
+				<ul class="list-disc list-inside space-y-2 mt-2">
+					<li><code class="px-2 py-1 rounded bg-code">0</code> — 允许继续</li>
+					<li><code class="px-2 py-1 rounded bg-code">1</code> — 拒绝，显示错误</li>
+					<li><code class="px-2 py-1 rounded bg-code">2</code> — 拒绝，不显示错误（静默）</li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">常见用法</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p><strong>1. 自动备份</strong> — 写文件前先备份原文件。</p>
+				<p><strong>2. 权限检查</strong> — 检查是否有权限执行某个操作。</p>
+				<p><strong>3. 通知</strong> — 敏感操作后发 Slack 通知。</p>
+				<p><strong>4. 审计日志</strong> — 记录所有工具调用。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">最后一句土话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>钩子就是给 Claude Code 装"门禁"和"监控"。用好了，安全又省心；用乱了，处处受限。</p>
+				<p style="color: var(--muted);">建议从简单的备份、日志开始，慢慢加复杂逻辑。</p>
+			</div>
+		</section>
+	</article>
+</Layout>

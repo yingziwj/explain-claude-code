@@ -1,0 +1,83 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDocBySlug } from '../../../data/navigation';
+
+const doc = getDocBySlug('skills');
+
+if (!doc) {
+	throw new Error('Skills doc metadata is missing');
+}
+---
+
+<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
+	<article class="space-y-8">
+		<header class="card rounded-[32px] p-8 shadow-card">
+			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">Build with Claude Code</p>
+			<h1 class="mt-3 font-display text-4xl font-semibold">Skills 用技能扩展 Claude</h1>
+			<p class="mt-4 max-w-3xl text-lg leading-8">{doc.summary}</p>
+			<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+				原页来源：
+				<a href="https://code.claude.com/docs/en/skills" target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">官方 Skills</a>
+			</p>
+		</header>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">一句人话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>技能就是预先写好的"绝活"，遇到特定活路直接喊它使出来。</p>
+				<p>比如"写单元测试"、"审查代码"、"写 API 文档"，都是技能。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">技能和子代理的区别</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p><strong>技能</strong> — 是"招式"，喊一下使一招。上下文还在主对话里。</p>
+				<p><strong>子代理</strong> — 是"徒弟"，派出去独立干活。有自己的上下文。</p>
+				<p>简单说：技能是"你来使这招"，子代理是"你去干这活"。</p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">怎么用技能</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>在对话里直接喊技能名字：</p>
+				<div class="mt-4 rounded-[24px] border p-6 font-mono text-sm overflow-x-auto" style="border-color: var(--line); background: var(--panel-strong);">
+<pre># 让 Claude 用某个技能
+/skills write-unit-tests
+
+# 或者直接在对话里说
+"用 write-unit-tests 技能给这个函数写测试"</pre>
+				</div>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">技能放哪</h2>
+			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+				<p>技能文件放在 <code class="px-2 py-1 rounded bg-code">~/.claude/skills/</code>（用户级）或 <code class="px-2 py-1 rounded bg-code">.claude/skills/</code>（项目级）。</p>
+				<p>技能是 Markdown 文件，带 frontmatter：</p>
+				<div class="mt-4 rounded-[24px] border p-6 font-mono text-sm overflow-x-auto" style="border-color: var(--line); background: var(--panel-strong);">
+<pre>---
+name: write-unit-tests
+description: 给函数写单元测试
+---
+
+你是一个测试专家。写测试时遵循以下原则：
+1. 测试名称清晰描述场景
+2. 每个测试只测一个行为
+3. 用 AAA 模式（Arrange-Act-Assert）
+...</pre>
+				</div>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">最后一句土话</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<p>技能就是把你的经验打包成"招式包"，遇到类似场景直接使。用好了，效率翻倍。</p>
+				<p style="color: var(--muted);">建议从你最常干的活开始，慢慢积累自己的技能库。</p>
+			</div>
+		</section>
+	</article>
+</Layout>
