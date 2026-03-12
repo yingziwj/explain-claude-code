@@ -8,6 +8,49 @@ const { title, summary, section, sourceUrl, content } = Astro.props as {
 	sourceUrl: string;
 	content: DocContent;
 };
+
+const visualSteps =
+	content.sections
+		.flatMap((block) => (block.steps?.length ? block.steps.map((step) => step.title) : []))
+		.slice(0, 3);
+
+const fallbackSteps = (() => {
+	switch (section) {
+		case '入门指南':
+			return ['先认门', '再交小活', '最后看结果'];
+		case '核心概念':
+			return ['先摸门道', '再分清边界', '最后照规矩用'];
+		case '用 Claude Code 搞构建':
+			return ['先选能力', '再装家伙', '最后分工干活'];
+		case '平台和集成':
+			return ['先挑入口', '再接环境', '最后顺手开工'];
+		case '部署':
+			return ['先看前提', '再接云和网络', '最后统一验活'];
+		case '管理':
+			return ['先立规矩', '再管权限', '最后盯使用'];
+		case '配置':
+			return ['先分作用域', '再拧旋钮', '最后看生效'];
+		case '参考':
+			return ['先找命令', '再查参数', '最后回头实操'];
+		default:
+			return ['先看明白', '再小步试', '最后照结果调'];
+	}
+})();
+
+const displaySteps = (visualSteps.length ? visualSteps : fallbackSteps).slice(0, 3);
+const lead = content.sections[0]?.paragraphs[0] ?? summary;
+const accentLabel =
+	section === '部署'
+		? '云上跑'
+		: section === '平台和集成'
+			? '多入口'
+			: section === '配置'
+				? '拧旋钮'
+				: section === '管理'
+					? '立规矩'
+					: section === '参考'
+						? '查表用'
+						: '讲人话';
 ---
 
 <article class="space-y-8">
@@ -51,9 +94,51 @@ const { title, summary, section, sourceUrl, content } = Astro.props as {
 
 	<section class="card rounded-[32px] p-8 shadow-card">
 		<h2 class="font-display text-2xl font-semibold">{content.illustration.title}</h2>
-		<div class="mt-6 rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
-			<pre class="overflow-x-auto text-sm leading-6" style="color: var(--accent-strong);"><code>{content.illustration.lines.join('\n')}</code></pre>
-			<p class="mt-4 leading-8" style="color: var(--muted);">{content.illustration.caption}</p>
+		<div class="doc-visual mt-6 rounded-[28px] border p-6" style="border-color: var(--line);">
+			<div class="doc-visual__halo doc-visual__halo--left"></div>
+			<div class="doc-visual__halo doc-visual__halo--right"></div>
+			<div class="relative z-[1] grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_320px]">
+				<div class="space-y-5">
+					<div class="flex flex-wrap items-center gap-3">
+						<span class="doc-chip">{section}</span>
+						<span class="doc-chip doc-chip--accent">{accentLabel}</span>
+					</div>
+					<div class="rounded-[24px] border px-5 py-5" style="border-color: var(--line); background: var(--panel);">
+						<p class="text-xs font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">一眼看懂</p>
+						<h3 class="mt-3 font-display text-2xl font-semibold">{title}</h3>
+						<p class="mt-3 max-w-2xl leading-8" style="color: var(--muted);">{lead}</p>
+					</div>
+					<div class="grid gap-3 md:grid-cols-3">
+						{displaySteps.map((step, index) => (
+							<div class="doc-step-card">
+								<p class="doc-step-card__index">0{index + 1}</p>
+								<p class="mt-3 text-sm leading-7">{step}</p>
+							</div>
+						))}
+					</div>
+				</div>
+				<div class="doc-side-stack">
+					<div class="doc-side-stack__node">
+						<span class="doc-side-stack__label">你来交代</span>
+						<p>把活说清</p>
+					</div>
+					<div class="doc-side-stack__arrow"></div>
+					<div class="doc-side-stack__node doc-side-stack__node--accent">
+						<span class="doc-side-stack__label">Claude Code</span>
+						<p>看现场再出手</p>
+					</div>
+					<div class="doc-side-stack__arrow"></div>
+					<div class="doc-side-stack__node">
+						<span class="doc-side-stack__label">最后验活</span>
+						<p>看结果再收工</p>
+					</div>
+				</div>
+			</div>
+			<p class="relative z-[1] mt-6 leading-8" style="color: var(--muted);">{content.illustration.caption}</p>
+			<details class="relative z-[1] mt-4 rounded-[18px] border px-4 py-3 text-sm" style="border-color: var(--line);">
+				<summary class="cursor-pointer select-none font-semibold" style="color: var(--accent-strong);">看原始简图</summary>
+				<pre class="mt-3 overflow-x-auto text-sm leading-6" style="color: var(--muted);"><code>{content.illustration.lines.join('\n')}</code></pre>
+			</details>
 		</div>
 	</section>
 

@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-npm run sync:docs
+npm run refresh:docs

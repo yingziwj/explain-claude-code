@@ -30,80 +30,114 @@ function uniqueByPath(items) {
 	});
 }
 
-function scrapeSidebar(html) {
+function scrapeTopTabs(html) {
 	const $ = load(html);
-	const sections = [];
+	return $('a.nav-tabs-item[href^="/docs/en/"]')
+		.map((_, anchor) => ({
+			title: $(anchor).text().trim(),
+			path: $(anchor).attr('href')?.replace(/\/$/, '')
+		}))
+		.get()
+		.filter((item) => item.path && item.title && item.title !== 'Resources')
+		.filter((item) => item.path !== '/docs/en/legal-and-compliance');
+}
 
-	$('nav').each((_, nav) => {
-		const groups = [];
-		$(nav)
-			.find('h2,h3,h4,h5')
-			.each((__, heading) => {
-				const title = $(heading).text().trim();
-				const list = $(heading).nextAll('ul').first();
-				if (!title || !list.length) return;
-				const items = list
-					.find('a[href^="/docs/en/"]')
-					.map((___, anchor) => ({
-						title: $(anchor).text().trim(),
-						path: $(anchor).attr('href')?.replace(/\/$/, '')
-					}))
-					.get();
-				if (items.length) groups.push({ title, items: uniqueByPath(items) });
-			});
+function scrapeSidebarGroups(html) {
+	const $ = load(html);
+	return $('[id=sidebar-title]')
+		.map((_, heading) => {
+			const title = $(heading).text().trim();
+			const items = $(heading)
+				.parent()
+				.nextAll('ul')
+				.first()
+				.find('a[href^="/docs/en/"]')
+				.map((__, anchor) => ({
+					title: $(anchor).text().trim(),
+					path: $(anchor).attr('href')?.replace(/\/$/, '')
+				}))
+				.get();
 
-		if (groups.length > sections.length) {
-			sections.splice(0, sections.length, ...groups);
-		}
-	});
-
-	return sections;
+			return {
+				title,
+				items: uniqueByPath(items)
+			};
+		})
+		.get()
+		.filter((group) => group.title && group.items.length);
 }
 
 function extractArticle(html) {
 	const $ = load(html);
 	const article = $('main article').first().length ? $('main article').first() : $('main').first();
 	const title = article.find('h1').first().text().trim() || $('h1').first().text().trim();
+	const metaDescription = $('meta[name="description"]').attr('content')?.trim() ?? '';
 	const headings = article
 		.find('h2,h3')
 		.map((_, node) => $(node).text().trim())
 		.get()
 		.filter(Boolean)
-		.slice(0, 10);
+		.slice(0, 16);
+	const toc = $('#table-of-contents-content a')
+		.map((_, node) => $(node).text().trim())
+		.get()
+		.filter(Boolean)
+		.slice(0, 16);
 	const paragraphs = article
 		.find('p,li,code')
 		.map((_, node) => $(node).text().replace(/\s+/g, ' ').trim())
 		.get()
 		.filter(Boolean)
-		.slice(0, 80);
+		.slice(0, 120);
+	const codeBlocks = article
+		.find('pre code, pre')
+		.map((_, node) => $(node).text())
+		.get()
+		.map((text) => text.trim())
+		.filter(Boolean)
+		.slice(0, 16);
 
-	return { title, headings, paragraphs };
+	return { title, metaDescription, headings, toc, paragraphs, codeBlocks };
 }
 
 async function main() {
 	const overviewHtml = await fetchHtml(docsRoot);
-	const sections = scrapeSidebar(overviewHtml);
-	const pages = [];
+	const topTabs = scrapeTopTabs(overviewHtml);
+	const sections = [];
+	const discoveredPages = [];
+	const pageMap = new Map();
 
-	for (const section of sections) {
-		for (const item of section.items) {
-			const url = `${baseUrl}${item.path}`;
-			try {
-				const html = await fetchHtml(url);
-				pages.push({
-					section: section.title,
-					path: item.path,
-					url,
-					...extractArticle(html)
-				});
-			} catch (error) {
-				pages.push({
-					section: section.title,
-					path: item.path,
-					url,
-					error: error instanceof Error ? error.message : String(error)
-				});
+	for (const tab of topTabs) {
+		const tabUrl = `${baseUrl}${tab.path}`;
+		const html = tab.path === '/docs/en/overview' ? overviewHtml : await fetchHtml(tabUrl);
+		const groups = scrapeSidebarGroups(html);
+
+		for (const group of groups) {
+			sections.push(group);
+			for (const item of group.items) {
+				if (!pageMap.has(item.path)) {
+					pageMap.set(item.path, {
+						section: group.title,
+						path: item.path,
+						url: `${baseUrl}${item.path}`
+					});
+				}
 			}
+		}
+	}
+
+	for (const page of pageMap.values()) {
+		try {
+			const html = page.path === '/docs/en/overview' ? overviewHtml : await fetchHtml(page.url);
+			discoveredPages.push({
+				...page,
+				...extractArticle(html)
+			});
+		} catch (error) {
+			discoveredPages.push({
+				...page,
+				error: error instanceof Error ? error.message : String(error)
+			});
 		}
 	}
 
@@ -114,15 +148,16 @@ async function main() {
 			{
 				generatedAt: new Date().toISOString(),
 				source: docsRoot,
+				topTabs,
 				sections,
-				pages
+				pages: discoveredPages
 			},
 			null,
 			2
 		)
 	);
 
-	console.log(`Synced ${pages.length} docs pages to ${outputFile}`);
+	console.log(`Synced ${discoveredPages.length} docs pages to ${outputFile}`);
 }
 
 main().catch((error) => {

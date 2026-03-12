@@ -1,4 +1,5 @@
 import type { DocItem } from './navigation';
+import generatedContentFile from './generated/generated-doc-content.json';
 
 export type DocStep = {
 	title: string;
@@ -30,6 +31,14 @@ type ContentSeed = {
 	steps?: DocStep[];
 	illustration?: DocContent['illustration'];
 };
+
+type GeneratedContentFile = {
+	generatedAt: string | null;
+	sourceGeneratedAt: string | null;
+	items: Record<string, DocContent>;
+};
+
+const generatedContent = (generatedContentFile as GeneratedContentFile).items ?? {};
 
 const pageSeeds: Record<string, ContentSeed> = {
 	overview: {
@@ -326,5 +335,5 @@ function getFallbackSeed(doc: DocItem & { slug: string }): ContentSeed {
 }
 
 export function getDocContent(doc: DocItem & { slug: string }): DocContent {
-	return toContent(doc, pageSeeds[doc.slug] ?? getFallbackSeed(doc));
+	return pageSeeds[doc.slug] ? toContent(doc, pageSeeds[doc.slug]) : generatedContent[doc.slug] ?? toContent(doc, getFallbackSeed(doc));
 }

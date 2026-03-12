@@ -25,17 +25,28 @@ npm run build
 4. 输出目录填 `dist`。
 5. 默认即可拿到免费域名 `https://explain-claude-code.pages.dev`。
 
+更完整的上线说明见：
+
+- `CLOUDFLARE-PAGES.md`
+
 ## 自动同步官方 docs
 
 仓库包含：
 
 - `scripts/sync-docs.mjs`：抓取官方 docs 导航和正文快照，写入 `src/data/generated/source-docs.json`
-- `.github/workflows/daily-sync.yml`：每天自动执行一次同步，并在有变化时提交回仓库
+- `scripts/generate-doc-content.mjs`：把抓到的官方正文快照自动转成本站使用的中文解释内容种子
+- `.github/workflows/daily-sync.yml`：每天自动执行一次同步和内容再生成，并在有变化时提交回仓库
 
 手动执行同步：
 
 ```sh
-node scripts/sync-docs.mjs
+npm run refresh:docs
+```
+
+上线前检查：
+
+```sh
+npm run check:preflight
 ```
 
 ## 说明
