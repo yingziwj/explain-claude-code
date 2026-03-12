@@ -10,7 +10,8 @@
     "sync:docs": "node scripts/sync-docs.mjs",
     "generate:docs": "node scripts/generate-doc-content.mjs",
     "refresh:docs": "npm run sync:docs && npm run generate:docs",
-    "check:preflight": "node scripts/preflight-check.mjs"
+    "check:preflight": "node scripts/preflight-check.mjs",
+    "check:live": "node scripts/live-check.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.1.6",

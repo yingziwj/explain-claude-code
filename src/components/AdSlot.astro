@@ -1,0 +1,51 @@
+---
+interface Props {
+	slot?: string;
+	label?: string;
+	position?: string;
+	format?: 'auto' | 'rectangle' | 'horizontal' | 'vertical';
+	className?: string;
+}
+
+const {
+	slot = '',
+	label = '广告位',
+	position = '内容区',
+	format = 'auto',
+	className = ''
+} = Astro.props as Props;
+
+const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT?.trim() || '';
+const enabled = Boolean(adsenseClient && slot);
+const layoutClass = format === 'horizontal' ? 'ad-slot--horizontal' : format === 'vertical' ? 'ad-slot--vertical' : '';
+---
+
+<section class:list={['ad-slot-shell', className].filter(Boolean)} aria-label={`${label} ${position}`}>
+	<div class="ad-slot-shell__header">
+		<p class="ad-slot-shell__eyebrow">{label}</p>
+		<p class="ad-slot-shell__position">{position}</p>
+	</div>
+
+	{
+		enabled ? (
+			<div class:list={['ad-slot-shell__body', layoutClass].filter(Boolean)}>
+				<ins
+					class="adsbygoogle ad-slot-shell__ins"
+					style="display:block"
+					data-ad-client={adsenseClient}
+					data-ad-slot={slot}
+					data-ad-format="auto"
+					data-full-width-responsive="true"
+				></ins>
+				<script is:inline>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</div>
+		) : (
+			<div class:list={['ad-slot-shell__body', 'ad-slot-shell__placeholder', layoutClass].filter(Boolean)}>
+				<p>这里已经预留好广告位了。</p>
+				<p>等你把 AdSense 的 `ca-pub` 和广告位 ID 填进 Cloudflare 环境变量，这里就会自动变成正式广告。</p>
+			</div>
+		)
+	}
+</section>

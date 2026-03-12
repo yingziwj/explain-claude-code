@@ -1,4 +1,6 @@
 ---
+import AdSlot from './AdSlot.astro';
+
 const { title, summary, description, section } = Astro.props as {
 	title: string;
 	summary: string;
@@ -54,5 +56,5 @@ const { title, summary, description, section } = Astro.props as {
 		</p>
 	</section>
 
-	<!-- Google AdSense: content bottom slot -->
+	<AdSlot slot={import.meta.env.PUBLIC_ADSENSE_CONTENT_SLOT} position="文档页底部" format="horizontal" />
 </article>

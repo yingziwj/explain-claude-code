@@ -69,35 +69,100 @@ function scrapeSidebarGroups(html) {
 
 function extractArticle(html) {
 	const $ = load(html);
-	const article = $('main article').first().length ? $('main article').first() : $('main').first();
-	const title = article.find('h1').first().text().trim() || $('h1').first().text().trim();
-	const metaDescription = $('meta[name="description"]').attr('content')?.trim() ?? '';
-	const headings = article
-		.find('h2,h3')
-		.map((_, node) => $(node).text().trim())
-		.get()
-		.filter(Boolean)
-		.slice(0, 16);
-	const toc = $('#table-of-contents-content a')
-		.map((_, node) => $(node).text().trim())
-		.get()
-		.filter(Boolean)
-		.slice(0, 16);
-	const paragraphs = article
-		.find('p,li,code')
-		.map((_, node) => $(node).text().replace(/\s+/g, ' ').trim())
-		.get()
-		.filter(Boolean)
-		.slice(0, 120);
-	const codeBlocks = article
-		.find('pre code, pre')
-		.map((_, node) => $(node).text())
-		.get()
-		.map((text) => text.trim())
-		.filter(Boolean)
-		.slice(0, 16);
+	const contentRoot =
+		$('#content-container').first().length
+			? $('#content-container').first()
+			: $('#content-area').first().length
+				? $('#content-area').first()
+				: $('main article').first().length
+					? $('main article').first()
+					: $('main').first().length
+						? $('main').first()
+						: $('body').first();
 
-	return { title, metaDescription, headings, toc, paragraphs, codeBlocks };
+	const unique = (items) => [...new Set(items.filter(Boolean))];
+	function buildSectionBlocks(root) {
+		const blocks = [];
+		let current = null;
+
+		const pushCurrent = () => {
+			if (!current) return;
+			current.paragraphs = unique(current.paragraphs).slice(0, 12);
+			current.codeBlocks = unique(current.codeBlocks).slice(0, 6);
+			if (current.title || current.paragraphs.length || current.codeBlocks.length) {
+				blocks.push(current);
+			}
+		};
+
+		for (const node of root.find('h2, h3, span[data-as="p"], p, li, pre').toArray()) {
+			const tag = node.tagName?.toLowerCase();
+			if (tag === 'h2' || tag === 'h3') {
+				pushCurrent();
+				current = {
+					title: $(node).text().trim(),
+					paragraphs: [],
+					codeBlocks: []
+				};
+				continue;
+			}
+
+			if (!current) {
+				current = {
+					title: '',
+					paragraphs: [],
+					codeBlocks: []
+				};
+			}
+
+			if (tag === 'pre') {
+				const code = $(node).text().trim();
+				if (code) current.codeBlocks.push(code);
+				continue;
+			}
+
+			const text = $(node).text().replace(/\s+/g, ' ').trim();
+			if (text && text.length >= 8 && text !== current.title) {
+				current.paragraphs.push(text);
+			}
+		}
+
+		pushCurrent();
+		return blocks.filter((block) => block.title || block.paragraphs.length || block.codeBlocks.length).slice(0, 32);
+	}
+
+	const title = contentRoot.find('h1').first().text().trim() || $('h1').first().text().trim();
+	const metaDescription = $('meta[name="description"]').attr('content')?.trim() ?? '';
+	const headings = unique(
+		contentRoot
+			.find('h2,h3')
+			.map((_, node) => $(node).text().trim())
+			.get()
+	).slice(0, 20);
+	const toc = unique(
+		$('#table-of-contents-content a')
+			.map((_, node) => $(node).text().trim())
+			.get()
+	).slice(0, 20);
+	const paragraphs = unique(
+		contentRoot
+			.find('span[data-as="p"], p, li')
+			.map((_, node) => $(node).text().replace(/\s+/g, ' ').trim())
+			.get()
+	)
+		.filter((text) => text.length >= 8)
+		.slice(0, 180);
+	const codeBlocks = unique(
+		contentRoot
+			.find('pre code, pre')
+			.map((_, node) => $(node).text())
+			.get()
+			.map((text) => text.trim())
+	)
+		.filter(Boolean)
+		.slice(0, 32);
+	const sectionBlocks = buildSectionBlocks(contentRoot);
+
+	return { title, metaDescription, headings, toc, paragraphs, codeBlocks, sectionBlocks };
 }
 
 async function main() {

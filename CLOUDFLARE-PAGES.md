@@ -31,7 +31,16 @@
 
 ## 广告和 SEO
 
-- 页面底部和侧栏已经预留了 Google AdSense 注释位，可以后续插入广告代码。
+- 页面底部、首页和侧边栏已经接入可开关的 Google AdSense 组件。
+- 如果还没拿到广告位 ID，页面只会显示“广告位预留”提示，不会实际请求广告。
+- 要在 Cloudflare Pages 里启用广告，请添加这些环境变量：
+  - `PUBLIC_ADSENSE_CLIENT`
+  - `PUBLIC_ADSENSE_PUBLISHER_ID`
+  - `PUBLIC_ADSENSE_SIDEBAR_SLOT`
+  - `PUBLIC_ADSENSE_HOME_SLOT`
+  - `PUBLIC_ADSENSE_HOME_ASIDE_SLOT`
+  - `PUBLIC_ADSENSE_CONTENT_SLOT`
+- 部署后可检查 `/ads.txt`、`/privacy`、`/advertising` 是否正常。
 - `astro.config.mjs` 已配置站点地址，Astro 会生成 sitemap。
 - `public/_headers` 已加基础安全头和静态资源缓存规则。
 
@@ -53,4 +62,16 @@
 npm run refresh:docs
 npm run build
 npm run check:preflight
+```
+
+如果站点已经在线，部署完成后再跑一次：
+
+```sh
+npm run check:live
+```
+
+如果你用了自定义域名，也可以这样检查：
+
+```sh
+SITE_URL=https://你的域名 npm run check:live
 ```

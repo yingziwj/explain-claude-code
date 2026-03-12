@@ -31,10 +31,92 @@ function pickToc(page, count) {
 }
 
 function pickCodeBlocks(page, count) {
-	return (page.codeBlocks ?? [])
+	const blocks = (page.codeBlocks ?? [])
 		.map((block) => String(block).trim())
 		.filter((block) => block && block.length <= 600)
-		.slice(0, count);
+		.filter((block, index, all) => all.findIndex((candidate) => candidate === block) === index);
+
+	if (blocks.length <= count) return blocks;
+
+	const picks = [];
+	for (let i = 0; i < count; i += 1) {
+		const ratio = count === 1 ? 0 : i / (count - 1);
+		const index = Math.round(ratio * (blocks.length - 1));
+		picks.push(blocks[index]);
+	}
+
+	return picks.filter((block, index, all) => all.findIndex((candidate) => candidate === block) === index);
+}
+
+function inferStepKind(code) {
+	const text = String(code ?? '').trim();
+	if (!text) return 'code';
+	if (/[├└│]/.test(text)) return 'structure';
+	if (/^\s*[{[]/.test(text) || /^---\n/.test(text) || /"name"\s*:|"env"\s*:|\.json|settings\.json|plugin\.json|SKILL\.md/i.test(text)) return 'config';
+	if (/^[\w./~-]+\s+.*$/m.test(text) && /(?:claude|curl|npm|npx|mkdir|cp|mv|rm|brew|winget|apk|irm|bash|cmd)\b/m.test(text)) return 'command';
+	if (/^(\/|> )/m.test(text) || /how does this code work\?/i.test(text) || /\?\s*$/.test(text)) return 'prompt';
+	return 'code';
+}
+
+function kindLabel(kind) {
+	switch (kind) {
+		case 'command':
+			return '命令';
+		case 'config':
+			return '配置';
+		case 'prompt':
+			return '提问示例';
+		case 'structure':
+			return '目录结构';
+		default:
+			return '代码片段';
+	}
+}
+
+function kindAction(kind) {
+	switch (kind) {
+		case 'command':
+			return '这一步是让你在终端里敲命令';
+		case 'config':
+			return '这一步是让你改配置或新建配置文件';
+		case 'prompt':
+			return '这一步是你直接跟 Claude 说的话';
+		case 'structure':
+			return '这一步是让你看目录和文件该怎么摆';
+		default:
+			return '这一步是原页里的关键代码或示例';
+	}
+}
+
+function pickSectionSteps(page, count) {
+	const steps = [];
+
+	for (const block of page.sectionBlocks ?? []) {
+		if (!block || !block.title || !Array.isArray(block.codeBlocks) || !block.codeBlocks.length) continue;
+
+		const title = normalizeText(block.title);
+		const codes = block.codeBlocks
+			.map((code) => String(code).trim())
+			.filter(Boolean)
+			.slice(0, title.includes('Quickstart') || title.includes('Install') || title.includes('Create') ? 6 : 3);
+
+		codes.forEach((code, index) => {
+			const kind = inferStepKind(code);
+			steps.push({
+				title: codes.length > 1 ? `原页关键片段：${title} ${index + 1}` : `原页关键片段：${title}`,
+				body:
+					block.paragraphs?.length
+						? `${kindAction(kind)}。这一小节原文主要在讲：${normalizeText(block.paragraphs[0])} 下面这块属于“${kindLabel(kind)}”，关键命令、文件名和参数最好照原样保留。`
+						: `${kindAction(kind)}。这段内容是从官方页面抓下来的${kindLabel(kind)}，解释可以说人话，但这里的关键字、命令名、文件名和参数别随便改字。`,
+				code,
+				kind
+			});
+		});
+
+		if (steps.length >= count) break;
+	}
+
+	return steps.slice(0, count);
 }
 
 function makeIllustration(title, sectionLabel) {
@@ -389,12 +471,18 @@ function makePractice(doc, page) {
 }
 
 function makeSteps(page) {
-	const blocks = pickCodeBlocks(page, 3);
+	const sectionSteps = pickSectionSteps(page, 12);
+	if (sectionSteps.length) return sectionSteps;
+
+	const blocks = pickCodeBlocks(page, 6);
 	if (!blocks.length) return undefined;
 
+	const labels = pickToc(page, 8).concat(pickHeadings(page, 8));
+
 	return blocks.map((code, index) => ({
-		title: `原页里的关键命令/代码 ${index + 1}`,
-		body: '这段内容是从官方页面抓下来的关键命令或代码片段。做中文解释时可以说人话，但这里的代码本身别随便改字。',
+		kind: inferStepKind(code),
+		title: labels[index] ? `原页关键片段：${labels[index]}` : `原页里的关键命令/代码 ${index + 1}`,
+		body: `${kindAction(inferStepKind(code))}。这段内容是从官方页面抓下来的${kindLabel(inferStepKind(code))}，解释可以说人话，但这里的关键字、命令名、文件名和参数别随便改字。`,
 		code
 	}));
 }

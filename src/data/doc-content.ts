@@ -5,6 +5,7 @@ export type DocStep = {
 	title: string;
 	body: string;
 	code?: string;
+	kind?: 'command' | 'config' | 'prompt' | 'structure' | 'code';
 };
 
 export type DocSectionContent = {
@@ -29,6 +30,7 @@ type ContentSeed = {
 	explain: string[];
 	practice: string[];
 	steps?: DocStep[];
+	extraSections?: DocSectionContent[];
 	illustration?: DocContent['illustration'];
 };
 
@@ -96,6 +98,41 @@ const pageSeeds: Record<string, ContentSeed> = {
 				code: `what does this project do?\nwhere is the main entry point?\nexplain the folder structure`
 			}
 		],
+		extraSections: [
+			{
+				title: '照着做一遍',
+				paragraphs: [
+					'如果你只想今天就把它跑起来，最省事的路就是按这四步来，不要东跳西跳。',
+					'每做完一步就验一下，确认没偏，再往下走。'
+				],
+				steps: [
+					{
+						title: '第 1 步：先装工具',
+						body: '挑跟你机器对应的安装命令。装完别急着干别的，先确认命令能认出来。',
+						code: `# macOS / Linux / WSL\ncurl -fsSL https://claude.ai/install.sh | bash\n\n# Windows PowerShell\nirm https://claude.ai/install.ps1 | iex`,
+						kind: 'command'
+					},
+					{
+						title: '第 2 步：进到你的项目目录',
+						body: 'Claude 最怕认错门。你先站到项目根目录，再开工。',
+						code: `cd your-project\npwd`,
+						kind: 'command'
+					},
+					{
+						title: '第 3 步：启动并登录',
+						body: '第一次会先认主。登录跑通后，后面才能正常派活。',
+						code: `claude`,
+						kind: 'command'
+					},
+					{
+						title: '第 4 步：先交一个很小的活',
+						body: '别一上来让它大改。先让它介绍项目、找入口、讲目录，确认它没有看错现场。',
+						code: `what does this project do?\nwhere is the main entry point?\nexplain the folder structure`,
+						kind: 'prompt'
+					}
+				]
+			}
+		],
 		illustration: {
 			title: '上手路线图',
 			lines: ['装工具 -> 登录 -> 进项目', '        |', '        v', '先问路 -> 交小活 -> 看结果', '        |', '        v', '再让它修真问题'],
@@ -118,17 +155,122 @@ const pageSeeds: Record<string, ContentSeed> = {
 		summary: ['插件就是把常用本事打包好，别的项目一装就能用。', '它可以带上子代理、技能、MCP 配置这些“成套工具”。'],
 		explain: ['像把常用农具装成一套工具箱。下次去另一块地，不用再一把锄头一把铲子重新找。', '如果你们团队有固定工作流，插件最适合拿来做复用。'],
 		practice: ['先想清楚这个插件解决的是哪类重复问题，再决定里面放技能、子代理还是外部连接。', '插件不要贪多。一个插件最好解决一类明确场景，而不是把所有东西都塞进去。'],
-		steps: [{ title: '打包前先问三句', body: '想明白这三句，插件就不容易做成一坨。', code: `1. 这个插件帮谁省时间？\n2. 安装后最常用的动作是什么？\n3. 团队里哪些项目都能复用？` }]
+		steps: [{ title: '打包前先问三句', body: '想明白这三句，插件就不容易做成一坨。', code: `1. 这个插件帮谁省时间？\n2. 安装后最常用的动作是什么？\n3. 团队里哪些项目都能复用？` }],
+		extraSections: [
+			{
+				title: '照着做一遍',
+				paragraphs: [
+					'第一次做插件，先别想着一口气把 skills、hooks、MCP 全塞进去。',
+					'先做一个最小能装、能跑、能试的插件，跑通以后再加复杂能力。'
+				],
+				steps: [
+					{
+						title: '第 1 步：先建插件目录',
+						body: '先把插件的壳子搭起来，这一步就是把地圈出来。',
+						code: `mkdir my-first-plugin\nmkdir my-first-plugin/.claude-plugin`,
+						kind: 'command'
+					},
+					{
+						title: '第 2 步：写 plugin.json',
+						body: '这个文件像工具箱封面，告诉 Claude 这套插件叫什么、干什么。',
+						code: `{\n  "name": "my-first-plugin",\n  "description": "A greeting plugin to learn the basics",\n  "version": "1.0.0"\n}`,
+						kind: 'config'
+					},
+					{
+						title: '第 3 步：先加一个最小 skill',
+						body: '不要先上复杂代理，先放一个最简单的 skill，能呼出来就算跑通。',
+						code: `mkdir -p my-first-plugin/skills/hello\n\n---\ndescription: Greet the user with a friendly message\ndisable-model-invocation: true\n---\n\nGreet the user warmly and ask how you can help them today.`,
+						kind: 'config'
+					},
+					{
+						title: '第 4 步：本地试装',
+						body: '先别发给别人，先在自己机器上临时加载，确认能用。',
+						code: `claude --plugin-dir ./my-first-plugin\n/my-first-plugin:hello`,
+						kind: 'command'
+					}
+				]
+			}
+		]
 	},
 	'discover-plugins': {
 		summary: ['这一页讲去哪找现成插件、怎么装、怎么判断值不值得装。', '重点不是装得多，而是挑对。'],
 		explain: ['别人已经做好的插件，能省你重复造轮子。但轮子也有好有坏，先看它解决的场景是不是你的刚需。', '安装前最好先看清插件带了哪些能力，别把自己不需要的权限也一起带进来。'],
-		practice: ['先找最贴近你工作流的插件，比如审查代码、连外部系统、补测试。', '装完先在小项目试，确认没副作用，再推广到主项目。']
+		practice: ['先找最贴近你工作流的插件，比如审查代码、连外部系统、补测试。', '装完先在小项目试，确认没副作用，再推广到主项目。'],
+		extraSections: [
+			{
+				title: '照着做一遍',
+				paragraphs: [
+					'第一次装现成插件，先别一下装一串。',
+					'先接一个市场，再装一个最贴近当前活路的插件，装完立刻试。'
+				],
+				steps: [
+					{
+						title: '第 1 步：先加插件来源',
+						body: '先把市场接进来，不然你后面连去哪挑都没有门。',
+						code: `claude plugin marketplace add demo https://example.com/marketplace.json`,
+						kind: 'command'
+					},
+					{
+						title: '第 2 步：先搜一遍可装插件',
+						body: '先看看摊子上有什么，再决定装谁。',
+						code: `claude plugin search`,
+						kind: 'command'
+					},
+					{
+						title: '第 3 步：装一个最贴近当前工作的插件',
+						body: '别图热闹，先装现在最刚需的那一个。',
+						code: `claude plugin install plugin-name`,
+						kind: 'command'
+					},
+					{
+						title: '第 4 步：装完马上验',
+						body: '确认功能真出现了，再决定要不要继续装别的。',
+						code: `/plugin\n/reload-plugins`,
+						kind: 'prompt'
+					}
+				]
+			}
+		]
 	},
 	skills: {
 		summary: ['技能就是预先写好的绝活说明书，Claude 遇到对应场景就能直接拿来用。', '它很适合把团队里的固定套路固化下来。'],
 		explain: ['你可以把技能当成“遇到这种活就照这个打法来”的小抄。比如审查 PR、写单测、写接口文档，都能做成技能。', '这样做的好处是口径统一，不靠每次临场发挥。'],
-		practice: ['技能描述要短、准、能执行，最好明确输入、输出和边界。', '别把技能写成长篇空话。能用几条清楚规则说完，就不要写成一大篇作文。']
+		practice: ['技能描述要短、准、能执行，最好明确输入、输出和边界。', '别把技能写成长篇空话。能用几条清楚规则说完，就不要写成一大篇作文。'],
+		extraSections: [
+			{
+				title: '照着做一遍',
+				paragraphs: [
+					'第一次做 skill，最稳就是做一个“解释代码”的小抄。',
+					'因为它不碰危险权限，也最容易一眼看出有没有生效。'
+				],
+				steps: [
+					{
+						title: '第 1 步：先建 skill 目录',
+						body: '先给这个小抄找个固定住处。',
+						code: `mkdir -p ~/.claude/skills/explain-code`,
+						kind: 'command'
+					},
+					{
+						title: '第 2 步：写 SKILL.md',
+						body: '前面写 frontmatter，后面写这套 skill 的具体打法。',
+						code: `---\nname: explain-code\ndescription: Explains code with visual diagrams and analogies.\n---\n\nWhen explaining code, always include an analogy and a simple diagram.`,
+						kind: 'config'
+					},
+					{
+						title: '第 3 步：试自动触发',
+						body: '先用一句自然话问它，看它会不会自己把这套 skill 调出来。',
+						code: `How does this code work?`,
+						kind: 'prompt'
+					},
+					{
+						title: '第 4 步：试手动点名',
+						body: '如果你想确认就是这套 skill 在起作用，直接点名叫它。',
+						code: `/explain-code src/auth/login.ts`,
+						kind: 'prompt'
+					}
+				]
+			}
+		]
 	},
 	'scheduled-tasks': {
 		summary: ['定时任务就是让 Claude 到点自动干活。', '适合日报、巡检、依赖检查、固定提醒这类重复劳动。'],
@@ -149,13 +291,83 @@ const pageSeeds: Record<string, ContentSeed> = {
 	headless: {
 		summary: ['无头模式就是不进聊天界面，直接在脚本或 CI 里调用 Claude Code。', '适合自动流程、批处理和流水线集成。'],
 		explain: ['你可以把它当成“把帮工嵌进机器流程里”。人不一定站在旁边，但机器会按你定好的话把活派出去。', '这种模式特别适合重复审查、批量解释、自动生成报告。'],
-		practice: ['先挑一个低风险场景试，比如解释报错、生成摘要、审查改动。', '自动流程里要特别注意输入范围和权限，别让它拿到超出预期的东西。']
+		practice: ['先挑一个低风险场景试，比如解释报错、生成摘要、审查改动。', '自动流程里要特别注意输入范围和权限，别让它拿到超出预期的东西。'],
+		extraSections: [
+			{
+				title: '照着做一遍',
+				paragraphs: [
+					'第一次用无头模式，别先接进整条 CI 流水线。',
+					'先在本地命令行里跑一个最小示例，确认它会吐你想要的结果。'
+				],
+				steps: [
+					{
+						title: '第 1 步：先跑一个最小问题',
+						body: '先问一个一眼能看出对不对的小问题。',
+						code: `claude -p "explain this function"`,
+						kind: 'command'
+					},
+					{
+						title: '第 2 步：再试带文件的任务',
+						body: '让它真正碰一下项目里的文件，看输出是不是靠谱。',
+						code: `claude -p "summarize the changes in src/auth/login.ts"`,
+						kind: 'command'
+					},
+					{
+						title: '第 3 步：要给别的程序吃时，再收紧格式',
+						body: '人看和机器看不是一回事，后面接程序时再固定结构。',
+						code: `claude -p "return JSON with keys summary and risk"`,
+						kind: 'command'
+					},
+					{
+						title: '第 4 步：最后才接进自动流程',
+						body: '先本地确认稳定，再放进脚本或 CI。',
+						code: `./run-claude-check.sh`,
+						kind: 'command'
+					}
+				]
+			}
+		]
 	},
 	mcp: {
 		summary: ['MCP 是 Claude Code 接外部工具和数据源的标准接口。', '有了它，Claude 不只看本地代码，还能摸到数据库、文档、工单、聊天记录这些外部材料。'],
 		explain: ['这东西像给帮工接上外接设备。原来它只在你院里转，现在能去仓库看账本、去办公室翻工单。', '重点不是“连得多”，而是“连得准”。先接最能帮你做决策的外部信息。'],
 		practice: ['先决定你最缺哪种外部信息，再去接对应的 MCP 服务。', '接好后先试只读类场景，确认数据能看懂，再慢慢放到写入类操作。'],
-		steps: [{ title: '最常见的接法', body: '先从读取外部信息开始，风险最小。', code: `1. 连接设计文档\n2. 读取工单系统\n3. 查看团队聊天记录\n4. 调用自定义内部工具` }]
+		steps: [{ title: '最常见的接法', body: '先从读取外部信息开始，风险最小。', code: `1. 连接设计文档\n2. 读取工单系统\n3. 查看团队聊天记录\n4. 调用自定义内部工具` }],
+		extraSections: [
+			{
+				title: '照着做一遍',
+				paragraphs: [
+					'第一次接 MCP，不要先碰最复杂的企业内网工具。',
+					'先接一个官方或公开可测的远程服务，把命令、连通、列服务这三步跑通。'
+				],
+				steps: [
+					{
+						title: '第 1 步：先加一个 HTTP MCP 服务',
+						body: 'HTTP 是现在最稳、最常见的接法。',
+						code: `claude mcp add --transport http notion https://mcp.notion.com/mcp`,
+						kind: 'command'
+					},
+					{
+						title: '第 2 步：列一下你已经接上的服务',
+						body: '先确认它真的记住了，不要盲猜已经连上。',
+						code: `claude mcp list`,
+						kind: 'command'
+					},
+					{
+						title: '第 3 步：进 Claude 里查状态',
+						body: '到了会话里，再看它是不是活着、工具是不是已经出现。',
+						code: `/mcp`,
+						kind: 'prompt'
+					},
+					{
+						title: '第 4 步：先只做读，不要先做写',
+						body: '先让它查资料、读信息，等确认稳定了，再考虑改外部系统。',
+						code: `Use the connected MCP service to read available resources first.`,
+						kind: 'prompt'
+					}
+				]
+			}
+		]
 	},
 	troubleshooting: {
 		summary: ['这一页是遇到问题时的急救箱。', '当安装失败、登录不通、命令跑不动、结果不对时，先来这里排查。'],
@@ -276,12 +488,122 @@ const pageSeeds: Record<string, ContentSeed> = {
 	setup: {
 		summary: ['管理员设置页主要给团队管理员看，不是普通个人用户的第一站。', '它讲的是怎么立规则、配权限、管入口。'],
 		explain: ['像村里管仓库钥匙的人，先得定清楚谁能进、谁能改、谁只能看。', '管理员层面的配置决定团队用起来是乱还是稳。'],
-		practice: ['先把账户、权限、默认规则和安全边界定下来，再让团队大规模开用。', '越早把管理员规则讲清楚，后面越少补锅。']
+		practice: ['先把账户、权限、默认规则和安全边界定下来，再让团队大规模开用。', '越早把管理员规则讲清楚，后面越少补锅。'],
+		extraSections: [
+			{
+				title: '照着做一遍',
+				paragraphs: [
+					'如果你现在的目标只是把 Claude Code 安装跑通，不必先钻管理员规则。',
+					'最实用的路线就是：安装 -> 验证 -> 登录 -> 再决定要不要碰更细设置。'
+				],
+				steps: [
+					{
+						title: '第 1 步：先安装',
+						body: '按你的系统挑一条安装命令。能简单装通，就别先绕远路。',
+						code: `# macOS / Linux / WSL\ncurl -fsSL https://claude.ai/install.sh | bash\n\n# Windows PowerShell\nirm https://claude.ai/install.ps1 | iex`,
+						kind: 'command'
+					},
+					{
+						title: '第 2 步：先验版本和体检',
+						body: '先别猜安装好了没有，直接让它自己报版本、跑体检。',
+						code: `claude --version\nclaude doctor`,
+						kind: 'command'
+					},
+					{
+						title: '第 3 步：再启动登录',
+						body: '只有认完主，后面很多命令和会话能力才真正能用。',
+						code: `claude`,
+						kind: 'command'
+					},
+					{
+						title: '第 4 步：有特殊环境再补配置',
+						body: '像 Windows Git Bash、Alpine、自动更新通道这些，都属于后补项，不要一开始就把自己绕晕。',
+						code: `{\n  "env": {\n    "CLAUDE_CODE_GIT_BASH_PATH": "C:\\\\Program Files\\\\Git\\\\bin\\\\bash.exe"\n  }\n}`,
+						kind: 'config'
+					}
+				]
+			}
+		]
+	},
+	permissions: {
+		summary: ['这页讲的是 Claude Code 到底能碰什么、不能碰什么。', '说白了，就是先把帮工的活动范围画清楚，免得它手伸得太长。'],
+		explain: ['你可以把权限想成院门钥匙和工具柜钥匙。哪把给它，哪把先别给，得提前说清。', '这一页重点不是炫技，而是教你怎么把“能读、能改、能执行”这些权限拆开管。', '如果你想既让它干活，又不想它乱跑，这页就是硬规矩。'],
+		practice: ['先从最保守的权限开始，确认任务确实需要，再一点点放开。', 'Bash、读写文件、联网请求这些权限不要混着开，最好一类一类验。', '真要让它长期进项目干活，就把规则写细，别只靠临时口头交代。'],
+		extraSections: [
+			{
+				title: '照着做一遍',
+				paragraphs: [
+					'权限最怕一上来全放开。',
+					'最稳的办法是先给最小权限，真干不动时再一点点加。'
+				],
+				steps: [
+					{
+						title: '第 1 步：先用最保守方式开工',
+						body: '先让它动手前都问你，别一开始就给满权限。',
+						code: `claude`,
+						kind: 'command'
+					},
+					{
+						title: '第 2 步：先让它看，不急着让它改',
+						body: '先确认它认路没错，再考虑放编辑权限。',
+						code: `Explain this codebase before making any changes.`,
+						kind: 'prompt'
+					},
+					{
+						title: '第 3 步：哪类不够，就只补哪类',
+						body: '比如先补文件编辑，不要顺手把 Bash、联网全开了。',
+						code: `{\n  "permissions": {\n    "edit": "ask"\n  }\n}`,
+						kind: 'config'
+					},
+					{
+						title: '第 4 步：阶段结束后把口子收回来',
+						body: '临时放开的权限别一直挂着，做完就该回收。',
+						code: `Review allowed tools and remove anything no longer needed.`,
+						kind: 'prompt'
+					}
+				]
+			}
+		]
 	},
 	settings: {
 		summary: ['设置页讲的是 Claude Code 身上那些旋钮和挡位到底怎么拧。', '重点不是都去改，而是知道哪些配置会真正影响你的手感和安全边界。'],
 		explain: ['像一台拖拉机，不只是会不会点火，还要知道档位、限速器、油门和刹车分别在哪儿。', '配置页就是让你分清“个人习惯”“项目规则”“临时试验”三类设置。'],
-		practice: ['个人口味放全局，项目规则放仓库，临时试验用命令行参数覆盖。', '权限类设置宁可先收紧，再按需要慢慢放开。']
+		practice: ['个人口味放全局，项目规则放仓库，临时试验用命令行参数覆盖。', '权限类设置宁可先收紧，再按需要慢慢放开。'],
+		extraSections: [
+			{
+				title: '照着做一遍',
+				paragraphs: [
+					'第一次碰设置，不用想着一口气全懂。',
+					'先抓三层：个人习惯、项目规则、临时覆盖，分清这三层就已经赢一半。'
+				],
+				steps: [
+					{
+						title: '第 1 步：先改全局习惯',
+						body: '像个人偏好这种，先放你自己的全局配置里。',
+						code: `~/.claude/settings.json`,
+						kind: 'config'
+					},
+					{
+						title: '第 2 步：团队规矩写进项目配置',
+						body: '凡是大家都得守的规则，才值得进仓库。',
+						code: `.claude/settings.json`,
+						kind: 'config'
+					},
+					{
+						title: '第 3 步：临时试验就走临时参数',
+						body: '别为了试一个想法，把长期配置改乱。',
+						code: `claude --model some-model`,
+						kind: 'command'
+					},
+					{
+						title: '第 4 步：改完马上核对有没有生效',
+						body: '配置最怕“你以为改了，其实没吃到”。',
+						code: `Use /config to review the current effective settings.`,
+						kind: 'prompt'
+					}
+				]
+			}
+		]
 	},
 	'cli-reference': {
 		summary: ['命令行参考页是查表用的，不是给你讲故事的。', '当你忘了某个参数、某个开关、某个命令该怎么写，就来翻这页。'],
@@ -307,7 +629,8 @@ function toContent(doc: DocItem & { slug: string }, seed: ContentSeed): DocConte
 				title: '上手时重点盯住什么',
 				paragraphs: seed.practice,
 				steps: seed.steps
-			}
+			},
+			...(seed.extraSections ?? [])
 		],
 		illustration:
 			seed.illustration ?? {
@@ -315,6 +638,55 @@ function toContent(doc: DocItem & { slug: string }, seed: ContentSeed): DocConte
 				lines: [doc.title, '   |', '   v', doc.summary, '   |', '   v', '照着步骤去做'],
 				caption: '这页的作用，就是把原本偏专业的话题，拆成能直接照着走的明白话。'
 			}
+	};
+}
+
+function buildDefaultWalkthrough(doc: DocItem & { slug: string }, content: DocContent): DocSectionContent {
+	const practiceSection = content.sections.find((section) => section.title === '上手时重点盯住什么');
+	const existingSteps = practiceSection?.steps?.slice(0, 4) ?? [];
+
+	if (existingSteps.length) {
+		return {
+			title: '照着做一遍',
+			paragraphs: [
+				'如果你不想来回翻，就先照这几步顺着做。',
+				'每做完一步就看一下结果，再决定要不要继续往下。'
+			],
+			steps: existingSteps.map((step, index) => ({
+				...step,
+				title: step.title.startsWith('第 ') ? step.title : `第 ${index + 1} 步：${step.title.replace(/^原页关键片段：/, '').trim()}`
+			}))
+		};
+	}
+
+	const practiceLabels = ['第 1 步：先起步', '第 2 步：边做边看', '第 3 步：收尾防出错'];
+	const paragraphs = (practiceSection?.paragraphs ?? [
+		'先从最小一步开始，不要一上来把整页所有东西全碰一遍。',
+		'做完一小步就回头看结果，确认没跑偏再继续。',
+		'命令、配置名和参数名尽量照原样用，别为了图省事乱改。'
+	]).slice(0, 3);
+
+	return {
+		title: '照着做一遍',
+		paragraphs: [
+			`这页属于“${doc.title}”这类活，最稳的办法还是一小步一小步来。`,
+			'下面这三步不一定华丽，但通常最不容易绕晕。'
+		],
+		steps: paragraphs.map((paragraph, index) => ({
+			title: practiceLabels[index] ?? `第 ${index + 1} 步`,
+			body: paragraph
+		}))
+	};
+}
+
+function ensureWalkthrough(doc: DocItem & { slug: string }, content: DocContent): DocContent {
+	if (content.sections.some((section) => section.title === '照着做一遍')) {
+		return content;
+	}
+
+	return {
+		...content,
+		sections: [...content.sections, buildDefaultWalkthrough(doc, content)]
 	};
 }
 
@@ -335,5 +707,6 @@ function getFallbackSeed(doc: DocItem & { slug: string }): ContentSeed {
 }
 
 export function getDocContent(doc: DocItem & { slug: string }): DocContent {
-	return pageSeeds[doc.slug] ? toContent(doc, pageSeeds[doc.slug]) : generatedContent[doc.slug] ?? toContent(doc, getFallbackSeed(doc));
+	const content = pageSeeds[doc.slug] ? toContent(doc, pageSeeds[doc.slug]) : generatedContent[doc.slug] ?? toContent(doc, getFallbackSeed(doc));
+	return ensureWalkthrough(doc, content);
 }

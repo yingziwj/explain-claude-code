@@ -1,5 +1,6 @@
 ---
 import type { NavSection } from '../data/navigation';
+import AdSlot from './AdSlot.astro';
 
 const { sections, currentPath } = Astro.props as {
 	sections: NavSection[];
@@ -42,5 +43,7 @@ const { sections, currentPath } = Astro.props as {
 			))
 		}
 	</nav>
-	<!-- Google AdSense: sidebar slot -->
+	<div class="mt-6">
+		<AdSlot slot={import.meta.env.PUBLIC_ADSENSE_SIDEBAR_SLOT} position="侧边栏" format="vertical" />
+	</div>
 </aside>

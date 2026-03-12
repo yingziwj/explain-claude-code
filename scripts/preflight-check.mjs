@@ -25,8 +25,13 @@ async function main() {
 		'public/_redirects',
 		'public/favicon.svg',
 		'public/social-card.svg',
+		'.env.example',
 		'astro.config.mjs',
 		'wrangler.jsonc',
+		'src/components/AdSlot.astro',
+		'src/pages/privacy.astro',
+		'src/pages/advertising.astro',
+		'src/pages/ads.txt.ts',
 		'src/data/generated/source-docs.json',
 		'src/data/generated/generated-doc-content.json'
 	];
