@@ -56,14 +56,14 @@ if (!doc) {
 			<div class="mt-4 space-y-4 leading-8">
 				<p>插件是个目录，包含 <code class="px-2 py-1 rounded bg-code">package.json</code> 和资源文件：</p>
 				<div class="mt-4 rounded-[24px] border p-6 font-mono text-sm overflow-x-auto" style="border-color: var(--line); background: var(--panel-strong);">
-<pre>my-plugin/
+<pre><![CDATA[my-plugin/
 ├── package.json          # 插件元信息
 ├── agents/               # 子代理目录
 │   ├── code-reviewer.md
 │   └── test-writer.md
 ├── skills/               # 技能目录
 │   └── api-conventions.md
-└── mcp.json              # MCP 服务器配置</pre>
+└── mcp.json              # MCP 服务器配置]]></pre>
 				</div>
 			</div>
 		</section>
@@ -76,11 +76,17 @@ if (!doc) {
   "name": "@yourname/claude-code-review-plugin",
   "version": "1.0.0",
   "description": "代码审查插件包",
+  "keywords": ["claude-code", "plugin", "code-review"],
   "claudeCode": {
     "agents": ["./agents/*.md"],
-    "skills": ["./skills/*.md"],
-    "mcp": "./mcp.json"
-  }
+    "skills": ["./skills/*.md"]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourname/claude-code-review-plugin"
+  },
+  "author": "Your Name",
+  "license": "MIT"
 }]]></pre>
 				</div>
 			</div>
@@ -92,6 +98,25 @@ if (!doc) {
 				<p><strong>从 npm 安装</strong> — <code class="px-2 py-1 rounded bg-code">claude plugins install @yourname/claude-code-review-plugin</code></p>
 				<p><strong>本地安装</strong> — <code class="px-2 py-1 rounded bg-code">claude plugins install ./path/to/plugin</code></p>
 				<p><strong>从 Git 安装</strong> — <code class="px-2 py-1 rounded bg-code">claude plugins install github:user/repo</code></p>
+			</div>
+		</section>
+
+		<section class="card rounded-[32px] p-8 shadow-card">
+			<h2 class="font-display text-2xl font-semibold">管理插件</h2>
+			<div class="mt-4 space-y-4 leading-8">
+				<div class="mt-4 rounded-[24px] border p-6 font-mono text-sm overflow-x-auto" style="border-color: var(--line); background: var(--panel-strong);">
+<pre><![CDATA[# 列出已安装插件
+claude plugins list
+
+# 查看插件详情
+claude plugins info @name/plugin-name
+
+# 更新插件
+claude plugins update @name/plugin-name
+
+# 卸载插件
+claude plugins uninstall @name/plugin-name]]></pre>
+				</div>
 			</div>
 		</section>
 
