@@ -1,0 +1,68 @@
+---
+import type { DocContent } from '../data/doc-content';
+
+const { title, summary, section, sourceUrl, content } = Astro.props as {
+	title: string;
+	summary: string;
+	section: string;
+	sourceUrl: string;
+	content: DocContent;
+};
+---
+
+<article class="space-y-8">
+	<header class="card rounded-[32px] p-8 shadow-card">
+		<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">{section}</p>
+		<h1 class="mt-3 font-display text-4xl font-semibold">{title}</h1>
+		<p class="mt-4 max-w-3xl text-lg leading-8">{summary}</p>
+		<p class="mt-4 text-sm leading-7" style="color: var(--muted);">
+			原页来源：
+			<a href={sourceUrl} target="_blank" rel="noreferrer" class="underline decoration-dotted underline-offset-4">
+				官方 {content.sourceLabel}
+			</a>
+		</p>
+	</header>
+
+	{
+		content.sections.map((block) => (
+			<section class="card rounded-[32px] p-8 shadow-card">
+				<h2 class="font-display text-2xl font-semibold">{block.title}</h2>
+				<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
+					{block.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+				</div>
+				{
+					block.steps?.length ? (
+						<div class="mt-6 grid gap-4">
+							{block.steps.map((step) => (
+								<div class="rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+									<h3 class="text-lg font-semibold">{step.title}</h3>
+									<p class="mt-3 leading-8" style="color: var(--muted);">{step.body}</p>
+									{step.code ? (
+										<pre class="mt-4 overflow-x-auto rounded-2xl px-4 py-4 text-sm leading-7" style="background: var(--ink); color: var(--paper);"><code>{step.code}</code></pre>
+									) : null}
+								</div>
+							))}
+						</div>
+					) : null
+				}
+			</section>
+		))
+	}
+
+	<section class="card rounded-[32px] p-8 shadow-card">
+		<h2 class="font-display text-2xl font-semibold">{content.illustration.title}</h2>
+		<div class="mt-6 rounded-[24px] border p-6" style="border-color: var(--line); background: var(--panel-strong);">
+			<pre class="overflow-x-auto text-sm leading-6" style="color: var(--accent-strong);"><code>{content.illustration.lines.join('\n')}</code></pre>
+			<p class="mt-4 leading-8" style="color: var(--muted);">{content.illustration.caption}</p>
+		</div>
+	</section>
+
+	<section class="card rounded-[32px] p-8 shadow-card">
+		<h2 class="font-display text-2xl font-semibold">后面还会怎么补</h2>
+		<p class="mt-4 leading-8" style="color: var(--muted);">
+			这个站会每天比对官方 docs 的导航和正文变化。原文一旦加页、删页、改内容，就重新生成对应页面并覆盖旧稿。
+		</p>
+	</section>
+
+	<!-- Google AdSense: content bottom slot -->
+</article>

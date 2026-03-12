@@ -1,6 +1,7 @@
 ---
-import DocPage from '../../../components/DocPage.astro';
+import DocContentPage from '../../../components/DocContentPage.astro';
 import Layout from '../../../layouts/Layout.astro';
+import { getDocContent } from '../../../data/doc-content';
 import { allDocs, getDocBySlug } from '../../../data/navigation';
 
 export function getStaticPaths() {
@@ -16,8 +17,16 @@ const doc = getDocBySlug(slug);
 if (!doc) {
 	throw new Error(`Unknown doc slug: ${slug}`);
 }
+
+const content = getDocContent(doc);
 ---
 
 <Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
-	<DocPage title={doc.title} summary={doc.summary} description={doc.description} section={doc.section} />
+	<DocContentPage
+		title={doc.title}
+		summary={doc.summary}
+		section={doc.section}
+		sourceUrl={`https://code.claude.com/docs/en/${doc.slug}`}
+		content={content}
+	/>
 </Layout>

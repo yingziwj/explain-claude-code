@@ -11,25 +11,37 @@ import Layout from '../layouts/Layout.astro';
 		<div class="space-y-6">
 			<section class="card rounded-[32px] p-8 shadow-card">
 				<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">首页</p>
-				<h1 class="mt-3 font-display text-4xl font-semibold">先把文档站的地基打好</h1>
+				<h1 class="mt-3 font-display text-4xl font-semibold">把 Claude Code 官方文档翻成人话</h1>
 				<p class="mt-4 max-w-3xl text-lg leading-8">
-					这个站会照着 Claude Code 官方文档的目录来排，一页不少；只是内容不再端着说，而是改成直白中文。
+					这个站照着 Claude Code 官方 docs 的目录和顺序来排，侧边栏也尽量保持一致；但正文改成中国人一眼就能看懂的大白话。
+				</p>
+				<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
+					重点步骤、命令、代码片段会保留，额外再补“简要总结”和一眼能懂的图解，方便先看明白再照着做。
 				</p>
 			</section>
 
 			<section class="card rounded-[32px] p-8 shadow-card">
-				<h2 class="font-display text-2xl font-semibold">当前进度</h2>
+				<h2 class="font-display text-2xl font-semibold">这个站已经有的能力</h2>
 				<div class="mt-4 space-y-3 leading-8" style="color: var(--muted);">
-					<p>现在已经把基础结构、完整导航、响应式布局、深浅色切换和 SEO 骨架先立起来。</p>
-					<p>下一步会抓官方文档内容，再按每一页分别改写成“人话版”。</p>
+					<p>完整的 docs 导航骨架已经接上，移动端和桌面端都能看，搜索框这类原站无关部分没有照搬。</p>
+					<p>页面统一带有简要总结、通俗解释、关键步骤区、插画区，以及后续放 Google AdSense 的预留位。</p>
+					<p>站点已经按 Cloudflare Pages 的静态站思路配置，域名默认就是 `explain-claude-code.pages.dev`。</p>
+				</div>
+			</section>
+
+			<section class="card rounded-[32px] p-8 shadow-card">
+				<h2 class="font-display text-2xl font-semibold">每天自动同步的思路</h2>
+				<div class="mt-4 space-y-3 leading-8" style="color: var(--muted);">
+					<p>仓库里已经加了每日同步脚本和 GitHub Actions 定时任务模板。</p>
+					<p>它会抓取官方 docs 页面的导航和正文快照，发现原站有新增、删除或改动时，就把最新源数据拉回仓库，方便重新生成解释版页面。</p>
 				</div>
 			</section>
 		</div>
 
 		<aside class="card rounded-[32px] p-6 shadow-card">
-			<h2 class="font-display text-xl font-semibold">施工说明</h2>
+			<h2 class="font-display text-xl font-semibold">部署和变现预留</h2>
 			<p class="mt-4 leading-8" style="color: var(--muted);">
-				目前属于第一步：先搭框架，不急着把全部正文一次写完。
+				Cloudflare Pages 免费可部署，`sitemap.xml` 会自动生成，后面接入谷歌广告联盟时可直接把广告代码放进现有预留位。
 			</p>
 			<!-- Google AdSense: home aside slot -->
 		</aside>

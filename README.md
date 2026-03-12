@@ -1,46 +1,45 @@
-# Astro Starter Kit: Basics
+# explain-claude-code
+
+把 Claude Code 官方 docs 做成通俗中文解释站，保留原导航结构和页面顺序，正文尽量写成普通人一眼能懂的话，同时保留关键命令、代码和步骤。
+
+## 本地开发
 
 ```sh
-npm create astro@latest -- --template basics
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+构建生产版本：
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```sh
+npm run build
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 部署
 
-## 🧞 Commands
+推荐直接部署到 Cloudflare Pages：
 
-All commands are run from the root of the project, from a terminal:
+1. 把这个仓库推到 GitHub。
+2. 在 Cloudflare Pages 里新建项目并连接该仓库。
+3. 构建命令填 `npm run build`。
+4. 输出目录填 `dist`。
+5. 默认即可拿到免费域名 `https://explain-claude-code.pages.dev`。
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## 自动同步官方 docs
 
-## 👀 Want to learn more?
+仓库包含：
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `scripts/sync-docs.mjs`：抓取官方 docs 导航和正文快照，写入 `src/data/generated/source-docs.json`
+- `.github/workflows/daily-sync.yml`：每天自动执行一次同步，并在有变化时提交回仓库
+
+手动执行同步：
+
+```sh
+node scripts/sync-docs.mjs
+```
+
+## 说明
+
+- 当前站点已经有完整导航骨架、SEO 基础、Cloudflare Pages 站点配置和农民伯伯主题图标。
+- `overview` 和 `quickstart` 目前是重点强化页，其它页面已统一接入“总结 + 通俗解释 + 关键步骤 + 插画”模板。
+- 未来接入 Google AdSense 时，可直接把广告代码填进布局和页面里的预留位置。

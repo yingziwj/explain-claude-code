@@ -1,0 +1,15 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" rx="48" fill="#F6EFE3"/>
+  <rect x="48" y="48" width="1104" height="534" rx="40" fill="#FFF8EE" stroke="#D7C2A2" stroke-width="4"/>
+  <circle cx="248" cy="202" r="78" fill="#F2C38B"/>
+  <path d="M170 214C176 137 231 96 291 89C338 83 387 100 412 134C370 136 337 157 314 188C287 171 211 166 170 214Z" fill="#A9733F"/>
+  <path d="M186 320C186 258 235 210 297 210C350 210 394 246 408 297L430 418L240 437L186 320Z" fill="#6B8F3E"/>
+  <rect x="286" y="414" width="64" height="124" rx="28" fill="#3F5C27"/>
+  <rect x="366" y="414" width="64" height="124" rx="28" fill="#3F5C27"/>
+  <rect x="420" y="174" width="262" height="316" rx="40" fill="#FFFDF7" stroke="#2E2316" stroke-width="10"/>
+  <path d="M502 262C536 229 579 213 623 214C614 248 600 281 575 307C608 310 643 325 667 349C632 366 594 370 558 363C557 400 546 435 521 466C495 435 488 399 492 362C457 367 420 362 390 341C423 320 459 311 498 312C482 280 480 243 491 208C497 225 499 244 502 262Z" fill="#2E2316"/>
+  <path d="M773 173H1028C1064 173 1092 201 1092 237V451C1092 487 1064 515 1028 515H773C737 515 709 487 709 451V237C709 201 737 173 773 173Z" fill="#FFF4DE"/>
+  <text x="760" y="280" fill="#2E2316" font-size="54" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-weight="700">讲给长辈听的</text>
+  <text x="760" y="352" fill="#3F5C27" font-size="76" font-family="'Noto Serif SC', 'Songti SC', serif" font-weight="700">Claude Code</text>
+  <text x="760" y="420" fill="#6A5846" font-size="38" font-family="'Noto Sans SC', 'PingFang SC', sans-serif">保留原导航，翻成听得懂的大白话</text>
+</svg>

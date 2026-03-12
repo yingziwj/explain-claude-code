@@ -1,0 +1,30 @@
+name: Daily docs sync
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 2 * * *'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: node scripts/sync-docs.mjs
+
+      - name: Commit generated changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/generated/source-docs.json
+          git diff --cached --quiet || git commit -m "chore: sync source docs snapshot"
+          git push

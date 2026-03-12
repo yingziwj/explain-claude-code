@@ -24,6 +24,7 @@ const canonical = new URL(pathname, Astro.site);
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonical} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta property="og:image" content={new URL('/social-card.svg', Astro.site)} />
 		<meta property="og:type" content="website" />
 		<meta property="og:locale" content="zh_CN" />
 		<meta property="og:title" content={title} />
@@ -31,6 +32,7 @@ const canonical = new URL(pathname, Astro.site);
 		<meta property="og:url" content={canonical} />
 		<meta property="og:site_name" content="通俗版 Claude Code 文档" />
 		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:image" content={new URL('/social-card.svg', Astro.site)} />
 		<script type="application/ld+json" set:html={JSON.stringify({
 			'@context': 'https://schema.org',
 			'@type': 'WebSite',
