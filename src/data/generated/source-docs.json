@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-13T04:21:08.975Z",
+  "generatedAt": "2026-03-14T04:19:13.875Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -269,6 +269,18 @@
         {
           "title": "CLI reference",
           "path": "/docs/en/cli-reference"
+        },
+        {
+          "title": "Built-in commands",
+          "path": "/docs/en/commands"
+        },
+        {
+          "title": "Environment variables",
+          "path": "/docs/en/env-vars"
+        },
+        {
+          "title": "Tools reference",
+          "path": "/docs/en/tools-reference"
         },
         {
           "title": "Interactive mode",
@@ -892,6 +904,8 @@
       "metaDescription": "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
       "headings": [],
       "toc": [
+        "2.1.76",
+        "2.1.75",
         "2.1.74",
         "2.1.73",
         "2.1.72",
@@ -909,14 +923,66 @@
         "2.1.55",
         "2.1.53",
         "2.1.52",
-        "2.1.51",
-        "2.1.50",
-        "2.1.49"
+        "2.1.51"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Added MCP elicitation support — MCP servers can now request structured input mid-task via an interactive dialog (form fields or browser URL)",
+        "Added new Elicitation and ElicitationResult hooks to intercept and override responses before they’re sent back",
+        "Added -n / --name <name> CLI flag to set a display name for the session at startup",
+        "Added worktree.sparsePaths setting for claude --worktree in large monorepos to check out only the directories you need via git sparse-checkout",
+        "Added PostCompact hook that fires after compaction completes",
+        "Added /effort slash command to set model effort level",
+        "Added session quality survey — enterprise admins can configure the sample rate via the feedbackSurveyRate setting",
+        "Fixed deferred tools (loaded via ToolSearch) losing their input schemas after conversation compaction, causing array and number parameters to be rejected with type errors",
+        "Fixed slash commands showing “Unknown skill”",
+        "Fixed plan mode asking for re-approval after the plan was already accepted",
+        "Fixed voice mode swallowing keypresses while a permission dialog or plan editor was open",
+        "Fixed /voice not working on Windows when installed via npm",
+        "Fixed spurious “Context limit reached” when invoking a skill with model: frontmatter on a 1M-context session",
+        "Fixed “adaptive thinking is not supported on this model” error when using non-standard model strings",
+        "Fixed Bash(cmd:*) permission rules not matching when a quoted argument contains #",
+        "Fixed “don’t ask again” in the Bash permission dialog showing the full raw command for pipes and compound commands",
+        "Fixed auto-compaction retrying indefinitely after consecutive failures — a circuit breaker now stops after 3 attempts",
+        "Fixed MCP reconnect spinner persisting after successful reconnection",
+        "Fixed LSP plugins not registering servers when the LSP Manager initialized before marketplaces were reconciled",
+        "Fixed clipboard copying in tmux over SSH — now attempts both direct terminal write and tmux clipboard integration",
+        "Fixed /export showing only the filename instead of the full file path in the success message",
+        "Fixed transcript not auto-scrolling to new messages after selecting text",
+        "Fixed Escape key not working to exit the login method selection screen",
+        "Fixed several Remote Control issues: sessions silently dying when the server reaps an idle environment, rapid messages being queued one-at-a-time instead of batched, and stale work items causing redelivery after JWT refresh",
+        "Fixed bridge sessions failing to recover after extended WebSocket disconnects",
+        "Fixed slash commands not found when typing the exact name of a soft-hidden command",
+        "Improved --worktree startup performance by reading git refs directly and skipping redundant git fetch when the remote branch is already available locally",
+        "Improved background agent behavior — killing a background agent now preserves its partial results in the conversation context",
+        "Improved model fallback notifications — now always visible instead of hidden behind verbose mode, with human-friendly model names",
+        "Improved blockquote readability on dark terminal themes — text is now italic with a left bar instead of dim",
+        "Improved stale worktree cleanup — worktrees left behind after an interrupted parallel run are now automatically cleaned up",
+        "Improved Remote Control session titles — now derived from your first prompt instead of showing “Interactive session”",
+        "Improved /voice to show your dictation language on enable and warn when your language setting isn’t supported for voice input",
+        "Updated --plugin-dir to only accept one path to support subcommands — use repeated --plugin-dir for multiple directories",
+        "[VSCode] Fixed gitignore patterns containing commas silently excluding entire filetypes from the @-mention file picker",
+        "Added 1M context window for Opus 4.6 by default for Max, Team, and Enterprise plans (previously required extra usage)",
+        "Added /color command for all users to set a prompt-bar color for your session",
+        "Added session name display on the prompt bar when using /rename",
+        "Added last-modified timestamps to memory files, helping Claude reason about which memories are fresh vs. stale",
+        "Added hook source display (settings/plugin/skill) in permission prompts when a hook requires confirmation",
+        "Fixed voice mode not activating correctly on fresh installs without toggling /voice twice",
+        "Fixed the Claude Code header not updating the displayed model name after switching models with /model or Option+P",
+        "Fixed session crash when an attachment message computation returns undefined values",
+        "Fixed Bash tool mangling ! in piped commands (e.g., jq 'select(.x != .y)' now works correctly)",
+        "Fixed managed-disabled plugins showing up in the /plugin Installed tab — plugins force-disabled by your organization are now hidden",
+        "Fixed token estimation over-counting for thinking and tool_use blocks, preventing premature context compaction",
+        "Fixed corrupted marketplace config path handling",
+        "Fixed /resume losing session names after resuming a forked or continued session",
+        "Fixed Esc not closing the /status dialog after visiting the Config tab",
+        "Fixed input handling when accepting or rejecting a plan",
+        "Fixed footer hint in agent teams showing ”↓ to expand” instead of the correct “shift + ↓ to expand”",
+        "Improved startup performance on macOS non-MDM machines by skipping unnecessary subprocess spawns",
+        "Suppressed async hook completion messages by default (visible with --verbose or transcript mode)",
+        "Breaking change: Removed deprecated Windows managed settings fallback at C:\\ProgramData\\ClaudeCode\\managed-settings.json — use C:\\Program Files\\ClaudeCode\\managed-settings.json",
         "Added actionable suggestions to /context command — identifies context-heavy tools, memory bloat, and capacity warnings with specific optimization tips",
         "Added autoMemoryDirectory setting to configure a custom directory for auto-memory storage",
         "Fixed memory leak where streaming API response buffers were not released when the generator was terminated early, causing unbounded RSS growth on the Node.js/npm code path",
@@ -1039,61 +1105,7 @@
         "Improved plugin-provided MCP server deduplication — servers that duplicate a manually-configured server (same command/URL) are now skipped, preventing duplicate connections and tool sets. Suppressions are shown in the /plugin menu.",
         "Updated /debug to toggle debug logging on mid-session, since debug logs are no longer written by default",
         "Removed startup notification noise for unauthenticated org-registered claude.ai connectors",
-        "Fixed API 400 errors when using ANTHROPIC_BASE_URL with a third-party gateway — tool search now correctly detects proxy endpoints and disables tool_reference blocks",
-        "Fixed API Error: 400 This model does not support the effort parameter when using custom Bedrock inference profiles or other model identifiers not matching standard Claude naming patterns",
-        "Fixed empty model responses immediately after ToolSearch — the server renders tool schemas with system-prompt-style tags at the prompt tail, which could confuse models into stopping early",
-        "Fixed prompt-cache bust when an MCP server with instructions connects after the first turn",
-        "Fixed Enter inserting a newline instead of submitting when typing over a slow SSH connection",
-        "Fixed clipboard corrupting non-ASCII text (CJK, emoji) on Windows/WSL by using PowerShell Set-Clipboard",
-        "Fixed extra VS Code windows opening at startup on Windows when running from the VS Code integrated terminal",
-        "Fixed voice mode failing on Windows native binary with “native audio module could not be loaded”",
-        "Fixed push-to-talk not activating on session start when voiceEnabled: true was set in settings",
-        "Fixed markdown links containing #NNN references incorrectly pointing to the current repository instead of the linked URL",
-        "Fixed repeated “Model updated to Opus 4.6” notification when a project’s .claude/settings.json has a legacy Opus model string pinned",
-        "Fixed plugins showing as inaccurately installed in /plugin",
-        "Fixed plugins showing “not found in marketplace” errors on fresh startup by auto-refreshing after marketplace installation",
-        "Fixed /security-review command failing with unknown option merge-base on older git versions",
-        "Fixed /color command having no way to reset back to the default color — /color default, /color gray, /color reset, and /color none now restore the default",
-        "Fixed a performance regression in the AskUserQuestion preview dialog that re-ran markdown rendering on every keystroke in the notes input",
-        "Fixed feature flags read during early startup never refreshing their disk cache, causing stale values to persist across sessions",
-        "Fixed permissions.defaultMode settings values other than acceptEdits or plan being applied in Claude Code Remote environments — they are now ignored",
-        "Fixed skill listing being re-injected on every --resume (~600 tokens saved per resume)",
-        "Fixed teleport marker not rendering in VS Code teleported sessions",
-        "Improved error message when microphone captures silence to distinguish from “no speech detected”",
-        "Improved compaction to preserve images in the summarizer request, allowing prompt cache reuse for faster and cheaper compaction",
-        "Improved /rename to work while Claude is processing, instead of being silently queued",
-        "Reduced prompt input re-renders during turns by ~74%",
-        "Reduced startup memory by ~426KB for users without custom CA certificates",
-        "Reduced Remote Control /poll rate to once per 10 minutes while connected (was 1–2s), cutting server load ~300×. Reconnection is unaffected — transport loss immediately wakes fast polling.",
-        "[VSCode] Added spark icon in VS Code activity bar that lists all Claude Code sessions, with sessions opening as full editors",
-        "[VSCode] Added full markdown document view for plans in VS Code, with support for adding comments to provide feedback",
-        "[VSCode] Added native MCP server management dialog — use /mcp in the chat panel to enable/disable servers, reconnect, and manage OAuth authentication without switching to the terminal",
-        "Added the /claude-api skill for building applications with the Claude API and Anthropic SDK",
-        "Added Ctrl+U on an empty bash prompt (!) to exit bash mode, matching escape and backspace",
-        "Added numeric keypad support for selecting options in Claude’s interview questions (previously only the number row above QWERTY worked)",
-        "Added optional name argument to /remote-control and claude remote-control (/remote-control My Project or --name \"My Project\") to set a custom session title visible in claude.ai/code",
-        "Added Voice STT support for 10 new languages (20 total) — Russian, Polish, Turkish, Dutch, Ukrainian, Greek, Czech, Danish, Swedish, Norwegian",
-        "Added effort level display (e.g., “with low effort”) to the logo and spinner, making it easier to see which effort setting is active",
-        "Added agent name display in terminal title when using claude --agent",
-        "Added sandbox.enableWeakerNetworkIsolation setting (macOS only) to allow Go programs like gh, gcloud, and terraform to verify TLS certificates when using a custom MITM proxy with httpProxyPort",
-        "Added includeGitInstructions setting (and CLAUDE_CODE_DISABLE_GIT_INSTRUCTIONS env var) to remove built-in commit and PR workflow instructions from Claude’s system prompt",
-        "Added /reload-plugins command to activate pending plugin changes without restarting",
-        "Added a one-time startup prompt suggesting Claude Code Desktop on macOS and Windows (max 3 showings, dismissible)",
-        "Added ${CLAUDE_SKILL_DIR} variable for skills to reference their own directory in SKILL.md content",
-        "Added InstructionsLoaded hook event that fires when CLAUDE.md or .claude/rules/*.md files are loaded into context",
-        "Added agent_id (for subagents) and agent_type (for subagents and --agent) to hook events",
-        "Added worktree field to status line hook commands with name, path, branch, and original repo directory when running in a --worktree session",
-        "Added pluginTrustMessage in managed settings to append organization-specific context to the plugin trust warning shown before installation",
-        "Added policy limit fetching (e.g., remote control restrictions) for Team plan OAuth users, not just Enterprise",
-        "Added pathPattern to strictKnownMarketplaces for regex-matching file/directory marketplace sources alongside hostPattern restrictions",
-        "Added plugin source type git-subdir to point to a subdirectory within a git repo",
-        "Added oauth.authServerMetadataUrl config option for MCP servers to specify a custom OAuth metadata discovery URL when standard discovery fails",
-        "Fixed a security issue where nested skill discovery could load skills from gitignored directories like node_modules",
-        "Fixed trust dialog silently enabling all .mcp.json servers on first run. You’ll now see the per-server approval dialog as expected",
-        "Fixed claude remote-control crashing immediately on npm installs with “bad option: —sdk-url” (anthropics/claude-code#28334)",
-        "Fixed --model claude-opus-4-0 and --model claude-opus-4-1 resolving to deprecated Opus versions instead of current",
-        "Fixed macOS keychain corruption when using multiple OAuth MCP servers. Large OAuth metadata blobs could overflow the security -i stdin buffer, silently leaving stale credentials behind and causing repeated /login prompts.",
-        "Fixed .credentials.json losing subscriptionType (showing “Claude API” instead of “Claude Pro”/“Claude Max”) when the profile endpoint transiently fails during token refresh (anthropics/claude-code#30185)"
+        "Fixed API 400 errors when using ANTHROPIC_BASE_URL with a third-party gateway — tool search now correctly detects proxy endpoints and disables tool_reference blocks"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1103,15 +1115,15 @@
             "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Added actionable suggestions to /context command — identifies context-heavy tools, memory bloat, and capacity warnings with specific optimization tips",
-            "Added autoMemoryDirectory setting to configure a custom directory for auto-memory storage",
-            "Fixed memory leak where streaming API response buffers were not released when the generator was terminated early, causing unbounded RSS growth on the Node.js/npm code path",
-            "Fixed managed policy ask rules being bypassed by user allow rules or skill allowed-tools",
-            "Fixed full model IDs (e.g., claude-opus-4-5) being silently ignored in agent frontmatter model: field and --agents JSON config — agents now accept the same model values as --model",
-            "Fixed MCP OAuth authentication hanging when the callback port is already in use",
-            "Fixed MCP OAuth refresh never prompting for re-auth after the refresh token expires, for OAuth servers that return errors with HTTP 200 (e.g. Slack)",
-            "Fixed voice mode silently failing on the macOS native binary for users whose terminal had never been granted microphone permission — the binary now includes the audio-input entitlement so macOS prompts correctly",
-            "Fixed SessionEnd hooks being killed after 1.5 s on exit regardless of hook.timeout — now configurable via CLAUDE_CODE_SESSIONEND_HOOKS_TIMEOUT_MS"
+            "Added MCP elicitation support — MCP servers can now request structured input mid-task via an interactive dialog (form fields or browser URL)",
+            "Added new Elicitation and ElicitationResult hooks to intercept and override responses before they’re sent back",
+            "Added -n / --name <name> CLI flag to set a display name for the session at startup",
+            "Added worktree.sparsePaths setting for claude --worktree in large monorepos to check out only the directories you need via git sparse-checkout",
+            "Added PostCompact hook that fires after compaction completes",
+            "Added /effort slash command to set model effort level",
+            "Added session quality survey — enterprise admins can configure the sample rate via the feedbackSurveyRate setting",
+            "Fixed deferred tools (loaded via ToolSearch) losing their input schemas after conversation compaction, causing array and number parameters to be rejected with type errors",
+            "Fixed slash commands showing “Unknown skill”"
           ],
           "codeBlocks": []
         }
@@ -2015,12 +2027,13 @@
         "The /memory command lists all CLAUDE.md and rules files loaded in your current session, lets you toggle auto memory on or off, and provides a link to open the auto memory folder. Select any file to open it in your editor.",
         "When you ask Claude to remember something, like “always use pnpm, not npm” or “remember that the API tests require a local Redis instance,” Claude saves it to auto memory. To add instructions to CLAUDE.md instead, ask Claude directly, like “add this to CLAUDE.md,” or edit the file yourself via /memory.",
         "These are the most common issues with CLAUDE.md and auto memory, along with steps to debug them.",
-        "CLAUDE.md is context, not enforcement. Claude reads it and tries to follow it, but there’s no guarantee of strict compliance, especially for vague or conflicting instructions.",
+        "CLAUDE.md content is delivered as a user message after the system prompt, not as part of the system prompt itself. Claude reads it and tries to follow it, but there’s no guarantee of strict compliance, especially for vague or conflicting instructions.",
         "To debug:",
         "Run /memory to verify your CLAUDE.md files are being loaded. If a file isn’t listed, Claude can’t see it.",
         "Check that the relevant CLAUDE.md is in a location that gets loaded for your session (see Choose where to put CLAUDE.md files).",
         "Make instructions more specific. “Use 2-space indentation” works better than “format code nicely.”",
         "Look for conflicting instructions across CLAUDE.md files. If two files give different guidance for the same behavior, Claude may pick one arbitrarily.",
+        "For instructions you want at the system prompt level, use --append-system-prompt. This must be passed every invocation, so it’s better suited to scripts and automation than interactive use.",
         "Use the InstructionsLoaded hook to log exactly which instruction files are loaded, when they load, and why. This is useful for debugging path-specific rules or lazy-loaded files in subdirectories.",
         "Run /memory and select the auto memory folder to browse what Claude has saved. Everything is plain markdown you can read, edit, or delete.",
         "Files over 200 lines consume more context and may reduce adherence. Move detailed content into separate files referenced with @path imports (see Import additional files), or split your instructions across .claude/rules/ files.",
@@ -2252,12 +2265,13 @@
         {
           "title": "​Claude isn’t following my CLAUDE.md",
           "paragraphs": [
-            "CLAUDE.md is context, not enforcement. Claude reads it and tries to follow it, but there’s no guarantee of strict compliance, especially for vague or conflicting instructions.",
+            "CLAUDE.md content is delivered as a user message after the system prompt, not as part of the system prompt itself. Claude reads it and tries to follow it, but there’s no guarantee of strict compliance, especially for vague or conflicting instructions.",
             "To debug:",
             "Run /memory to verify your CLAUDE.md files are being loaded. If a file isn’t listed, Claude can’t see it.",
             "Check that the relevant CLAUDE.md is in a location that gets loaded for your session (see Choose where to put CLAUDE.md files).",
             "Make instructions more specific. “Use 2-space indentation” works better than “format code nicely.”",
             "Look for conflicting instructions across CLAUDE.md files. If two files give different guidance for the same behavior, Claude may pick one arbitrarily.",
+            "For instructions you want at the system prompt level, use --append-system-prompt. This must be passed every invocation, so it’s better suited to scripts and automation than interactive use.",
             "Use the InstructionsLoaded hook to log exactly which instruction files are loaded, when they load, and why. This is useful for debugging path-specific rules or lazy-loaded files in subdirectories."
           ],
           "codeBlocks": []
@@ -2491,14 +2505,14 @@
         "Directory references show file listings, not contents",
         "You can reference multiple files in a single message (for example, “@file1.js and @file2.js”)",
         "Extended thinking is enabled by default, giving Claude space to reason through complex problems step-by-step before responding. This reasoning is visible in verbose mode, which you can toggle on with Ctrl+O.",
-        "Additionally, Opus 4.6 introduces adaptive reasoning: instead of a fixed thinking token budget, the model dynamically allocates thinking based on your effort level setting. Extended thinking and adaptive reasoning work together to give you control over how deeply Claude reasons before responding.",
+        "Additionally, Opus 4.6 and Sonnet 4.6 support adaptive reasoning: instead of a fixed thinking token budget, the model dynamically allocates thinking based on your effort level setting. Extended thinking and adaptive reasoning work together to give you control over how deeply Claude reasons before responding.",
         "Extended thinking is particularly valuable for complex architectural decisions, challenging bugs, multi-step implementation planning, and evaluating tradeoffs between different approaches.",
         "Phrases like “think”, “think hard”, and “think more” are interpreted as regular prompt instructions and don’t allocate thinking tokens.",
         "Thinking is enabled by default, but you can adjust or disable it.",
         "To view Claude’s thinking process, press Ctrl+O to toggle verbose mode and see the internal reasoning displayed as gray italic text.",
         "Extended thinking controls how much internal reasoning Claude performs before responding. More thinking provides more space to explore solutions, analyze edge cases, and self-correct mistakes.",
-        "With Opus 4.6, thinking uses adaptive reasoning: the model dynamically allocates thinking tokens based on the effort level you select (low, medium, high). This is the recommended way to tune the tradeoff between speed and reasoning depth.",
-        "With other models, thinking uses a fixed budget of up to 31,999 tokens from your output budget. You can limit this with the MAX_THINKING_TOKENS environment variable, or disable thinking entirely via /config or the Option+T/Alt+T toggle.",
+        "With Opus 4.6 and Sonnet 4.6, thinking uses adaptive reasoning: the model dynamically allocates thinking tokens based on the effort level you select. This is the recommended way to tune the tradeoff between speed and reasoning depth.",
+        "With older models, thinking uses a fixed budget of up to 31,999 tokens from your output budget. You can limit this with the MAX_THINKING_TOKENS environment variable, or disable thinking entirely via /config or the Option+T/Alt+T toggle.",
         "MAX_THINKING_TOKENS is ignored on Opus 4.6 and Sonnet 4.6, since adaptive reasoning controls thinking depth instead. The one exception: setting MAX_THINKING_TOKENS=0 still disables thinking entirely on any model. To disable adaptive thinking and revert to the fixed thinking budget, set CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1. See environment variables.",
         "You’re charged for all thinking tokens used, even though Claude 4 models show summarized thinking",
         "When starting Claude Code, you can resume a previous session:",
@@ -2508,8 +2522,9 @@
         "From inside an active session, use /resume to switch to a different conversation.",
         "Sessions are stored per project directory. The /resume picker shows sessions from the same git repository, including worktrees.",
         "Give sessions descriptive names to find them later. This is a best practice when working on multiple tasks or features.",
-        "Name the current session",
-        "Use /rename during a session to give it a memorable name:",
+        "Name the session",
+        "Name a session at startup with -n:",
+        "Or use /rename during a session, which also shows the name on the prompt bar:",
         "You can also rename any session from the picker: run /resume, navigate to a session, and press R.",
         "Resume by name later",
         "From the command line:",
@@ -2526,8 +2541,7 @@
         "Name sessions early: Use /rename when starting work on a distinct task—it’s much easier to find “payment-integration” than “explain this function” later",
         "Use --continue for quick access to your most recent conversation in the current directory",
         "Use --resume session-name when you know which session you need",
-        "Use --resume (without a name) when you need to browse and select",
-        "For scripts, use claude --continue --print \"prompt\" to resume in non-interactive mode"
+        "Use --resume (without a name) when you need to browse and select"
       ],
       "codeBlocks": [
         "cd /path/to/project",
@@ -2841,7 +2855,7 @@
           "title": "​Use extended thinking (thinking mode)",
           "paragraphs": [
             "Extended thinking is enabled by default, giving Claude space to reason through complex problems step-by-step before responding. This reasoning is visible in verbose mode, which you can toggle on with Ctrl+O.",
-            "Additionally, Opus 4.6 introduces adaptive reasoning: instead of a fixed thinking token budget, the model dynamically allocates thinking based on your effort level setting. Extended thinking and adaptive reasoning work together to give you control over how deeply Claude reasons before responding.",
+            "Additionally, Opus 4.6 and Sonnet 4.6 support adaptive reasoning: instead of a fixed thinking token budget, the model dynamically allocates thinking based on your effort level setting. Extended thinking and adaptive reasoning work together to give you control over how deeply Claude reasons before responding.",
             "Extended thinking is particularly valuable for complex architectural decisions, challenging bugs, multi-step implementation planning, and evaluating tradeoffs between different approaches.",
             "Phrases like “think”, “think hard”, and “think more” are interpreted as regular prompt instructions and don’t allocate thinking tokens."
           ],
@@ -2859,8 +2873,8 @@
           "title": "​How extended thinking works",
           "paragraphs": [
             "Extended thinking controls how much internal reasoning Claude performs before responding. More thinking provides more space to explore solutions, analyze edge cases, and self-correct mistakes.",
-            "With Opus 4.6, thinking uses adaptive reasoning: the model dynamically allocates thinking tokens based on the effort level you select (low, medium, high). This is the recommended way to tune the tradeoff between speed and reasoning depth.",
-            "With other models, thinking uses a fixed budget of up to 31,999 tokens from your output budget. You can limit this with the MAX_THINKING_TOKENS environment variable, or disable thinking entirely via /config or the Option+T/Alt+T toggle.",
+            "With Opus 4.6 and Sonnet 4.6, thinking uses adaptive reasoning: the model dynamically allocates thinking tokens based on the effort level you select. This is the recommended way to tune the tradeoff between speed and reasoning depth.",
+            "With older models, thinking uses a fixed budget of up to 31,999 tokens from your output budget. You can limit this with the MAX_THINKING_TOKENS environment variable, or disable thinking entirely via /config or the Option+T/Alt+T toggle.",
             "MAX_THINKING_TOKENS is ignored on Opus 4.6 and Sonnet 4.6, since adaptive reasoning controls thinking depth instead. The one exception: setting MAX_THINKING_TOKENS=0 still disables thinking entirely on any model. To disable adaptive thinking and revert to the fixed thinking budget, set CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1. See environment variables.",
             "You’re charged for all thinking tokens used, even though Claude 4 models show summarized thinking"
           ],
@@ -2882,14 +2896,16 @@
           "title": "​Name your sessions",
           "paragraphs": [
             "Give sessions descriptive names to find them later. This is a best practice when working on multiple tasks or features.",
-            "Name the current session",
-            "Use /rename during a session to give it a memorable name:",
+            "Name the session",
+            "Name a session at startup with -n:",
+            "Or use /rename during a session, which also shows the name on the prompt bar:",
             "You can also rename any session from the picker: run /resume, navigate to a session, and press R.",
             "Resume by name later",
             "From the command line:",
             "Or from inside an active session:"
           ],
           "codeBlocks": [
+            "claude -n auth-refactor",
             "/rename auth-refactor",
             "claude --resume auth-refactor",
             "/resume auth-refactor"
@@ -2968,22 +2984,19 @@
           "title": "​Get notified when Claude needs your attention",
           "paragraphs": [
             "When you kick off a long-running task and switch to another window, you can set up desktop notifications so you know when Claude finishes or needs your input. This uses the Notification hook event, which fires whenever Claude is waiting for permission, idle and ready for a new prompt, or completing authentication.",
-            "Open the hooks menu",
-            "Type /hooks and select Notification from the list of events.",
-            "Configure the matcher",
-            "Select + Match all (no filter) to fire on all notification types. To notify only for specific events, select + Add new matcher… and enter one of these values:",
-            "Add your notification command",
-            "Select + Add new hook… and enter the command for your OS:",
-            "Windows (PowerShell)",
-            "Uses osascript to trigger a native macOS notification through AppleScript:",
-            "Uses notify-send, which is pre-installed on most Linux desktops with a notification daemon:",
-            "Uses PowerShell to show a native message box through .NET’s Windows Forms:",
-            "Save to user settings"
+            "Add the hook to your settings",
+            "Open ~/.claude/settings.json and add a Notification hook that calls your platform’s native notification command:",
+            "If your settings file already has a hooks key, merge the Notification entry into it rather than overwriting. You can also ask Claude to write the hook for you by describing what you want in the CLI.",
+            "Optionally narrow the matcher",
+            "By default the hook fires on all notification types. To fire only for specific events, set the matcher field to one of these values:",
+            "Verify the hook",
+            "Type /hooks and select Notification to confirm the hook appears. Selecting it shows the command that will run. To test it end-to-end, ask Claude to run a command that requires permission and switch away from the terminal, or ask Claude to trigger a notification directly.",
+            "For the complete event schema and notification types, see the Notification reference."
           ],
           "codeBlocks": [
-            "osascript -e 'display notification \"Claude Code needs your attention\" with title \"Claude Code\"'",
-            "notify-send 'Claude Code' 'Claude Code needs your attention'",
-            "powershell.exe -Command \"[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code needs your attention', 'Claude Code')\""
+            "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+            "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"notify-send 'Claude Code' 'Claude Code needs your attention'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+            "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"powershell.exe -Command \\\"[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code needs your attention', 'Claude Code')\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}"
           ]
         },
         {
@@ -3163,7 +3176,7 @@
         "With MCP servers, you can ask Claude to implement features from issue trackers, query databases, analyze monitoring data, integrate designs from Figma, and automate workflows.",
         "Use hooks for actions that must happen every time with zero exceptions.",
         "Hooks run scripts automatically at specific points in Claude’s workflow. Unlike CLAUDE.md instructions which are advisory, hooks are deterministic and guarantee the action happens.",
-        "Claude can write hooks for you. Try prompts like “Write a hook that runs eslint after every file edit” or “Write a hook that blocks writes to the migrations folder.” Run /hooks for interactive configuration, or edit .claude/settings.json directly.",
+        "Claude can write hooks for you. Try prompts like “Write a hook that runs eslint after every file edit” or “Write a hook that blocks writes to the migrations folder.” Edit .claude/settings.json directly to configure hooks by hand, and run /hooks to browse what’s configured.",
         "Create SKILL.md files in .claude/skills/ to give Claude domain knowledge and reusable workflows.",
         "Skills extend Claude’s knowledge with information specific to your project, team, or domain. Claude applies them automatically when relevant, or you can invoke them directly with /skill-name.",
         "Create a skill by adding a directory with a SKILL.md to .claude/skills/:",
@@ -3407,7 +3420,7 @@
           "paragraphs": [
             "Use hooks for actions that must happen every time with zero exceptions.",
             "Hooks run scripts automatically at specific points in Claude’s workflow. Unlike CLAUDE.md instructions which are advisory, hooks are deterministic and guarantee the action happens.",
-            "Claude can write hooks for you. Try prompts like “Write a hook that runs eslint after every file edit” or “Write a hook that blocks writes to the migrations folder.” Run /hooks for interactive configuration, or edit .claude/settings.json directly."
+            "Claude can write hooks for you. Try prompts like “Write a hook that runs eslint after every file edit” or “Write a hook that blocks writes to the migrations folder.” Edit .claude/settings.json directly to configure hooks by hand, and run /hooks to browse what’s configured."
           ],
           "codeBlocks": []
         },
@@ -3685,15 +3698,16 @@
         "Subscription: available on Pro, Max, Team, and Enterprise plans. Team and Enterprise admins must first enable Claude Code in admin settings. API keys are not supported.",
         "Authentication: run claude and use /login to sign in through claude.ai if you haven’t already.",
         "Workspace trust: run claude in your project directory at least once to accept the workspace trust dialog.",
-        "You can start a new session directly in Remote Control, or connect a session that’s already running.",
-        "New session",
+        "You can start a dedicated Remote Control server, start an interactive session with Remote Control enabled, or connect a session that’s already running.",
+        "Server mode",
+        "Interactive session",
         "From an existing session",
         "Navigate to your project directory and run:",
-        "The process stays running in your terminal, waiting for remote connections. It displays a session URL you can use to connect from another device, and you can press spacebar to show a QR code for quick access from your phone. While a remote session is active, the terminal shows connection status and tool activity.",
-        "This command supports the following flags:",
-        "--name \"My Project\": set a custom session title visible in the session list at claude.ai/code. You can also pass the name as a positional argument: claude remote-control \"My Project\"",
-        "--verbose: show detailed connection and session logs",
-        "--sandbox / --no-sandbox: enable or disable sandboxing for filesystem and network isolation during the session. Sandboxing is off by default.",
+        "The process stays running in your terminal in server mode, waiting for remote connections. It displays a session URL you can use to connect from another device, and you can press spacebar to show a QR code for quick access from your phone. While a remote session is active, the terminal shows connection status and tool activity.",
+        "Available flags:",
+        "To start a normal interactive Claude Code session with Remote Control enabled, use the --remote-control flag (or --rc):",
+        "Optionally pass a name for the session:",
+        "This gives you a full interactive session in your terminal that you can also control from claude.ai or the Claude app. Unlike claude remote-control (server mode), you can type messages locally while the session is also available remotely.",
         "If you’re already in a Claude Code session and want to continue it remotely, use the /remote-control (or /rc) command:",
         "Pass a name as an argument to set a custom session title:",
         "This starts a Remote Control session that carries over your current conversation history and displays a session URL and QR code you can use to connect from another device. The --verbose, --sandbox, and --no-sandbox flags are not available with this command.",
@@ -3703,13 +3717,13 @@
         "Open claude.ai/code or the Claude app and find the session by name in the session list. Remote Control sessions show a computer icon with a green status dot when online.",
         "The remote session takes its name from the --name argument (or the name passed to /remote-control), your last message, your /rename value, or “Remote Control session” if there’s no conversation history. If the environment already has an active session, you’ll be asked whether to continue it or start a new one.",
         "If you don’t have the Claude app yet, use the /mobile command inside Claude Code to display a download QR code for iOS or Android.",
-        "By default, Remote Control only activates when you explicitly run claude remote-control or /remote-control. To enable it automatically for every session, run /config inside Claude Code and set Enable Remote Control for all sessions to true. Set it back to false to disable.",
-        "Each Claude Code instance supports one remote session at a time. If you run multiple instances, each one gets its own environment and session.",
+        "By default, Remote Control only activates when you explicitly run claude remote-control, claude --remote-control, or /remote-control. To enable it automatically for every interactive session, run /config inside Claude Code and set Enable Remote Control for all sessions to true. Set it back to false to disable.",
+        "With this setting on, each interactive Claude Code process registers one remote session. If you run multiple instances, each one gets its own environment and session. To run multiple concurrent sessions from a single process, use server mode with --spawn instead.",
         "Your local Claude Code session makes outbound HTTPS requests only and never opens inbound ports on your machine. When you start Remote Control, it registers with the Anthropic API and polls for work. When you connect from another device, the server routes messages between the web or mobile client and your local session over a streaming connection.",
         "All traffic travels through the Anthropic API over TLS, the same transport security as any Claude Code session. The connection uses multiple short-lived credentials, each scoped to a single purpose and expiring independently.",
         "Remote Control and Claude Code on the web both use the claude.ai/code interface. The key difference is where the session runs: Remote Control executes on your machine, so your local MCP servers, tools, and project configuration stay available. Claude Code on the web executes in Anthropic-managed cloud infrastructure.",
         "Use Remote Control when you’re in the middle of local work and want to keep going from another device. Use Claude Code on the web when you want to kick off a task without any local setup, work on a repo you don’t have cloned, or run multiple tasks in parallel.",
-        "One remote session at a time: each Claude Code session supports one remote connection.",
+        "One remote session per interactive process: outside of server mode, each Claude Code instance supports one remote session at a time. Use server mode with --spawn to run multiple concurrent sessions from a single process.",
         "Terminal must stay open: Remote Control runs as a local process. If you close the terminal or stop the claude process, the session ends. Run claude remote-control again to start a new one.",
         "Extended network outage: if your machine is awake but unable to reach the network for more than roughly 10 minutes, the session times out and the process exits. Run claude remote-control again to start a new session.",
         "Claude Code on the web: run sessions in Anthropic-managed cloud environments instead of on your machine",
@@ -3721,6 +3735,8 @@
       ],
       "codeBlocks": [
         "claude remote-control",
+        "claude --remote-control",
+        "claude --remote-control \"My Project\"",
         "/remote-control",
         "/remote-control My Project"
       ],
@@ -3756,21 +3772,23 @@
         {
           "title": "​Start a Remote Control session",
           "paragraphs": [
-            "You can start a new session directly in Remote Control, or connect a session that’s already running.",
-            "New session",
+            "You can start a dedicated Remote Control server, start an interactive session with Remote Control enabled, or connect a session that’s already running.",
+            "Server mode",
+            "Interactive session",
             "From an existing session",
             "Navigate to your project directory and run:",
-            "The process stays running in your terminal, waiting for remote connections. It displays a session URL you can use to connect from another device, and you can press spacebar to show a QR code for quick access from your phone. While a remote session is active, the terminal shows connection status and tool activity.",
-            "This command supports the following flags:",
-            "--name \"My Project\": set a custom session title visible in the session list at claude.ai/code. You can also pass the name as a positional argument: claude remote-control \"My Project\"",
-            "--verbose: show detailed connection and session logs",
-            "--sandbox / --no-sandbox: enable or disable sandboxing for filesystem and network isolation during the session. Sandboxing is off by default.",
+            "The process stays running in your terminal in server mode, waiting for remote connections. It displays a session URL you can use to connect from another device, and you can press spacebar to show a QR code for quick access from your phone. While a remote session is active, the terminal shows connection status and tool activity.",
+            "Available flags:",
+            "To start a normal interactive Claude Code session with Remote Control enabled, use the --remote-control flag (or --rc):",
+            "Optionally pass a name for the session:",
+            "This gives you a full interactive session in your terminal that you can also control from claude.ai or the Claude app. Unlike claude remote-control (server mode), you can type messages locally while the session is also available remotely.",
             "If you’re already in a Claude Code session and want to continue it remotely, use the /remote-control (or /rc) command:",
-            "Pass a name as an argument to set a custom session title:",
-            "This starts a Remote Control session that carries over your current conversation history and displays a session URL and QR code you can use to connect from another device. The --verbose, --sandbox, and --no-sandbox flags are not available with this command."
+            "Pass a name as an argument to set a custom session title:"
           ],
           "codeBlocks": [
             "claude remote-control",
+            "claude --remote-control",
+            "claude --remote-control \"My Project\"",
             "/remote-control",
             "/remote-control My Project"
           ]
@@ -3790,8 +3808,8 @@
         {
           "title": "​Enable Remote Control for all sessions",
           "paragraphs": [
-            "By default, Remote Control only activates when you explicitly run claude remote-control or /remote-control. To enable it automatically for every session, run /config inside Claude Code and set Enable Remote Control for all sessions to true. Set it back to false to disable.",
-            "Each Claude Code instance supports one remote session at a time. If you run multiple instances, each one gets its own environment and session."
+            "By default, Remote Control only activates when you explicitly run claude remote-control, claude --remote-control, or /remote-control. To enable it automatically for every interactive session, run /config inside Claude Code and set Enable Remote Control for all sessions to true. Set it back to false to disable.",
+            "With this setting on, each interactive Claude Code process registers one remote session. If you run multiple instances, each one gets its own environment and session. To run multiple concurrent sessions from a single process, use server mode with --spawn instead."
           ],
           "codeBlocks": []
         },
@@ -3814,7 +3832,7 @@
         {
           "title": "​Limitations",
           "paragraphs": [
-            "One remote session at a time: each Claude Code session supports one remote connection.",
+            "One remote session per interactive process: outside of server mode, each Claude Code instance supports one remote session at a time. Use server mode with --spawn to run multiple concurrent sessions from a single process.",
             "Terminal must stay open: Remote Control runs as a local process. If you close the terminal or stop the claude process, the session ends. Run claude remote-control again to start a new one.",
             "Extended network outage: if your machine is awake but unable to reach the network for more than roughly 10 minutes, the session times out and the process exits. Run claude remote-control again to start a new session."
           ],
@@ -6272,8 +6290,8 @@
         "Subagents are Markdown files with YAML frontmatter. Store them in different locations depending on scope. When multiple subagents share the same name, the higher-priority location wins.",
         "Project subagents (.claude/agents/) are ideal for subagents specific to a codebase. Check them into version control so your team can use and improve them collaboratively.",
         "User subagents (~/.claude/agents/) are personal subagents available in all your projects.",
-        "CLI-defined subagents are passed as JSON when launching Claude Code. They exist only for that session and aren’t saved to disk, making them useful for quick testing or automation scripts:",
-        "The --agents flag accepts JSON with the same frontmatter fields as file-based subagents: description, prompt, tools, disallowedTools, model, permissionMode, mcpServers, hooks, maxTurns, skills, and memory. Use prompt for the system prompt, equivalent to the markdown body in file-based subagents. See the CLI reference for the full JSON format.",
+        "CLI-defined subagents are passed as JSON when launching Claude Code. They exist only for that session and aren’t saved to disk, making them useful for quick testing or automation scripts. You can define multiple subagents in a single --agents call:",
+        "The --agents flag accepts JSON with the same frontmatter fields as file-based subagents: description, prompt, tools, disallowedTools, model, permissionMode, mcpServers, hooks, maxTurns, skills, and memory. Use prompt for the system prompt, equivalent to the markdown body in file-based subagents.",
         "Plugin subagents come from plugins you’ve installed. They appear in /agents alongside your custom subagents. See the plugin components reference for details on creating plugin subagents.",
         "Subagent files use YAML frontmatter for configuration, followed by the system prompt in Markdown:",
         "Subagents are loaded at session start. If you create a subagent by manually adding a file, restart your session or use /agents to load it immediately.",
@@ -6360,7 +6378,7 @@
         "/agents",
         "A code improvement agent that scans files and suggests improvements\nfor readability, performance, and best practices. It should explain\neach issue, show the current code, and provide an improved version.",
         "Use the code-improver agent to suggest improvements in this project",
-        "claude --agents '{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  }\n}'",
+        "claude --agents '{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  },\n  \"debugger\": {\n    \"description\": \"Debugging specialist for errors and test failures.\",\n    \"prompt\": \"You are an expert debugger. Analyze errors, identify root causes, and provide fixes.\"\n  }\n}'",
         "---\nname: code-reviewer\ndescription: Reviews code for quality and best practices\ntools: Read, Glob, Grep\nmodel: sonnet\n---\n\nYou are a code reviewer. When invoked, analyze the code and provide\nspecific, actionable feedback on quality, security, and best practices.",
         "---\nname: safe-researcher\ndescription: Research agent with restricted capabilities\ntools: Read, Grep, Glob, Bash\ndisallowedTools: Write, Edit\n---",
         "---\nname: coordinator\ndescription: Coordinates work across specialized agents\ntools: Agent(worker, researcher), Read, Bash\n---",
@@ -6472,12 +6490,12 @@
             "Subagents are Markdown files with YAML frontmatter. Store them in different locations depending on scope. When multiple subagents share the same name, the higher-priority location wins.",
             "Project subagents (.claude/agents/) are ideal for subagents specific to a codebase. Check them into version control so your team can use and improve them collaboratively.",
             "User subagents (~/.claude/agents/) are personal subagents available in all your projects.",
-            "CLI-defined subagents are passed as JSON when launching Claude Code. They exist only for that session and aren’t saved to disk, making them useful for quick testing or automation scripts:",
-            "The --agents flag accepts JSON with the same frontmatter fields as file-based subagents: description, prompt, tools, disallowedTools, model, permissionMode, mcpServers, hooks, maxTurns, skills, and memory. Use prompt for the system prompt, equivalent to the markdown body in file-based subagents. See the CLI reference for the full JSON format.",
+            "CLI-defined subagents are passed as JSON when launching Claude Code. They exist only for that session and aren’t saved to disk, making them useful for quick testing or automation scripts. You can define multiple subagents in a single --agents call:",
+            "The --agents flag accepts JSON with the same frontmatter fields as file-based subagents: description, prompt, tools, disallowedTools, model, permissionMode, mcpServers, hooks, maxTurns, skills, and memory. Use prompt for the system prompt, equivalent to the markdown body in file-based subagents.",
             "Plugin subagents come from plugins you’ve installed. They appear in /agents alongside your custom subagents. See the plugin components reference for details on creating plugin subagents."
           ],
           "codeBlocks": [
-            "claude --agents '{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  }\n}'"
+            "claude --agents '{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  },\n  \"debugger\": {\n    \"description\": \"Debugging specialist for errors and test failures.\",\n    \"prompt\": \"You are an expert debugger. Analyze errors, identify root causes, and provide fixes.\"\n  }\n}'"
           ]
         },
         {
@@ -8355,16 +8373,11 @@
         "Related resources",
         "Create, manage, and share skills to extend Claude’s capabilities in Claude Code. Includes custom commands and bundled skills.",
         "Skills extend what Claude can do. Create a SKILL.md file with instructions, and Claude adds it to its toolkit. Claude uses skills when relevant, or you can invoke one directly with /skill-name.",
-        "For built-in commands like /help and /compact, see interactive mode.",
+        "For built-in commands like /help and /compact, see the built-in commands reference.",
         "Custom commands have been merged into skills. A file at .claude/commands/deploy.md and a skill at .claude/skills/deploy/SKILL.md both create /deploy and work the same way. Your existing .claude/commands/ files keep working. Skills add optional features: a directory for supporting files, frontmatter to control whether you or Claude invokes them, and the ability for Claude to load them automatically when relevant.",
         "Claude Code skills follow the Agent Skills open standard, which works across multiple AI tools. Claude Code extends the standard with additional features like invocation control, subagent execution, and dynamic context injection.",
         "Bundled skills ship with Claude Code and are available in every session. Unlike built-in commands, which execute fixed logic directly, bundled skills are prompt-based: they give Claude a detailed playbook and let it orchestrate the work using its tools. This means bundled skills can spawn parallel agents, read files, and adapt to your codebase.",
-        "You invoke bundled skills the same way as any other skill: type / followed by the skill name.",
-        "/simplify: reviews your recently changed files for code reuse, quality, and efficiency issues, then fixes them. Run it after implementing a feature or bug fix to clean up your work. It spawns three review agents in parallel (code reuse, code quality, efficiency), aggregates their findings, and applies fixes. Pass optional text to focus on specific concerns: /simplify focus on memory efficiency.",
-        "/batch <instruction>: orchestrates large-scale changes across a codebase in parallel. Provide a description of the change and /batch researches the codebase, decomposes the work into 5 to 30 independent units, and presents a plan for your approval. Once approved, it spawns one background agent per unit, each in an isolated git worktree. Each agent implements its unit, runs tests, and opens a pull request. Requires a git repository. Example: /batch migrate src/ from Solid to React.",
-        "/debug [description]: troubleshoots your current Claude Code session by reading the session debug log. Optionally describe the issue to focus the analysis.",
-        "/loop [interval] <prompt>: runs a prompt repeatedly on an interval while the session stays open. Claude parses the interval, schedules a recurring cron task, and confirms the cadence. Useful for polling a deployment, babysitting a PR, or periodically re-running another skill. Example: /loop 5m check if the deploy finished. See Run prompts on a schedule.",
-        "/claude-api: loads Claude API reference material for your project’s language (Python, TypeScript, Java, Go, Ruby, C#, PHP, or cURL) and Agent SDK reference for Python and TypeScript. Covers tool use, streaming, batches, structured outputs, and common pitfalls. Also activates automatically when your code imports anthropic, @anthropic-ai/sdk, or claude_agent_sdk.",
+        "You invoke bundled skills the same way as any other skill: type / followed by the skill name. In the table below, <arg> indicates a required argument and [arg] indicates an optional one.",
         "This example creates a skill that teaches Claude to explain code using visual diagrams and analogies. Since it uses default frontmatter, Claude can load it automatically when you ask how something works, or you can invoke it directly with /explain-code.",
         "Create the skill directory",
         "Create a directory for the skill in your personal skills folder. Personal skills are available across all your projects.",
@@ -8462,7 +8475,7 @@
         "Plugins: package and distribute skills with other extensions",
         "Hooks: automate workflows around tool events",
         "Memory: manage CLAUDE.md files for persistent context",
-        "Interactive mode: built-in commands and shortcuts",
+        "Built-in commands: reference for built-in / commands",
         "Permissions: control tool and skill access",
         "Was this page helpful?"
       ],
@@ -8514,12 +8527,7 @@
           "title": "​Bundled skills",
           "paragraphs": [
             "Bundled skills ship with Claude Code and are available in every session. Unlike built-in commands, which execute fixed logic directly, bundled skills are prompt-based: they give Claude a detailed playbook and let it orchestrate the work using its tools. This means bundled skills can spawn parallel agents, read files, and adapt to your codebase.",
-            "You invoke bundled skills the same way as any other skill: type / followed by the skill name.",
-            "/simplify: reviews your recently changed files for code reuse, quality, and efficiency issues, then fixes them. Run it after implementing a feature or bug fix to clean up your work. It spawns three review agents in parallel (code reuse, code quality, efficiency), aggregates their findings, and applies fixes. Pass optional text to focus on specific concerns: /simplify focus on memory efficiency.",
-            "/batch <instruction>: orchestrates large-scale changes across a codebase in parallel. Provide a description of the change and /batch researches the codebase, decomposes the work into 5 to 30 independent units, and presents a plan for your approval. Once approved, it spawns one background agent per unit, each in an isolated git worktree. Each agent implements its unit, runs tests, and opens a pull request. Requires a git repository. Example: /batch migrate src/ from Solid to React.",
-            "/debug [description]: troubleshoots your current Claude Code session by reading the session debug log. Optionally describe the issue to focus the analysis.",
-            "/loop [interval] <prompt>: runs a prompt repeatedly on an interval while the session stays open. Claude parses the interval, schedules a recurring cron task, and confirms the cadence. Useful for polling a deployment, babysitting a PR, or periodically re-running another skill. Example: /loop 5m check if the deploy finished. See Run prompts on a schedule.",
-            "/claude-api: loads Claude API reference material for your project’s language (Python, TypeScript, Java, Go, Ruby, C#, PHP, or cURL) and Agent SDK reference for Python and TypeScript. Covers tool use, streaming, batches, structured outputs, and common pitfalls. Also activates automatically when your code imports anthropic, @anthropic-ai/sdk, or claude_agent_sdk."
+            "You invoke bundled skills the same way as any other skill: type / followed by the skill name. In the table below, <arg> indicates a required argument and [arg] indicates an optional one."
           ],
           "codeBlocks": []
         },
@@ -8776,7 +8784,7 @@
             "Plugins: package and distribute skills with other extensions",
             "Hooks: automate workflows around tool events",
             "Memory: manage CLAUDE.md files for persistent context",
-            "Interactive mode: built-in commands and shortcuts",
+            "Built-in commands: reference for built-in / commands",
             "Permissions: control tool and skill access",
             "Was this page helpful?"
           ],
@@ -9235,25 +9243,20 @@
         "For decisions that require judgment rather than deterministic rules, you can also use prompt-based hooks or agent-based hooks that use a Claude model to evaluate conditions.",
         "For other ways to extend Claude Code, see skills for giving Claude additional instructions and executable commands, subagents for running tasks in isolated contexts, and plugins for packaging extensions to share across projects.",
         "This guide covers common use cases and how to get started. For full event schemas, JSON input/output formats, and advanced features like async hooks and MCP tool hooks, see the Hooks reference.",
-        "The fastest way to create a hook is through the /hooks interactive menu in Claude Code. This walkthrough creates a desktop notification hook, so you get alerted whenever Claude is waiting for your input instead of watching the terminal.",
-        "Open the hooks menu",
-        "Type /hooks in the Claude Code CLI. You’ll see a list of all available hook events, plus an option to disable all hooks. Each event corresponds to a point in Claude’s lifecycle where you can run custom code. Select Notification to create a hook that fires when Claude needs your attention.",
-        "Configure the matcher",
-        "The menu shows a list of matchers, which filter when the hook fires. Set the matcher to * to fire on all notification types. You can narrow it later by changing the matcher to a specific value like permission_prompt or idle_prompt.",
-        "Add your command",
-        "Select + Add new hook…. The menu prompts you for a shell command to run when the event fires. Hooks run any shell command you provide, so you can use your platform’s built-in notification tool. Copy the command for your OS:",
-        "Windows (PowerShell)",
-        "Uses osascript to trigger a native macOS notification through AppleScript:",
-        "Uses notify-send, which is pre-installed on most Linux desktops with a notification daemon:",
-        "Uses PowerShell to show a native message box through .NET’s Windows Forms:",
-        "Choose a storage location",
-        "The menu asks where to save the hook configuration. Select User settings to store it in ~/.claude/settings.json, which applies the hook to all your projects. You could also choose Project settings to scope it to the current project. See Configure hook location for all available scopes.",
+        "To create a hook, add a hooks block to a settings file. This walkthrough creates a desktop notification hook, so you get alerted whenever Claude is waiting for your input instead of watching the terminal.",
+        "Add the hook to your settings",
+        "Open ~/.claude/settings.json and add a Notification hook. The example below uses osascript for macOS; see Get notified when Claude needs input for Linux and Windows commands.",
+        "If your settings file already has a hooks key, merge the Notification entry into it rather than replacing the whole object. You can also ask Claude to write the hook for you by describing what you want in the CLI.",
+        "Verify the configuration",
+        "Type /hooks to open the hooks browser. You’ll see a list of all available hook events, with a count next to each event that has hooks configured. Select Notification to confirm your new hook appears in the list. Selecting the hook shows its details: the event, matcher, type, source file, and command.",
         "Test the hook",
         "Press Esc to return to the CLI. Ask Claude to do something that requires permission, then switch away from the terminal. You should receive a desktop notification.",
+        "The /hooks menu is read-only. To add, modify, or remove hooks, edit your settings JSON directly or ask Claude to make the change.",
         "Hooks let you run code at key points in Claude Code’s lifecycle: format files after edits, block commands before they execute, send notifications when Claude needs input, inject context at session start, and more. For the full list of hook events, see the Hooks reference.",
         "Each example includes a ready-to-use configuration block that you add to a settings file. The most common patterns:",
         "Get a desktop notification whenever Claude finishes working and needs your input, so you can switch to other tasks without checking the terminal.",
-        "This hook uses the Notification event, which fires when Claude is waiting for input or permission. Each tab below uses the platform’s native notification command. Add this to ~/.claude/settings.json, or use the interactive walkthrough above to configure it with /hooks:",
+        "This hook uses the Notification event, which fires when Claude is waiting for input or permission. Each tab below uses the platform’s native notification command. Add this to ~/.claude/settings.json:",
+        "Windows (PowerShell)",
         "Automatically run Prettier on every file Claude edits, so formatting stays consistent without manual intervention.",
         "This hook uses the PostToolUse event with an Edit|Write matcher, so it runs only after file-editing tools. The command extracts the edited file path with jq and passes it to Prettier. Add this to .claude/settings.json in your project root:",
         "The Bash examples on this page use jq for JSON parsing. Install it with brew install jq (macOS), apt-get install jq (Debian/Ubuntu), or see jq downloads.",
@@ -9306,8 +9309,8 @@
         "The SessionEnd event supports matchers on the reason the session ended. This hook only fires on clear (when you run /clear), not on normal exits:",
         "For full matcher syntax, see the Hooks reference.",
         "Where you add a hook determines its scope:",
-        "You can also use the /hooks menu in Claude Code to add, delete, and view hooks interactively. To disable all hooks at once, use the toggle at the bottom of the /hooks menu or set \"disableAllHooks\": true in your settings file.",
-        "Hooks added through the /hooks menu take effect immediately. If you edit settings files directly while Claude Code is running, the changes won’t take effect until you review them in the /hooks menu or restart your session.",
+        "Run /hooks in Claude Code to browse all configured hooks grouped by event. To disable all hooks at once, set \"disableAllHooks\": true in your settings file.",
+        "If you edit settings files directly while Claude Code is running, hook changes won’t take effect until you review them in the /hooks menu or restart your session. This prevents unexpected hook modifications from taking effect mid-session.",
         "For decisions that require judgment rather than deterministic rules, use type: \"prompt\" hooks. Instead of running a shell command, Claude Code sends your prompt and the hook’s input data to a Claude model (Haiku by default) to make the decision. You can specify a different model with the model field if you need more capability.",
         "The model’s only job is to return a yes/no decision as JSON:",
         "\"ok\": true: the action proceeds",
@@ -9324,7 +9327,6 @@
         "This example posts every tool use to a local logging service:",
         "The endpoint should return a JSON response body using the same output format as command hooks. To block a tool call, return a 2xx response with the appropriate hookSpecificOutput fields. HTTP status codes alone cannot block actions.",
         "Header values support environment variable interpolation using $VAR_NAME or ${VAR_NAME} syntax. Only variables listed in the allowedEnvVars array are resolved; all other $VAR references remain empty.",
-        "HTTP hooks must be configured by editing your settings JSON directly. The /hooks interactive menu only supports adding command hooks.",
         "For full configuration options and response handling, see HTTP hooks in the reference.",
         "Command hooks communicate through stdout, stderr, and exit codes only. They cannot trigger commands or tool calls directly. HTTP hooks communicate through the response body instead.",
         "Hook timeout is 10 minutes by default, configurable per hook with the timeout field (in seconds).",
@@ -9342,7 +9344,7 @@
         "If you see “jq: command not found”, install jq or use Python/Node.js for JSON parsing",
         "If the script isn’t running at all, make it executable: chmod +x ./my-hook.sh",
         "You edited a settings file but the hooks don’t appear in the menu.",
-        "Restart your session or open /hooks to reload. Hooks added through the /hooks menu take effect immediately, but manual file edits require a reload.",
+        "Restart your session or open /hooks to reload. Manual file edits require a reload before they take effect.",
         "Verify your JSON is valid (trailing commas and comments are not allowed)",
         "Confirm the settings file is in the correct location: .claude/settings.json for project hooks, ~/.claude/settings.json for global hooks",
         "Claude keeps working in an infinite loop instead of stopping.",
@@ -9358,9 +9360,6 @@
         "Was this page helpful?"
       ],
       "codeBlocks": [
-        "osascript -e 'display notification \"Claude Code needs your attention\" with title \"Claude Code\"'",
-        "notify-send 'Claude Code' 'Claude Code needs your attention'",
-        "powershell.exe -Command \"[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code needs your attention', 'Claude Code')\"",
         "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
         "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"notify-send 'Claude Code' 'Claude Code needs your attention'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
         "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"powershell.exe -Command \\\"[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code needs your attention', 'Claude Code')\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
@@ -9407,23 +9406,18 @@
         {
           "title": "​Set up your first hook",
           "paragraphs": [
-            "The fastest way to create a hook is through the /hooks interactive menu in Claude Code. This walkthrough creates a desktop notification hook, so you get alerted whenever Claude is waiting for your input instead of watching the terminal.",
-            "Open the hooks menu",
-            "Type /hooks in the Claude Code CLI. You’ll see a list of all available hook events, plus an option to disable all hooks. Each event corresponds to a point in Claude’s lifecycle where you can run custom code. Select Notification to create a hook that fires when Claude needs your attention.",
-            "Configure the matcher",
-            "The menu shows a list of matchers, which filter when the hook fires. Set the matcher to * to fire on all notification types. You can narrow it later by changing the matcher to a specific value like permission_prompt or idle_prompt.",
-            "Add your command",
-            "Select + Add new hook…. The menu prompts you for a shell command to run when the event fires. Hooks run any shell command you provide, so you can use your platform’s built-in notification tool. Copy the command for your OS:",
-            "Windows (PowerShell)",
-            "Uses osascript to trigger a native macOS notification through AppleScript:",
-            "Uses notify-send, which is pre-installed on most Linux desktops with a notification daemon:",
-            "Uses PowerShell to show a native message box through .NET’s Windows Forms:",
-            "Choose a storage location"
+            "To create a hook, add a hooks block to a settings file. This walkthrough creates a desktop notification hook, so you get alerted whenever Claude is waiting for your input instead of watching the terminal.",
+            "Add the hook to your settings",
+            "Open ~/.claude/settings.json and add a Notification hook. The example below uses osascript for macOS; see Get notified when Claude needs input for Linux and Windows commands.",
+            "If your settings file already has a hooks key, merge the Notification entry into it rather than replacing the whole object. You can also ask Claude to write the hook for you by describing what you want in the CLI.",
+            "Verify the configuration",
+            "Type /hooks to open the hooks browser. You’ll see a list of all available hook events, with a count next to each event that has hooks configured. Select Notification to confirm your new hook appears in the list. Selecting the hook shows its details: the event, matcher, type, source file, and command.",
+            "Test the hook",
+            "Press Esc to return to the CLI. Ask Claude to do something that requires permission, then switch away from the terminal. You should receive a desktop notification.",
+            "The /hooks menu is read-only. To add, modify, or remove hooks, edit your settings JSON directly or ask Claude to make the change."
           ],
           "codeBlocks": [
-            "osascript -e 'display notification \"Claude Code needs your attention\" with title \"Claude Code\"'",
-            "notify-send 'Claude Code' 'Claude Code needs your attention'",
-            "powershell.exe -Command \"[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code needs your attention', 'Claude Code')\""
+            "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}"
           ]
         },
         {
@@ -9443,7 +9437,7 @@
           "title": "​Get notified when Claude needs input",
           "paragraphs": [
             "Get a desktop notification whenever Claude finishes working and needs your input, so you can switch to other tasks without checking the terminal.",
-            "This hook uses the Notification event, which fires when Claude is waiting for input or permission. Each tab below uses the platform’s native notification command. Add this to ~/.claude/settings.json, or use the interactive walkthrough above to configure it with /hooks:",
+            "This hook uses the Notification event, which fires when Claude is waiting for input or permission. Each tab below uses the platform’s native notification command. Add this to ~/.claude/settings.json:",
             "Windows (PowerShell)"
           ],
           "codeBlocks": [
@@ -9563,8 +9557,8 @@
           "title": "​Configure hook location",
           "paragraphs": [
             "Where you add a hook determines its scope:",
-            "You can also use the /hooks menu in Claude Code to add, delete, and view hooks interactively. To disable all hooks at once, use the toggle at the bottom of the /hooks menu or set \"disableAllHooks\": true in your settings file.",
-            "Hooks added through the /hooks menu take effect immediately. If you edit settings files directly while Claude Code is running, the changes won’t take effect until you review them in the /hooks menu or restart your session."
+            "Run /hooks in Claude Code to browse all configured hooks grouped by event. To disable all hooks at once, set \"disableAllHooks\": true in your settings file.",
+            "If you edit settings files directly while Claude Code is running, hook changes won’t take effect until you review them in the /hooks menu or restart your session. This prevents unexpected hook modifications from taking effect mid-session."
           ],
           "codeBlocks": []
         },
@@ -9603,7 +9597,6 @@
             "This example posts every tool use to a local logging service:",
             "The endpoint should return a JSON response body using the same output format as command hooks. To block a tool call, return a 2xx response with the appropriate hookSpecificOutput fields. HTTP status codes alone cannot block actions.",
             "Header values support environment variable interpolation using $VAR_NAME or ${VAR_NAME} syntax. Only variables listed in the allowedEnvVars array are resolved; all other $VAR references remain empty.",
-            "HTTP hooks must be configured by editing your settings JSON directly. The /hooks interactive menu only supports adding command hooks.",
             "For full configuration options and response handling, see HTTP hooks in the reference."
           ],
           "codeBlocks": [
@@ -9654,7 +9647,7 @@
           "title": "​/hooks shows no hooks configured",
           "paragraphs": [
             "You edited a settings file but the hooks don’t appear in the menu.",
-            "Restart your session or open /hooks to reload. Hooks added through the /hooks menu take effect immediately, but manual file edits require a reload.",
+            "Restart your session or open /hooks to reload. Manual file edits require a reload before they take effect.",
             "Verify your JSON is valid (trailing commas and comments are not allowed)",
             "Confirm the settings file is in the correct location: .claude/settings.json for project hooks, ~/.claude/settings.json for global hooks"
           ],
@@ -9995,6 +9988,7 @@
         "Use MCP servers from Claude.ai",
         "Use Claude Code as an MCP server",
         "MCP output limits and warnings",
+        "Respond to MCP elicitation requests",
         "Use MCP resources",
         "Reference MCP resources",
         "Scale with MCP Tool Search",
@@ -10144,8 +10138,7 @@
         "You can use --scope user to add the server to your user configuration instead of the project-specific one",
         "If you’ve already configured MCP servers in Claude Desktop, you can import them:",
         "Import servers from Claude Desktop",
-        "Select which servers to import",
-        "After running the command, you’ll see an interactive dialog that allows you to select which servers you want to import."
+        "Select which servers to import"
       ],
       "codeBlocks": [
         "# Basic syntax\nclaude mcp add --transport http <name> <url>\n\n# Real example: Connect to Notion\nclaude mcp add --transport http notion https://mcp.notion.com/mcp\n\n# Example with Bearer token\nclaude mcp add --transport http secure-api https://api.example.com/mcp \\\n  --header \"Authorization: Bearer your-token\"",
@@ -10590,31 +10583,23 @@
           ]
         },
         {
+          "title": "​Respond to MCP elicitation requests",
+          "paragraphs": [
+            "MCP servers can request structured input from you mid-task using elicitation. When a server needs information it can’t get on its own, Claude Code displays an interactive dialog and passes your response back to the server. No configuration is required on your side: elicitation dialogs appear automatically when a server requests them.",
+            "Servers can request input in two ways:",
+            "Form mode: Claude Code shows a dialog with form fields defined by the server (for example, a username and password prompt). Fill in the fields and submit.",
+            "URL mode: Claude Code opens a browser URL for authentication or approval. Complete the flow in the browser, then confirm in the CLI.",
+            "To auto-respond to elicitation requests without showing a dialog, use the Elicitation hook.",
+            "If you’re building an MCP server that uses elicitation, see the MCP elicitation specification for protocol details and schema examples."
+          ],
+          "codeBlocks": []
+        },
+        {
           "title": "​Use MCP resources",
           "paragraphs": [
             "MCP servers can expose resources that you can reference using @ mentions, similar to how you reference files."
           ],
           "codeBlocks": []
-        },
-        {
-          "title": "​Reference MCP resources",
-          "paragraphs": [
-            "List available resources",
-            "Type @ in your prompt to see available resources from all connected MCP servers. Resources appear alongside files in the autocomplete menu.",
-            "Reference a specific resource",
-            "Use the format @server:protocol://resource/path to reference a resource:",
-            "Multiple resource references",
-            "You can reference multiple resources in a single prompt:",
-            "Resources are automatically fetched and included as attachments when referenced",
-            "Resource paths are fuzzy-searchable in the @ mention autocomplete",
-            "Claude Code automatically provides tools to list and read MCP resources when servers support them",
-            "Resources can contain any type of content that the MCP server provides (text, JSON, structured data, etc.)"
-          ],
-          "codeBlocks": [
-            "Can you analyze @github:issue://123 and suggest a fix?",
-            "Please review the API documentation at @docs:file://api/authentication",
-            "Compare @postgres:schema://users with @docs:file://database/user-model"
-          ]
         }
       ]
     },
@@ -11923,8 +11908,8 @@
         "For more restrictive permissions, create a custom role with only the permissions above.",
         "For details, see Vertex IAM documentation.",
         "Create a dedicated GCP project for Claude Code to simplify cost tracking and access control.",
-        "Claude Sonnet 4 and Sonnet 4.6 support the 1M token context window on Vertex AI.",
-        "The 1M token context window is currently in beta. To use the extended context window, include the context-1m-2025-08-07 beta header in your Vertex AI requests.",
+        "Claude Opus 4.6, Sonnet 4.6, Sonnet 4.5, and Sonnet 4 support the 1M token context window on Vertex AI. Claude Code automatically enables the extended context window when you select a 1M model variant.",
+        "To enable the 1M context window for your pinned model, append [1m] to the model ID. See Pin models for third-party deployments for details.",
         "If you encounter quota issues:",
         "Check current quotas or request quota increase through Cloud Console",
         "If you encounter “model not found” 404 errors:",
@@ -12060,8 +12045,8 @@
         {
           "title": "​1M token context window",
           "paragraphs": [
-            "Claude Sonnet 4 and Sonnet 4.6 support the 1M token context window on Vertex AI.",
-            "The 1M token context window is currently in beta. To use the extended context window, include the context-1m-2025-08-07 beta header in your Vertex AI requests."
+            "Claude Opus 4.6, Sonnet 4.6, Sonnet 4.5, and Sonnet 4 support the 1M token context window on Vertex AI. Claude Code automatically enables the extended context window when you select a 1M model variant.",
+            "To enable the 1M context window for your pinned model, append [1m] to the model ID. See Pin models for third-party deployments for details."
           ],
           "codeBlocks": []
         },
@@ -12337,6 +12322,7 @@
         "claude.ai: authentication for claude.ai accounts",
         "platform.claude.com: authentication for Anthropic Console accounts",
         "Ensure these URLs are allowlisted in your proxy configuration and firewall rules. This is especially important when using Claude Code in containerized or restricted network environments.",
+        "Claude Code on the web and Code Review connect to your repositories from Anthropic-managed infrastructure. If your GitHub Enterprise Cloud organization restricts access by IP address, enable IP allow list inheritance for installed GitHub Apps. The Claude GitHub App registers its IP ranges, so enabling this setting allows access without manual configuration. To add the ranges to your allow list manually instead, or to configure other firewalls, see the Anthropic API IP addresses.",
         "Claude Code settings",
         "Environment variables reference",
         "Troubleshooting guide",
@@ -12416,7 +12402,8 @@
             "api.anthropic.com: Claude API endpoints",
             "claude.ai: authentication for claude.ai accounts",
             "platform.claude.com: authentication for Anthropic Console accounts",
-            "Ensure these URLs are allowlisted in your proxy configuration and firewall rules. This is especially important when using Claude Code in containerized or restricted network environments."
+            "Ensure these URLs are allowlisted in your proxy configuration and firewall rules. This is especially important when using Claude Code in containerized or restricted network environments.",
+            "Claude Code on the web and Code Review connect to your repositories from Anthropic-managed infrastructure. If your GitHub Enterprise Cloud organization restricts access by IP address, enable IP allow list inheritance for installed GitHub Apps. The Claude GitHub App registers its IP ranges, so enabling this setting allows access without manual configuration. To add the ranges to your allow list manually instead, or to configure other firewalls, see the Anthropic API IP addresses."
           ],
           "codeBlocks": []
         },
@@ -14998,7 +14985,7 @@
         "Add this to your settings.json to run the hook before every Bash command:",
         "The hook calls this script, which checks if the command is a test runner and modifies it to show only failures:",
         "Your CLAUDE.md file is loaded into context at session start. If it contains detailed instructions for specific workflows (like PR reviews or database migrations), those tokens are present even when you’re doing unrelated work. Skills load on-demand only when invoked, so moving specialized instructions into skills keeps your base context smaller. Aim to keep CLAUDE.md under ~500 lines by including only essentials.",
-        "Extended thinking is enabled by default with a budget of 31,999 tokens because it significantly improves performance on complex planning and reasoning tasks. However, thinking tokens are billed as output tokens, so for simpler tasks where deep reasoning isn’t needed, you can reduce costs by lowering the effort level in /model for Opus 4.6, disabling thinking in /config, or lowering the budget (for example, MAX_THINKING_TOKENS=8000).",
+        "Extended thinking is enabled by default with a budget of 31,999 tokens because it significantly improves performance on complex planning and reasoning tasks. However, thinking tokens are billed as output tokens, so for simpler tasks where deep reasoning isn’t needed, you can reduce costs by lowering the effort level with /effort or in /model, disabling thinking in /config, or lowering the budget (for example, MAX_THINKING_TOKENS=8000).",
         "Running tests, fetching documentation, or processing log files can consume significant context. Delegate these to subagents so the verbose output stays in the subagent’s context while only a summary returns to your main conversation.",
         "Agent teams use approximately 7x more tokens than standard sessions when teammates run in plan mode, because each teammate maintains its own context window and runs as a separate Claude instance. Keep team tasks small and self-contained to limit per-teammate token usage. See agent teams for details.",
         "Vague requests like “improve this codebase” trigger broad scanning. Specific requests like “add input validation to the login function in auth.ts” let Claude work efficiently with minimal file reads.",
@@ -15156,7 +15143,7 @@
         {
           "title": "​Adjust extended thinking",
           "paragraphs": [
-            "Extended thinking is enabled by default with a budget of 31,999 tokens because it significantly improves performance on complex planning and reasoning tasks. However, thinking tokens are billed as output tokens, so for simpler tasks where deep reasoning isn’t needed, you can reduce costs by lowering the effort level in /model for Opus 4.6, disabling thinking in /config, or lowering the budget (for example, MAX_THINKING_TOKENS=8000)."
+            "Extended thinking is enabled by default with a budget of 31,999 tokens because it significantly improves performance on complex planning and reasoning tasks. However, thinking tokens are billed as output tokens, so for simpler tasks where deep reasoning isn’t needed, you can reduce costs by lowering the effort level with /effort or in /model, disabling thinking in /config, or lowering the budget (for example, MAX_THINKING_TOKENS=8000)."
           ],
           "codeBlocks": []
         },
@@ -16156,6 +16143,7 @@
         "​What uses scopes",
         "​Settings files",
         "​Available settings",
+        "​Worktree settings",
         "​Permission settings",
         "​Permission rule syntax",
         "​Sandbox settings",
@@ -16167,8 +16155,7 @@
         "​Key points about the configuration system",
         "​System prompt",
         "​Excluding sensitive files",
-        "​Subagent configuration",
-        "​Plugin configuration"
+        "​Subagent configuration"
       ],
       "toc": [
         "Configuration scopes",
@@ -16178,6 +16165,7 @@
         "What uses scopes",
         "Settings files",
         "Available settings",
+        "Worktree settings",
         "Permission settings",
         "Permission rule syntax",
         "Sandbox settings",
@@ -16189,8 +16177,7 @@
         "Verify active settings",
         "Key points about the configuration system",
         "System prompt",
-        "Excluding sensitive files",
-        "Subagent configuration"
+        "Excluding sensitive files"
       ],
       "paragraphs": [
         "Configuration scopes",
@@ -16200,6 +16187,7 @@
         "What uses scopes",
         "Settings files",
         "Available settings",
+        "Worktree settings",
         "Permission settings",
         "Permission rule syntax",
         "Sandbox settings",
@@ -16221,8 +16209,6 @@
         "Managing plugins",
         "Environment variables",
         "Tools available to Claude",
-        "Bash tool behavior",
-        "Extending tools with hooks",
         "See also",
         "Configure Claude Code with global and project-level settings, and environment variables.",
         "Claude Code offers a variety of settings to configure its behavior to meet your needs. You can configure Claude Code by running the /config command when using the interactive REPL, which opens a tabbed Settings interface where you can view status information and modify configuration options.",
@@ -16251,29 +16237,33 @@
         "User (lowest) - applies when nothing else specifies the setting",
         "For example, if a permission is allowed in user settings but denied in project settings, the project setting takes precedence and the permission is blocked.",
         "Scopes apply to many Claude Code features:",
-        "The settings.json file is our official mechanism for configuring Claude Code through hierarchical settings:",
+        "The settings.json file is the official mechanism for configuring Claude Code through hierarchical settings:",
         "User settings are defined in ~/.claude/settings.json and apply to all projects.",
         "Project settings are saved in your project directory: .claude/settings.json for settings that are checked into source control and shared with your team .claude/settings.local.json for settings that are not checked in, useful for personal preferences and experimentation. Claude Code will configure git to ignore .claude/settings.local.json when it is created.",
         "Project settings are saved in your project directory:",
         ".claude/settings.json for settings that are checked into source control and shared with your team",
         ".claude/settings.local.json for settings that are not checked in, useful for personal preferences and experimentation. Claude Code will configure git to ignore .claude/settings.local.json when it is created.",
-        "Managed settings: For organizations that need centralized control, Claude Code supports multiple delivery mechanisms for managed settings. All use the same JSON format and cannot be overridden by user or project settings: Server-managed settings: delivered from Anthropic’s servers via the Claude.ai admin console. See server-managed settings. MDM/OS-level policies: delivered through native device management on macOS and Windows: macOS: com.anthropic.claudecode managed preferences domain (deployed via configuration profiles in Jamf, Kandji, or other MDM tools) Windows: HKLM\\SOFTWARE\\Policies\\ClaudeCode registry key with a Settings value (REG_SZ or REG_EXPAND_SZ) containing JSON (deployed via Group Policy or Intune) Windows (user-level): HKCU\\SOFTWARE\\Policies\\ClaudeCode (lowest policy priority, only used when no admin-level source exists) File-based: managed-settings.json and managed-mcp.json deployed to system directories: macOS: /Library/Application Support/ClaudeCode/ Linux and WSL: /etc/claude-code/ Windows: C:\\Program Files\\ClaudeCode\\ See managed settings and Managed MCP configuration for details. Managed deployments can also restrict plugin marketplace additions using strictKnownMarketplaces. For more information, see Managed marketplace restrictions.",
+        "Managed settings: For organizations that need centralized control, Claude Code supports multiple delivery mechanisms for managed settings. All use the same JSON format and cannot be overridden by user or project settings: Server-managed settings: delivered from Anthropic’s servers via the Claude.ai admin console. See server-managed settings. MDM/OS-level policies: delivered through native device management on macOS and Windows: macOS: com.anthropic.claudecode managed preferences domain (deployed via configuration profiles in Jamf, Kandji, or other MDM tools) Windows: HKLM\\SOFTWARE\\Policies\\ClaudeCode registry key with a Settings value (REG_SZ or REG_EXPAND_SZ) containing JSON (deployed via Group Policy or Intune) Windows (user-level): HKCU\\SOFTWARE\\Policies\\ClaudeCode (lowest policy priority, only used when no admin-level source exists) File-based: managed-settings.json and managed-mcp.json deployed to system directories: macOS: /Library/Application Support/ClaudeCode/ Linux and WSL: /etc/claude-code/ Windows: C:\\Program Files\\ClaudeCode\\ The legacy Windows path C:\\ProgramData\\ClaudeCode\\managed-settings.json is no longer supported as of v2.1.75. Administrators who deployed settings to that location must migrate files to C:\\Program Files\\ClaudeCode\\managed-settings.json. See managed settings and Managed MCP configuration for details. Managed deployments can also restrict plugin marketplace additions using strictKnownMarketplaces. For more information, see Managed marketplace restrictions.",
         "Managed settings: For organizations that need centralized control, Claude Code supports multiple delivery mechanisms for managed settings. All use the same JSON format and cannot be overridden by user or project settings:",
         "Server-managed settings: delivered from Anthropic’s servers via the Claude.ai admin console. See server-managed settings.",
         "MDM/OS-level policies: delivered through native device management on macOS and Windows: macOS: com.anthropic.claudecode managed preferences domain (deployed via configuration profiles in Jamf, Kandji, or other MDM tools) Windows: HKLM\\SOFTWARE\\Policies\\ClaudeCode registry key with a Settings value (REG_SZ or REG_EXPAND_SZ) containing JSON (deployed via Group Policy or Intune) Windows (user-level): HKCU\\SOFTWARE\\Policies\\ClaudeCode (lowest policy priority, only used when no admin-level source exists)",
+        "MDM/OS-level policies: delivered through native device management on macOS and Windows:",
         "macOS: com.anthropic.claudecode managed preferences domain (deployed via configuration profiles in Jamf, Kandji, or other MDM tools)",
         "Windows: HKLM\\SOFTWARE\\Policies\\ClaudeCode registry key with a Settings value (REG_SZ or REG_EXPAND_SZ) containing JSON (deployed via Group Policy or Intune)",
         "Windows (user-level): HKCU\\SOFTWARE\\Policies\\ClaudeCode (lowest policy priority, only used when no admin-level source exists)",
-        "File-based: managed-settings.json and managed-mcp.json deployed to system directories: macOS: /Library/Application Support/ClaudeCode/ Linux and WSL: /etc/claude-code/ Windows: C:\\Program Files\\ClaudeCode\\",
+        "File-based: managed-settings.json and managed-mcp.json deployed to system directories: macOS: /Library/Application Support/ClaudeCode/ Linux and WSL: /etc/claude-code/ Windows: C:\\Program Files\\ClaudeCode\\ The legacy Windows path C:\\ProgramData\\ClaudeCode\\managed-settings.json is no longer supported as of v2.1.75. Administrators who deployed settings to that location must migrate files to C:\\Program Files\\ClaudeCode\\managed-settings.json.",
+        "File-based: managed-settings.json and managed-mcp.json deployed to system directories:",
         "macOS: /Library/Application Support/ClaudeCode/",
         "Linux and WSL: /etc/claude-code/",
         "Windows: C:\\Program Files\\ClaudeCode\\",
+        "The legacy Windows path C:\\ProgramData\\ClaudeCode\\managed-settings.json is no longer supported as of v2.1.75. Administrators who deployed settings to that location must migrate files to C:\\Program Files\\ClaudeCode\\managed-settings.json.",
         "See managed settings and Managed MCP configuration for details.",
         "Managed deployments can also restrict plugin marketplace additions using strictKnownMarketplaces. For more information, see Managed marketplace restrictions.",
         "Other configuration is stored in ~/.claude.json. This file contains your preferences (theme, notification settings, editor mode), OAuth session, MCP server configurations for user and local scopes, per-project state (allowed tools, trust settings), and various caches. Project-scoped MCP servers are stored separately in .mcp.json.",
         "Claude Code automatically creates timestamped backups of configuration files and retains the five most recent backups to prevent data loss.",
         "The $schema line in the example above points to the official JSON schema for Claude Code settings. Adding it to your settings.json enables autocomplete and inline validation in VS Code, Cursor, and any other editor that supports JSON schema validation.",
         "settings.json supports a number of options:",
+        "Configure how --worktree creates and manages git worktrees. Use these settings to reduce disk usage and startup time in large monorepos.",
         "Permission rules follow the format Tool or Tool(specifier). Rules are evaluated in order: deny rules first, then ask, then allow. The first matching rule wins.",
         "Quick examples:",
         "For the complete rule syntax reference, including wildcard behavior, tool-specific patterns for Read, Edit, WebFetch, MCP, and Agent rules, and security limitations of Bash patterns, see Permission rule syntax.",
@@ -16369,10 +16359,7 @@
         "List of sources: Users can only add marketplaces that match exactly",
         "All supported source types:",
         "The allowlist supports seven marketplace source types. Most sources use exact matching, while hostPattern uses regex matching against the marketplace host.",
-        "GitHub repositories:",
-        "Fields: repo (required), ref (optional: branch/tag/SHA), path (optional: subdirectory)",
-        "Git repositories:",
-        "Fields: url (required), ref (optional: branch/tag/SHA), path (optional: subdirectory)"
+        "GitHub repositories:"
       ],
       "codeBlocks": [
         "{\n  \"$schema\": \"https://json.schemastore.org/claude-code-settings.json\",\n  \"permissions\": {\n    \"allow\": [\n      \"Bash(npm run lint)\",\n      \"Bash(npm run test *)\",\n      \"Read(~/.zshrc)\"\n    ],\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ]\n  },\n  \"env\": {\n    \"CLAUDE_CODE_ENABLE_TELEMETRY\": \"1\",\n    \"OTEL_METRICS_EXPORTER\": \"otlp\"\n  },\n  \"companyAnnouncements\": [\n    \"Welcome to Acme Corp! Review our code guidelines at docs.acme.com\",\n    \"Reminder: Code reviews required for all PRs\",\n    \"New security policy in effect\"\n  ]\n}",
@@ -16403,10 +16390,7 @@
         "// These are DIFFERENT sources:\n{ \"source\": \"github\", \"repo\": \"acme-corp/plugins\" }\n{ \"source\": \"github\", \"repo\": \"acme-corp/plugins\", \"ref\": \"main\" }\n\n// These are also DIFFERENT:\n{ \"source\": \"github\", \"repo\": \"acme-corp/plugins\", \"path\": \"marketplace\" }\n{ \"source\": \"github\", \"repo\": \"acme-corp/plugins\" }",
         "{\n  \"strictKnownMarketplaces\": [\n    { \"source\": \"github\", \"repo\": \"acme-corp/plugins\" }\n  ]\n}",
         "{\n  \"extraKnownMarketplaces\": {\n    \"acme-tools\": {\n      \"source\": { \"source\": \"github\", \"repo\": \"acme-corp/plugins\" }\n    }\n  }\n}",
-        "{\n  \"strictKnownMarketplaces\": [\n    { \"source\": \"github\", \"repo\": \"acme-corp/plugins\" }\n  ],\n  \"extraKnownMarketplaces\": {\n    \"acme-tools\": {\n      \"source\": { \"source\": \"github\", \"repo\": \"acme-corp/plugins\" }\n    }\n  }\n}",
-        "conda activate myenv\n# or: source /path/to/venv/bin/activate\nclaude",
-        "export CLAUDE_ENV_FILE=/path/to/env-setup.sh\nclaude",
-        "conda activate myenv\n# or: source /path/to/venv/bin/activate\n# or: export MY_VAR=value"
+        "{\n  \"strictKnownMarketplaces\": [\n    { \"source\": \"github\", \"repo\": \"acme-corp/plugins\" }\n  ],\n  \"extraKnownMarketplaces\": {\n    \"acme-tools\": {\n      \"source\": { \"source\": \"github\", \"repo\": \"acme-corp/plugins\" }\n    }\n  }\n}"
       ],
       "sectionBlocks": [
         {
@@ -16419,11 +16403,11 @@
             "What uses scopes",
             "Settings files",
             "Available settings",
+            "Worktree settings",
             "Permission settings",
             "Permission rule syntax",
             "Sandbox settings",
-            "Sandbox path prefixes",
-            "Attribution settings"
+            "Sandbox path prefixes"
           ],
           "codeBlocks": []
         },
@@ -16480,18 +16464,18 @@
         {
           "title": "​Settings files",
           "paragraphs": [
-            "The settings.json file is our official mechanism for configuring Claude Code through hierarchical settings:",
+            "The settings.json file is the official mechanism for configuring Claude Code through hierarchical settings:",
             "User settings are defined in ~/.claude/settings.json and apply to all projects.",
             "Project settings are saved in your project directory: .claude/settings.json for settings that are checked into source control and shared with your team .claude/settings.local.json for settings that are not checked in, useful for personal preferences and experimentation. Claude Code will configure git to ignore .claude/settings.local.json when it is created.",
             "Project settings are saved in your project directory:",
             ".claude/settings.json for settings that are checked into source control and shared with your team",
             ".claude/settings.local.json for settings that are not checked in, useful for personal preferences and experimentation. Claude Code will configure git to ignore .claude/settings.local.json when it is created.",
-            "Managed settings: For organizations that need centralized control, Claude Code supports multiple delivery mechanisms for managed settings. All use the same JSON format and cannot be overridden by user or project settings: Server-managed settings: delivered from Anthropic’s servers via the Claude.ai admin console. See server-managed settings. MDM/OS-level policies: delivered through native device management on macOS and Windows: macOS: com.anthropic.claudecode managed preferences domain (deployed via configuration profiles in Jamf, Kandji, or other MDM tools) Windows: HKLM\\SOFTWARE\\Policies\\ClaudeCode registry key with a Settings value (REG_SZ or REG_EXPAND_SZ) containing JSON (deployed via Group Policy or Intune) Windows (user-level): HKCU\\SOFTWARE\\Policies\\ClaudeCode (lowest policy priority, only used when no admin-level source exists) File-based: managed-settings.json and managed-mcp.json deployed to system directories: macOS: /Library/Application Support/ClaudeCode/ Linux and WSL: /etc/claude-code/ Windows: C:\\Program Files\\ClaudeCode\\ See managed settings and Managed MCP configuration for details. Managed deployments can also restrict plugin marketplace additions using strictKnownMarketplaces. For more information, see Managed marketplace restrictions.",
+            "Managed settings: For organizations that need centralized control, Claude Code supports multiple delivery mechanisms for managed settings. All use the same JSON format and cannot be overridden by user or project settings: Server-managed settings: delivered from Anthropic’s servers via the Claude.ai admin console. See server-managed settings. MDM/OS-level policies: delivered through native device management on macOS and Windows: macOS: com.anthropic.claudecode managed preferences domain (deployed via configuration profiles in Jamf, Kandji, or other MDM tools) Windows: HKLM\\SOFTWARE\\Policies\\ClaudeCode registry key with a Settings value (REG_SZ or REG_EXPAND_SZ) containing JSON (deployed via Group Policy or Intune) Windows (user-level): HKCU\\SOFTWARE\\Policies\\ClaudeCode (lowest policy priority, only used when no admin-level source exists) File-based: managed-settings.json and managed-mcp.json deployed to system directories: macOS: /Library/Application Support/ClaudeCode/ Linux and WSL: /etc/claude-code/ Windows: C:\\Program Files\\ClaudeCode\\ The legacy Windows path C:\\ProgramData\\ClaudeCode\\managed-settings.json is no longer supported as of v2.1.75. Administrators who deployed settings to that location must migrate files to C:\\Program Files\\ClaudeCode\\managed-settings.json. See managed settings and Managed MCP configuration for details. Managed deployments can also restrict plugin marketplace additions using strictKnownMarketplaces. For more information, see Managed marketplace restrictions.",
             "Managed settings: For organizations that need centralized control, Claude Code supports multiple delivery mechanisms for managed settings. All use the same JSON format and cannot be overridden by user or project settings:",
             "Server-managed settings: delivered from Anthropic’s servers via the Claude.ai admin console. See server-managed settings.",
             "MDM/OS-level policies: delivered through native device management on macOS and Windows: macOS: com.anthropic.claudecode managed preferences domain (deployed via configuration profiles in Jamf, Kandji, or other MDM tools) Windows: HKLM\\SOFTWARE\\Policies\\ClaudeCode registry key with a Settings value (REG_SZ or REG_EXPAND_SZ) containing JSON (deployed via Group Policy or Intune) Windows (user-level): HKCU\\SOFTWARE\\Policies\\ClaudeCode (lowest policy priority, only used when no admin-level source exists)",
-            "macOS: com.anthropic.claudecode managed preferences domain (deployed via configuration profiles in Jamf, Kandji, or other MDM tools)",
-            "Windows: HKLM\\SOFTWARE\\Policies\\ClaudeCode registry key with a Settings value (REG_SZ or REG_EXPAND_SZ) containing JSON (deployed via Group Policy or Intune)"
+            "MDM/OS-level policies: delivered through native device management on macOS and Windows:",
+            "macOS: com.anthropic.claudecode managed preferences domain (deployed via configuration profiles in Jamf, Kandji, or other MDM tools)"
           ],
           "codeBlocks": [
             "{\n  \"$schema\": \"https://json.schemastore.org/claude-code-settings.json\",\n  \"permissions\": {\n    \"allow\": [\n      \"Bash(npm run lint)\",\n      \"Bash(npm run test *)\",\n      \"Read(~/.zshrc)\"\n    ],\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ]\n  },\n  \"env\": {\n    \"CLAUDE_CODE_ENABLE_TELEMETRY\": \"1\",\n    \"OTEL_METRICS_EXPORTER\": \"otlp\"\n  },\n  \"companyAnnouncements\": [\n    \"Welcome to Acme Corp! Review our code guidelines at docs.acme.com\",\n    \"Reminder: Code reviews required for all PRs\",\n    \"New security policy in effect\"\n  ]\n}"
@@ -16501,6 +16485,13 @@
           "title": "​Available settings",
           "paragraphs": [
             "settings.json supports a number of options:"
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Worktree settings",
+          "paragraphs": [
+            "Configure how --worktree creates and manages git worktrees. Use these settings to reduce disk usage and startup time in large monorepos."
           ],
           "codeBlocks": []
         },
@@ -16693,47 +16684,16 @@
         {
           "title": "​Environment variables",
           "paragraphs": [
-            "Claude Code supports the following environment variables to control its behavior:",
-            "All environment variables can also be configured in settings.json. This is useful as a way to automatically set environment variables for each session, or to roll out a set of environment variables for your whole team or organization."
+            "Environment variables let you control Claude Code behavior without editing settings files. Any variable can also be configured in settings.json under the env key to apply it to every session or roll it out to your team.",
+            "See the environment variables reference for the full list."
           ],
           "codeBlocks": []
         },
         {
           "title": "​Tools available to Claude",
           "paragraphs": [
-            "Claude Code has access to a set of powerful tools that help it understand and modify your codebase:",
-            "Permission rules can be configured using /allowed-tools or in permission settings. Also see Tool-specific permission rules."
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Bash tool behavior",
-          "paragraphs": [
-            "The Bash tool executes shell commands with the following persistence behavior:",
-            "Working directory persists: When Claude changes the working directory (for example, cd /path/to/dir), subsequent Bash commands will execute in that directory. You can use CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR=1 to reset to the project directory after each command.",
-            "Environment variables do NOT persist: Environment variables set in one Bash command (for example, export MY_VAR=value) are not available in subsequent Bash commands. Each Bash command runs in a fresh shell environment.",
-            "To make environment variables available in Bash commands, you have three options:",
-            "Option 1: Activate environment before starting Claude Code (simplest approach)",
-            "Activate your virtual environment in your terminal before launching Claude Code:",
-            "This works for shell environments but environment variables set within Claude’s Bash commands will not persist between commands.",
-            "Option 2: Set CLAUDE_ENV_FILE before starting Claude Code (persistent environment setup)",
-            "Export the path to a shell script containing your environment setup:",
-            "Where /path/to/env-setup.sh contains:",
-            "Claude Code will source this file before each Bash command, making the environment persistent across all commands.",
-            "Option 3: Use a SessionStart hook (project-specific configuration)"
-          ],
-          "codeBlocks": [
-            "conda activate myenv\n# or: source /path/to/venv/bin/activate\nclaude",
-            "export CLAUDE_ENV_FILE=/path/to/env-setup.sh\nclaude",
-            "conda activate myenv\n# or: source /path/to/venv/bin/activate\n# or: export MY_VAR=value",
-            "{\n  \"hooks\": {\n    \"SessionStart\": [{\n      \"matcher\": \"startup\",\n      \"hooks\": [{\n        \"type\": \"command\",\n        \"command\": \"echo 'conda activate myenv' >> \\\"$CLAUDE_ENV_FILE\\\"\"\n      }]\n    }]\n  }\n}"
-          ]
-        },
-        {
-          "title": "​Extending tools with hooks",
-          "paragraphs": [
-            "You can run custom commands before or after any tool executes using Claude Code hooks.",
-            "For example, you could automatically run a Python formatter after Claude modifies Python files, or prevent modifications to production configuration files by blocking Write operations to certain paths."
+            "Claude Code has access to a set of tools for reading, editing, searching, running commands, and orchestrating subagents. Tool names are the exact strings you use in permission rules and hook matchers.",
+            "See the tools reference for the full list and Bash tool behavior details."
           ],
           "codeBlocks": []
         },
@@ -17877,20 +17837,20 @@
         "In execution mode - Automatically switches to sonnet for code generation and implementation",
         "This gives you the best of both worlds: Opus’s superior reasoning for planning, and Sonnet’s efficiency for execution.",
         "Effort levels control adaptive reasoning, which dynamically allocates thinking based on task complexity. Lower effort is faster and cheaper for straightforward tasks, while higher effort provides deeper reasoning for complex problems.",
-        "Three levels are available: low, medium, and high. Opus 4.6 defaults to medium effort for Max and Team subscribers.",
+        "Three levels persist across sessions: low, medium, and high. A fourth level, max, provides the deepest reasoning with no constraint on token spending, so responses are slower and cost more than at high. max is available on Opus 4.6 only and applies to the current session without persisting. Opus 4.6 defaults to medium effort for Max and Team subscribers.",
         "Setting effort:",
+        "/effort: run /effort low, /effort medium, /effort high, or /effort max to change the level, or /effort auto to reset to the model default",
         "In /model: use left/right arrow keys to adjust the effort slider when selecting a model",
-        "Environment variable: set CLAUDE_CODE_EFFORT_LEVEL=low|medium|high",
-        "Settings: set effortLevel in your settings file",
-        "Effort is supported on Opus 4.6 and Sonnet 4.6. The effort slider appears in /model when a supported model is selected. The current effort level is also displayed next to the logo and spinner (for example, “with low effort”), so you can confirm which setting is active without opening /model.",
+        "--effort flag: pass low, medium, high, or max to set the level for a single session when launching Claude Code",
+        "Environment variable: set CLAUDE_CODE_EFFORT_LEVEL to low, medium, high, max, or auto",
+        "Settings: set effortLevel in your settings file to \"low\", \"medium\", or \"high\"",
+        "The environment variable takes precedence, then your configured level, then the model default.",
+        "Effort is supported on Opus 4.6 and Sonnet 4.6. The effort slider appears in /model when a supported model is selected. The current effort level is also displayed next to the logo and spinner, for example “with low effort”, so you can confirm which setting is active without opening /model.",
         "To disable adaptive reasoning on Opus 4.6 and Sonnet 4.6 and revert to the previous fixed thinking budget, set CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1. When disabled, these models use the fixed budget controlled by MAX_THINKING_TOKENS. See environment variables.",
         "Opus 4.6 and Sonnet 4.6 support a 1 million token context window for long sessions with large codebases.",
-        "The 1M context window is currently in beta. Features, pricing, and availability may change.",
-        "Extended context is available for:",
-        "API and pay-as-you-go users: full access to 1M context",
-        "Pro, Max, Teams, and Enterprise subscribers: available with extra usage enabled",
+        "Availability varies by model and plan. On Max, Team, and Enterprise plans, Opus is automatically upgraded to 1M context with no additional configuration. This applies to both Team Standard and Team Premium seats.",
         "To disable 1M context entirely, set CLAUDE_CODE_DISABLE_1M_CONTEXT=1. This removes 1M model variants from the model picker. See environment variables.",
-        "Selecting a 1M model does not immediately change billing. Your session uses standard rates until it exceeds 200K tokens of context. Beyond 200K tokens, requests are charged at long-context pricing with dedicated rate limits. For subscribers, tokens beyond 200K are billed as extra usage rather than through the subscription.",
+        "The 1M context window uses standard model pricing with no premium for tokens beyond 200K. For plans where extended context is included with your subscription, usage remains covered by your subscription. For plans that access extended context through extra usage, tokens are billed to extra usage.",
         "If your account supports 1M context, the option appears in the model picker (/model) in the latest versions of Claude Code. If you don’t see it, try restarting your session.",
         "You can also use the [1m] suffix with model aliases or full model names:",
         "You can see which model you’re currently using in several ways:",
@@ -17903,6 +17863,8 @@
         "Set all three model environment variables to specific version IDs as part of your initial setup. Skipping this step means a Claude Code update can break your users without any action on your part.",
         "Use the following environment variables with version-specific model IDs for your provider:",
         "Apply the same pattern for ANTHROPIC_DEFAULT_SONNET_MODEL and ANTHROPIC_DEFAULT_HAIKU_MODEL. For current and legacy model IDs across all providers, see Models overview. To upgrade users to a new model version, update these environment variables and redeploy.",
+        "To enable extended context for a pinned model, append [1m] to the model ID in ANTHROPIC_DEFAULT_OPUS_MODEL or ANTHROPIC_DEFAULT_SONNET_MODEL:",
+        "The [1m] suffix applies the 1M context window to all usage of that alias, including opusplan. Claude Code strips the suffix before sending the model ID to your provider. Only append [1m] when the underlying model supports 1M context, such as Opus 4.6 or Sonnet 4.6.",
         "The settings.availableModels allowlist still applies when using third-party providers. Filtering matches on the model alias (opus, sonnet, haiku), not the provider-specific model ID.",
         "The family-level environment variables above configure one model ID per family alias. If you need to map several versions within the same family to distinct provider IDs, use the modelOverrides setting instead.",
         "modelOverrides maps individual Anthropic model IDs to the provider-specific strings that Claude Code sends to your provider’s API. When a user selects a mapped model in the /model picker, Claude Code uses your configured value instead of the built-in default.",
@@ -17920,7 +17882,8 @@
         "{\n    \"permissions\": {\n        ...\n    },\n    \"model\": \"opus\"\n}",
         "{\n  \"availableModels\": [\"sonnet\", \"haiku\"]\n}",
         "{\n  \"model\": \"sonnet\",\n  \"availableModels\": [\"sonnet\", \"haiku\"]\n}",
-        "# Use the sonnet[1m] alias\n/model sonnet[1m]\n\n# Or append [1m] to a full model name\n/model claude-sonnet-4-6[1m]",
+        "# Use the opus[1m] or sonnet[1m] alias\n/model opus[1m]\n/model sonnet[1m]\n\n# Or append [1m] to a full model name\n/model claude-opus-4-6[1m]",
+        "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-6[1m]'",
         "{\n  \"modelOverrides\": {\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-prod\",\n    \"claude-opus-4-5-20251101\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-45-prod\",\n    \"claude-sonnet-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/sonnet-prod\"\n  }\n}"
       ],
       "sectionBlocks": [
@@ -18046,12 +18009,15 @@
           "title": "​Adjust effort level",
           "paragraphs": [
             "Effort levels control adaptive reasoning, which dynamically allocates thinking based on task complexity. Lower effort is faster and cheaper for straightforward tasks, while higher effort provides deeper reasoning for complex problems.",
-            "Three levels are available: low, medium, and high. Opus 4.6 defaults to medium effort for Max and Team subscribers.",
+            "Three levels persist across sessions: low, medium, and high. A fourth level, max, provides the deepest reasoning with no constraint on token spending, so responses are slower and cost more than at high. max is available on Opus 4.6 only and applies to the current session without persisting. Opus 4.6 defaults to medium effort for Max and Team subscribers.",
             "Setting effort:",
+            "/effort: run /effort low, /effort medium, /effort high, or /effort max to change the level, or /effort auto to reset to the model default",
             "In /model: use left/right arrow keys to adjust the effort slider when selecting a model",
-            "Environment variable: set CLAUDE_CODE_EFFORT_LEVEL=low|medium|high",
-            "Settings: set effortLevel in your settings file",
-            "Effort is supported on Opus 4.6 and Sonnet 4.6. The effort slider appears in /model when a supported model is selected. The current effort level is also displayed next to the logo and spinner (for example, “with low effort”), so you can confirm which setting is active without opening /model.",
+            "--effort flag: pass low, medium, high, or max to set the level for a single session when launching Claude Code",
+            "Environment variable: set CLAUDE_CODE_EFFORT_LEVEL to low, medium, high, max, or auto",
+            "Settings: set effortLevel in your settings file to \"low\", \"medium\", or \"high\"",
+            "The environment variable takes precedence, then your configured level, then the model default.",
+            "Effort is supported on Opus 4.6 and Sonnet 4.6. The effort slider appears in /model when a supported model is selected. The current effort level is also displayed next to the logo and spinner, for example “with low effort”, so you can confirm which setting is active without opening /model.",
             "To disable adaptive reasoning on Opus 4.6 and Sonnet 4.6 and revert to the previous fixed thinking budget, set CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1. When disabled, these models use the fixed budget controlled by MAX_THINKING_TOKENS. See environment variables."
           ],
           "codeBlocks": []
@@ -18060,17 +18026,14 @@
           "title": "​Extended context",
           "paragraphs": [
             "Opus 4.6 and Sonnet 4.6 support a 1 million token context window for long sessions with large codebases.",
-            "The 1M context window is currently in beta. Features, pricing, and availability may change.",
-            "Extended context is available for:",
-            "API and pay-as-you-go users: full access to 1M context",
-            "Pro, Max, Teams, and Enterprise subscribers: available with extra usage enabled",
+            "Availability varies by model and plan. On Max, Team, and Enterprise plans, Opus is automatically upgraded to 1M context with no additional configuration. This applies to both Team Standard and Team Premium seats.",
             "To disable 1M context entirely, set CLAUDE_CODE_DISABLE_1M_CONTEXT=1. This removes 1M model variants from the model picker. See environment variables.",
-            "Selecting a 1M model does not immediately change billing. Your session uses standard rates until it exceeds 200K tokens of context. Beyond 200K tokens, requests are charged at long-context pricing with dedicated rate limits. For subscribers, tokens beyond 200K are billed as extra usage rather than through the subscription.",
+            "The 1M context window uses standard model pricing with no premium for tokens beyond 200K. For plans where extended context is included with your subscription, usage remains covered by your subscription. For plans that access extended context through extra usage, tokens are billed to extra usage.",
             "If your account supports 1M context, the option appears in the model picker (/model) in the latest versions of Claude Code. If you don’t see it, try restarting your session.",
             "You can also use the [1m] suffix with model aliases or full model names:"
           ],
           "codeBlocks": [
-            "# Use the sonnet[1m] alias\n/model sonnet[1m]\n\n# Or append [1m] to a full model name\n/model claude-sonnet-4-6[1m]"
+            "# Use the opus[1m] or sonnet[1m] alias\n/model opus[1m]\n/model sonnet[1m]\n\n# Or append [1m] to a full model name\n/model claude-opus-4-6[1m]"
           ]
         },
         {
@@ -18098,9 +18061,13 @@
             "Set all three model environment variables to specific version IDs as part of your initial setup. Skipping this step means a Claude Code update can break your users without any action on your part.",
             "Use the following environment variables with version-specific model IDs for your provider:",
             "Apply the same pattern for ANTHROPIC_DEFAULT_SONNET_MODEL and ANTHROPIC_DEFAULT_HAIKU_MODEL. For current and legacy model IDs across all providers, see Models overview. To upgrade users to a new model version, update these environment variables and redeploy.",
+            "To enable extended context for a pinned model, append [1m] to the model ID in ANTHROPIC_DEFAULT_OPUS_MODEL or ANTHROPIC_DEFAULT_SONNET_MODEL:",
+            "The [1m] suffix applies the 1M context window to all usage of that alias, including opusplan. Claude Code strips the suffix before sending the model ID to your provider. Only append [1m] when the underlying model supports 1M context, such as Opus 4.6 or Sonnet 4.6.",
             "The settings.availableModels allowlist still applies when using third-party providers. Filtering matches on the model alias (opus, sonnet, haiku), not the provider-specific model ID."
           ],
-          "codeBlocks": []
+          "codeBlocks": [
+            "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-6[1m]'"
+          ]
         },
         {
           "title": "​Override model IDs per version",
@@ -19212,42 +19179,26 @@
       "headings": [
         "​CLI commands",
         "​CLI flags",
-        "​Agents flag format",
         "​System prompt flags",
         "​See also"
       ],
       "toc": [
         "CLI commands",
         "CLI flags",
-        "Agents flag format",
         "System prompt flags",
         "See also"
       ],
       "paragraphs": [
         "CLI commands",
         "CLI flags",
-        "Agents flag format",
         "System prompt flags",
         "See also",
         "Complete reference for Claude Code command-line interface, including commands and flags.",
         "You can start sessions, pipe content, resume conversations, and manage updates with these commands:",
         "Customize Claude Code’s behavior with these command-line flags:",
-        "The --output-format json flag is particularly useful for scripting and automation, allowing you to parse Claude’s responses programmatically.",
-        "The --agents flag accepts a JSON object that defines one or more custom subagents. Each subagent requires a unique name (as the key) and a definition object with the following fields:",
-        "Example:",
-        "For more details on creating and using subagents, see the subagents documentation.",
         "Claude Code provides four flags for customizing the system prompt. All four work in both interactive and non-interactive modes.",
-        "When to use each:",
-        "--system-prompt: use when you need complete control over Claude’s system prompt. This removes all default Claude Code instructions, giving you a blank slate. Report incorrect codeCopyAsk AIclaude --system-prompt \"You are a Python expert who only writes type-annotated code\"",
-        "--system-prompt: use when you need complete control over Claude’s system prompt. This removes all default Claude Code instructions, giving you a blank slate.",
-        "--system-prompt-file: use when you want to load a custom prompt from a file, useful for team consistency or version-controlled prompt templates. Report incorrect codeCopyAsk AIclaude --system-prompt-file ./prompts/code-review.txt",
-        "--system-prompt-file: use when you want to load a custom prompt from a file, useful for team consistency or version-controlled prompt templates.",
-        "--append-system-prompt: use when you want to add specific instructions while keeping Claude Code’s default capabilities intact. This is the safest option for most use cases. Report incorrect codeCopyAsk AIclaude --append-system-prompt \"Always use TypeScript and include JSDoc comments\"",
-        "--append-system-prompt: use when you want to add specific instructions while keeping Claude Code’s default capabilities intact. This is the safest option for most use cases.",
-        "--append-system-prompt-file: use when you want to append instructions from a file while keeping Claude Code’s defaults. Useful for version-controlled additions. Report incorrect codeCopyAsk AIclaude --append-system-prompt-file ./prompts/style-rules.txt",
-        "--append-system-prompt-file: use when you want to append instructions from a file while keeping Claude Code’s defaults. Useful for version-controlled additions.",
-        "--system-prompt and --system-prompt-file are mutually exclusive. The append flags can be used together with either replacement flag.",
-        "For most use cases, --append-system-prompt or --append-system-prompt-file is recommended as they preserve Claude Code’s built-in capabilities while adding your custom requirements. Use --system-prompt or --system-prompt-file only when you need complete control over the system prompt.",
+        "--system-prompt and --system-prompt-file are mutually exclusive. The append flags can be combined with either replacement flag.",
+        "For most use cases, use an append flag. Appending preserves Claude Code’s built-in capabilities while adding your requirements. Use a replacement flag only when you need complete control over the system prompt.",
         "Chrome extension - Browser automation and web testing",
         "Interactive mode - Shortcuts, input modes, and interactive features",
         "Quickstart guide - Getting started with Claude Code",
@@ -19256,20 +19207,13 @@
         "Agent SDK documentation - Programmatic usage and integrations",
         "Was this page helpful?"
       ],
-      "codeBlocks": [
-        "claude --agents '{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  },\n  \"debugger\": {\n    \"description\": \"Debugging specialist for errors and test failures.\",\n    \"prompt\": \"You are an expert debugger. Analyze errors, identify root causes, and provide fixes.\"\n  }\n}'",
-        "claude --system-prompt \"You are a Python expert who only writes type-annotated code\"",
-        "claude --system-prompt-file ./prompts/code-review.txt",
-        "claude --append-system-prompt \"Always use TypeScript and include JSDoc comments\"",
-        "claude --append-system-prompt-file ./prompts/style-rules.txt"
-      ],
+      "codeBlocks": [],
       "sectionBlocks": [
         {
           "title": "",
           "paragraphs": [
             "CLI commands",
             "CLI flags",
-            "Agents flag format",
             "System prompt flags",
             "See also",
             "Complete reference for Claude Code command-line interface, including commands and flags."
@@ -19286,44 +19230,18 @@
         {
           "title": "​CLI flags",
           "paragraphs": [
-            "Customize Claude Code’s behavior with these command-line flags:",
-            "The --output-format json flag is particularly useful for scripting and automation, allowing you to parse Claude’s responses programmatically."
+            "Customize Claude Code’s behavior with these command-line flags:"
           ],
           "codeBlocks": []
-        },
-        {
-          "title": "​Agents flag format",
-          "paragraphs": [
-            "The --agents flag accepts a JSON object that defines one or more custom subagents. Each subagent requires a unique name (as the key) and a definition object with the following fields:",
-            "Example:",
-            "For more details on creating and using subagents, see the subagents documentation."
-          ],
-          "codeBlocks": [
-            "claude --agents '{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  },\n  \"debugger\": {\n    \"description\": \"Debugging specialist for errors and test failures.\",\n    \"prompt\": \"You are an expert debugger. Analyze errors, identify root causes, and provide fixes.\"\n  }\n}'"
-          ]
         },
         {
           "title": "​System prompt flags",
           "paragraphs": [
             "Claude Code provides four flags for customizing the system prompt. All four work in both interactive and non-interactive modes.",
-            "When to use each:",
-            "--system-prompt: use when you need complete control over Claude’s system prompt. This removes all default Claude Code instructions, giving you a blank slate. Report incorrect codeCopyAsk AIclaude --system-prompt \"You are a Python expert who only writes type-annotated code\"",
-            "--system-prompt: use when you need complete control over Claude’s system prompt. This removes all default Claude Code instructions, giving you a blank slate.",
-            "--system-prompt-file: use when you want to load a custom prompt from a file, useful for team consistency or version-controlled prompt templates. Report incorrect codeCopyAsk AIclaude --system-prompt-file ./prompts/code-review.txt",
-            "--system-prompt-file: use when you want to load a custom prompt from a file, useful for team consistency or version-controlled prompt templates.",
-            "--append-system-prompt: use when you want to add specific instructions while keeping Claude Code’s default capabilities intact. This is the safest option for most use cases. Report incorrect codeCopyAsk AIclaude --append-system-prompt \"Always use TypeScript and include JSDoc comments\"",
-            "--append-system-prompt: use when you want to add specific instructions while keeping Claude Code’s default capabilities intact. This is the safest option for most use cases.",
-            "--append-system-prompt-file: use when you want to append instructions from a file while keeping Claude Code’s defaults. Useful for version-controlled additions. Report incorrect codeCopyAsk AIclaude --append-system-prompt-file ./prompts/style-rules.txt",
-            "--append-system-prompt-file: use when you want to append instructions from a file while keeping Claude Code’s defaults. Useful for version-controlled additions.",
-            "--system-prompt and --system-prompt-file are mutually exclusive. The append flags can be used together with either replacement flag.",
-            "For most use cases, --append-system-prompt or --append-system-prompt-file is recommended as they preserve Claude Code’s built-in capabilities while adding your custom requirements. Use --system-prompt or --system-prompt-file only when you need complete control over the system prompt."
+            "--system-prompt and --system-prompt-file are mutually exclusive. The append flags can be combined with either replacement flag.",
+            "For most use cases, use an append flag. Appending preserves Claude Code’s built-in capabilities while adding your requirements. Use a replacement flag only when you need complete control over the system prompt."
           ],
-          "codeBlocks": [
-            "claude --system-prompt \"You are a Python expert who only writes type-annotated code\"",
-            "claude --system-prompt-file ./prompts/code-review.txt",
-            "claude --append-system-prompt \"Always use TypeScript and include JSDoc comments\"",
-            "claude --append-system-prompt-file ./prompts/style-rules.txt"
-          ]
+          "codeBlocks": []
         },
         {
           "title": "​See also",
@@ -19334,6 +19252,174 @@
             "Common workflows - Advanced workflows and patterns",
             "Settings - Configuration options",
             "Agent SDK documentation - Programmatic usage and integrations",
+            "Was this page helpful?"
+          ],
+          "codeBlocks": []
+        }
+      ]
+    },
+    {
+      "section": "Reference",
+      "path": "/docs/en/commands",
+      "url": "https://code.claude.com/docs/en/commands",
+      "title": "Built-in commands",
+      "metaDescription": "Complete reference for built-in commands available in Claude Code.",
+      "headings": [
+        "​MCP prompts",
+        "​See also"
+      ],
+      "toc": [
+        "MCP prompts",
+        "See also"
+      ],
+      "paragraphs": [
+        "MCP prompts",
+        "See also",
+        "Complete reference for built-in commands available in Claude Code.",
+        "Type / in Claude Code to see all available commands, or type / followed by any letters to filter. Not all commands are visible to every user. Some depend on your platform, plan, or environment. For example, /desktop only appears on macOS and Windows, /upgrade and /privacy-settings are only available on Pro and Max plans, and /terminal-setup is hidden when your terminal natively supports its keybindings.",
+        "Claude Code also includes bundled skills like /simplify, /batch, and /debug that appear alongside built-in commands when you type /. To create your own commands, see skills.",
+        "In the table below, <arg> indicates a required argument and [arg] indicates an optional one.",
+        "MCP servers can expose prompts that appear as commands. These use the format /mcp__<server>__<prompt> and are dynamically discovered from connected servers. See MCP prompts for details.",
+        "Skills: create your own commands",
+        "Interactive mode: keyboard shortcuts, Vim mode, and command history",
+        "CLI reference: launch-time flags",
+        "Was this page helpful?"
+      ],
+      "codeBlocks": [],
+      "sectionBlocks": [
+        {
+          "title": "",
+          "paragraphs": [
+            "MCP prompts",
+            "See also",
+            "Complete reference for built-in commands available in Claude Code.",
+            "Type / in Claude Code to see all available commands, or type / followed by any letters to filter. Not all commands are visible to every user. Some depend on your platform, plan, or environment. For example, /desktop only appears on macOS and Windows, /upgrade and /privacy-settings are only available on Pro and Max plans, and /terminal-setup is hidden when your terminal natively supports its keybindings.",
+            "Claude Code also includes bundled skills like /simplify, /batch, and /debug that appear alongside built-in commands when you type /. To create your own commands, see skills.",
+            "In the table below, <arg> indicates a required argument and [arg] indicates an optional one."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​MCP prompts",
+          "paragraphs": [
+            "MCP servers can expose prompts that appear as commands. These use the format /mcp__<server>__<prompt> and are dynamically discovered from connected servers. See MCP prompts for details."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​See also",
+          "paragraphs": [
+            "Skills: create your own commands",
+            "Interactive mode: keyboard shortcuts, Vim mode, and command history",
+            "CLI reference: launch-time flags",
+            "Was this page helpful?"
+          ],
+          "codeBlocks": []
+        }
+      ]
+    },
+    {
+      "section": "Reference",
+      "path": "/docs/en/env-vars",
+      "url": "https://code.claude.com/docs/en/env-vars",
+      "title": "Environment variables",
+      "metaDescription": "Complete reference for environment variables that control Claude Code behavior.",
+      "headings": [
+        "​See also"
+      ],
+      "toc": [
+        "See also"
+      ],
+      "paragraphs": [
+        "See also",
+        "Complete reference for environment variables that control Claude Code behavior.",
+        "Claude Code supports the following environment variables to control its behavior. Set them in your shell before launching claude, or configure them in settings.json under the env key to apply them to every session or roll them out across your team.",
+        "Settings: configure environment variables in settings.json so they apply to every session",
+        "CLI reference: launch-time flags",
+        "Network configuration: proxy and TLS setup",
+        "Was this page helpful?"
+      ],
+      "codeBlocks": [],
+      "sectionBlocks": [
+        {
+          "title": "",
+          "paragraphs": [
+            "See also",
+            "Complete reference for environment variables that control Claude Code behavior.",
+            "Claude Code supports the following environment variables to control its behavior. Set them in your shell before launching claude, or configure them in settings.json under the env key to apply them to every session or roll them out across your team."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​See also",
+          "paragraphs": [
+            "Settings: configure environment variables in settings.json so they apply to every session",
+            "CLI reference: launch-time flags",
+            "Network configuration: proxy and TLS setup",
+            "Was this page helpful?"
+          ],
+          "codeBlocks": []
+        }
+      ]
+    },
+    {
+      "section": "Reference",
+      "path": "/docs/en/tools-reference",
+      "url": "https://code.claude.com/docs/en/tools-reference",
+      "title": "Tools reference",
+      "metaDescription": "Complete reference for the tools Claude Code can use, including permission requirements.",
+      "headings": [
+        "​Bash tool behavior",
+        "​See also"
+      ],
+      "toc": [
+        "Bash tool behavior",
+        "See also"
+      ],
+      "paragraphs": [
+        "Bash tool behavior",
+        "See also",
+        "Complete reference for the tools Claude Code can use, including permission requirements.",
+        "Claude Code has access to a set of tools that help it understand and modify your codebase. The tool names below are the exact strings you use in permission rules, subagent tool lists, and hook matchers.",
+        "Permission rules can be configured using /permissions or in permission settings. Also see Tool-specific permission rules.",
+        "The Bash tool runs each command in a separate process with the following persistence behavior:",
+        "Working directory persists across commands. Set CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR=1 to reset to the project directory after each command.",
+        "Environment variables do not persist. An export in one command will not be available in the next.",
+        "Activate your virtualenv or conda environment before launching Claude Code. To make environment variables persist across Bash commands, set CLAUDE_ENV_FILE to a shell script before launching Claude Code, or use a SessionStart hook to populate it dynamically.",
+        "Permissions: permission system, rule syntax, and tool-specific patterns",
+        "Subagents: configure tool access for subagents",
+        "Hooks: run custom commands before or after tool execution",
+        "Was this page helpful?"
+      ],
+      "codeBlocks": [],
+      "sectionBlocks": [
+        {
+          "title": "",
+          "paragraphs": [
+            "Bash tool behavior",
+            "See also",
+            "Complete reference for the tools Claude Code can use, including permission requirements.",
+            "Claude Code has access to a set of tools that help it understand and modify your codebase. The tool names below are the exact strings you use in permission rules, subagent tool lists, and hook matchers.",
+            "Permission rules can be configured using /permissions or in permission settings. Also see Tool-specific permission rules."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Bash tool behavior",
+          "paragraphs": [
+            "The Bash tool runs each command in a separate process with the following persistence behavior:",
+            "Working directory persists across commands. Set CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR=1 to reset to the project directory after each command.",
+            "Environment variables do not persist. An export in one command will not be available in the next.",
+            "Activate your virtualenv or conda environment before launching Claude Code. To make environment variables persist across Bash commands, set CLAUDE_ENV_FILE to a shell script before launching Claude Code, or use a SessionStart hook to populate it dynamically."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​See also",
+          "paragraphs": [
+            "Permissions: permission system, rule syntax, and tool-specific patterns",
+            "Subagents: configure tool access for subagents",
+            "Hooks: run custom commands before or after tool execution",
             "Was this page helpful?"
           ],
           "codeBlocks": []
@@ -19354,7 +19440,6 @@
         "​Multiline input",
         "​Quick commands",
         "​Built-in commands",
-        "​MCP prompts",
         "​Vim editor mode",
         "​Mode switching",
         "​Navigation (NORMAL mode)",
@@ -19366,7 +19451,8 @@
         "​How backgrounding works",
         "​Bash mode with ! prefix",
         "​Prompt suggestions",
-        "​Side questions with /btw"
+        "​Side questions with /btw",
+        "​Task list"
       ],
       "toc": [
         "Keyboard shortcuts",
@@ -19376,7 +19462,6 @@
         "Multiline input",
         "Quick commands",
         "Built-in commands",
-        "MCP prompts",
         "Vim editor mode",
         "Mode switching",
         "Navigation (NORMAL mode)",
@@ -19388,7 +19473,8 @@
         "How backgrounding works",
         "Bash mode with ! prefix",
         "Prompt suggestions",
-        "Side questions with /btw"
+        "Side questions with /btw",
+        "Task list"
       ],
       "paragraphs": [
         "Keyboard shortcuts",
@@ -19398,7 +19484,6 @@
         "Multiline input",
         "Quick commands",
         "Built-in commands",
-        "MCP prompts",
         "Vim editor mode",
         "Mode switching",
         "Navigation (NORMAL mode)",
@@ -19423,10 +19508,8 @@
         "See Terminal configuration for details.",
         "Syntax highlighting is only available in the native build of Claude Code.",
         "Shift+Enter works without configuration in iTerm2, WezTerm, Ghostty, and Kitty. For other terminals (VS Code, Alacritty, Zed, Warp), run /terminal-setup to install the binding.",
-        "Type / in Claude Code to see all available commands, or type / followed by any letters to filter. Not all commands are visible to every user. Some depend on your platform, plan, or environment. For example, /desktop only appears on macOS and Windows, /upgrade and /privacy-settings are only available on Pro and Max plans, and /terminal-setup is hidden when your terminal natively supports its keybindings.",
-        "Claude Code also ships with bundled skills like /simplify, /batch, and /debug that appear alongside built-in commands when you type /. To create your own commands, see skills.",
-        "In the table below, <arg> indicates a required argument and [arg] indicates an optional one.",
-        "MCP servers can expose prompts that appear as commands. These use the format /mcp__<server>__<prompt> and are dynamically discovered from connected servers. See MCP prompts for details.",
+        "Type / in Claude Code to see all available commands, or type / followed by any letters to filter. The / menu shows both built-in commands and bundled skills like /simplify. Not all commands are visible to every user since some depend on your platform or plan.",
+        "See the commands reference for the full list of built-in commands. To create your own commands, see skills.",
         "Enable vim-style editing with /vim command or configure permanently via /config.",
         "In vim normal mode, if the cursor is at the beginning or end of input and cannot move further, the arrow keys navigate command history instead.",
         "Text objects work with operators like d, c, and y:",
@@ -19522,11 +19605,11 @@
             "Multiline input",
             "Quick commands",
             "Built-in commands",
-            "MCP prompts",
             "Vim editor mode",
             "Mode switching",
             "Navigation (NORMAL mode)",
-            "Editing (NORMAL mode)"
+            "Editing (NORMAL mode)",
+            "Text objects (NORMAL mode)"
           ],
           "codeBlocks": []
         },
@@ -19574,16 +19657,8 @@
         {
           "title": "​Built-in commands",
           "paragraphs": [
-            "Type / in Claude Code to see all available commands, or type / followed by any letters to filter. Not all commands are visible to every user. Some depend on your platform, plan, or environment. For example, /desktop only appears on macOS and Windows, /upgrade and /privacy-settings are only available on Pro and Max plans, and /terminal-setup is hidden when your terminal natively supports its keybindings.",
-            "Claude Code also ships with bundled skills like /simplify, /batch, and /debug that appear alongside built-in commands when you type /. To create your own commands, see skills.",
-            "In the table below, <arg> indicates a required argument and [arg] indicates an optional one."
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​MCP prompts",
-          "paragraphs": [
-            "MCP servers can expose prompts that appear as commands. These use the format /mcp__<server>__<prompt> and are dynamically discovered from connected servers. See MCP prompts for details."
+            "Type / in Claude Code to see all available commands, or type / followed by any letters to filter. The / menu shows both built-in commands and bundled skills like /simplify. Not all commands are visible to every user since some depend on your platform or plan.",
+            "See the commands reference for the full list of built-in commands. To create your own commands, see skills."
           ],
           "codeBlocks": []
         },
@@ -20068,8 +20143,16 @@
         "WorktreeRemove input",
         "PreCompact",
         "PreCompact input",
+        "PostCompact",
+        "PostCompact input",
         "SessionEnd",
         "SessionEnd input",
+        "Elicitation",
+        "Elicitation input",
+        "Elicitation output",
+        "ElicitationResult",
+        "ElicitationResult input",
+        "ElicitationResult output",
         "Prompt-based hooks",
         "How prompt-based hooks work",
         "Prompt hook configuration",
@@ -20137,7 +20220,6 @@
         "Claude Code sends the hook’s JSON input as the POST request body with Content-Type: application/json. The response body uses the same JSON output format as command hooks.",
         "Error handling differs from command hooks: non-2xx responses, connection failures, and timeouts all produce non-blocking errors that allow execution to continue. To block a tool call or deny a permission, return a 2xx response with a JSON body containing decision: \"block\" or a hookSpecificOutput with permissionDecision: \"deny\".",
         "This example sends PreToolUse events to a local validation service, authenticating with a token from the MY_TOKEN environment variable:",
-        "HTTP hooks must be configured by editing settings JSON directly. The /hooks interactive menu only supports adding command hooks.",
         "In addition to the common fields, prompt and agent hooks accept these fields:",
         "All matching hooks run in parallel, and identical handlers are deduplicated automatically. Command hooks are deduplicated by command string, and HTTP hooks are deduplicated by URL. Handlers run in the current directory with Claude Code’s environment. The $CLAUDE_CODE_REMOTE environment variable is set to \"true\" in remote web environments and not set in the local CLI.",
         "Use environment variables to reference hook scripts relative to the project or plugin root, regardless of the working directory when the hook runs:",
@@ -20154,31 +20236,24 @@
         "Hooks use the same configuration format as settings-based hooks but are scoped to the component’s lifetime and cleaned up when it finishes.",
         "This skill defines a PreToolUse hook that runs a security validation script before each Bash command:",
         "Agents use the same format in their YAML frontmatter.",
-        "Type /hooks in Claude Code to open the interactive hooks manager, where you can view, add, and delete hooks without editing settings files directly. For a step-by-step walkthrough, see Set up your first hook in the guide.",
-        "Each hook in the menu is labeled with a bracket prefix indicating its source:",
-        "[User]: from ~/.claude/settings.json",
-        "[Project]: from .claude/settings.json",
-        "[Local]: from .claude/settings.local.json",
-        "[Plugin]: from a plugin’s hooks/hooks.json, read-only",
-        "To remove a hook, delete its entry from the settings JSON file, or use the /hooks menu and select the hook to delete it.",
-        "To temporarily disable all hooks without removing them, set \"disableAllHooks\": true in your settings file or use the toggle in the /hooks menu. There is no way to disable an individual hook while keeping it in the configuration.",
+        "Type /hooks in Claude Code to open a read-only browser for your configured hooks. The menu shows every hook event with a count of configured hooks, lets you drill into matchers, and shows the full details of each hook handler. Use it to verify configuration, check which settings file a hook came from, or inspect a hook’s command, prompt, or URL.",
+        "The menu displays all four hook types: command, prompt, agent, and http. Each hook is labeled with a [type] prefix and a source indicating where it was defined:",
+        "User: from ~/.claude/settings.json",
+        "Project: from .claude/settings.json",
+        "Local: from .claude/settings.local.json",
+        "Plugin: from a plugin’s hooks/hooks.json",
+        "Session: registered in memory for the current session",
+        "Built-in: registered internally by Claude Code",
+        "Selecting a hook opens a detail view showing its event, matcher, type, source file, and the full command, prompt, or URL. The menu is read-only: to add, modify, or remove hooks, edit the settings JSON directly or ask Claude to make the change.",
+        "To remove a hook, delete its entry from the settings JSON file.",
+        "To temporarily disable all hooks without removing them, set \"disableAllHooks\": true in your settings file. There is no way to disable an individual hook while keeping it in the configuration.",
         "The disableAllHooks setting respects the managed settings hierarchy. If an administrator has configured hooks through managed policy settings, disableAllHooks set in user, project, or local settings cannot disable those managed hooks. Only disableAllHooks set at the managed settings level can disable managed hooks.",
         "Direct edits to hooks in settings files don’t take effect immediately. Claude Code captures a snapshot of hooks at startup and uses it throughout the session. This prevents malicious or accidental hook modifications from taking effect mid-session without your review. If hooks are modified externally, Claude Code warns you and requires review in the /hooks menu before changes apply.",
         "Command hooks receive JSON data via stdin and communicate results through exit codes, stdout, and stderr. HTTP hooks receive the same JSON as the POST request body and communicate results through the HTTP response body. This section covers fields and behavior common to all events. Each event’s section under Hook events includes its specific input schema and decision control options.",
         "All hook events receive these fields as JSON, in addition to event-specific fields documented in each hook event section. For command hooks, this JSON arrives via stdin. For HTTP hooks, it arrives as the POST request body.",
         "When running with --agent or inside a subagent, two additional fields are included:",
         "For example, a PreToolUse hook for a Bash command receives this on stdin:",
-        "The tool_name and tool_input fields are event-specific. Each hook event section documents the additional fields for that event.",
-        "The exit code from your hook command tells Claude Code whether the action should proceed, be blocked, or be ignored.",
-        "Exit 0 means success. Claude Code parses stdout for JSON output fields. JSON output is only processed on exit 0. For most events, stdout is only shown in verbose mode (Ctrl+O). The exceptions are UserPromptSubmit and SessionStart, where stdout is added as context that Claude can see and act on.",
-        "Exit 2 means a blocking error. Claude Code ignores stdout and any JSON in it. Instead, stderr text is fed back to Claude as an error message. The effect depends on the event: PreToolUse blocks the tool call, UserPromptSubmit rejects the prompt, and so on. See exit code 2 behavior for the full list.",
-        "Any other exit code is a non-blocking error. stderr is shown in verbose mode (Ctrl+O) and execution continues.",
-        "For example, a hook command script that blocks dangerous Bash commands:",
-        "Exit code 2 is the way a hook signals “stop, don’t do this.” The effect depends on the event, because some events represent actions that can be blocked (like a tool call that hasn’t happened yet) and others represent things that already happened or can’t be prevented.",
-        "HTTP hooks use HTTP status codes and response bodies instead of exit codes and stdout:",
-        "2xx with an empty body: success, equivalent to exit code 0 with no output",
-        "2xx with a plain text body: success, the text is added as context",
-        "2xx with a JSON body: success, parsed using the same JSON output schema as command hooks"
+        "The tool_name and tool_input fields are event-specific. Each hook event section documents the additional fields for that event."
       ],
       "codeBlocks": [
         "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \".claude/hooks/block-rm.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
@@ -20319,7 +20394,7 @@
             "Claude Code sends the hook’s JSON input as the POST request body with Content-Type: application/json. The response body uses the same JSON output format as command hooks.",
             "Error handling differs from command hooks: non-2xx responses, connection failures, and timeouts all produce non-blocking errors that allow execution to continue. To block a tool call or deny a permission, return a 2xx response with a JSON body containing decision: \"block\" or a hookSpecificOutput with permissionDecision: \"deny\".",
             "This example sends PreToolUse events to a local validation service, authenticating with a token from the MY_TOKEN environment variable:",
-            "HTTP hooks must be configured by editing settings JSON directly. The /hooks interactive menu only supports adding command hooks."
+            "In addition to the common fields, prompt and agent hooks accept these fields:"
           ],
           "codeBlocks": [
             "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"http\",\n            \"url\": \"http://localhost:8080/hooks/pre-tool-use\",\n            \"timeout\": 30,\n            \"headers\": {\n              \"Authorization\": \"Bearer $MY_TOKEN\"\n            },\n            \"allowedEnvVars\": [\"MY_TOKEN\"]\n          }\n        ]\n      }\n    ]\n  }\n}"
@@ -20359,20 +20434,23 @@
         {
           "title": "​The /hooks menu",
           "paragraphs": [
-            "Type /hooks in Claude Code to open the interactive hooks manager, where you can view, add, and delete hooks without editing settings files directly. For a step-by-step walkthrough, see Set up your first hook in the guide.",
-            "Each hook in the menu is labeled with a bracket prefix indicating its source:",
-            "[User]: from ~/.claude/settings.json",
-            "[Project]: from .claude/settings.json",
-            "[Local]: from .claude/settings.local.json",
-            "[Plugin]: from a plugin’s hooks/hooks.json, read-only"
+            "Type /hooks in Claude Code to open a read-only browser for your configured hooks. The menu shows every hook event with a count of configured hooks, lets you drill into matchers, and shows the full details of each hook handler. Use it to verify configuration, check which settings file a hook came from, or inspect a hook’s command, prompt, or URL.",
+            "The menu displays all four hook types: command, prompt, agent, and http. Each hook is labeled with a [type] prefix and a source indicating where it was defined:",
+            "User: from ~/.claude/settings.json",
+            "Project: from .claude/settings.json",
+            "Local: from .claude/settings.local.json",
+            "Plugin: from a plugin’s hooks/hooks.json",
+            "Session: registered in memory for the current session",
+            "Built-in: registered internally by Claude Code",
+            "Selecting a hook opens a detail view showing its event, matcher, type, source file, and the full command, prompt, or URL. The menu is read-only: to add, modify, or remove hooks, edit the settings JSON directly or ask Claude to make the change."
           ],
           "codeBlocks": []
         },
         {
           "title": "​Disable or remove hooks",
           "paragraphs": [
-            "To remove a hook, delete its entry from the settings JSON file, or use the /hooks menu and select the hook to delete it.",
-            "To temporarily disable all hooks without removing them, set \"disableAllHooks\": true in your settings file or use the toggle in the /hooks menu. There is no way to disable an individual hook while keeping it in the configuration.",
+            "To remove a hook, delete its entry from the settings JSON file.",
+            "To temporarily disable all hooks without removing them, set \"disableAllHooks\": true in your settings file. There is no way to disable an individual hook while keeping it in the configuration.",
             "The disableAllHooks setting respects the managed settings hierarchy. If an administrator has configured hooks through managed policy settings, disableAllHooks set in user, project, or local settings cannot disable those managed hooks. Only disableAllHooks set at the managed settings level can disable managed hooks.",
             "Direct edits to hooks in settings files don’t take effect immediately. Claude Code captures a snapshot of hooks at startup and uses it throughout the session. This prevents malicious or accidental hook modifications from taking effect mid-session without your review. If hooks are modified externally, Claude Code warns you and requires review in the /hooks menu before changes apply."
           ],

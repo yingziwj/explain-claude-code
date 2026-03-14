@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-13T04:21:09.161Z",
-  "sourceGeneratedAt": "2026-03-13T04:21:08.975Z",
+  "generatedAt": "2026-03-14T04:19:14.063Z",
+  "sourceGeneratedAt": "2026-03-14T04:19:13.875Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -210,7 +210,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把“Changelog”理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.74、2.1.73、2.1.72、2.1.71 这些环节往下讲。",
+            "原文这页大多会按 2.1.76、2.1.75、2.1.74、2.1.73 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -219,7 +219,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.74 -> 2.1.73 -> 2.1.72 -> 2.1.71。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.76 -> 2.1.75 -> 2.1.74 -> 2.1.73。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -724,21 +724,21 @@
           "steps": [
             {
               "title": "原页关键片段：​Start a Remote Control session 1",
-              "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：You can start a new session directly in Remote Control, or connect a session that’s already running. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
+              "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：You can start a dedicated Remote Control server, start an interactive session with Remote Control enabled, or connect a session that’s already running. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
               "code": "claude remote-control",
               "kind": "command"
             },
             {
               "title": "原页关键片段：​Start a Remote Control session 2",
-              "body": "这一步是你直接跟 Claude 说的话。这一小节原文主要在讲：You can start a new session directly in Remote Control, or connect a session that’s already running. 下面这块属于“提问示例”，关键命令、文件名和参数最好照原样保留。",
-              "code": "/remote-control",
-              "kind": "prompt"
+              "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：You can start a dedicated Remote Control server, start an interactive session with Remote Control enabled, or connect a session that’s already running. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
+              "code": "claude --remote-control",
+              "kind": "command"
             },
             {
               "title": "原页关键片段：​Start a Remote Control session 3",
-              "body": "这一步是你直接跟 Claude 说的话。这一小节原文主要在讲：You can start a new session directly in Remote Control, or connect a session that’s already running. 下面这块属于“提问示例”，关键命令、文件名和参数最好照原样保留。",
-              "code": "/remote-control My Project",
-              "kind": "prompt"
+              "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：You can start a dedicated Remote Control server, start an interactive session with Remote Control enabled, or connect a session that’s already running. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
+              "code": "claude --remote-control \"My Project\"",
+              "kind": "command"
             }
           ]
         }
@@ -1167,7 +1167,7 @@
             {
               "title": "原页关键片段：​Choose the subagent scope",
               "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：Subagents are Markdown files with YAML frontmatter. Store them in different locations depending on scope. When multiple subagents share the same name, the higher-priority location wins. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
-              "code": "claude --agents '{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  }\n}'",
+              "code": "claude --agents '{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  },\n  \"debugger\": {\n    \"description\": \"Debugging specialist for errors and test failures.\",\n    \"prompt\": \"You are an expert debugger. Analyze errors, identify root causes, and provide fixes.\"\n  }\n}'",
               "kind": "command"
             },
             {
@@ -1856,22 +1856,10 @@
           ],
           "steps": [
             {
-              "title": "原页关键片段：​Set up your first hook 1",
-              "body": "这一步是原页里的关键代码或示例。这一小节原文主要在讲：The fastest way to create a hook is through the /hooks interactive menu in Claude Code. This walkthrough creates a desktop notification hook, so you get alerted whenever Claude is waiting for your input instead of watching the terminal. 下面这块属于“代码片段”，关键命令、文件名和参数最好照原样保留。",
-              "code": "osascript -e 'display notification \"Claude Code needs your attention\" with title \"Claude Code\"'",
-              "kind": "code"
-            },
-            {
-              "title": "原页关键片段：​Set up your first hook 2",
-              "body": "这一步是原页里的关键代码或示例。这一小节原文主要在讲：The fastest way to create a hook is through the /hooks interactive menu in Claude Code. This walkthrough creates a desktop notification hook, so you get alerted whenever Claude is waiting for your input instead of watching the terminal. 下面这块属于“代码片段”，关键命令、文件名和参数最好照原样保留。",
-              "code": "notify-send 'Claude Code' 'Claude Code needs your attention'",
-              "kind": "code"
-            },
-            {
-              "title": "原页关键片段：​Set up your first hook 3",
-              "body": "这一步是原页里的关键代码或示例。这一小节原文主要在讲：The fastest way to create a hook is through the /hooks interactive menu in Claude Code. This walkthrough creates a desktop notification hook, so you get alerted whenever Claude is waiting for your input instead of watching the terminal. 下面这块属于“代码片段”，关键命令、文件名和参数最好照原样保留。",
-              "code": "powershell.exe -Command \"[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code needs your attention', 'Claude Code')\"",
-              "kind": "code"
+              "title": "原页关键片段：​Set up your first hook",
+              "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：To create a hook, add a hooks block to a settings file. This walkthrough creates a desktop notification hook, so you get alerted whenever Claude is waiting for your input instead of watching the terminal. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "kind": "config"
             },
             {
               "title": "原页关键片段：​Get notified when Claude needs input 1",
@@ -1926,6 +1914,18 @@
               "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：Track when settings or skills files change during a session. The ConfigChange event fires when an external process or editor modifies a configuration file, so you can log changes for compliance or block unauthorized modifications. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
               "code": "{\n  \"hooks\": {\n    \"ConfigChange\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"jq -c '{timestamp: now | todate, source: .source, file: .file_path}' >> ~/claude-config-audit.log\"\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
+            },
+            {
+              "title": "原页关键片段：​Read input and return output 1",
+              "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：Hooks communicate with Claude Code through stdin, stdout, stderr, and exit codes. When an event fires, Claude Code passes event-specific data as JSON to your script’s stdin. Your script reads that data, does its work, and tells Claude Code what to do next via the exit code. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "{\n  \"session_id\": \"abc123\",          // unique ID for this session\n  \"cwd\": \"/Users/sarah/myproject\", // working directory when the event fired\n  \"hook_event_name\": \"PreToolUse\", // which event triggered this hook\n  \"tool_name\": \"Bash\",             // the tool Claude is about to use\n  \"tool_input\": {                  // the arguments Claude passed to the tool\n    \"command\": \"npm test\"          // for Bash, this is the shell command\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：​Read input and return output 2",
+              "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：Hooks communicate with Claude Code through stdin, stdout, stderr, and exit codes. When an event fires, Claude Code passes event-specific data as JSON to your script’s stdin. Your script reads that data, does its work, and tells Claude Code what to do next via the exit code. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
+              "code": "#!/bin/bash\nINPUT=$(cat)\nCOMMAND=$(echo \"$INPUT\" | jq -r '.tool_input.command')\n\nif echo \"$COMMAND\" | grep -q \"drop table\"; then\n  echo \"Blocked: dropping tables is not allowed\" >&2  # stderr becomes Claude's feedback\n  exit 2                                               # exit 2 = block the action\nfi\n\nexit 0  # exit 0 = let it proceed",
+              "kind": "command"
             }
           ]
         }
@@ -3432,7 +3432,7 @@
           "steps": [
             {
               "title": "原页关键片段：​Settings files",
-              "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：The settings.json file is our official mechanism for configuring Claude Code through hierarchical settings: 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：The settings.json file is the official mechanism for configuring Claude Code through hierarchical settings: 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
               "code": "{\n  \"$schema\": \"https://json.schemastore.org/claude-code-settings.json\",\n  \"permissions\": {\n    \"allow\": [\n      \"Bash(npm run lint)\",\n      \"Bash(npm run test *)\",\n      \"Read(~/.zshrc)\"\n    ],\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ]\n  },\n  \"env\": {\n    \"CLAUDE_CODE_ENABLE_TELEMETRY\": \"1\",\n    \"OTEL_METRICS_EXPORTER\": \"otlp\"\n  },\n  \"companyAnnouncements\": [\n    \"Welcome to Acme Corp! Review our code guidelines at docs.acme.com\",\n    \"Reminder: Code reviews required for all PRs\",\n    \"New security policy in effect\"\n  ]\n}",
               "kind": "config"
             },
@@ -3747,7 +3747,13 @@
             {
               "title": "原页关键片段：​Extended context",
               "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：Opus 4.6 and Sonnet 4.6 support a 1 million token context window for long sessions with large codebases. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
-              "code": "# Use the sonnet[1m] alias\n/model sonnet[1m]\n\n# Or append [1m] to a full model name\n/model claude-sonnet-4-6[1m]",
+              "code": "# Use the opus[1m] or sonnet[1m] alias\n/model opus[1m]\n/model sonnet[1m]\n\n# Or append [1m] to a full model name\n/model claude-opus-4-6[1m]",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：​Pin models for third-party deployments",
+              "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：When deploying Claude Code through Bedrock, Vertex AI, or Foundry, pin model versions before rolling out to users. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
+              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-6[1m]'",
               "kind": "command"
             },
             {
@@ -4028,32 +4034,6 @@
             "先记最常用的那几条，剩下的有需要再翻。",
             "查 flag 时看清是不是只在特定模式下生效，别生搬硬套。",
             "命令行参考最好和 interactive mode、settings 配着看，一个讲口令，一个讲环境。"
-          ],
-          "steps": [
-            {
-              "title": "原页关键片段：​Agents flag format",
-              "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：The --agents flag accepts a JSON object that defines one or more custom subagents. Each subagent requires a unique name (as the key) and a definition object with the following fields: 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
-              "code": "claude --agents '{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  },\n  \"debugger\": {\n    \"description\": \"Debugging specialist for errors and test failures.\",\n    \"prompt\": \"You are an expert debugger. Analyze errors, identify root causes, and provide fixes.\"\n  }\n}'",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：​System prompt flags 1",
-              "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：Claude Code provides four flags for customizing the system prompt. All four work in both interactive and non-interactive modes. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
-              "code": "claude --system-prompt \"You are a Python expert who only writes type-annotated code\"",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：​System prompt flags 2",
-              "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：Claude Code provides four flags for customizing the system prompt. All four work in both interactive and non-interactive modes. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
-              "code": "claude --system-prompt-file ./prompts/code-review.txt",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：​System prompt flags 3",
-              "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：Claude Code provides four flags for customizing the system prompt. All four work in both interactive and non-interactive modes. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
-              "code": "claude --append-system-prompt \"Always use TypeScript and include JSDoc comments\"",
-              "kind": "command"
-            }
           ]
         }
       ],
@@ -4061,6 +4041,129 @@
         "title": "一眼看懂这一页",
         "lines": [
           "CLI reference",
+          "   |",
+          "   v",
+          "这是 Reference 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "commands": {
+      "sourceLabel": "Built-in commands",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Built-in commands：Complete reference for built-in commands available in Claude Code.",
+            "你可以把它当成“Reference”这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把“Built-in commands”理解成 Reference 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 MCP prompts、See also 这些环节往下讲。",
+            "翻成人话，大概就是：Complete reference for built-in commands available in Claude Code."
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：MCP prompts -> See also。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Built-in commands",
+          "   |",
+          "   v",
+          "这是 Reference 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "env-vars": {
+      "sourceLabel": "Environment variables",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Environment variables：Complete reference for environment variables that control Claude Code behavior.",
+            "你可以把它当成“Reference”这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把“Environment variables”理解成 Reference 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 See also 这些环节往下讲。",
+            "翻成人话，大概就是：Complete reference for environment variables that control Claude Code behavior."
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：See also。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Environment variables",
+          "   |",
+          "   v",
+          "这是 Reference 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "tools-reference": {
+      "sourceLabel": "Tools reference",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Tools reference：Complete reference for the tools Claude Code can use, including permission requirements.",
+            "你可以把它当成“Reference”这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把“Tools reference”理解成 Reference 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Bash tool behavior、See also 这些环节往下讲。",
+            "翻成人话，大概就是：Bash tool behavior"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Bash tool behavior -> See also。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Tools reference",
           "   |",
           "   v",
           "这是 Reference 里的一摊要紧活",
