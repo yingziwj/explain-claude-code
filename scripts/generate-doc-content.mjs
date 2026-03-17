@@ -153,6 +153,58 @@ function summarizeSectionHints(block) {
 		.slice(0, 10);
 	const joined = hints.join(' ').toLowerCase();
 	const paragraphs = [];
+	const firstHint = hints[0] ?? '';
+	const secondHint = hints[1] ?? '';
+
+	function pushHintDrivenFallback() {
+		if (/^use (.+) to (.+)/i.test(firstHint)) {
+			const [, subject, action] = firstHint.match(/^use (.+) to (.+)/i) ?? [];
+			paragraphs.push(`这一节是在教你怎么用 ${subject} 去做 ${action}。重点不是光知道名字，而是真把这条用法落到手上。`);
+			return;
+		}
+		if (/^create (.+)/i.test(firstHint)) {
+			const [, subject] = firstHint.match(/^create (.+)/i) ?? [];
+			paragraphs.push(`这一节是在教你怎么把 ${subject} 这东西真正建出来。一般要盯住文件放哪儿、字段怎么写、建完怎么验证。`);
+			return;
+		}
+		if (/^install (.+)/i.test(firstHint)) {
+			const [, subject] = firstHint.match(/^install (.+)/i) ?? [];
+			paragraphs.push(`这一节是在教你怎么安装 ${subject}。这类内容最怕跳步骤，所以最好按原顺序一条一条做。`);
+			return;
+		}
+		if (/^configure (.+)|^set up (.+)/i.test(firstHint)) {
+			const match = firstHint.match(/^configure (.+)|^set up (.+)/i);
+			const subject = match?.[1] || match?.[2] || title;
+			paragraphs.push(`这一节是在讲怎么把 ${subject} 配对、配稳。重点通常是改哪儿、怎么写，以及改完以后怎么确认真生效。`);
+			return;
+		}
+		if (/^run (.+)/i.test(firstHint)) {
+			const [, subject] = firstHint.match(/^run (.+)/i) ?? [];
+			paragraphs.push(`这一节是在讲怎么把 ${subject} 真跑起来。别只看命令长什么样，还要看它跑完该出现什么结果。`);
+			return;
+		}
+		if (/^view (.+)|^see (.+)/i.test(firstHint)) {
+			const match = firstHint.match(/^view (.+)|^see (.+)/i);
+			const subject = match?.[1] || match?.[2] || title;
+			paragraphs.push(`这一节是在讲怎么看 ${subject}，也就是出了问题时你该去哪里翻、翻到什么算正常。`);
+			return;
+		}
+		if (/^choose (.+)/i.test(firstHint)) {
+			const [, subject] = firstHint.match(/^choose (.+)/i) ?? [];
+			paragraphs.push(`这一节是在帮你从几个选项里挑 ${subject}。重点通常不只是知道有哪些可选，而是看各自代价和适用场景。`);
+			return;
+		}
+		if (/^when /i.test(firstHint) || /^if /i.test(firstHint)) {
+			paragraphs.push(`这一节更像在讲判断条件：什么情况下该这么做，什么情况下别急着上。看这类段落时，重点是把触发条件看清。`);
+			return;
+		}
+		if (/^the |^this /i.test(firstHint)) {
+			paragraphs.push(`这一节不是单纯报个标题名，而是在说明“${title}”这块到底负责哪一摊、会影响哪一块，以及你读这一段时该先抓哪几个要点。`);
+			return;
+		}
+
+		paragraphs.push(`这一节落点通常不在空概念，而在“${title}”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。`);
+	}
 
 	if (/built-in subagents/.test(heading)) {
 		return [
@@ -329,8 +381,56 @@ function summarizeSectionHints(block) {
 		];
 	}
 
-	paragraphs.push(`这一节主要在讲“${title}”这块该怎么理解、什么时候用，以及要盯住哪些边界。`);
+	if (/^when to use /.test(heading)) {
+		paragraphs.push(`这一节是在回答“${title} 这种东西到底什么时候值得上”。重点不是会不会开，而是这类场景值不值、划不划算。`);
+	} else if (/^compare /.test(heading)) {
+		paragraphs.push(`这一节是在帮你做对比：${title} 这类内容一般都是拿两个看起来像的东西拆开讲，免得你用错工具。`);
+	} else if (/^choose /.test(heading)) {
+		paragraphs.push(`这一节是在帮你做选择题，不是只告诉你“有这个选项”。像 ${title} 这种标题，重点通常是先看取舍，再决定怎么选。`);
+	} else if (/^size /.test(heading)) {
+		paragraphs.push(`这一节讲的是“别切得太碎，也别一坨太大”。像 ${title} 这种，核心通常是把任务大小卡在一个既能交付、又便于调度的尺度上。`);
+	} else if (/^wait /.test(heading)) {
+		paragraphs.push(`这一节讲的是先别急着往前冲。像 ${title} 这种提醒，多半是在告诉你主流程该等谁、什么时候不该自己抢活。`);
+	} else if (/^set up |^setup /.test(heading)) {
+		paragraphs.push(`这一节是上手准备活，通常会告诉你前提条件、落地点和最稳的起步顺序。`);
+	} else if (/^install |^update |^uninstall /.test(heading)) {
+		paragraphs.push(`这一节属于实操步骤，重点是照着顺序做，不要自己脑补省略中间步骤。`);
+	} else if (/^verify |^authenticate /.test(heading)) {
+		paragraphs.push(`这一节讲的是“别只装完就算了”，而是要确认它真能用、真认主、真跑通。`);
+	} else if (/^configure |^enable |^disable /.test(heading)) {
+		paragraphs.push(`这一节讲怎么把某个开关拧对。重点通常不是概念，而是你该在哪儿改、改完怎么确认生效。`);
+	} else if (/^how .* works$|^how .* start/.test(heading)) {
+		paragraphs.push(`这一节讲底层是怎么运转的。你把它看明白，后面遇到异常时就知道该往哪儿查。`);
+	} else if (/^manage |^control /.test(heading)) {
+		paragraphs.push(`这一节讲的是收放和管理，不只是“能不能用”，而是“怎么管住、怎么不乱、怎么在多人环境里稳住”。`);
+	} else if (/^example |^examples /.test(heading)) {
+		paragraphs.push(`这一节是样板段。重点不是全文照抄，而是学它是怎么把职责、步骤和边界写清楚的。`);
+	} else if (/reference|schema|fields|actions|syntax/.test(heading)) {
+		paragraphs.push(`这一节更像查表说明书，重点是字段、格式和规则要照准，不适合靠猜。`);
+	} else if (/troubleshoot|debug|issue/.test(heading)) {
+		paragraphs.push(`这一节偏排错，最好按它给的顺序一项项排，不要一上来大拆大改。`);
+	} else if (/best practices|common patterns/.test(heading)) {
+		paragraphs.push(`这一节给的是老手常用套路。不是硬规则，但通常照着做会少走很多弯路。`);
+	} else {
+		pushHintDrivenFallback();
+	}
 
+	if (secondHint && paragraphs.length < 2) {
+		paragraphs.push(`原文这段后面还会继续展开：${secondHint}。你可以把它理解成前面那句规则往下落的细节和边界。`);
+	}
+
+	if (/token costs scale linearly|coordination overhead increases|diminishing returns/.test(joined)) {
+		paragraphs.push('这里明显在提醒你：人数不是越多越好。队友一多，花费、沟通和互相绊脚的成本会一起往上走。');
+	}
+	if (/3-5 teammates|5-6 tasks per teammate/.test(joined)) {
+		paragraphs.push('原文这种数字建议要当成经验值来用。像 3 到 5 个队友、每人 5 到 6 个任务，意思就是先按这个舒服区间起步，不要一上来拉满。');
+	}
+	if (/too small|too large|self-contained units/.test(joined)) {
+		paragraphs.push('它强调的是任务切块要刚刚好：太小了不值当分工，太大了又容易一个人闷头干太久，最后返工更重。');
+	}
+	if (/lead|teammate/.test(joined) && /wait|finish|complete/.test(joined)) {
+		paragraphs.push('如果这里反复提 lead 和 teammate，通常是在提醒主代理别抢队友还没做完的活，先等人把结果交回来再继续统筹。');
+	}
 	if (/project|user|scope|session/i.test(joined)) {
 		paragraphs.push('这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。');
 	}
