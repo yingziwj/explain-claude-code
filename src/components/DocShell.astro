@@ -1,7 +1,6 @@
 ---
 import AdSlot from './AdSlot.astro';
 import type { SiteData, SitePage } from '../data/site-data';
-import { getPracticeSection } from '../data/site-data';
 
 const { page, siteData, currentPath } = Astro.props as {
 	page: SitePage;
@@ -10,11 +9,19 @@ const { page, siteData, currentPath } = Astro.props as {
 };
 
 const currentSection = siteData.sections.find((section) => section.key === page.sectionKey) ?? siteData.sections[0];
-const practiceSection = getPracticeSection(page.content.sections);
-const mainSections = page.content.sections.filter(
-	(section) => !['简要总结', '农民伯伯版解释', '上手时重点盯住什么'].includes(section.title)
-);
+const summarySection = page.content.sections.find((section) => section.title === '简要总结');
+const explainSection = page.content.sections.find((section) => section.title === '农民伯伯版解释');
+const practiceSection = page.content.sections.find((section) => section.title === '上手时重点盯住什么');
+const mainSections = page.content.sections.filter((section) => !['简要总结', '农民伯伯版解释', '上手时重点盯住什么'].includes(section.title));
 const showAdPlaceholders = !import.meta.env.PUBLIC_ADSENSE_CLIENT;
+
+function stepKindLabel(kind?: string) {
+	if (kind === 'command') return '命令';
+	if (kind === 'config') return '配置';
+	if (kind === 'prompt') return '提问示例';
+	if (kind === 'structure') return '目录结构';
+	return '代码片段';
+}
 ---
 
 <div class="doc-shell">
@@ -68,46 +75,13 @@ const showAdPlaceholders = !import.meta.env.PUBLIC_ADSENSE_CLIENT;
 				</header>
 
 				<section class="doc-panel">
-					<p class="doc-eyebrow">简要总结</p>
+					<p class="doc-eyebrow">这一页先讲明白</p>
 					<div class="doc-copy">
-						{page.content.sections[0]?.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+						{summarySection?.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+						{explainSection?.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+						{practiceSection?.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
 					</div>
 				</section>
-
-				<section class="doc-panel">
-					<p class="doc-eyebrow">大白话解释</p>
-					<div class="doc-copy">
-						{page.content.sections[1]?.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-					</div>
-				</section>
-
-				{practiceSection ? (
-					<section class="doc-panel">
-						<p class="doc-eyebrow">先看这三件事</p>
-						<div class="doc-practice-grid">
-							{practiceSection.paragraphs.slice(0, 3).map((paragraph, index) => (
-								<div class="doc-practice-item">
-									<h2>{['你现在先做什么', '做完看什么', '最容易错在哪'][index] ?? `要点 ${index + 1}`}</h2>
-									<p>{paragraph}</p>
-								</div>
-							))}
-						</div>
-						{practiceSection.steps?.length ? (
-							<div class="doc-steps">
-								{practiceSection.steps.map((step) => (
-									<div class="doc-step">
-										<div class="doc-step__head">
-											{step.kind ? <span class={`doc-step__tag doc-step__tag--${step.kind}`}>{step.kind === 'command' ? '命令' : step.kind === 'config' ? '配置' : step.kind === 'prompt' ? '提问示例' : step.kind === 'structure' ? '目录结构' : '代码片段'}</span> : null}
-											<h3>{step.title}</h3>
-										</div>
-										<p>{step.body}</p>
-										{step.code ? <pre><code>{step.code}</code></pre> : null}
-									</div>
-								))}
-							</div>
-						) : null}
-					</section>
-				) : null}
 
 				{showAdPlaceholders ? (
 					<section class="doc-ad-placeholder">
@@ -130,7 +104,7 @@ const showAdPlaceholders = !import.meta.env.PUBLIC_ADSENSE_CLIENT;
 								{section.steps.map((step) => (
 									<div class="doc-step">
 										<div class="doc-step__head">
-											{step.kind ? <span class={`doc-step__tag doc-step__tag--${step.kind}`}>{step.kind === 'command' ? '命令' : step.kind === 'config' ? '配置' : step.kind === 'prompt' ? '提问示例' : step.kind === 'structure' ? '目录结构' : '代码片段'}</span> : null}
+											{step.kind ? <span class={`doc-step__tag doc-step__tag--${step.kind}`}>{stepKindLabel(step.kind)}</span> : null}
 											<h3>{step.title}</h3>
 										</div>
 										<p>{step.body}</p>
@@ -154,7 +128,7 @@ const showAdPlaceholders = !import.meta.env.PUBLIC_ADSENSE_CLIENT;
 					<p class="doc-eyebrow">文末提醒</p>
 					<div class="doc-copy">
 						<p>这站会按官方 docs 的导航和内容变化继续重生成，原站加页、删页、改页时，这里会跟着更新。</p>
-						<p>你看不懂的地方，我会优先把步骤掰成“先做什么、再看什么、哪里最容易错”这三类。</p>
+						<p>人话解释会尽量顺着原页往下讲，但命令、参数名、配置名这些硬东西还是保留原样，免得你抄过去跑不起来。</p>
 					</div>
 				</section>
 
