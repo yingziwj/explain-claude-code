@@ -81,6 +81,20 @@ function stepKindLabel(kind?: string) {
 						{explainSection?.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
 						{practiceSection?.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
 					</div>
+					{practiceSection?.steps?.length ? (
+						<div class="doc-steps">
+							{practiceSection.steps.map((step) => (
+								<div class="doc-step">
+									<div class="doc-step__head">
+										{step.kind ? <span class={`doc-step__tag doc-step__tag--${step.kind}`}>{stepKindLabel(step.kind)}</span> : null}
+										<h3>{step.title}</h3>
+									</div>
+									<p>{step.body}</p>
+									{step.code ? <pre><code>{step.code}</code></pre> : null}
+								</div>
+							))}
+						</div>
+					) : null}
 				</section>
 
 				{showAdPlaceholders ? (
