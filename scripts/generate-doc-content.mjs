@@ -54,6 +54,14 @@ function inferStepKind(code) {
 	if (!text) return 'code';
 	if (/[├└│]/.test(text)) return 'structure';
 	if (/^\s*[{[]/.test(text) || /^---\n/.test(text) || /"name"\s*:|"env"\s*:|\.json|settings\.json|plugin\.json|SKILL\.md/i.test(text)) return 'config';
+	if (
+		text.split('\n').length === 1 &&
+		!/[[\]{}();=]/.test(text) &&
+		!/^(Model:|Tools:|Purpose:|Team config:|Task list:)/i.test(text) &&
+		/^[A-Z][A-Za-z0-9,'". -]{4,120}$/.test(text)
+	) {
+		return 'prompt';
+	}
 	if (/^[\w./~-]+\s+.*$/m.test(text) && /(?:claude|curl|npm|npx|mkdir|cp|mv|rm|brew|winget|apk|irm|bash|cmd)\b/m.test(text)) return 'command';
 	if (/^(\/|> )/m.test(text) || /how does this code work\?/i.test(text) || /\?\s*$/.test(text)) return 'prompt';
 	return 'code';
@@ -124,42 +132,222 @@ function pickSectionCodeBlocks(block, count) {
 	return (block.codeBlocks ?? [])
 		.map((code) => String(code).trim())
 		.filter(Boolean)
+		.filter((code) => {
+			const kind = inferStepKind(code);
+			if (kind === 'code') {
+				return /[\n{}[\]();=#/\\]|^\s*#!/.test(code) || /`/.test(code);
+			}
+			return true;
+		})
 		.filter((code, index, all) => all.findIndex((candidate) => candidate === code) === index)
 		.slice(0, count);
 }
 
 function summarizeSectionHints(block) {
+	const title = normalizeText(block.title);
+	const heading = title.toLowerCase();
 	const hints = (block.paragraphs ?? [])
 		.map(normalizeText)
 		.filter(Boolean)
-		.filter((text) => text !== normalizeText(block.title))
-		.slice(0, 8);
+		.filter((text) => text !== title)
+		.slice(0, 10);
+	const joined = hints.join(' ').toLowerCase();
+	const paragraphs = [];
 
-	if (!hints.length) return [];
+	if (/built-in subagents/.test(heading)) {
+		return [
+			'这一节先把系统自带的子代理认清楚：它们各自擅长什么活、会继承什么权限、什么时候会被 Claude 自动叫出来。',
+			'看这段时别只盯名字，重点是分清哪类代理偏查资料、哪类能动手改、哪类只适合在计划阶段帮你摸底。'
+		];
+	}
+	if (/quickstart/.test(heading) && /subagent/.test(heading)) {
+		return [
+			'这一节是手把手做第一个子代理，核心不是炫配置，而是先把入口、存放位置、权限和模型这几步走通。',
+			'最稳的顺序就是先进 `/agents`，先做一个最简单、边界很清楚的子代理，跑通以后再往里加复杂能力。'
+		];
+	}
+	if (/use the \/agents command/.test(heading)) {
+		return [
+			'这一节讲 `/agents` 这个总入口。以后你想看现有代理、建新代理、改权限、删旧代理，基本都从这里进。',
+			'如果不是为了批量自动化，优先用这个交互入口，比你自己手搓文件稳得多。'
+		];
+	}
+	if (/choose the subagent scope/.test(heading)) {
+		return [
+			'这一节讲子代理到底放哪儿。项目级放仓库里，适合团队共用；个人级放 `~/.claude/agents/`，适合你自己到处带着走。',
+			'如果只是临时试一下，也可以用 `--agents` 这种会话级方式；但临时的东西不会长期留着，别把正式规则全压在这上面。'
+		];
+	}
+	if (/write subagent files/.test(heading)) {
+		return [
+			'这一节讲子代理文件怎么写，重点是 frontmatter 放什么、正文提示词怎么写、改完以后怎么让 Claude 重新认到它。',
+			'别把子代理文件写成散文，名字、描述、工具、模型和正文职责要分得清清楚楚。'
+		];
+	}
+	if (/choose a model/.test(heading)) {
+		return [
+			'这一节讲子代理用什么模型。说白了，就是这类活到底该让快一点的工种来，还是让更能深想的工种来。',
+			'如果这类子代理主要是查资料、扫目录、跑轻活，通常不用一上来就上最重的模型。'
+		];
+	}
+	if (/control subagent capabilities/.test(heading)) {
+		return [
+			'这一节讲怎么收放子代理的手脚，比如它能用哪些工具、能不能再叫别的代理、能不能挂 MCP、skills、memory 这些外接能力。',
+			'这里的核心原则就是只给它完成这类活必须的能力，不要为了省事一口气全放开。'
+		];
+	}
+	if (/define hooks for subagents/.test(heading)) {
+		return [
+			'这一节讲怎么给子代理挂 hooks，也就是让它在某些动作前后自动做检查、校验或收尾。',
+			'如果你想让子代理改文件后自动跑检查，或者在执行危险命令前先过一遍门禁，这一节就是干这个的。'
+		];
+	}
+	if (/understand automatic delegation/.test(heading)) {
+		return [
+			'这一节讲 Claude 什么时候会主动把活派给某个子代理。关键不只在你的提问，还在子代理描述写得够不够清楚。',
+			'如果你希望某类子代理“该出手时就出手”，描述里就得把触发场景写明白，别只写一串空话。'
+		];
+	}
+	if (/run subagents in foreground or background/.test(heading)) {
+		return [
+			'这一节讲子代理是在前台拦着你干，还是放到后台并行跑。前台适合需要你随时确认的活，后台适合你想边等边做别的。',
+			'后台模式要特别注意提前把权限准备好，不然它中途卡住了，你还得回来补票。'
+		];
+	}
+	if (/common patterns/.test(heading)) {
+		return [
+			'这一节给的是日常最值钱的套路，不是新概念。像把大输出隔离出去、并行调研、串起来分步干，都是子代理最常见的用法。',
+			'你看这段时，重点不是全背，而是挑一个最像你当前活路的套路先照着学。'
+		];
+	}
+	if (/manage subagent context/.test(heading)) {
+		return [
+			'这一节讲子代理的上下文怎么续上。每次新起一个子代理都是新会话，但你也可以让 Claude 继续之前那个已经干到一半的子代理。',
+			'如果某个子代理已经把现场摸熟了，优先续上它，比重新开一个新代理更省上下文。'
+		];
+	}
+	if (/example subagents/.test(heading)) {
+		return [
+			'这一节开始给你看现成样板，不是让你照抄所有细节，而是让你学会怎样把“职责、工具、提示词”三件事写得清楚。',
+			'后面每个示例都可以当模板，但真正落你自己项目时，还是要按你们的活路改。'
+		];
+	}
+	if (/code reviewer/.test(heading)) {
+		return [
+			'这一节是代码审查型子代理的样板。重点在于只给它看和查的能力，不让它顺手就改，先把“找问题”这件事做好。',
+			'如果你想让审查更稳定，就把输出格式、重点风险和禁止事项写进提示词里。'
+		];
+	}
+	if (/debugger/.test(heading)) {
+		return [
+			'这一节是排错型子代理的样板，适合专门盯报错、失败测试和根因定位这类活。',
+			'排错代理最怕信息不全，所以描述里最好写明它该先看什么、怎么判断根因、最后要回给你什么。'
+		];
+	}
+	if (/data scientist/.test(heading)) {
+		return [
+			'这一节是数据分析类子代理的样板，适合把查数、做图、解释结果这种活拆给专门角色。',
+			'这类代理通常要更强调数据来源、分析边界和输出格式，不然很容易只给你一堆空结论。'
+		];
+	}
+	if (/database query validator/.test(heading)) {
+		return [
+			'这一节讲一个很实用的样板：数据库查询代理可以放开 Bash，但要先挂校验，只允许读，不允许改。',
+			'重点不是“会查库”本身，而是先把危险动作挡在门外，确保它问库时只读不写。'
+		];
+	}
+	if (/when to use agent teams/.test(heading)) {
+		return [
+			'这一节先讲什么时候值得开团队。只有任务能明显拆成几股并行推进时，团队模式才值；顺着一条线一步步做的活，单会话反而更省。',
+			'团队最大的好处是并行摸底、并行验证、分层协作；最大的代价是协调成本和 token 开销都更高。'
+		];
+	}
+	if (/compare with subagents/.test(heading)) {
+		return [
+			'这一节是拿 agent teams 和 subagents 做对比。简单说，子代理更像几个短工各自回报；团队更像几个人边干边彼此沟通。',
+			'如果你的工人之间需要互相交换发现、挑战彼此方案，再决定怎么收口，那就更偏团队。'
+		];
+	}
+	if (/enable agent teams/.test(heading)) {
+		return [
+			'这一节讲团队模式默认是关着的，要先把实验开关打开，Claude 才能真的拉起一个队伍来干活。',
+			'最常见的做法就是在环境变量或 `settings.json` 里把对应开关设成 `1`，先开起来再试。'
+		];
+	}
+	if (/start your first agent team/.test(heading)) {
+		return [
+			'这一节是第一次拉团队开工。做法不是先手点很多按钮，而是直接用自然语言告诉 Claude：这活要分成哪几路、每一路干什么。',
+			'样例里强调的不是文案本身，而是“角色之间要能并行、不互相卡脖子”这个原则。'
+		];
+	}
+	if (/control your agent team/.test(heading)) {
+		return [
+			'这一节讲团队拉起来以后怎么指挥。你平时主要还是跟 lead 说话，由它来拆任务、派活、协调收口。',
+			'别把每个细碎指令都自己塞给所有队友，先让 lead 做总调度，团队才不容易乱。'
+		];
+	}
+	if (/choose a display mode/.test(heading)) {
+		return [
+			'这一节讲团队输出怎么显示。一个模式是在主终端里轮流切着看，另一个模式是分屏，一人一格同时盯着。',
+			'如果你想同时看多个人在干什么，就走分屏；如果环境简单、先求能跑，就先用 in-process。'
+		];
+	}
+	if (/specify teammates and models/.test(heading)) {
+		return [
+			'这一节讲怎么明确告诉 Claude：你要几名队友、各自大概干什么、用什么模型。',
+			'如果你不说，Claude 会自己估；但任务一旦比较重，提前把人数和模型说死，通常更稳。'
+		];
+	}
+	if (/require plan approval for teammates/.test(heading)) {
+		return [
+			'这一节讲怎么让队友先交计划，再动手。对高风险改动，这是很值的一道闸门。',
+			'思路很简单：先只读计划，lead 审过了再放它进实施，不满意就打回去重做。'
+		];
+	}
+	if (/assign and claim tasks/.test(heading)) {
+		return [
+			'这一节讲团队任务单怎么分。可以由 lead 指派，也可以让队友干完手头活后自己认领下一个没被卡住的任务。',
+			'你要盯的是依赖关系和占坑冲突，别让两个队友同时冲向同一块地。'
+		];
+	}
+	if (/shut down teammates/.test(heading)) {
+		return [
+			'这一节讲怎么优雅地让某个队友收工。别直接粗暴掐掉，最好通过 lead 发关机请求，让对方把正在做的活收好。',
+			'这样收尾更干净，也不容易把共享任务单和上下文搞坏。'
+		];
+	}
+	if (/clean up the team/.test(heading)) {
+		return [
+			'这一节讲团队收尾，不是随便喊一句完事，而是要让 lead 负责做 cleanup，把共享资源收干净。',
+			'最关键的规矩是：先把还在跑的队友停掉，再让 lead 做 cleanup；不要让普通 teammate 自己去收尾。'
+		];
+	}
+	if (/enforce quality gates with hooks/.test(heading)) {
+		return [
+			'这一节讲怎么在团队流程里加质检门。队友快空闲时、任务准备标完成时，都可以用 hooks 再拦一道。',
+			'如果检查没过，可以用退出码把任务打回去，让队友继续干，而不是稀里糊涂就算完成。'
+		];
+	}
 
-	const shortHints = hints.filter((text) => text.length <= 120).slice(0, 3);
-	const joinedHints = (shortHints.length ? shortHints : hints.slice(0, 2)).join('；');
-	const keywordText = hints.join(' ');
-	const extra = [];
+	paragraphs.push(`这一节主要在讲“${title}”这块该怎么理解、什么时候用，以及要盯住哪些边界。`);
 
-	if (/tool|permission|allow|deny|read|write|edit/i.test(keywordText)) {
-		extra.push('这一段尤其要盯工具和权限边界，别为了省事一把全开。');
+	if (/project|user|scope|session/i.test(joined)) {
+		paragraphs.push('这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。');
 	}
-	if (/model|haiku|sonnet|opus/i.test(keywordText)) {
-		extra.push('这里还牵扯模型怎么选，速度、成本和能力通常要一起掂量。');
+	if (/tool|permission|allow|deny|read|write|edit/i.test(joined)) {
+		paragraphs.push('看这段时要特别盯工具和权限边界，别为了省事一把全开。');
 	}
-	if (/scope|project|user|plugin|session/i.test(keywordText)) {
-		extra.push('这部分还会反复提作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。');
+	if (/hook|mcp|skill|memory/i.test(joined)) {
+		paragraphs.push('如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。');
 	}
-	if (/hook|mcp|skill|memory/i.test(keywordText)) {
-		extra.push('如果你打算把子能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。');
+	if (/tmux|iterm|split pane|in-process/i.test(joined)) {
+		paragraphs.push('这一段还会谈显示方式和终端环境，重点是先选一个你当前最稳能用的模式，不必一上来追求花哨。');
+	}
+	if (/environment variable|settings\.json|claude_code_/i.test(joined)) {
+		paragraphs.push('如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。');
 	}
 
-	return [
-		`这一节讲“${normalizeText(block.title)}”。先把这小块的门道听明白，再照着下面的命令和配置去做。`,
-		`原文这段重点会围着这些事打转：${joinedHints}。`,
-		...extra
-	].slice(0, 3);
+	return paragraphs.slice(0, 3);
 }
 
 function makeDetailedSections(page) {
