@@ -1,32 +1,24 @@
 ---
-import DocContentPage from '../../../components/DocContentPage.astro';
-import Layout from '../../../layouts/Layout.astro';
-import { getDocContent } from '../../../data/doc-content';
-import { allDocs, getDocBySlug } from '../../../data/navigation';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import DocShell from '../../../components/DocShell.astro';
+import { siteData, getSitePageBySlug } from '../../../data/site-data';
 
 export function getStaticPaths() {
-	return allDocs.map((doc) => ({
+	return siteData.pages.map((doc) => ({
 		params: { slug: doc.slug }
 	}));
 }
 
 const slugParam = Astro.params.slug;
 const slug = Array.isArray(slugParam) ? slugParam.join('/') : slugParam ?? '';
-const doc = getDocBySlug(slug);
+const doc = getSitePageBySlug(slug);
 
 if (!doc) {
 	throw new Error(`Unknown doc slug: ${slug}`);
 }
-
-const content = getDocContent(doc);
+const canonical = new URL(doc.path, Astro.site).toString();
 ---
 
-<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
-	<DocContentPage
-		title={doc.title}
-		summary={doc.summary}
-		section={doc.section}
-		sourceUrl={`https://code.claude.com/docs/en/${doc.slug}`}
-		content={content}
-	/>
-</Layout>
+<BaseLayout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} canonical={canonical}>
+	<DocShell page={doc} siteData={siteData} currentPath={doc.path} />
+</BaseLayout>

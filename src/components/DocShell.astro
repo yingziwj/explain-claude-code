@@ -1,0 +1,173 @@
+---
+import AdSlot from './AdSlot.astro';
+import type { SiteData, SitePage } from '../data/site-data';
+import { getPracticeSection } from '../data/site-data';
+
+const { page, siteData, currentPath } = Astro.props as {
+	page: SitePage;
+	siteData: SiteData;
+	currentPath: string;
+};
+
+const currentSection = siteData.sections.find((section) => section.key === page.sectionKey) ?? siteData.sections[0];
+const practiceSection = getPracticeSection(page.content.sections);
+const mainSections = page.content.sections.filter(
+	(section) => !['简要总结', '农民伯伯版解释', '上手时重点盯住什么'].includes(section.title)
+);
+const showAdPlaceholders = !import.meta.env.PUBLIC_ADSENSE_CLIENT;
+---
+
+<div class="doc-shell">
+	<header class="doc-topbar">
+		<a class="doc-brand" href="/">
+			<img src="/logo.svg" alt="农民伯伯抱着 Claude 图标" class="doc-brand__logo" />
+			<div>
+				<strong>通俗版 Claude Code 文档</strong>
+				<p>结构照原 docs，内容改成真能照着做的人话版。</p>
+			</div>
+		</a>
+
+		<nav class="doc-topnav" aria-label="主导航">
+			{siteData.topNav.map((item) => (
+				<a href={item.href} class={item.key === currentSection?.key ? 'active' : ''}>{item.label}</a>
+			))}
+		</nav>
+	</header>
+
+	<div class="doc-grid">
+		<aside class="doc-sidebar" aria-label="侧边导航">
+			{currentSection?.sidebar.map((group) => (
+				<section class="doc-sidebar__group">
+					<h2>{group.title}</h2>
+					<ul>
+						{group.items.map((item) => (
+							<li>
+								<a href={item.href} class={item.actualPath === currentPath ? 'active' : ''}>
+									{item.title}
+								</a>
+							</li>
+						))}
+					</ul>
+				</section>
+			))}
+
+			<AdSlot slot={import.meta.env.PUBLIC_ADSENSE_SIDEBAR_SLOT} position="侧边栏" format="vertical" />
+		</aside>
+
+		<main class="doc-main">
+			<div class="doc-meta">
+				<a href={page.sourceUrl} target="_blank" rel="noreferrer">查看原始文档</a>
+				<span>目录顺序与官方保持一致</span>
+			</div>
+
+			<article class="doc-article">
+				<header class="doc-hero">
+					<p class="doc-eyebrow">{page.sectionTitle}</p>
+					<h1>{page.title}</h1>
+					<p class="doc-hero__summary">{page.summary}</p>
+				</header>
+
+				<section class="doc-panel">
+					<p class="doc-eyebrow">简要总结</p>
+					<div class="doc-copy">
+						{page.content.sections[0]?.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+					</div>
+				</section>
+
+				<section class="doc-panel">
+					<p class="doc-eyebrow">大白话解释</p>
+					<div class="doc-copy">
+						{page.content.sections[1]?.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+					</div>
+				</section>
+
+				{practiceSection ? (
+					<section class="doc-panel">
+						<p class="doc-eyebrow">先看这三件事</p>
+						<div class="doc-practice-grid">
+							{practiceSection.paragraphs.slice(0, 3).map((paragraph, index) => (
+								<div class="doc-practice-item">
+									<h2>{['你现在先做什么', '做完看什么', '最容易错在哪'][index] ?? `要点 ${index + 1}`}</h2>
+									<p>{paragraph}</p>
+								</div>
+							))}
+						</div>
+						{practiceSection.steps?.length ? (
+							<div class="doc-steps">
+								{practiceSection.steps.map((step) => (
+									<div class="doc-step">
+										<div class="doc-step__head">
+											{step.kind ? <span class={`doc-step__tag doc-step__tag--${step.kind}`}>{step.kind === 'command' ? '命令' : step.kind === 'config' ? '配置' : step.kind === 'prompt' ? '提问示例' : step.kind === 'structure' ? '目录结构' : '代码片段'}</span> : null}
+											<h3>{step.title}</h3>
+										</div>
+										<p>{step.body}</p>
+										{step.code ? <pre><code>{step.code}</code></pre> : null}
+									</div>
+								))}
+							</div>
+						) : null}
+					</section>
+				) : null}
+
+				{showAdPlaceholders ? (
+					<section class="doc-ad-placeholder">
+						<p>预留广告位</p>
+						<strong>正文中段响应式广告</strong>
+						<span>等你后面真接 AdSense，这里再放正式广告。</span>
+					</section>
+				) : (
+					<AdSlot slot={import.meta.env.PUBLIC_ADSENSE_CONTENT_SLOT} position="正文中段" format="horizontal" />
+				)}
+
+				{mainSections.map((section) => (
+					<section class="doc-panel">
+						<p class="doc-eyebrow">{section.title}</p>
+						<div class="doc-copy">
+							{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+						</div>
+						{section.steps?.length ? (
+							<div class="doc-steps">
+								{section.steps.map((step) => (
+									<div class="doc-step">
+										<div class="doc-step__head">
+											{step.kind ? <span class={`doc-step__tag doc-step__tag--${step.kind}`}>{step.kind === 'command' ? '命令' : step.kind === 'config' ? '配置' : step.kind === 'prompt' ? '提问示例' : step.kind === 'structure' ? '目录结构' : '代码片段'}</span> : null}
+											<h3>{step.title}</h3>
+										</div>
+										<p>{step.body}</p>
+										{step.code ? <pre><code>{step.code}</code></pre> : null}
+									</div>
+								))}
+							</div>
+						) : null}
+					</section>
+				))}
+
+				<section class="doc-panel doc-panel--illustration">
+					<p class="doc-eyebrow">{page.content.illustration.title}</p>
+					<div class="doc-copy">
+						<p>{page.content.illustration.caption}</p>
+					</div>
+					<pre class="doc-illustration"><code>{page.content.illustration.lines.join('\n')}</code></pre>
+				</section>
+
+				<section class="doc-panel">
+					<p class="doc-eyebrow">文末提醒</p>
+					<div class="doc-copy">
+						<p>这站会按官方 docs 的导航和内容变化继续重生成，原站加页、删页、改页时，这里会跟着更新。</p>
+						<p>你看不懂的地方，我会优先把步骤掰成“先做什么、再看什么、哪里最容易错”这三类。</p>
+					</div>
+				</section>
+
+				{showAdPlaceholders ? (
+					<section class="doc-ad-placeholder doc-ad-placeholder--footer">
+						<p>预留广告位</p>
+						<strong>文末横幅广告</strong>
+						<span>适合放在文章读完以后，不抢首屏注意力。</span>
+					</section>
+				) : (
+					<AdSlot slot={import.meta.env.PUBLIC_ADSENSE_CONTENT_SLOT} position="文末" format="horizontal" />
+				)}
+			</article>
+		</main>
+	</div>
+</div>

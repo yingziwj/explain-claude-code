@@ -1,24 +1,16 @@
 ---
-import DocContentPage from '../../../components/DocContentPage.astro';
-import Layout from '../../../layouts/Layout.astro';
-import { getDocContent } from '../../../data/doc-content';
-import { getDocBySlug } from '../../../data/navigation';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import DocShell from '../../../components/DocShell.astro';
+import { getSitePageBySlug, siteData } from '../../../data/site-data';
 
-const doc = getDocBySlug('quickstart');
+const doc = getSitePageBySlug('quickstart');
 
 if (!doc) {
 	throw new Error('Quickstart doc metadata is missing');
 }
-
-const content = getDocContent(doc);
+const canonical = new URL(doc.path, Astro.site).toString();
 ---
 
-<Layout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} pathname={doc.path}>
-	<DocContentPage
-		title={doc.title}
-		summary={doc.summary}
-		section={doc.section}
-		sourceUrl="https://code.claude.com/docs/en/quickstart"
-		content={content}
-	/>
-</Layout>
+<BaseLayout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} canonical={canonical}>
+	<DocShell page={doc} siteData={siteData} currentPath={doc.path} />
+</BaseLayout>

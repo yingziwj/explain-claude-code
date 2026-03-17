@@ -1,54 +1,64 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import AdSlot from '../components/AdSlot.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteData } from '../data/site-data';
 ---
 
-<Layout
+<BaseLayout
 	title="通俗版 Claude Code 文档"
 	description="把 Claude Code 官方文档翻成农村长辈也能听懂的中文说明。"
-	pathname="/"
+	canonical={new URL('/', Astro.site).toString()}
 >
-	<section class="grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
-		<div class="space-y-6">
-			<section class="card rounded-[32px] p-8 shadow-card">
-				<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">首页</p>
-				<h1 class="mt-3 font-display text-4xl font-semibold">把 Claude Code 官方文档翻成人话</h1>
-				<p class="mt-4 max-w-3xl text-lg leading-8">
-					这个站照着 Claude Code 官方 docs 的目录和顺序来排，侧边栏也尽量保持一致；但正文改成中国人一眼就能看懂的大白话。
-				</p>
-				<p class="mt-4 max-w-4xl leading-8" style="color: var(--muted);">
-					重点步骤、命令、代码片段会保留，额外再补“简要总结”和一眼能懂的图解，方便先看明白再照着做。
-				</p>
-			</section>
+	<div class="doc-shell">
+		<header class="doc-topbar">
+			<a class="doc-brand" href="/">
+				<img src="/logo.svg" alt="农民伯伯抱着 Claude 图标" class="doc-brand__logo" />
+				<div>
+					<strong>通俗版 Claude Code 文档</strong>
+					<p>结构照原 docs，内容改成真能照着做的人话版。</p>
+				</div>
+			</a>
+			<nav class="doc-topnav" aria-label="主导航">
+				{siteData.topNav.map((item) => (
+					<a href={item.href}>{item.label}</a>
+				))}
+			</nav>
+		</header>
 
-			<section class="card rounded-[32px] p-8 shadow-card">
-				<h2 class="font-display text-2xl font-semibold">这个站已经有的能力</h2>
-				<div class="mt-4 space-y-3 leading-8" style="color: var(--muted);">
-					<p>完整的 docs 导航骨架已经接上，移动端和桌面端都能看，搜索框这类原站无关部分没有照搬。</p>
-					<p>页面统一带有简要总结、通俗解释、关键步骤区、插画区，以及后续放 Google AdSense 的预留位。</p>
-					<p>站点已经按 Cloudflare Pages 的静态站思路配置，域名默认就是 `explain-claude-code.pages.dev`。</p>
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">首页</p>
+				<h1 class="doc-home__title">把 Claude Code 官方文档翻成真正能照着做的人话版</h1>
+				<div class="doc-copy">
+					<p>这个站继续照着 Claude Code 官方 docs 的导航、顺序和侧边栏来排，但正文不再是硬翻译，也不是空洞摘要。</p>
+					<p>现在每一页都会尽量拆成：先讲清这是干什么的，再给关键命令、配置、提问示例，最后补“照着做一遍”。</p>
 				</div>
 			</section>
 
-			<section class="card rounded-[32px] p-8 shadow-card">
-				<h2 class="font-display text-2xl font-semibold">每天自动同步的思路</h2>
-				<div class="mt-4 space-y-3 leading-8" style="color: var(--muted);">
-					<p>仓库里已经加了每日同步脚本和 GitHub Actions 定时任务模板。</p>
-					<p>它会抓取官方 docs 页面的导航和正文快照，发现原站有新增、删除或改动时，就把最新源数据拉回仓库，方便重新生成解释版页面。</p>
+			<section class="doc-panel">
+				<p class="doc-eyebrow">现在这站怎么读</p>
+				<div class="doc-practice-grid">
+					<div class="doc-practice-item">
+						<h2>先看总结</h2>
+						<p>先弄懂这页解决什么问题，不要一上来埋头抄命令。</p>
+					</div>
+					<div class="doc-practice-item">
+						<h2>再看步骤</h2>
+						<p>命令、配置、提问示例、目录结构已经分开标出来了。</p>
+					</div>
+					<div class="doc-practice-item">
+						<h2>最后照着做</h2>
+						<p>重点页有人工版编号教程，其余页也会自动补出一套可跟做的流程。</p>
+					</div>
 				</div>
 			</section>
 
-			<AdSlot slot={import.meta.env.PUBLIC_ADSENSE_HOME_SLOT} position="首页内容区" format="horizontal" />
+			<section class="doc-panel">
+				<p class="doc-eyebrow">同步和部署</p>
+				<div class="doc-copy">
+					<p>仓库里已经有官方 docs 同步脚本、内容重生成脚本、Cloudflare Pages 部署配置和广告预留位。</p>
+					<p>原站如果新增、删除或改内容，这里可以继续重抓并覆盖本站对应页面。</p>
+				</div>
+			</section>
 		</div>
-
-		<aside class="card rounded-[32px] p-6 shadow-card">
-			<h2 class="font-display text-xl font-semibold">部署和变现预留</h2>
-			<p class="mt-4 leading-8" style="color: var(--muted);">
-				Cloudflare Pages 免费可部署，`sitemap.xml` 会自动生成，后面接入谷歌广告联盟时可直接把广告代码放进现有预留位。
-			</p>
-			<div class="mt-6">
-				<AdSlot slot={import.meta.env.PUBLIC_ADSENSE_HOME_ASIDE_SLOT} position="首页侧栏" format="rectangle" />
-			</div>
-		</aside>
-	</section>
-</Layout>
+	</div>
+</BaseLayout>

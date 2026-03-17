@@ -1,45 +1,47 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<Layout
+<BaseLayout
 	title="隐私说明 | 通俗版 Claude Code 文档"
 	description="说明本站会收集哪些基础访问数据，以及未来接入 Google AdSense 时会涉及哪些广告相关处理。"
-	pathname="/privacy"
+	canonical={new URL('/privacy', Astro.site).toString()}
 >
-	<article class="space-y-6">
-		<section class="card rounded-[32px] p-8 shadow-card">
-			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">隐私说明</p>
-			<h1 class="mt-3 font-display text-4xl font-semibold">隐私和数据怎么处理</h1>
-			<p class="mt-4 max-w-3xl text-lg leading-8">
-				这页就是把话说明白：你来这个站看文档，我们会尽量少收集东西；以后接广告，也会把会发生什么提前摆出来。
-			</p>
-		</section>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">隐私说明</p>
+				<h1 class="doc-home__title">隐私和数据怎么处理</h1>
+				<div class="doc-copy">
+					<p>这页就是把话说明白：你来这个站看文档，我们尽量少碰你的资料；以后真接广告，也会提前把会发生什么摊开讲清楚。</p>
+				</div>
+			</section>
 
-		<section class="card rounded-[32px] p-8 shadow-card">
-			<h2 class="font-display text-2xl font-semibold">现在站点会碰到哪些数据</h2>
-			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
-				<p>站点部署在 Cloudflare Pages，上线后 Cloudflare 可能会记录一些基础访问日志，比如访问时间、请求路径、浏览器类型和 IP 这类运行站点必需的数据。</p>
-				<p>这些东西主要是用来保站点正常运行、看访问情况和排查故障，不是为了把人盯得死死的。</p>
-				<p>站内目前没有用户注册、评论区和主动收集姓名电话的表单，所以不走那种重度个人资料路线。</p>
-			</div>
-		</section>
+			<section class="doc-panel">
+				<p class="doc-eyebrow">现在站点会碰到哪些数据</p>
+				<div class="doc-copy">
+					<p>站点部署在 Cloudflare Pages，上线后 Cloudflare 可能会记录一些基础访问日志，比如访问时间、请求路径、浏览器类型和 IP 这类运行站点必需的数据。</p>
+					<p>这些东西主要是用来保站点正常运行、看访问情况和排查故障，不是为了把人盯得死死的。</p>
+					<p>站内目前没有用户注册、评论区和主动收集姓名电话的表单，所以不走那种重度个人资料路线。</p>
+				</div>
+			</section>
 
-		<section class="card rounded-[32px] p-8 shadow-card">
-			<h2 class="font-display text-2xl font-semibold">如果接入 Google AdSense 会怎样</h2>
-			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
-				<p>等正式接入 AdSense 后，页面里会出现 Google 提供的广告代码。到那时，Google 及其合作方可能会用 Cookie 或类似技术来决定广告怎么展示、怎么统计。</p>
-				<p>简单说，就是广告系统要知道“这个位置有没有被看到”“哪类页面更常被点”，这样它才知道往哪放广告。</p>
-				<p>如果后面开启个性化广告，我们会再补更明确的提示；如果只放非个性化广告，也会在这里把做法写清楚。</p>
-			</div>
-		</section>
+			<section class="doc-panel">
+				<p class="doc-eyebrow">如果接入 Google AdSense 会怎样</p>
+				<div class="doc-copy">
+					<p>等正式接入 AdSense 后，页面里会出现 Google 提供的广告代码。到那时，Google 及其合作方可能会用 Cookie 或类似技术来决定广告怎么展示、怎么统计。</p>
+					<p>简单说，就是广告系统要知道哪个位置有人看、哪类页面更容易被点，这样它才知道广告怎么摆。</p>
+					<p>如果后面开启个性化广告，我们会再补更明确的提示；如果只放非个性化广告，也会在这里把做法写清楚。</p>
+				</div>
+			</section>
 
-		<section class="card rounded-[32px] p-8 shadow-card">
-			<h2 class="font-display text-2xl font-semibold">你可以怎么处理</h2>
-			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
-				<p>你可以通过浏览器自己的设置来限制 Cookie、清理站点数据，或者使用广告拦截与隐私增强工具。</p>
-				<p>如果你用的是公司网络、学校网络或共享设备，也建议按本地规则处理，不要把隐私控制全押在网站一头。</p>
-			</div>
-		</section>
-	</article>
-</Layout>
+			<section class="doc-panel">
+				<p class="doc-eyebrow">你可以怎么处理</p>
+				<div class="doc-copy">
+					<p>你可以通过浏览器自己的设置来限制 Cookie、清理站点数据，或者使用广告拦截与隐私增强工具。</p>
+					<p>如果你用的是公司网络、学校网络或共享设备，也建议按本地规则处理，不要把隐私控制全押在网站一头。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>

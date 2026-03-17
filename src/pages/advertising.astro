@@ -1,48 +1,50 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import AdSlot from '../components/AdSlot.astro';
 ---
 
-<Layout
+<BaseLayout
 	title="广告说明 | 通俗版 Claude Code 文档"
 	description="说明本站广告位怎么预留、什么时候会启用，以及 Cloudflare Pages 上需要配置哪些 AdSense 环境变量。"
-	pathname="/advertising"
+	canonical={new URL('/advertising', Astro.site).toString()}
 >
-	<article class="space-y-6">
-		<section class="card rounded-[32px] p-8 shadow-card">
-			<p class="text-sm font-semibold uppercase tracking-[0.24em]" style="color: var(--muted);">广告说明</p>
-			<h1 class="mt-3 font-display text-4xl font-semibold">广告怎么接，先把规矩立好</h1>
-			<p class="mt-4 max-w-3xl text-lg leading-8">
-				广告不是先乱贴再说。这个站现在已经把位置和代码接口预留好了，但只有你把 AdSense 的账号和广告位填进去，它才会正式开始展示。
-			</p>
-		</section>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">广告说明</p>
+				<h1 class="doc-home__title">广告怎么接，先把规矩立好</h1>
+				<div class="doc-copy">
+					<p>广告不是先乱贴再说。这个站现在已经把位置和代码接口预留好了，但只有你把 AdSense 的账号和广告位填进去，它才会正式开始展示。</p>
+				</div>
+			</section>
 
-		<section class="card rounded-[32px] p-8 shadow-card">
-			<h2 class="font-display text-2xl font-semibold">现在已经准备好的位置</h2>
-			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
-				<p>侧边栏底部已经有一个广告位，适合放竖向或自适应广告。</p>
-				<p>首页内容区和首页右侧也各留了一块，方便你后面看效果再决定要不要启用。</p>
-				<p>每个文档页底部也有一块位置，适合放一条横向或自适应广告。</p>
-			</div>
-		</section>
+			<section class="doc-panel">
+				<p class="doc-eyebrow">现在已经准备好的位置</p>
+				<div class="doc-copy">
+					<p>侧边栏底部已经有一个广告位，适合放竖向或自适应广告。</p>
+					<p>首页内容区和首页右侧也各留了一块，方便你后面看效果再决定要不要启用。</p>
+					<p>每个文档页底部也有一块位置，适合放一条横向或自适应广告。</p>
+				</div>
+			</section>
 
-		<AdSlot slot={import.meta.env.PUBLIC_ADSENSE_CONTENT_SLOT} position="广告说明页示例位" format="horizontal" />
+			<AdSlot slot={import.meta.env.PUBLIC_ADSENSE_CONTENT_SLOT} position="广告说明页示例位" format="horizontal" />
 
-		<section class="card rounded-[32px] p-8 shadow-card">
-			<h2 class="font-display text-2xl font-semibold">Cloudflare 里要填哪些变量</h2>
-			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
-				<p>`PUBLIC_ADSENSE_CLIENT`：填你的 `ca-pub-xxxxxxxxxxxxxxxx`。</p>
-				<p>`PUBLIC_ADSENSE_PUBLISHER_ID`：填 `pub-xxxxxxxxxxxxxxxx`，用来生成 `ads.txt`。</p>
-				<p>`PUBLIC_ADSENSE_SIDEBAR_SLOT`、`PUBLIC_ADSENSE_HOME_SLOT`、`PUBLIC_ADSENSE_HOME_ASIDE_SLOT`、`PUBLIC_ADSENSE_CONTENT_SLOT`：分别对应各个广告位 ID。</p>
-			</div>
-		</section>
+			<section class="doc-panel">
+				<p class="doc-eyebrow">Cloudflare 里要填哪些变量</p>
+				<div class="doc-copy">
+					<p><code>PUBLIC_ADSENSE_CLIENT</code>：填你的 <code>ca-pub-xxxxxxxxxxxxxxxx</code>。</p>
+					<p><code>PUBLIC_ADSENSE_PUBLISHER_ID</code>：填 <code>pub-xxxxxxxxxxxxxxxx</code>，用来生成 <code>ads.txt</code>。</p>
+					<p><code>PUBLIC_ADSENSE_SIDEBAR_SLOT</code>、<code>PUBLIC_ADSENSE_HOME_SLOT</code>、<code>PUBLIC_ADSENSE_HOME_ASIDE_SLOT</code>、<code>PUBLIC_ADSENSE_CONTENT_SLOT</code>：分别对应各个广告位 ID。</p>
+				</div>
+			</section>
 
-		<section class="card rounded-[32px] p-8 shadow-card">
-			<h2 class="font-display text-2xl font-semibold">正式启用前的提醒</h2>
-			<div class="mt-4 space-y-4 leading-8" style="color: var(--muted);">
-				<p>先把隐私说明页、`ads.txt` 和站点基本内容准备好，再去申请或挂接 AdSense，过审会更稳。</p>
-				<p>广告别一口气塞太多，先从少量、清楚标注、别挡正文开始。这个站的结构已经按这个思路留好了。</p>
-			</div>
-		</section>
-	</article>
-</Layout>
+			<section class="doc-panel">
+				<p class="doc-eyebrow">正式启用前的提醒</p>
+				<div class="doc-copy">
+					<p>先把隐私说明页、<code>ads.txt</code> 和站点基本内容准备好，再去申请或挂接 AdSense，过审会更稳。</p>
+					<p>广告别一口气塞太多，先从少量、清楚标注、别挡正文开始。这个站的结构已经按这个思路留好了。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>

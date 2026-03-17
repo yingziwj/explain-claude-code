@@ -1,0 +1,58 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description: string;
+	canonical: string;
+}
+
+const { title, description, canonical } = Astro.props;
+const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT?.trim() || '';
+const ogImage = new URL('/social-card.svg', canonical).toString();
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<meta name="robots" content="index,follow,max-image-preview:large" />
+		<meta name="theme-color" content="#f6efe3" />
+		<link rel="canonical" href={canonical} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{title}</title>
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="zh_CN" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:site_name" content="通俗版 Claude Code 文档" />
+		<meta property="og:image" content={ogImage} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+		{adsenseClient ? <meta name="google-adsense-account" content={adsenseClient} /> : null}
+		<script type="application/ld+json" set:html={JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'WebSite',
+			name: '通俗版 Claude Code 文档',
+			url: Astro.site,
+			description
+		})} />
+		{
+			adsenseClient ? (
+				<script
+					async
+					src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+					crossorigin="anonymous"
+				></script>
+			) : null
+		}
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
