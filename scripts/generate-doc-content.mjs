@@ -6,6 +6,7 @@ const outputFile = path.resolve('src/data/generated/generated-doc-content.json')
 
 function normalizeText(value) {
 	return String(value ?? '')
+		.replace(/[\u200B-\u200D\uFEFF]/g, '')
 		.replace(/\s+/g, ' ')
 		.replace(/`/g, '')
 		.trim();
@@ -117,6 +118,80 @@ function pickSectionSteps(page, count) {
 	}
 
 	return steps.slice(0, count);
+}
+
+function pickSectionCodeBlocks(block, count) {
+	return (block.codeBlocks ?? [])
+		.map((code) => String(code).trim())
+		.filter(Boolean)
+		.filter((code, index, all) => all.findIndex((candidate) => candidate === code) === index)
+		.slice(0, count);
+}
+
+function summarizeSectionHints(block) {
+	const hints = (block.paragraphs ?? [])
+		.map(normalizeText)
+		.filter(Boolean)
+		.filter((text) => text !== normalizeText(block.title))
+		.slice(0, 8);
+
+	if (!hints.length) return [];
+
+	const shortHints = hints.filter((text) => text.length <= 120).slice(0, 3);
+	const joinedHints = (shortHints.length ? shortHints : hints.slice(0, 2)).join('；');
+	const keywordText = hints.join(' ');
+	const extra = [];
+
+	if (/tool|permission|allow|deny|read|write|edit/i.test(keywordText)) {
+		extra.push('这一段尤其要盯工具和权限边界，别为了省事一把全开。');
+	}
+	if (/model|haiku|sonnet|opus/i.test(keywordText)) {
+		extra.push('这里还牵扯模型怎么选，速度、成本和能力通常要一起掂量。');
+	}
+	if (/scope|project|user|plugin|session/i.test(keywordText)) {
+		extra.push('这部分还会反复提作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。');
+	}
+	if (/hook|mcp|skill|memory/i.test(keywordText)) {
+		extra.push('如果你打算把子能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。');
+	}
+
+	return [
+		`这一节讲“${normalizeText(block.title)}”。先把这小块的门道听明白，再照着下面的命令和配置去做。`,
+		`原文这段重点会围着这些事打转：${joinedHints}。`,
+		...extra
+	].slice(0, 3);
+}
+
+function makeDetailedSections(page) {
+	return (page.sectionBlocks ?? [])
+		.filter((block) => block && normalizeText(block.title))
+		.map((block) => {
+			const title = normalizeText(block.title);
+			const codeBlocks = pickSectionCodeBlocks(
+				block,
+				/quickstart|create|install|setup|example/i.test(title) ? 6 : 4
+			);
+
+			return {
+				title,
+				paragraphs: summarizeSectionHints(block),
+				steps: codeBlocks.length
+					? codeBlocks.map((code, index) => {
+							const kind = inferStepKind(code);
+							return {
+								title: codeBlocks.length > 1 ? `${title} ${index + 1}` : title,
+								body:
+									block.paragraphs?.length
+										? `${kindAction(kind)}。这一节原文主要在讲：${normalizeText(block.paragraphs[0])} 下面这块属于“${kindLabel(kind)}”，关键命令、文件名和参数最好照原样保留。`
+										: `${kindAction(kind)}。这是这一节最该保住的${kindLabel(kind)}，解释可以说人话，但命令、参数和配置键不要乱改。`,
+								code,
+								kind
+							};
+						})
+					: undefined
+			};
+		})
+		.filter((section) => section.paragraphs.length || section.steps?.length);
 }
 
 function makeIllustration(title, sectionLabel) {
@@ -512,7 +587,8 @@ function buildGeneratedContent(sourceData, navigationData) {
 					title: '上手时重点盯住什么',
 					paragraphs: override?.practice ?? makePractice(doc, page),
 					steps: makeSteps(page)
-				}
+				},
+				...makeDetailedSections(page)
 			],
 			illustration: makeIllustration(doc.title, doc.section)
 		};

@@ -690,6 +690,30 @@ function ensureWalkthrough(doc: DocItem & { slug: string }, content: DocContent)
 	};
 }
 
+function mergeGeneratedSections(base: DocContent, generated?: DocContent): DocContent {
+	if (!generated) return base;
+
+	const introTitles = new Set(['简要总结', '农民伯伯版解释', '上手时重点盯住什么']);
+	const baseIntro = base.sections.filter((section) => introTitles.has(section.title));
+	const baseExtra = base.sections.filter((section) => !introTitles.has(section.title));
+	const generatedExtra = generated.sections.filter((section) => !introTitles.has(section.title));
+	const mergedExtra = [];
+	const seen = new Set();
+
+	for (const section of [...generatedExtra, ...baseExtra]) {
+		const key = `${section.title}::${(section.paragraphs ?? []).join('||')}::${(section.steps ?? []).length}`;
+		if (seen.has(key)) continue;
+		seen.add(key);
+		mergedExtra.push(section);
+	}
+
+	return {
+		...base,
+		sourceLabel: base.sourceLabel || generated.sourceLabel,
+		sections: [...baseIntro, ...mergedExtra]
+	};
+}
+
 function getFallbackSeed(doc: DocItem & { slug: string }): ContentSeed {
 	return {
 		summary: [doc.summary, doc.description],
@@ -707,6 +731,8 @@ function getFallbackSeed(doc: DocItem & { slug: string }): ContentSeed {
 }
 
 export function getDocContent(doc: DocItem & { slug: string }): DocContent {
-	const content = pageSeeds[doc.slug] ? toContent(doc, pageSeeds[doc.slug]) : generatedContent[doc.slug] ?? toContent(doc, getFallbackSeed(doc));
+	const generated = generatedContent[doc.slug];
+	const seeded = pageSeeds[doc.slug] ? toContent(doc, pageSeeds[doc.slug]) : undefined;
+	const content = seeded ? mergeGeneratedSections(seeded, generated) : generated ?? toContent(doc, getFallbackSeed(doc));
 	return ensureWalkthrough(doc, content);
 }
