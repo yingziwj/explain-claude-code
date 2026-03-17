@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-16T04:48:11.114Z",
-  "sourceGeneratedAt": "2026-03-16T04:48:10.918Z",
+  "generatedAt": "2026-03-17T04:26:30.370Z",
+  "sourceGeneratedAt": "2026-03-17T04:26:30.177Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -210,7 +210,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把“Changelog”理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.76、2.1.75、2.1.74、2.1.73 这些环节往下讲。",
+            "原文这页大多会按 2.1.77、2.1.76、2.1.75、2.1.74 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -219,7 +219,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.76 -> 2.1.75 -> 2.1.74 -> 2.1.73。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.77 -> 2.1.76 -> 2.1.75 -> 2.1.74。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -1916,16 +1916,16 @@
               "kind": "config"
             },
             {
-              "title": "原页关键片段：​Read input and return output 1",
-              "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：Hooks communicate with Claude Code through stdin, stdout, stderr, and exit codes. When an event fires, Claude Code passes event-specific data as JSON to your script’s stdin. Your script reads that data, does its work, and tells Claude Code what to do next via the exit code. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
-              "code": "{\n  \"session_id\": \"abc123\",          // unique ID for this session\n  \"cwd\": \"/Users/sarah/myproject\", // working directory when the event fired\n  \"hook_event_name\": \"PreToolUse\", // which event triggered this hook\n  \"tool_name\": \"Bash\",             // the tool Claude is about to use\n  \"tool_input\": {                  // the arguments Claude passed to the tool\n    \"command\": \"npm test\"          // for Bash, this is the shell command\n  }\n}",
+              "title": "原页关键片段：​Auto-approve specific permission prompts 1",
+              "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：Skip the approval dialog for tool calls you always allow. This example auto-approves ExitPlanMode, the tool Claude calls when it finishes presenting a plan and asks to proceed, so you aren’t prompted every time a plan is ready. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "{\n  \"hooks\": {\n    \"PermissionRequest\": [\n      {\n        \"matcher\": \"ExitPlanMode\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo '{\\\"hookSpecificOutput\\\": {\\\"hookEventName\\\": \\\"PermissionRequest\\\", \\\"decision\\\": {\\\"behavior\\\": \\\"allow\\\"}}}'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             },
             {
-              "title": "原页关键片段：​Read input and return output 2",
-              "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：Hooks communicate with Claude Code through stdin, stdout, stderr, and exit codes. When an event fires, Claude Code passes event-specific data as JSON to your script’s stdin. Your script reads that data, does its work, and tells Claude Code what to do next via the exit code. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
-              "code": "#!/bin/bash\nINPUT=$(cat)\nCOMMAND=$(echo \"$INPUT\" | jq -r '.tool_input.command')\n\nif echo \"$COMMAND\" | grep -q \"drop table\"; then\n  echo \"Blocked: dropping tables is not allowed\" >&2  # stderr becomes Claude's feedback\n  exit 2                                               # exit 2 = block the action\nfi\n\nexit 0  # exit 0 = let it proceed",
-              "kind": "command"
+              "title": "原页关键片段：​Auto-approve specific permission prompts 2",
+              "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：Skip the approval dialog for tool calls you always allow. This example auto-approves ExitPlanMode, the tool Claude calls when it finishes presenting a plan and asks to proceed, so you aren’t prompted every time a plan is ready. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PermissionRequest\",\n    \"decision\": {\n      \"behavior\": \"allow\",\n      \"updatedPermissions\": [\n        { \"type\": \"setMode\", \"mode\": \"acceptEdits\", \"destination\": \"session\" }\n      ]\n    }\n  }\n}",
+              "kind": "config"
             }
           ]
         }
@@ -2994,7 +2994,7 @@
             {
               "title": "原页关键片段：​Configure server-managed settings",
               "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：Open the admin console 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
-              "code": "{\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ]\n  },\n  \"disableBypassPermissionsMode\": \"disable\"\n}",
+              "code": "{\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ],\n    \"disableBypassPermissionsMode\": \"disable\"\n  }\n}",
               "kind": "config"
             }
           ]
@@ -3899,7 +3899,7 @@
             {
               "title": "原页关键片段：​Context window usage",
               "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：Display the current model and context window usage with a visual progress bar. Each script reads JSON from stdin, extracts the used_percentage field, and builds a 10-character bar where filled blocks (▓) represent usage: 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
-              "code": "#!/bin/bash\n# Read all of stdin into a variable\ninput=$(cat)\n\n# Extract fields with jq, \"// 0\" provides fallback for null\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nPCT=$(echo \"$input\" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)\n\n# Build progress bar: printf creates spaces, tr replaces with blocks\nBAR_WIDTH=10\nFILLED=$((PCT * BAR_WIDTH / 100))\nEMPTY=$((BAR_WIDTH - FILLED))\nBAR=\"\"\n[ \"$FILLED\" -gt 0 ] && BAR=$(printf \"%${FILLED}s\" | tr ' ' '▓')\n[ \"$EMPTY\" -gt 0 ] && BAR=\"${BAR}$(printf \"%${EMPTY}s\" | tr ' ' '░')\"\n\necho \"[$MODEL] $BAR $PCT%\"",
+              "code": "#!/bin/bash\n# Read all of stdin into a variable\ninput=$(cat)\n\n# Extract fields with jq, \"// 0\" provides fallback for null\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nPCT=$(echo \"$input\" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)\n\n# Build progress bar: printf -v creates a run of spaces, then\n# ${var// /▓} replaces each space with a block character\nBAR_WIDTH=10\nFILLED=$((PCT * BAR_WIDTH / 100))\nEMPTY=$((BAR_WIDTH - FILLED))\nBAR=\"\"\n[ \"$FILLED\" -gt 0 ] && printf -v FILL \"%${FILLED}s\" && BAR=\"${FILL// /▓}\"\n[ \"$EMPTY\" -gt 0 ] && printf -v PAD \"%${EMPTY}s\" && BAR=\"${BAR}${PAD// /░}\"\n\necho \"[$MODEL] $BAR $PCT%\"",
               "kind": "command"
             },
             {
@@ -3917,7 +3917,7 @@
             {
               "title": "原页关键片段：​Display multiple lines",
               "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：Your script can output multiple lines to create a richer display. Each echo statement produces a separate row in the status area. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
-              "code": "#!/bin/bash\ninput=$(cat)\n\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nDIR=$(echo \"$input\" | jq -r '.workspace.current_dir')\nCOST=$(echo \"$input\" | jq -r '.cost.total_cost_usd // 0')\nPCT=$(echo \"$input\" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)\nDURATION_MS=$(echo \"$input\" | jq -r '.cost.total_duration_ms // 0')\n\nCYAN='\\033[36m'; GREEN='\\033[32m'; YELLOW='\\033[33m'; RED='\\033[31m'; RESET='\\033[0m'\n\n# Pick bar color based on context usage\nif [ \"$PCT\" -ge 90 ]; then BAR_COLOR=\"$RED\"\nelif [ \"$PCT\" -ge 70 ]; then BAR_COLOR=\"$YELLOW\"\nelse BAR_COLOR=\"$GREEN\"; fi\n\nFILLED=$((PCT / 10)); EMPTY=$((10 - FILLED))\nBAR=$(printf \"%${FILLED}s\" | tr ' ' '█')$(printf \"%${EMPTY}s\" | tr ' ' '░')\n\nMINS=$((DURATION_MS / 60000)); SECS=$(((DURATION_MS % 60000) / 1000))\n\nBRANCH=\"\"\ngit rev-parse --git-dir > /dev/null 2>&1 && BRANCH=\" | 🌿 $(git branch --show-current 2>/dev/null)\"\n\necho -e \"${CYAN}[$MODEL]${RESET} 📁 ${DIR##*/}$BRANCH\"\nCOST_FMT=$(printf '$%.2f' \"$COST\")\necho -e \"${BAR_COLOR}${BAR}${RESET} ${PCT}% | ${YELLOW}${COST_FMT}${RESET} | ⏱️ ${MINS}m ${SECS}s\"",
+              "code": "#!/bin/bash\ninput=$(cat)\n\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nDIR=$(echo \"$input\" | jq -r '.workspace.current_dir')\nCOST=$(echo \"$input\" | jq -r '.cost.total_cost_usd // 0')\nPCT=$(echo \"$input\" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)\nDURATION_MS=$(echo \"$input\" | jq -r '.cost.total_duration_ms // 0')\n\nCYAN='\\033[36m'; GREEN='\\033[32m'; YELLOW='\\033[33m'; RED='\\033[31m'; RESET='\\033[0m'\n\n# Pick bar color based on context usage\nif [ \"$PCT\" -ge 90 ]; then BAR_COLOR=\"$RED\"\nelif [ \"$PCT\" -ge 70 ]; then BAR_COLOR=\"$YELLOW\"\nelse BAR_COLOR=\"$GREEN\"; fi\n\nFILLED=$((PCT / 10)); EMPTY=$((10 - FILLED))\nprintf -v FILL \"%${FILLED}s\"; printf -v PAD \"%${EMPTY}s\"\nBAR=\"${FILL// /█}${PAD// /░}\"\n\nMINS=$((DURATION_MS / 60000)); SECS=$(((DURATION_MS % 60000) / 1000))\n\nBRANCH=\"\"\ngit rev-parse --git-dir > /dev/null 2>&1 && BRANCH=\" | 🌿 $(git branch --show-current 2>/dev/null)\"\n\necho -e \"${CYAN}[$MODEL]${RESET} 📁 ${DIR##*/}$BRANCH\"\nCOST_FMT=$(printf '$%.2f' \"$COST\")\necho -e \"${BAR_COLOR}${BAR}${RESET} ${PCT}% | ${YELLOW}${COST_FMT}${RESET} | ⏱️ ${MINS}m ${SECS}s\"",
               "kind": "command"
             },
             {

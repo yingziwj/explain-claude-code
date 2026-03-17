@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-16T04:48:10.918Z",
+  "generatedAt": "2026-03-17T04:26:30.177Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -904,6 +904,7 @@
       "metaDescription": "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
       "headings": [],
       "toc": [
+        "2.1.77",
         "2.1.76",
         "2.1.75",
         "2.1.74",
@@ -922,13 +923,56 @@
         "2.1.56",
         "2.1.55",
         "2.1.53",
-        "2.1.52",
-        "2.1.51"
+        "2.1.52"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Increased default maximum output token limits for Claude Opus 4.6 to 64k tokens, and the upper bound for Opus 4.6 and Sonnet 4.6 models to 128k tokens",
+        "Added allowRead sandbox filesystem setting to re-allow read access within denyRead regions",
+        "/copy now accepts an optional index: /copy N copies the Nth-latest assistant response",
+        "Fixed “Always Allow” on compound bash commands (e.g. cd src && npm test) saving a single rule for the full string instead of per-subcommand, leading to dead rules and repeated permission prompts",
+        "Fixed auto-updater starting overlapping binary downloads when the slash-command overlay repeatedly opened and closed, accumulating tens of gigabytes of memory",
+        "Fixed --resume silently truncating recent conversation history due to a race between memory-extraction writes and the main transcript",
+        "Fixed PreToolUse hooks returning \"allow\" bypassing deny permission rules, including enterprise managed settings",
+        "Fixed Write tool silently converting line endings when overwriting CRLF files or creating files in CRLF directories",
+        "Fixed memory growth in long-running sessions from progress messages surviving compaction",
+        "Fixed cost and token usage not being tracked when the API falls back to non-streaming mode",
+        "Fixed CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS not stripping beta tool-schema fields, causing proxy gateways to reject requests",
+        "Fixed Bash tool reporting errors for successful commands when the system temp directory path contains spaces",
+        "Fixed paste being lost when typing immediately after pasting",
+        "Fixed Ctrl+D in /feedback text input deleting forward instead of the second press exiting the session",
+        "Fixed API error when dragging a 0-byte image file into the prompt",
+        "Fixed Claude Desktop sessions incorrectly using the terminal CLI’s configured API key instead of OAuth",
+        "Fixed git-subdir plugins at different subdirectories of the same monorepo commit colliding in the plugin cache",
+        "Fixed ordered list numbers not rendering in terminal UI",
+        "Fixed a race condition where stale-worktree cleanup could delete an agent worktree just resumed from a previous crash",
+        "Fixed input deadlock when opening /mcp or similar dialogs while the agent is running",
+        "Fixed Backspace and Delete keys not working in vim NORMAL mode",
+        "Fixed status line not updating when vim mode is toggled on or off",
+        "Fixed hyperlinks opening twice on Cmd+click in VS Code, Cursor, and other xterm.js-based terminals",
+        "Fixed background colors rendering as terminal-default inside tmux with default configuration",
+        "Fixed iTerm2 session crash when selecting text inside tmux over SSH",
+        "Fixed clipboard copy silently failing in tmux sessions; copy toast now indicates whether to paste with ⌘V or tmux prefix+]",
+        "Fixed ←/→ accidentally switching tabs in settings, permissions, and sandbox dialogs while navigating lists",
+        "Fixed IDE integration not auto-connecting when Claude Code is launched inside tmux or screen",
+        "Fixed CJK characters visually bleeding into adjacent UI elements when clipped at the right edge",
+        "Fixed teammate panes not closing when the leader exits",
+        "Fixed iTerm2 auto mode not detecting iTerm2 for native split-pane teammates",
+        "Faster startup on macOS (~60ms) by reading keychain credentials in parallel with module loading",
+        "Faster --resume on fork-heavy and very large sessions — up to 45% faster loading and ~100-150MB less peak memory",
+        "Improved Esc to abort in-flight non-streaming API requests",
+        "Improved claude plugin validate to check skill, agent, and command frontmatter plus hooks/hooks.json, catching YAML parse errors and schema violations",
+        "Background bash tasks are now killed if output exceeds 5GB, preventing runaway processes from filling disk",
+        "Sessions are now auto-named from plan content when you accept a plan",
+        "Improved headless mode plugin installation to compose correctly with CLAUDE_CODE_PLUGIN_SEED_DIR",
+        "Show a notice when apiKeyHelper takes longer than 10s, preventing it from blocking the main loop",
+        "The Agent tool no longer accepts a resume parameter — use SendMessage({to: agentId}) to continue a previously spawned agent",
+        "SendMessage now auto-resumes stopped agents in the background instead of returning an error",
+        "Renamed /fork to /branch (/fork still works as an alias)",
+        "[VSCode] Improved plan preview tab titles to use the plan’s heading instead of “Claude’s Plan”",
+        "[VSCode] When option+click doesn’t trigger native selection on macOS, the footer now points to the macOptionClickForcesSelection setting",
         "Added MCP elicitation support — MCP servers can now request structured input mid-task via an interactive dialog (form fields or browser URL)",
         "Added new Elicitation and ElicitationResult hooks to intercept and override responses before they’re sent back",
         "Added -n / --name <name> CLI flag to set a display name for the session at startup",
@@ -1061,51 +1105,7 @@
         "Fixed prompt cache invalidation in SDK query() calls, reducing input token costs up to 12x",
         "Fixed Escape key becoming unresponsive after cancelling a query",
         "Fixed double Ctrl+C not exiting when background agents or tasks are running",
-        "Fixed team agents to inherit the leader’s model",
-        "Fixed “Always Allow” saving permission rules that never match again",
-        "Fixed several hooks issues: transcript_path pointing to the wrong directory for resumed/forked sessions, agent prompt being silently deleted from settings.json on every settings write, PostToolUse block reason displaying twice, async hooks not receiving stdin with bash read -r, and validation error message showing an example that fails validation",
-        "Fixed session crashes in Desktop/SDK when Read returned files containing U+2028/U+2029 characters",
-        "Fixed terminal title being cleared on exit even when CLAUDE_CODE_DISABLE_TERMINAL_TITLE was set",
-        "Fixed several permission rule matching issues: wildcard rules not matching commands with heredocs, embedded newlines, or no arguments; sandbox.excludedCommands failing with env var prefixes; “always allow” suggesting overly broad prefixes for nested CLI tools; and deny rules not applying to all command forms",
-        "Fixed oversized and truncated images from Bash data-URL output",
-        "Fixed a crash when resuming sessions that contained Bedrock API errors",
-        "Fixed intermittent “expected boolean, received string” validation errors on Edit, Bash, and Grep tool inputs",
-        "Fixed multi-line session titles when forking from a conversation whose first message contained newlines",
-        "Fixed queued messages not showing attached images, and images being lost when pressing ↑ to edit a queued message",
-        "Fixed parallel tool calls where a failed Read/WebFetch/Glob would cancel its siblings — only Bash errors now cascade",
-        "VSCode: Fixed scroll speed in integrated terminals not matching native terminals",
-        "VSCode: Fixed Shift+Enter submitting input instead of inserting a newline for users with older keybindings",
-        "VSCode: Added effort level indicator on the input border",
-        "VSCode: Added vscode://anthropic.claude-code/open URI handler to open a new Claude Code tab programmatically, with optional prompt and session query parameters",
-        "Added /loop command to run a prompt or slash command on a recurring interval (e.g. /loop 5m check the deploy)",
-        "Added cron scheduling tools for recurring prompts within a session",
-        "Added voice:pushToTalk keybinding to make the voice activation key rebindable in keybindings.json (default: space) — modifier+letter combos like meta+k have zero typing interference",
-        "Added fmt, comm, cmp, numfmt, expr, test, printf, getconf, seq, tsort, and pr to the bash auto-approval allowlist",
-        "Fixed stdin freeze in long-running sessions where keystrokes stop being processed but the process stays alive",
-        "Fixed a 5–8 second startup freeze for users with voice mode enabled, caused by CoreAudio initialization blocking the main thread after system wake",
-        "Fixed startup UI freeze when many claude.ai proxy connectors refresh an expired OAuth token simultaneously",
-        "Fixed forked conversations (/fork) sharing the same plan file, which caused plan edits in one fork to overwrite the other",
-        "Fixed the Read tool putting oversized images into context when image processing failed, breaking subsequent turns in long image-heavy sessions",
-        "Fixed false-positive permission prompts for compound bash commands containing heredoc commit messages",
-        "Fixed plugin installations being lost when running multiple Claude Code instances",
-        "Fixed claude.ai connectors failing to reconnect after OAuth token refresh",
-        "Fixed claude.ai MCP connector startup notifications appearing for every org-configured connector instead of only previously connected ones",
-        "Fixed background agent completion notifications missing the output file path, which made it difficult for parent agents to recover agent results after context compaction",
-        "Fixed duplicate output in Bash tool error messages when commands exit with non-zero status",
-        "Fixed Chrome extension auto-detection getting permanently stuck on “not installed” after running on a machine without local Chrome",
-        "Fixed /plugin marketplace update failing with merge conflicts when the marketplace is pinned to a branch/tag ref",
-        "Fixed /plugin marketplace add owner/repo@ref incorrectly parsing @ — previously only # worked as a ref separator, causing undiagnosable errors with strictKnownMarketplaces",
-        "Fixed duplicate entries in /permissions Workspace tab when the same directory is added with and without a trailing slash",
-        "Fixed --print hanging forever when team agents are configured — the exit loop no longer waits on long-lived in_process_teammate tasks",
-        "Fixed ”❯ Tool loaded.” appearing in the REPL after every ToolSearch call",
-        "Fixed prompting for cd <cwd> && git ... on Windows when the model uses a mingw-style path",
-        "Improved startup time by deferring native image processor loading to first use",
-        "Improved bridge session reconnection to complete within seconds after laptop wake from sleep, instead of waiting up to 10 minutes",
-        "Improved /plugin uninstall to disable project-scoped plugins in .claude/settings.local.json instead of modifying .claude/settings.json, so changes don’t affect teammates",
-        "Improved plugin-provided MCP server deduplication — servers that duplicate a manually-configured server (same command/URL) are now skipped, preventing duplicate connections and tool sets. Suppressions are shown in the /plugin menu.",
-        "Updated /debug to toggle debug logging on mid-session, since debug logs are no longer written by default",
-        "Removed startup notification noise for unauthenticated org-registered claude.ai connectors",
-        "Fixed API 400 errors when using ANTHROPIC_BASE_URL with a third-party gateway — tool search now correctly detects proxy endpoints and disables tool_reference blocks"
+        "Fixed team agents to inherit the leader’s model"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1115,15 +1115,15 @@
             "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Added MCP elicitation support — MCP servers can now request structured input mid-task via an interactive dialog (form fields or browser URL)",
-            "Added new Elicitation and ElicitationResult hooks to intercept and override responses before they’re sent back",
-            "Added -n / --name <name> CLI flag to set a display name for the session at startup",
-            "Added worktree.sparsePaths setting for claude --worktree in large monorepos to check out only the directories you need via git sparse-checkout",
-            "Added PostCompact hook that fires after compaction completes",
-            "Added /effort slash command to set model effort level",
-            "Added session quality survey — enterprise admins can configure the sample rate via the feedbackSurveyRate setting",
-            "Fixed deferred tools (loaded via ToolSearch) losing their input schemas after conversation compaction, causing array and number parameters to be rejected with type errors",
-            "Fixed slash commands showing “Unknown skill”"
+            "Increased default maximum output token limits for Claude Opus 4.6 to 64k tokens, and the upper bound for Opus 4.6 and Sonnet 4.6 models to 128k tokens",
+            "Added allowRead sandbox filesystem setting to re-allow read access within denyRead regions",
+            "/copy now accepts an optional index: /copy N copies the Nth-latest assistant response",
+            "Fixed “Always Allow” on compound bash commands (e.g. cd src && npm test) saving a single rule for the full string instead of per-subcommand, leading to dead rules and repeated permission prompts",
+            "Fixed auto-updater starting overlapping binary downloads when the slash-command overlay repeatedly opened and closed, accumulating tens of gigabytes of memory",
+            "Fixed --resume silently truncating recent conversation history due to a race between memory-extraction writes and the main transcript",
+            "Fixed PreToolUse hooks returning \"allow\" bypassing deny permission rules, including enterprise managed settings",
+            "Fixed Write tool silently converting line endings when overwriting CRLF files or creating files in CRLF directories",
+            "Fixed memory growth in long-running sessions from progress messages surviving compaction"
           ],
           "codeBlocks": []
         }
@@ -6293,6 +6293,7 @@
         "CLI-defined subagents are passed as JSON when launching Claude Code. They exist only for that session and aren’t saved to disk, making them useful for quick testing or automation scripts. You can define multiple subagents in a single --agents call:",
         "The --agents flag accepts JSON with the same frontmatter fields as file-based subagents: description, prompt, tools, disallowedTools, model, permissionMode, mcpServers, hooks, maxTurns, skills, and memory. Use prompt for the system prompt, equivalent to the markdown body in file-based subagents.",
         "Plugin subagents come from plugins you’ve installed. They appear in /agents alongside your custom subagents. See the plugin components reference for details on creating plugin subagents.",
+        "For security reasons, plugin subagents do not support the hooks, mcpServers, or permissionMode frontmatter fields. These fields are ignored when loading agents from a plugin. If you need them, copy the agent file into .claude/agents/ or ~/.claude/agents/. You can also add rules to permissions.allow in settings.json or settings.local.json, but these rules apply to the entire session, not just the plugin subagent.",
         "Subagent files use YAML frontmatter for configuration, followed by the system prompt in Markdown:",
         "Subagents are loaded at session start. If you create a subagent by manually adding a file, restart your session or use /agents to load it immediately.",
         "The frontmatter defines the subagent’s metadata and configuration. The body becomes the system prompt that guides the subagent’s behavior. Subagents receive only this system prompt (plus basic environment details like working directory), not the full Claude Code system prompt.",
@@ -6371,8 +6372,7 @@
         "Use subagents when:",
         "The task produces verbose output you don’t need in your main context",
         "You want to enforce specific tool restrictions or permissions",
-        "The work is self-contained and can return a summary",
-        "Consider Skills instead when you want reusable prompts or workflows that run in the main conversation context rather than isolated subagent context."
+        "The work is self-contained and can return a summary"
       ],
       "codeBlocks": [
         "/agents",
@@ -6492,7 +6492,8 @@
             "User subagents (~/.claude/agents/) are personal subagents available in all your projects.",
             "CLI-defined subagents are passed as JSON when launching Claude Code. They exist only for that session and aren’t saved to disk, making them useful for quick testing or automation scripts. You can define multiple subagents in a single --agents call:",
             "The --agents flag accepts JSON with the same frontmatter fields as file-based subagents: description, prompt, tools, disallowedTools, model, permissionMode, mcpServers, hooks, maxTurns, skills, and memory. Use prompt for the system prompt, equivalent to the markdown body in file-based subagents.",
-            "Plugin subagents come from plugins you’ve installed. They appear in /agents alongside your custom subagents. See the plugin components reference for details on creating plugin subagents."
+            "Plugin subagents come from plugins you’ve installed. They appear in /agents alongside your custom subagents. See the plugin components reference for details on creating plugin subagents.",
+            "For security reasons, plugin subagents do not support the hooks, mcpServers, or permissionMode frontmatter fields. These fields are ignored when loading agents from a plugin. If you need them, copy the agent file into .claude/agents/ or ~/.claude/agents/. You can also add rules to permissions.allow in settings.json or settings.local.json, but these rules apply to the entire session, not just the plugin subagent."
           ],
           "codeBlocks": [
             "claude --agents '{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  },\n  \"debugger\": {\n    \"description\": \"Debugging specialist for errors and test failures.\",\n    \"prompt\": \"You are an expert debugger. Analyze errors, identify root causes, and provide fixes.\"\n  }\n}'"
@@ -7397,7 +7398,7 @@
         "For plugins with many components, organize your directory structure by functionality. For complete directory layouts and organization patterns, see Plugin directory structure.",
         "Use the --plugin-dir flag to test plugins during development. This loads your plugin directly without requiring installation.",
         "When a --plugin-dir plugin has the same name as an installed marketplace plugin, the local copy takes precedence for that session. This lets you test changes to a plugin you already have installed without uninstalling it first. Marketplace plugins force-enabled by managed settings are the only exception and cannot be overridden.",
-        "As you make changes to your plugin, run /reload-plugins to pick up the updates without restarting. Changes to LSP server configuration still require a full restart. Test your plugin components:",
+        "As you make changes to your plugin, run /reload-plugins to pick up the updates without restarting. This reloads commands, skills, agents, hooks, plugin MCP servers, and plugin LSP servers. Test your plugin components:",
         "Try your skills with /plugin-name:skill-name",
         "Check that agents appear in /agents",
         "Verify hooks work as expected",
@@ -7605,7 +7606,7 @@
           "paragraphs": [
             "Use the --plugin-dir flag to test plugins during development. This loads your plugin directly without requiring installation.",
             "When a --plugin-dir plugin has the same name as an installed marketplace plugin, the local copy takes precedence for that session. This lets you test changes to a plugin you already have installed without uninstalling it first. Marketplace plugins force-enabled by managed settings are the only exception and cannot be overridden.",
-            "As you make changes to your plugin, run /reload-plugins to pick up the updates without restarting. Changes to LSP server configuration still require a full restart. Test your plugin components:",
+            "As you make changes to your plugin, run /reload-plugins to pick up the updates without restarting. This reloads commands, skills, agents, hooks, plugin MCP servers, and plugin LSP servers. Test your plugin components:",
             "Try your skills with /plugin-name:skill-name",
             "Check that agents appear in /agents",
             "Verify hooks work as expected",
@@ -7853,7 +7854,7 @@
         "You can also install directly from the command line:",
         "See Configuration scopes to learn more about scopes.",
         "Use your new plugin",
-        "After installing, the plugin’s commands are immediately available. Plugin commands are namespaced by the plugin name, so commit-commands provides commands like /commit-commands:commit.",
+        "After installing, run /reload-plugins to activate the plugin. Plugin commands are namespaced by the plugin name, so commit-commands provides commands like /commit-commands:commit.",
         "Try it out by making a change to a file and running:",
         "This stages your changes, generates a commit message, and creates the commit.",
         "Each plugin works differently. Check the plugin’s description in the Discover tab or its homepage to learn what commands and capabilities it provides.",
@@ -7888,9 +7889,8 @@
         "Re-enable a disabled plugin:",
         "Completely remove a plugin:",
         "The --scope option lets you target a specific scope with CLI commands:",
-        "When you install, enable, or disable plugins during a session, some changes (like new commands and hooks) take effect immediately. Others, including LSP server updates, require a restart.",
-        "To activate all pending plugin changes without restarting, run:",
-        "Claude Code reloads all active plugins and reports what was loaded. If any LSP servers were added or updated, it will let you know those require a restart to take effect.",
+        "When you install, enable, or disable plugins during a session, run /reload-plugins to pick up all changes without restarting:",
+        "Claude Code reloads all active plugins and shows counts for reloaded commands, skills, agents, hooks, plugin MCP servers, and plugin LSP servers.",
         "You can manage marketplaces through the interactive /plugin interface or with CLI commands.",
         "Run /plugin and go to the Marketplaces tab to:",
         "View all your added marketplaces with their sources and status",
@@ -8167,9 +8167,8 @@
         {
           "title": "​Apply plugin changes without restarting",
           "paragraphs": [
-            "When you install, enable, or disable plugins during a session, some changes (like new commands and hooks) take effect immediately. Others, including LSP server updates, require a restart.",
-            "To activate all pending plugin changes without restarting, run:",
-            "Claude Code reloads all active plugins and reports what was loaded. If any LSP servers were added or updated, it will let you know those require a restart to take effect."
+            "When you install, enable, or disable plugins during a session, run /reload-plugins to pick up all changes without restarting:",
+            "Claude Code reloads all active plugins and shows counts for reloaded commands, skills, agents, hooks, plugin MCP servers, and plugin LSP servers."
           ],
           "codeBlocks": [
             "/reload-plugins"
@@ -9175,6 +9174,7 @@
         "​Block edits to protected files",
         "​Re-inject context after compaction",
         "​Audit configuration changes",
+        "​Auto-approve specific permission prompts",
         "​How hooks work",
         "​Read input and return output",
         "​Filter hooks with matchers",
@@ -9186,8 +9186,7 @@
         "​Limitations",
         "​Hook not firing",
         "​Hook error in output",
-        "​/hooks shows no hooks configured",
-        "​Stop hook runs forever"
+        "​/hooks shows no hooks configured"
       ],
       "toc": [
         "Set up your first hook",
@@ -9197,6 +9196,7 @@
         "Block edits to protected files",
         "Re-inject context after compaction",
         "Audit configuration changes",
+        "Auto-approve specific permission prompts",
         "How hooks work",
         "Read input and return output",
         "Hook input",
@@ -9208,8 +9208,7 @@
         "Agent-based hooks",
         "HTTP hooks",
         "Limitations and troubleshooting",
-        "Limitations",
-        "Hook not firing"
+        "Limitations"
       ],
       "paragraphs": [
         "Set up your first hook",
@@ -9219,6 +9218,7 @@
         "Block edits to protected files",
         "Re-inject context after compaction",
         "Audit configuration changes",
+        "Auto-approve specific permission prompts",
         "How hooks work",
         "Read input and return output",
         "Hook input",
@@ -9274,6 +9274,13 @@
         "Track when settings or skills files change during a session. The ConfigChange event fires when an external process or editor modifies a configuration file, so you can log changes for compliance or block unauthorized modifications.",
         "This example appends each change to an audit log. Add this to ~/.claude/settings.json:",
         "The matcher filters by configuration type: user_settings, project_settings, local_settings, policy_settings, or skills. To block a change from taking effect, exit with code 2 or return {\"decision\": \"block\"}. See the ConfigChange reference for the full input schema.",
+        "Skip the approval dialog for tool calls you always allow. This example auto-approves ExitPlanMode, the tool Claude calls when it finishes presenting a plan and asks to proceed, so you aren’t prompted every time a plan is ready.",
+        "Unlike the exit-code examples above, auto-approval requires your hook to write a JSON decision to stdout. A PermissionRequest hook fires when Claude Code is about to show a permission dialog, and returning \"behavior\": \"allow\" answers it on your behalf.",
+        "The matcher scopes the hook to ExitPlanMode only, so no other prompts are affected. Add this to ~/.claude/settings.json:",
+        "When the hook approves, Claude Code exits plan mode and restores whatever permission mode was active before you entered plan mode. The transcript shows “Allowed by PermissionRequest hook” where the dialog would have appeared. The hook path always keeps the current conversation: it cannot clear context and start a fresh implementation session the way the dialog can.",
+        "To set a specific permission mode instead, your hook’s output can include an updatedPermissions array with a setMode entry. The mode value is any permission mode like default, acceptEdits, or bypassPermissions, and destination: \"session\" applies it for the current session only.",
+        "To switch the session to acceptEdits, your hook writes this JSON to stdout:",
+        "Keep the matcher as narrow as possible. Matching on .* or leaving the matcher empty would auto-approve every permission prompt, including file writes and shell commands. See the PermissionRequest reference for the full set of decision fields.",
         "Hook events fire at specific lifecycle points in Claude Code. When an event fires, all matching hooks run in parallel, and identical hook commands are automatically deduplicated. The table below shows each event and when it triggers:",
         "Each hook has a type that determines how it runs. Most hooks use \"type\": \"command\", which runs a shell command. Three other types are available:",
         "\"type\": \"http\": POST event data to a URL. See HTTP hooks.",
@@ -9310,7 +9317,7 @@
         "For full matcher syntax, see the Hooks reference.",
         "Where you add a hook determines its scope:",
         "Run /hooks in Claude Code to browse all configured hooks grouped by event. To disable all hooks at once, set \"disableAllHooks\": true in your settings file.",
-        "If you edit settings files directly while Claude Code is running, hook changes won’t take effect until you review them in the /hooks menu or restart your session. This prevents unexpected hook modifications from taking effect mid-session.",
+        "If you edit settings files directly while Claude Code is running, the file watcher normally picks up hook changes automatically.",
         "For decisions that require judgment rather than deterministic rules, use type: \"prompt\" hooks. Instead of running a shell command, Claude Code sends your prompt and the hook’s input data to a Claude model (Haiku by default) to make the decision. You can specify a different model with the model field if you need more capability.",
         "The model’s only job is to return a yes/no decision as JSON:",
         "\"ok\": true: the action proceeds",
@@ -9344,7 +9351,7 @@
         "If you see “jq: command not found”, install jq or use Python/Node.js for JSON parsing",
         "If the script isn’t running at all, make it executable: chmod +x ./my-hook.sh",
         "You edited a settings file but the hooks don’t appear in the menu.",
-        "Restart your session or open /hooks to reload. Manual file edits require a reload before they take effect.",
+        "File edits are normally picked up automatically. If they haven’t appeared after a few seconds, the file watcher may have missed the change: restart your session to force a reload.",
         "Verify your JSON is valid (trailing commas and comments are not allowed)",
         "Confirm the settings file is in the correct location: .claude/settings.json for project hooks, ~/.claude/settings.json for global hooks",
         "Claude keeps working in an infinite loop instead of stopping.",
@@ -9369,6 +9376,8 @@
         "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Edit|Write\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"\\\"$CLAUDE_PROJECT_DIR\\\"/.claude/hooks/protect-files.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
         "{\n  \"hooks\": {\n    \"SessionStart\": [\n      {\n        \"matcher\": \"compact\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo 'Reminder: use Bun, not npm. Run bun test before committing. Current sprint: auth refactor.'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
         "{\n  \"hooks\": {\n    \"ConfigChange\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"jq -c '{timestamp: now | todate, source: .source, file: .file_path}' >> ~/claude-config-audit.log\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+        "{\n  \"hooks\": {\n    \"PermissionRequest\": [\n      {\n        \"matcher\": \"ExitPlanMode\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo '{\\\"hookSpecificOutput\\\": {\\\"hookEventName\\\": \\\"PermissionRequest\\\", \\\"decision\\\": {\\\"behavior\\\": \\\"allow\\\"}}}'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+        "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PermissionRequest\",\n    \"decision\": {\n      \"behavior\": \"allow\",\n      \"updatedPermissions\": [\n        { \"type\": \"setMode\", \"mode\": \"acceptEdits\", \"destination\": \"session\" }\n      ]\n    }\n  }\n}",
         "{\n  \"session_id\": \"abc123\",          // unique ID for this session\n  \"cwd\": \"/Users/sarah/myproject\", // working directory when the event fired\n  \"hook_event_name\": \"PreToolUse\", // which event triggered this hook\n  \"tool_name\": \"Bash\",             // the tool Claude is about to use\n  \"tool_input\": {                  // the arguments Claude passed to the tool\n    \"command\": \"npm test\"          // for Bash, this is the shell command\n  }\n}",
         "#!/bin/bash\nINPUT=$(cat)\nCOMMAND=$(echo \"$INPUT\" | jq -r '.tool_input.command')\n\nif echo \"$COMMAND\" | grep -q \"drop table\"; then\n  echo \"Blocked: dropping tables is not allowed\" >&2  # stderr becomes Claude's feedback\n  exit 2                                               # exit 2 = block the action\nfi\n\nexit 0  # exit 0 = let it proceed",
         "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PreToolUse\",\n    \"permissionDecision\": \"deny\",\n    \"permissionDecisionReason\": \"Use rg instead of grep for better performance\"\n  }\n}",
@@ -9395,11 +9404,11 @@
             "Block edits to protected files",
             "Re-inject context after compaction",
             "Audit configuration changes",
+            "Auto-approve specific permission prompts",
             "How hooks work",
             "Read input and return output",
             "Hook input",
-            "Hook output",
-            "Structured JSON output"
+            "Hook output"
           ],
           "codeBlocks": []
         },
@@ -9429,7 +9438,8 @@
             "Auto-format code after edits",
             "Block edits to protected files",
             "Re-inject context after compaction",
-            "Audit configuration changes"
+            "Audit configuration changes",
+            "Auto-approve specific permission prompts"
           ],
           "codeBlocks": []
         },
@@ -9498,6 +9508,22 @@
           ]
         },
         {
+          "title": "​Auto-approve specific permission prompts",
+          "paragraphs": [
+            "Skip the approval dialog for tool calls you always allow. This example auto-approves ExitPlanMode, the tool Claude calls when it finishes presenting a plan and asks to proceed, so you aren’t prompted every time a plan is ready.",
+            "Unlike the exit-code examples above, auto-approval requires your hook to write a JSON decision to stdout. A PermissionRequest hook fires when Claude Code is about to show a permission dialog, and returning \"behavior\": \"allow\" answers it on your behalf.",
+            "The matcher scopes the hook to ExitPlanMode only, so no other prompts are affected. Add this to ~/.claude/settings.json:",
+            "When the hook approves, Claude Code exits plan mode and restores whatever permission mode was active before you entered plan mode. The transcript shows “Allowed by PermissionRequest hook” where the dialog would have appeared. The hook path always keeps the current conversation: it cannot clear context and start a fresh implementation session the way the dialog can.",
+            "To set a specific permission mode instead, your hook’s output can include an updatedPermissions array with a setMode entry. The mode value is any permission mode like default, acceptEdits, or bypassPermissions, and destination: \"session\" applies it for the current session only.",
+            "To switch the session to acceptEdits, your hook writes this JSON to stdout:",
+            "Keep the matcher as narrow as possible. Matching on .* or leaving the matcher empty would auto-approve every permission prompt, including file writes and shell commands. See the PermissionRequest reference for the full set of decision fields."
+          ],
+          "codeBlocks": [
+            "{\n  \"hooks\": {\n    \"PermissionRequest\": [\n      {\n        \"matcher\": \"ExitPlanMode\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo '{\\\"hookSpecificOutput\\\": {\\\"hookEventName\\\": \\\"PermissionRequest\\\", \\\"decision\\\": {\\\"behavior\\\": \\\"allow\\\"}}}'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+            "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PermissionRequest\",\n    \"decision\": {\n      \"behavior\": \"allow\",\n      \"updatedPermissions\": [\n        { \"type\": \"setMode\", \"mode\": \"acceptEdits\", \"destination\": \"session\" }\n      ]\n    }\n  }\n}"
+          ]
+        },
+        {
           "title": "​How hooks work",
           "paragraphs": [
             "Hook events fire at specific lifecycle points in Claude Code. When an event fires, all matching hooks run in parallel, and identical hook commands are automatically deduplicated. The table below shows each event and when it triggers:",
@@ -9558,7 +9584,7 @@
           "paragraphs": [
             "Where you add a hook determines its scope:",
             "Run /hooks in Claude Code to browse all configured hooks grouped by event. To disable all hooks at once, set \"disableAllHooks\": true in your settings file.",
-            "If you edit settings files directly while Claude Code is running, hook changes won’t take effect until you review them in the /hooks menu or restart your session. This prevents unexpected hook modifications from taking effect mid-session."
+            "If you edit settings files directly while Claude Code is running, the file watcher normally picks up hook changes automatically."
           ],
           "codeBlocks": []
         },
@@ -9647,7 +9673,7 @@
           "title": "​/hooks shows no hooks configured",
           "paragraphs": [
             "You edited a settings file but the hooks don’t appear in the menu.",
-            "Restart your session or open /hooks to reload. Manual file edits require a reload before they take effect.",
+            "File edits are normally picked up automatically. If they haven’t appeared after a few seconds, the file watcher may have missed the change: restart your session to force a reload.",
             "Verify your JSON is valid (trailing commas and comments are not allowed)",
             "Confirm the settings file is in the correct location: .claude/settings.json for project hooks, ~/.claude/settings.json for global hooks"
           ],
@@ -10050,7 +10076,7 @@
         "In .mcp.json at plugin root:",
         "Or inline in plugin.json:",
         "Plugin MCP features:",
-        "Automatic lifecycle: Servers start when plugin enables, but you must restart Claude Code to apply MCP server changes (enabling or disabling)",
+        "Automatic lifecycle: At session startup, servers for enabled plugins connect automatically. If you enable or disable a plugin during a session, run /reload-plugins to connect or disconnect its MCP servers",
         "Environment variables: Use ${CLAUDE_PLUGIN_ROOT} for plugin-relative paths",
         "User environment access: Access to same environment variables as manually configured servers",
         "Multiple transport types: Support stdio, SSE, and HTTP transports (transport support may vary by server)",
@@ -10295,7 +10321,7 @@
             "In .mcp.json at plugin root:",
             "Or inline in plugin.json:",
             "Plugin MCP features:",
-            "Automatic lifecycle: Servers start when plugin enables, but you must restart Claude Code to apply MCP server changes (enabling or disabling)",
+            "Automatic lifecycle: At session startup, servers for enabled plugins connect automatically. If you enable or disable a plugin during a session, run /reload-plugins to connect or disconnect its MCP servers",
             "Environment variables: Use ${CLAUDE_PLUGIN_ROOT} for plugin-relative paths"
           ],
           "codeBlocks": [
@@ -13887,7 +13913,7 @@
         "Was this page helpful?"
       ],
       "codeBlocks": [
-        "{\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ]\n  },\n  \"disableBypassPermissionsMode\": \"disable\"\n}"
+        "{\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ],\n    \"disableBypassPermissionsMode\": \"disable\"\n  }\n}"
       ],
       "sectionBlocks": [
         {
@@ -13938,7 +13964,7 @@
             "Save your changes. Claude Code clients receive the updated settings on their next startup or hourly polling cycle."
           ],
           "codeBlocks": [
-            "{\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ]\n  },\n  \"disableBypassPermissionsMode\": \"disable\"\n}"
+            "{\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ],\n    \"disableBypassPermissionsMode\": \"disable\"\n  }\n}"
           ]
         },
         {
@@ -14098,7 +14124,7 @@
         "If you explicitly opt in to methods to provide us with materials to train on, such as via the Development Partner Program, we may use those materials provided to train our models. An organization admin can expressly opt-in to the Development Partner Program for their organization. Note that this program is available only for Anthropic first-party API, and not for Bedrock or Vertex users.",
         "If you choose to send us feedback about Claude Code using the /bug command, we may use your feedback to improve our products and services. Transcripts shared via /bug are retained for 5 years.",
         "When you see the “How is Claude doing this session?” prompt in Claude Code, responding to this survey (including selecting “Dismiss”), only your numeric rating (1, 2, 3, or dismiss) is recorded. We do not collect or store any conversation transcripts, inputs, outputs, or other session data as part of this survey. Unlike thumbs up/down feedback or /bug reports, this session quality survey is a simple product satisfaction metric. Your responses to this survey do not impact your data training preferences and cannot be used to train our AI models.",
-        "To disable these surveys, set CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1. The survey is also automatically disabled when using third-party providers (Bedrock, Vertex, Foundry) or when telemetry is disabled.",
+        "To disable these surveys, set CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1. The survey is also disabled when DISABLE_TELEMETRY or CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC is set. To control frequency instead of disabling, set feedbackSurveyRate in your settings file to a probability between 0 and 1.",
         "Anthropic retains Claude Code data based on your account type and preferences.",
         "Consumer users (Free, Pro, and Max plans):",
         "Users who allow data use for model improvement: 5-year retention period to support model development and safety improvements",
@@ -14124,7 +14150,7 @@
         "Claude Code connects from users’ machines to the Statsig service to log operational metrics such as latency, reliability, and usage patterns. This logging does not include any code or file paths. Data is encrypted in transit using TLS and at rest using 256-bit AES encryption. Read more in the Statsig security documentation. To opt out of Statsig telemetry, set the DISABLE_TELEMETRY environment variable.",
         "Claude Code connects from users’ machines to Sentry for operational error logging. The data is encrypted in transit using TLS and at rest using 256-bit AES encryption. Read more in the Sentry security documentation. To opt out of error logging, set the DISABLE_ERROR_REPORTING environment variable.",
         "When users run the /bug command, a copy of their full conversation history including code is sent to Anthropic. The data is encrypted in transit and at rest. Optionally, a Github issue is created in our public repository. To opt out of bug reporting, set the DISABLE_BUG_COMMAND environment variable.",
-        "By default, we disable all non-essential traffic (including error reporting, telemetry, bug reporting functionality, and session quality surveys) when using Bedrock, Vertex, or Foundry. You can also opt out of all of these at once by setting the CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC environment variable. Here are the full default behaviors:",
+        "By default, error reporting, telemetry, and bug reporting are disabled when using Bedrock, Vertex, or Foundry. Session quality surveys are the exception and appear regardless of provider. You can opt out of all non-essential traffic, including surveys, at once by setting CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC. Here are the full default behaviors:",
         "All environment variables can be checked into settings.json (read more).",
         "Was this page helpful?"
       ],
@@ -14179,7 +14205,7 @@
           "title": "​Session quality surveys",
           "paragraphs": [
             "When you see the “How is Claude doing this session?” prompt in Claude Code, responding to this survey (including selecting “Dismiss”), only your numeric rating (1, 2, 3, or dismiss) is recorded. We do not collect or store any conversation transcripts, inputs, outputs, or other session data as part of this survey. Unlike thumbs up/down feedback or /bug reports, this session quality survey is a simple product satisfaction metric. Your responses to this survey do not impact your data training preferences and cannot be used to train our AI models.",
-            "To disable these surveys, set CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1. The survey is also automatically disabled when using third-party providers (Bedrock, Vertex, Foundry) or when telemetry is disabled."
+            "To disable these surveys, set CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1. The survey is also disabled when DISABLE_TELEMETRY or CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC is set. To control frequency instead of disabling, set feedbackSurveyRate in your settings file to a probability between 0 and 1."
           ],
           "codeBlocks": []
         },
@@ -14241,7 +14267,7 @@
         {
           "title": "​Default behaviors by API provider",
           "paragraphs": [
-            "By default, we disable all non-essential traffic (including error reporting, telemetry, bug reporting functionality, and session quality surveys) when using Bedrock, Vertex, or Foundry. You can also opt out of all of these at once by setting the CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC environment variable. Here are the full default behaviors:",
+            "By default, error reporting, telemetry, and bug reporting are disabled when using Bedrock, Vertex, or Foundry. Session quality surveys are the exception and appear regardless of provider. You can opt out of all non-essential traffic, including surveys, at once by setting CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC. Here are the full default behaviors:",
             "All environment variables can be checked into settings.json (read more).",
             "Was this page helpful?"
           ],
@@ -18143,7 +18169,7 @@
         "Fast mode requires Claude Code v2.1.36 or later. Check your version with claude --version.",
         "What to know:",
         "Use /fast to toggle on fast mode in Claude Code CLI. Also available via /fast in Claude Code VS Code Extension.",
-        "Fast mode for Opus 4.6 pricing starts at $30/150 MTok. Fast mode is available at a 50% discount for all plans until 11:59pm PT on February 16.",
+        "Fast mode for Opus 4.6 pricing is $30/150 MTok.",
         "Available to all Claude Code users on subscription plans (Pro/Max/Team/Enterprise) and Claude Console.",
         "For Claude Code users on subscription plans (Pro/Max/Team/Enterprise), fast mode is available via extra usage only and not included in the subscription rate limits.",
         "This page covers how to toggle fast mode, its cost tradeoff, when to use it, requirements, per-session opt-in, and rate limit behavior.",
@@ -18159,7 +18185,7 @@
         "Run /fast again at any time to check whether fast mode is on or off",
         "When you disable fast mode with /fast again, you remain on Opus 4.6. The model does not revert to your previous model. To switch to a different model, use /model.",
         "Fast mode has higher per-token pricing than standard Opus 4.6:",
-        "Fast mode is compatible with the 1M token extended context window.",
+        "Fast mode pricing is flat across the full 1M token context window.",
         "When you switch into fast mode mid-conversation, you pay the full fast mode uncached input token price for the entire conversation context. This costs more than if you had enabled fast mode from the start.",
         "Fast mode is best for interactive work where response latency matters more than cost:",
         "Rapid iteration on code changes",
@@ -18242,7 +18268,7 @@
           "title": "​Understand the cost tradeoff",
           "paragraphs": [
             "Fast mode has higher per-token pricing than standard Opus 4.6:",
-            "Fast mode is compatible with the 1M token extended context window.",
+            "Fast mode pricing is flat across the full 1M token context window.",
             "When you switch into fast mode mid-conversation, you pay the full fast mode uncached input token price for the entire conversation context. This costs more than if you had enabled fast mode from the start."
           ],
           "codeBlocks": []
@@ -18520,10 +18546,10 @@
         "chmod +x ~/.claude/statusline.sh",
         "{\n  \"statusLine\": {\n    \"type\": \"command\",\n    \"command\": \"~/.claude/statusline.sh\"\n  }\n}",
         "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-6\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\"\n  },\n  \"version\": \"1.0.80\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
-        "#!/bin/bash\n# Read all of stdin into a variable\ninput=$(cat)\n\n# Extract fields with jq, \"// 0\" provides fallback for null\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nPCT=$(echo \"$input\" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)\n\n# Build progress bar: printf creates spaces, tr replaces with blocks\nBAR_WIDTH=10\nFILLED=$((PCT * BAR_WIDTH / 100))\nEMPTY=$((BAR_WIDTH - FILLED))\nBAR=\"\"\n[ \"$FILLED\" -gt 0 ] && BAR=$(printf \"%${FILLED}s\" | tr ' ' '▓')\n[ \"$EMPTY\" -gt 0 ] && BAR=\"${BAR}$(printf \"%${EMPTY}s\" | tr ' ' '░')\"\n\necho \"[$MODEL] $BAR $PCT%\"",
+        "#!/bin/bash\n# Read all of stdin into a variable\ninput=$(cat)\n\n# Extract fields with jq, \"// 0\" provides fallback for null\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nPCT=$(echo \"$input\" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)\n\n# Build progress bar: printf -v creates a run of spaces, then\n# ${var// /▓} replaces each space with a block character\nBAR_WIDTH=10\nFILLED=$((PCT * BAR_WIDTH / 100))\nEMPTY=$((BAR_WIDTH - FILLED))\nBAR=\"\"\n[ \"$FILLED\" -gt 0 ] && printf -v FILL \"%${FILLED}s\" && BAR=\"${FILL// /▓}\"\n[ \"$EMPTY\" -gt 0 ] && printf -v PAD \"%${EMPTY}s\" && BAR=\"${BAR}${PAD// /░}\"\n\necho \"[$MODEL] $BAR $PCT%\"",
         "#!/bin/bash\ninput=$(cat)\n\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nDIR=$(echo \"$input\" | jq -r '.workspace.current_dir')\n\nGREEN='\\033[32m'\nYELLOW='\\033[33m'\nRESET='\\033[0m'\n\nif git rev-parse --git-dir > /dev/null 2>&1; then\n    BRANCH=$(git branch --show-current 2>/dev/null)\n    STAGED=$(git diff --cached --numstat 2>/dev/null | wc -l | tr -d ' ')\n    MODIFIED=$(git diff --numstat 2>/dev/null | wc -l | tr -d ' ')\n\n    GIT_STATUS=\"\"\n    [ \"$STAGED\" -gt 0 ] && GIT_STATUS=\"${GREEN}+${STAGED}${RESET}\"\n    [ \"$MODIFIED\" -gt 0 ] && GIT_STATUS=\"${GIT_STATUS}${YELLOW}~${MODIFIED}${RESET}\"\n\n    echo -e \"[$MODEL] 📁 ${DIR##*/} | 🌿 $BRANCH $GIT_STATUS\"\nelse\n    echo \"[$MODEL] 📁 ${DIR##*/}\"\nfi",
         "#!/bin/bash\ninput=$(cat)\n\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nCOST=$(echo \"$input\" | jq -r '.cost.total_cost_usd // 0')\nDURATION_MS=$(echo \"$input\" | jq -r '.cost.total_duration_ms // 0')\n\nCOST_FMT=$(printf '$%.2f' \"$COST\")\nDURATION_SEC=$((DURATION_MS / 1000))\nMINS=$((DURATION_SEC / 60))\nSECS=$((DURATION_SEC % 60))\n\necho \"[$MODEL] 💰 $COST_FMT | ⏱️ ${MINS}m ${SECS}s\"",
-        "#!/bin/bash\ninput=$(cat)\n\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nDIR=$(echo \"$input\" | jq -r '.workspace.current_dir')\nCOST=$(echo \"$input\" | jq -r '.cost.total_cost_usd // 0')\nPCT=$(echo \"$input\" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)\nDURATION_MS=$(echo \"$input\" | jq -r '.cost.total_duration_ms // 0')\n\nCYAN='\\033[36m'; GREEN='\\033[32m'; YELLOW='\\033[33m'; RED='\\033[31m'; RESET='\\033[0m'\n\n# Pick bar color based on context usage\nif [ \"$PCT\" -ge 90 ]; then BAR_COLOR=\"$RED\"\nelif [ \"$PCT\" -ge 70 ]; then BAR_COLOR=\"$YELLOW\"\nelse BAR_COLOR=\"$GREEN\"; fi\n\nFILLED=$((PCT / 10)); EMPTY=$((10 - FILLED))\nBAR=$(printf \"%${FILLED}s\" | tr ' ' '█')$(printf \"%${EMPTY}s\" | tr ' ' '░')\n\nMINS=$((DURATION_MS / 60000)); SECS=$(((DURATION_MS % 60000) / 1000))\n\nBRANCH=\"\"\ngit rev-parse --git-dir > /dev/null 2>&1 && BRANCH=\" | 🌿 $(git branch --show-current 2>/dev/null)\"\n\necho -e \"${CYAN}[$MODEL]${RESET} 📁 ${DIR##*/}$BRANCH\"\nCOST_FMT=$(printf '$%.2f' \"$COST\")\necho -e \"${BAR_COLOR}${BAR}${RESET} ${PCT}% | ${YELLOW}${COST_FMT}${RESET} | ⏱️ ${MINS}m ${SECS}s\"",
+        "#!/bin/bash\ninput=$(cat)\n\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nDIR=$(echo \"$input\" | jq -r '.workspace.current_dir')\nCOST=$(echo \"$input\" | jq -r '.cost.total_cost_usd // 0')\nPCT=$(echo \"$input\" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)\nDURATION_MS=$(echo \"$input\" | jq -r '.cost.total_duration_ms // 0')\n\nCYAN='\\033[36m'; GREEN='\\033[32m'; YELLOW='\\033[33m'; RED='\\033[31m'; RESET='\\033[0m'\n\n# Pick bar color based on context usage\nif [ \"$PCT\" -ge 90 ]; then BAR_COLOR=\"$RED\"\nelif [ \"$PCT\" -ge 70 ]; then BAR_COLOR=\"$YELLOW\"\nelse BAR_COLOR=\"$GREEN\"; fi\n\nFILLED=$((PCT / 10)); EMPTY=$((10 - FILLED))\nprintf -v FILL \"%${FILLED}s\"; printf -v PAD \"%${EMPTY}s\"\nBAR=\"${FILL// /█}${PAD// /░}\"\n\nMINS=$((DURATION_MS / 60000)); SECS=$(((DURATION_MS % 60000) / 1000))\n\nBRANCH=\"\"\ngit rev-parse --git-dir > /dev/null 2>&1 && BRANCH=\" | 🌿 $(git branch --show-current 2>/dev/null)\"\n\necho -e \"${CYAN}[$MODEL]${RESET} 📁 ${DIR##*/}$BRANCH\"\nCOST_FMT=$(printf '$%.2f' \"$COST\")\necho -e \"${BAR_COLOR}${BAR}${RESET} ${PCT}% | ${YELLOW}${COST_FMT}${RESET} | ⏱️ ${MINS}m ${SECS}s\"",
         "#!/bin/bash\ninput=$(cat)\n\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\n\n# Convert git SSH URL to HTTPS\nREMOTE=$(git remote get-url origin 2>/dev/null | sed 's/[email protected]:/https:\\/\\/github.com\\//' | sed 's/\\.git$//')\n\nif [ -n \"$REMOTE\" ]; then\n    REPO_NAME=$(basename \"$REMOTE\")\n    # OSC 8 format: \\e]8;;URL\\a then TEXT then \\e]8;;\\a\n    # printf %b interprets escape sequences reliably across shells\n    printf '%b' \"[$MODEL] 🔗 \\e]8;;${REMOTE}\\a${REPO_NAME}\\e]8;;\\a\\n\"\nelse\n    echo \"[$MODEL]\"\nfi",
         "#!/bin/bash\ninput=$(cat)\n\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nDIR=$(echo \"$input\" | jq -r '.workspace.current_dir')\n\nCACHE_FILE=\"/tmp/statusline-git-cache\"\nCACHE_MAX_AGE=5  # seconds\n\ncache_is_stale() {\n    [ ! -f \"$CACHE_FILE\" ] || \\\n    # stat -f %m is macOS, stat -c %Y is Linux\n    [ $(($(date +%s) - $(stat -f %m \"$CACHE_FILE\" 2>/dev/null || stat -c %Y \"$CACHE_FILE\" 2>/dev/null || echo 0))) -gt $CACHE_MAX_AGE ]\n}\n\nif cache_is_stale; then\n    if git rev-parse --git-dir > /dev/null 2>&1; then\n        BRANCH=$(git branch --show-current 2>/dev/null)\n        STAGED=$(git diff --cached --numstat 2>/dev/null | wc -l | tr -d ' ')\n        MODIFIED=$(git diff --numstat 2>/dev/null | wc -l | tr -d ' ')\n        echo \"$BRANCH|$STAGED|$MODIFIED\" > \"$CACHE_FILE\"\n    else\n        echo \"||\" > \"$CACHE_FILE\"\n    fi\nfi\n\nIFS='|' read -r BRANCH STAGED MODIFIED < \"$CACHE_FILE\"\n\nif [ -n \"$BRANCH\" ]; then\n    echo \"[$MODEL] 📁 ${DIR##*/} | 🌿 $BRANCH +$STAGED ~$MODIFIED\"\nelse\n    echo \"[$MODEL] 📁 ${DIR##*/}\"\nfi",
         "{\n  \"statusLine\": {\n    \"type\": \"command\",\n    \"command\": \"powershell -NoProfile -File C:/Users/username/.claude/statusline.ps1\"\n  }\n}"
@@ -18668,7 +18694,7 @@
             "Display the current model and context window usage with a visual progress bar. Each script reads JSON from stdin, extracts the used_percentage field, and builds a 10-character bar where filled blocks (▓) represent usage:"
           ],
           "codeBlocks": [
-            "#!/bin/bash\n# Read all of stdin into a variable\ninput=$(cat)\n\n# Extract fields with jq, \"// 0\" provides fallback for null\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nPCT=$(echo \"$input\" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)\n\n# Build progress bar: printf creates spaces, tr replaces with blocks\nBAR_WIDTH=10\nFILLED=$((PCT * BAR_WIDTH / 100))\nEMPTY=$((BAR_WIDTH - FILLED))\nBAR=\"\"\n[ \"$FILLED\" -gt 0 ] && BAR=$(printf \"%${FILLED}s\" | tr ' ' '▓')\n[ \"$EMPTY\" -gt 0 ] && BAR=\"${BAR}$(printf \"%${EMPTY}s\" | tr ' ' '░')\"\n\necho \"[$MODEL] $BAR $PCT%\""
+            "#!/bin/bash\n# Read all of stdin into a variable\ninput=$(cat)\n\n# Extract fields with jq, \"// 0\" provides fallback for null\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nPCT=$(echo \"$input\" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)\n\n# Build progress bar: printf -v creates a run of spaces, then\n# ${var// /▓} replaces each space with a block character\nBAR_WIDTH=10\nFILLED=$((PCT * BAR_WIDTH / 100))\nEMPTY=$((BAR_WIDTH - FILLED))\nBAR=\"\"\n[ \"$FILLED\" -gt 0 ] && printf -v FILL \"%${FILLED}s\" && BAR=\"${FILL// /▓}\"\n[ \"$EMPTY\" -gt 0 ] && printf -v PAD \"%${EMPTY}s\" && BAR=\"${BAR}${PAD// /░}\"\n\necho \"[$MODEL] $BAR $PCT%\""
           ]
         },
         {
@@ -18698,7 +18724,7 @@
             "This example combines several techniques: threshold-based colors (green under 70%, yellow 70-89%, red 90%+), a progress bar, and git branch info. Each print or echo statement creates a separate row:"
           ],
           "codeBlocks": [
-            "#!/bin/bash\ninput=$(cat)\n\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nDIR=$(echo \"$input\" | jq -r '.workspace.current_dir')\nCOST=$(echo \"$input\" | jq -r '.cost.total_cost_usd // 0')\nPCT=$(echo \"$input\" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)\nDURATION_MS=$(echo \"$input\" | jq -r '.cost.total_duration_ms // 0')\n\nCYAN='\\033[36m'; GREEN='\\033[32m'; YELLOW='\\033[33m'; RED='\\033[31m'; RESET='\\033[0m'\n\n# Pick bar color based on context usage\nif [ \"$PCT\" -ge 90 ]; then BAR_COLOR=\"$RED\"\nelif [ \"$PCT\" -ge 70 ]; then BAR_COLOR=\"$YELLOW\"\nelse BAR_COLOR=\"$GREEN\"; fi\n\nFILLED=$((PCT / 10)); EMPTY=$((10 - FILLED))\nBAR=$(printf \"%${FILLED}s\" | tr ' ' '█')$(printf \"%${EMPTY}s\" | tr ' ' '░')\n\nMINS=$((DURATION_MS / 60000)); SECS=$(((DURATION_MS % 60000) / 1000))\n\nBRANCH=\"\"\ngit rev-parse --git-dir > /dev/null 2>&1 && BRANCH=\" | 🌿 $(git branch --show-current 2>/dev/null)\"\n\necho -e \"${CYAN}[$MODEL]${RESET} 📁 ${DIR##*/}$BRANCH\"\nCOST_FMT=$(printf '$%.2f' \"$COST\")\necho -e \"${BAR_COLOR}${BAR}${RESET} ${PCT}% | ${YELLOW}${COST_FMT}${RESET} | ⏱️ ${MINS}m ${SECS}s\""
+            "#!/bin/bash\ninput=$(cat)\n\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nDIR=$(echo \"$input\" | jq -r '.workspace.current_dir')\nCOST=$(echo \"$input\" | jq -r '.cost.total_cost_usd // 0')\nPCT=$(echo \"$input\" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)\nDURATION_MS=$(echo \"$input\" | jq -r '.cost.total_duration_ms // 0')\n\nCYAN='\\033[36m'; GREEN='\\033[32m'; YELLOW='\\033[33m'; RED='\\033[31m'; RESET='\\033[0m'\n\n# Pick bar color based on context usage\nif [ \"$PCT\" -ge 90 ]; then BAR_COLOR=\"$RED\"\nelif [ \"$PCT\" -ge 70 ]; then BAR_COLOR=\"$YELLOW\"\nelse BAR_COLOR=\"$GREEN\"; fi\n\nFILLED=$((PCT / 10)); EMPTY=$((10 - FILLED))\nprintf -v FILL \"%${FILLED}s\"; printf -v PAD \"%${EMPTY}s\"\nBAR=\"${FILL// /█}${PAD// /░}\"\n\nMINS=$((DURATION_MS / 60000)); SECS=$(((DURATION_MS % 60000) / 1000))\n\nBRANCH=\"\"\ngit rev-parse --git-dir > /dev/null 2>&1 && BRANCH=\" | 🌿 $(git branch --show-current 2>/dev/null)\"\n\necho -e \"${CYAN}[$MODEL]${RESET} 📁 ${DIR##*/}$BRANCH\"\nCOST_FMT=$(printf '$%.2f' \"$COST\")\necho -e \"${BAR_COLOR}${BAR}${RESET} ${PCT}% | ${YELLOW}${COST_FMT}${RESET} | ⏱️ ${MINS}m ${SECS}s\""
           ]
         },
         {
@@ -20113,6 +20139,7 @@
         "PermissionRequest",
         "PermissionRequest input",
         "PermissionRequest decision control",
+        "Permission update entries",
         "PostToolUse",
         "PostToolUse input",
         "PostToolUse decision control",
@@ -20248,12 +20275,11 @@
         "To remove a hook, delete its entry from the settings JSON file.",
         "To temporarily disable all hooks without removing them, set \"disableAllHooks\": true in your settings file. There is no way to disable an individual hook while keeping it in the configuration.",
         "The disableAllHooks setting respects the managed settings hierarchy. If an administrator has configured hooks through managed policy settings, disableAllHooks set in user, project, or local settings cannot disable those managed hooks. Only disableAllHooks set at the managed settings level can disable managed hooks.",
-        "Direct edits to hooks in settings files don’t take effect immediately. Claude Code captures a snapshot of hooks at startup and uses it throughout the session. This prevents malicious or accidental hook modifications from taking effect mid-session without your review. If hooks are modified externally, Claude Code warns you and requires review in the /hooks menu before changes apply.",
+        "Direct edits to hooks in settings files are normally picked up automatically by the file watcher.",
         "Command hooks receive JSON data via stdin and communicate results through exit codes, stdout, and stderr. HTTP hooks receive the same JSON as the POST request body and communicate results through the HTTP response body. This section covers fields and behavior common to all events. Each event’s section under Hook events includes its specific input schema and decision control options.",
         "All hook events receive these fields as JSON, in addition to event-specific fields documented in each hook event section. For command hooks, this JSON arrives via stdin. For HTTP hooks, it arrives as the POST request body.",
         "When running with --agent or inside a subagent, two additional fields are included:",
-        "For example, a PreToolUse hook for a Bash command receives this on stdin:",
-        "The tool_name and tool_input fields are event-specific. Each hook event section documents the additional fields for that event."
+        "For example, a PreToolUse hook for a Bash command receives this on stdin:"
       ],
       "codeBlocks": [
         "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \".claude/hooks/block-rm.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
@@ -20280,7 +20306,7 @@
         "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"UserPromptSubmit\",\n  \"prompt\": \"Write a function to calculate the factorial of a number\"\n}",
         "{\n  \"decision\": \"block\",\n  \"reason\": \"Explanation for decision\",\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"UserPromptSubmit\",\n    \"additionalContext\": \"My additional context here\"\n  }\n}",
         "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PreToolUse\",\n    \"permissionDecision\": \"allow\",\n    \"permissionDecisionReason\": \"My reason here\",\n    \"updatedInput\": {\n      \"field_to_modify\": \"new value\"\n    },\n    \"additionalContext\": \"Current environment: production. Proceed with caution.\"\n  }\n}",
-        "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PermissionRequest\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"rm -rf node_modules\",\n    \"description\": \"Remove node_modules directory\"\n  },\n  \"permission_suggestions\": [\n    { \"type\": \"toolAlwaysAllow\", \"tool\": \"Bash\" }\n  ]\n}",
+        "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PermissionRequest\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"rm -rf node_modules\",\n    \"description\": \"Remove node_modules directory\"\n  },\n  \"permission_suggestions\": [\n    {\n      \"type\": \"addRules\",\n      \"rules\": [{ \"toolName\": \"Bash\", \"ruleContent\": \"rm -rf node_modules\" }],\n      \"behavior\": \"allow\",\n      \"destination\": \"localSettings\"\n    }\n  ]\n}",
         "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUse\",\n  \"tool_name\": \"Write\",\n  \"tool_input\": {\n    \"file_path\": \"/path/to/file.txt\",\n    \"content\": \"file content\"\n  },\n  \"tool_response\": {\n    \"filePath\": \"/path/to/file.txt\",\n    \"success\": true\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\"\n}",
         "{\n  \"decision\": \"block\",\n  \"reason\": \"Explanation for decision\",\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolUse\",\n    \"additionalContext\": \"Additional information for Claude\"\n  }\n}",
         "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUseFailure\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"npm test\",\n    \"description\": \"Run test suite\"\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"error\": \"Command exited with non-zero status code 1\",\n  \"is_interrupt\": false\n}",
@@ -20452,7 +20478,7 @@
             "To remove a hook, delete its entry from the settings JSON file.",
             "To temporarily disable all hooks without removing them, set \"disableAllHooks\": true in your settings file. There is no way to disable an individual hook while keeping it in the configuration.",
             "The disableAllHooks setting respects the managed settings hierarchy. If an administrator has configured hooks through managed policy settings, disableAllHooks set in user, project, or local settings cannot disable those managed hooks. Only disableAllHooks set at the managed settings level can disable managed hooks.",
-            "Direct edits to hooks in settings files don’t take effect immediately. Claude Code captures a snapshot of hooks at startup and uses it throughout the session. This prevents malicious or accidental hook modifications from taking effect mid-session without your review. If hooks are modified externally, Claude Code warns you and requires review in the /hooks menu before changes apply."
+            "Direct edits to hooks in settings files are normally picked up automatically by the file watcher."
           ],
           "codeBlocks": []
         },
@@ -20609,10 +20635,13 @@
             "Runs when the user is shown a permission dialog. Use PermissionRequest decision control to allow or deny on behalf of the user.",
             "Matches on tool name, same values as PreToolUse.",
             "PermissionRequest hooks receive tool_name and tool_input fields like PreToolUse hooks, but without tool_use_id. An optional permission_suggestions array contains the “always allow” options the user would normally see in the permission dialog. The difference is when the hook fires: PermissionRequest hooks run when a permission dialog is about to be shown to the user, while PreToolUse hooks run before tool execution regardless of permission status.",
-            "PermissionRequest hooks can allow or deny permission requests. In addition to the JSON output fields available to all hooks, your hook script can return a decision object with these event-specific fields:"
+            "PermissionRequest hooks can allow or deny permission requests. In addition to the JSON output fields available to all hooks, your hook script can return a decision object with these event-specific fields:",
+            "The updatedPermissions output field and the permission_suggestions input field both use the same array of entry objects. Each entry has a type that determines its other fields, and a destination that controls where the change is written.",
+            "The destination field on every entry determines whether the change stays in memory or persists to a settings file.",
+            "A hook can echo one of the permission_suggestions it received as its own updatedPermissions output, which is equivalent to the user selecting that “always allow” option in the dialog."
           ],
           "codeBlocks": [
-            "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PermissionRequest\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"rm -rf node_modules\",\n    \"description\": \"Remove node_modules directory\"\n  },\n  \"permission_suggestions\": [\n    { \"type\": \"toolAlwaysAllow\", \"tool\": \"Bash\" }\n  ]\n}",
+            "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PermissionRequest\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"rm -rf node_modules\",\n    \"description\": \"Remove node_modules directory\"\n  },\n  \"permission_suggestions\": [\n    {\n      \"type\": \"addRules\",\n      \"rules\": [{ \"toolName\": \"Bash\", \"ruleContent\": \"rm -rf node_modules\" }],\n      \"behavior\": \"allow\",\n      \"destination\": \"localSettings\"\n    }\n  ]\n}",
             "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PermissionRequest\",\n    \"decision\": {\n      \"behavior\": \"allow\",\n      \"updatedInput\": {\n        \"command\": \"npm run lint\"\n      }\n    }\n  }\n}"
           ]
         },
