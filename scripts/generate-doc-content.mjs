@@ -632,6 +632,714 @@ function summarizeSectionHints(block, pageTitle = '') {
 			'适合团队想统一发一套现成配置，不想每个人手敲一遍。'
 		];
 	}
+	if (/system requirements/.test(heading)) {
+		return [
+			'这里先看你这台机器够不够格干这活。系统太老、环境不对，后面再折腾也是白搭。',
+			'先把门槛看清，再决定往下装。'
+		];
+	}
+	if (/additional dependencies/.test(heading)) {
+		return [
+			'这里讲除了 Claude Code 本体以外，还要不要再备点别的东西。',
+			'少了这些配套，装是能装，跑起来可能会缺胳膊少腿。'
+		];
+	}
+	if (/install claude code/.test(heading)) {
+		return [
+			'这里就是正式安装那几步。照顺序来，不要自己跳步。',
+			'先把命令跑通，再去想后面的花样。'
+		];
+	}
+	if (/set up on windows/.test(heading)) {
+		return [
+			'这里专门讲 Windows 这条路怎么走，因为它和别的系统不完全一样。',
+			'该补的环境变量、该注意的终端习惯，都在这里。'
+		];
+	}
+	if (/alpine linux and musl-based distributions/.test(heading)) {
+		return [
+			'这一段是给 Alpine 这类特殊环境看的。普通机器没这事，就不用被它吓住。',
+			'你只要记住：这种环境有额外讲究，别拿普通装法硬套。'
+		];
+	}
+	if (/verify your installation/.test(heading)) {
+		return [
+			'装完别急着走，先验一下它到底能不能跑。',
+			'能认命令、能报版本、能做体检，才算真装好。'
+		];
+	}
+	if (/authenticate/.test(heading) && /setup/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲认主，也就是把账号跟工具对上。',
+			'没认上主，后面很多功能都使不上劲。'
+		];
+	}
+	if (/auto-updates/.test(heading)) {
+		return [
+			'这里讲自动更新这件事到底开不开。',
+			'想省心就开着，想自己卡版本就关掉再手动管。'
+		];
+	}
+	if (/configure release channel/.test(heading)) {
+		return [
+			'这里讲更新该走哪条道，是追新一点，还是稳一点。',
+			'团队一起用时，最好大家走同一条，不然版本容易乱。'
+		];
+	}
+	if (/disable auto-updates/.test(heading)) {
+		return [
+			'这里讲怎么把自动更新关掉。',
+			'适合那种版本必须自己点头才能换的环境。'
+		];
+	}
+	if (/advanced installation options/.test(heading)) {
+		return [
+			'这里讲的是安装时那些更偏门的选项。',
+			'普通人先别钻，真遇到特殊环境再回来翻。'
+		];
+	}
+	if (/install a specific version/.test(heading)) {
+		return [
+			'这里讲怎么指定装某一个版本，而不是永远拿最新的。',
+			'适合团队要统一版本，或者老项目只能认某一版。'
+		];
+	}
+	if (/deprecated npm installation/.test(heading)) {
+		return [
+			'这里是在提醒你，这条老路子现在不推荐了。',
+			'能走新的安装办法，就别再往旧路上绕。'
+		];
+	}
+	if (/binary integrity and code signing/.test(heading)) {
+		return [
+			'这里讲的是怎么确认你拿到的安装包没被人动过手脚。',
+			'说白了，就是先验明正身，再往机器里装。'
+		];
+	}
+	if (/uninstall claude code/.test(heading)) {
+		return [
+			'这里讲怎么把它卸干净。',
+			'不只是删主程序，相关残留要不要一起收，也得看清。'
+		];
+	}
+	if (/native installation/.test(heading)) {
+		return [
+			'这里讲直接装到系统里的那条路。',
+			'适合想走最直、最原生那种装法的人。'
+		];
+	}
+	if (/homebrew installation/.test(heading)) {
+		return [
+			'这里讲用 Homebrew 装，适合平时就用它管工具的人。',
+			'好处就是升级和卸载都顺手。'
+		];
+	}
+	if (/winget installation/.test(heading)) {
+		return [
+			'这里讲 Windows 上用 WinGet 装。',
+			'如果你平时就靠 WinGet 管软件，这条会比较顺手。'
+		];
+	}
+	if (/remove configuration files/.test(heading)) {
+		return [
+			'这里讲卸掉程序以后，那些配置文件还留不留。',
+			'要是你想彻底清干净，这段得看。'
+		];
+	}
+	if (/permission system/.test(heading)) {
+		return [
+			'这里先把权限这套规矩讲明白。你可以把它当成钥匙分配表，哪把能给，哪把先别给。',
+			'先把总规矩看懂，后面细项才不容易乱。'
+		];
+	}
+	if (/permission modes/.test(heading)) {
+		return [
+			'这里讲几种常见的放权方式，有的每次都问你，有的先按规则走。',
+			'重点不是背名字，而是分清哪种更适合你现在这摊活。'
+		];
+	}
+	if (/match all uses of a tool/.test(heading)) {
+		return [
+			'这里讲一条规则怎么一次管住某个工具的所有用法。',
+			'适合你已经想明白：这把工具以后怎么用都按同一条规矩来。'
+		];
+	}
+	if (/use specifiers for fine-grained control/.test(heading)) {
+		return [
+			'这里讲更细的管法，不是一刀切，而是分情况卡得更准。',
+			'适合你既想放一点，又不想全放开。'
+		];
+	}
+	if (/wildcard patterns/.test(heading)) {
+		return [
+			'这里讲通配写法，也就是一条规则想顺手管一串类似的情况。',
+			'这玩意好用，但一不小心也容易放太宽。'
+		];
+	}
+	if (/tool-specific permission rules/.test(heading)) {
+		return [
+			'这里讲按工具一把一把地定规矩。',
+			'谁能碰 Bash，谁只能读文件，最好分开讲。'
+		];
+	}
+	if (/bash/.test(heading) && /permissions/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里专门讲 Bash 这把刀该怎么管，因为它能做的事太多了。',
+			'能不开太大就别开太大。'
+		];
+	}
+	if (/read and edit/.test(heading)) {
+		return [
+			'这里讲看文件和改文件这两种手脚怎么分开管。',
+			'能先给看，就别急着把改也一起放开。'
+		];
+	}
+	if (/webfetch/.test(heading)) {
+		return [
+			'这里讲的是让它出门看网页这件事要怎么管。',
+			'该不该让它上网、能看哪些地方，得先想清。'
+		];
+	}
+	if (/agent \(subagents\)/.test(heading)) {
+		return [
+			'这里讲子代理能不能被叫出来干活，也就是这把权要不要给。',
+			'你可以把它当成“准不准再叫帮手”的规矩。'
+		];
+	}
+	if (/extend permissions with hooks/.test(heading)) {
+		return [
+			'这里讲的是再加一道自动门禁，让权限不只是死规矩，还能临场再拦一下。',
+			'适合那种平时能放，但某些危险情况还想再挡一道的场景。'
+		];
+	}
+	if (/working directories/.test(heading) && /permissions/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲它能在哪些目录里动手。',
+			'地方画清楚了，手才不会伸到不该碰的地方去。'
+		];
+	}
+	if (/how permissions interact with sandboxing/.test(heading)) {
+		return [
+			'这里讲权限和沙箱是怎么一起起作用的。',
+			'你可以把它理解成：一层是钥匙，一层是围栏，两样都在管。'
+		];
+	}
+	if (/managed settings/.test(heading) && /permissions/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲管理员从上面压下来的规矩。',
+			'这种规矩不是你在本地随手改一下就能顶掉的。'
+		];
+	}
+	if (/managed-only settings/.test(heading)) {
+		return [
+			'这里讲只能由管理员来定的那部分。',
+			'普通用户看明白就行，不是叫你自己去改。'
+		];
+	}
+	if (/configuration scopes/.test(heading)) {
+		return [
+			'这里先把设置分几层讲清楚：你自己这层、项目这层、还有临时这层。',
+			'先把层次看明白，后面才知道该去哪儿改。'
+		];
+	}
+	if (/available scopes/.test(heading)) {
+		return [
+			'这里列的是到底有哪几层可用。',
+			'你不用全背，但至少要知道各层大概管哪摊。'
+		];
+	}
+	if (/when to use each scope/.test(heading)) {
+		return [
+			'这里讲什么时候该把设置放在自己身上，什么时候该放进项目里。',
+			'一句话，谁都要守的放项目，只是你自己习惯的放个人。'
+		];
+	}
+	if (/how scopes interact/.test(heading)) {
+		return [
+			'这里讲几层设置撞到一起时会怎么互相压。',
+			'谁离眼前这次活更近，通常谁更有劲。'
+		];
+	}
+	if (/what uses scopes/.test(heading)) {
+		return [
+			'这里讲哪些东西会吃“分层设置”这套规矩。',
+			'不是所有东西都会听它，所以这段是拿来分清边界的。'
+		];
+	}
+	if (/settings files/.test(heading)) {
+		return [
+			'这里讲那些设置文件各放哪儿、各管哪摊。',
+			'地方认清了，改设置时才不容易摸错门。'
+		];
+	}
+	if (/available settings/.test(heading)) {
+		return [
+			'这里是总开关清单，告诉你到底有哪些旋钮能拧。',
+			'先知道有啥，再决定改不改。'
+		];
+	}
+	if (/worktree settings/.test(heading)) {
+		return [
+			'这里讲 worktree 相关设置，主要是给大仓库省地方、省时间用的。',
+			'普通小项目如果没这痛点，可以先略过。'
+		];
+	}
+	if (/permission settings/.test(heading) && /settings/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲设置页里那批和权限有关的旋钮。',
+			'这种最好先收着，再一点点放。'
+		];
+	}
+	if (/sandbox settings/.test(heading)) {
+		return [
+			'这里讲沙箱那圈围栏怎么拧。',
+			'围栏太松容易闯祸，太紧又干不动，所以要拧得刚好。'
+		];
+	}
+	if (/attribution settings/.test(heading)) {
+		return [
+			'这里讲结果里那些署名、来源标记一类的设置。',
+			'平时不一定常改，但要知道它在这儿。'
+		];
+	}
+	if (/file suggestion settings/.test(heading)) {
+		return [
+			'这里讲文件路径自动提示那套东西怎么调。',
+			'项目一大，这类小手感差别会很明显。'
+		];
+	}
+	if (/hook configuration/.test(heading) && /settings/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲设置层面怎么把 hooks 接进来。',
+			'也就是那些自动动作到底写哪儿、谁来吃。'
+		];
+	}
+	if (/verify active settings/.test(heading)) {
+		return [
+			'这里讲改完以后怎么确认现在真正生效的是哪套设置。',
+			'不然你很容易以为自己改对了，其实吃到的是另一层。'
+		];
+	}
+	if (/key points about the configuration system/.test(heading)) {
+		return [
+			'这里是在帮你把前面那堆设置规矩重新拢一遍。',
+			'看完这段，脑子里最好能有个总账。'
+		];
+	}
+	if (/system prompt/.test(heading) && /settings/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲那段最上面的总交代放哪儿、怎么起作用。',
+			'这东西分量重，别轻易写成长篇废话。'
+		];
+	}
+	if (/excluding sensitive files/.test(heading)) {
+		return [
+			'这里讲哪些敏感文件最好别让它碰。',
+			'像钥匙、账本、证件这类东西，能隔开就隔开。'
+		];
+	}
+	if (/subagent configuration/.test(heading)) {
+		return [
+			'这里讲设置系统里和子代理有关的那部分。',
+			'也就是小帮工这条线，在总设置里怎么管。'
+		];
+	}
+	if (/plugin configuration/.test(heading)) {
+		return [
+			'这里讲插件那条线在设置里怎么落。',
+			'适合你已经开始装插件、管插件的人看。'
+		];
+	}
+	if (/plugin settings/.test(heading)) {
+		return [
+			'这里讲插件自己带来的那些设置项。',
+			'不是所有插件都一样，所以看这段时要分清是谁家的规矩。'
+		];
+	}
+	if (/managing plugins/.test(heading)) {
+		return [
+			'这里讲平时怎么开、关、看插件。',
+			'说白了，就是插件摊子怎么日常管。'
+		];
+	}
+	if (/environment variables/.test(heading) && /settings/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲环境变量这条路怎么影响设置。',
+			'它适合临时顶一下，但也最容易让人忘了自己改过。'
+		];
+	}
+	if (/tools available to claude/.test(heading)) {
+		return [
+			'这里讲 Claude 手里到底有哪些工具可用。',
+			'工具清单看明白了，后面很多权限问题就更好懂。'
+		];
+	}
+	if (/set up your first hook/.test(heading)) {
+		return [
+			'这里就是第一个 hook 的上手路子。先挑一个最稳的小动作做，不要一上来整大活。',
+			'比如改完自动格式化，或者先发个提醒，这种最适合起步。'
+		];
+	}
+	if (/what you can automate/.test(heading) && /hook/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲 hooks 到底适合拿来自动干什么。',
+			'凡是老重复、规矩又清楚的活，通常都能交给它。'
+		];
+	}
+	if (/get notified when claude needs input/.test(heading)) {
+		return [
+			'这里讲 Claude 卡住要你出面时，怎么第一时间提醒到你。',
+			'适合那种你不想一直盯屏幕，但又怕它干等的场景。'
+		];
+	}
+	if (/auto-format code after edits/.test(heading)) {
+		return [
+			'这里讲改完代码自动收拾格式。',
+			'这种活最适合交给 hooks，省得人每次自己想。'
+		];
+	}
+	if (/block edits to protected files/.test(heading)) {
+		return [
+			'这里讲怎么拦住它去改那些碰不得的文件。',
+			'像关键配置、证书、账本这种，最好先立门禁。'
+		];
+	}
+	if (/re-inject context after compaction/.test(heading)) {
+		return [
+			'这里讲的是会话缩短以后，怎么把关键交代再塞回去。',
+			'免得它一瘦身，就把最要紧的话也丢了。'
+		];
+	}
+	if (/audit configuration changes/.test(heading)) {
+		return [
+			'这里讲配置一改动，怎么留个痕、回头能查。',
+			'适合那种规矩多、不能乱改的环境。'
+		];
+	}
+	if (/auto-approve specific permission prompts/.test(heading)) {
+		return [
+			'这里讲某些你已经想得很清楚的小权限，能不能自动放过去。',
+			'这样可以少点很多重复点头，但前提是你真想明白了。'
+		];
+	}
+	if (/how hooks work/.test(heading)) {
+		return [
+			'这里先把 hooks 这套东西怎么转起来讲明白。',
+			'什么时候触发、吃什么输入、吐什么结果，都在这里。'
+		];
+	}
+	if (/read input and return output/.test(heading)) {
+		return [
+			'这里讲 hook 怎么接收进来的内容，又把结果回出去。',
+			'你可以把它当成门口收条、回条那套流程。'
+		];
+	}
+	if (/filter hooks with matchers/.test(heading)) {
+		return [
+			'这里讲怎么让 hook 只在某些情况才出手，不是每次都扑出来。',
+			'过滤条件设得准，hook 才不会乱响。'
+		];
+	}
+	if (/configure hook location/.test(heading)) {
+		return [
+			'这里讲 hooks 写在哪一层、放在哪儿。',
+			'地方放对了，团队共享和个人自用才分得清。'
+		];
+	}
+	if (/prompt-based hooks/.test(heading)) {
+		return [
+			'这里讲用提示词那条路来做 hook。',
+			'适合你想让它按某种说法先过一遍脑子。'
+		];
+	}
+	if (/agent-based hooks/.test(heading)) {
+		return [
+			'这里讲用子代理那条路来做 hook。',
+			'适合想把某种检查专门交给一个小帮工。'
+		];
+	}
+	if (/http hooks/.test(heading)) {
+		return [
+			'这里讲 hook 不在本地跑命令，而是把消息发到一个网址上去处理。',
+			'适合你们本来就有自己的服务来接这类事。'
+		];
+	}
+	if (/hook not firing/.test(heading)) {
+		return [
+			'这里讲 hook 为什么压根没响。',
+			'一般先查触发条件对不对、位置写没写对。'
+		];
+	}
+	if (/hook error in output/.test(heading)) {
+		return [
+			'这里讲 hook 明明跑了，但吐出来是错的。',
+			'这种通常要回头看输出格式和返回值。'
+		];
+	}
+	if (/\/hooks shows no hooks configured/.test(heading)) {
+		return [
+			'这里讲你明明以为配了，结果 `/hooks` 却说没有。',
+			'多半是放错地方，或者根本没被当前会话吃到。'
+		];
+	}
+	if (/stop hook runs forever/.test(heading)) {
+		return [
+			'这里讲停止时那个 hook 老是跑不完怎么办。',
+			'这种事最烦人，所以要先看是不是命令卡死了。'
+		];
+	}
+	if (/json validation failed/.test(heading)) {
+		return [
+			'这里讲 JSON 格式不对，系统根本不认。',
+			'这种错最笨也最常见，字段名、括号、引号都得对。'
+		];
+	}
+	if (/learn more/.test(heading) && /hook/.test(pageTitle.toLowerCase())) {
+		return [
+			'看到这里，说明基础路子你已经摸到了。',
+			'后面再学更花的玩法也不迟。'
+		];
+	}
+	if (/keyboard shortcuts/.test(heading)) {
+		return [
+			'这里讲那些顺手小动作，也就是键盘一按就能省好几步。',
+			'不用全背，先记最常用那几个。'
+		];
+	}
+	if (/general controls/.test(heading)) {
+		return [
+			'这里讲最基础那套操作，像进退、确认、取消这种。',
+			'先把这些摸熟，后面别的就顺手多了。'
+		];
+	}
+	if (/text editing/.test(heading)) {
+		return [
+			'这里讲输入框里那些改字删字的小动作。',
+			'天天用的人，手感差别会很明显。'
+		];
+	}
+	if (/theme and display/.test(heading)) {
+		return [
+			'这里讲画面怎么显示更顺眼。',
+			'不是核心本事，但每天盯着看，顺手也很重要。'
+		];
+	}
+	if (/multiline input/.test(heading)) {
+		return [
+			'这里讲一句话装不下时，怎么老老实实换行继续写。',
+			'适合交代复杂任务，不用非得挤成一行。'
+		];
+	}
+	if (/quick commands/.test(heading)) {
+		return [
+			'这里讲那些快口令，少敲点字就能叫出常用动作。',
+			'熟了以后，效率会上来很明显。'
+		];
+	}
+	if (/voice input/.test(heading)) {
+		return [
+			'这里讲能不能直接说，不一定非得手打。',
+			'适合你脑子快、手跟不上的时候。'
+		];
+	}
+	if (/built-in commands/.test(heading) && /interactive/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲系统自己带的那些口令。',
+			'平时最常用的那几条，最好先混个脸熟。'
+		];
+	}
+	if (/vim editor mode/.test(heading)) {
+		return [
+			'这里讲喜欢 Vim 那套手法的人怎么用。',
+			'不走这路的人，看个大概就行。'
+		];
+	}
+	if (/mode switching/.test(heading) && /interactive/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲不同操作状态之间怎么切。',
+			'别小看这事，切不明白就老容易按错。'
+		];
+	}
+	if (/navigation \(normal mode\)/.test(heading)) {
+		return [
+			'这里讲在普通模式下怎么挪来挪去。',
+			'也就是不碰鼠标时，你的光标怎么走。'
+		];
+	}
+	if (/editing \(normal mode\)/.test(heading)) {
+		return [
+			'这里讲普通模式下怎么改字。',
+			'是 Vim 用家最常摸的那套手法。'
+		];
+	}
+	if (/text objects \(normal mode\)/.test(heading)) {
+		return [
+			'这里讲按一块一块来选文字，不是一个字一个字抠。',
+			'会了以后，改大段内容会快很多。'
+		];
+	}
+	if (/command history/.test(heading) && /interactive/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲以前说过的话、敲过的命令怎么翻回来。',
+			'老重复的活，靠这招很省劲。'
+		];
+	}
+	if (/reverse search with ctrl\+r/.test(heading)) {
+		return [
+			'这里讲怎么倒着翻历史，想不起原句也能搜回来。',
+			'越是老用户，越离不开这招。'
+		];
+	}
+	if (/background bash commands/.test(heading)) {
+		return [
+			'这里讲命令放到后面跑，不用一直堵着你眼前。',
+			'适合那种要等一会儿的活。'
+		];
+	}
+	if (/how backgrounding works/.test(heading)) {
+		return [
+			'这里讲放后台跑时，系统到底怎么安排。',
+			'看懂了，后面遇到卡住或丢输出才知道往哪儿找。'
+		];
+	}
+	if (/bash mode with ! prefix/.test(heading)) {
+		return [
+			'这里讲在前面加个 `!`，直接把话当成 bash 命令来跑。',
+			'这种最直接，但也最要小心别敲错。'
+		];
+	}
+	if (/prompt suggestions/.test(heading)) {
+		return [
+			'这里讲系统给你的那些提示词建议什么时候值当用。',
+			'顺手时很好用，不顺手就别硬套。'
+		];
+	}
+	if (/side questions with \/btw/.test(heading)) {
+		return [
+			'这里讲 `/btw` 这种顺手插一句的小问法。',
+			'适合你想问个边角问题，又不想把主线越带越歪。'
+		];
+	}
+	if (/task list/.test(heading) && /interactive/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲任务单怎么在交互里看和用。',
+			'活一多，这东西就像院里的白板。'
+		];
+	}
+	if (/pr review status/.test(heading)) {
+		return [
+			'这里讲 PR 审到哪一步了、现在什么状态。',
+			'适合边看边盯进度。'
+		];
+	}
+	if (/plugin components reference/.test(heading)) {
+		return [
+			'这里是插件零件总表，告诉你一个插件里能装哪些部件。',
+			'做插件时，这段就像装配图首页。'
+		];
+	}
+	if (/skills/.test(heading) && /plugins? reference/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲插件里怎么放 skills。',
+			'也就是那种固定说法、固定打法该放哪儿。'
+		];
+	}
+	if (/agents/.test(heading) && /plugins? reference/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲插件里怎么带上小帮工。',
+			'适合想把分工也跟插件一起打包的人看。'
+		];
+	}
+	if (/hooks/.test(heading) && /plugins? reference/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲插件怎么顺手带 hooks。',
+			'也就是装上插件后，那些自动动作能不能一起跟着来。'
+		];
+	}
+	if (/mcp servers/.test(heading) && /plugins? reference/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲插件里怎么顺手带上 MCP 服务。',
+			'适合那种装完插件，就想把外面的工具和数据口也一起接上的场景。'
+		];
+	}
+	if (/lsp servers/.test(heading)) {
+		return [
+			'这里讲插件里怎么接语言服务。',
+			'适合想让它对某门语言看得更懂。'
+		];
+	}
+	if (/plugin installation scopes/.test(heading)) {
+		return [
+			'这里讲插件装在哪一层最合适。',
+			'是只这个项目用，还是你以后到处都能用，要先分清。'
+		];
+	}
+	if (/path behavior rules/.test(heading)) {
+		return [
+			'这里讲路径写法会怎么被认。',
+			'路径一旦写糊了，后面找文件就容易乱。'
+		];
+	}
+	if (/plugin caching and file resolution/.test(heading)) {
+		return [
+			'这里讲插件文件会怎么被记住、怎么被找到。',
+			'看懂这段，排错时会少走很多弯路。'
+		];
+	}
+	if (/path traversal limitations/.test(heading)) {
+		return [
+			'这里讲路径乱窜这件事会被怎么拦。',
+			'说白了，就是别让它顺着路径钻出该待的地方。'
+		];
+	}
+	if (/working with external dependencies/.test(heading)) {
+		return [
+			'这里讲插件要靠外部依赖时，怎么别把自己搞乱。',
+			'依赖一多，最怕别人装了你的插件却跑不起来。'
+		];
+	}
+	if (/plugin directory structure/.test(heading)) {
+		return [
+			'这里讲插件目录该怎么摆。',
+			'先把骨架摆正，后面加东西才不乱。'
+		];
+	}
+	if (/standard plugin layout/.test(heading)) {
+		return [
+			'这里给的是那种最标准、最不容易出错的摆法。',
+			'第一次做插件，尽量先照这个来。'
+		];
+	}
+	if (/plugin install/.test(heading) && /plugins? reference/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲 `plugin install` 这条命令怎么用，也就是把插件真正装进来。',
+			'先把来源看清，再装，别见一个就往里塞。'
+		];
+	}
+	if (/plugin uninstall/.test(heading) && /plugins? reference/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲 `plugin uninstall`，也就是怎么把插件卸掉。',
+			'不用了就拆，别老留一堆不用的。'
+		];
+	}
+	if (/plugin enable/.test(heading) && /plugins? reference/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲 `plugin enable`，就是把装好的插件真正打开。',
+			'装了不等于用上，开没开要分清。'
+		];
+	}
+	if (/plugin disable/.test(heading) && /plugins? reference/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲 `plugin disable`，就是先把插件停掉但不一定删掉。',
+			'适合暂时不用，但还想留着以后再开。'
+		];
+	}
+	if (/plugin update/.test(heading) && /plugins? reference/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲 `plugin update`，也就是插件怎么升级。',
+			'升级前后最好看清版本和变化，别闷头直接上。'
+		];
+	}
 	if (/when to use agent teams/.test(heading)) {
 		return [
 			'只有一摊活能拆成几路同时干时，才值得把队伍拉起来。要是本来就得一步接一步做，一个 Claude 慢慢做反而更省事。',
