@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-17T04:26:30.177Z",
+  "generatedAt": "2026-03-18T04:32:18.350Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -252,6 +252,10 @@
         {
           "title": "Speed up responses with fast mode",
           "path": "/docs/en/fast-mode"
+        },
+        {
+          "title": "Voice dictation",
+          "path": "/docs/en/voice-dictation"
         },
         {
           "title": "Customize status line",
@@ -904,6 +908,7 @@
       "metaDescription": "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
       "headings": [],
       "toc": [
+        "2.1.78",
         "2.1.77",
         "2.1.76",
         "2.1.75",
@@ -922,13 +927,38 @@
         "2.1.58",
         "2.1.56",
         "2.1.55",
-        "2.1.53",
-        "2.1.52"
+        "2.1.53"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Added StopFailure hook event that fires when the turn ends due to an API error (rate limit, auth failure, etc.)",
+        "Added ${CLAUDE_PLUGIN_DATA} variable for plugin persistent state that survives plugin updates; /plugin uninstall prompts before deleting it",
+        "Added effort, maxTurns, and disallowedTools frontmatter support for plugin-shipped agents",
+        "Terminal notifications (iTerm2/Kitty/Ghostty popups, progress bar) now reach the outer terminal when running inside tmux with set -g allow-passthrough on",
+        "Response text now streams line-by-line as it’s generated",
+        "Fixed git log HEAD failing with “ambiguous argument” inside sandboxed Bash on Linux, and stub files polluting git status in the working directory",
+        "Fixed cc log and --resume silently truncating conversation history on large sessions (>5 MB) that used subagents",
+        "Fixed infinite loop when API errors triggered stop hooks that re-fed blocking errors to the model",
+        "Fixed deny: [\"mcp__servername\"] permission rules not removing MCP server tools before sending to the model, allowing it to see and attempt blocked tools",
+        "Fixed sandbox.filesystem.allowWrite not working with absolute paths (previously required // prefix)",
+        "Fixed /sandbox Dependencies tab showing Linux prerequisites on macOS instead of macOS-specific info",
+        "Security: Fixed silent sandbox disable when sandbox.enabled: true is set but dependencies are missing — now shows a visible startup warning",
+        "Fixed .git, .claude, and other protected directories being writable without a prompt in bypassPermissions mode",
+        "Fixed ctrl+u in normal mode scrolling instead of readline kill-line (ctrl+u/ctrl+d half-page scroll moved to transcript mode only)",
+        "Fixed voice mode modifier-combo push-to-talk keybindings (e.g. ctrl+k) requiring a hold instead of activating immediately",
+        "Fixed voice mode not working on WSL2 with WSLg (Windows 11); WSL1/Win10 users now get a clear error",
+        "Fixed --worktree flag not loading skills and hooks from the worktree directory",
+        "Fixed CLAUDE_CODE_DISABLE_GIT_INSTRUCTIONS and includeGitInstructions setting not suppressing the git status section in the system prompt",
+        "Fixed Bash tool not finding Homebrew and other PATH-dependent binaries when VS Code is launched from Dock/Spotlight",
+        "Fixed washed-out Claude orange color in VS Code/Cursor/code-server terminals that don’t advertise truecolor support",
+        "Added ANTHROPIC_CUSTOM_MODEL_OPTION env var to add a custom entry to the /model picker, with optional _NAME and _DESCRIPTION suffixed vars for display",
+        "Fixed ANTHROPIC_BETAS environment variable being silently ignored when using Haiku models",
+        "Fixed queued prompts being concatenated without a newline separator",
+        "Improved memory usage and startup time when resuming large sessions",
+        "[VSCode] Fixed a brief flash of the login screen when opening the sidebar while already authenticated",
+        "[VSCode] Fixed “API Error: Rate limit reached” when selecting Opus — model dropdown no longer offers 1M context variant to subscribers whose plan tier is unknown",
         "Increased default maximum output token limits for Claude Opus 4.6 to 64k tokens, and the upper bound for Opus 4.6 and Sonnet 4.6 models to 128k tokens",
         "Added allowRead sandbox filesystem setting to re-allow read access within denyRead regions",
         "/copy now accepts an optional index: /copy N copies the Nth-latest assistant response",
@@ -1079,33 +1109,7 @@
         "Restored the model parameter on the Agent tool for per-invocation model overrides",
         "Simplified effort levels to low/medium/high (removed max) with new symbols (○ ◐ ●) and a brief notification instead of a persistent icon. Use /effort auto to reset to default",
         "Improved /config — Escape now cancels changes, Enter saves and closes, Space toggles settings",
-        "Improved up-arrow history to show current session’s messages first when running multiple concurrent sessions",
-        "Improved voice input transcription accuracy for repo names and common dev terms (regex, OAuth, JSON)",
-        "Improved bash command parsing by switching to a native module — faster initialization and no memory leak",
-        "Reduced bundle size by ~510 KB",
-        "Changed CLAUDE.md HTML comments (<!-- ... -->) to be hidden from Claude when auto-injected. Comments remain visible when read with the Read tool",
-        "Fixed slow exits when background tasks or hooks were slow to respond",
-        "Fixed agent task progress stuck on “Initializing…”",
-        "Fixed skill hooks firing twice per event when a hooks-enabled skill is invoked by the model",
-        "Fixed several voice mode issues: occasional input lag, false “No speech detected” errors after releasing push-to-talk, and stale transcripts re-filling the prompt after submission",
-        "Fixed --continue not resuming from the most recent point after --compact",
-        "Fixed bash security parsing edge cases",
-        "Added support for marketplace git URLs without .git suffix (Azure DevOps, AWS CodeCommit)",
-        "Improved marketplace clone failure messages to show diagnostic info even when git produces no stderr",
-        "Fixed several plugin issues: installation failing on Windows with EEXIST error in OneDrive folders, marketplace blocking user-scope installs when a project-scope install exists, CLAUDE_CODE_PLUGIN_CACHE_DIR creating literal ~ directories, and plugin.json with marketplace-only fields failing to load",
-        "Fixed feedback survey appearing too frequently in long sessions",
-        "Fixed --effort CLI flag being reset by unrelated settings writes on startup",
-        "Fixed backgrounded Ctrl+B queries losing their transcript or corrupting the new conversation after /clear",
-        "Fixed /clear killing background agent/bash tasks — only foreground tasks are now cleared",
-        "Fixed worktree isolation issues: Task tool resume not restoring cwd, and background task notifications missing worktreePath and worktreeBranch",
-        "Fixed /model not displaying results when run while Claude is working",
-        "Fixed digit keys selecting menu options instead of typing in plan mode permission prompt’s text input",
-        "Fixed sandbox permission issues: certain file write operations incorrectly allowed without prompting, and output redirections to allowlisted directories (like /tmp/claude/) prompting unnecessarily",
-        "Improved CPU utilization in long sessions",
-        "Fixed prompt cache invalidation in SDK query() calls, reducing input token costs up to 12x",
-        "Fixed Escape key becoming unresponsive after cancelling a query",
-        "Fixed double Ctrl+C not exiting when background agents or tasks are running",
-        "Fixed team agents to inherit the leader’s model"
+        "Improved up-arrow history to show current session’s messages first when running multiple concurrent sessions"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1115,15 +1119,15 @@
             "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Increased default maximum output token limits for Claude Opus 4.6 to 64k tokens, and the upper bound for Opus 4.6 and Sonnet 4.6 models to 128k tokens",
-            "Added allowRead sandbox filesystem setting to re-allow read access within denyRead regions",
-            "/copy now accepts an optional index: /copy N copies the Nth-latest assistant response",
-            "Fixed “Always Allow” on compound bash commands (e.g. cd src && npm test) saving a single rule for the full string instead of per-subcommand, leading to dead rules and repeated permission prompts",
-            "Fixed auto-updater starting overlapping binary downloads when the slash-command overlay repeatedly opened and closed, accumulating tens of gigabytes of memory",
-            "Fixed --resume silently truncating recent conversation history due to a race between memory-extraction writes and the main transcript",
-            "Fixed PreToolUse hooks returning \"allow\" bypassing deny permission rules, including enterprise managed settings",
-            "Fixed Write tool silently converting line endings when overwriting CRLF files or creating files in CRLF directories",
-            "Fixed memory growth in long-running sessions from progress messages surviving compaction"
+            "Added StopFailure hook event that fires when the turn ends due to an API error (rate limit, auth failure, etc.)",
+            "Added ${CLAUDE_PLUGIN_DATA} variable for plugin persistent state that survives plugin updates; /plugin uninstall prompts before deleting it",
+            "Added effort, maxTurns, and disallowedTools frontmatter support for plugin-shipped agents",
+            "Terminal notifications (iTerm2/Kitty/Ghostty popups, progress bar) now reach the outer terminal when running inside tmux with set -g allow-passthrough on",
+            "Response text now streams line-by-line as it’s generated",
+            "Fixed git log HEAD failing with “ambiguous argument” inside sandboxed Bash on Linux, and stub files polluting git status in the working directory",
+            "Fixed cc log and --resume silently truncating conversation history on large sessions (>5 MB) that used subagents",
+            "Fixed infinite loop when API errors triggered stop hooks that re-fed blocking errors to the model",
+            "Fixed deny: [\"mcp__servername\"] permission rules not removing MCP server tools before sending to the model, allowing it to see and attempt blocked tools"
           ],
           "codeBlocks": []
         }
@@ -1966,6 +1970,7 @@
         "For large projects, you can break instructions into topic-specific files using project rules. Rules let you scope instructions to specific file types or subdirectories.",
         "A project CLAUDE.md can be stored in either ./CLAUDE.md or ./.claude/CLAUDE.md. Create this file and add instructions that apply to anyone working on the project: build and test commands, coding standards, architectural decisions, naming conventions, and common workflows. These instructions are shared with your team through version control, so focus on project-level standards rather than personal preferences.",
         "Run /init to generate a starting CLAUDE.md automatically. Claude analyzes your codebase and creates a file with build commands, test instructions, and project conventions it discovers. If a CLAUDE.md already exists, /init suggests improvements rather than overwriting it. Refine from there with instructions Claude wouldn’t discover on its own.",
+        "Set CLAUDE_CODE_NEW_INIT=true to enable an interactive multi-phase flow. /init asks which artifacts to set up: CLAUDE.md files, skills, and hooks. It then explores your codebase with a subagent, fills in gaps via follow-up questions, and presents a reviewable proposal before writing any files.",
         "CLAUDE.md files are loaded into the context window at the start of every session, consuming tokens alongside your conversation. Because they’re context rather than enforced configuration, how you write instructions affects how reliably Claude follows them. Specific, concise, well-structured instructions work best.",
         "Size: target under 200 lines per CLAUDE.md file. Longer files consume more context and reduce adherence. If your instructions are growing large, split them using imports or .claude/rules/ files.",
         "Structure: use markdown headers and bullets to group related instructions. Claude scans structure the same way readers do: organized sections are easier to follow than dense paragraphs.",
@@ -2005,6 +2010,8 @@
         "Windows: C:\\Program Files\\ClaudeCode\\CLAUDE.md",
         "Deploy with your configuration management system",
         "Use MDM, Group Policy, Ansible, or similar tools to distribute the file across developer machines. See managed settings for other organization-wide configuration options.",
+        "A managed CLAUDE.md and managed settings serve different purposes. Use settings for technical enforcement and CLAUDE.md for behavioral guidance:",
+        "Settings rules are enforced by the client regardless of what Claude decides to do. CLAUDE.md instructions shape Claude’s behavior but are not a hard enforcement layer.",
         "In large monorepos, ancestor CLAUDE.md files may contain instructions that aren’t relevant to your work. The claudeMdExcludes setting lets you skip specific files by path or glob pattern.",
         "This example excludes a top-level CLAUDE.md and a rules directory from a parent folder. Add it to .claude/settings.local.json so the exclusion stays local to your machine:",
         "Patterns are matched against absolute file paths using glob syntax. You can configure claudeMdExcludes at any settings layer: user, project, local, or managed policy. Arrays merge across layers.",
@@ -2107,7 +2114,8 @@
           "title": "​Set up a project CLAUDE.md",
           "paragraphs": [
             "A project CLAUDE.md can be stored in either ./CLAUDE.md or ./.claude/CLAUDE.md. Create this file and add instructions that apply to anyone working on the project: build and test commands, coding standards, architectural decisions, naming conventions, and common workflows. These instructions are shared with your team through version control, so focus on project-level standards rather than personal preferences.",
-            "Run /init to generate a starting CLAUDE.md automatically. Claude analyzes your codebase and creates a file with build commands, test instructions, and project conventions it discovers. If a CLAUDE.md already exists, /init suggests improvements rather than overwriting it. Refine from there with instructions Claude wouldn’t discover on its own."
+            "Run /init to generate a starting CLAUDE.md automatically. Claude analyzes your codebase and creates a file with build commands, test instructions, and project conventions it discovers. If a CLAUDE.md already exists, /init suggests improvements rather than overwriting it. Refine from there with instructions Claude wouldn’t discover on its own.",
+            "Set CLAUDE_CODE_NEW_INIT=true to enable an interactive multi-phase flow. /init asks which artifacts to set up: CLAUDE.md files, skills, and hooks. It then explores your codebase with a subagent, fills in gaps via follow-up questions, and presents a reviewable proposal before writing any files."
           ],
           "codeBlocks": []
         },
@@ -2188,10 +2196,10 @@
             "Windows: C:\\Program Files\\ClaudeCode\\CLAUDE.md",
             "Deploy with your configuration management system",
             "Use MDM, Group Policy, Ansible, or similar tools to distribute the file across developer machines. See managed settings for other organization-wide configuration options.",
+            "A managed CLAUDE.md and managed settings serve different purposes. Use settings for technical enforcement and CLAUDE.md for behavioral guidance:",
+            "Settings rules are enforced by the client regardless of what Claude decides to do. CLAUDE.md instructions shape Claude’s behavior but are not a hard enforcement layer.",
             "In large monorepos, ancestor CLAUDE.md files may contain instructions that aren’t relevant to your work. The claudeMdExcludes setting lets you skip specific files by path or glob pattern.",
-            "This example excludes a top-level CLAUDE.md and a rules directory from a parent folder. Add it to .claude/settings.local.json so the exclusion stays local to your machine:",
-            "Patterns are matched against absolute file paths using glob syntax. You can configure claudeMdExcludes at any settings layer: user, project, local, or managed policy. Arrays merge across layers.",
-            "Managed policy CLAUDE.md files cannot be excluded. This ensures organization-wide instructions always apply regardless of individual settings."
+            "This example excludes a top-level CLAUDE.md and a rules directory from a parent folder. Add it to .claude/settings.local.json so the exclusion stays local to your machine:"
           ],
           "codeBlocks": [
             "{\n  \"claudeMdExcludes\": [\n    \"**/monorepo/CLAUDE.md\",\n    \"/home/user/monorepo/other-team/.claude/rules/**\"\n  ]\n}"
@@ -2457,6 +2465,7 @@
         "Run “headless” queries in Plan Mode",
         "You can also run a query in Plan Mode directly with -p (that is, in “headless mode”):",
         "Claude analyzes the current implementation and create a comprehensive plan. Refine with follow-ups:",
+        "When you accept a plan, Claude automatically names the session from the plan content. The name appears on the prompt bar and in the session picker. If you’ve already set a name with --name or /rename, accepting a plan won’t overwrite it.",
         "See settings documentation for more configuration options.",
         "Suppose you need to add tests for uncovered code.",
         "Identify untested code",
@@ -2512,8 +2521,8 @@
         "To view Claude’s thinking process, press Ctrl+O to toggle verbose mode and see the internal reasoning displayed as gray italic text.",
         "Extended thinking controls how much internal reasoning Claude performs before responding. More thinking provides more space to explore solutions, analyze edge cases, and self-correct mistakes.",
         "With Opus 4.6 and Sonnet 4.6, thinking uses adaptive reasoning: the model dynamically allocates thinking tokens based on the effort level you select. This is the recommended way to tune the tradeoff between speed and reasoning depth.",
-        "With older models, thinking uses a fixed budget of up to 31,999 tokens from your output budget. You can limit this with the MAX_THINKING_TOKENS environment variable, or disable thinking entirely via /config or the Option+T/Alt+T toggle.",
-        "MAX_THINKING_TOKENS is ignored on Opus 4.6 and Sonnet 4.6, since adaptive reasoning controls thinking depth instead. The one exception: setting MAX_THINKING_TOKENS=0 still disables thinking entirely on any model. To disable adaptive thinking and revert to the fixed thinking budget, set CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1. See environment variables.",
+        "With older models, thinking uses a fixed token budget drawn from your output allocation. The budget varies by model; see MAX_THINKING_TOKENS for per-model ceilings. You can limit the budget with that environment variable, or disable thinking entirely via /config or the Option+T/Alt+T toggle.",
+        "On Opus 4.6 and Sonnet 4.6, adaptive reasoning controls thinking depth, so MAX_THINKING_TOKENS only applies when set to 0 to disable thinking, or when CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1 reverts these models to the fixed budget. See environment variables.",
         "You’re charged for all thinking tokens used, even though Claude 4 models show summarized thinking",
         "When starting Claude Code, you can resume a previous session:",
         "claude --continue continues the most recent conversation in the current directory",
@@ -2537,11 +2546,10 @@
         "Time elapsed since last activity",
         "Message count",
         "Git branch (if applicable)",
-        "Forked sessions (created with /rewind or --fork-session) are grouped together under their root session, making it easier to find related conversations.",
-        "Name sessions early: Use /rename when starting work on a distinct task—it’s much easier to find “payment-integration” than “explain this function” later",
+        "Forked sessions (created with /branch, /rewind, or --fork-session) are grouped together under their root session, making it easier to find related conversations.",
+        "Name sessions early: Use /rename when starting work on a distinct task: it’s much easier to find “payment-integration” than “explain this function” later",
         "Use --continue for quick access to your most recent conversation in the current directory",
-        "Use --resume session-name when you know which session you need",
-        "Use --resume (without a name) when you need to browse and select"
+        "Use --resume session-name when you know which session you need"
       ],
       "codeBlocks": [
         "cd /path/to/project",
@@ -2734,7 +2742,8 @@
         {
           "title": "​Example: Planning a complex refactor",
           "paragraphs": [
-            "Claude analyzes the current implementation and create a comprehensive plan. Refine with follow-ups:"
+            "Claude analyzes the current implementation and create a comprehensive plan. Refine with follow-ups:",
+            "When you accept a plan, Claude automatically names the session from the plan content. The name appears on the prompt bar and in the session picker. If you’ve already set a name with --name or /rename, accepting a plan won’t overwrite it."
           ],
           "codeBlocks": [
             "claude --permission-mode plan",
@@ -2874,8 +2883,8 @@
           "paragraphs": [
             "Extended thinking controls how much internal reasoning Claude performs before responding. More thinking provides more space to explore solutions, analyze edge cases, and self-correct mistakes.",
             "With Opus 4.6 and Sonnet 4.6, thinking uses adaptive reasoning: the model dynamically allocates thinking tokens based on the effort level you select. This is the recommended way to tune the tradeoff between speed and reasoning depth.",
-            "With older models, thinking uses a fixed budget of up to 31,999 tokens from your output budget. You can limit this with the MAX_THINKING_TOKENS environment variable, or disable thinking entirely via /config or the Option+T/Alt+T toggle.",
-            "MAX_THINKING_TOKENS is ignored on Opus 4.6 and Sonnet 4.6, since adaptive reasoning controls thinking depth instead. The one exception: setting MAX_THINKING_TOKENS=0 still disables thinking entirely on any model. To disable adaptive thinking and revert to the fixed thinking budget, set CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1. See environment variables.",
+            "With older models, thinking uses a fixed token budget drawn from your output allocation. The budget varies by model; see MAX_THINKING_TOKENS for per-model ceilings. You can limit the budget with that environment variable, or disable thinking entirely via /config or the Option+T/Alt+T toggle.",
+            "On Opus 4.6 and Sonnet 4.6, adaptive reasoning controls thinking depth, so MAX_THINKING_TOKENS only applies when set to 0 to disable thinking, or when CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1 reverts these models to the fixed budget. See environment variables.",
             "You’re charged for all thinking tokens used, even though Claude 4 models show summarized thinking"
           ],
           "codeBlocks": []
@@ -2922,8 +2931,8 @@
             "Time elapsed since last activity",
             "Message count",
             "Git branch (if applicable)",
-            "Forked sessions (created with /rewind or --fork-session) are grouped together under their root session, making it easier to find related conversations.",
-            "Name sessions early: Use /rename when starting work on a distinct task—it’s much easier to find “payment-integration” than “explain this function” later",
+            "Forked sessions (created with /branch, /rewind, or --fork-session) are grouped together under their root session, making it easier to find related conversations.",
+            "Name sessions early: Use /rename when starting work on a distinct task: it’s much easier to find “payment-integration” than “explain this function” later",
             "Use --continue for quick access to your most recent conversation in the current directory",
             "Use --resume session-name when you know which session you need"
           ],
@@ -3663,6 +3672,7 @@
         "​Connection and security",
         "​Remote Control vs Claude Code on the web",
         "​Limitations",
+        "​Troubleshooting",
         "​Related resources"
       ],
       "toc": [
@@ -3673,6 +3683,7 @@
         "Connection and security",
         "Remote Control vs Claude Code on the web",
         "Limitations",
+        "Troubleshooting",
         "Related resources"
       ],
       "paragraphs": [
@@ -3683,6 +3694,7 @@
         "Connection and security",
         "Remote Control vs Claude Code on the web",
         "Limitations",
+        "Troubleshooting",
         "Related resources",
         "Continue a local Claude Code session from your phone, tablet, or any browser using Remote Control. Works with claude.ai/code and the Claude mobile app.",
         "Remote Control is available on all plans. Team and Enterprise admins must first enable Claude Code in admin settings.",
@@ -3726,6 +3738,11 @@
         "One remote session per interactive process: outside of server mode, each Claude Code instance supports one remote session at a time. Use server mode with --spawn to run multiple concurrent sessions from a single process.",
         "Terminal must stay open: Remote Control runs as a local process. If you close the terminal or stop the claude process, the session ends. Run claude remote-control again to start a new one.",
         "Extended network outage: if your machine is awake but unable to reach the network for more than roughly 10 minutes, the session times out and the process exits. Run claude remote-control again to start a new session.",
+        "If your terminal shows Remote credentials fetch failed — see debug log, Claude Code could not obtain a short-lived credential from the Anthropic API to establish the Remote Control connection. To see the full error detail, re-run with the --verbose flag:",
+        "Common causes:",
+        "Not signed in: run claude and use /login to authenticate with your claude.ai account. API key authentication is not supported for Remote Control.",
+        "Network or proxy issue: a firewall or proxy may be blocking the outbound HTTPS request. Remote Control requires access to the Anthropic API on port 443.",
+        "Session creation failed: if you also see Session creation failed — see debug log, the failure happened earlier in setup. Check that your subscription (Pro, Max, Team, or Enterprise) is active.",
         "Claude Code on the web: run sessions in Anthropic-managed cloud environments instead of on your machine",
         "Authentication: set up /login and manage credentials for claude.ai",
         "CLI reference: full list of flags and commands including claude remote-control",
@@ -3738,7 +3755,8 @@
         "claude --remote-control",
         "claude --remote-control \"My Project\"",
         "/remote-control",
-        "/remote-control My Project"
+        "/remote-control My Project",
+        "claude remote-control --verbose"
       ],
       "sectionBlocks": [
         {
@@ -3751,11 +3769,11 @@
             "Connection and security",
             "Remote Control vs Claude Code on the web",
             "Limitations",
+            "Troubleshooting",
             "Related resources",
             "Continue a local Claude Code session from your phone, tablet, or any browser using Remote Control. Works with claude.ai/code and the Claude mobile app.",
             "Remote Control is available on all plans. Team and Enterprise admins must first enable Claude Code in admin settings.",
-            "Remote Control connects claude.ai/code or the Claude app for iOS and Android to a Claude Code session running on your machine. Start a task at your desk, then pick it up from your phone on the couch or a browser on another computer.",
-            "When you start a Remote Control session on your machine, Claude keeps running locally the entire time, so nothing moves to the cloud. With Remote Control you can:"
+            "Remote Control connects claude.ai/code or the Claude app for iOS and Android to a Claude Code session running on your machine. Start a task at your desk, then pick it up from your phone on the couch or a browser on another computer."
           ],
           "codeBlocks": []
         },
@@ -3837,6 +3855,19 @@
             "Extended network outage: if your machine is awake but unable to reach the network for more than roughly 10 minutes, the session times out and the process exits. Run claude remote-control again to start a new session."
           ],
           "codeBlocks": []
+        },
+        {
+          "title": "​Troubleshooting",
+          "paragraphs": [
+            "If your terminal shows Remote credentials fetch failed — see debug log, Claude Code could not obtain a short-lived credential from the Anthropic API to establish the Remote Control connection. To see the full error detail, re-run with the --verbose flag:",
+            "Common causes:",
+            "Not signed in: run claude and use /login to authenticate with your claude.ai account. API key authentication is not supported for Remote Control.",
+            "Network or proxy issue: a firewall or proxy may be blocking the outbound HTTPS request. Remote Control requires access to the Anthropic API on port 443.",
+            "Session creation failed: if you also see Session creation failed — see debug log, the failure happened earlier in setup. Check that your subscription (Pro, Max, Team, or Enterprise) is active."
+          ],
+          "codeBlocks": [
+            "claude remote-control --verbose"
+          ]
         },
         {
           "title": "​Related resources",
@@ -6160,6 +6191,7 @@
         "​Define hooks for subagents",
         "​Work with subagents",
         "​Understand automatic delegation",
+        "​Invoke subagents explicitly",
         "​Run subagents in foreground or background",
         "​Common patterns",
         "​Choose between subagents and main conversation",
@@ -6167,8 +6199,7 @@
         "​Example subagents",
         "​Code reviewer",
         "​Debugger",
-        "​Data scientist",
-        "​Database query validator"
+        "​Data scientist"
       ],
       "toc": [
         "Built-in subagents",
@@ -6215,6 +6246,7 @@
         "Project-level hooks for subagent events",
         "Work with subagents",
         "Understand automatic delegation",
+        "Invoke subagents explicitly",
         "Run subagents in foreground or background",
         "Common patterns",
         "Isolate high-volume operations",
@@ -6349,30 +6381,29 @@
         "Both events support matchers to target specific agent types by name. This example runs a setup script only when the db-agent subagent starts, and a cleanup script when any subagent stops:",
         "See Hooks for the complete hook configuration format.",
         "Claude automatically delegates tasks based on the task description in your request, the description field in subagent configurations, and current context. To encourage proactive delegation, include phrases like “use proactively” in your subagent’s description field.",
-        "You can also request a specific subagent explicitly:",
+        "When automatic delegation isn’t enough, you can request a subagent yourself. Three patterns escalate from a one-off suggestion to a session-wide default:",
+        "Natural language: name the subagent in your prompt; Claude decides whether to delegate",
+        "@-mention: guarantees the subagent runs for one task",
+        "Session-wide: the whole session uses that subagent’s system prompt, tool restrictions, and model via the --agent flag or the agent setting",
+        "For natural language, there’s no special syntax. Name the subagent and Claude typically delegates:",
+        "@-mention the subagent. Type @ and pick the subagent from the typeahead, the same way you @-mention files. This ensures that specific subagent runs rather than leaving the choice to Claude:",
+        "Your full message still goes to Claude, which writes the subagent’s task prompt based on what you asked. The @-mention controls which subagent Claude invokes, not what prompt it receives.",
+        "Subagents provided by an enabled plugin appear in the typeahead as <plugin-name>:<agent-name>. You can also type the mention manually without using the picker: @agent-<name> for local subagents, or @agent-<plugin-name>:<agent-name> for plugin subagents.",
+        "Run the whole session as a subagent. Pass --agent <name> to start a session where the main thread itself takes on that subagent’s system prompt, tool restrictions, and model:",
+        "The subagent’s system prompt replaces the default Claude Code system prompt entirely, the same way --system-prompt does. CLAUDE.md files and project memory still load through the normal message flow. The agent name appears as @<name> in the startup header so you can confirm it’s active.",
+        "This works with built-in and custom subagents, and the choice persists when you resume the session.",
+        "For a plugin-provided subagent, pass the scoped name: claude --agent <plugin-name>:<agent-name>.",
+        "To make it the default for every session in a project, set agent in .claude/settings.json:",
+        "The CLI flag overrides the setting if both are present.",
         "Subagents can run in the foreground (blocking) or background (concurrent):",
         "Foreground subagents block the main conversation until complete. Permission prompts and clarifying questions (like AskUserQuestion) are passed through to you.",
         "Background subagents run concurrently while you continue working. Before launching, Claude Code prompts for any tool permissions the subagent will need, ensuring it has the necessary approvals upfront. Once running, the subagent inherits these permissions and auto-denies anything not pre-approved. If a background subagent needs to ask clarifying questions, that tool call fails but the subagent continues.",
-        "If a background subagent fails due to missing permissions, you can resume it in the foreground to retry with interactive prompts.",
+        "If a background subagent fails due to missing permissions, you can start a new foreground subagent with the same task to retry with interactive prompts.",
         "Claude decides whether to run subagents in the foreground or background based on the task. You can also:",
         "Ask Claude to “run this in the background”",
         "Press Ctrl+B to background a running task",
         "To disable all background task functionality, set the CLAUDE_CODE_DISABLE_BACKGROUND_TASKS environment variable to 1. See Environment variables.",
-        "One of the most effective uses for subagents is isolating operations that produce large amounts of output. Running tests, fetching documentation, or processing log files can consume significant context. By delegating these to a subagent, the verbose output stays in the subagent’s context while only the relevant summary returns to your main conversation.",
-        "For independent investigations, spawn multiple subagents to work simultaneously:",
-        "Each subagent explores its area independently, then Claude synthesizes the findings. This works best when the research paths don’t depend on each other.",
-        "When subagents complete, their results return to your main conversation. Running many subagents that each return detailed results can consume significant context.",
-        "For tasks that need sustained parallelism or exceed your context window, agent teams give each worker its own independent context.",
-        "For multi-step workflows, ask Claude to use subagents in sequence. Each subagent completes its task and returns results to Claude, which then passes relevant context to the next subagent.",
-        "Use the main conversation when:",
-        "The task needs frequent back-and-forth or iterative refinement",
-        "Multiple phases share significant context (planning → implementation → testing)",
-        "You’re making a quick, targeted change",
-        "Latency matters. Subagents start fresh and may need time to gather context",
-        "Use subagents when:",
-        "The task produces verbose output you don’t need in your main context",
-        "You want to enforce specific tool restrictions or permissions",
-        "The work is self-contained and can return a summary"
+        "One of the most effective uses for subagents is isolating operations that produce large amounts of output. Running tests, fetching documentation, or processing log files can consume significant context. By delegating these to a subagent, the verbose output stays in the subagent’s context while only the relevant summary returns to your main conversation."
       ],
       "codeBlocks": [
         "/agents",
@@ -6394,6 +6425,9 @@
         "---\nname: code-reviewer\ndescription: Review code changes with automatic linting\nhooks:\n  PreToolUse:\n    - matcher: \"Bash\"\n      hooks:\n        - type: command\n          command: \"./scripts/validate-command.sh $TOOL_INPUT\"\n  PostToolUse:\n    - matcher: \"Edit|Write\"\n      hooks:\n        - type: command\n          command: \"./scripts/run-linter.sh\"\n---",
         "{\n  \"hooks\": {\n    \"SubagentStart\": [\n      {\n        \"matcher\": \"db-agent\",\n        \"hooks\": [\n          { \"type\": \"command\", \"command\": \"./scripts/setup-db-connection.sh\" }\n        ]\n      }\n    ],\n    \"SubagentStop\": [\n      {\n        \"hooks\": [\n          { \"type\": \"command\", \"command\": \"./scripts/cleanup-db-connection.sh\" }\n        ]\n      }\n    ]\n  }\n}",
         "Use the test-runner subagent to fix failing tests\nHave the code-reviewer subagent look at my recent changes",
+        "@\"code-reviewer (agent)\" look at the auth changes",
+        "claude --agent code-reviewer",
+        "{\n  \"agent\": \"code-reviewer\"\n}",
         "Use a subagent to run the test suite and report only the failing tests with their error messages",
         "Research the authentication, database, and API modules in parallel using separate subagents",
         "Use the code-reviewer subagent to find performance issues, then use the optimizer subagent to fix them",
@@ -6403,8 +6437,7 @@
         "---\nname: debugger\ndescription: Debugging specialist for errors, test failures, and unexpected behavior. Use proactively when encountering any issues.\ntools: Read, Edit, Bash, Grep, Glob\n---\n\nYou are an expert debugger specializing in root cause analysis.\n\nWhen invoked:\n1. Capture error message and stack trace\n2. Identify reproduction steps\n3. Isolate the failure location\n4. Implement minimal fix\n5. Verify solution works\n\nDebugging process:\n- Analyze error messages and logs\n- Check recent code changes\n- Form and test hypotheses\n- Add strategic debug logging\n- Inspect variable states\n\nFor each issue, provide:\n- Root cause explanation\n- Evidence supporting the diagnosis\n- Specific code fix\n- Testing approach\n- Prevention recommendations\n\nFocus on fixing the underlying issue, not the symptoms.",
         "---\nname: data-scientist\ndescription: Data analysis expert for SQL queries, BigQuery operations, and data insights. Use proactively for data analysis tasks and queries.\ntools: Bash, Read, Write\nmodel: sonnet\n---\n\nYou are a data scientist specializing in SQL and BigQuery analysis.\n\nWhen invoked:\n1. Understand the data analysis requirement\n2. Write efficient SQL queries\n3. Use BigQuery command line tools (bq) when appropriate\n4. Analyze and summarize results\n5. Present findings clearly\n\nKey practices:\n- Write optimized SQL queries with proper filters\n- Use appropriate aggregations and joins\n- Include comments explaining complex logic\n- Format results for readability\n- Provide data-driven recommendations\n\nFor each analysis:\n- Explain the query approach\n- Document any assumptions\n- Highlight key findings\n- Suggest next steps based on data\n\nAlways ensure queries are efficient and cost-effective.",
         "---\nname: db-reader\ndescription: Execute read-only database queries. Use when analyzing data or generating reports.\ntools: Bash\nhooks:\n  PreToolUse:\n    - matcher: \"Bash\"\n      hooks:\n        - type: command\n          command: \"./scripts/validate-readonly-query.sh\"\n---\n\nYou are a database analyst with read-only access. Execute SELECT queries to answer questions about the data.\n\nWhen asked to analyze data:\n1. Identify which tables contain the relevant data\n2. Write efficient SELECT queries with appropriate filters\n3. Present results clearly with context\n\nYou cannot modify data. If asked to INSERT, UPDATE, DELETE, or modify schema, explain that you only have read access.",
-        "#!/bin/bash\n# Blocks SQL write operations, allows SELECT queries\n\n# Read JSON input from stdin\nINPUT=$(cat)\n\n# Extract the command field from tool_input using jq\nCOMMAND=$(echo \"$INPUT\" | jq -r '.tool_input.command // empty')\n\nif [ -z \"$COMMAND\" ]; then\n  exit 0\nfi\n\n# Block write operations (case-insensitive)\nif echo \"$COMMAND\" | grep -iE '\\b(INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|TRUNCATE|REPLACE|MERGE)\\b' > /dev/null; then\n  echo \"Blocked: Write operations not allowed. Use SELECT queries only.\" >&2\n  exit 2\nfi\n\nexit 0",
-        "chmod +x ./scripts/validate-readonly-query.sh"
+        "#!/bin/bash\n# Blocks SQL write operations, allows SELECT queries\n\n# Read JSON input from stdin\nINPUT=$(cat)\n\n# Extract the command field from tool_input using jq\nCOMMAND=$(echo \"$INPUT\" | jq -r '.tool_input.command // empty')\n\nif [ -z \"$COMMAND\" ]; then\n  exit 0\nfi\n\n# Block write operations (case-insensitive)\nif echo \"$COMMAND\" | grep -iE '\\b(INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|TRUNCATE|REPLACE|MERGE)\\b' > /dev/null; then\n  echo \"Blocked: Write operations not allowed. Use SELECT queries only.\" >&2\n  exit 2\nfi\n\nexit 0"
       ],
       "sectionBlocks": [
         {
@@ -6574,11 +6607,31 @@
         {
           "title": "​Understand automatic delegation",
           "paragraphs": [
-            "Claude automatically delegates tasks based on the task description in your request, the description field in subagent configurations, and current context. To encourage proactive delegation, include phrases like “use proactively” in your subagent’s description field.",
-            "You can also request a specific subagent explicitly:"
+            "Claude automatically delegates tasks based on the task description in your request, the description field in subagent configurations, and current context. To encourage proactive delegation, include phrases like “use proactively” in your subagent’s description field."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Invoke subagents explicitly",
+          "paragraphs": [
+            "When automatic delegation isn’t enough, you can request a subagent yourself. Three patterns escalate from a one-off suggestion to a session-wide default:",
+            "Natural language: name the subagent in your prompt; Claude decides whether to delegate",
+            "@-mention: guarantees the subagent runs for one task",
+            "Session-wide: the whole session uses that subagent’s system prompt, tool restrictions, and model via the --agent flag or the agent setting",
+            "For natural language, there’s no special syntax. Name the subagent and Claude typically delegates:",
+            "@-mention the subagent. Type @ and pick the subagent from the typeahead, the same way you @-mention files. This ensures that specific subagent runs rather than leaving the choice to Claude:",
+            "Your full message still goes to Claude, which writes the subagent’s task prompt based on what you asked. The @-mention controls which subagent Claude invokes, not what prompt it receives.",
+            "Subagents provided by an enabled plugin appear in the typeahead as <plugin-name>:<agent-name>. You can also type the mention manually without using the picker: @agent-<name> for local subagents, or @agent-<plugin-name>:<agent-name> for plugin subagents.",
+            "Run the whole session as a subagent. Pass --agent <name> to start a session where the main thread itself takes on that subagent’s system prompt, tool restrictions, and model:",
+            "The subagent’s system prompt replaces the default Claude Code system prompt entirely, the same way --system-prompt does. CLAUDE.md files and project memory still load through the normal message flow. The agent name appears as @<name> in the startup header so you can confirm it’s active.",
+            "This works with built-in and custom subagents, and the choice persists when you resume the session.",
+            "For a plugin-provided subagent, pass the scoped name: claude --agent <plugin-name>:<agent-name>."
           ],
           "codeBlocks": [
-            "Use the test-runner subagent to fix failing tests\nHave the code-reviewer subagent look at my recent changes"
+            "Use the test-runner subagent to fix failing tests\nHave the code-reviewer subagent look at my recent changes",
+            "@\"code-reviewer (agent)\" look at the auth changes",
+            "claude --agent code-reviewer",
+            "{\n  \"agent\": \"code-reviewer\"\n}"
           ]
         },
         {
@@ -6587,7 +6640,7 @@
             "Subagents can run in the foreground (blocking) or background (concurrent):",
             "Foreground subagents block the main conversation until complete. Permission prompts and clarifying questions (like AskUserQuestion) are passed through to you.",
             "Background subagents run concurrently while you continue working. Before launching, Claude Code prompts for any tool permissions the subagent will need, ensuring it has the necessary approvals upfront. Once running, the subagent inherits these permissions and auto-denies anything not pre-approved. If a background subagent needs to ask clarifying questions, that tool call fails but the subagent continues.",
-            "If a background subagent fails due to missing permissions, you can resume it in the foreground to retry with interactive prompts.",
+            "If a background subagent fails due to missing permissions, you can start a new foreground subagent with the same task to retry with interactive prompts.",
             "Claude decides whether to run subagents in the foreground or background based on the task. You can also:",
             "Ask Claude to “run this in the background”",
             "Press Ctrl+B to background a running task",
@@ -6634,7 +6687,8 @@
           "paragraphs": [
             "Each subagent invocation creates a new instance with fresh context. To continue an existing subagent’s work instead of starting over, ask Claude to resume it.",
             "Resumed subagents retain their full conversation history, including all previous tool calls, results, and reasoning. The subagent picks up exactly where it stopped rather than starting fresh.",
-            "When a subagent completes, Claude receives its agent ID. To resume a subagent, ask Claude to continue the previous work:",
+            "When a subagent completes, Claude receives its agent ID. Claude uses the SendMessage tool with the agent’s ID as the to field to resume it. To resume a subagent, ask Claude to continue the previous work:",
+            "If a stopped subagent receives a SendMessage, it auto-resumes in the background without requiring a new Agent invocation.",
             "You can also ask Claude for the agent ID if you want to reference it explicitly, or find IDs in the transcript files at ~/.claude/projects/{project}/{sessionId}/subagents/. Each transcript is stored as agent-{agentId}.jsonl.",
             "Subagent transcripts persist independently of the main conversation:",
             "Main conversation compaction: When the main conversation compacts, subagent transcripts are unaffected. They’re stored in separate files.",
@@ -9298,9 +9352,10 @@
         "Use exit 2 to block with a stderr message, or exit 0 with JSON for structured control. Don’t mix them: Claude Code ignores JSON when you exit 2.",
         "For example, a PreToolUse hook can deny a tool call and tell Claude why, or escalate it to the user for approval:",
         "Claude Code reads permissionDecision and cancels the tool call, then feeds permissionDecisionReason back to Claude as feedback. These three options are specific to PreToolUse:",
-        "\"allow\": proceed without showing a permission prompt",
+        "\"allow\": skip the interactive permission prompt. Deny and ask rules, including enterprise managed deny lists, still apply",
         "\"deny\": cancel the tool call and send the reason to Claude",
         "\"ask\": show the permission prompt to the user as normal",
+        "Returning \"allow\" skips the interactive prompt but does not override permission rules. If a deny rule matches the tool call, the call is blocked even when your hook returns \"allow\". If an ask rule matches, the user is still prompted. This means deny rules from any settings scope, including managed settings, always take precedence over hook approvals.",
         "Other events use different decision patterns. For example, PostToolUse and Stop hooks use a top-level decision: \"block\" field, while PermissionRequest uses hookSpecificOutput.decision.behavior. See the summary table in the reference for a full breakdown by event.",
         "For UserPromptSubmit hooks, use additionalContext instead to inject text into Claude’s context. Prompt-based hooks (type: \"prompt\") handle output differently: see Prompt-based hooks.",
         "Without a matcher, a hook fires on every occurrence of its event. Matchers let you narrow that down. For example, if you want to run a formatter only after file edits (not after every tool call), add a matcher to your PostToolUse hook:",
@@ -9780,6 +9835,7 @@
         "Use a tool like jq to parse the response and extract specific fields:",
         "Use --output-format stream-json with --verbose and --include-partial-messages to receive tokens as they’re generated. Each line is a JSON object representing an event:",
         "The following example uses jq to filter for text deltas and display just the streaming text. The -r flag outputs raw strings (no quotes) and -j joins without newlines so tokens stream continuously:",
+        "When an API request fails with a retryable error, Claude Code emits a system/api_retry event before retrying. You can use this to surface retry progress or implement custom backoff logic.",
         "For programmatic streaming with callbacks and message objects, see Stream responses in real-time in the Agent SDK documentation.",
         "Use --allowedTools to let Claude use certain tools without prompting. This example runs a test suite and fixes failures, allowing Claude to execute Bash commands and read/edit files without asking for permission:",
         "This example reviews staged changes and creates a commit with an appropriate message:",
@@ -9873,6 +9929,7 @@
           "paragraphs": [
             "Use --output-format stream-json with --verbose and --include-partial-messages to receive tokens as they’re generated. Each line is a JSON object representing an event:",
             "The following example uses jq to filter for text deltas and display just the streaming text. The -r flag outputs raw strings (no quotes) and -j joins without newlines so tokens stream continuously:",
+            "When an API request fails with a retryable error, Claude Code emits a system/api_retry event before retrying. You can use this to surface retry progress or implement custom backoff logic.",
             "For programmatic streaming with callbacks and message objects, see Stream responses in real-time in the Agent SDK documentation."
           ],
           "codeBlocks": [
@@ -10077,7 +10134,7 @@
         "Or inline in plugin.json:",
         "Plugin MCP features:",
         "Automatic lifecycle: At session startup, servers for enabled plugins connect automatically. If you enable or disable a plugin during a session, run /reload-plugins to connect or disconnect its MCP servers",
-        "Environment variables: Use ${CLAUDE_PLUGIN_ROOT} for plugin-relative paths",
+        "Environment variables: use ${CLAUDE_PLUGIN_ROOT} for bundled plugin files and ${CLAUDE_PLUGIN_DATA} for persistent state that survives plugin updates",
         "User environment access: Access to same environment variables as manually configured servers",
         "Multiple transport types: Support stdio, SSE, and HTTP transports (transport support may vary by server)",
         "Viewing plugin MCP servers:",
@@ -10322,7 +10379,7 @@
             "Or inline in plugin.json:",
             "Plugin MCP features:",
             "Automatic lifecycle: At session startup, servers for enabled plugins connect automatically. If you enable or disable a plugin during a session, run /reload-plugins to connect or disconnect its MCP servers",
-            "Environment variables: Use ${CLAUDE_PLUGIN_ROOT} for plugin-relative paths"
+            "Environment variables: use ${CLAUDE_PLUGIN_ROOT} for bundled plugin files and ${CLAUDE_PLUGIN_DATA} for persistent state that survives plugin updates"
           ],
           "codeBlocks": [
             "{\n  \"database-tools\": {\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n    \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/config.json\"],\n    \"env\": {\n      \"DB_URL\": \"${DB_URL}\"\n    }\n  }\n}",
@@ -11700,7 +11757,7 @@
         "{\n  \"Credentials\": {\n    \"AccessKeyId\": \"value\",\n    \"SecretAccessKey\": \"value\",\n    \"SessionToken\": \"value\"\n  }\n}",
         "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the region for the small/fast model (Haiku)\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2",
         "export ANTHROPIC_DEFAULT_OPUS_MODEL='us.anthropic.claude-opus-4-6-v1'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='us.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'",
-        "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_SMALL_FAST_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1",
+        "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1",
         "{\n  \"modelOverrides\": {\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-46-prod\",\n    \"claude-opus-4-5-20251101\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-45-prod\",\n    \"claude-opus-4-1-20250805\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-41-prod\"\n  }\n}",
         "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"AllowModelAndInferenceProfileAccess\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"bedrock:InvokeModel\",\n        \"bedrock:InvokeModelWithResponseStream\",\n        \"bedrock:ListInferenceProfiles\"\n      ],\n      \"Resource\": [\n        \"arn:aws:bedrock:*:*:inference-profile/*\",\n        \"arn:aws:bedrock:*:*:application-inference-profile/*\",\n        \"arn:aws:bedrock:*:*:foundation-model/*\"\n      ]\n    },\n    {\n      \"Sid\": \"AllowMarketplaceSubscription\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"aws-marketplace:ViewSubscriptions\",\n        \"aws-marketplace:Subscribe\"\n      ],\n      \"Resource\": \"*\",\n      \"Condition\": {\n        \"StringEquals\": {\n          \"aws:CalledViaLast\": \"bedrock.amazonaws.com\"\n        }\n      }\n    }\n  ]\n}",
         "{\n  \"env\": {\n    \"ANTHROPIC_CUSTOM_HEADERS\": \"X-Amzn-Bedrock-GuardrailIdentifier: your-guardrail-id\\nX-Amzn-Bedrock-GuardrailVersion: 1\"\n  }\n}"
@@ -11804,7 +11861,7 @@
           ],
           "codeBlocks": [
             "export ANTHROPIC_DEFAULT_OPUS_MODEL='us.anthropic.claude-opus-4-6-v1'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='us.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'",
-            "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_SMALL_FAST_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1",
+            "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1",
             "{\n  \"modelOverrides\": {\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-46-prod\",\n    \"claude-opus-4-5-20251101\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-45-prod\",\n    \"claude-opus-4-1-20250805\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-41-prod\"\n  }\n}"
           ]
         },
@@ -11941,8 +11998,8 @@
         "If you encounter “model not found” 404 errors:",
         "Confirm model is Enabled in Model Garden",
         "Verify you have access to the specified region",
-        "If using CLOUD_ML_REGION=global, check that your models support global endpoints in Model Garden under “Supported features”. For models that don’t support global endpoints, either: Specify a supported model via ANTHROPIC_MODEL or ANTHROPIC_SMALL_FAST_MODEL, or Set a regional endpoint using VERTEX_REGION_<MODEL_NAME> environment variables",
-        "Specify a supported model via ANTHROPIC_MODEL or ANTHROPIC_SMALL_FAST_MODEL, or",
+        "If using CLOUD_ML_REGION=global, check that your models support global endpoints in Model Garden under “Supported features”. For models that don’t support global endpoints, either: Specify a supported model via ANTHROPIC_MODEL or ANTHROPIC_DEFAULT_HAIKU_MODEL, or Set a regional endpoint using VERTEX_REGION_<MODEL_NAME> environment variables",
+        "Specify a supported model via ANTHROPIC_MODEL or ANTHROPIC_DEFAULT_HAIKU_MODEL, or",
         "Set a regional endpoint using VERTEX_REGION_<MODEL_NAME> environment variables",
         "If you encounter 429 errors:",
         "For regional endpoints, ensure the primary model and small/fast model are supported in your selected region",
@@ -11956,7 +12013,7 @@
         "# Set your project ID\ngcloud config set project YOUR-PROJECT-ID\n\n# Enable Vertex AI API\ngcloud services enable aiplatform.googleapis.com",
         "# Enable Vertex AI integration\nexport CLAUDE_CODE_USE_VERTEX=1\nexport CLOUD_ML_REGION=global\nexport ANTHROPIC_VERTEX_PROJECT_ID=YOUR-PROJECT-ID\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# When CLOUD_ML_REGION=global, override region for unsupported models\nexport VERTEX_REGION_CLAUDE_3_5_HAIKU=us-east5\n\n# Optional: Override regions for other specific models\nexport VERTEX_REGION_CLAUDE_3_5_SONNET=us-east5\nexport VERTEX_REGION_CLAUDE_3_7_SONNET=us-east5\nexport VERTEX_REGION_CLAUDE_4_0_OPUS=europe-west1\nexport VERTEX_REGION_CLAUDE_4_0_SONNET=us-east5\nexport VERTEX_REGION_CLAUDE_4_1_OPUS=europe-west1",
         "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-6'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'",
-        "export ANTHROPIC_MODEL='claude-opus-4-6'\nexport ANTHROPIC_SMALL_FAST_MODEL='claude-haiku-4-5@20251001'"
+        "export ANTHROPIC_MODEL='claude-opus-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'"
       ],
       "sectionBlocks": [
         {
@@ -12053,7 +12110,7 @@
           ],
           "codeBlocks": [
             "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-6'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'",
-            "export ANTHROPIC_MODEL='claude-opus-4-6'\nexport ANTHROPIC_SMALL_FAST_MODEL='claude-haiku-4-5@20251001'"
+            "export ANTHROPIC_MODEL='claude-opus-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'"
           ]
         },
         {
@@ -12084,8 +12141,8 @@
             "If you encounter “model not found” 404 errors:",
             "Confirm model is Enabled in Model Garden",
             "Verify you have access to the specified region",
-            "If using CLOUD_ML_REGION=global, check that your models support global endpoints in Model Garden under “Supported features”. For models that don’t support global endpoints, either: Specify a supported model via ANTHROPIC_MODEL or ANTHROPIC_SMALL_FAST_MODEL, or Set a regional endpoint using VERTEX_REGION_<MODEL_NAME> environment variables",
-            "Specify a supported model via ANTHROPIC_MODEL or ANTHROPIC_SMALL_FAST_MODEL, or",
+            "If using CLOUD_ML_REGION=global, check that your models support global endpoints in Model Garden under “Supported features”. For models that don’t support global endpoints, either: Specify a supported model via ANTHROPIC_MODEL or ANTHROPIC_DEFAULT_HAIKU_MODEL, or Set a regional endpoint using VERTEX_REGION_<MODEL_NAME> environment variables",
+            "Specify a supported model via ANTHROPIC_MODEL or ANTHROPIC_DEFAULT_HAIKU_MODEL, or",
             "Set a regional endpoint using VERTEX_REGION_<MODEL_NAME> environment variables",
             "If you encounter 429 errors:",
             "For regional endpoints, ensure the primary model and small/fast model are supported in your selected region",
@@ -12348,6 +12405,9 @@
         "claude.ai: authentication for claude.ai accounts",
         "platform.claude.com: authentication for Anthropic Console accounts",
         "Ensure these URLs are allowlisted in your proxy configuration and firewall rules. This is especially important when using Claude Code in containerized or restricted network environments.",
+        "The native installer and update checks also require the following URLs. If you install Claude Code through npm or manage your own binary distribution, end users may not need access:",
+        "downloads.claude.ai: CDN hosting the install script, version pointers, manifests, and executables",
+        "storage.googleapis.com: legacy download bucket, deprecation in progress",
         "Claude Code on the web and Code Review connect to your repositories from Anthropic-managed infrastructure. If your GitHub Enterprise Cloud organization restricts access by IP address, enable IP allow list inheritance for installed GitHub Apps. The Claude GitHub App registers its IP ranges, so enabling this setting allows access without manual configuration. To add the ranges to your allow list manually instead, or to configure other firewalls, see the Anthropic API IP addresses.",
         "Claude Code settings",
         "Environment variables reference",
@@ -12429,6 +12489,9 @@
             "claude.ai: authentication for claude.ai accounts",
             "platform.claude.com: authentication for Anthropic Console accounts",
             "Ensure these URLs are allowlisted in your proxy configuration and firewall rules. This is especially important when using Claude Code in containerized or restricted network environments.",
+            "The native installer and update checks also require the following URLs. If you install Claude Code through npm or manage your own binary distribution, end users may not need access:",
+            "downloads.claude.ai: CDN hosting the install script, version pointers, manifests, and executables",
+            "storage.googleapis.com: legacy download bucket, deprecation in progress",
             "Claude Code on the web and Code Review connect to your repositories from Anthropic-managed infrastructure. If your GitHub Enterprise Cloud organization restricts access by IP address, enable IP allow list inheritance for installed GitHub Apps. The Claude GitHub App registers its IP ranges, so enabling this setting allows access without manual configuration. To add the ranges to your allow list manually instead, or to configure other firewalls, see the Anthropic API IP addresses."
           ],
           "codeBlocks": []
@@ -13378,6 +13441,8 @@
         "Supported authentication types: Claude.ai credentials, Claude API credentials, Azure Auth, Bedrock Auth, and Vertex Auth.",
         "Custom credential scripts: the apiKeyHelper setting can be configured to run a shell script that returns an API key.",
         "Refresh intervals: by default, apiKeyHelper is called after 5 minutes or on HTTP 401 response. Set CLAUDE_CODE_API_KEY_HELPER_TTL_MS environment variable for custom refresh intervals.",
+        "Slow helper notice: if apiKeyHelper takes longer than 10 seconds to return a key, Claude Code displays a warning notice in the prompt bar showing the elapsed time. If you see this notice regularly, check whether your credential script can be optimized.",
+        "apiKeyHelper, ANTHROPIC_API_KEY, and ANTHROPIC_AUTH_TOKEN apply to terminal CLI sessions only. Claude Desktop and remote sessions use OAuth exclusively and do not call apiKeyHelper or read API key environment variables.",
         "Was this page helpful?"
       ],
       "codeBlocks": [],
@@ -13477,6 +13542,8 @@
             "Supported authentication types: Claude.ai credentials, Claude API credentials, Azure Auth, Bedrock Auth, and Vertex Auth.",
             "Custom credential scripts: the apiKeyHelper setting can be configured to run a shell script that returns an API key.",
             "Refresh intervals: by default, apiKeyHelper is called after 5 minutes or on HTTP 401 response. Set CLAUDE_CODE_API_KEY_HELPER_TTL_MS environment variable for custom refresh intervals.",
+            "Slow helper notice: if apiKeyHelper takes longer than 10 seconds to return a key, Claude Code displays a warning notice in the prompt bar showing the elapsed time. If you see this notice regularly, check whether your credential script can be optimized.",
+            "apiKeyHelper, ANTHROPIC_API_KEY, and ANTHROPIC_AUTH_TOKEN apply to terminal CLI sessions only. Claude Desktop and remote sessions use OAuth exclusively and do not call apiKeyHelper or read API key environment variables.",
             "Was this page helpful?"
           ],
           "codeBlocks": []
@@ -15011,7 +15078,7 @@
         "Add this to your settings.json to run the hook before every Bash command:",
         "The hook calls this script, which checks if the command is a test runner and modifies it to show only failures:",
         "Your CLAUDE.md file is loaded into context at session start. If it contains detailed instructions for specific workflows (like PR reviews or database migrations), those tokens are present even when you’re doing unrelated work. Skills load on-demand only when invoked, so moving specialized instructions into skills keeps your base context smaller. Aim to keep CLAUDE.md under ~500 lines by including only essentials.",
-        "Extended thinking is enabled by default with a budget of 31,999 tokens because it significantly improves performance on complex planning and reasoning tasks. However, thinking tokens are billed as output tokens, so for simpler tasks where deep reasoning isn’t needed, you can reduce costs by lowering the effort level with /effort or in /model, disabling thinking in /config, or lowering the budget (for example, MAX_THINKING_TOKENS=8000).",
+        "Extended thinking is enabled by default because it significantly improves performance on complex planning and reasoning tasks. Thinking tokens are billed as output tokens, and the default budget can be tens of thousands of tokens per request depending on the model. For simpler tasks where deep reasoning isn’t needed, you can reduce costs by lowering the effort level with /effort or in /model, disabling thinking in /config, or lowering the budget with MAX_THINKING_TOKENS=8000.",
         "Running tests, fetching documentation, or processing log files can consume significant context. Delegate these to subagents so the verbose output stays in the subagent’s context while only a summary returns to your main conversation.",
         "Agent teams use approximately 7x more tokens than standard sessions when teammates run in plan mode, because each teammate maintains its own context window and runs as a separate Claude instance. Keep team tasks small and self-contained to limit per-teammate token usage. See agent teams for details.",
         "Vague requests like “improve this codebase” trigger broad scanning. Specific requests like “add input validation to the login function in auth.ts” let Claude work efficiently with minimal file reads.",
@@ -15169,7 +15236,7 @@
         {
           "title": "​Adjust extended thinking",
           "paragraphs": [
-            "Extended thinking is enabled by default with a budget of 31,999 tokens because it significantly improves performance on complex planning and reasoning tasks. However, thinking tokens are billed as output tokens, so for simpler tasks where deep reasoning isn’t needed, you can reduce costs by lowering the effort level with /effort or in /model, disabling thinking in /config, or lowering the budget (for example, MAX_THINKING_TOKENS=8000)."
+            "Extended thinking is enabled by default because it significantly improves performance on complex planning and reasoning tasks. Thinking tokens are billed as output tokens, and the default budget can be tens of thousands of tokens per request depending on the model. For simpler tasks where deep reasoning isn’t needed, you can reduce costs by lowering the effort level with /effort or in /model, disabling thinking in /config, or lowering the budget with MAX_THINKING_TOKENS=8000."
           ],
           "codeBlocks": []
         },
@@ -15610,6 +15677,7 @@
         "Private repositories",
         "Test locally before distribution",
         "Require marketplaces for your team",
+        "Pre-populate plugins for containers",
         "Managed marketplace restrictions",
         "Common configurations",
         "How restrictions work",
@@ -15672,7 +15740,7 @@
         "This example shows a plugin entry using many of the optional fields, including custom paths for commands, agents, hooks, and MCP servers:",
         "Key things to notice:",
         "commands and agents: You can specify multiple directories or individual files. Paths are relative to the plugin root.",
-        "${CLAUDE_PLUGIN_ROOT}: Use this variable in hooks and MCP server configs to reference files within the plugin’s installation directory. This is necessary because plugins are copied to a cache location when installed.",
+        "${CLAUDE_PLUGIN_ROOT}: use this variable in hooks and MCP server configs to reference files within the plugin’s installation directory. This is necessary because plugins are copied to a cache location when installed. For dependencies or state that should survive plugin updates, use ${CLAUDE_PLUGIN_DATA} instead.",
         "strict: false: Since this is set to false, the plugin doesn’t need its own plugin.json. The marketplace entry defines everything. See Strict mode below.",
         "The strict field controls whether plugin.json is the authority for component definitions (commands, agents, hooks, skills, MCP servers, output styles).",
         "When to use each mode:",
@@ -15693,6 +15761,15 @@
         "You can configure your repository so team members are automatically prompted to install your marketplace when they trust the project folder. Add your marketplace to .claude/settings.json:",
         "You can also specify which plugins should be enabled by default:",
         "For full configuration options, see Plugin settings.",
+        "For container images and CI environments, you can pre-populate a plugins directory at build time so Claude Code starts with marketplaces and plugins already available, without cloning anything at runtime. Set the CLAUDE_CODE_PLUGIN_SEED_DIR environment variable to point at this directory.",
+        "The seed directory mirrors the structure of ~/.claude/plugins:",
+        "The simplest way to build a seed directory is to run Claude Code once during image build, install the plugins you need, then copy the resulting ~/.claude/plugins directory into your image and point CLAUDE_CODE_PLUGIN_SEED_DIR at it.",
+        "At startup, Claude Code registers marketplaces found in the seed’s known_marketplaces.json into the primary configuration, and uses plugin caches found under cache/ in place without re-cloning. This works in both interactive mode and non-interactive mode with the -p flag.",
+        "Behavior details:",
+        "Read-only: the seed directory is never written to. Auto-updates are disabled for seed marketplaces since git pull would fail on a read-only filesystem.",
+        "Seed entries take precedence: marketplaces declared in the seed overwrite any matching entries in the user’s configuration on each startup. To opt out of a seed plugin, use /plugin disable rather than removing the marketplace.",
+        "Path resolution: Claude Code locates marketplace content by probing $CLAUDE_CODE_PLUGIN_SEED_DIR/marketplaces/<name>/ at runtime, not by trusting paths stored inside the seed’s JSON. This means the seed works correctly even when mounted at a different path than where it was built.",
+        "Composes with settings: if extraKnownMarketplaces or enabledPlugins declare a marketplace that already exists in the seed, Claude Code uses the seed copy instead of cloning.",
         "For organizations requiring strict control over plugin sources, administrators can restrict which plugin marketplaces users are allowed to add using the strictKnownMarketplaces setting in managed settings.",
         "When strictKnownMarketplaces is configured in managed settings, the restriction behavior depends on the value:",
         "Disable all marketplace additions:",
@@ -15725,12 +15802,13 @@
         "Solutions:",
         "Verify the marketplace URL is accessible",
         "Check that .claude-plugin/marketplace.json exists at the specified path",
-        "Ensure JSON syntax is valid using claude plugin validate or /plugin validate",
+        "Ensure JSON syntax is valid and frontmatter is well-formed using claude plugin validate or /plugin validate",
         "For private repositories, confirm you have access permissions",
-        "Run claude plugin validate . or /plugin validate . from your marketplace directory to check for issues. Common errors:",
+        "Run claude plugin validate . or /plugin validate . from your marketplace directory to check for issues. The validator checks plugin.json, skill/agent/command frontmatter, and hooks/hooks.json for syntax and schema errors. Common errors:",
         "Warnings (non-blocking):",
         "Marketplace has no plugins defined: add at least one plugin to the plugins array",
         "No marketplace description provided: add metadata.description to help users understand your marketplace",
+        "Plugin name \"x\" is not kebab-case: the plugin name contains uppercase letters, spaces, or special characters. Rename to lowercase letters, digits, and hyphens only (for example, my-plugin). Claude Code accepts other forms, but the Claude.ai marketplace sync rejects them.",
         "Symptoms: Marketplace appears but plugin installation fails",
         "Verify plugin source URLs are accessible",
         "Check that plugin directories contain required files",
@@ -15755,15 +15833,7 @@
         "Use external sources: Change plugin entries to use GitHub, npm, or git URL sources instead of relative paths: Report incorrect codeCopyAsk AI{ \"name\": \"my-plugin\", \"source\": { \"source\": \"github\", \"repo\": \"owner/repo\" } }",
         "Use a Git-based marketplace: Host your marketplace in a Git repository and add it with the git URL. Git-based marketplaces clone the entire repository, making relative paths work correctly.",
         "Symptoms: Plugin installs but references to files fail, especially files outside the plugin directory",
-        "Cause: Plugins are copied to a cache directory rather than used in-place. Paths that reference files outside the plugin’s directory (such as ../shared-utils) won’t work because those files aren’t copied.",
-        "Solutions: See Plugin caching and file resolution for workarounds including symlinks and directory restructuring.",
-        "For additional debugging tools and common issues, see Debugging and development tools.",
-        "Discover and install prebuilt plugins - Installing plugins from existing marketplaces",
-        "Plugins - Creating your own plugins",
-        "Plugins reference - Complete technical specifications and schemas",
-        "Plugin settings - Plugin configuration options",
-        "strictKnownMarketplaces reference - Managed marketplace restrictions",
-        "Was this page helpful?"
+        "Cause: Plugins are copied to a cache directory rather than used in-place. Paths that reference files outside the plugin’s directory (such as ../shared-utils) won’t work because those files aren’t copied."
       ],
       "codeBlocks": [
         "mkdir -p my-marketplace/.claude-plugin\nmkdir -p my-marketplace/plugins/quality-review-plugin/.claude-plugin\nmkdir -p my-marketplace/plugins/quality-review-plugin/skills/quality-review",
@@ -15789,6 +15859,7 @@
         "/plugin marketplace add ./my-local-marketplace\n/plugin install test-plugin@my-local-marketplace",
         "{\n  \"extraKnownMarketplaces\": {\n    \"company-tools\": {\n      \"source\": {\n        \"source\": \"github\",\n        \"repo\": \"your-org/claude-plugins\"\n      }\n    }\n  }\n}",
         "{\n  \"enabledPlugins\": {\n    \"code-formatter@company-tools\": true,\n    \"deployment-tools@company-tools\": true\n  }\n}",
+        "$CLAUDE_CODE_PLUGIN_SEED_DIR/\n  known_marketplaces.json\n  marketplaces/<name>/...\n  cache/<marketplace>/<plugin>/<version>/...",
         "{\n  \"strictKnownMarketplaces\": []\n}",
         "{\n  \"strictKnownMarketplaces\": [\n    {\n      \"source\": \"github\",\n      \"repo\": \"acme-corp/approved-plugins\"\n    },\n    {\n      \"source\": \"github\",\n      \"repo\": \"acme-corp/security-tools\",\n      \"ref\": \"v2.0\"\n    },\n    {\n      \"source\": \"url\",\n      \"url\": \"https://plugins.example.com/marketplace.json\"\n    }\n  ]\n}",
         "{\n  \"strictKnownMarketplaces\": [\n    {\n      \"source\": \"hostPattern\",\n      \"hostPattern\": \"^github\\\\.example\\\\.com$\"\n    }\n  ]\n}",
@@ -15796,8 +15867,7 @@
         "{\n  \"name\": \"stable-tools\",\n  \"plugins\": [\n    {\n      \"name\": \"code-formatter\",\n      \"source\": {\n        \"source\": \"github\",\n        \"repo\": \"acme-corp/code-formatter\",\n        \"ref\": \"stable\"\n      }\n    }\n  ]\n}",
         "{\n  \"name\": \"latest-tools\",\n  \"plugins\": [\n    {\n      \"name\": \"code-formatter\",\n      \"source\": {\n        \"source\": \"github\",\n        \"repo\": \"acme-corp/code-formatter\",\n        \"ref\": \"latest\"\n      }\n    }\n  ]\n}",
         "{\n  \"extraKnownMarketplaces\": {\n    \"stable-tools\": {\n      \"source\": {\n        \"source\": \"github\",\n        \"repo\": \"acme-corp/stable-tools\"\n      }\n    }\n  }\n}",
-        "{\n  \"extraKnownMarketplaces\": {\n    \"latest-tools\": {\n      \"source\": {\n        \"source\": \"github\",\n        \"repo\": \"acme-corp/latest-tools\"\n      }\n    }\n  }\n}",
-        "claude plugin validate ."
+        "{\n  \"extraKnownMarketplaces\": {\n    \"latest-tools\": {\n      \"source\": {\n        \"source\": \"github\",\n        \"repo\": \"acme-corp/latest-tools\"\n      }\n    }\n  }\n}"
       ],
       "sectionBlocks": [
         {
@@ -15981,7 +16051,7 @@
             "This example shows a plugin entry using many of the optional fields, including custom paths for commands, agents, hooks, and MCP servers:",
             "Key things to notice:",
             "commands and agents: You can specify multiple directories or individual files. Paths are relative to the plugin root.",
-            "${CLAUDE_PLUGIN_ROOT}: Use this variable in hooks and MCP server configs to reference files within the plugin’s installation directory. This is necessary because plugins are copied to a cache location when installed.",
+            "${CLAUDE_PLUGIN_ROOT}: use this variable in hooks and MCP server configs to reference files within the plugin’s installation directory. This is necessary because plugins are copied to a cache location when installed. For dependencies or state that should survive plugin updates, use ${CLAUDE_PLUGIN_DATA} instead.",
             "strict: false: Since this is set to false, the plugin doesn’t need its own plugin.json. The marketplace entry defines everything. See Strict mode below."
           ],
           "codeBlocks": [
@@ -16058,6 +16128,23 @@
           ]
         },
         {
+          "title": "​Pre-populate plugins for containers",
+          "paragraphs": [
+            "For container images and CI environments, you can pre-populate a plugins directory at build time so Claude Code starts with marketplaces and plugins already available, without cloning anything at runtime. Set the CLAUDE_CODE_PLUGIN_SEED_DIR environment variable to point at this directory.",
+            "The seed directory mirrors the structure of ~/.claude/plugins:",
+            "The simplest way to build a seed directory is to run Claude Code once during image build, install the plugins you need, then copy the resulting ~/.claude/plugins directory into your image and point CLAUDE_CODE_PLUGIN_SEED_DIR at it.",
+            "At startup, Claude Code registers marketplaces found in the seed’s known_marketplaces.json into the primary configuration, and uses plugin caches found under cache/ in place without re-cloning. This works in both interactive mode and non-interactive mode with the -p flag.",
+            "Behavior details:",
+            "Read-only: the seed directory is never written to. Auto-updates are disabled for seed marketplaces since git pull would fail on a read-only filesystem.",
+            "Seed entries take precedence: marketplaces declared in the seed overwrite any matching entries in the user’s configuration on each startup. To opt out of a seed plugin, use /plugin disable rather than removing the marketplace.",
+            "Path resolution: Claude Code locates marketplace content by probing $CLAUDE_CODE_PLUGIN_SEED_DIR/marketplaces/<name>/ at runtime, not by trusting paths stored inside the seed’s JSON. This means the seed works correctly even when mounted at a different path than where it was built.",
+            "Composes with settings: if extraKnownMarketplaces or enabledPlugins declare a marketplace that already exists in the seed, Claude Code uses the seed copy instead of cloning."
+          ],
+          "codeBlocks": [
+            "$CLAUDE_CODE_PLUGIN_SEED_DIR/\n  known_marketplaces.json\n  marketplaces/<name>/...\n  cache/<marketplace>/<plugin>/<version>/..."
+          ]
+        },
+        {
           "title": "​Managed marketplace restrictions",
           "paragraphs": [
             "For organizations requiring strict control over plugin sources, administrators can restrict which plugin marketplaces users are allowed to add using the strictKnownMarketplaces setting in managed settings.",
@@ -16126,7 +16213,7 @@
             "Solutions:",
             "Verify the marketplace URL is accessible",
             "Check that .claude-plugin/marketplace.json exists at the specified path",
-            "Ensure JSON syntax is valid using claude plugin validate or /plugin validate",
+            "Ensure JSON syntax is valid and frontmatter is well-formed using claude plugin validate or /plugin validate",
             "For private repositories, confirm you have access permissions"
           ],
           "codeBlocks": []
@@ -16134,22 +16221,11 @@
         {
           "title": "​Marketplace validation errors",
           "paragraphs": [
-            "Run claude plugin validate . or /plugin validate . from your marketplace directory to check for issues. Common errors:",
+            "Run claude plugin validate . or /plugin validate . from your marketplace directory to check for issues. The validator checks plugin.json, skill/agent/command frontmatter, and hooks/hooks.json for syntax and schema errors. Common errors:",
             "Warnings (non-blocking):",
             "Marketplace has no plugins defined: add at least one plugin to the plugins array",
-            "No marketplace description provided: add metadata.description to help users understand your marketplace"
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Plugin installation failures",
-          "paragraphs": [
-            "Symptoms: Marketplace appears but plugin installation fails",
-            "Solutions:",
-            "Verify plugin source URLs are accessible",
-            "Check that plugin directories contain required files",
-            "For GitHub sources, ensure repositories are public or you have access",
-            "Test plugin sources manually by cloning/downloading"
+            "No marketplace description provided: add metadata.description to help users understand your marketplace",
+            "Plugin name \"x\" is not kebab-case: the plugin name contains uppercase letters, spaces, or special characters. Rename to lowercase letters, digits, and hyphens only (for example, my-plugin). Claude Code accepts other forms, but the Claude.ai marketplace sync rejects them."
           ],
           "codeBlocks": []
         }
@@ -16294,7 +16370,7 @@
         "Quick examples:",
         "For the complete rule syntax reference, including wildcard behavior, tool-specific patterns for Read, Edit, WebFetch, MCP, and Agent rules, and security limitations of Bash patterns, see Permission rule syntax.",
         "Configure advanced sandboxing behavior. Sandboxing isolates bash commands from your filesystem and network. See Sandboxing for details.",
-        "Paths in filesystem.allowWrite, filesystem.denyWrite, and filesystem.denyRead support these prefixes:",
+        "Paths in filesystem.allowWrite, filesystem.denyWrite, filesystem.denyRead, and filesystem.allowRead support these prefixes:",
         "Configuration example:",
         "Filesystem and network restrictions can be configured in two ways that are merged together:",
         "sandbox.filesystem settings (shown above): Control paths at the OS-level sandbox boundary. These restrictions apply to all subprocess commands (e.g., kubectl, terraform, npm), not just Claude’s file tools.",
@@ -16539,7 +16615,7 @@
           "title": "​Sandbox settings",
           "paragraphs": [
             "Configure advanced sandboxing behavior. Sandboxing isolates bash commands from your filesystem and network. See Sandboxing for details.",
-            "Paths in filesystem.allowWrite, filesystem.denyWrite, and filesystem.denyRead support these prefixes:",
+            "Paths in filesystem.allowWrite, filesystem.denyWrite, filesystem.denyRead, and filesystem.allowRead support these prefixes:",
             "Configuration example:",
             "Filesystem and network restrictions can be configured in two ways that are merged together:",
             "sandbox.filesystem settings (shown above): Control paths at the OS-level sandbox boundary. These restrictions apply to all subprocess commands (e.g., kubectl, terraform, npm), not just Claude’s file tools.",
@@ -16829,6 +16905,7 @@
         "Bash(git * main) matches commands like git checkout main, git merge main",
         "When * appears at the end with a space before it (like Bash(ls *)), it enforces a word boundary, requiring the prefix to be followed by a space or end-of-string. For example, Bash(ls *) matches ls -la but not lsof. In contrast, Bash(ls*) without a space matches both ls -la and lsof because there’s no word boundary constraint.",
         "Claude Code is aware of shell operators (like &&) so a prefix match rule like Bash(safe-cmd *) won’t give it permission to run the command safe-cmd && other-cmd.",
+        "When you approve a compound command with “Yes, don’t ask again”, Claude Code saves a separate rule for each subcommand that requires approval, rather than a single rule for the full compound string. For example, approving git status && npm test saves a rule for npm test, so future npm test invocations are recognized regardless of what precedes the &&. Subcommands like cd into a subdirectory generate their own Read rule for that path. Up to 5 rules may be saved for a single compound command.",
         "Bash permission patterns that try to constrain command arguments are fragile. For example, Bash(curl http://github.com/ *) intends to restrict curl to GitHub URLs, but won’t match variations like:",
         "Options before URL: curl -X GET http://github.com/...",
         "Different protocol: curl https://github.com/...",
@@ -16841,8 +16918,10 @@
         "Instructing Claude Code about your allowed curl patterns via CLAUDE.md",
         "Note that using WebFetch alone does not prevent network access. If Bash is allowed, Claude can still use curl, wget, or other tools to reach any URL.",
         "Edit rules apply to all built-in tools that edit files. Claude makes a best-effort attempt to apply Read rules to all built-in tools that read files like Grep and Glob.",
+        "Read and Edit deny rules apply to Claude’s built-in file tools, not to Bash subprocesses. A Read(./.env) deny rule blocks the Read tool but does not prevent cat .env in Bash. For OS-level enforcement that blocks all processes from accessing a path, enable the sandbox.",
         "Read and Edit rules both follow the gitignore specification with four distinct pattern types:",
         "A pattern like /Users/alice/file is NOT an absolute path. It’s relative to the project root. Use //Users/alice/file for absolute paths.",
+        "On Windows, paths are normalized to POSIX form before matching. C:\\Users\\alice becomes /c/Users/alice, so use //c/**/.env to match .env files anywhere on that drive. To match across all drives, use //**/.env.",
         "Examples:",
         "Edit(/docs/**): edits in <project>/docs/ (NOT /docs/ and NOT <project>/.claude/docs/)",
         "Read(~/.zshrc): reads your home directory’s .zshrc",
@@ -16858,7 +16937,8 @@
         "Agent(Plan) matches the Plan subagent",
         "Agent(my-custom-agent) matches a custom subagent named my-custom-agent",
         "Add these rules to the deny array in your settings or use the --disallowedTools CLI flag to disable specific agents. To disable the Explore agent:",
-        "Claude Code hooks provide a way to register custom shell commands to perform permission evaluation at runtime. When Claude Code makes a tool call, PreToolUse hooks run before the permission system, and the hook output can determine whether to approve or deny the tool call in place of the permission system.",
+        "Claude Code hooks provide a way to register custom shell commands to perform permission evaluation at runtime. When Claude Code makes a tool call, PreToolUse hooks run before the permission prompt. The hook output can deny the tool call, force a prompt, or skip the prompt to let the call proceed.",
+        "Skipping the prompt does not bypass permission rules. Deny and ask rules are still evaluated after a hook returns \"allow\", so a matching deny rule still blocks the call. This preserves the deny-first precedence described in Manage permissions, including deny rules set in managed settings.",
         "By default, Claude has access to files in the directory where it was launched. You can extend this access:",
         "During startup: use --add-dir <path> CLI argument",
         "During session: use /add-dir command",
@@ -16987,10 +17067,10 @@
             "Bash(git * main) matches commands like git checkout main, git merge main",
             "When * appears at the end with a space before it (like Bash(ls *)), it enforces a word boundary, requiring the prefix to be followed by a space or end-of-string. For example, Bash(ls *) matches ls -la but not lsof. In contrast, Bash(ls*) without a space matches both ls -la and lsof because there’s no word boundary constraint.",
             "Claude Code is aware of shell operators (like &&) so a prefix match rule like Bash(safe-cmd *) won’t give it permission to run the command safe-cmd && other-cmd.",
+            "When you approve a compound command with “Yes, don’t ask again”, Claude Code saves a separate rule for each subcommand that requires approval, rather than a single rule for the full compound string. For example, approving git status && npm test saves a rule for npm test, so future npm test invocations are recognized regardless of what precedes the &&. Subcommands like cd into a subdirectory generate their own Read rule for that path. Up to 5 rules may be saved for a single compound command.",
             "Bash permission patterns that try to constrain command arguments are fragile. For example, Bash(curl http://github.com/ *) intends to restrict curl to GitHub URLs, but won’t match variations like:",
             "Options before URL: curl -X GET http://github.com/...",
-            "Different protocol: curl https://github.com/...",
-            "Redirects: curl -L http://bit.ly/xyz (redirects to github)"
+            "Different protocol: curl https://github.com/..."
           ],
           "codeBlocks": []
         },
@@ -16998,8 +17078,10 @@
           "title": "​Read and Edit",
           "paragraphs": [
             "Edit rules apply to all built-in tools that edit files. Claude makes a best-effort attempt to apply Read rules to all built-in tools that read files like Grep and Glob.",
+            "Read and Edit deny rules apply to Claude’s built-in file tools, not to Bash subprocesses. A Read(./.env) deny rule blocks the Read tool but does not prevent cat .env in Bash. For OS-level enforcement that blocks all processes from accessing a path, enable the sandbox.",
             "Read and Edit rules both follow the gitignore specification with four distinct pattern types:",
             "A pattern like /Users/alice/file is NOT an absolute path. It’s relative to the project root. Use //Users/alice/file for absolute paths.",
+            "On Windows, paths are normalized to POSIX form before matching. C:\\Users\\alice becomes /c/Users/alice, so use //c/**/.env to match .env files anywhere on that drive. To match across all drives, use //**/.env.",
             "Examples:",
             "Edit(/docs/**): edits in <project>/docs/ (NOT /docs/ and NOT <project>/.claude/docs/)",
             "Read(~/.zshrc): reads your home directory’s .zshrc",
@@ -17041,7 +17123,8 @@
         {
           "title": "​Extend permissions with hooks",
           "paragraphs": [
-            "Claude Code hooks provide a way to register custom shell commands to perform permission evaluation at runtime. When Claude Code makes a tool call, PreToolUse hooks run before the permission system, and the hook output can determine whether to approve or deny the tool call in place of the permission system."
+            "Claude Code hooks provide a way to register custom shell commands to perform permission evaluation at runtime. When Claude Code makes a tool call, PreToolUse hooks run before the permission prompt. The hook output can deny the tool call, force a prompt, or skip the prompt to let the call proceed.",
+            "Skipping the prompt does not bypass permission rules. Deny and ask rules are still evaluated after a hook returns \"allow\", so a matching deny rule still blocks the call. This preserves the deny-first precedence described in Manage permissions, including deny rules set in managed settings."
           ],
           "codeBlocks": []
         },
@@ -17238,9 +17321,10 @@
         "Customize sandbox behavior through your settings.json file. See Settings for complete configuration reference.",
         "By default, sandboxed commands can only write to the current working directory. If subprocess commands like kubectl, terraform, or npm need to write outside the project directory, use sandbox.filesystem.allowWrite to grant access to specific paths:",
         "These paths are enforced at the OS level, so all commands running inside the sandbox, including their child processes, respect them. This is the recommended approach when a tool needs write access to a specific location, rather than excluding the tool from the sandbox entirely with excludedCommands.",
-        "When allowWrite (or denyWrite/denyRead) is defined in multiple settings scopes, the arrays are merged, meaning paths from every scope are combined, not replaced. For example, if managed settings allow writes to //opt/company-tools and a user adds ~/.kube in their personal settings, both paths are included in the final sandbox configuration. This means users and projects can extend the list without duplicating or overriding paths set by higher-priority scopes.",
+        "When allowWrite (or denyWrite/denyRead/allowRead) is defined in multiple settings scopes, the arrays are merged, meaning paths from every scope are combined, not replaced. For example, if managed settings allow writes to //opt/company-tools and a user adds ~/.kube in their personal settings, both paths are included in the final sandbox configuration. This means users and projects can extend the list without duplicating or overriding paths set by higher-priority scopes.",
         "Path prefixes control how paths are resolved:",
-        "You can also deny write or read access using sandbox.filesystem.denyWrite and sandbox.filesystem.denyRead. These are merged with any paths from Edit(...) and Read(...) permission rules.",
+        "You can also deny write or read access using sandbox.filesystem.denyWrite and sandbox.filesystem.denyRead. These are merged with any paths from Edit(...) and Read(...) permission rules. To re-allow reading specific paths within a denied region, use sandbox.filesystem.allowRead, which takes precedence over denyRead. When allowManagedReadPathsOnly is enabled in managed settings, only managed allowRead entries are respected; user, project, and local allowRead entries are ignored.",
+        "For example, to block reading from the entire home directory while still allowing reads from the current project:",
         "Not all commands are compatible with sandboxing out of the box. Some notes that may help you make the most out of the sandbox:",
         "Many CLI tools require accessing certain hosts. As you use these tools, they will request permission to access certain hosts. Granting permission will allow them to access these hosts now and in the future, enabling them to safely execute inside the sandbox.",
         "watchman is incompatible with running in the sandbox. If you’re running jest, consider using jest --no-watchman",
@@ -17284,6 +17368,7 @@
         "Filesystem and network restrictions are configured through both sandbox settings and permission rules:",
         "Use sandbox.filesystem.allowWrite to grant subprocess write access to paths outside the working directory",
         "Use sandbox.filesystem.denyWrite and sandbox.filesystem.denyRead to block subprocess access to specific paths",
+        "Use sandbox.filesystem.allowRead to re-allow reading specific paths within a denyRead region",
         "Use Read and Edit deny rules to block access to specific files or directories",
         "Use WebFetch allow/deny rules to control domain access",
         "Use sandbox allowedDomains to control which domains Bash commands can reach",
@@ -17319,6 +17404,7 @@
         "sudo dnf install bubblewrap socat",
         "/sandbox",
         "{\n  \"sandbox\": {\n    \"enabled\": true,\n    \"filesystem\": {\n      \"allowWrite\": [\"~/.kube\", \"//tmp/build\"]\n    }\n  }\n}",
+        "{\n  \"sandbox\": {\n    \"enabled\": true,\n    \"filesystem\": {\n      \"denyRead\": [\"~/\"],\n      \"allowRead\": [\".\"]\n    }\n  }\n}",
         "{\n  \"sandbox\": {\n    \"network\": {\n      \"httpProxyPort\": 8080,\n      \"socksProxyPort\": 8081\n    }\n  }\n}",
         "npx @anthropic-ai/sandbox-runtime <command-to-sandbox>"
       ],
@@ -17449,18 +17535,19 @@
             "Customize sandbox behavior through your settings.json file. See Settings for complete configuration reference.",
             "By default, sandboxed commands can only write to the current working directory. If subprocess commands like kubectl, terraform, or npm need to write outside the project directory, use sandbox.filesystem.allowWrite to grant access to specific paths:",
             "These paths are enforced at the OS level, so all commands running inside the sandbox, including their child processes, respect them. This is the recommended approach when a tool needs write access to a specific location, rather than excluding the tool from the sandbox entirely with excludedCommands.",
-            "When allowWrite (or denyWrite/denyRead) is defined in multiple settings scopes, the arrays are merged, meaning paths from every scope are combined, not replaced. For example, if managed settings allow writes to //opt/company-tools and a user adds ~/.kube in their personal settings, both paths are included in the final sandbox configuration. This means users and projects can extend the list without duplicating or overriding paths set by higher-priority scopes.",
+            "When allowWrite (or denyWrite/denyRead/allowRead) is defined in multiple settings scopes, the arrays are merged, meaning paths from every scope are combined, not replaced. For example, if managed settings allow writes to //opt/company-tools and a user adds ~/.kube in their personal settings, both paths are included in the final sandbox configuration. This means users and projects can extend the list without duplicating or overriding paths set by higher-priority scopes.",
             "Path prefixes control how paths are resolved:",
-            "You can also deny write or read access using sandbox.filesystem.denyWrite and sandbox.filesystem.denyRead. These are merged with any paths from Edit(...) and Read(...) permission rules.",
+            "You can also deny write or read access using sandbox.filesystem.denyWrite and sandbox.filesystem.denyRead. These are merged with any paths from Edit(...) and Read(...) permission rules. To re-allow reading specific paths within a denied region, use sandbox.filesystem.allowRead, which takes precedence over denyRead. When allowManagedReadPathsOnly is enabled in managed settings, only managed allowRead entries are respected; user, project, and local allowRead entries are ignored.",
+            "For example, to block reading from the entire home directory while still allowing reads from the current project:",
             "Not all commands are compatible with sandboxing out of the box. Some notes that may help you make the most out of the sandbox:",
             "Many CLI tools require accessing certain hosts. As you use these tools, they will request permission to access certain hosts. Granting permission will allow them to access these hosts now and in the future, enabling them to safely execute inside the sandbox.",
             "watchman is incompatible with running in the sandbox. If you’re running jest, consider using jest --no-watchman",
             "docker is incompatible with running in the sandbox. Consider specifying docker in excludedCommands to force it to run outside of the sandbox.",
-            "Claude Code includes an intentional escape hatch mechanism that allows commands to run outside the sandbox when necessary. When a command fails due to sandbox restrictions (such as network connectivity issues or incompatible tools), Claude is prompted to analyze the failure and may retry the command with the dangerouslyDisableSandbox parameter. Commands that use this parameter go through the normal Claude Code permissions flow requiring user permission to execute. This allows Claude Code to handle edge cases where certain tools or network operations cannot function within sandbox constraints.",
-            "You can disable this escape hatch by setting \"allowUnsandboxedCommands\": false in your sandbox settings. When disabled, the dangerouslyDisableSandbox parameter is completely ignored and all commands must run sandboxed or be explicitly listed in excludedCommands."
+            "Claude Code includes an intentional escape hatch mechanism that allows commands to run outside the sandbox when necessary. When a command fails due to sandbox restrictions (such as network connectivity issues or incompatible tools), Claude is prompted to analyze the failure and may retry the command with the dangerouslyDisableSandbox parameter. Commands that use this parameter go through the normal Claude Code permissions flow requiring user permission to execute. This allows Claude Code to handle edge cases where certain tools or network operations cannot function within sandbox constraints."
           ],
           "codeBlocks": [
-            "{\n  \"sandbox\": {\n    \"enabled\": true,\n    \"filesystem\": {\n      \"allowWrite\": [\"~/.kube\", \"//tmp/build\"]\n    }\n  }\n}"
+            "{\n  \"sandbox\": {\n    \"enabled\": true,\n    \"filesystem\": {\n      \"allowWrite\": [\"~/.kube\", \"//tmp/build\"]\n    }\n  }\n}",
+            "{\n  \"sandbox\": {\n    \"enabled\": true,\n    \"filesystem\": {\n      \"denyRead\": [\"~/\"],\n      \"allowRead\": [\".\"]\n    }\n  }\n}"
           ]
         },
         {
@@ -17530,6 +17617,7 @@
             "Filesystem and network restrictions are configured through both sandbox settings and permission rules:",
             "Use sandbox.filesystem.allowWrite to grant subprocess write access to paths outside the working directory",
             "Use sandbox.filesystem.denyWrite and sandbox.filesystem.denyRead to block subprocess access to specific paths",
+            "Use sandbox.filesystem.allowRead to re-allow reading specific paths within a denyRead region",
             "Use Read and Edit deny rules to block access to specific files or directories",
             "Use WebFetch allow/deny rules to control domain access",
             "Use sandbox allowedDomains to control which domains Bash commands can reach",
@@ -18364,6 +18452,177 @@
     },
     {
       "section": "Configuration",
+      "path": "/docs/en/voice-dictation",
+      "url": "https://code.claude.com/docs/en/voice-dictation",
+      "title": "Voice dictation",
+      "metaDescription": "Use push-to-talk voice dictation to speak your prompts instead of typing them in the Claude Code CLI.",
+      "headings": [
+        "​Requirements",
+        "​Enable voice dictation",
+        "​Record a prompt",
+        "​Change the dictation language",
+        "​Rebind the push-to-talk key",
+        "​Troubleshooting",
+        "​See also"
+      ],
+      "toc": [
+        "Requirements",
+        "Enable voice dictation",
+        "Record a prompt",
+        "Change the dictation language",
+        "Rebind the push-to-talk key",
+        "Troubleshooting",
+        "See also"
+      ],
+      "paragraphs": [
+        "Requirements",
+        "Enable voice dictation",
+        "Record a prompt",
+        "Change the dictation language",
+        "Rebind the push-to-talk key",
+        "Troubleshooting",
+        "See also",
+        "Use push-to-talk voice dictation to speak your prompts instead of typing them in the Claude Code CLI.",
+        "Hold a key and speak to dictate your prompts. Your speech is transcribed live into the prompt input, so you can mix voice and typing in the same message. Enable dictation with /voice. The default push-to-talk key is Space; rebind to a modifier combination to activate on the first keypress rather than after a brief hold.",
+        "Voice dictation requires Claude Code v2.1.69 or later. Check your version with claude --version.",
+        "Voice dictation uses a streaming speech-to-text service that is only available when you authenticate with a Claude.ai account. It is not available when Claude Code is configured to use an Anthropic API key directly, Amazon Bedrock, Google Vertex AI, or Microsoft Foundry.",
+        "Voice dictation also needs local microphone access, so it does not work in remote environments such as Claude Code on the web or SSH sessions. In WSL, voice dictation requires WSLg for audio access, which is included with WSL2 on Windows 11. On Windows 10 or WSL1, run Claude Code in native Windows instead.",
+        "Audio recording uses a built-in native module on macOS, Linux, and Windows. On Linux, if the native module cannot load, Claude Code falls back to arecord from ALSA utils or rec from SoX. If neither is available, /voice prints an install command for your package manager.",
+        "Run /voice to toggle voice dictation on. The first time you enable it, Claude Code runs a microphone check. On macOS, this triggers the system microphone permission prompt for your terminal if it has never been granted.",
+        "Voice dictation persists across sessions. Run /voice again to turn it off, or set it directly in your user settings file:",
+        "While voice dictation is enabled, the input footer shows a hold Space to speak hint when the prompt is empty. The hint does not appear if you have a custom status line configured.",
+        "Hold Space to start recording. Claude Code detects a held key by watching for rapid key-repeat events from your terminal, so there is a brief warmup before recording begins. The footer shows keep holding… during warmup, then switches to a live waveform once recording is active.",
+        "The first couple of key-repeat characters type into the input during warmup and are removed automatically when recording activates. A single Space tap still types a space, since hold detection only triggers on rapid repeat.",
+        "To skip the warmup, rebind to a modifier combination like meta+k. Modifier combos start recording on the first keypress.",
+        "Your speech appears in the prompt as you speak, dimmed until the transcript is finalized. Release Space to stop recording and finalize the text. The transcript is inserted at your cursor position and the cursor stays at the end of the inserted text, so you can mix typing and dictation in any order. Hold Space again to append another recording, or move the cursor first to insert speech elsewhere in the prompt:",
+        "Transcription is tuned for coding vocabulary. Common development terms like regex, OAuth, JSON, and localhost are recognized correctly, and your current project name and git branch name are added as recognition hints automatically.",
+        "Voice dictation uses the same language setting that controls Claude’s response language. If that setting is empty, dictation defaults to English.",
+        "Supported dictation languages",
+        "Set the language in /config or directly in settings. You can use either the BCP 47 language code or the language name:",
+        "If your language setting is not in the supported list, /voice warns you on enable and falls back to English for dictation. Claude’s text responses are not affected by this fallback.",
+        "The push-to-talk key is bound to voice:pushToTalk in the Chat context and defaults to Space. Rebind it in ~/.claude/keybindings.json:",
+        "Setting \"space\": null removes the default binding. Omit it if you want both keys active.",
+        "Because hold detection relies on key-repeat, avoid binding a bare letter key like v since it types into the prompt during warmup. Use Space, or use a modifier combination like meta+k to start recording on the first keypress with no warmup. See customize keyboard shortcuts for the full keybinding syntax.",
+        "Common issues when voice dictation does not activate or record:",
+        "Voice mode requires a Claude.ai account: you are authenticated with an API key or a third-party provider. Run /login to sign in with a Claude.ai account.",
+        "Microphone access is denied: grant microphone permission to your terminal in system settings. On macOS, go to System Settings → Privacy & Security → Microphone. On Windows, go to Settings → Privacy → Microphone. Then run /voice again.",
+        "No audio recording tool found on Linux: the native audio module could not load and no fallback is installed. Install SoX with the command shown in the error message, for example sudo apt-get install sox.",
+        "Nothing happens when holding Space: watch the prompt input while you hold. If spaces keep accumulating, voice dictation is off; run /voice to enable it. If only one or two spaces appear and then nothing, voice dictation is on but hold detection is not triggering. Hold detection requires your terminal to send key-repeat events, so it cannot detect a held key if key-repeat is disabled at the OS level.",
+        "Transcription is garbled or in the wrong language: dictation defaults to English. If you are dictating in another language, set it in /config first. See Change the dictation language.",
+        "Customize keyboard shortcuts: rebind voice:pushToTalk and other CLI keyboard actions",
+        "Configure settings: full reference for voiceEnabled, language, and other settings keys",
+        "Interactive mode: keyboard shortcuts, input modes, and session controls",
+        "Built-in commands: reference for /voice, /config, and all other commands",
+        "Was this page helpful?"
+      ],
+      "codeBlocks": [
+        "/voice\nVoice mode enabled. Hold Space to record. Dictation language: en (/config to change).",
+        "{\n  \"voiceEnabled\": true\n}",
+        "> refactor the auth middleware to ▮\n  # hold Space, speak \"use the new token validation helper\"\n> refactor the auth middleware to use the new token validation helper▮",
+        "{\n  \"language\": \"japanese\"\n}",
+        "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"meta+k\": \"voice:pushToTalk\",\n        \"space\": null\n      }\n    }\n  ]\n}"
+      ],
+      "sectionBlocks": [
+        {
+          "title": "",
+          "paragraphs": [
+            "Requirements",
+            "Enable voice dictation",
+            "Record a prompt",
+            "Change the dictation language",
+            "Rebind the push-to-talk key",
+            "Troubleshooting",
+            "See also",
+            "Use push-to-talk voice dictation to speak your prompts instead of typing them in the Claude Code CLI.",
+            "Hold a key and speak to dictate your prompts. Your speech is transcribed live into the prompt input, so you can mix voice and typing in the same message. Enable dictation with /voice. The default push-to-talk key is Space; rebind to a modifier combination to activate on the first keypress rather than after a brief hold.",
+            "Voice dictation requires Claude Code v2.1.69 or later. Check your version with claude --version."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Requirements",
+          "paragraphs": [
+            "Voice dictation uses a streaming speech-to-text service that is only available when you authenticate with a Claude.ai account. It is not available when Claude Code is configured to use an Anthropic API key directly, Amazon Bedrock, Google Vertex AI, or Microsoft Foundry.",
+            "Voice dictation also needs local microphone access, so it does not work in remote environments such as Claude Code on the web or SSH sessions. In WSL, voice dictation requires WSLg for audio access, which is included with WSL2 on Windows 11. On Windows 10 or WSL1, run Claude Code in native Windows instead.",
+            "Audio recording uses a built-in native module on macOS, Linux, and Windows. On Linux, if the native module cannot load, Claude Code falls back to arecord from ALSA utils or rec from SoX. If neither is available, /voice prints an install command for your package manager."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Enable voice dictation",
+          "paragraphs": [
+            "Run /voice to toggle voice dictation on. The first time you enable it, Claude Code runs a microphone check. On macOS, this triggers the system microphone permission prompt for your terminal if it has never been granted.",
+            "Voice dictation persists across sessions. Run /voice again to turn it off, or set it directly in your user settings file:",
+            "While voice dictation is enabled, the input footer shows a hold Space to speak hint when the prompt is empty. The hint does not appear if you have a custom status line configured."
+          ],
+          "codeBlocks": [
+            "/voice\nVoice mode enabled. Hold Space to record. Dictation language: en (/config to change).",
+            "{\n  \"voiceEnabled\": true\n}"
+          ]
+        },
+        {
+          "title": "​Record a prompt",
+          "paragraphs": [
+            "Hold Space to start recording. Claude Code detects a held key by watching for rapid key-repeat events from your terminal, so there is a brief warmup before recording begins. The footer shows keep holding… during warmup, then switches to a live waveform once recording is active.",
+            "The first couple of key-repeat characters type into the input during warmup and are removed automatically when recording activates. A single Space tap still types a space, since hold detection only triggers on rapid repeat.",
+            "To skip the warmup, rebind to a modifier combination like meta+k. Modifier combos start recording on the first keypress.",
+            "Your speech appears in the prompt as you speak, dimmed until the transcript is finalized. Release Space to stop recording and finalize the text. The transcript is inserted at your cursor position and the cursor stays at the end of the inserted text, so you can mix typing and dictation in any order. Hold Space again to append another recording, or move the cursor first to insert speech elsewhere in the prompt:",
+            "Transcription is tuned for coding vocabulary. Common development terms like regex, OAuth, JSON, and localhost are recognized correctly, and your current project name and git branch name are added as recognition hints automatically."
+          ],
+          "codeBlocks": [
+            "> refactor the auth middleware to ▮\n  # hold Space, speak \"use the new token validation helper\"\n> refactor the auth middleware to use the new token validation helper▮"
+          ]
+        },
+        {
+          "title": "​Change the dictation language",
+          "paragraphs": [
+            "Voice dictation uses the same language setting that controls Claude’s response language. If that setting is empty, dictation defaults to English.",
+            "Supported dictation languages",
+            "Set the language in /config or directly in settings. You can use either the BCP 47 language code or the language name:",
+            "If your language setting is not in the supported list, /voice warns you on enable and falls back to English for dictation. Claude’s text responses are not affected by this fallback."
+          ],
+          "codeBlocks": [
+            "{\n  \"language\": \"japanese\"\n}"
+          ]
+        },
+        {
+          "title": "​Rebind the push-to-talk key",
+          "paragraphs": [
+            "The push-to-talk key is bound to voice:pushToTalk in the Chat context and defaults to Space. Rebind it in ~/.claude/keybindings.json:",
+            "Setting \"space\": null removes the default binding. Omit it if you want both keys active.",
+            "Because hold detection relies on key-repeat, avoid binding a bare letter key like v since it types into the prompt during warmup. Use Space, or use a modifier combination like meta+k to start recording on the first keypress with no warmup. See customize keyboard shortcuts for the full keybinding syntax."
+          ],
+          "codeBlocks": [
+            "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"meta+k\": \"voice:pushToTalk\",\n        \"space\": null\n      }\n    }\n  ]\n}"
+          ]
+        },
+        {
+          "title": "​Troubleshooting",
+          "paragraphs": [
+            "Common issues when voice dictation does not activate or record:",
+            "Voice mode requires a Claude.ai account: you are authenticated with an API key or a third-party provider. Run /login to sign in with a Claude.ai account.",
+            "Microphone access is denied: grant microphone permission to your terminal in system settings. On macOS, go to System Settings → Privacy & Security → Microphone. On Windows, go to Settings → Privacy → Microphone. Then run /voice again.",
+            "No audio recording tool found on Linux: the native audio module could not load and no fallback is installed. Install SoX with the command shown in the error message, for example sudo apt-get install sox.",
+            "Nothing happens when holding Space: watch the prompt input while you hold. If spaces keep accumulating, voice dictation is off; run /voice to enable it. If only one or two spaces appear and then nothing, voice dictation is on but hold detection is not triggering. Hold detection requires your terminal to send key-repeat events, so it cannot detect a held key if key-repeat is disabled at the OS level.",
+            "Transcription is garbled or in the wrong language: dictation defaults to English. If you are dictating in another language, set it in /config first. See Change the dictation language."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​See also",
+          "paragraphs": [
+            "Customize keyboard shortcuts: rebind voice:pushToTalk and other CLI keyboard actions",
+            "Configure settings: full reference for voiceEnabled, language, and other settings keys",
+            "Interactive mode: keyboard shortcuts, input modes, and session controls",
+            "Built-in commands: reference for /voice, /config, and all other commands",
+            "Was this page helpful?"
+          ],
+          "codeBlocks": []
+        }
+      ]
+    },
+    {
+      "section": "Configuration",
       "path": "/docs/en/statusline",
       "url": "https://code.claude.com/docs/en/statusline",
       "title": "Customize your status line",
@@ -18863,6 +19122,7 @@
         "Select actions",
         "Plugin actions",
         "Settings actions",
+        "Voice actions",
         "Keystroke syntax",
         "Modifiers",
         "Uppercase letters",
@@ -18900,6 +19160,7 @@
         "Actions available in the Select context:",
         "Actions available in the Plugin context:",
         "Actions available in the Settings context:",
+        "Actions available in the Chat context when voice dictation is enabled:",
         "Use modifier keys with the + separator:",
         "ctrl or control - Control key",
         "alt, opt, or option - Alt/Option key",
@@ -19124,6 +19385,13 @@
           "codeBlocks": []
         },
         {
+          "title": "​Voice actions",
+          "paragraphs": [
+            "Actions available in the Chat context when voice dictation is enabled:"
+          ],
+          "codeBlocks": []
+        },
+        {
           "title": "​Keystroke syntax",
           "paragraphs": [],
           "codeBlocks": []
@@ -19184,13 +19452,6 @@
           "title": "​Reserved shortcuts",
           "paragraphs": [
             "These shortcuts cannot be rebound:"
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Terminal conflicts",
-          "paragraphs": [
-            "Some shortcuts may conflict with terminal multiplexers:"
           ],
           "codeBlocks": []
         }
@@ -19465,6 +19726,7 @@
         "​Theme and display",
         "​Multiline input",
         "​Quick commands",
+        "​Voice input",
         "​Built-in commands",
         "​Vim editor mode",
         "​Mode switching",
@@ -19477,8 +19739,7 @@
         "​How backgrounding works",
         "​Bash mode with ! prefix",
         "​Prompt suggestions",
-        "​Side questions with /btw",
-        "​Task list"
+        "​Side questions with /btw"
       ],
       "toc": [
         "Keyboard shortcuts",
@@ -19487,6 +19748,7 @@
         "Theme and display",
         "Multiline input",
         "Quick commands",
+        "Voice input",
         "Built-in commands",
         "Vim editor mode",
         "Mode switching",
@@ -19499,8 +19761,7 @@
         "How backgrounding works",
         "Bash mode with ! prefix",
         "Prompt suggestions",
-        "Side questions with /btw",
-        "Task list"
+        "Side questions with /btw"
       ],
       "paragraphs": [
         "Keyboard shortcuts",
@@ -19509,6 +19770,7 @@
         "Theme and display",
         "Multiline input",
         "Quick commands",
+        "Voice input",
         "Built-in commands",
         "Vim editor mode",
         "Mode switching",
@@ -19564,6 +19826,7 @@
         "Output is buffered and Claude can retrieve it using the TaskOutput tool",
         "Background tasks have unique IDs for tracking and output retrieval",
         "Background tasks are automatically cleaned up when Claude Code exits",
+        "Background tasks are automatically terminated if output exceeds 5GB, with a note in stderr explaining why",
         "To disable all background task functionality, set the CLAUDE_CODE_DISABLE_BACKGROUND_TASKS environment variable to 1. See Environment variables for details.",
         "Common backgrounded commands:",
         "Build tools (webpack, vite, make)",
@@ -19630,12 +19893,12 @@
             "Theme and display",
             "Multiline input",
             "Quick commands",
+            "Voice input",
             "Built-in commands",
             "Vim editor mode",
             "Mode switching",
             "Navigation (NORMAL mode)",
-            "Editing (NORMAL mode)",
-            "Text objects (NORMAL mode)"
+            "Editing (NORMAL mode)"
           ],
           "codeBlocks": []
         },
@@ -19677,6 +19940,11 @@
         },
         {
           "title": "​Quick commands",
+          "paragraphs": [],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Voice input",
           "paragraphs": [],
           "codeBlocks": []
         },
@@ -19765,10 +20033,10 @@
             "Output is buffered and Claude can retrieve it using the TaskOutput tool",
             "Background tasks have unique IDs for tracking and output retrieval",
             "Background tasks are automatically cleaned up when Claude Code exits",
+            "Background tasks are automatically terminated if output exceeds 5GB, with a note in stderr explaining why",
             "To disable all background task functionality, set the CLAUDE_CODE_DISABLE_BACKGROUND_TASKS environment variable to 1. See Environment variables for details.",
             "Common backgrounded commands:",
-            "Build tools (webpack, vite, make)",
-            "Package managers (npm, yarn, pnpm)"
+            "Build tools (webpack, vite, make)"
           ],
           "codeBlocks": []
         },
@@ -20251,7 +20519,8 @@
         "All matching hooks run in parallel, and identical handlers are deduplicated automatically. Command hooks are deduplicated by command string, and HTTP hooks are deduplicated by URL. Handlers run in the current directory with Claude Code’s environment. The $CLAUDE_CODE_REMOTE environment variable is set to \"true\" in remote web environments and not set in the local CLI.",
         "Use environment variables to reference hook scripts relative to the project or plugin root, regardless of the working directory when the hook runs:",
         "$CLAUDE_PROJECT_DIR: the project root. Wrap in quotes to handle paths with spaces.",
-        "${CLAUDE_PLUGIN_ROOT}: the plugin’s root directory, for scripts bundled with a plugin.",
+        "${CLAUDE_PLUGIN_ROOT}: the plugin’s installation directory, for scripts bundled with a plugin. Changes on each plugin update.",
+        "${CLAUDE_PLUGIN_DATA}: the plugin’s persistent data directory, for dependencies and state that should survive plugin updates.",
         "Project scripts",
         "Plugin scripts",
         "This example uses $CLAUDE_PROJECT_DIR to run a style checker from the project’s .claude/hooks/ directory after any Write or Edit tool call:",
@@ -20278,8 +20547,7 @@
         "Direct edits to hooks in settings files are normally picked up automatically by the file watcher.",
         "Command hooks receive JSON data via stdin and communicate results through exit codes, stdout, and stderr. HTTP hooks receive the same JSON as the POST request body and communicate results through the HTTP response body. This section covers fields and behavior common to all events. Each event’s section under Hook events includes its specific input schema and decision control options.",
         "All hook events receive these fields as JSON, in addition to event-specific fields documented in each hook event section. For command hooks, this JSON arrives via stdin. For HTTP hooks, it arrives as the POST request body.",
-        "When running with --agent or inside a subagent, two additional fields are included:",
-        "For example, a PreToolUse hook for a Bash command receives this on stdin:"
+        "When running with --agent or inside a subagent, two additional fields are included:"
       ],
       "codeBlocks": [
         "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \".claude/hooks/block-rm.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
@@ -20431,7 +20699,8 @@
           "paragraphs": [
             "Use environment variables to reference hook scripts relative to the project or plugin root, regardless of the working directory when the hook runs:",
             "$CLAUDE_PROJECT_DIR: the project root. Wrap in quotes to handle paths with spaces.",
-            "${CLAUDE_PLUGIN_ROOT}: the plugin’s root directory, for scripts bundled with a plugin.",
+            "${CLAUDE_PLUGIN_ROOT}: the plugin’s installation directory, for scripts bundled with a plugin. Changes on each plugin update.",
+            "${CLAUDE_PLUGIN_DATA}: the plugin’s persistent data directory, for dependencies and state that should survive plugin updates.",
             "Project scripts",
             "Plugin scripts",
             "This example uses $CLAUDE_PROJECT_DIR to run a style checker from the project’s .claude/hooks/ directory after any Write or Edit tool call:",
@@ -20829,12 +21098,12 @@
         "Component path fields",
         "Path behavior rules",
         "Environment variables",
+        "Persistent data directory",
         "Plugin caching and file resolution",
         "Path traversal limitations",
         "Working with external dependencies",
         "Plugin directory structure",
-        "Standard plugin layout",
-        "File locations reference"
+        "Standard plugin layout"
       ],
       "paragraphs": [
         "Plugin components reference",
@@ -20848,6 +21117,7 @@
         "Component path fields",
         "Path behavior rules",
         "Environment variables",
+        "Persistent data directory",
         "Plugin caching and file resolution",
         "Path traversal limitations",
         "Working with external dependencies",
@@ -20951,7 +21221,15 @@
         "Commands from custom paths use the same naming and namespacing rules",
         "Multiple paths can be specified as arrays for flexibility",
         "Path examples:",
-        "${CLAUDE_PLUGIN_ROOT}: Contains the absolute path to your plugin directory. Use this in hooks, MCP servers, and scripts to ensure correct paths regardless of installation location.",
+        "Claude Code provides two variables for referencing plugin paths. Both are substituted inline anywhere they appear in skill content, agent content, hook commands, and MCP or LSP server configs. Both are also exported as environment variables to hook processes and MCP or LSP server subprocesses.",
+        "${CLAUDE_PLUGIN_ROOT}: the absolute path to your plugin’s installation directory. Use this to reference scripts, binaries, and config files bundled with the plugin. This path changes when the plugin updates, so files you write here do not survive an update.",
+        "${CLAUDE_PLUGIN_DATA}: a persistent directory for plugin state that survives updates. Use this for installed dependencies such as node_modules or Python virtual environments, generated code, caches, and any other files that should persist across plugin versions. The directory is created automatically the first time this variable is referenced.",
+        "The ${CLAUDE_PLUGIN_DATA} directory resolves to ~/.claude/plugins/data/{id}/, where {id} is the plugin identifier with characters outside a-z, A-Z, 0-9, _, and - replaced by -. For a plugin installed as formatter@my-marketplace, the directory is ~/.claude/plugins/data/formatter-my-marketplace/.",
+        "A common use is installing language dependencies once and reusing them across sessions and plugin updates. Because the data directory outlives any single plugin version, a check for directory existence alone cannot detect when an update changes the plugin’s dependency manifest. The recommended pattern compares the bundled manifest against a copy in the data directory and reinstalls when they differ.",
+        "This SessionStart hook installs node_modules on the first run and again whenever a plugin update includes a changed package.json:",
+        "The diff exits nonzero when the stored copy is missing or differs from the bundled one, covering both first run and dependency-changing updates. If npm install fails, the trailing rm removes the copied manifest so the next session retries.",
+        "Scripts bundled in ${CLAUDE_PLUGIN_ROOT} can then run against the persisted node_modules:",
+        "The data directory is deleted automatically when you uninstall the plugin from the last scope where it is installed. The /plugin interface shows the directory size and prompts before deleting. The CLI deletes by default; pass --keep-data to preserve it.",
         "Plugins are specified in one of two ways:",
         "Through claude --plugin-dir, for the duration of a session.",
         "Through a marketplace, installed for future sessions.",
@@ -20971,6 +21249,7 @@
         "Remove an installed plugin.",
         "<plugin>: Plugin name or plugin-name@marketplace-name",
         "Aliases: remove, rm",
+        "By default, uninstalling from the last remaining scope also deletes the plugin’s ${CLAUDE_PLUGIN_DATA} directory. Use --keep-data to preserve it, for example when reinstalling after testing a new version.",
         "Enable a disabled plugin.",
         "Disable a plugin without uninstalling it.",
         "Update a plugin to the latest version.",
@@ -21006,17 +21285,7 @@
         "Ensure the server is properly configured in .mcp.json or plugin.json",
         "Verify the server implements the MCP protocol correctly",
         "Check for connection timeouts in debug output",
-        "Symptoms: Plugin loads but components (commands, agents, hooks) are missing.",
-        "Correct structure: Components must be at the plugin root, not inside .claude-plugin/. Only plugin.json belongs in .claude-plugin/.",
-        "If your components are inside .claude-plugin/, move them to the plugin root.",
-        "Debug checklist:",
-        "Run claude --debug and look for “loading plugin” messages",
-        "Check that each component directory is listed in the debug output",
-        "Verify file permissions allow reading the plugin files",
-        "Follow semantic versioning for plugin releases:",
-        "Version format: MAJOR.MINOR.PATCH",
-        "MAJOR: Breaking changes (incompatible API changes)",
-        "MINOR: New features (backward-compatible additions)"
+        "Symptoms: Plugin loads but components (commands, agents, hooks) are missing."
       ],
       "codeBlocks": [
         "skills/\n├── pdf-processor/\n│   ├── SKILL.md\n│   ├── reference.md (optional)\n│   └── scripts/ (optional)\n└── code-reviewer/\n    └── SKILL.md",
@@ -21028,6 +21297,8 @@
         "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"[email protected]\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"skills\": \"./custom/skills/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\"\n}",
         "{\n  \"commands\": [\n    \"./specialized/deploy.md\",\n    \"./utilities/batch-process.md\"\n  ],\n  \"agents\": [\n    \"./custom-agents/reviewer.md\",\n    \"./custom-agents/tester.md\"\n  ]\n}",
         "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/process.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+        "{\n  \"hooks\": {\n    \"SessionStart\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"diff -q \\\"${CLAUDE_PLUGIN_ROOT}/package.json\\\" \\\"${CLAUDE_PLUGIN_DATA}/package.json\\\" >/dev/null 2>&1 || (cd \\\"${CLAUDE_PLUGIN_DATA}\\\" && cp \\\"${CLAUDE_PLUGIN_ROOT}/package.json\\\" . && npm install) || rm -f \\\"${CLAUDE_PLUGIN_DATA}/package.json\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+        "{\n  \"mcpServers\": {\n    \"routines\": {\n      \"command\": \"node\",\n      \"args\": [\"${CLAUDE_PLUGIN_ROOT}/server.js\"],\n      \"env\": {\n        \"NODE_PATH\": \"${CLAUDE_PLUGIN_DATA}/node_modules\"\n      }\n    }\n  }\n}",
         "# Inside your plugin directory\nln -s /path/to/shared-utils ./shared-utils",
         "enterprise-plugin/\n├── .claude-plugin/           # Metadata directory (optional)\n│   └── plugin.json             # plugin manifest\n├── commands/                 # Default command location\n│   ├── status.md\n│   └── logs.md\n├── agents/                   # Default agent location\n│   ├── security-reviewer.md\n│   ├── performance-tester.md\n│   └── compliance-checker.md\n├── skills/                   # Agent Skills\n│   ├── code-reviewer/\n│   │   └── SKILL.md\n│   └── pdf-processor/\n│       ├── SKILL.md\n│       └── scripts/\n├── hooks/                    # Hook configurations\n│   ├── hooks.json           # Main hook config\n│   └── security-hooks.json  # Additional hooks\n├── settings.json            # Default settings for the plugin\n├── .mcp.json                # MCP server definitions\n├── .lsp.json                # LSP server configurations\n├── scripts/                 # Hook and utility scripts\n│   ├── security-scan.sh\n│   ├── format-code.py\n│   └── deploy.js\n├── LICENSE                  # License file\n└── CHANGELOG.md             # Version history",
         "claude plugin install <plugin> [options]",
@@ -21054,7 +21325,7 @@
             "Component path fields",
             "Path behavior rules",
             "Environment variables",
-            "Plugin caching and file resolution"
+            "Persistent data directory"
           ],
           "codeBlocks": []
         },
@@ -21214,10 +21485,20 @@
         {
           "title": "​Environment variables",
           "paragraphs": [
-            "${CLAUDE_PLUGIN_ROOT}: Contains the absolute path to your plugin directory. Use this in hooks, MCP servers, and scripts to ensure correct paths regardless of installation location."
+            "Claude Code provides two variables for referencing plugin paths. Both are substituted inline anywhere they appear in skill content, agent content, hook commands, and MCP or LSP server configs. Both are also exported as environment variables to hook processes and MCP or LSP server subprocesses.",
+            "${CLAUDE_PLUGIN_ROOT}: the absolute path to your plugin’s installation directory. Use this to reference scripts, binaries, and config files bundled with the plugin. This path changes when the plugin updates, so files you write here do not survive an update.",
+            "${CLAUDE_PLUGIN_DATA}: a persistent directory for plugin state that survives updates. Use this for installed dependencies such as node_modules or Python virtual environments, generated code, caches, and any other files that should persist across plugin versions. The directory is created automatically the first time this variable is referenced.",
+            "The ${CLAUDE_PLUGIN_DATA} directory resolves to ~/.claude/plugins/data/{id}/, where {id} is the plugin identifier with characters outside a-z, A-Z, 0-9, _, and - replaced by -. For a plugin installed as formatter@my-marketplace, the directory is ~/.claude/plugins/data/formatter-my-marketplace/.",
+            "A common use is installing language dependencies once and reusing them across sessions and plugin updates. Because the data directory outlives any single plugin version, a check for directory existence alone cannot detect when an update changes the plugin’s dependency manifest. The recommended pattern compares the bundled manifest against a copy in the data directory and reinstalls when they differ.",
+            "This SessionStart hook installs node_modules on the first run and again whenever a plugin update includes a changed package.json:",
+            "The diff exits nonzero when the stored copy is missing or differs from the bundled one, covering both first run and dependency-changing updates. If npm install fails, the trailing rm removes the copied manifest so the next session retries.",
+            "Scripts bundled in ${CLAUDE_PLUGIN_ROOT} can then run against the persisted node_modules:",
+            "The data directory is deleted automatically when you uninstall the plugin from the last scope where it is installed. The /plugin interface shows the directory size and prompts before deleting. The CLI deletes by default; pass --keep-data to preserve it."
           ],
           "codeBlocks": [
-            "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/process.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}"
+            "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/process.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+            "{\n  \"hooks\": {\n    \"SessionStart\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"diff -q \\\"${CLAUDE_PLUGIN_ROOT}/package.json\\\" \\\"${CLAUDE_PLUGIN_DATA}/package.json\\\" >/dev/null 2>&1 || (cd \\\"${CLAUDE_PLUGIN_DATA}\\\" && cp \\\"${CLAUDE_PLUGIN_ROOT}/package.json\\\" . && npm install) || rm -f \\\"${CLAUDE_PLUGIN_DATA}/package.json\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+            "{\n  \"mcpServers\": {\n    \"routines\": {\n      \"command\": \"node\",\n      \"args\": [\"${CLAUDE_PLUGIN_ROOT}/server.js\"],\n      \"env\": {\n        \"NODE_PATH\": \"${CLAUDE_PLUGIN_DATA}/node_modules\"\n      }\n    }\n  }\n}"
           ]
         },
         {
@@ -21296,7 +21577,8 @@
             "Arguments:",
             "<plugin>: Plugin name or plugin-name@marketplace-name",
             "Options:",
-            "Aliases: remove, rm"
+            "Aliases: remove, rm",
+            "By default, uninstalling from the last remaining scope also deletes the plugin’s ${CLAUDE_PLUGIN_DATA} directory. Use --keep-data to preserve it, for example when reinstalling after testing a new version."
           ],
           "codeBlocks": [
             "claude plugin uninstall <plugin> [options]"

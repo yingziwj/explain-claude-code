@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-17T14:58:41.931Z",
-  "sourceGeneratedAt": "2026-03-17T04:26:30.177Z",
+  "generatedAt": "2026-03-18T04:32:18.594Z",
+  "sourceGeneratedAt": "2026-03-18T04:32:18.350Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -531,7 +531,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把“Changelog”理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.77、2.1.76、2.1.75、2.1.74 这些环节往下讲。",
+            "原文这页大多会按 2.1.78、2.1.77、2.1.76、2.1.75 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -540,7 +540,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.77 -> 2.1.76 -> 2.1.75 -> 2.1.74。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.78 -> 2.1.77 -> 2.1.76 -> 2.1.75。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -1609,7 +1609,9 @@
         {
           "title": "Example: Planning a complex refactor",
           "paragraphs": [
-            "这一节落点通常不在空概念，而在“Example: Planning a complex refactor”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。"
+            "这一节落点通常不在空概念，而在“Example: Planning a complex refactor”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。",
+            "原文这段后面还会继续展开：When you accept a plan, Claude automatically names the session from the plan content. The name appears on the prompt bar and in the session picker. If you’ve already set a name with --name or /rename, accepting a plan won’t overwrite it.。你可以把它理解成前面那句规则往下落的细节和边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
@@ -2433,6 +2435,12 @@
               "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：You can start a dedicated Remote Control server, start an interactive session with Remote Control enabled, or connect a session that’s already running. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
               "code": "claude --remote-control \"My Project\"",
               "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Troubleshooting",
+              "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：If your terminal shows Remote credentials fetch failed — see debug log, Claude Code could not obtain a short-lived credential from the Anthropic API to establish the Remote Control connection. To see the full error detail, re-run with the --verbose flag: 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
+              "code": "claude remote-control --verbose",
+              "kind": "command"
             }
           ]
         },
@@ -2516,6 +2524,22 @@
             "这一节落点通常不在空概念，而在“Limitations”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。",
             "原文这段后面还会继续展开：Terminal must stay open: Remote Control runs as a local process. If you close the terminal or stop the claude process, the session ends. Run claude remote-control again to start a new one.。你可以把它理解成前面那句规则往下落的细节和边界。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Troubleshooting",
+          "paragraphs": [
+            "这一节偏排错，最好按它给的顺序一项项排，不要一上来大拆大改。",
+            "原文这段后面还会继续展开：Common causes:。你可以把它理解成前面那句规则往下落的细节和边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Troubleshooting",
+              "body": "这一步是让你在终端里敲命令。这一节原文主要在讲：If your terminal shows Remote credentials fetch failed — see debug log, Claude Code could not obtain a short-lived credential from the Anthropic API to establish the Remote Control connection. To see the full error detail, re-run with the --verbose flag: 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
+              "code": "claude remote-control --verbose",
+              "kind": "command"
+            }
           ]
         },
         {
@@ -4091,16 +4115,16 @@
               "kind": "config"
             },
             {
-              "title": "原页关键片段：Understand automatic delegation",
-              "body": "这一步是原页里的关键代码或示例。这一小节原文主要在讲：Claude automatically delegates tasks based on the task description in your request, the description field in subagent configurations, and current context. To encourage proactive delegation, include phrases like “use proactively” in your subagent’s description field. 下面这块属于“代码片段”，关键命令、文件名和参数最好照原样保留。",
+              "title": "原页关键片段：Invoke subagents explicitly 1",
+              "body": "这一步是原页里的关键代码或示例。这一小节原文主要在讲：When automatic delegation isn’t enough, you can request a subagent yourself. Three patterns escalate from a one-off suggestion to a session-wide default: 下面这块属于“代码片段”，关键命令、文件名和参数最好照原样保留。",
               "code": "Use the test-runner subagent to fix failing tests\nHave the code-reviewer subagent look at my recent changes",
               "kind": "code"
             },
             {
-              "title": "原页关键片段：Common patterns 1",
-              "body": "这一步是你直接跟 Claude 说的话。这一小节原文主要在讲：One of the most effective uses for subagents is isolating operations that produce large amounts of output. Running tests, fetching documentation, or processing log files can consume significant context. By delegating these to a subagent, the verbose output stays in the subagent’s context while only the relevant summary returns to your main conversation. 下面这块属于“提问示例”，关键命令、文件名和参数最好照原样保留。",
-              "code": "Use a subagent to run the test suite and report only the failing tests with their error messages",
-              "kind": "prompt"
+              "title": "原页关键片段：Invoke subagents explicitly 2",
+              "body": "这一步是原页里的关键代码或示例。这一小节原文主要在讲：When automatic delegation isn’t enough, you can request a subagent yourself. Three patterns escalate from a one-off suggestion to a session-wide default: 下面这块属于“代码片段”，关键命令、文件名和参数最好照原样保留。",
+              "code": "@\"code-reviewer (agent)\" look at the auth changes",
+              "kind": "code"
             }
           ]
         },
@@ -4253,13 +4277,39 @@
           "paragraphs": [
             "这一节讲 Claude 什么时候会主动把活派给某个子代理。关键不只在你的提问，还在子代理描述写得够不够清楚。",
             "如果你希望某类子代理“该出手时就出手”，描述里就得把触发场景写明白，别只写一串空话。"
+          ]
+        },
+        {
+          "title": "Invoke subagents explicitly",
+          "paragraphs": [
+            "这一节更像在讲判断条件：什么情况下该这么做，什么情况下别急着上。看这类段落时，重点是把触发条件看清。",
+            "原文这段后面还会继续展开：Natural language: name the subagent in your prompt; Claude decides whether to delegate。你可以把它理解成前面那句规则往下落的细节和边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
-              "title": "Understand automatic delegation",
-              "body": "这一步是原页里的关键代码或示例。这一节原文主要在讲：Claude automatically delegates tasks based on the task description in your request, the description field in subagent configurations, and current context. To encourage proactive delegation, include phrases like “use proactively” in your subagent’s description field. 下面这块属于“代码片段”，关键命令、文件名和参数最好照原样保留。",
+              "title": "Invoke subagents explicitly 1",
+              "body": "这一步是原页里的关键代码或示例。这一节原文主要在讲：When automatic delegation isn’t enough, you can request a subagent yourself. Three patterns escalate from a one-off suggestion to a session-wide default: 下面这块属于“代码片段”，关键命令、文件名和参数最好照原样保留。",
               "code": "Use the test-runner subagent to fix failing tests\nHave the code-reviewer subagent look at my recent changes",
               "kind": "code"
+            },
+            {
+              "title": "Invoke subagents explicitly 2",
+              "body": "这一步是原页里的关键代码或示例。这一节原文主要在讲：When automatic delegation isn’t enough, you can request a subagent yourself. Three patterns escalate from a one-off suggestion to a session-wide default: 下面这块属于“代码片段”，关键命令、文件名和参数最好照原样保留。",
+              "code": "@\"code-reviewer (agent)\" look at the auth changes",
+              "kind": "code"
+            },
+            {
+              "title": "Invoke subagents explicitly 3",
+              "body": "这一步是让你在终端里敲命令。这一节原文主要在讲：When automatic delegation isn’t enough, you can request a subagent yourself. Three patterns escalate from a one-off suggestion to a session-wide default: 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
+              "code": "claude --agent code-reviewer",
+              "kind": "command"
+            },
+            {
+              "title": "Invoke subagents explicitly 4",
+              "body": "这一步是让你改配置或新建配置文件。这一节原文主要在讲：When automatic delegation isn’t enough, you can request a subagent yourself. Three patterns escalate from a one-off suggestion to a session-wide default: 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "{\n  \"agent\": \"code-reviewer\"\n}",
+              "kind": "config"
             }
           ]
         },
@@ -8824,7 +8874,7 @@
             {
               "title": "原页关键片段：4. Pin model versions 2",
               "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：Pin specific model versions for every deployment. If you use model aliases (sonnet, opus, haiku) without pinning, Claude Code may attempt to use a newer model version that isn’t available in your Bedrock account, breaking existing users when Anthropic releases updates. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
-              "code": "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_SMALL_FAST_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1",
+              "code": "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1",
               "kind": "command"
             },
             {
@@ -8936,7 +8986,7 @@
             {
               "title": "4. Pin model versions 2",
               "body": "这一步是让你在终端里敲命令。这一节原文主要在讲：Pin specific model versions for every deployment. If you use model aliases (sonnet, opus, haiku) without pinning, Claude Code may attempt to use a newer model version that isn’t available in your Bedrock account, breaking existing users when Anthropic releases updates. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
-              "code": "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_SMALL_FAST_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1",
+              "code": "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1",
               "kind": "command"
             },
             {
@@ -9054,7 +9104,7 @@
             {
               "title": "原页关键片段：5. Pin model versions 2",
               "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：Pin specific model versions for every deployment. If you use model aliases (sonnet, opus, haiku) without pinning, Claude Code may attempt to use a newer model version that isn’t enabled in your Vertex AI project, breaking existing users when Anthropic releases updates. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
-              "code": "export ANTHROPIC_MODEL='claude-opus-4-6'\nexport ANTHROPIC_SMALL_FAST_MODEL='claude-haiku-4-5@20251001'",
+              "code": "export ANTHROPIC_MODEL='claude-opus-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'",
               "kind": "command"
             }
           ]
@@ -9143,7 +9193,7 @@
             {
               "title": "5. Pin model versions 2",
               "body": "这一步是让你在终端里敲命令。这一节原文主要在讲：Pin specific model versions for every deployment. If you use model aliases (sonnet, opus, haiku) without pinning, Claude Code may attempt to use a newer model version that isn’t enabled in your Vertex AI project, breaking existing users when Anthropic releases updates. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
-              "code": "export ANTHROPIC_MODEL='claude-opus-4-6'\nexport ANTHROPIC_SMALL_FAST_MODEL='claude-haiku-4-5@20251001'",
+              "code": "export ANTHROPIC_MODEL='claude-opus-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'",
               "kind": "command"
             }
           ]
@@ -9488,7 +9538,7 @@
           "paragraphs": [
             "这一节落点通常不在空概念，而在“Network access requirements”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。",
             "原文这段后面还会继续展开：api.anthropic.com: Claude API endpoints。你可以把它理解成前面那句规则往下落的细节和边界。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -10307,7 +10357,7 @@
           "paragraphs": [
             "这一节落点通常不在空概念，而在“Credential management”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。",
             "原文这段后面还会继续展开：Storage location: on macOS, credentials are stored in the encrypted macOS Keychain.。你可以把它理解成前面那句规则往下落的细节和边界。",
-            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         }
       ],
@@ -11959,6 +12009,22 @@
           ]
         },
         {
+          "title": "Pre-populate plugins for containers",
+          "paragraphs": [
+            "这一节落点通常不在空概念，而在“Pre-populate plugins for containers”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。",
+            "原文这段后面还会继续展开：The seed directory mirrors the structure of ~/.claude/plugins:。你可以把它理解成前面那句规则往下落的细节和边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Pre-populate plugins for containers",
+              "body": "这一步是让你改配置或新建配置文件。这一节原文主要在讲：For container images and CI environments, you can pre-populate a plugins directory at build time so Claude Code starts with marketplaces and plugins already available, without cloning anything at runtime. Set the CLAUDE_CODE_PLUGIN_SEED_DIR environment variable to point at this directory. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "$CLAUDE_CODE_PLUGIN_SEED_DIR/\n  known_marketplaces.json\n  marketplaces/<name>/...\n  cache/<marketplace>/<plugin>/<version>/...",
+              "kind": "config"
+            }
+          ]
+        },
+        {
           "title": "Managed marketplace restrictions",
           "paragraphs": [
             "这一节落点通常不在空概念，而在“Managed marketplace restrictions”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。",
@@ -12076,16 +12142,9 @@
         {
           "title": "Marketplace validation errors",
           "paragraphs": [
-            "这一节是在讲怎么把 claude plugin validate . or /plugin validate . from your marketplace directory to check for issues. Common errors: 真跑起来。别只看命令长什么样，还要看它跑完该出现什么结果。",
+            "这一节是在讲怎么把 claude plugin validate . or /plugin validate . from your marketplace directory to check for issues. The validator checks plugin.json, skill/agent/command frontmatter, and hooks/hooks.json for syntax and schema errors. Common errors: 真跑起来。别只看命令长什么样，还要看它跑完该出现什么结果。",
             "原文这段后面还会继续展开：Warnings (non-blocking):。你可以把它理解成前面那句规则往下落的细节和边界。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Plugin installation failures",
-          "paragraphs": [
-            "这一节落点通常不在空概念，而在“Plugin installation failures”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。",
-            "原文这段后面还会继续展开：Solutions:。你可以把它理解成前面那句规则往下落的细节和边界。"
           ]
         }
       ],
@@ -12286,7 +12345,7 @@
           "title": "Sandbox settings",
           "paragraphs": [
             "这一节是在讲怎么把 advanced sandboxing behavior. Sandboxing isolates bash commands from your filesystem and network. See Sandboxing for details. 配对、配稳。重点通常是改哪儿、怎么写，以及改完以后怎么确认真生效。",
-            "原文这段后面还会继续展开：Paths in filesystem.allowWrite, filesystem.denyWrite, and filesystem.denyRead support these prefixes:。你可以把它理解成前面那句规则往下落的细节和边界。",
+            "原文这段后面还会继续展开：Paths in filesystem.allowWrite, filesystem.denyWrite, filesystem.denyRead, and filesystem.allowRead support these prefixes:。你可以把它理解成前面那句规则往下落的细节和边界。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ],
           "steps": [
@@ -12642,7 +12701,7 @@
           "title": "Read and Edit",
           "paragraphs": [
             "这一节落点通常不在空概念，而在“Read and Edit”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。",
-            "原文这段后面还会继续展开：Read and Edit rules both follow the gitignore specification with four distinct pattern types:。你可以把它理解成前面那句规则往下落的细节和边界。",
+            "原文这段后面还会继续展开：Read and Edit deny rules apply to Claude’s built-in file tools, not to Bash subprocesses. A Read(./.env) deny rule blocks the Read tool but does not prevent cat .env in Bash. For OS-level enforcement that blocks all processes from accessing a path, enable the sandbox.。你可以把它理解成前面那句规则往下落的细节和边界。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
@@ -12680,8 +12739,8 @@
           "title": "Extend permissions with hooks",
           "paragraphs": [
             "这一节落点通常不在空概念，而在“Extend permissions with hooks”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+            "原文这段后面还会继续展开：Skipping the prompt does not bypass permission rules. Deny and ask rules are still evaluated after a hook returns \"allow\", so a matching deny rule still blocks the call. This preserves the deny-first precedence described in Manage permissions, including deny rules set in managed settings.。你可以把它理解成前面那句规则往下落的细节和边界。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -12795,9 +12854,15 @@
               "kind": "prompt"
             },
             {
-              "title": "原页关键片段：Configure sandboxing",
+              "title": "原页关键片段：Configure sandboxing 1",
               "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：Customize sandbox behavior through your settings.json file. See Settings for complete configuration reference. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
               "code": "{\n  \"sandbox\": {\n    \"enabled\": true,\n    \"filesystem\": {\n      \"allowWrite\": [\"~/.kube\", \"//tmp/build\"]\n    }\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Configure sandboxing 2",
+              "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：Customize sandbox behavior through your settings.json file. See Settings for complete configuration reference. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "{\n  \"sandbox\": {\n    \"enabled\": true,\n    \"filesystem\": {\n      \"denyRead\": [\"~/\"],\n      \"allowRead\": [\".\"]\n    }\n  }\n}",
               "kind": "config"
             },
             {
@@ -12905,9 +12970,15 @@
           ],
           "steps": [
             {
-              "title": "Configure sandboxing",
+              "title": "Configure sandboxing 1",
               "body": "这一步是让你改配置或新建配置文件。这一节原文主要在讲：Customize sandbox behavior through your settings.json file. See Settings for complete configuration reference. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
               "code": "{\n  \"sandbox\": {\n    \"enabled\": true,\n    \"filesystem\": {\n      \"allowWrite\": [\"~/.kube\", \"//tmp/build\"]\n    }\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Configure sandboxing 2",
+              "body": "这一步是让你改配置或新建配置文件。这一节原文主要在讲：Customize sandbox behavior through your settings.json file. See Settings for complete configuration reference. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "{\n  \"sandbox\": {\n    \"enabled\": true,\n    \"filesystem\": {\n      \"denyRead\": [\"~/\"],\n      \"allowRead\": [\".\"]\n    }\n  }\n}",
               "kind": "config"
             }
           ]
@@ -13524,6 +13595,171 @@
         "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
       }
     },
+    "voice-dictation": {
+      "sourceLabel": "Voice dictation",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Voice dictation：Use push-to-talk voice dictation to speak your prompts instead of typing them in the Claude Code CLI.",
+            "你可以把它当成“Configuration”这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把“Voice dictation”理解成 Configuration 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Requirements、Enable voice dictation、Record a prompt、Change the dictation language 这些环节往下讲。",
+            "翻成人话，大概就是：Enable voice dictation"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Requirements -> Enable voice dictation -> Record a prompt -> Change the dictation language。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Enable voice dictation 1",
+              "body": "这一步是你直接跟 Claude 说的话。这一小节原文主要在讲：Run /voice to toggle voice dictation on. The first time you enable it, Claude Code runs a microphone check. On macOS, this triggers the system microphone permission prompt for your terminal if it has never been granted. 下面这块属于“提问示例”，关键命令、文件名和参数最好照原样保留。",
+              "code": "/voice\nVoice mode enabled. Hold Space to record. Dictation language: en (/config to change).",
+              "kind": "prompt"
+            },
+            {
+              "title": "原页关键片段：Enable voice dictation 2",
+              "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：Run /voice to toggle voice dictation on. The first time you enable it, Claude Code runs a microphone check. On macOS, this triggers the system microphone permission prompt for your terminal if it has never been granted. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "{\n  \"voiceEnabled\": true\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Record a prompt",
+              "body": "这一步是你直接跟 Claude 说的话。这一小节原文主要在讲：Hold Space to start recording. Claude Code detects a held key by watching for rapid key-repeat events from your terminal, so there is a brief warmup before recording begins. The footer shows keep holding… during warmup, then switches to a live waveform once recording is active. 下面这块属于“提问示例”，关键命令、文件名和参数最好照原样保留。",
+              "code": "> refactor the auth middleware to ▮\n  # hold Space, speak \"use the new token validation helper\"\n> refactor the auth middleware to use the new token validation helper▮",
+              "kind": "prompt"
+            },
+            {
+              "title": "原页关键片段：Change the dictation language",
+              "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：Voice dictation uses the same language setting that controls Claude’s response language. If that setting is empty, dictation defaults to English. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "{\n  \"language\": \"japanese\"\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Rebind the push-to-talk key",
+              "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：The push-to-talk key is bound to voice:pushToTalk in the Chat context and defaults to Space. Rebind it in ~/.claude/keybindings.json: 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"meta+k\": \"voice:pushToTalk\",\n        \"space\": null\n      }\n    }\n  ]\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Requirements",
+          "paragraphs": [
+            "这一节落点通常不在空概念，而在“Requirements”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。",
+            "原文这段后面还会继续展开：Voice dictation also needs local microphone access, so it does not work in remote environments such as Claude Code on the web or SSH sessions. In WSL, voice dictation requires WSLg for audio access, which is included with WSL2 on Windows 11. On Windows 10 or WSL1, run Claude Code in native Windows instead.。你可以把它理解成前面那句规则往下落的细节和边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Enable voice dictation",
+          "paragraphs": [
+            "这一节讲怎么把某个开关拧对。重点通常不是概念，而是你该在哪儿改、改完怎么确认生效。",
+            "原文这段后面还会继续展开：Voice dictation persists across sessions. Run /voice again to turn it off, or set it directly in your user settings file:。你可以把它理解成前面那句规则往下落的细节和边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Enable voice dictation 1",
+              "body": "这一步是你直接跟 Claude 说的话。这一节原文主要在讲：Run /voice to toggle voice dictation on. The first time you enable it, Claude Code runs a microphone check. On macOS, this triggers the system microphone permission prompt for your terminal if it has never been granted. 下面这块属于“提问示例”，关键命令、文件名和参数最好照原样保留。",
+              "code": "/voice\nVoice mode enabled. Hold Space to record. Dictation language: en (/config to change).",
+              "kind": "prompt"
+            },
+            {
+              "title": "Enable voice dictation 2",
+              "body": "这一步是让你改配置或新建配置文件。这一节原文主要在讲：Run /voice to toggle voice dictation on. The first time you enable it, Claude Code runs a microphone check. On macOS, this triggers the system microphone permission prompt for your terminal if it has never been granted. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "{\n  \"voiceEnabled\": true\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Record a prompt",
+          "paragraphs": [
+            "这一节落点通常不在空概念，而在“Record a prompt”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。",
+            "原文这段后面还会继续展开：The first couple of key-repeat characters type into the input during warmup and are removed automatically when recording activates. A single Space tap still types a space, since hold detection only triggers on rapid repeat.。你可以把它理解成前面那句规则往下落的细节和边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Record a prompt",
+              "body": "这一步是你直接跟 Claude 说的话。这一节原文主要在讲：Hold Space to start recording. Claude Code detects a held key by watching for rapid key-repeat events from your terminal, so there is a brief warmup before recording begins. The footer shows keep holding… during warmup, then switches to a live waveform once recording is active. 下面这块属于“提问示例”，关键命令、文件名和参数最好照原样保留。",
+              "code": "> refactor the auth middleware to ▮\n  # hold Space, speak \"use the new token validation helper\"\n> refactor the auth middleware to use the new token validation helper▮",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Change the dictation language",
+          "paragraphs": [
+            "这一节落点通常不在空概念，而在“Change the dictation language”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。",
+            "原文这段后面还会继续展开：Supported dictation languages。你可以把它理解成前面那句规则往下落的细节和边界。"
+          ],
+          "steps": [
+            {
+              "title": "Change the dictation language",
+              "body": "这一步是让你改配置或新建配置文件。这一节原文主要在讲：Voice dictation uses the same language setting that controls Claude’s response language. If that setting is empty, dictation defaults to English. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "{\n  \"language\": \"japanese\"\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Rebind the push-to-talk key",
+          "paragraphs": [
+            "这一节不是单纯报个标题名，而是在说明“Rebind the push-to-talk key”这块到底负责哪一摊、会影响哪一块，以及你读这一段时该先抓哪几个要点。",
+            "原文这段后面还会继续展开：Setting \"space\": null removes the default binding. Omit it if you want both keys active.。你可以把它理解成前面那句规则往下落的细节和边界。"
+          ],
+          "steps": [
+            {
+              "title": "Rebind the push-to-talk key",
+              "body": "这一步是让你改配置或新建配置文件。这一节原文主要在讲：The push-to-talk key is bound to voice:pushToTalk in the Chat context and defaults to Space. Rebind it in ~/.claude/keybindings.json: 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"meta+k\": \"voice:pushToTalk\",\n        \"space\": null\n      }\n    }\n  ]\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Troubleshooting",
+          "paragraphs": [
+            "这一节偏排错，最好按它给的顺序一项项排，不要一上来大拆大改。",
+            "原文这段后面还会继续展开：Voice mode requires a Claude.ai account: you are authenticated with an API key or a third-party provider. Run /login to sign in with a Claude.ai account.。你可以把它理解成前面那句规则往下落的细节和边界。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "See also",
+          "paragraphs": [
+            "这一节落点通常不在空概念，而在“See also”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。",
+            "原文这段后面还会继续展开：Configure settings: full reference for voiceEnabled, language, and other settings keys。你可以把它理解成前面那句规则往下落的细节和边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Voice dictation",
+          "   |",
+          "   v",
+          "这是 Configuration 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
     "statusline": {
       "sourceLabel": "Customize your status line",
       "sections": [
@@ -14088,6 +14324,12 @@
           ]
         },
         {
+          "title": "Voice actions",
+          "paragraphs": [
+            "这一节更像查表说明书，重点是字段、格式和规则要照准，不适合靠猜。"
+          ]
+        },
+        {
           "title": "Keystroke syntax",
           "paragraphs": [
             "这一节更像查表说明书，重点是字段、格式和规则要照准，不适合靠猜。"
@@ -14146,12 +14388,6 @@
           "title": "Reserved shortcuts",
           "paragraphs": [
             "这一节落点通常不在空概念，而在“Reserved shortcuts”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。"
-          ]
-        },
-        {
-          "title": "Terminal conflicts",
-          "paragraphs": [
-            "这一节落点通常不在空概念，而在“Terminal conflicts”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。"
           ]
         }
       ],
@@ -14482,6 +14718,12 @@
           "title": "Quick commands",
           "paragraphs": [
             "这一节落点通常不在空概念，而在“Quick commands”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。"
+          ]
+        },
+        {
+          "title": "Voice input",
+          "paragraphs": [
+            "这一节落点通常不在空概念，而在“Voice input”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。"
           ]
         },
         {
@@ -15525,9 +15767,21 @@
               "kind": "config"
             },
             {
-              "title": "原页关键片段：Environment variables",
-              "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：${CLAUDE_PLUGIN_ROOT}: Contains the absolute path to your plugin directory. Use this in hooks, MCP servers, and scripts to ensure correct paths regardless of installation location. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "title": "原页关键片段：Environment variables 1",
+              "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：Claude Code provides two variables for referencing plugin paths. Both are substituted inline anywhere they appear in skill content, agent content, hook commands, and MCP or LSP server configs. Both are also exported as environment variables to hook processes and MCP or LSP server subprocesses. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
               "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/process.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Environment variables 2",
+              "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：Claude Code provides two variables for referencing plugin paths. Both are substituted inline anywhere they appear in skill content, agent content, hook commands, and MCP or LSP server configs. Both are also exported as environment variables to hook processes and MCP or LSP server subprocesses. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "{\n  \"hooks\": {\n    \"SessionStart\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"diff -q \\\"${CLAUDE_PLUGIN_ROOT}/package.json\\\" \\\"${CLAUDE_PLUGIN_DATA}/package.json\\\" >/dev/null 2>&1 || (cd \\\"${CLAUDE_PLUGIN_DATA}\\\" && cp \\\"${CLAUDE_PLUGIN_ROOT}/package.json\\\" . && npm install) || rm -f \\\"${CLAUDE_PLUGIN_DATA}/package.json\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Environment variables 3",
+              "body": "这一步是让你改配置或新建配置文件。这一小节原文主要在讲：Claude Code provides two variables for referencing plugin paths. Both are substituted inline anywhere they appear in skill content, agent content, hook commands, and MCP or LSP server configs. Both are also exported as environment variables to hook processes and MCP or LSP server subprocesses. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "{\n  \"mcpServers\": {\n    \"routines\": {\n      \"command\": \"node\",\n      \"args\": [\"${CLAUDE_PLUGIN_ROOT}/server.js\"],\n      \"env\": {\n        \"NODE_PATH\": \"${CLAUDE_PLUGIN_DATA}/node_modules\"\n      }\n    }\n  }\n}",
               "kind": "config"
             },
             {
@@ -15535,18 +15789,6 @@
               "body": "这一步是原页里的关键代码或示例。这一小节原文主要在讲：If your plugin needs to access files outside its directory, you can create symbolic links to external files within your plugin directory. Symlinks are honored during the copy process: 下面这块属于“代码片段”，关键命令、文件名和参数最好照原样保留。",
               "code": "# Inside your plugin directory\nln -s /path/to/shared-utils ./shared-utils",
               "kind": "code"
-            },
-            {
-              "title": "原页关键片段：Standard plugin layout",
-              "body": "这一步是让你看目录和文件该怎么摆。这一小节原文主要在讲：A complete plugin follows this structure: 下面这块属于“目录结构”，关键命令、文件名和参数最好照原样保留。",
-              "code": "enterprise-plugin/\n├── .claude-plugin/           # Metadata directory (optional)\n│   └── plugin.json             # plugin manifest\n├── commands/                 # Default command location\n│   ├── status.md\n│   └── logs.md\n├── agents/                   # Default agent location\n│   ├── security-reviewer.md\n│   ├── performance-tester.md\n│   └── compliance-checker.md\n├── skills/                   # Agent Skills\n│   ├── code-reviewer/\n│   │   └── SKILL.md\n│   └── pdf-processor/\n│       ├── SKILL.md\n│       └── scripts/\n├── hooks/                    # Hook configurations\n│   ├── hooks.json           # Main hook config\n│   └── security-hooks.json  # Additional hooks\n├── settings.json            # Default settings for the plugin\n├── .mcp.json                # MCP server definitions\n├── .lsp.json                # LSP server configurations\n├── scripts/                 # Hook and utility scripts\n│   ├── security-scan.sh\n│   ├── format-code.py\n│   └── deploy.js\n├── LICENSE                  # License file\n└── CHANGELOG.md             # Version history",
-              "kind": "structure"
-            },
-            {
-              "title": "原页关键片段：plugin install 1",
-              "body": "这一步是让你在终端里敲命令。这一小节原文主要在讲：Install a plugin from available marketplaces. 下面这块属于“命令”，关键命令、文件名和参数最好照原样保留。",
-              "code": "claude plugin install <plugin> [options]",
-              "kind": "command"
             }
           ]
         },
@@ -15709,13 +15951,26 @@
           "title": "Environment variables",
           "paragraphs": [
             "这一节落点通常不在空概念，而在“Environment variables”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+            "原文这段后面还会继续展开：${CLAUDE_PLUGIN_ROOT}: the absolute path to your plugin’s installation directory. Use this to reference scripts, binaries, and config files bundled with the plugin. This path changes when the plugin updates, so files you write here do not survive an update.。你可以把它理解成前面那句规则往下落的细节和边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
-              "title": "Environment variables",
-              "body": "这一步是让你改配置或新建配置文件。这一节原文主要在讲：${CLAUDE_PLUGIN_ROOT}: Contains the absolute path to your plugin directory. Use this in hooks, MCP servers, and scripts to ensure correct paths regardless of installation location. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "title": "Environment variables 1",
+              "body": "这一步是让你改配置或新建配置文件。这一节原文主要在讲：Claude Code provides two variables for referencing plugin paths. Both are substituted inline anywhere they appear in skill content, agent content, hook commands, and MCP or LSP server configs. Both are also exported as environment variables to hook processes and MCP or LSP server subprocesses. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
               "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/process.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Environment variables 2",
+              "body": "这一步是让你改配置或新建配置文件。这一节原文主要在讲：Claude Code provides two variables for referencing plugin paths. Both are substituted inline anywhere they appear in skill content, agent content, hook commands, and MCP or LSP server configs. Both are also exported as environment variables to hook processes and MCP or LSP server subprocesses. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "{\n  \"hooks\": {\n    \"SessionStart\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"diff -q \\\"${CLAUDE_PLUGIN_ROOT}/package.json\\\" \\\"${CLAUDE_PLUGIN_DATA}/package.json\\\" >/dev/null 2>&1 || (cd \\\"${CLAUDE_PLUGIN_DATA}\\\" && cp \\\"${CLAUDE_PLUGIN_ROOT}/package.json\\\" . && npm install) || rm -f \\\"${CLAUDE_PLUGIN_DATA}/package.json\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Environment variables 3",
+              "body": "这一步是让你改配置或新建配置文件。这一节原文主要在讲：Claude Code provides two variables for referencing plugin paths. Both are substituted inline anywhere they appear in skill content, agent content, hook commands, and MCP or LSP server configs. Both are also exported as environment variables to hook processes and MCP or LSP server subprocesses. 下面这块属于“配置”，关键命令、文件名和参数最好照原样保留。",
+              "code": "{\n  \"mcpServers\": {\n    \"routines\": {\n      \"command\": \"node\",\n      \"args\": [\"${CLAUDE_PLUGIN_ROOT}/server.js\"],\n      \"env\": {\n        \"NODE_PATH\": \"${CLAUDE_PLUGIN_DATA}/node_modules\"\n      }\n    }\n  }\n}",
               "kind": "config"
             }
           ]
@@ -15809,7 +16064,8 @@
           "title": "plugin uninstall",
           "paragraphs": [
             "这一节落点通常不在空概念，而在“plugin uninstall”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。",
-            "原文这段后面还会继续展开：Arguments:。你可以把它理解成前面那句规则往下落的细节和边界。"
+            "原文这段后面还会继续展开：Arguments:。你可以把它理解成前面那句规则往下落的细节和边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
