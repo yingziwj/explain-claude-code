@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-18T10:55:28.295Z",
+  "generatedAt": "2026-03-18T11:35:40.126Z",
   "sourceGeneratedAt": "2026-03-18T04:32:18.350Z",
   "items": {
     "overview": {
@@ -219,7 +219,7 @@
             },
             {
               "title": "原页关键片段：Step 2: Log in to your account 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Step 2: Log in to your account”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Step 2: Log in to your account”这一段的意思去办。",
               "code": "/login\n# Follow the prompts to log in with your account",
               "kind": "prompt"
             },
@@ -231,19 +231,19 @@
             },
             {
               "title": "原页关键片段：Step 4: Ask your first question 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Step 4: Ask your first question”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Step 4: Ask your first question”这一段的意思去办。",
               "code": "what does this project do?",
               "kind": "prompt"
             },
             {
               "title": "原页关键片段：Step 4: Ask your first question 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Step 4: Ask your first question”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Step 4: Ask your first question”这一段的意思去办。",
               "code": "what technologies does this project use?",
               "kind": "prompt"
             },
             {
               "title": "原页关键片段：Step 4: Ask your first question 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Step 4: Ask your first question”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Step 4: Ask your first question”这一段的意思去办。",
               "code": "where is the main entry point?",
               "kind": "prompt"
             },
@@ -315,7 +315,7 @@
             },
             {
               "title": "Step 2: Log in to your account 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Step 2: Log in to your account”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Step 2: Log in to your account”这一段的意思去办。",
               "code": "/login\n# Follow the prompts to log in with your account",
               "kind": "prompt"
             }
@@ -345,25 +345,25 @@
           "steps": [
             {
               "title": "Step 4: Ask your first question 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Step 4: Ask your first question”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Step 4: Ask your first question”这一段的意思去办。",
               "code": "what does this project do?",
               "kind": "prompt"
             },
             {
               "title": "Step 4: Ask your first question 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Step 4: Ask your first question”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Step 4: Ask your first question”这一段的意思去办。",
               "code": "what technologies does this project use?",
               "kind": "prompt"
             },
             {
               "title": "Step 4: Ask your first question 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Step 4: Ask your first question”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Step 4: Ask your first question”这一段的意思去办。",
               "code": "where is the main entry point?",
               "kind": "prompt"
             },
             {
               "title": "Step 4: Ask your first question 4",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Step 4: Ask your first question”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Step 4: Ask your first question”这一段的意思去办。",
               "code": "what can Claude Code do?",
               "kind": "prompt"
             }
@@ -384,7 +384,7 @@
           "steps": [
             {
               "title": "Step 6: Use Git with Claude Code 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Step 6: Use Git with Claude Code”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Step 6: Use Git with Claude Code”这一段的意思去办。",
               "code": "what files have I changed?",
               "kind": "prompt"
             },
@@ -575,13 +575,13 @@
             },
             {
               "title": "原页关键片段：It’s a conversation 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“It’s a conversation”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“It’s a conversation”这一段的意思去办。",
               "code": "Fix the login bug",
               "kind": "prompt"
             },
             {
               "title": "原页关键片段：It’s a conversation 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“It’s a conversation”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“It’s a conversation”这一段的意思去办。",
               "code": "That's not quite right. The issue is in the session handling.",
               "kind": "prompt"
             },
@@ -605,7 +605,7 @@
             },
             {
               "title": "原页关键片段：Delegate, don’t dictate",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Delegate, don’t dictate”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Delegate, don’t dictate”这一段的意思去办。",
               "code": "The checkout flow is broken for users with expired cards.\nThe relevant code is in src/payments/. Can you investigate and fix it?",
               "kind": "prompt"
             }
@@ -736,13 +736,13 @@
           "steps": [
             {
               "title": "It’s a conversation 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“It’s a conversation”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“It’s a conversation”这一段的意思去办。",
               "code": "Fix the login bug",
               "kind": "prompt"
             },
             {
               "title": "It’s a conversation 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“It’s a conversation”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“It’s a conversation”这一段的意思去办。",
               "code": "That's not quite right. The issue is in the session handling.",
               "kind": "prompt"
             }
@@ -799,7 +799,7 @@
           "steps": [
             {
               "title": "Delegate, don’t dictate",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Delegate, don’t dictate”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Delegate, don’t dictate”这一段的意思去办。",
               "code": "The checkout flow is broken for users with expired cards.\nThe relevant code is in src/payments/. Can you investigate and fix it?",
               "kind": "prompt"
             }
@@ -1372,7 +1372,7 @@
             },
             {
               "title": "原页关键片段：Find relevant code 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Find relevant code”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Find relevant code”这一段的意思去办。",
               "code": "how do these authentication files work together?",
               "kind": "prompt"
             },
@@ -1384,7 +1384,7 @@
             },
             {
               "title": "原页关键片段：Fix bugs efficiently 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Fix bugs efficiently”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Fix bugs efficiently”这一段的意思去办。",
               "code": "I'm seeing an error when I run npm test",
               "kind": "prompt"
             },
@@ -1441,13 +1441,13 @@
             },
             {
               "title": "Get a quick codebase overview 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Get a quick codebase overview”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Get a quick codebase overview”这一段的意思去办。",
               "code": "what are the key data models?",
               "kind": "prompt"
             },
             {
               "title": "Get a quick codebase overview 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Get a quick codebase overview”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Get a quick codebase overview”这一段的意思去办。",
               "code": "how is authentication handled?",
               "kind": "prompt"
             }
@@ -1462,7 +1462,7 @@
           "steps": [
             {
               "title": "Find relevant code",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Find relevant code”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Find relevant code”这一段的意思去办。",
               "code": "how do these authentication files work together?",
               "kind": "prompt"
             }
@@ -1476,7 +1476,7 @@
           "steps": [
             {
               "title": "Fix bugs efficiently",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Fix bugs efficiently”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Fix bugs efficiently”这一段的意思去办。",
               "code": "I'm seeing an error when I run npm test",
               "kind": "prompt"
             }
@@ -1496,7 +1496,7 @@
           "steps": [
             {
               "title": "Use specialized subagents",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Use specialized subagents”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Use specialized subagents”这一段的意思去办。",
               "code": "/agents",
               "kind": "prompt"
             }
@@ -1552,19 +1552,19 @@
             },
             {
               "title": "Example: Planning a complex refactor 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Example: Planning a complex refactor”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Example: Planning a complex refactor”这一段的意思去办。",
               "code": "I need to refactor our authentication system to use OAuth2. Create a detailed migration plan.",
               "kind": "prompt"
             },
             {
               "title": "Example: Planning a complex refactor 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Example: Planning a complex refactor”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Example: Planning a complex refactor”这一段的意思去办。",
               "code": "What about backward compatibility?",
               "kind": "prompt"
             },
             {
               "title": "Example: Planning a complex refactor 4",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Example: Planning a complex refactor”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Example: Planning a complex refactor”这一段的意思去办。",
               "code": "How should we handle database migration?",
               "kind": "prompt"
             }
@@ -1612,25 +1612,25 @@
           "steps": [
             {
               "title": "Work with images 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Work with images”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Work with images”这一段的意思去办。",
               "code": "What does this image show?",
               "kind": "prompt"
             },
             {
               "title": "Work with images 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Work with images”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Work with images”这一段的意思去办。",
               "code": "Describe the UI elements in this screenshot",
               "kind": "prompt"
             },
             {
               "title": "Work with images 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Work with images”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Work with images”这一段的意思去办。",
               "code": "Are there any problematic elements in this diagram?",
               "kind": "prompt"
             },
             {
               "title": "Work with images 4",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Work with images”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Work with images”这一段的意思去办。",
               "code": "Here's a screenshot of the error. What's causing it?",
               "kind": "prompt"
             }
@@ -1651,7 +1651,7 @@
             },
             {
               "title": "Reference files and directories 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Reference files and directories”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Reference files and directories”这一段的意思去办。",
               "code": "What's the structure of @src/components?",
               "kind": "prompt"
             },
@@ -1704,7 +1704,7 @@
             },
             {
               "title": "Name your sessions 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Name your sessions”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Name your sessions”这一段的意思去办。",
               "code": "/rename auth-refactor",
               "kind": "prompt"
             },
@@ -1716,7 +1716,7 @@
             },
             {
               "title": "Name your sessions 4",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Name your sessions”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Name your sessions”这一段的意思去办。",
               "code": "/resume auth-refactor",
               "kind": "prompt"
             }
@@ -2364,7 +2364,7 @@
             },
             {
               "title": "Start a Remote Control session 4",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Start a Remote Control session”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Start a Remote Control session”这一段的意思去办。",
               "code": "/remote-control",
               "kind": "prompt"
             }
@@ -3113,7 +3113,7 @@
           "steps": [
             {
               "title": "原页关键片段：Reference files and folders",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Reference files and folders”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Reference files and folders”这一段的意思去办。",
               "code": "> Explain the logic in @auth (fuzzy matches auth.js, AuthService.ts, etc.)\n> What's in @src/components/ (include a trailing slash for folders)",
               "kind": "prompt"
             },
@@ -3131,7 +3131,7 @@
             },
             {
               "title": "原页关键片段：Create commits and pull requests",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Create commits and pull requests”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Create commits and pull requests”这一段的意思去办。",
               "code": "> commit my changes with a descriptive message\n> create a pr for this feature\n> summarize the changes I've made to the auth module",
               "kind": "prompt"
             },
@@ -3178,7 +3178,7 @@
           "steps": [
             {
               "title": "Reference files and folders",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Reference files and folders”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Reference files and folders”这一段的意思去办。",
               "code": "> Explain the logic in @auth (fuzzy matches auth.js, AuthService.ts, etc.)\n> What's in @src/components/ (include a trailing slash for folders)",
               "kind": "prompt"
             }
@@ -3338,7 +3338,7 @@
           "steps": [
             {
               "title": "Create commits and pull requests",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Create commits and pull requests”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Create commits and pull requests”这一段的意思去办。",
               "code": "> commit my changes with a descriptive message\n> create a pr for this feature\n> summarize the changes I've made to the auth module",
               "kind": "prompt"
             }
@@ -3428,7 +3428,7 @@
             },
             {
               "title": "原页关键片段：From External Terminals 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“From External Terminals”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“From External Terminals”这一段的意思去办。",
               "code": "/ide",
               "kind": "prompt"
             }
@@ -3480,7 +3480,7 @@
           "steps": [
             {
               "title": "From External Terminals",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“From External Terminals”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“From External Terminals”这一段的意思去办。",
               "code": "/ide",
               "kind": "prompt"
             }
@@ -3843,7 +3843,7 @@
           "steps": [
             {
               "title": "原页关键片段：Quickstart: create your first subagent 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Quickstart: create your first subagent”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Quickstart: create your first subagent”这一段的意思去办。",
               "code": "/agents",
               "kind": "prompt"
             },
@@ -3855,7 +3855,7 @@
             },
             {
               "title": "原页关键片段：Quickstart: create your first subagent 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Quickstart: create your first subagent”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Quickstart: create your first subagent”这一段的意思去办。",
               "code": "Use the code-improver agent to suggest improvements in this project",
               "kind": "prompt"
             },
@@ -3931,7 +3931,7 @@
           "steps": [
             {
               "title": "Quickstart: create your first subagent 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Quickstart: create your first subagent”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Quickstart: create your first subagent”这一段的意思去办。",
               "code": "/agents",
               "kind": "prompt"
             },
@@ -3943,7 +3943,7 @@
             },
             {
               "title": "Quickstart: create your first subagent 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Quickstart: create your first subagent”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Quickstart: create your first subagent”这一段的意思去办。",
               "code": "Use the code-improver agent to suggest improvements in this project",
               "kind": "prompt"
             }
@@ -4115,19 +4115,19 @@
           "steps": [
             {
               "title": "Common patterns 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Common patterns”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Common patterns”这一段的意思去办。",
               "code": "Use a subagent to run the test suite and report only the failing tests with their error messages",
               "kind": "prompt"
             },
             {
               "title": "Common patterns 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Common patterns”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Common patterns”这一段的意思去办。",
               "code": "Research the authentication, database, and API modules in parallel using separate subagents",
               "kind": "prompt"
             },
             {
               "title": "Common patterns 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Common patterns”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Common patterns”这一段的意思去办。",
               "code": "Use the code-reviewer subagent to find performance issues, then use the optimizer subagent to fix them",
               "kind": "prompt"
             }
@@ -4326,13 +4326,13 @@
             },
             {
               "title": "原页关键片段：Shut down teammates",
-              "body": "这里不是敲命令，而是把下面这句话交给 lead，让它把那位队友稳稳当当地收下来。",
+              "body": "这里不是敲命令，而是把下面这句话交给带队的那个 Claude，让它把那位队友稳稳当当地收下来。",
               "code": "Ask the researcher teammate to shut down",
               "kind": "prompt"
             },
             {
               "title": "原页关键片段：Clean up the team",
-              "body": "等队友都停稳了，再把下面这句话交给 lead，让它把整支队伍的摊子收干净。",
+              "body": "等队友都停稳了，再把下面这句话交给带队的那个 Claude，让它把整支队伍的摊子收干净。",
               "code": "Clean up the team",
               "kind": "prompt"
             },
@@ -4356,7 +4356,7 @@
             },
             {
               "title": "原页关键片段：Wait for teammates to finish",
-              "body": "这句话是拿来踩刹车的，提醒 lead 先别急着往前冲，等队友把手头活交回来再说。",
+              "body": "这句话是拿来踩刹车的，提醒带队的那个先别急着往前冲，等队友把手头活交回来再说。",
               "code": "Wait for your teammates to complete their tasks before proceeding",
               "kind": "prompt"
             }
@@ -4365,15 +4365,15 @@
         {
           "title": "When to use agent teams",
           "paragraphs": [
-            "这一节先讲什么时候值得开团队。只有任务能明显拆成几股并行推进时，团队模式才值；顺着一条线一步步做的活，单会话反而更省。",
-            "团队最大的好处是并行摸底、并行验证、分层协作；最大的代价是协调成本和 token 开销都更高。"
+            "只有一摊活能拆成几路同时干时，才值得把队伍拉起来。要是本来就得一步接一步做，一个 Claude 慢慢做反而更省事。",
+            "队伍的好处是几路人一起查、一起试；坏处也很实在，就是人一多就更费钱，也更费嘴。"
           ]
         },
         {
           "title": "Compare with subagents",
           "paragraphs": [
-            "这一节是拿 agent teams 和 subagents 做对比。简单说，子代理更像几个短工各自回报；团队更像几个人边干边彼此沟通。",
-            "如果你的工人之间需要互相交换发现、挑战彼此方案，再决定怎么收口，那就更偏团队。"
+            "子代理更像你临时叫来几个帮手，各人干完就回来报一声；团队更像几个人一起干同一摊活，干着干着还要彼此通气。",
+            "如果几个人之间需要互相商量、互相挑错，最后再凑出一个结论，那就更像团队。"
           ]
         },
         {
@@ -4394,8 +4394,8 @@
         {
           "title": "Start your first agent team",
           "paragraphs": [
-            "这一节是第一次拉团队开工。做法不是先手点很多按钮，而是直接用自然语言告诉 Claude：这活要分成哪几路、每一路干什么。",
-            "样例里强调的不是文案本身，而是“角色之间要能并行、不互相卡脖子”这个原则。"
+            "第一次拉团队开工，不用先记一堆按钮。你就像给包工头派活一样，直接说这件事要分几路、每一路干什么。",
+            "关键不是话术花不花，而是这几路活别互相绊脚，最好能各干各的。"
           ],
           "steps": [
             {
@@ -4409,15 +4409,15 @@
         {
           "title": "Control your agent team",
           "paragraphs": [
-            "这一节讲团队拉起来以后怎么指挥。你平时主要还是跟 lead 说话，由它来拆任务、派活、协调收口。",
-            "别把每个细碎指令都自己塞给所有队友，先让 lead 做总调度，团队才不容易乱。"
+            "队伍拉起来以后，你平时主要还是跟带队的那个说话。它再往下拆活、派活、收活。",
+            "别一着急就自己去指挥每个队友，不然全队消息会很乱。先让带队的那个当总管，队伍才稳。"
           ]
         },
         {
           "title": "Choose a display mode",
           "paragraphs": [
-            "这一节讲团队输出怎么显示。一个模式是在主终端里轮流切着看，另一个模式是分屏，一人一格同时盯着。",
-            "如果你想同时看多个人在干什么，就走分屏；如果环境简单、先求能跑，就先用 in-process。"
+            "这里讲的是你怎么看这支队伍干活。一个办法是轮流切着看，另一个办法是分成几格同时看。",
+            "如果你想一眼盯住好几个人，就用分屏；如果你只求先跑起来，那就先用简单那种。"
           ],
           "steps": [
             {
@@ -4437,8 +4437,8 @@
         {
           "title": "Specify teammates and models",
           "paragraphs": [
-            "这一节讲怎么明确告诉 Claude：你要几名队友、各自大概干什么、用什么模型。",
-            "如果你不说，Claude 会自己估；但任务一旦比较重，提前把人数和模型说死，通常更稳。"
+            "这里是在说，你最好提前把人数和分工讲明白：要几个人，谁查，谁改，谁验。",
+            "要是这活比较重，你连“用哪种脑子干”都先说清，通常会更稳。"
           ],
           "steps": [
             {
@@ -4452,8 +4452,8 @@
         {
           "title": "Require plan approval for teammates",
           "paragraphs": [
-            "这一节讲怎么让队友先交计划，再动手。对高风险改动，这是很值的一道闸门。",
-            "思路很简单：先只读计划，lead 审过了再放它进实施，不满意就打回去重做。"
+            "这里讲的是先别急着让队友开工，先叫他们把打算怎么做交上来。",
+            "你或带队的那个先看计划，觉得靠谱再放行；不靠谱就让它回去重想。"
           ],
           "steps": [
             {
@@ -4467,15 +4467,15 @@
         {
           "title": "Talk to teammates directly",
           "paragraphs": [
-            "这里是在讲能不能直接越过 lead 去找队友说话。一般可以，但最好知道自己为什么这么做，不然队里消息容易乱。",
-            "如果只是普通调度，还是让 lead 当中间人更稳；真要直接插话，也要让上下文别断。"
+            "这里是在讲，你能不能跳过带队的那个，直接去跟某个队友说话。一般能，但别乱来，不然全队容易听岔。",
+            "普通派活还是先走带队的那个更稳；真要直接插一句，也要把前因后果说清。"
           ]
         },
         {
           "title": "Assign and claim tasks",
           "paragraphs": [
-            "这一节讲团队任务单怎么分。可以由 lead 指派，也可以让队友干完手头活后自己认领下一个没被卡住的任务。",
-            "你要盯的是依赖关系和占坑冲突，别让两个队友同时冲向同一块地。"
+            "这里讲任务单怎么分。可以由带队的那个直接点名，也可以让队友干完手头活后自己去认下一个。",
+            "你最要防的是撞车，别让两个人同时扑向同一块地方。"
           ]
         },
         {
@@ -4487,7 +4487,7 @@
           "steps": [
             {
               "title": "Shut down teammates",
-              "body": "这里不是敲命令，而是把下面这句话交给 lead，让它把那位队友稳稳当当地收下来。",
+              "body": "这里不是敲命令，而是把下面这句话交给带队的那个 Claude，让它把那位队友稳稳当当地收下来。",
               "code": "Ask the researcher teammate to shut down",
               "kind": "prompt"
             }
@@ -4502,7 +4502,7 @@
           "steps": [
             {
               "title": "Clean up the team",
-              "body": "等队友都停稳了，再把下面这句话交给 lead，让它把整支队伍的摊子收干净。",
+              "body": "等队友都停稳了，再把下面这句话交给带队的那个 Claude，让它把整支队伍的摊子收干净。",
               "code": "Clean up the team",
               "kind": "prompt"
             }
@@ -4518,57 +4518,57 @@
         {
           "title": "How agent teams work",
           "paragraphs": [
-            "这一节先把队伍怎么转起来讲明白。Claude 会先拉一个 lead，再由 lead 去找队友分活、收结果、最后汇总回你这里。",
-            "你平时不用挨个盯每个 teammate，先盯住 lead 怎么派活、怎么收口，这样思路最清楚。"
+            "这一节先把队伍怎么转起来讲明白。Claude 会先安排一个带队的，再由它去找下面几个干活的，把结果一份份收回来。",
+            "你平时不用追着每个队友跑，先盯住带队的那个怎么派活、怎么收尾就够了。"
           ]
         },
         {
           "title": "How Claude starts agent teams",
           "paragraphs": [
-            "这里讲的是 Claude 真要拉起一支队伍时，前后顺序怎么走。先起 lead，再分活，再让队友把结果往回送。",
-            "把这段看懂以后，你就知道团队为什么有时反应快，有时又会卡在准备和协调上。"
+            "这里讲的是 Claude 真要拉起一支队伍时，前后顺序怎么走。先定一个带队的，再往下派人，再把结果一份份收回来。",
+            "这段看懂以后，你就知道它为什么有时跑得快，有时又会卡在前面的安排上。"
           ]
         },
         {
           "title": "Architecture",
           "paragraphs": [
-            "这里讲的是这支队伍的架子怎么搭。你多半是跟 lead 说，lead 再去找各个 teammate，把结果收回来。",
-            "把这个关系看懂，后面看到消息流转、分工和收尾时就不会发懵。"
+            "这里讲的是这支队伍的架子怎么搭。通常是你跟带队的那个说，带队的再去找下面的人干活。",
+            "把这个顺序看明白，后面看到谁给谁回话、谁来收尾，就不容易绕晕。"
           ]
         },
         {
           "title": "Permissions",
           "paragraphs": [
-            "这里讲的是队友手里能拿多大的权。谁只能看，谁能改，谁能跑工具，都别图省事一把全开。",
-            "团队一旦跑起来，权限放太松最容易出事，所以这段得认真看。"
+            "这里讲的是每个队友手里能拿多大的权。谁只能看，谁能改，谁能用工具，都别图省事一把全开。",
+            "人一多，最怕有人手太大乱碰东西，所以这段一定要看细。"
           ]
         },
         {
           "title": "Context and communication",
           "paragraphs": [
-            "这里讲的是队友之间怎么传话、怎么交结果。人一多，最怕的不是没人干活，而是说不清、接不上。",
-            "这时候就更需要 lead 把上下文收住，别让每个人各说各的。"
+            "这里讲的是队友之间怎么传话、怎么交结果。人一多，最怕的不是没人干，而是话没说清、东西没接住。",
+            "这时候就更需要带队的那个把前面发生了什么记牢，别让每个人各说各的。"
           ]
         },
         {
           "title": "Token usage",
           "paragraphs": [
-            "这里是在算账。团队一拉起来，每个队友都有自己的上下文窗口，所以花费不会像单人会话那样省。",
-            "意思不是叫你别用团队，而是先估好值不值，别为了一件小活把人马拉太大。"
+            "这里是在算账。队友一多，花费就会一起往上走，不会像一个人干活那样省。",
+            "意思不是不让你用团队，而是小活别摆大阵仗。"
           ]
         },
         {
           "title": "Use case examples",
           "paragraphs": [
-            "这里开始举例子了，就是拿几种常见活路告诉你，什么任务适合拉一支队伍来干。",
-            "不用全背，挑一个跟你手头最像的例子去套就行。"
+            "这里开始举例子了，就是拿几种常见活路告诉你，什么事值得拉一支队伍来干。",
+            "不用全背，挑一个跟你手头最像的去套就行。"
           ]
         },
         {
           "title": "Run a parallel code review",
           "paragraphs": [
-            "这一段是在说怎么把代码审查拆成几路一起看。这样是快，但每个人看的范围得先分清，不然容易重复和漏看。",
-            "最稳的做法是先按文件、模块或者风险点分地盘，再让 lead 收总账。"
+            "这一段是在说，代码审查怎么分给几个人一起看。这样是快，但谁看哪块得先分清，不然有人重复看，有人没人看。",
+            "最稳的做法就是先划地盘，再让带队的那个收总账。"
           ],
           "steps": [
             {
@@ -4582,7 +4582,8 @@
         {
           "title": "Investigate with competing hypotheses",
           "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。"
+            "这一段是在说，遇到难查的问题时，可以让几个人各自猜一种原因，再互相找对方的毛病。",
+            "这样做的好处是，不容易一开始就认死一个答案。"
           ],
           "steps": [
             {
@@ -4602,8 +4603,8 @@
         {
           "title": "Give teammates enough context",
           "paragraphs": [
-            "派活前别只甩一句短话就让人去干。背景、范围、你最担心什么，最好先讲明白。",
-            "不然队友跑半天带回来的，可能根本不是你要的那路东西。"
+            "派活前别只甩一句短话就让人去干。事情背景、范围、你最担心哪一点，最好先讲明白。",
+            "不然队友跑半天带回来的，很可能根本不是你要的东西。"
           ],
           "steps": [
             {
@@ -4625,19 +4626,19 @@
           "title": "Size tasks appropriately",
           "paragraphs": [
             "活分出去也得分得像样。太碎了，沟通成本比干活还大；太大了，一个人抱着走太久，别人也接不上。",
-            "最好切成能独立交付的小块，交回来时 lead 一眼就能接住。"
+            "最好切成能独立交付的小块，交回来时带队的那个一眼就能接住。"
           ]
         },
         {
           "title": "Wait for teammates to finish",
           "paragraphs": [
-            "队友已经在跑的时候，lead 最好别半路抢方向。先等结果回来，再看下一步怎么收。",
+            "队友已经在跑的时候，带队的那个最好别半路突然改主意。先等结果回来，再看下一步怎么办。",
             "人家还没把活说完，你这边就急着改主意，最容易把队伍带乱。"
           ],
           "steps": [
             {
               "title": "Wait for teammates to finish",
-              "body": "这句话是拿来踩刹车的，提醒 lead 先别急着往前冲，等队友把手头活交回来再说。",
+              "body": "这句话是拿来踩刹车的，提醒带队的那个先别急着往前冲，等队友把手头活交回来再说。",
               "code": "Wait for your teammates to complete their tasks before proceeding",
               "kind": "prompt"
             }
@@ -4646,20 +4647,22 @@
         {
           "title": "Start with research and review",
           "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。"
+            "这一段是在提醒你，别一上来就让大家闷头改。先让人去查、去看、去挑毛病，后面动手会稳很多。",
+            "先把情况摸清，再下手，返工通常会少。"
           ]
         },
         {
           "title": "Avoid file conflicts",
           "paragraphs": [
-            "这一块主要是在讲“Avoid file conflicts”到了手上该怎么使，哪里最容易踩坑。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+            "这一段是在防大家改到一块去。两个人同时碰同一个文件，最容易互相顶掉。",
+            "最稳的办法就是提前把地盘划开，谁改哪块先说清。"
           ]
         },
         {
           "title": "Monitor and steer",
           "paragraphs": [
-            "读到这里，就把“Monitor and steer”当成一件要上手的活看：先搞清怎么用，再留心别踩坑。"
+            "队伍拉起来以后，不是就撒手不管了。你还得时不时看看谁跑偏了，谁卡住了。",
+            "发现方向不对，早点拨一下，比最后全推倒重来强得多。"
           ]
         },
         {
@@ -5085,7 +5088,7 @@
             },
             {
               "title": "原页关键片段：Try it: add the demo marketplace 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Try it: add the demo marketplace”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Try it: add the demo marketplace”这一段的意思去办。",
               "code": "/commit-commands:commit",
               "kind": "prompt"
             },
@@ -5097,25 +5100,25 @@
             },
             {
               "title": "原页关键片段：Add from other Git hosts 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Add from other Git hosts”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Add from other Git hosts”这一段的意思去办。",
               "code": "/plugin marketplace add https://gitlab.com/company/plugins.git",
               "kind": "prompt"
             },
             {
               "title": "原页关键片段：Add from other Git hosts 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Add from other Git hosts”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Add from other Git hosts”这一段的意思去办。",
               "code": "/plugin marketplace add [email protected]:company/plugins.git",
               "kind": "prompt"
             },
             {
               "title": "原页关键片段：Add from other Git hosts 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Add from other Git hosts”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Add from other Git hosts”这一段的意思去办。",
               "code": "/plugin marketplace add https://gitlab.com/company/plugins.git#v1.0.0",
               "kind": "prompt"
             },
             {
               "title": "原页关键片段：Add from local paths 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Add from local paths”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Add from local paths”这一段的意思去办。",
               "code": "/plugin marketplace add ./my-marketplace",
               "kind": "prompt"
             },
@@ -5133,7 +5136,7 @@
             },
             {
               "title": "原页关键片段：Install plugins",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Install plugins”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Install plugins”这一段的意思去办。",
               "code": "/plugin install plugin-name@marketplace-name",
               "kind": "prompt"
             }
@@ -5208,7 +5211,7 @@
             },
             {
               "title": "Try it: add the demo marketplace 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Try it: add the demo marketplace”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Try it: add the demo marketplace”这一段的意思去办。",
               "code": "/commit-commands:commit",
               "kind": "prompt"
             }
@@ -5243,19 +5246,19 @@
           "steps": [
             {
               "title": "Add from other Git hosts 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Add from other Git hosts”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Add from other Git hosts”这一段的意思去办。",
               "code": "/plugin marketplace add https://gitlab.com/company/plugins.git",
               "kind": "prompt"
             },
             {
               "title": "Add from other Git hosts 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Add from other Git hosts”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Add from other Git hosts”这一段的意思去办。",
               "code": "/plugin marketplace add [email protected]:company/plugins.git",
               "kind": "prompt"
             },
             {
               "title": "Add from other Git hosts 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Add from other Git hosts”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Add from other Git hosts”这一段的意思去办。",
               "code": "/plugin marketplace add https://gitlab.com/company/plugins.git#v1.0.0",
               "kind": "prompt"
             }
@@ -5269,7 +5272,7 @@
           "steps": [
             {
               "title": "Add from local paths 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Add from local paths”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Add from local paths”这一段的意思去办。",
               "code": "/plugin marketplace add ./my-marketplace",
               "kind": "prompt"
             },
@@ -5304,7 +5307,7 @@
           "steps": [
             {
               "title": "Install plugins",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Install plugins”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Install plugins”这一段的意思去办。",
               "code": "/plugin install plugin-name@marketplace-name",
               "kind": "prompt"
             }
@@ -5319,19 +5322,19 @@
           "steps": [
             {
               "title": "Manage installed plugins 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Manage installed plugins”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Manage installed plugins”这一段的意思去办。",
               "code": "/plugin disable plugin-name@marketplace-name",
               "kind": "prompt"
             },
             {
               "title": "Manage installed plugins 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Manage installed plugins”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Manage installed plugins”这一段的意思去办。",
               "code": "/plugin enable plugin-name@marketplace-name",
               "kind": "prompt"
             },
             {
               "title": "Manage installed plugins 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Manage installed plugins”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Manage installed plugins”这一段的意思去办。",
               "code": "/plugin uninstall plugin-name@marketplace-name",
               "kind": "prompt"
             },
@@ -5352,7 +5355,7 @@
           "steps": [
             {
               "title": "Apply plugin changes without restarting",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Apply plugin changes without restarting”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Apply plugin changes without restarting”这一段的意思去办。",
               "code": "/reload-plugins",
               "kind": "prompt"
             }
@@ -5378,19 +5381,19 @@
           "steps": [
             {
               "title": "Use CLI commands 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Use CLI commands”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Use CLI commands”这一段的意思去办。",
               "code": "/plugin marketplace list",
               "kind": "prompt"
             },
             {
               "title": "Use CLI commands 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Use CLI commands”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Use CLI commands”这一段的意思去办。",
               "code": "/plugin marketplace update marketplace-name",
               "kind": "prompt"
             },
             {
               "title": "Use CLI commands 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Use CLI commands”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Use CLI commands”这一段的意思去办。",
               "code": "/plugin marketplace remove marketplace-name",
               "kind": "prompt"
             }
@@ -5521,13 +5524,13 @@
             },
             {
               "title": "原页关键片段：Create your first skill 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Create your first skill”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Create your first skill”这一段的意思去办。",
               "code": "How does this code work?",
               "kind": "prompt"
             },
             {
               "title": "原页关键片段：Create your first skill 4",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Create your first skill”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Create your first skill”这一段的意思去办。",
               "code": "/explain-code src/auth/login.ts",
               "kind": "prompt"
             },
@@ -5615,13 +5618,13 @@
             },
             {
               "title": "Create your first skill 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Create your first skill”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Create your first skill”这一段的意思去办。",
               "code": "How does this code work?",
               "kind": "prompt"
             },
             {
               "title": "Create your first skill 4",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Create your first skill”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Create your first skill”这一段的意思去办。",
               "code": "/explain-code src/auth/login.ts",
               "kind": "prompt"
             }
@@ -5937,13 +5940,13 @@
           "steps": [
             {
               "title": "原页关键片段：Schedule a recurring prompt with /loop",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Schedule a recurring prompt with /loop”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Schedule a recurring prompt with /loop”这一段的意思去办。",
               "code": "/loop 5m check if the deployment finished and tell me what happened",
               "kind": "prompt"
             },
             {
               "title": "原页关键片段：Loop over another command",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Loop over another command”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Loop over another command”这一段的意思去办。",
               "code": "/loop 20m /review-pr 1234",
               "kind": "prompt"
             },
@@ -5961,7 +5964,7 @@
             },
             {
               "title": "原页关键片段：Manage scheduled tasks 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Manage scheduled tasks”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Manage scheduled tasks”这一段的意思去办。",
               "code": "what scheduled tasks do I have?",
               "kind": "prompt"
             },
@@ -5982,7 +5985,7 @@
           "steps": [
             {
               "title": "Schedule a recurring prompt with /loop",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Schedule a recurring prompt with /loop”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Schedule a recurring prompt with /loop”这一段的意思去办。",
               "code": "/loop 5m check if the deployment finished and tell me what happened",
               "kind": "prompt"
             }
@@ -6003,7 +6006,7 @@
           "steps": [
             {
               "title": "Loop over another command",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Loop over another command”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Loop over another command”这一段的意思去办。",
               "code": "/loop 20m /review-pr 1234",
               "kind": "prompt"
             }
@@ -6024,7 +6027,7 @@
           "steps": [
             {
               "title": "Manage scheduled tasks",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Manage scheduled tasks”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Manage scheduled tasks”这一段的意思去办。",
               "code": "what scheduled tasks do I have?",
               "kind": "prompt"
             }
@@ -7000,7 +7003,7 @@
             },
             {
               "title": "原页关键片段：Plugin-provided MCP servers 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Plugin-provided MCP servers”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Plugin-provided MCP servers”这一段的意思去办。",
               "code": "# Within Claude Code, see all MCP servers including plugin ones\n/mcp",
               "kind": "prompt"
             },
@@ -7146,7 +7149,7 @@
             },
             {
               "title": "Plugin-provided MCP servers 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Plugin-provided MCP servers”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Plugin-provided MCP servers”这一段的意思去办。",
               "code": "# Within Claude Code, see all MCP servers including plugin ones\n/mcp",
               "kind": "prompt"
             }
@@ -7259,25 +7262,25 @@
             },
             {
               "title": "Example: Monitor errors with Sentry 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Example: Monitor errors with Sentry”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Example: Monitor errors with Sentry”这一段的意思去办。",
               "code": "/mcp",
               "kind": "prompt"
             },
             {
               "title": "Example: Monitor errors with Sentry 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Example: Monitor errors with Sentry”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Example: Monitor errors with Sentry”这一段的意思去办。",
               "code": "What are the most common errors in the last 24 hours?",
               "kind": "prompt"
             },
             {
               "title": "Example: Monitor errors with Sentry 4",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Example: Monitor errors with Sentry”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Example: Monitor errors with Sentry”这一段的意思去办。",
               "code": "Show me the stack trace for error ID abc123",
               "kind": "prompt"
             },
             {
               "title": "Example: Monitor errors with Sentry 5",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Example: Monitor errors with Sentry”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Example: Monitor errors with Sentry”这一段的意思去办。",
               "code": "Which deployment introduced these new errors?",
               "kind": "prompt"
             }
@@ -7297,7 +7300,7 @@
             },
             {
               "title": "Example: Connect to GitHub for code reviews 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Example: Connect to GitHub for code reviews”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Example: Connect to GitHub for code reviews”这一段的意思去办。",
               "code": "/mcp",
               "kind": "prompt"
             },
@@ -7309,13 +7312,13 @@
             },
             {
               "title": "Example: Connect to GitHub for code reviews 4",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Example: Connect to GitHub for code reviews”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Example: Connect to GitHub for code reviews”这一段的意思去办。",
               "code": "Create a new issue for the bug we just found",
               "kind": "prompt"
             },
             {
               "title": "Example: Connect to GitHub for code reviews 5",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Example: Connect to GitHub for code reviews”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Example: Connect to GitHub for code reviews”这一段的意思去办。",
               "code": "Show me all open PRs assigned to me",
               "kind": "prompt"
             }
@@ -7335,19 +7338,19 @@
             },
             {
               "title": "Example: Query your PostgreSQL database 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Example: Query your PostgreSQL database”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Example: Query your PostgreSQL database”这一段的意思去办。",
               "code": "What's our total revenue this month?",
               "kind": "prompt"
             },
             {
               "title": "Example: Query your PostgreSQL database 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Example: Query your PostgreSQL database”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Example: Query your PostgreSQL database”这一段的意思去办。",
               "code": "Show me the schema for the orders table",
               "kind": "prompt"
             },
             {
               "title": "Example: Query your PostgreSQL database 4",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Example: Query your PostgreSQL database”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Example: Query your PostgreSQL database”这一段的意思去办。",
               "code": "Find customers who haven't made a purchase in 90 days",
               "kind": "prompt"
             }
@@ -7368,7 +7371,7 @@
             },
             {
               "title": "Authenticate with remote MCP servers 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Authenticate with remote MCP servers”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Authenticate with remote MCP servers”这一段的意思去办。",
               "code": "/mcp",
               "kind": "prompt"
             }
@@ -7488,7 +7491,7 @@
           "steps": [
             {
               "title": "Use MCP servers from Claude.ai 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Use MCP servers from Claude.ai”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Use MCP servers from Claude.ai”这一段的意思去办。",
               "code": "/mcp",
               "kind": "prompt"
             },
@@ -9973,8 +9976,8 @@
         {
           "title": "Permission-based architecture",
           "paragraphs": [
-            "这里讲的是这支队伍的架子怎么搭。你多半是跟 lead 说，lead 再去找各个 teammate，把结果收回来。",
-            "把这个关系看懂，后面看到消息流转、分工和收尾时就不会发懵。"
+            "这里讲的是这支队伍的架子怎么搭。通常是你跟带队的那个说，带队的再去找下面的人干活。",
+            "把这个顺序看明白，后面看到谁给谁回话、谁来收尾，就不容易绕晕。"
           ]
         },
         {
@@ -10831,8 +10834,8 @@
         {
           "title": "Reduce token usage",
           "paragraphs": [
-            "这里是在算账。团队一拉起来，每个队友都有自己的上下文窗口，所以花费不会像单人会话那样省。",
-            "意思不是叫你别用团队，而是先估好值不值，别为了一件小活把人马拉太大。"
+            "这里是在算账。队友一多，花费就会一起往上走，不会像一个人干活那样省。",
+            "意思不是不让你用团队，而是小活别摆大阵仗。"
           ]
         },
         {
@@ -10935,8 +10938,8 @@
         {
           "title": "Background token usage",
           "paragraphs": [
-            "这里是在算账。团队一拉起来，每个队友都有自己的上下文窗口，所以花费不会像单人会话那样省。",
-            "意思不是叫你别用团队，而是先估好值不值，别为了一件小活把人马拉太大。"
+            "这里是在算账。队友一多，花费就会一起往上走，不会像一个人干活那样省。",
+            "意思不是不让你用团队，而是小活别摆大阵仗。"
           ]
         },
         {
@@ -11204,13 +11207,13 @@
             },
             {
               "title": "Walkthrough: create a local marketplace 5",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Walkthrough: create a local marketplace”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Walkthrough: create a local marketplace”这一段的意思去办。",
               "code": "/plugin marketplace add ./my-marketplace\n/plugin install quality-review-plugin@my-plugins",
               "kind": "prompt"
             },
             {
               "title": "Walkthrough: create a local marketplace 6",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Walkthrough: create a local marketplace”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Walkthrough: create a local marketplace”这一段的意思去办。",
               "code": "/review",
               "kind": "prompt"
             }
@@ -11426,7 +11429,7 @@
           "steps": [
             {
               "title": "Host on other git services",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Host on other git services”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Host on other git services”这一段的意思去办。",
               "code": "/plugin marketplace add https://gitlab.com/company/plugins.git",
               "kind": "prompt"
             }
@@ -11455,7 +11458,7 @@
           "steps": [
             {
               "title": "Test locally before distribution",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Test locally before distribution”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Test locally before distribution”这一段的意思去办。",
               "code": "/plugin marketplace add ./my-local-marketplace\n/plugin install test-plugin@my-local-marketplace",
               "kind": "prompt"
             }
@@ -11577,19 +11580,19 @@
             },
             {
               "title": "Validation and testing 2",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Validation and testing”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Validation and testing”这一段的意思去办。",
               "code": "/plugin validate .",
               "kind": "prompt"
             },
             {
               "title": "Validation and testing 3",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Validation and testing”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Validation and testing”这一段的意思去办。",
               "code": "/plugin marketplace add ./path/to/marketplace",
               "kind": "prompt"
             },
             {
               "title": "Validation and testing 4",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Validation and testing”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Validation and testing”这一段的意思去办。",
               "code": "/plugin install test-plugin@marketplace-name",
               "kind": "prompt"
             }
@@ -12286,7 +12289,7 @@
             },
             {
               "title": "原页关键片段：Enable sandboxing",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Enable sandboxing”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Enable sandboxing”这一段的意思去办。",
               "code": "/sandbox",
               "kind": "prompt"
             },
@@ -12377,7 +12380,7 @@
           "steps": [
             {
               "title": "Enable sandboxing",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Enable sandboxing”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Enable sandboxing”这一段的意思去办。",
               "code": "/sandbox",
               "kind": "prompt"
             }
@@ -13009,7 +13012,7 @@
           "steps": [
             {
               "title": "原页关键片段：Enable voice dictation 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Enable voice dictation”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Enable voice dictation”这一段的意思去办。",
               "code": "/voice\nVoice mode enabled. Hold Space to record. Dictation language: en (/config to change).",
               "kind": "prompt"
             },
@@ -13021,7 +13024,7 @@
             },
             {
               "title": "原页关键片段：Record a prompt",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Record a prompt”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Record a prompt”这一段的意思去办。",
               "code": "> refactor the auth middleware to ▮\n  # hold Space, speak \"use the new token validation helper\"\n> refactor the auth middleware to use the new token validation helper▮",
               "kind": "prompt"
             },
@@ -13055,7 +13058,7 @@
           "steps": [
             {
               "title": "Enable voice dictation 1",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Enable voice dictation”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Enable voice dictation”这一段的意思去办。",
               "code": "/voice\nVoice mode enabled. Hold Space to record. Dictation language: en (/config to change).",
               "kind": "prompt"
             },
@@ -13076,7 +13079,7 @@
           "steps": [
             {
               "title": "Record a prompt",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Record a prompt”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Record a prompt”这一段的意思去办。",
               "code": "> refactor the auth middleware to ▮\n  # hold Space, speak \"use the new token validation helper\"\n> refactor the auth middleware to use the new token validation helper▮",
               "kind": "prompt"
             }
@@ -13167,7 +13170,7 @@
           "steps": [
             {
               "title": "原页关键片段：Use the /statusline command",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Use the /statusline command”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Use the /statusline command”这一段的意思去办。",
               "code": "/statusline show model name and context percentage with a progress bar",
               "kind": "prompt"
             },
@@ -13253,7 +13256,7 @@
           "steps": [
             {
               "title": "Use the /statusline command",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Use the /statusline command”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Use the /statusline command”这一段的意思去办。",
               "code": "/statusline show model name and context percentage with a progress bar",
               "kind": "prompt"
             }
@@ -14029,7 +14032,7 @@
             },
             {
               "title": "原页关键片段：Side questions with /btw",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Side questions with /btw”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Side questions with /btw”这一段的意思去办。",
               "code": "/btw what was the name of that config file again?",
               "kind": "prompt"
             }
@@ -14184,7 +14187,7 @@
           "steps": [
             {
               "title": "Side questions with /btw",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 或 lead 就行，让它按“Side questions with /btw”这一段的意思去办。",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Side questions with /btw”这一段的意思去办。",
               "code": "/btw what was the name of that config file again?",
               "kind": "prompt"
             }
