@@ -632,6 +632,312 @@ function summarizeSectionHints(block, pageTitle = '') {
 			'适合团队想统一发一套现成配置，不想每个人手敲一遍。'
 		];
 	}
+	if (/mcp prompts/.test(heading) && /built-in commands/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲跟 MCP 相关的那几条内置口令怎么用。',
+			'适合你已经接了外部服务，现在想在会话里顺手叫出来。'
+		];
+	}
+	if (/see also/.test(heading) && /built-in commands|environment variables|tools reference/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里是在告诉你：这页看完后，下一步还该顺手去翻哪几页。',
+			'把相关页连着看，脑子里那张图才会完整。'
+		];
+	}
+	if (/bash tool behavior/.test(heading)) {
+		return [
+			'这里讲 Bash 这把刀平时是怎么出手的。',
+			'它最能干活，也最容易出事，所以规矩要看清。'
+		];
+	}
+	if (/hook lifecycle/.test(heading)) {
+		return [
+			'这里讲 hook 从开始到结束会经过哪几步。',
+			'先把这条路看明白，后面配规则才不容易拧巴。'
+		];
+	}
+	if (/how a hook resolves/.test(heading)) {
+		return [
+			'这里讲系统最后到底会挑中哪条 hook 来跑。',
+			'规则一多时，这段很关键，不然你会搞不懂为什么跑的是它。'
+		];
+	}
+	if (/hook locations/.test(heading) && /^hooks$/i.test(pageTitle)) {
+		return [
+			'这里讲 hook 可以放在哪几层、哪几个地方。',
+			'放对地方，团队共享和个人自用才分得清。'
+		];
+	}
+	if (/matcher patterns/.test(heading)) {
+		return [
+			'这里讲匹配条件怎么写，也就是什么情况下 hook 才该跳出来。',
+			'条件写准了，hook 才不会乱响。'
+		];
+	}
+	if (/hooks in skills and agents/.test(heading)) {
+		return [
+			'这里讲 hook 不只可以单独配，还能塞进 skills 和 agents 一起带着走。',
+			'适合想把某套规矩和能力一起打包的人看。'
+		];
+	}
+	if (/the \/hooks menu/.test(heading)) {
+		return [
+			'这里讲 `/hooks` 这个入口平时怎么用。',
+			'看列表、查现状、确认有没有吃到配置，基本都从这儿进。'
+		];
+	}
+	if (/disable or remove hooks/.test(heading)) {
+		return [
+			'这里讲 hook 不想用了以后，怎么停、怎么删。',
+			'别让旧钩子一直留着暗处里响。'
+		];
+	}
+	if (/hook input and output/.test(heading)) {
+		return [
+			'这里讲 hook 吃进去什么、又该吐出来什么。',
+			'输入输出一旦弄糊，hook 就算跑了也容易白跑。'
+		];
+	}
+	if (/http response handling/.test(heading)) {
+		return [
+			'这里讲 HTTP hook 那边回了东西以后，这边怎么认、怎么接。',
+			'适合你们本来就走接口服务这条路。'
+		];
+	}
+	if (/hook events/.test(heading)) {
+		return [
+			'这里是事件总表，也就是什么时候 hook 有机会出手。',
+			'先把事件认清，后面才知道该挂在哪个点上。'
+		];
+	}
+	if (/sessionstart/.test(heading)) {
+		return [
+			'这里讲会话一开场时会触发什么。',
+			'适合做开工前提醒、加载规矩这类事。'
+		];
+	}
+	if (/instructionsloaded/.test(heading)) {
+		return [
+			'这里讲规则文件刚读进来那一下能做什么。',
+			'适合你想在规矩装进脑子后再补一刀检查。'
+		];
+	}
+	if (/userpromptsubmit/.test(heading)) {
+		return [
+			'这里讲用户刚把话交上去那一下会触发什么。',
+			'适合先过滤、先提醒、先加一道小门槛。'
+		];
+	}
+	if (/pretooluse/.test(heading)) {
+		return [
+			'这里讲工具真正出手前，你还能不能先拦一下。',
+			'适合做最后一道门禁。'
+		];
+	}
+	if (/permissionrequest/.test(heading)) {
+		return [
+			'这里讲系统准备来找你要权限时，会触发什么。',
+			'适合在点头前再补一层判断。'
+		];
+	}
+	if (/posttoolusefailure/.test(heading)) {
+		return [
+			'这里讲工具跑砸了以后，hook 能怎么接手。',
+			'适合做报错整理和补充提醒。'
+		];
+	}
+	if (/teammateidle/.test(heading)) {
+		return [
+			'这里讲队友快闲下来的时候会触发什么。',
+			'适合在它准备收工前再看一眼有没有漏。'
+		];
+	}
+	if (/taskcompleted/.test(heading)) {
+		return [
+			'这里讲任务准备算完成那一下会触发什么。',
+			'适合在交卷前再加一道检查。'
+		];
+	}
+	if (/configchange/.test(heading)) {
+		return [
+			'这里讲配置一变动时会触发什么。',
+			'适合留痕、告警或者补审。'
+		];
+	}
+	if (/worktreecreate/.test(heading)) {
+		return [
+			'这里讲新 worktree 建出来那一下会触发什么。',
+			'适合给新工作区先做准备活。'
+		];
+	}
+	if (/how checkpoints work/.test(heading)) {
+		return [
+			'这里先把检查点这套保险怎么起作用讲清楚。',
+			'你可以把它理解成干大活时先留个回头路。'
+		];
+	}
+	if (/automatic tracking/.test(heading) && /checkpoint/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲系统会不会自己帮你记下阶段点。',
+			'能自动记当然省心，但你也要知道它记到了哪儿。'
+		];
+	}
+	if (/rewind and summarize/.test(heading)) {
+		return [
+			'这里讲怎么回到前面某一步，同时把中间发生的事捋一遍。',
+			'适合改远了、想收回来时用。'
+		];
+	}
+	if (/common use cases/.test(heading) && /checkpoint/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲哪些场景最值当用检查点。',
+			'像重构、大改、试验性改动，这些都很适合先留后手。'
+		];
+	}
+	if (/bash command changes not tracked/.test(heading)) {
+		return [
+			'这里提醒你：有些 bash 命令带来的变化，检查点不一定帮你记住。',
+			'所以别把它当成万能保险。'
+		];
+	}
+	if (/external changes not tracked/.test(heading)) {
+		return [
+			'这里提醒你：外面别的程序动过的东西，检查点也不一定看得见。',
+			'院外发生的事，不一定都能算到这本账里。'
+		];
+	}
+	if (/not a replacement for version control/.test(heading)) {
+		return [
+			'这里讲检查点再好，也代替不了 Git 这类正式账本。',
+			'检查点是短保险，版本管理才是长账本。'
+		];
+	}
+	if (/themes and appearance/.test(heading) && /terminal/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲终端看起来顺不顺眼那一摊。',
+			'不是核心本事，但天天盯着，舒服很多。'
+		];
+	}
+	if (/line breaks/.test(heading)) {
+		return [
+			'这里讲换行显示对不对、会不会乱折。',
+			'这事小，但乱了会很烦。'
+		];
+	}
+	if (/notification setup/.test(heading)) {
+		return [
+			'这里讲提示声、提醒这类东西怎么接好。',
+			'适合你不想一直盯着终端，也怕错过动静。'
+		];
+	}
+	if (/handling large inputs/.test(heading)) {
+		return [
+			'这里讲一大坨输入塞进来时，终端这边怎么别卡住。',
+			'适合经常贴长日志、长代码的人看。'
+		];
+	}
+	if (/vim mode/.test(heading) && /terminal/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲终端里那套 Vim 手法要不要开、怎么开。',
+			'喜欢这套的人会很顺，不喜欢的别硬逼自己。'
+		];
+	}
+	if (/available models/.test(heading)) {
+		return [
+			'这里讲现在有哪些模型可选，各自大概是什么路子。',
+			'先分清谁偏快、谁偏稳、谁偏能深想。'
+		];
+	}
+	if (/model aliases/.test(heading)) {
+		return [
+			'这里讲模型那些简称、别名到底指谁。',
+			'不然你看配置时很容易张冠李戴。'
+		];
+	}
+	if (/setting your model/.test(heading)) {
+		return [
+			'这里讲你平时到底在哪儿选模型、怎么换模型。',
+			'先把入口认清，后面调起来才快。'
+		];
+	}
+	if (/restrict model selection/.test(heading)) {
+		return [
+			'这里讲能不能把可选模型收窄，不让大家乱选。',
+			'适合团队想统一成本和口径时用。'
+		];
+	}
+	if (/default model behavior/.test(heading)) {
+		return [
+			'这里讲默认那只模型平时会怎么顶上来干活。',
+			'你不特别点名时，多半就是它先上。'
+		];
+	}
+	if (/control the model users run on/.test(heading)) {
+		return [
+			'这里讲管理员能不能管住大家最后跑在哪个模型上。',
+			'适合统一成本、统一效果的场景。'
+		];
+	}
+	if (/merge behavior/.test(heading) && /model/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里讲几层模型设置撞到一起时，最后怎么合并、听谁的。',
+			'先把这条规矩搞懂，后面才不容易“以为改了其实没改到”。'
+		];
+	}
+	if (/special model behavior/.test(heading)) {
+		return [
+			'这里讲有些模型会带一点特别脾气，不完全按普通路子走。',
+			'这种地方最好提前看，不要用时才吃惊。'
+		];
+	}
+	if (/default model setting/.test(heading)) {
+		return [
+			'这里讲默认模型那一项具体怎么写。',
+			'也就是你不特别指定时，它该先用谁。'
+		];
+	}
+	if (/opusplan model setting/.test(heading)) {
+		return [
+			'这里讲专门拿来做计划那只模型怎么设。',
+			'适合你想把“想方案”和“真动手”分开。'
+		];
+	}
+	if (/adjust effort level/.test(heading)) {
+		return [
+			'这里讲让模型是快点给答案，还是多想一会儿再答。',
+			'说白了，就是速度和细致程度怎么取舍。'
+		];
+	}
+	if (/extended context/.test(heading)) {
+		return [
+			'这里讲想让模型记住更多东西时，能不能把肚量放大一点。',
+			'肚量大了有好处，花费也可能跟着涨。'
+		];
+	}
+	if (/checking your current model/.test(heading)) {
+		return [
+			'这里讲怎么确认眼下到底是哪只模型在干活。',
+			'别到最后才发现一直跑错工种。'
+		];
+	}
+	if (/pin models for third-party deployments/.test(heading)) {
+		return [
+			'这里讲第三方部署时，怎么把模型钉死在某几个上。',
+			'适合不想让外面环境乱飘的人看。'
+		];
+	}
+	if (/override model ids per version/.test(heading)) {
+		return [
+			'这里讲不同版本想指向不同模型 ID 时怎么写。',
+			'这种是细活，照着写，不要靠猜。'
+		];
+	}
+	if (/prompt caching configuration/.test(heading)) {
+		return [
+			'这里讲提示缓存怎么配，能不能省点重复花费。',
+			'适合那种老问类似问题、老跑类似流程的场景。'
+		];
+	}
 	if (/system requirements/.test(heading)) {
 		return [
 			'这里先看你这台机器够不够格干这活。系统太老、环境不对，后面再折腾也是白搭。',
