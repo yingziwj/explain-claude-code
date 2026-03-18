@@ -97,6 +97,24 @@ function kindAction(kind) {
 	}
 }
 
+function buildStepBody({ kind, pageTitle, sectionTitle }) {
+	const pageLabel = pageTitle || '这一页';
+	const sectionLabel = sectionTitle || '这一段';
+
+	switch (kind) {
+		case 'prompt':
+			return `放在《${pageLabel}》这一整页里，这一步是在处理“${sectionLabel}”这小段。你如果想让 Claude 或 lead 真按这段意思去做，下面这句话就可以直接发出去。`;
+		case 'command':
+			return `放在《${pageLabel}》这一整页里，这一步已经从“讲道理”走到“真动手”了。下面这条就是你在终端里要敲的命令，敲完再看结果是不是跟这一段想达到的目标对上。`;
+		case 'config':
+			return `放在《${pageLabel}》这一整页里，这一步是在把“${sectionLabel}”这段规矩真正写进配置。下面这块别随便改关键字，照着落进去最稳。`;
+		case 'structure':
+			return `放在《${pageLabel}》这一整页里，这一步不是让你背概念，而是让你看清目录和文件该怎么摆。先把位置认准，后面才不容易配错。`;
+		default:
+			return `放在《${pageLabel}》这一整页里，这一小段已经开始落具体例子了。下面这块是这一节最该保住的原始片段，先看懂它在“${sectionLabel}”里扮演什么角色，再决定要不要照着用。`;
+	}
+}
+
 function pickSectionSteps(page, count) {
 	const steps = [];
 
@@ -113,10 +131,7 @@ function pickSectionSteps(page, count) {
 			const kind = inferStepKind(code);
 			steps.push({
 				title: codes.length > 1 ? `原页关键片段：${title} ${index + 1}` : `原页关键片段：${title}`,
-				body:
-					block.paragraphs?.length
-						? `${kindAction(kind)}。这一小节原文主要在讲：${normalizeText(block.paragraphs[0])} 下面这块属于“${kindLabel(kind)}”，关键命令、文件名和参数最好照原样保留。`
-						: `${kindAction(kind)}。这段内容是从官方页面抓下来的${kindLabel(kind)}，解释可以说人话，但这里的关键字、命令名、文件名和参数别随便改字。`,
+				body: buildStepBody({ kind, pageTitle: page.title, sectionTitle: title }),
 				code,
 				kind
 			});
@@ -143,7 +158,7 @@ function pickSectionCodeBlocks(block, count) {
 		.slice(0, count);
 }
 
-function summarizeSectionHints(block) {
+function summarizeSectionHints(block, pageTitle = '') {
 	const title = normalizeText(block.title);
 	const heading = title.toLowerCase();
 	const hints = (block.paragraphs ?? [])
@@ -155,60 +170,61 @@ function summarizeSectionHints(block) {
 	const paragraphs = [];
 	const firstHint = hints[0] ?? '';
 	const secondHint = hints[1] ?? '';
+	const pageLead = pageTitle ? `放在《${pageTitle}》这一整页里，` : '';
 
 	function pushHintDrivenFallback() {
 		if (/^use (.+) to (.+)/i.test(firstHint)) {
 			const [, subject, action] = firstHint.match(/^use (.+) to (.+)/i) ?? [];
-			paragraphs.push(`这一节是在教你怎么用 ${subject} 去做 ${action}。重点不是光知道名字，而是真把这条用法落到手上。`);
+			paragraphs.push(`${pageLead}这一节是在教你怎么用 ${subject} 去做 ${action}。重点不是光知道名字，而是真把这条用法落到手上。`);
 			return;
 		}
 		if (/^create (.+)/i.test(firstHint)) {
 			const [, subject] = firstHint.match(/^create (.+)/i) ?? [];
-			paragraphs.push(`这一节是在教你怎么把 ${subject} 这东西真正建出来。一般要盯住文件放哪儿、字段怎么写、建完怎么验证。`);
+			paragraphs.push(`${pageLead}这一节是在教你怎么把 ${subject} 这东西真正建出来。一般要盯住文件放哪儿、字段怎么写、建完怎么验证。`);
 			return;
 		}
 		if (/^install (.+)/i.test(firstHint)) {
 			const [, subject] = firstHint.match(/^install (.+)/i) ?? [];
-			paragraphs.push(`这一节是在教你怎么安装 ${subject}。这类内容最怕跳步骤，所以最好按原顺序一条一条做。`);
+			paragraphs.push(`${pageLead}这一节是在教你怎么安装 ${subject}。这类内容最怕跳步骤，所以最好按原顺序一条一条做。`);
 			return;
 		}
 		if (/^configure (.+)|^set up (.+)/i.test(firstHint)) {
 			const match = firstHint.match(/^configure (.+)|^set up (.+)/i);
 			const subject = match?.[1] || match?.[2] || title;
-			paragraphs.push(`这一节是在讲怎么把 ${subject} 配对、配稳。重点通常是改哪儿、怎么写，以及改完以后怎么确认真生效。`);
+			paragraphs.push(`${pageLead}这一节是在讲怎么把 ${subject} 配对、配稳。重点通常是改哪儿、怎么写，以及改完以后怎么确认真生效。`);
 			return;
 		}
 		if (/^run (.+)/i.test(firstHint)) {
 			const [, subject] = firstHint.match(/^run (.+)/i) ?? [];
-			paragraphs.push(`这一节是在讲怎么把 ${subject} 真跑起来。别只看命令长什么样，还要看它跑完该出现什么结果。`);
+			paragraphs.push(`${pageLead}这一节是在讲怎么把 ${subject} 真跑起来。别只看命令长什么样，还要看它跑完该出现什么结果。`);
 			return;
 		}
 		if (/^view (.+)|^see (.+)/i.test(firstHint)) {
 			const match = firstHint.match(/^view (.+)|^see (.+)/i);
 			const subject = match?.[1] || match?.[2] || title;
-			paragraphs.push(`这一节是在讲怎么看 ${subject}，也就是出了问题时你该去哪里翻、翻到什么算正常。`);
+			paragraphs.push(`${pageLead}这一节是在讲怎么看 ${subject}，也就是出了问题时你该去哪里翻、翻到什么算正常。`);
 			return;
 		}
 		if (/^choose (.+)/i.test(firstHint)) {
 			const [, subject] = firstHint.match(/^choose (.+)/i) ?? [];
-			paragraphs.push(`这一节是在帮你从几个选项里挑 ${subject}。重点通常不只是知道有哪些可选，而是看各自代价和适用场景。`);
+			paragraphs.push(`${pageLead}这一节是在帮你从几个选项里挑 ${subject}。重点通常不只是知道有哪些可选，而是看各自代价和适用场景。`);
 			return;
 		}
 		if (/^when /i.test(firstHint) || /^if /i.test(firstHint)) {
-			paragraphs.push(`这一节更像在讲判断条件：什么情况下该这么做，什么情况下别急着上。看这类段落时，重点是把触发条件看清。`);
+			paragraphs.push(`${pageLead}这一节更像在讲判断条件：什么情况下该这么做，什么情况下别急着上。看这类段落时，重点是把触发条件看清。`);
 			return;
 		}
 		if (/^the |^this /i.test(firstHint)) {
-			paragraphs.push(`这一节不是单纯报个标题名，而是在说明“${title}”这块到底负责哪一摊、会影响哪一块，以及你读这一段时该先抓哪几个要点。`);
+			paragraphs.push(`${pageLead}这一节不是单纯报个标题名，而是在说明“${title}”这块到底负责哪一摊、会影响哪一块，以及你读这一段时该先抓哪几个要点。`);
 			return;
 		}
 
-		paragraphs.push(`这一节落点通常不在空概念，而在“${title}”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。`);
+		paragraphs.push(`${pageLead}这一节落点通常不在空概念，而在“${title}”实际怎么用、什么时候值得用、以及最容易在哪些地方踩坑。`);
 	}
 
 	if (/built-in subagents/.test(heading)) {
 		return [
-			'这一节先把系统自带的子代理认清楚：它们各自擅长什么活、会继承什么权限、什么时候会被 Claude 自动叫出来。',
+			`${pageLead}这一节先把系统自带的子代理认清楚：它们各自擅长什么活、会继承什么权限、什么时候会被 Claude 自动叫出来。`,
 			'看这段时别只盯名字，重点是分清哪类代理偏查资料、哪类能动手改、哪类只适合在计划阶段帮你摸底。'
 		];
 	}
@@ -450,7 +466,7 @@ function summarizeSectionHints(block) {
 	return paragraphs.slice(0, 3);
 }
 
-function makeDetailedSections(page) {
+function makeDetailedSections(page, doc) {
 	return (page.sectionBlocks ?? [])
 		.filter((block) => block && normalizeText(block.title))
 		.map((block) => {
@@ -462,16 +478,13 @@ function makeDetailedSections(page) {
 
 			return {
 				title,
-				paragraphs: summarizeSectionHints(block),
+				paragraphs: summarizeSectionHints(block, doc.title),
 				steps: codeBlocks.length
 					? codeBlocks.map((code, index) => {
 							const kind = inferStepKind(code);
 							return {
 								title: codeBlocks.length > 1 ? `${title} ${index + 1}` : title,
-								body:
-									block.paragraphs?.length
-										? `${kindAction(kind)}。这一节原文主要在讲：${normalizeText(block.paragraphs[0])} 下面这块属于“${kindLabel(kind)}”，关键命令、文件名和参数最好照原样保留。`
-										: `${kindAction(kind)}。这是这一节最该保住的${kindLabel(kind)}，解释可以说人话，但命令、参数和配置键不要乱改。`,
+								body: buildStepBody({ kind, pageTitle: doc.title, sectionTitle: title }),
 								code,
 								kind
 							};
@@ -833,7 +846,7 @@ function makePractice(doc, page) {
 	return base;
 }
 
-function makeSteps(page) {
+function makeSteps(page, doc) {
 	const sectionSteps = pickSectionSteps(page, 12);
 	if (sectionSteps.length) return sectionSteps;
 
@@ -845,7 +858,11 @@ function makeSteps(page) {
 	return blocks.map((code, index) => ({
 		kind: inferStepKind(code),
 		title: labels[index] ? `原页关键片段：${labels[index]}` : `原页里的关键命令/代码 ${index + 1}`,
-		body: `${kindAction(inferStepKind(code))}。这段内容是从官方页面抓下来的${kindLabel(inferStepKind(code))}，解释可以说人话，但这里的关键字、命令名、文件名和参数别随便改字。`,
+		body: buildStepBody({
+			kind: inferStepKind(code),
+			pageTitle: doc.title,
+			sectionTitle: labels[index] ?? `关键片段 ${index + 1}`
+		}),
 		code
 	}));
 }
@@ -874,9 +891,9 @@ function buildGeneratedContent(sourceData, navigationData) {
 				{
 					title: '上手时重点盯住什么',
 					paragraphs: override?.practice ?? makePractice(doc, page),
-					steps: makeSteps(page)
+					steps: makeSteps(page, doc)
 				},
-				...makeDetailedSections(page)
+				...makeDetailedSections(page, doc)
 			],
 			illustration: makeIllustration(doc.title, doc.section)
 		};

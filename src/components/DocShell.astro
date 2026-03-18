@@ -16,11 +16,11 @@ const mainSections = page.content.sections.filter((section) => !['简要总结',
 const showAdPlaceholders = !import.meta.env.PUBLIC_ADSENSE_CLIENT;
 
 function stepKindLabel(kind?: string) {
-	if (kind === 'command') return '命令';
-	if (kind === 'config') return '配置';
-	if (kind === 'prompt') return '提问示例';
-	if (kind === 'structure') return '目录结构';
-	return '代码片段';
+	if (kind === 'command') return '终端里敲';
+	if (kind === 'config') return '改配置';
+	if (kind === 'prompt') return '直接对 Claude 说';
+	if (kind === 'structure') return '目录怎么摆';
+	return '关键片段';
 }
 ---
 
