@@ -290,10 +290,28 @@ function summarizeSectionHints(block, pageTitle = '') {
 			'如果你想让子代理改文件后自动跑检查，或者在执行危险命令前先过一遍门禁，这一节就是干这个的。'
 		];
 	}
+	if (/configure subagents/.test(heading)) {
+		return [
+			'这里讲的是子代理那些开关该怎么拧。你主要看它放哪儿、认不认得出来、权限有没有给对。',
+			'别一下子把所有花样都加上，先让最小那版跑通。'
+		];
+	}
+	if (/work with subagents/.test(heading)) {
+		return [
+			'这里是在讲平时怎么把子代理真正用起来，不是光把文件写完就算。',
+			'要点就两件事：什么时候该叫它上，叫上来以后它负责哪一块。'
+		];
+	}
 	if (/understand automatic delegation/.test(heading)) {
 		return [
 			'这一节讲 Claude 什么时候会主动把活派给某个子代理。关键不只在你的提问，还在子代理描述写得够不够清楚。',
 			'如果你希望某类子代理“该出手时就出手”，描述里就得把触发场景写明白，别只写一串空话。'
+		];
+	}
+	if (/invoke subagents explicitly/.test(heading)) {
+		return [
+			'这里讲的是你手动点名叫某个子代理干活。这样做最适合你心里已经清楚“这活就该它来”。',
+			'手动点名的好处是稳，不会让 Claude 自己猜错工种。'
 		];
 	}
 	if (/run subagents in foreground or background/.test(heading)) {
@@ -310,8 +328,14 @@ function summarizeSectionHints(block, pageTitle = '') {
 	}
 	if (/manage subagent context/.test(heading)) {
 		return [
-			'这一节讲子代理的上下文怎么续上。每次新起一个子代理都是新会话，但你也可以让 Claude 继续之前那个已经干到一半的子代理。',
-			'如果某个子代理已经把现场摸熟了，优先续上它，比重新开一个新代理更省上下文。'
+			'这里讲的是上次干到一半的子代理，要不要接着用。要是它已经把情况摸熟了，继续用通常更省事。',
+			'别刚把现场讲明白，就又换一个新子代理从头听一遍。'
+		];
+	}
+	if (/choose between subagents and main conversation/.test(heading)) {
+		return [
+			'这里是在说，这件事到底该交给专门小帮工，还是就留在当前对话里慢慢做。',
+			'如果这活老是重复、边界又很清楚，就更适合单独拎个子代理。'
 		];
 	}
 	if (/example subagents/.test(heading)) {
@@ -342,6 +366,270 @@ function summarizeSectionHints(block, pageTitle = '') {
 		return [
 			'这一节讲一个很实用的样板：数据库查询代理可以放开 Bash，但要先挂校验，只允许读，不允许改。',
 			'重点不是“会查库”本身，而是先把危险动作挡在门外，确保它问库时只读不写。'
+		];
+	}
+	if (/next steps/.test(heading) && /subagent/.test(pageTitle.toLowerCase())) {
+		return [
+			'看到这里，别急着再学新花样，先做一个最简单的子代理把路走通。',
+			'能叫得出来、能按边界干活，再慢慢往里加本事。'
+		];
+	}
+	if (/when to use plugins vs standalone configuration/.test(heading)) {
+		return [
+			'这里是在帮你判断，到底该做成插件，还是在当前项目里单独配一下就够。',
+			'要是这套东西很多项目都要反复用，才更像插件；只是一时一地要用，就别急着打包。'
+		];
+	}
+	if (/quickstart/.test(heading) && /plugin/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里就是插件起步那几步，先把壳子搭起来，再让它能被 Claude 看见。',
+			'第一次别贪大，先做一个最小插件，能装上、能叫出来就算赢。'
+		];
+	}
+	if (/prerequisites/.test(heading) && /plugin/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里是在说开工前你得先备好什么，不然做到一半容易卡壳。',
+			'先把目录、工具和最基本的文件准备好，后面会顺很多。'
+		];
+	}
+	if (/create your first plugin/.test(heading)) {
+		return [
+			'这里是手把手做第一个插件。先建目录，再写最小那几个文件，让它先活过来。',
+			'别想着第一回就做成大工具箱，能跑起来最重要。'
+		];
+	}
+	if (/plugin structure overview/.test(heading)) {
+		return [
+			'这里是在认插件的骨架，哪个文件像门牌，哪个文件装规矩，哪个目录放附加能力。',
+			'先把地方认清，后面才不会把东西塞错位置。'
+		];
+	}
+	if (/develop more complex plugins/.test(heading)) {
+		return [
+			'这里开始讲插件做大以后怎么收拾，不然越塞越乱。',
+			'思路很简单：先分层，再分目录，别把所有能力糊成一坨。'
+		];
+	}
+	if (/add skills to your plugin/.test(heading)) {
+		return [
+			'这里讲怎么把 skill 装进插件里。说白了，就是把一套固定说法、固定做法打包进去。',
+			'适合那种反复要用、而且每次都想按同一路子干的活。'
+		];
+	}
+	if (/add lsp servers to your plugin/.test(heading)) {
+		return [
+			'这里讲怎么把语言服务也塞进插件。这样 Claude 看某种语言的代码时，会更懂门道。',
+			'你只要记住一件事：先配好服务怎么启动，再让文件后缀对上它。'
+		];
+	}
+	if (/ship default settings with your plugin/.test(heading)) {
+		return [
+			'这里讲怎么把默认设置一块打包带走。这样别人装上插件后，不用再手搓同一套设置。',
+			'默认值要给得稳，不要一上来就给太猛的权限。'
+		];
+	}
+	if (/organize complex plugins/.test(heading)) {
+		return [
+			'插件一大，就得开始收拾屋子。谁放哪儿、谁管哪摊，要提前分清。',
+			'不然后面加一个能力，就像往杂物堆里再扔一把铁锹。'
+		];
+	}
+	if (/test your plugins locally/.test(heading)) {
+		return [
+			'这里讲怎么先在自己机器上试插件。先本地跑通，再给别人用，最稳。',
+			'这一步就是先在自家院里试水，别一上来就往正式环境扔。'
+		];
+	}
+	if (/share your plugins/.test(heading)) {
+		return [
+			'这里讲的是插件做好以后怎么给别人用。',
+			'先想清楚你是给自己团队发，还是打算公开给更多人装，这两种路子不一样。'
+		];
+	}
+	if (/submit your plugin to the official marketplace/.test(heading)) {
+		return [
+			'这里讲怎么把插件送去官方市场。说白了，就是让别人以后能像逛摊子一样找到它。',
+			'这一步通常要把说明写清、结构收好，别把半成品端上去。'
+		];
+	}
+	if (/convert existing configurations to plugins/.test(heading)) {
+		return [
+			'这里讲怎么把你手头零散的配置，收拢成一个正式插件。',
+			'先别急着全搬，先看哪些东西真值得打包进去。'
+		];
+	}
+	if (/migration steps/.test(heading) && /plugin/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里就是迁过去的顺序。照着一小步一小步搬，最不容易漏。',
+			'先搭骨架，再往里塞原来的东西，别一下全倒进去。'
+		];
+	}
+	if (/what changes when migrating/.test(heading)) {
+		return [
+			'这里讲迁过去以后到底变了什么。你最该看的是：以后东西放哪儿、谁来读、谁来管。',
+			'这些边界弄清了，迁过去才不会手忙脚乱。'
+		];
+	}
+	if (/for plugin users/.test(heading)) {
+		return [
+			'这一段是写给装插件的人看的，重点是怎么装、怎么用、怎么确认真生效。',
+			'如果你不是开发插件的人，就主要看这段。'
+		];
+	}
+	if (/for plugin developers/.test(heading)) {
+		return [
+			'这一段是写给做插件的人看的，重点是怎么打包、怎么发、怎么让别人装得顺。',
+			'如果你准备长期维护插件，这段要多看两遍。'
+		];
+	}
+	if (/what you can do with mcp/.test(heading)) {
+		return [
+			'这里先讲 MCP 能帮你碰到什么外面的东西。接上以后，Claude 不只会看本地文件，还能去看外面的账本和工具。',
+			'你可以把它当成给帮工开了院门，让它能去外面拿材料。'
+		];
+	}
+	if (/popular mcp servers/.test(heading)) {
+		return [
+			'这里是在给你看常见现成货，别人已经接好的那些 MCP 服务都有哪些。',
+			'第一次上手，优先挑现成成熟的，不要一上来就自己造。'
+		];
+	}
+	if (/installing mcp servers/.test(heading)) {
+		return [
+			'这里讲怎么把 MCP 服务接进来。先连上，再看得到，再试着用，顺序别乱。',
+			'第一次别贪多，接一个最刚需的就够。'
+		];
+	}
+	if (/option 1: add a remote http server/.test(heading)) {
+		return [
+			'这一种是走普通网页那条路，适合对方本来就给了一个远程地址。',
+			'你把地址填对，认证做好，基本就能连。'
+		];
+	}
+	if (/option 2: add a remote sse server/.test(heading)) {
+		return [
+			'这一种也是远程接法，只是对方用的是 SSE 这种推送路子。',
+			'如果服务端写明让你用 SSE，就别拿 HTTP 那套硬套。'
+		];
+	}
+	if (/option 3: add a local stdio server/.test(heading)) {
+		return [
+			'这一种是把服务直接放在你自己机器上跑，再从本地接过去。',
+			'适合那些本来就得靠本机命令启动的工具。'
+		];
+	}
+	if (/managing your servers/.test(heading)) {
+		return [
+			'这里讲已经接上的那些服务平时怎么管。能列出来、能改、能删，才算真接稳。',
+			'别连上一次就不管了，后面出问题还得回来这里查。'
+		];
+	}
+	if (/dynamic tool updates/.test(heading)) {
+		return [
+			'这里讲的是外面那套工具变了以后，Claude 这边怎么跟着知道。',
+			'说白了，就是别让它一直拿旧工具说明干活。'
+		];
+	}
+	if (/plugin-provided mcp servers/.test(heading)) {
+		return [
+			'这里讲插件也能顺手带一个 MCP 服务进来，不用你每次再单独接一遍。',
+			'适合把一整套能力打成包一起发。'
+		];
+	}
+	if (/mcp installation scopes/.test(heading)) {
+		return [
+			'这里讲 MCP 装在哪一层。是只给当前项目用，还是你所有项目都能用，要先分清。',
+			'这一步分清了，后面就不容易出现“怎么这边改了那边也跟着变”。'
+		];
+	}
+	if (/local scope/.test(heading) && /mcp/.test(pageTitle.toLowerCase())) {
+		return [
+			'本地这一层的意思是：只管眼前这个地方，不往外带。',
+			'适合临时试验，试完不满意也好收。'
+		];
+	}
+	if (/project scope/.test(heading)) {
+		return [
+			'项目这一层的意思是：这个仓库里的人都按同一套来。',
+			'适合团队共用的连接方式。'
+		];
+	}
+	if (/user scope/.test(heading)) {
+		return [
+			'用户这一层的意思是：你这个人以后到别的项目也能接着用。',
+			'适合你自己常用、但不一定要全团队共享的东西。'
+		];
+	}
+	if (/choosing the right scope/.test(heading)) {
+		return [
+			'这里就是帮你选装在哪一层最合适。先想清楚“只这次用”还是“以后都要用”，答案就出来了。',
+			'别图省事全装到最大那层，后面不好收。'
+		];
+	}
+	if (/scope hierarchy and precedence/.test(heading)) {
+		return [
+			'这里讲的是几层规则撞到一起时，最后到底听谁的。',
+			'你可以把它理解成：村规、队规、今天临时交代，谁更大，谁压谁。'
+		];
+	}
+	if (/environment variable expansion in \.mcp\.json/.test(heading)) {
+		return [
+			'这里讲怎么在 `.mcp.json` 里借用环境变量，不把敏感东西硬写死在文件里。',
+			'像密钥、地址这类经常变的东西，这样放更稳。'
+		];
+	}
+	if (/practical examples/.test(heading) && /mcp/.test(pageTitle.toLowerCase())) {
+		return [
+			'这里开始上真例子了，就是拿几种常见活路告诉你，MCP 真接上以后能怎么用。',
+			'先挑一个和你手头最像的例子去照。'
+		];
+	}
+	if (/example: monitor errors with sentry/.test(heading)) {
+		return [
+			'这个例子是在说怎么把报错系统接进来，让 Claude 直接看线上出什么事。',
+			'适合那种你老要来回翻报错平台的场景。'
+		];
+	}
+	if (/example: connect to github for code reviews/.test(heading)) {
+		return [
+			'这个例子是在说把 GitHub 接进来，让 Claude 直接看代码审查那一摊。',
+			'这样它看变更、看评论、看 PR 会顺手很多。'
+		];
+	}
+	if (/example: query your postgresql database/.test(heading)) {
+		return [
+			'这个例子是在说怎么让 Claude 去问数据库，但前提还是先把读和写分清。',
+			'第一次最好先只读，别急着让它改库。'
+		];
+	}
+	if (/authenticate with remote mcp servers/.test(heading)) {
+		return [
+			'这里讲远程服务怎么认主。没认上，再多命令也白搭。',
+			'先把登录和授权走通，后面再谈干活。'
+		];
+	}
+	if (/use a fixed oauth callback port/.test(heading)) {
+		return [
+			'这里讲回调端口固定下来这件事。这样网络和系统规则更容易放行，不容易每次变来变去。',
+			'适合对网络规矩比较严的环境。'
+		];
+	}
+	if (/use pre-configured oauth credentials/.test(heading)) {
+		return [
+			'这里讲提前把 OAuth 那套证件准备好，不用临时一边接一边找。',
+			'提前备好，接起来会顺很多。'
+		];
+	}
+	if (/override oauth metadata discovery/.test(heading)) {
+		return [
+			'这里讲的是默认那套自动认路不灵时，你要手工告诉它该往哪儿认。',
+			'通常是环境比较特殊时才会用到。'
+		];
+	}
+	if (/add mcp servers from json configuration/.test(heading)) {
+		return [
+			'这里讲怎么直接从 JSON 配置里把一组 MCP 服务一起加进去。',
+			'适合团队想统一发一套现成配置，不想每个人手敲一遍。'
 		];
 	}
 	if (/when to use agent teams/.test(heading)) {
