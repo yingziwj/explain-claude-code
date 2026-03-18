@@ -331,8 +331,8 @@ a {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	justify-content: space-between;
-	gap: 1rem 2rem;
+	justify-content: flex-start;
+	gap: 1rem;
 	padding: 0 0 20px;
 	border-bottom: 1px solid var(--line);
 }
@@ -363,32 +363,6 @@ a {
 	line-height: 1.6;
 }
 
-.doc-topnav {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.55rem;
-}
-
-.doc-topnav a {
-	display: inline-flex;
-	align-items: center;
-	min-height: 42px;
-	padding: 0 0.95rem;
-	border-radius: 999px;
-	text-decoration: none;
-	color: var(--muted);
-	font-weight: 700;
-	transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
-}
-
-.doc-topnav a:hover,
-.doc-topnav a:focus-visible,
-.doc-topnav a.active {
-	background: rgba(107, 143, 62, 0.1);
-	color: var(--accent-strong);
-	transform: translateY(-1px);
-}
-
 .doc-grid {
 	display: grid;
 	grid-template-columns: minmax(250px, 280px) minmax(0, 1fr);
@@ -408,6 +382,19 @@ a {
 	padding-right: 0.25rem;
 }
 
+.doc-sidebar__intro {
+	background: rgba(107, 143, 62, 0.08);
+	border: 1px solid rgba(107, 143, 62, 0.14);
+	border-radius: 22px;
+	padding: 1rem;
+	color: var(--muted);
+	line-height: 1.7;
+}
+
+.doc-sidebar__intro p:last-child {
+	margin-bottom: 0;
+}
+
 .doc-sidebar__group {
 	background: var(--panel);
 	border: 1px solid var(--line);
@@ -416,9 +403,25 @@ a {
 	backdrop-filter: blur(16px);
 }
 
+.doc-sidebar__group.is-current {
+	border-color: rgba(107, 143, 62, 0.28);
+	box-shadow: inset 0 0 0 1px rgba(107, 143, 62, 0.06);
+}
+
 .doc-sidebar__group h2 {
 	margin: 0 0 0.8rem;
 	font-size: 1rem;
+}
+
+.doc-sidebar__group h2 a {
+	color: var(--text);
+	text-decoration: none;
+}
+
+.doc-sidebar__group h2 a:hover,
+.doc-sidebar__group h2 a:focus-visible,
+.doc-sidebar__group h2 a.active {
+	color: var(--accent-strong);
 }
 
 .doc-sidebar__group ul {
@@ -673,8 +676,7 @@ a {
 }
 
 .doc-home {
-	max-width: 960px;
-	margin: 24px auto 0;
+	min-width: 0;
 }
 
 @media (max-width: 1080px) {
@@ -685,6 +687,8 @@ a {
 	.doc-sidebar {
 		position: static;
 		max-height: none;
+		overflow: visible;
+		padding-right: 0;
 	}
 }
 

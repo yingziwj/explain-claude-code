@@ -33,21 +33,21 @@ function stepKindLabel(kind?: string) {
 				<p>结构照原 docs，内容改成真能照着做的人话版。</p>
 			</div>
 		</a>
-
-		<nav class="doc-topnav" aria-label="主导航">
-			{siteData.topNav.map((item) => (
-				<a href={item.href} class={item.key === currentSection?.key ? 'active' : ''}>{item.label}</a>
-			))}
-		</nav>
 	</header>
 
 	<div class="doc-grid">
 		<aside class="doc-sidebar" aria-label="侧边导航">
-			{currentSection?.sidebar.map((group) => (
-				<section class="doc-sidebar__group">
-					<h2>{group.title}</h2>
+			<div class="doc-sidebar__intro">
+				<p class="doc-eyebrow">全部目录</p>
+				<p>一级是官方栏目，下面挂的是这个栏目里的页面，顺序也照官方来。</p>
+			</div>
+			{siteData.sections.map((section) => (
+				<section class={`doc-sidebar__group ${section.key === currentSection?.key ? 'is-current' : ''}`}>
+					<h2>
+						<a href={section.href} class={section.key === currentSection?.key ? 'active' : ''}>{section.title}</a>
+					</h2>
 					<ul>
-						{group.items.map((item) => (
+						{section.items.map((item) => (
 							<li>
 								<a href={item.href} class={item.actualPath === currentPath ? 'active' : ''}>
 									{item.title}

@@ -17,48 +17,62 @@ import { siteData } from '../data/site-data';
 					<p>结构照原 docs，内容改成真能照着做的人话版。</p>
 				</div>
 			</a>
-			<nav class="doc-topnav" aria-label="主导航">
-				{siteData.topNav.map((item) => (
-					<a href={item.href}>{item.label}</a>
-				))}
-			</nav>
 		</header>
 
-		<div class="doc-home">
-			<section class="doc-panel">
-				<p class="doc-eyebrow">首页</p>
-				<h1 class="doc-home__title">把 Claude Code 官方文档翻成真正能照着做的人话版</h1>
-				<div class="doc-copy">
-					<p>这个站继续照着 Claude Code 官方 docs 的导航、顺序和侧边栏来排，但正文不再是硬翻译，也不是空洞摘要。</p>
-					<p>现在每一页都会尽量拆成：先讲清这是干什么的，再给关键命令、配置、提问示例，最后补“照着做一遍”。</p>
+		<div class="doc-grid">
+			<aside class="doc-sidebar" aria-label="全站目录">
+				<div class="doc-sidebar__intro">
+					<p class="doc-eyebrow">全部目录</p>
+					<p>左边这一棵树就是全站导航。一级是栏目，二级是栏目里的页面。</p>
 				</div>
-			</section>
+				{siteData.sections.map((section) => (
+					<section class="doc-sidebar__group">
+						<h2><a href={section.href}>{section.title}</a></h2>
+						<ul>
+							{section.items.map((item) => (
+								<li><a href={item.href}>{item.title}</a></li>
+							))}
+						</ul>
+					</section>
+				))}
+			</aside>
 
-			<section class="doc-panel">
-				<p class="doc-eyebrow">现在这站怎么读</p>
-				<div class="doc-practice-grid">
-					<div class="doc-practice-item">
-						<h2>先看总结</h2>
-						<p>先弄懂这页解决什么问题，不要一上来埋头抄命令。</p>
+			<div class="doc-home">
+				<section class="doc-panel">
+					<p class="doc-eyebrow">首页</p>
+					<h1 class="doc-home__title">把 Claude Code 官方文档翻成真正能照着做的人话版</h1>
+					<div class="doc-copy">
+						<p>这个站继续照着 Claude Code 官方 docs 的导航、顺序和页面来排，但正文不再是硬翻译，也不是空洞摘要。</p>
+						<p>现在导航已经全收进左边了。你就顺着左边那棵树点：先找大栏目，再找下面具体那页。</p>
 					</div>
-					<div class="doc-practice-item">
-						<h2>再看步骤</h2>
-						<p>命令、配置、提问示例、目录结构已经分开标出来了。</p>
-					</div>
-					<div class="doc-practice-item">
-						<h2>最后照着做</h2>
-						<p>重点页有人工版编号教程，其余页也会自动补出一套可跟做的流程。</p>
-					</div>
-				</div>
-			</section>
+				</section>
 
-			<section class="doc-panel">
-				<p class="doc-eyebrow">同步和部署</p>
-				<div class="doc-copy">
-					<p>仓库里已经有官方 docs 同步脚本、内容重生成脚本、Cloudflare Pages 部署配置和广告预留位。</p>
-					<p>原站如果新增、删除或改内容，这里可以继续重抓并覆盖本站对应页面。</p>
-				</div>
-			</section>
+				<section class="doc-panel">
+					<p class="doc-eyebrow">现在这站怎么读</p>
+					<div class="doc-practice-grid">
+						<div class="doc-practice-item">
+							<h2>先找栏目</h2>
+							<p>左边一级导航就是 Getting started、Build、Deployment 这些大栏。</p>
+						</div>
+						<div class="doc-practice-item">
+							<h2>再点具体页</h2>
+							<p>二级导航就是每个栏目下面的具体页面，顺序和官方保持一致。</p>
+						</div>
+						<div class="doc-practice-item">
+							<h2>最后照着做</h2>
+							<p>正文里会尽量把命令、配置、示例提问留住，再用人话讲明白。</p>
+						</div>
+					</div>
+				</section>
+
+				<section class="doc-panel">
+					<p class="doc-eyebrow">同步和部署</p>
+					<div class="doc-copy">
+						<p>仓库里已经有官方 docs 同步脚本、内容重生成脚本、Cloudflare Pages 部署配置和广告预留位。</p>
+						<p>原站如果新增、删除或改内容，这里可以继续重抓并覆盖本站对应页面。</p>
+					</div>
+				</section>
+			</div>
 		</div>
 	</div>
 </BaseLayout>

@@ -23,13 +23,11 @@ export type SiteData = {
 	sections: Array<{
 		key: string;
 		title: string;
-		sidebar: Array<{
+		href: string;
+		items: Array<{
+			href: string;
 			title: string;
-			items: Array<{
-				href: string;
-				title: string;
-				actualPath: string;
-			}>;
+			actualPath: string;
 		}>;
 	}>;
 	pages: SitePage[];
@@ -37,19 +35,6 @@ export type SiteData = {
 
 function sectionKey(title: string) {
 	return title.toLowerCase().replace(/\s+/g, '-');
-}
-
-function buildSidebar(section: NavSection) {
-	return [
-		{
-			title: section.title,
-			items: section.items.map((item) => ({
-				href: item.path,
-				title: item.title,
-				actualPath: item.path
-			}))
-		}
-	];
 }
 
 export const siteData: SiteData = {
@@ -62,7 +47,12 @@ export const siteData: SiteData = {
 	sections: navSections.map((section) => ({
 		key: sectionKey(section.title),
 		title: section.title,
-		sidebar: buildSidebar(section)
+		href: section.items[0]?.path ?? '/',
+		items: section.items.map((item) => ({
+			href: item.path,
+			title: item.title,
+			actualPath: item.path
+		}))
 	})),
 	pages: allDocs.map((doc) => ({
 		title: doc.title,
@@ -88,4 +78,3 @@ export function getSitePageByPath(path: string) {
 export function getPracticeSection(sections: DocSectionContent[]) {
 	return sections.find((section) => section.title === '上手时重点盯住什么');
 }
-
