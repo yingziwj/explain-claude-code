@@ -112,15 +112,35 @@ function buildStepBody({ kind, pageTitle, sectionTitle }) {
 			if (/wait for teammates to finish/.test(sectionHeading)) {
 				return '这句话是拿来踩刹车的，提醒带队的那个先别急着往前冲，等队友把手头活交回来再说。';
 			}
-			return `这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“${sectionLabel}”这一段的意思去办。`;
+			return stepStyle(sectionLabel, kind, [
+				`这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“${sectionLabel}”这一段的意思去办。`,
+				'这一步不用你自己动手配什么，把下面这句话交出去就行。',
+				'最省事的做法，就是把下面这句原样说给 Claude。',
+				'到这里其实就剩一句话，把下面这句发出去就行。'
+			]);
 		case 'command':
-			return '说到这一步就别只停在理解上了。下面这条命令照着敲，跑完再回头看结果是不是对上这一节要的东西。';
+			return stepStyle(sectionLabel, kind, [
+				'到这一步就该真动手了，下面这条命令直接敲一遍，看跑出来是不是你要的。',
+				'这里别只盯着看，先把下面命令跑一遍再说。',
+				'下面这条就是现在该敲的，先跑起来看结果。',
+				'走到这里，最实在的就是先把下面命令执行掉。'
+			]);
 		case 'config':
-			return `这一段要真正落到配置里。下面这块照着填，关键字和字段名别随手改。`;
+			return stepStyle(sectionLabel, kind, [
+				'最后还是得把这段意思写进配置里，下面这块照着填就行。',
+				'这里要动配置了，字段名和关键字按原样来最稳。',
+				'如果要把规矩固定住，下面这块就是该写进去的位置。',
+				'这一步是改配置，不是自由发挥，照着写就行。'
+			]);
 		case 'structure':
 			return '这一段主要是认目录和文件摆放位置。先把地方放对，后面才不容易串。';
 		default:
-			return `下面这块是“${sectionLabel}”里最要紧的原始片段。先看懂它在这一段里是干什么的，再决定要不要照着搬。`;
+			return stepStyle(sectionLabel, kind, [
+				`下面这块是“${sectionLabel}”里最要紧的原始片段，先看它在这段里负责什么。`,
+				'这一段真正值钱的原文片段就在下面，先对着看一眼最稳。',
+				'下面这块可以当成这一段的原始样板，先看原文，再回头看解释。',
+				'如果这一段只保留一小块原文，通常就是下面这块。'
+			]);
 	}
 }
 
@@ -128,6 +148,14 @@ function chooseVariant(key, variants) {
 	const source = String(key || '');
 	const hash = Array.from(source).reduce((sum, char) => sum + char.charCodeAt(0), 0);
 	return variants[hash % variants.length];
+}
+
+function sectionStyle(title, variants) {
+	return chooseVariant(`section:${title}`, variants);
+}
+
+function stepStyle(title, kind, variants) {
+	return chooseVariant(`step:${kind}:${title}`, variants);
 }
 
 function pickSectionSteps(page, count) {
@@ -228,16 +256,23 @@ function summarizeSectionHints(block, pageTitle = '') {
 			return;
 		}
 		if (/^the |^this /i.test(firstHint)) {
-			paragraphs.push(`这一段不是单纯报个标题名，而是在交代“${title}”到底管哪一摊、会影响到哪一摊。`);
+			paragraphs.push(
+				sectionStyle(title, [
+					`这一段不只是挂个标题，它是在说明“${title}”这一块到底负责什么。`,
+					`这里主要是在交代“${title}”这一块会碰到哪些事。`,
+					`别把这段只当成标题看，它其实是在给“${title}”划边界。`,
+					`这段看着像个标题，其实是在说“${title}”管到哪儿。`
+				])
+			);
 			return;
 		}
 
 		paragraphs.push(
-			chooseVariant(title, [
-				`这一块主要是在讲“${title}”到了手上该怎么使，哪里最容易踩坑。`,
-				`说白了，这里不是让你背“${title}”这个名词，而是讲它真干活时怎么用。`,
-				`读到这里，就把“${title}”当成一件要上手的活看：先搞清怎么用，再留心别踩坑。`,
-				`这一段主要是在掰开讲“${title}”怎么落地，不是挂个标题给你看看就完。`
+			sectionStyle(title, [
+				`这一块主要是在说“${title}”真到手上该怎么用，哪里最容易踩坑。`,
+				`这里不是让你背“${title}”这个词，而是让你看它真干活时怎么使。`,
+				`看到这里，就把“${title}”当成一件真要上手的活来看。`,
+				`这一段主要是在把“${title}”讲实，不是只摆个标题给你看。`
 			])
 		);
 	}
@@ -1822,35 +1857,95 @@ function summarizeSectionHints(block, pageTitle = '') {
 	}
 
 	if (/^when to use /.test(heading)) {
-		paragraphs.push(`这里是在回答一个很实际的问题：${title} 到底什么时候值得上。重点不是会不会开，而是值不值。`);
+		paragraphs.push(sectionStyle(title, [
+			`${title} 到底什么时候值得上，这一段就是在算这笔账。`,
+			`这一段主要是在帮你判断：${title} 这种东西到底值不值得现在就上。`,
+			`这里不是催你全用上，而是在说 ${title} 什么时候用才划算。`
+		]));
 	} else if (/^compare /.test(heading)) {
-		paragraphs.push(`这里是在帮你做对比。像 ${title} 这种标题，通常就是怕你把两个看着差不多的东西混着用。`);
+		paragraphs.push(sectionStyle(title, [
+			`像 ${title} 这种标题，通常就是怕你把两个看着差不多的东西混着用。`,
+			`这一段是在拆开比较，免得你把差不多的两样东西用混。`,
+			`这里就是把两条像样的路摆一块，让你别走岔。`
+		]));
 	} else if (/^choose /.test(heading)) {
-		paragraphs.push(`这里是在帮你做选择题，不是只告诉你“有这个选项”。先看取舍，再决定怎么选。`);
+		paragraphs.push(sectionStyle(title, [
+			'这里是在帮你做选择题，不是只告诉你“有这个选项”。先看取舍，再决定怎么选。',
+			'这段主要是让你挑，不是让你全要。',
+			'看这段时就盯一个事：到底该选哪条更合适。'
+		]));
 	} else if (/^size /.test(heading)) {
-		paragraphs.push('这里讲的是“别切得太碎，也别一坨太大”。大小卡准了，分工和收尾才顺。');
+		paragraphs.push(sectionStyle(title, [
+			'这里讲的是“别切得太碎，也别一坨太大”。大小卡准了，分工和收尾才顺。',
+			'这一段主要是在拿捏大小，太大太小都不好使。',
+			'这里讲怎么把活分得刚刚好，不多不少。'
+		]));
 	} else if (/^wait /.test(heading)) {
-		paragraphs.push('这里是在提醒你先别急着往前冲。该等人的时候就等，别自己抢活。');
+		paragraphs.push(sectionStyle(title, [
+			'这里是在提醒你先别急着往前冲。该等人的时候就等，别自己抢活。',
+			'这段就是踩刹车用的，不是让你硬往前顶。',
+			'看见这种标题，先记住一句：该等就等。'
+		]));
 	} else if (/^set up |^setup /.test(heading)) {
-		paragraphs.push('这里是上手准备活，通常会告诉你前提条件、落地点和最稳的起步顺序。');
+		paragraphs.push(sectionStyle(title, [
+			'这里是上手准备活，通常会告诉你前提条件、落地点和最稳的起步顺序。',
+			'这段就是开工前的准备清单，先把地基打好。',
+			'看到这里，就当是在做开工前那套准备。'
+		]));
 	} else if (/^install |^update |^uninstall /.test(heading)) {
-		paragraphs.push('这里属于实操步骤，重点是照着顺序做，不要自己脑补省略中间步骤。');
+		paragraphs.push(sectionStyle(title, [
+			'这里属于实操步骤，重点是照着顺序做，不要自己脑补省略中间步骤。',
+			'这段就是手把手操作，照顺序来最稳。',
+			'看到这儿别跳步，按它给的顺序往下走。'
+		]));
 	} else if (/^verify |^authenticate /.test(heading)) {
-		paragraphs.push('这里讲的是“别只装完就算了”，而是要确认它真能用、真认主、真跑通。');
+		paragraphs.push(sectionStyle(title, [
+			'这里讲的是“别只装完就算了”，而是要确认它真能用、真认主、真跑通。',
+			'这一段就是验收，看它到底有没有真的通。',
+			'这里不只是看看热闹，是要确认它真活了。'
+		]));
 	} else if (/^configure |^enable |^disable /.test(heading)) {
-		paragraphs.push('这里讲怎么把某个开关拧对。重点不是概念，而是你该在哪儿改、改完怎么确认生效。');
+		paragraphs.push(sectionStyle(title, [
+			'这里讲怎么把某个开关拧对。重点不是概念，而是你该在哪儿改、改完怎么确认生效。',
+			'这一段主要是在拧开关，地方和顺序都别搞错。',
+			'看到这类标题，就当是在调一个具体开关。'
+		]));
 	} else if (/^how .* works$|^how .* start/.test(heading)) {
-		paragraphs.push('这里讲底层是怎么运转的。你把它看明白，后面遇到异常时就知道该往哪儿查。');
+		paragraphs.push(sectionStyle(title, [
+			'这里讲底层是怎么运转的。你把它看明白，后面遇到异常时就知道该往哪儿查。',
+			'这一段是在讲它背后怎么转，不是立刻让你去按按钮。',
+			'看懂这里，后面出怪事时你心里会更有底。'
+		]));
 	} else if (/^manage |^control /.test(heading)) {
-		paragraphs.push('这里讲的是收放和管理，不只是“能不能用”，而是“怎么管住、怎么不乱”。');
+		paragraphs.push(sectionStyle(title, [
+			'这里讲的是收放和管理，不只是“能不能用”，而是“怎么管住、怎么不乱”。',
+			'这段主要是在说平时怎么管，不是光教你怎么开。',
+			'看到这类标题，就把它当成日常管摊子的规矩。'
+		]));
 	} else if (/^example |^examples /.test(heading)) {
-		paragraphs.push('这里是样板段。重点不是全文照抄，而是学它怎么把职责、步骤和边界写清楚。');
+		paragraphs.push(sectionStyle(title, [
+			'这里是样板段。重点不是全文照抄，而是学它怎么把职责、步骤和边界写清楚。',
+			'这一段主要是拿例子给你看路数，不是让你一字不差照搬。',
+			'看到例子时，先学它的架子，再决定怎么照你自己情况改。'
+		]));
 	} else if (/reference|schema|fields|actions|syntax/.test(heading)) {
-		paragraphs.push('这里更像查表说明书，字段、格式和规则都要照准，不适合靠猜。');
+		paragraphs.push(sectionStyle(title, [
+			'这里更像查表说明书，字段、格式和规则都要照准，不适合靠猜。',
+			'这一段就是查表用的，别靠感觉写。',
+			'看见这种标题，就按说明书心态来，照准最重要。'
+		]));
 	} else if (/troubleshoot|debug|issue/.test(heading)) {
-		paragraphs.push('这里偏排错，最好按它给的顺序一项项排，不要一上来大拆大改。');
+		paragraphs.push(sectionStyle(title, [
+			'这里偏排错，最好按它给的顺序一项项排，不要一上来大拆大改。',
+			'这一段就是排错用的，先查清，再下手。',
+			'遇到这种标题，先把错一项项排出来，别急着乱改。'
+		]));
 	} else if (/best practices|common patterns/.test(heading)) {
-		paragraphs.push('这里给的是老手常用套路。不是硬规矩，但照着做通常会少走很多弯路。');
+		paragraphs.push(sectionStyle(title, [
+			'这里给的是老手常用套路。不是硬规矩，但照着做通常会少走很多弯路。',
+			'这段算经验活，听劝通常能省事。',
+			'看到这里，就当是前人踩完坑留下来的顺手做法。'
+		]));
 	} else {
 		pushHintDrivenFallback();
 	}
