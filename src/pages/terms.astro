@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="使用条款 | 通俗版 Claude Code 文档"
+	description="说明使用本站的基本条款和免责声明。"
+	canonical={new URL('/terms', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">使用条款</p>
+				<h1 class="doc-home__title">使用条款和免责声明</h1>
+				<div class="doc-copy">
+					<p>欢迎来到通俗版 Claude Code 文档。使用本站即表示你同意以下条款。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">本站内容</p>
+				<div class="doc-copy">
+					<p>本站内容基于 Claude Code 官方文档整理，但用更通俗的语言重新解释。内容仅供学习参考，不构成专业建议。</p>
+					<p>我们尽力保证内容准确，但不保证完全正确。使用本站内容产生的任何后果，由使用者自行承担。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">知识产权</p>
+				<div class="doc-copy">
+					<p>Claude Code 是 Anthropic 公司的商标。本站与 Anthropic 无关，只是第三方学习资源。</p>
+					<p>本站原创内容的版权归作者所有。如需转载，请注明出处。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">广告披露</p>
+				<div class="doc-copy">
+					<p>本站可能接入 Google AdSense 等广告联盟。广告内容不代表本站观点。</p>
+					<p>我们不对广告内容的准确性或可靠性负责。点击广告前请自行判断。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">外部链接</p>
+				<div class="doc-copy">
+					<p>本站可能包含指向第三方网站的链接。这些网站由各自运营者管理，我们不承担责任。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">条款修改</p>
+				<div class="doc-copy">
+					<p>我们可能随时更新这些条款。修改后的条款自发布之日起生效。</p>
+					<p>如有重大变更，会在首页发布通知。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">联系方式</p>
+				<div class="doc-copy">
+					<p>如有任何问题，请通过 GitHub 仓库提交 Issue。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>
