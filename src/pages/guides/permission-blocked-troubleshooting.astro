@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="Claude Code 被权限卡住时怎么判断 | 通俗版 Claude Code 文档"
+	description="把权限拦截拆成读、写、执行三类，先判断拦的是哪一道门。"
+	canonical={new URL('/guides/permission-blocked-troubleshooting', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原创问题页</p>
+				<h1 class="doc-home__title">Claude Code 被权限卡住时怎么判断</h1>
+				<div class="doc-copy">
+					<p>权限问题最烦的不是错，而是看起来都像“它不让我干”。其实读不了、写不了、执行不了，是三种完全不同的拦法。</p>
+				</div>
+			</section>
+			<section class="doc-panel"><p class="doc-eyebrow">先分清是哪一类</p><div class="doc-copy"><p>先看它到底是看不到文件、改不了文件，还是命令跑不出去。别把三种问题搅成一锅。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">再决定补哪一口权限</p><div class="doc-copy"><p>如果只是差一小步，就只补那一小步，不要因为一次拦截就整套放开。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">最后回头收权限</p><div class="doc-copy"><p>临时放开的权限，用完最好再收回来。权限管理不是一次动作，是来回调的活。</p></div></section>
+		</div>
+	</div>
+</BaseLayout>

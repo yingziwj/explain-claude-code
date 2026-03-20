@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="Claude Code 登录失败时怎么排 | 通俗版 Claude Code 文档"
+	description="把登录失败常见原因按顺序排开：账号、凭证、环境、第三方平台。"
+	canonical={new URL('/guides/login-troubleshooting', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原创问题页</p>
+				<h1 class="doc-home__title">Claude Code 登录失败时怎么排</h1>
+				<div class="doc-copy">
+					<p>登录失败很容易让人误以为是工具坏了。其实很多时候，是账号状态、认证方式、网络环境三样里有一样没对上。</p>
+				</div>
+			</section>
+			<section class="doc-panel"><p class="doc-eyebrow">先看账号和权限</p><div class="doc-copy"><p>先确认你现在用的到底是哪种账号、有没有对应权限、是不是在正确的平台和入口登录。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">再看认证方式</p><div class="doc-copy"><p>Claude 直登、第三方云平台、企业托管，这几种不是一回事。你要先分清自己走的是哪条路。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">最后看网络和本机环境</p><div class="doc-copy"><p>公司网络、代理、浏览器跳转失败、本机凭证缓存，都可能把登录流程卡住。到这一步再查这些，才不乱。</p></div></section>
+		</div>
+	</div>
+</BaseLayout>

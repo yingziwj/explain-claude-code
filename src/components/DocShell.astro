@@ -14,6 +14,38 @@ const explainSection = page.content.sections.find((section) => section.title ===
 const practiceSection = page.content.sections.find((section) => section.title === '上手时重点盯住什么');
 const mainSections = page.content.sections.filter((section) => !['简要总结', '农民伯伯版解释', '上手时重点盯住什么'].includes(section.title));
 const showAdPlaceholders = !import.meta.env.PUBLIC_ADSENSE_CLIENT;
+const relatedGuideMap: Record<string, Array<{ href: string; title: string; summary: string }>> = {
+	setup: [
+		{ href: '/guides/first-day-checklist', title: '第一天上手清单', summary: '适合刚装好还不知道先做哪三步的人。' },
+		{ href: '/guides/installation-by-platform', title: '安装对照版', summary: '把 Windows、macOS、Linux 的常见差别放到一页里看。' },
+		{ href: '/guides/common-errors-checklist', title: '常见报错排查清单', summary: '装完跑不起来时，先按这页的顺序排。' }
+	],
+	authentication: [
+		{ href: '/guides/common-errors-checklist', title: '常见报错排查清单', summary: '登录、凭证、环境问题先从这页查起。' },
+		{ href: '/guides/first-day-checklist', title: '第一天上手清单', summary: '适合还在搭第一轮起手动作的人。' }
+	],
+	permissions: [
+		{ href: '/guides/permission-boundaries', title: '权限边界怎么拿捏', summary: '专门讲权限到底该开到哪，不走极端。' },
+		{ href: '/guides/common-errors-checklist', title: '常见报错排查清单', summary: '权限拦路时，先搞清到底是哪种拦法。' }
+	],
+	mcp: [
+		{ href: '/guides/choose-subagents-plugins-mcp', title: 'Sub-agents、Plugins、MCP 怎么选', summary: '先分清 MCP 到底是接外线还是加功能。' },
+		{ href: '/guides/mcp-connection-troubleshooting', title: 'MCP 连不上时先查什么', summary: '专门给 MCP 连接失败用的排错清单。' }
+	],
+	plugins: [
+		{ href: '/guides/choose-subagents-plugins-mcp', title: 'Sub-agents、Plugins、MCP 怎么选', summary: '先分清插件到底值不值得上。' },
+		{ href: '/guides/common-errors-checklist', title: '常见报错排查清单', summary: '插件一装就出事时，先别乱拆环境。' }
+	],
+	'sub-agents': [
+		{ href: '/guides/choose-subagents-plugins-mcp', title: 'Sub-agents、Plugins、MCP 怎么选', summary: '先分清 sub-agents 是拿来分工，不是拿来堆花活。' },
+		{ href: '/guides/team-rollout-playbook', title: '小团队落地手册', summary: '想在团队里用多人协作前，先看这页。' }
+	],
+	'agent-teams': [
+		{ href: '/guides/team-rollout-playbook', title: '小团队落地手册', summary: '团队真要落地，先用这页的试点打法。' },
+		{ href: '/guides/permission-boundaries', title: '权限边界怎么拿捏', summary: '多人协作时，权限更不能一把全开。' }
+	]
+};
+const relatedGuides = relatedGuideMap[page.slug] ?? [];
 
 function stepKindLabel(kind?: string) {
 	if (kind === 'command') return '终端里敲';
@@ -145,6 +177,20 @@ function stepKindLabel(kind?: string) {
 						<p>人话解释会尽量顺着原页往下讲，但命令、参数名、配置名这些硬东西还是保留原样，免得你抄过去跑不起来。</p>
 					</div>
 				</section>
+
+				{relatedGuides.length ? (
+					<section class="doc-panel">
+						<p class="doc-eyebrow">顺手再看</p>
+						<div class="doc-practice-grid">
+							{relatedGuides.map((guide) => (
+								<div class="doc-practice-item">
+									<h2><a href={guide.href}>{guide.title}</a></h2>
+									<p>{guide.summary}</p>
+								</div>
+							))}
+						</div>
+					</section>
+				) : null}
 
 				{showAdPlaceholders ? (
 					<section class="doc-ad-placeholder doc-ad-placeholder--footer">

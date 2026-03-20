@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="MCP 连不上时先查什么 | 通俗版 Claude Code 文档"
+	description="把 MCP 连接失败时最常见的几类问题拆开：服务本身、配置位置、认证、网络。"
+	canonical={new URL('/guides/mcp-connection-troubleshooting', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原创问题页</p>
+				<h1 class="doc-home__title">MCP 连不上时先查什么</h1>
+				<div class="doc-copy">
+					<p>MCP 这东西一旦连不上，很多人会觉得它特别玄。其实大多数时候还是那几类老问题：服务没起、配置挂错层、认证没通、网络被拦。</p>
+				</div>
+			</section>
+			<section class="doc-panel"><p class="doc-eyebrow">先看服务是不是活着</p><div class="doc-copy"><p>先确认 MCP 服务自己是不是能正常起。服务本身都没活，后面所有配置都白搭。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">再看配在哪一层</p><div class="doc-copy"><p>MCP 很容易配错位置。你得先搞清这是全局、项目、插件还是子代理自己的配置，不然明明写了也不生效。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">再看认证和网络</p><div class="doc-copy"><p>如果服务活着、配置也像对的，那就去查认证和网络。很多“连不上”其实不是 Claude Code 的锅，而是那头不给过。</p></div></section>
+		</div>
+	</div>
+</BaseLayout>

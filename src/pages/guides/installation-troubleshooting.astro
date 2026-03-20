@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="Claude Code 安装失败时先查什么 | 通俗版 Claude Code 文档"
+	description="把安装失败时最常见的几类原因按顺序拆开讲，减少一上来乱改环境的情况。"
+	canonical={new URL('/guides/installation-troubleshooting', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原创问题页</p>
+				<h1 class="doc-home__title">Claude Code 安装失败时先查什么</h1>
+				<div class="doc-copy">
+					<p>安装失败最怕两种做法：一种是啥都不看就重装三遍，另一种是一激动就把整套环境全改了。都不划算。</p>
+				</div>
+			</section>
+			<section class="doc-panel"><p class="doc-eyebrow">先查系统和终端</p><div class="doc-copy"><p>先确认系统版本和你用的终端是不是官方步骤针对的那个环境。很多“照着做了也不行”，根子都在环境不一致。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">再查 PATH 和命令可见性</p><div class="doc-copy"><p>安装完命令找不到，通常不是装没装，而是终端还没认到命令位置。先重开终端，再看 PATH。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">最后才查更深的环境问题</p><div class="doc-copy"><p>像代理、权限、公司网络、容器环境这些，放到后面查。别一上来就怀疑最复杂的原因。</p></div></section>
+		</div>
+	</div>
+</BaseLayout>
