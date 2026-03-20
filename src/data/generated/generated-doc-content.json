@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-19T04:31:50.182Z",
-  "sourceGeneratedAt": "2026-03-19T04:31:49.931Z",
+  "generatedAt": "2026-03-20T04:22:27.312Z",
+  "sourceGeneratedAt": "2026-03-20T04:22:27.036Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -515,7 +515,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把“Changelog”理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.79、2.1.78、2.1.77、2.1.76 这些环节往下讲。",
+            "原文这页大多会按 2.1.80、2.1.79、2.1.78、2.1.77 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -524,7 +524,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.79 -> 2.1.78 -> 2.1.77 -> 2.1.76。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.80 -> 2.1.79 -> 2.1.78 -> 2.1.77。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -3394,9 +3394,10 @@
           ]
         },
         {
-          "title": "Fix common issues",
+          "title": "The built-in IDE MCP server",
           "paragraphs": [
-            "遇到这种内容，别急着大拆大改，先按它给的路子把问题缩小。"
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         }
       ],
@@ -4276,7 +4277,7 @@
           "Create custom subagents",
           "   |",
           "   v",
-          "这是 Build with Claude Code 里的一摊要紧活",
+          "这是 Agents 里的一摊要紧活",
           "   |",
           "   v",
           "先弄懂，再下手"
@@ -4700,7 +4701,7 @@
           "Run agent teams",
           "   |",
           "   v",
-          "这是 Build with Claude Code 里的一摊要紧活",
+          "这是 Agents 里的一摊要紧活",
           "   |",
           "   v",
           "先弄懂，再下手"
@@ -4708,361 +4709,651 @@
         "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
       }
     },
-    "plugins": {
-      "sourceLabel": "Create plugins",
+    "mcp": {
+      "sourceLabel": "Connect Claude Code to tools via MCP",
       "sections": [
         {
           "title": "简要总结",
           "paragraphs": [
-            "这页讲怎么做自己的插件，把技能、代理、hooks、MCP 这些打成包。",
-            "做出来以后，别的项目和别人装上就能直接用。"
+            "这页讲 MCP，也就是怎么把 Claude Code 接到外部工具和数据源上。",
+            "说白了，就是给帮工装外接设备，让它别只盯着眼前这堆文件。"
           ]
         },
         {
           "title": "农民伯伯版解释",
           "paragraphs": [
-            "插件像打包好的工具箱，不用每换一块地就重新配一遍。",
-            "这一页会讲什么时候该做插件、什么时候只做独立配置就够、以及第一个插件怎么起步。",
-            "如果你们团队总在重复配同一套东西，这页很值。"
+            "你可以把 MCP 想成拖拉机后面的挂载口。接上去以后，Claude 才能碰到数据库、接口、知识库、内部工具这些外面的家伙事。",
+            "这页最值钱的地方，不是名词本身，而是它会告诉你有哪些接法、哪些现成服务器、该怎么装。",
+            "如果你想让 Claude 真正懂你们团队外面的系统，这页几乎绕不过去。"
           ]
         },
         {
           "title": "上手时重点盯住什么",
           "paragraphs": [
-            "先确定你打包的是一类稳定能力，而不是一堆临时想法。",
-            "从最小插件结构做起，先让它能装、能跑，再慢慢加复杂内容。",
-            "技能、hooks、代理、MCP 往里放时，先想好谁是核心，不要把插件做成杂货铺。"
+            "第一次上 MCP，先挑一个最刚需的外部工具接，不要一口气连十几个。",
+            "远程 HTTP、SSE、本地 stdio 这些接法分清楚，再决定走哪条。",
+            "接好后先做只读类试验，确认它看得懂、用得稳，再考虑更重的操作。"
           ],
           "steps": [
             {
-              "title": "原页关键片段：Create your first plugin 1",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "mkdir my-first-plugin",
+              "title": "原页关键片段：Option 1: Add a remote HTTP server",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "# Basic syntax\nclaude mcp add --transport http <name> <url>\n\n# Real example: Connect to Notion\nclaude mcp add --transport http notion https://mcp.notion.com/mcp\n\n# Example with Bearer token\nclaude mcp add --transport http secure-api https://api.example.com/mcp \\\n  --header \"Authorization: Bearer your-token\"",
               "kind": "command"
             },
             {
-              "title": "原页关键片段：Create your first plugin 2",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "mkdir my-first-plugin/.claude-plugin",
+              "title": "原页关键片段：Option 2: Add a remote SSE server",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "# Basic syntax\nclaude mcp add --transport sse <name> <url>\n\n# Real example: Connect to Asana\nclaude mcp add --transport sse asana https://mcp.asana.com/sse\n\n# Example with authentication header\nclaude mcp add --transport sse private-api https://api.company.com/sse \\\n  --header \"X-API-Key: your-key-here\"",
               "kind": "command"
             },
             {
-              "title": "原页关键片段：Create your first plugin 3",
-              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n\"name\": \"my-first-plugin\",\n\"description\": \"A greeting plugin to learn the basics\",\n\"version\": \"1.0.0\",\n\"author\": {\n\"name\": \"Your Name\"\n}\n}",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Create your first plugin 4",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "mkdir -p my-first-plugin/skills/hello",
+              "title": "原页关键片段：Option 3: Add a local stdio server",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "# Basic syntax\nclaude mcp add [options] <name> -- <command> [args...]\n\n# Real example: Add Airtable server\nclaude mcp add --transport stdio --env AIRTABLE_API_KEY=YOUR_KEY airtable \\\n  -- npx -y airtable-mcp-server",
               "kind": "command"
             },
             {
-              "title": "原页关键片段：Create your first plugin 5",
-              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "---\ndescription: Greet the user with a friendly message\ndisable-model-invocation: true\n---\n\nGreet the user warmly and ask how you can help them today.",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Create your first plugin 6",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "claude --plugin-dir ./my-first-plugin",
+              "title": "原页关键片段：Managing your servers",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "# List all configured servers\nclaude mcp list\n\n# Get details for a specific server\nclaude mcp get github\n\n# Remove a server\nclaude mcp remove github\n\n# (within Claude Code) Check server status\n/mcp",
               "kind": "command"
             },
             {
-              "title": "原页关键片段：Add Skills to your plugin 1",
-              "body": "这一段主要是认目录和文件摆放位置。先把地方放对，后面才不容易串。",
-              "code": "my-plugin/\n├── .claude-plugin/\n│   └── plugin.json\n└── skills/\n    └── code-review/\n        └── SKILL.md",
-              "kind": "structure"
+              "title": "原页关键片段：Push messages with channels",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "# This creates command=\"cmd\" which Windows can execute\nclaude mcp add --transport stdio my-server -- cmd /c npx -y @some/package",
+              "kind": "command"
             },
             {
-              "title": "原页关键片段：Add Skills to your plugin 2",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "---\nname: code-review\ndescription: Reviews code for best practices and potential issues. Use when reviewing code, checking PRs, or analyzing code quality.\n---\n\nWhen reviewing code, check for:\n1. Code organization and structure\n2. Error handling\n3. Security concerns\n4. Test coverage",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Add LSP servers to your plugin",
+              "title": "原页关键片段：Plugin-provided MCP servers 1",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"go\": {\n    \"command\": \"gopls\",\n    \"args\": [\"serve\"],\n    \"extensionToLanguage\": {\n      \".go\": \"go\"\n    }\n  }\n}",
+              "code": "{\n  \"database-tools\": {\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n    \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/config.json\"],\n    \"env\": {\n      \"DB_URL\": \"${DB_URL}\"\n    }\n  }\n}",
               "kind": "config"
             },
             {
-              "title": "原页关键片段：Ship default settings with your plugin",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"agent\": \"security-reviewer\"\n}",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Test your plugins locally 1",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude --plugin-dir ./my-plugin",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：Test your plugins locally 2",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "When to use plugins vs standalone configuration",
-          "paragraphs": [
-            "这里是在帮你判断，到底该做成插件，还是在当前项目里单独配一下就够。",
-            "要是这套东西很多项目都要反复用，才更像插件；只是一时一地要用，就别急着打包。"
-          ]
-        },
-        {
-          "title": "Quickstart",
-          "paragraphs": [
-            "这里就是插件起步那几步，先把壳子搭起来，再让它能被 Claude 看见。",
-            "第一次别贪大，先做一个最小插件，能装上、能叫出来就算赢。"
-          ]
-        },
-        {
-          "title": "Prerequisites",
-          "paragraphs": [
-            "这里是在说开工前你得先备好什么，不然做到一半容易卡壳。",
-            "先把目录、工具和最基本的文件准备好，后面会顺很多。"
-          ]
-        },
-        {
-          "title": "Create your first plugin",
-          "paragraphs": [
-            "这里是手把手做第一个插件。先建目录，再写最小那几个文件，让它先活过来。",
-            "别想着第一回就做成大工具箱，能跑起来最重要。"
-          ],
-          "steps": [
-            {
-              "title": "Create your first plugin 1",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "mkdir my-first-plugin",
-              "kind": "command"
-            },
-            {
-              "title": "Create your first plugin 2",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "mkdir my-first-plugin/.claude-plugin",
-              "kind": "command"
-            },
-            {
-              "title": "Create your first plugin 3",
-              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n\"name\": \"my-first-plugin\",\n\"description\": \"A greeting plugin to learn the basics\",\n\"version\": \"1.0.0\",\n\"author\": {\n\"name\": \"Your Name\"\n}\n}",
-              "kind": "config"
-            },
-            {
-              "title": "Create your first plugin 4",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "mkdir -p my-first-plugin/skills/hello",
-              "kind": "command"
-            },
-            {
-              "title": "Create your first plugin 5",
-              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "---\ndescription: Greet the user with a friendly message\ndisable-model-invocation: true\n---\n\nGreet the user warmly and ask how you can help them today.",
-              "kind": "config"
-            },
-            {
-              "title": "Create your first plugin 6",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "claude --plugin-dir ./my-first-plugin",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Plugin structure overview",
-          "paragraphs": [
-            "这里是在认插件的骨架，哪个文件像门牌，哪个文件装规矩，哪个目录放附加能力。",
-            "先把地方认清，后面才不会把东西塞错位置。"
-          ]
-        },
-        {
-          "title": "Develop more complex plugins",
-          "paragraphs": [
-            "这里开始讲插件做大以后怎么收拾，不然越塞越乱。",
-            "思路很简单：先分层，再分目录，别把所有能力糊成一坨。"
-          ]
-        },
-        {
-          "title": "Add Skills to your plugin",
-          "paragraphs": [
-            "这里讲怎么把 skill 装进插件里。说白了，就是把一套固定说法、固定做法打包进去。",
-            "适合那种反复要用、而且每次都想按同一路子干的活。"
-          ],
-          "steps": [
-            {
-              "title": "Add Skills to your plugin 1",
-              "body": "这一段主要是认目录和文件摆放位置。先把地方放对，后面才不容易串。",
-              "code": "my-plugin/\n├── .claude-plugin/\n│   └── plugin.json\n└── skills/\n    └── code-review/\n        └── SKILL.md",
-              "kind": "structure"
-            },
-            {
-              "title": "Add Skills to your plugin 2",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "---\nname: code-review\ndescription: Reviews code for best practices and potential issues. Use when reviewing code, checking PRs, or analyzing code quality.\n---\n\nWhen reviewing code, check for:\n1. Code organization and structure\n2. Error handling\n3. Security concerns\n4. Test coverage",
-              "kind": "config"
-            }
-          ]
-        },
-        {
-          "title": "Add LSP servers to your plugin",
-          "paragraphs": [
-            "这里讲怎么把语言服务也塞进插件。这样 Claude 看某种语言的代码时，会更懂门道。",
-            "你只要记住一件事：先配好服务怎么启动，再让文件后缀对上它。"
-          ],
-          "steps": [
-            {
-              "title": "Add LSP servers to your plugin",
+              "title": "原页关键片段：Plugin-provided MCP servers 2",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"go\": {\n    \"command\": \"gopls\",\n    \"args\": [\"serve\"],\n    \"extensionToLanguage\": {\n      \".go\": \"go\"\n    }\n  }\n}",
+              "code": "{\n  \"name\": \"my-plugin\",\n  \"mcpServers\": {\n    \"plugin-api\": {\n      \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/api-server\",\n      \"args\": [\"--port\", \"8080\"]\n    }\n  }\n}",
               "kind": "config"
-            }
-          ]
-        },
-        {
-          "title": "Ship default settings with your plugin",
-          "paragraphs": [
-            "这里讲怎么把默认设置一块打包带走。这样别人装上插件后，不用再手搓同一套设置。",
-            "默认值要给得稳，不要一上来就给太猛的权限。"
-          ],
-          "steps": [
+            },
             {
-              "title": "Ship default settings with your plugin",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"agent\": \"security-reviewer\"\n}",
-              "kind": "config"
-            }
-          ]
-        },
-        {
-          "title": "Organize complex plugins",
-          "paragraphs": [
-            "插件一大，就得开始收拾屋子。谁放哪儿、谁管哪摊，要提前分清。",
-            "不然后面加一个能力，就像往杂物堆里再扔一把铁锹。"
-          ]
-        },
-        {
-          "title": "Test your plugins locally",
-          "paragraphs": [
-            "这里讲怎么先在自己机器上试插件。先本地跑通，再给别人用，最稳。",
-            "这一步就是先在自家院里试水，别一上来就往正式环境扔。"
-          ],
-          "steps": [
+              "title": "原页关键片段：Plugin-provided MCP servers 3",
+              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
+              "code": "# Within Claude Code, see all MCP servers including plugin ones\n/mcp",
+              "kind": "prompt"
+            },
             {
-              "title": "Test your plugins locally 1",
+              "title": "原页关键片段：Local scope",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude --plugin-dir ./my-plugin",
+              "code": "# Add a local-scoped server (default)\nclaude mcp add --transport http stripe https://mcp.stripe.com\n\n# Explicitly specify local scope\nclaude mcp add --transport http stripe --scope local https://mcp.stripe.com",
               "kind": "command"
             },
             {
-              "title": "Test your plugins locally 2",
+              "title": "原页关键片段：Project scope 1",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Debug plugin issues",
-          "paragraphs": [
-            "遇到这种内容，别急着大拆大改，先按它给的路子把问题缩小。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ]
-        },
-        {
-          "title": "Share your plugins",
-          "paragraphs": [
-            "这里讲的是插件做好以后怎么给别人用。",
-            "先想清楚你是给自己团队发，还是打算公开给更多人装，这两种路子不一样。"
-          ]
-        },
-        {
-          "title": "Submit your plugin to the official marketplace",
-          "paragraphs": [
-            "这里讲怎么把插件送去官方市场。说白了，就是让别人以后能像逛摊子一样找到它。",
-            "这一步通常要把说明写清、结构收好，别把半成品端上去。"
-          ]
-        },
-        {
-          "title": "Convert existing configurations to plugins",
-          "paragraphs": [
-            "这里讲怎么把你手头零散的配置，收拢成一个正式插件。",
-            "先别急着全搬，先看哪些东西真值得打包进去。"
-          ]
-        },
-        {
-          "title": "Migration steps",
-          "paragraphs": [
-            "这里就是迁过去的顺序。照着一小步一小步搬，最不容易漏。",
-            "先搭骨架，再往里塞原来的东西，别一下全倒进去。"
-          ],
-          "steps": [
-            {
-              "title": "Migration steps 1",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "mkdir -p my-plugin/.claude-plugin",
+              "code": "# Add a project-scoped server\nclaude mcp add --transport http paypal --scope project https://mcp.paypal.com/mcp",
               "kind": "command"
             },
             {
-              "title": "Migration steps 2",
+              "title": "原页关键片段：Project scope 2",
               "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"name\": \"my-plugin\",\n  \"description\": \"Migrated from standalone configuration\",\n  \"version\": \"1.0.0\"\n}",
+              "code": "{\n  \"mcpServers\": {\n    \"shared-server\": {\n      \"command\": \"/path/to/server\",\n      \"args\": [],\n      \"env\": {}\n    }\n  }\n}",
               "kind": "config"
             },
             {
-              "title": "Migration steps 3",
+              "title": "原页关键片段：User scope",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Copy commands\ncp -r .claude/commands my-plugin/\n\n# Copy agents (if any)\ncp -r .claude/agents my-plugin/\n\n# Copy skills (if any)\ncp -r .claude/skills my-plugin/",
-              "kind": "command"
-            },
-            {
-              "title": "Migration steps 4",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "mkdir my-plugin/hooks",
+              "code": "# Add a user server\nclaude mcp add --transport http hubspot --scope user https://mcp.hubspot.com/anthropic",
               "kind": "command"
             }
           ]
         },
         {
-          "title": "What changes when migrating",
+          "title": "What you can do with MCP",
           "paragraphs": [
-            "这里讲迁过去以后到底变了什么。你最该看的是：以后东西放哪儿、谁来读、谁来管。",
-            "这些边界弄清了，迁过去才不会手忙脚乱。"
+            "这里先讲 MCP 能帮你碰到什么外面的东西。接上以后，Claude 不只会看本地文件，还能去看外面的账本和工具。",
+            "你可以把它当成给帮工开了院门，让它能去外面拿材料。"
           ]
         },
         {
-          "title": "Next steps",
+          "title": "Popular MCP servers",
           "paragraphs": [
-            "这里不是让你背“Next steps”这个词，而是让你看它真干活时怎么使。"
+            "这里是在给你看常见现成货，别人已经接好的那些 MCP 服务都有哪些。",
+            "第一次上手，优先挑现成成熟的，不要一上来就自己造。"
           ]
         },
         {
-          "title": "For plugin users",
+          "title": "Installing MCP servers",
           "paragraphs": [
-            "这一段是写给装插件的人看的，重点是怎么装、怎么用、怎么确认真生效。",
-            "如果你不是开发插件的人，就主要看这段。"
+            "这里讲怎么把 MCP 服务接进来。先连上，再看得到，再试着用，顺序别乱。",
+            "第一次别贪多，接一个最刚需的就够。"
           ]
         },
         {
-          "title": "For plugin developers",
+          "title": "Option 1: Add a remote HTTP server",
           "paragraphs": [
-            "这一段是写给做插件的人看的，重点是怎么打包、怎么发、怎么让别人装得顺。",
-            "如果你准备长期维护插件，这段要多看两遍。"
+            "这一种是走普通网页那条路，适合对方本来就给了一个远程地址。",
+            "你把地址填对，认证做好，基本就能连。"
+          ],
+          "steps": [
+            {
+              "title": "Option 1: Add a remote HTTP server",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "# Basic syntax\nclaude mcp add --transport http <name> <url>\n\n# Real example: Connect to Notion\nclaude mcp add --transport http notion https://mcp.notion.com/mcp\n\n# Example with Bearer token\nclaude mcp add --transport http secure-api https://api.example.com/mcp \\\n  --header \"Authorization: Bearer your-token\"",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Option 2: Add a remote SSE server",
+          "paragraphs": [
+            "这一种也是远程接法，只是对方用的是 SSE 这种推送路子。",
+            "如果服务端写明让你用 SSE，就别拿 HTTP 那套硬套。"
+          ],
+          "steps": [
+            {
+              "title": "Option 2: Add a remote SSE server",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "# Basic syntax\nclaude mcp add --transport sse <name> <url>\n\n# Real example: Connect to Asana\nclaude mcp add --transport sse asana https://mcp.asana.com/sse\n\n# Example with authentication header\nclaude mcp add --transport sse private-api https://api.company.com/sse \\\n  --header \"X-API-Key: your-key-here\"",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Option 3: Add a local stdio server",
+          "paragraphs": [
+            "这一种是把服务直接放在你自己机器上跑，再从本地接过去。",
+            "适合那些本来就得靠本机命令启动的工具。"
+          ],
+          "steps": [
+            {
+              "title": "Option 3: Add a local stdio server",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "# Basic syntax\nclaude mcp add [options] <name> -- <command> [args...]\n\n# Real example: Add Airtable server\nclaude mcp add --transport stdio --env AIRTABLE_API_KEY=YOUR_KEY airtable \\\n  -- npx -y airtable-mcp-server",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Managing your servers",
+          "paragraphs": [
+            "这里讲已经接上的那些服务平时怎么管。能列出来、能改、能删，才算真接稳。",
+            "别连上一次就不管了，后面出问题还得回来这里查。"
+          ],
+          "steps": [
+            {
+              "title": "Managing your servers",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "# List all configured servers\nclaude mcp list\n\n# Get details for a specific server\nclaude mcp get github\n\n# Remove a server\nclaude mcp remove github\n\n# (within Claude Code) Check server status\n/mcp",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Dynamic tool updates",
+          "paragraphs": [
+            "这里讲的是外面那套工具变了以后，Claude 这边怎么跟着知道。",
+            "说白了，就是别让它一直拿旧工具说明干活。"
+          ]
+        },
+        {
+          "title": "Push messages with channels",
+          "paragraphs": [
+            "这一段主要是在把“Push messages with channels”讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Push messages with channels",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "# This creates command=\"cmd\" which Windows can execute\nclaude mcp add --transport stdio my-server -- cmd /c npx -y @some/package",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Plugin-provided MCP servers",
+          "paragraphs": [
+            "这里讲插件也能顺手带一个 MCP 服务进来，不用你每次再单独接一遍。",
+            "适合把一整套能力打成包一起发。"
+          ],
+          "steps": [
+            {
+              "title": "Plugin-provided MCP servers 1",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"database-tools\": {\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n    \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/config.json\"],\n    \"env\": {\n      \"DB_URL\": \"${DB_URL}\"\n    }\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Plugin-provided MCP servers 2",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"name\": \"my-plugin\",\n  \"mcpServers\": {\n    \"plugin-api\": {\n      \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/api-server\",\n      \"args\": [\"--port\", \"8080\"]\n    }\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Plugin-provided MCP servers 3",
+              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
+              "code": "# Within Claude Code, see all MCP servers including plugin ones\n/mcp",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "MCP installation scopes",
+          "paragraphs": [
+            "这里讲 MCP 装在哪一层。是只给当前项目用，还是你所有项目都能用，要先分清。",
+            "这一步分清了，后面就不容易出现“怎么这边改了那边也跟着变”。"
+          ]
+        },
+        {
+          "title": "Local scope",
+          "paragraphs": [
+            "本地这一层的意思是：只管眼前这个地方，不往外带。",
+            "适合临时试验，试完不满意也好收。"
+          ],
+          "steps": [
+            {
+              "title": "Local scope",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "# Add a local-scoped server (default)\nclaude mcp add --transport http stripe https://mcp.stripe.com\n\n# Explicitly specify local scope\nclaude mcp add --transport http stripe --scope local https://mcp.stripe.com",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Project scope",
+          "paragraphs": [
+            "项目这一层的意思是：这个仓库里的人都按同一套来。",
+            "适合团队共用的连接方式。"
+          ],
+          "steps": [
+            {
+              "title": "Project scope 1",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "# Add a project-scoped server\nclaude mcp add --transport http paypal --scope project https://mcp.paypal.com/mcp",
+              "kind": "command"
+            },
+            {
+              "title": "Project scope 2",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "{\n  \"mcpServers\": {\n    \"shared-server\": {\n      \"command\": \"/path/to/server\",\n      \"args\": [],\n      \"env\": {}\n    }\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "User scope",
+          "paragraphs": [
+            "用户这一层的意思是：你这个人以后到别的项目也能接着用。",
+            "适合你自己常用、但不一定要全团队共享的东西。"
+          ],
+          "steps": [
+            {
+              "title": "User scope",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "# Add a user server\nclaude mcp add --transport http hubspot --scope user https://mcp.hubspot.com/anthropic",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Choosing the right scope",
+          "paragraphs": [
+            "这里就是帮你选装在哪一层最合适。先想清楚“只这次用”还是“以后都要用”，答案就出来了。",
+            "别图省事全装到最大那层，后面不好收。"
+          ]
+        },
+        {
+          "title": "Scope hierarchy and precedence",
+          "paragraphs": [
+            "这里讲的是几层规则撞到一起时，最后到底听谁的。",
+            "你可以把它理解成：村规、队规、今天临时交代，谁更大，谁压谁。"
+          ]
+        },
+        {
+          "title": "Environment variable expansion in .mcp.json",
+          "paragraphs": [
+            "这里讲怎么在 `.mcp.json` 里借用环境变量，不把敏感东西硬写死在文件里。",
+            "像密钥、地址这类经常变的东西，这样放更稳。"
+          ],
+          "steps": [
+            {
+              "title": "Environment variable expansion in .mcp.json",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "{\n  \"mcpServers\": {\n    \"api-server\": {\n      \"type\": \"http\",\n      \"url\": \"${API_BASE_URL:-https://api.example.com}/mcp\",\n      \"headers\": {\n        \"Authorization\": \"Bearer ${API_KEY}\"\n      }\n    }\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Practical examples",
+          "paragraphs": [
+            "这里开始上真例子了，就是拿几种常见活路告诉你，MCP 真接上以后能怎么用。",
+            "先挑一个和你手头最像的例子去照。"
+          ]
+        },
+        {
+          "title": "Example: Monitor errors with Sentry",
+          "paragraphs": [
+            "这个例子是在说怎么把报错系统接进来，让 Claude 直接看线上出什么事。",
+            "适合那种你老要来回翻报错平台的场景。"
+          ],
+          "steps": [
+            {
+              "title": "Example: Monitor errors with Sentry 1",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude mcp add --transport http sentry https://mcp.sentry.dev/mcp",
+              "kind": "command"
+            },
+            {
+              "title": "Example: Monitor errors with Sentry 2",
+              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
+              "code": "/mcp",
+              "kind": "prompt"
+            },
+            {
+              "title": "Example: Monitor errors with Sentry 3",
+              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
+              "code": "What are the most common errors in the last 24 hours?",
+              "kind": "prompt"
+            },
+            {
+              "title": "Example: Monitor errors with Sentry 4",
+              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
+              "code": "Show me the stack trace for error ID abc123",
+              "kind": "prompt"
+            },
+            {
+              "title": "Example: Monitor errors with Sentry 5",
+              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
+              "code": "Which deployment introduced these new errors?",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Example: Connect to GitHub for code reviews",
+          "paragraphs": [
+            "这个例子是在说把 GitHub 接进来，让 Claude 直接看代码审查那一摊。",
+            "这样它看变更、看评论、看 PR 会顺手很多。"
+          ],
+          "steps": [
+            {
+              "title": "Example: Connect to GitHub for code reviews 1",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude mcp add --transport http github https://api.githubcopilot.com/mcp/",
+              "kind": "command"
+            },
+            {
+              "title": "Example: Connect to GitHub for code reviews 2",
+              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
+              "code": "/mcp",
+              "kind": "prompt"
+            },
+            {
+              "title": "Example: Connect to GitHub for code reviews 3",
+              "body": "“Example: Connect to GitHub for code reviews”这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "Review PR #456 and suggest improvements",
+              "kind": "code"
+            },
+            {
+              "title": "Example: Connect to GitHub for code reviews 4",
+              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
+              "code": "Create a new issue for the bug we just found",
+              "kind": "prompt"
+            },
+            {
+              "title": "Example: Connect to GitHub for code reviews 5",
+              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
+              "code": "Show me all open PRs assigned to me",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Example: Query your PostgreSQL database",
+          "paragraphs": [
+            "这个例子是在说怎么让 Claude 去问数据库，但前提还是先把读和写分清。",
+            "第一次最好先只读，别急着让它改库。"
+          ],
+          "steps": [
+            {
+              "title": "Example: Query your PostgreSQL database 1",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude mcp add --transport stdio db -- npx -y @bytebase/dbhub \\\n  --dsn \"postgresql://readonly:[email protected]:5432/analytics\"",
+              "kind": "command"
+            },
+            {
+              "title": "Example: Query your PostgreSQL database 2",
+              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
+              "code": "What's our total revenue this month?",
+              "kind": "prompt"
+            },
+            {
+              "title": "Example: Query your PostgreSQL database 3",
+              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
+              "code": "Show me the schema for the orders table",
+              "kind": "prompt"
+            },
+            {
+              "title": "Example: Query your PostgreSQL database 4",
+              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
+              "code": "Find customers who haven't made a purchase in 90 days",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Authenticate with remote MCP servers",
+          "paragraphs": [
+            "这里讲远程服务怎么认主。没认上，再多命令也白搭。",
+            "先把登录和授权走通，后面再谈干活。"
+          ],
+          "steps": [
+            {
+              "title": "Authenticate with remote MCP servers 1",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude mcp add --transport http sentry https://mcp.sentry.dev/mcp",
+              "kind": "command"
+            },
+            {
+              "title": "Authenticate with remote MCP servers 2",
+              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
+              "code": "/mcp",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Use a fixed OAuth callback port",
+          "paragraphs": [
+            "这里讲回调端口固定下来这件事。这样网络和系统规则更容易放行，不容易每次变来变去。",
+            "适合对网络规矩比较严的环境。"
+          ],
+          "steps": [
+            {
+              "title": "Use a fixed OAuth callback port",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "# Fixed callback port with dynamic client registration\nclaude mcp add --transport http \\\n  --callback-port 8080 \\\n  my-server https://mcp.example.com/mcp",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Use pre-configured OAuth credentials",
+          "paragraphs": [
+            "这里讲提前把 OAuth 那套证件准备好，不用临时一边接一边找。",
+            "提前备好，接起来会顺很多。"
+          ],
+          "steps": [
+            {
+              "title": "Use pre-configured OAuth credentials 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "claude mcp add --transport http \\\n  --client-id your-client-id --client-secret --callback-port 8080 \\\n  my-server https://mcp.example.com/mcp",
+              "kind": "command"
+            },
+            {
+              "title": "Use pre-configured OAuth credentials 2",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "claude mcp add-json my-server \\\n  '{\"type\":\"http\",\"url\":\"https://mcp.example.com/mcp\",\"oauth\":{\"clientId\":\"your-client-id\",\"callbackPort\":8080}}' \\\n  --client-secret",
+              "kind": "command"
+            },
+            {
+              "title": "Use pre-configured OAuth credentials 3",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "claude mcp add-json my-server \\\n  '{\"type\":\"http\",\"url\":\"https://mcp.example.com/mcp\",\"oauth\":{\"callbackPort\":8080}}'",
+              "kind": "command"
+            },
+            {
+              "title": "Use pre-configured OAuth credentials 4",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "MCP_CLIENT_SECRET=your-secret claude mcp add --transport http \\\n  --client-id your-client-id --client-secret --callback-port 8080 \\\n  my-server https://mcp.example.com/mcp",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Override OAuth metadata discovery",
+          "paragraphs": [
+            "这里讲的是默认那套自动认路不灵时，你要手工告诉它该往哪儿认。",
+            "通常是环境比较特殊时才会用到。"
+          ],
+          "steps": [
+            {
+              "title": "Override OAuth metadata discovery",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"mcpServers\": {\n    \"my-server\": {\n      \"type\": \"http\",\n      \"url\": \"https://mcp.example.com/mcp\",\n      \"oauth\": {\n        \"authServerMetadataUrl\": \"https://auth.example.com/.well-known/openid-configuration\"\n      }\n    }\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Add MCP servers from JSON configuration",
+          "paragraphs": [
+            "这里讲怎么直接从 JSON 配置里把一组 MCP 服务一起加进去。",
+            "适合团队想统一发一套现成配置，不想每个人手敲一遍。"
+          ],
+          "steps": [
+            {
+              "title": "Add MCP servers from JSON configuration 1",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "# Basic syntax\nclaude mcp add-json <name> '<json>'\n\n# Example: Adding an HTTP server with JSON configuration\nclaude mcp add-json weather-api '{\"type\":\"http\",\"url\":\"https://api.weather.com/mcp\",\"headers\":{\"Authorization\":\"Bearer token\"}}'\n\n# Example: Adding a stdio server with JSON configuration\nclaude mcp add-json local-weather '{\"type\":\"stdio\",\"command\":\"/path/to/weather-cli\",\"args\":[\"--api-key\",\"abc123\"],\"env\":{\"CACHE_DIR\":\"/tmp\"}}'\n\n# Example: Adding an HTTP server with pre-configured OAuth credentials\nclaude mcp add-json my-server '{\"type\":\"http\",\"url\":\"https://mcp.example.com/mcp\",\"oauth\":{\"clientId\":\"your-client-id\",\"callbackPort\":8080}}' --client-secret",
+              "kind": "config"
+            },
+            {
+              "title": "Add MCP servers from JSON configuration 2",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude mcp get weather-api",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Import MCP servers from Claude Desktop",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Import MCP servers from Claude Desktop 1",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "# Basic syntax \nclaude mcp add-from-claude-desktop",
+              "kind": "command"
+            },
+            {
+              "title": "Import MCP servers from Claude Desktop 2",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude mcp list",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Use MCP servers from Claude.ai",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ],
+          "steps": [
+            {
+              "title": "Use MCP servers from Claude.ai 1",
+              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
+              "code": "/mcp",
+              "kind": "prompt"
+            },
+            {
+              "title": "Use MCP servers from Claude.ai 2",
+              "body": "“Use MCP servers from Claude.ai”这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "ENABLE_CLAUDEAI_MCP_SERVERS=false claude",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Use Claude Code as an MCP server",
+          "paragraphs": [
+            "这一段主要是在把“Use Claude Code as an MCP server”讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Use Claude Code as an MCP server 1",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "# Start Claude as a stdio MCP server\nclaude mcp serve",
+              "kind": "command"
+            },
+            {
+              "title": "Use Claude Code as an MCP server 2",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"mcpServers\": {\n    \"claude-code\": {\n      \"type\": \"stdio\",\n      \"command\": \"claude\",\n      \"args\": [\"mcp\", \"serve\"],\n      \"env\": {}\n    }\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Use Claude Code as an MCP server 3",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "which claude",
+              "kind": "command"
+            },
+            {
+              "title": "Use Claude Code as an MCP server 4",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"mcpServers\": {\n    \"claude-code\": {\n      \"type\": \"stdio\",\n      \"command\": \"/full/path/to/claude\",\n      \"args\": [\"mcp\", \"serve\"],\n      \"env\": {}\n    }\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "MCP output limits and warnings",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "MCP output limits and warnings",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "# Set a higher limit for MCP tool outputs\nexport MAX_MCP_OUTPUT_TOKENS=50000\nclaude",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Respond to MCP elicitation requests",
+          "paragraphs": [
+            "看到这里，就把“Respond to MCP elicitation requests”当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         }
       ],
       "illustration": {
         "title": "一眼看懂这一页",
         "lines": [
-          "Create plugins",
+          "Model Context Protocol (MCP)",
           "   |",
           "   v",
-          "这是 Build with Claude Code 里的一摊要紧活",
+          "这是 Tools and plugins 里的一摊要紧活",
           "   |",
           "   v",
           "先弄懂，再下手"
@@ -5504,7 +5795,369 @@
           "Discover and install prebuilt plugins",
           "   |",
           "   v",
-          "这是 Build with Claude Code 里的一摊要紧活",
+          "这是 Tools and plugins 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "plugins": {
+      "sourceLabel": "Create plugins",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页讲怎么做自己的插件，把技能、代理、hooks、MCP 这些打成包。",
+            "做出来以后，别的项目和别人装上就能直接用。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "插件像打包好的工具箱，不用每换一块地就重新配一遍。",
+            "这一页会讲什么时候该做插件、什么时候只做独立配置就够、以及第一个插件怎么起步。",
+            "如果你们团队总在重复配同一套东西，这页很值。"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "先确定你打包的是一类稳定能力，而不是一堆临时想法。",
+            "从最小插件结构做起，先让它能装、能跑，再慢慢加复杂内容。",
+            "技能、hooks、代理、MCP 往里放时，先想好谁是核心，不要把插件做成杂货铺。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Create your first plugin 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "mkdir my-first-plugin",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Create your first plugin 2",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "mkdir my-first-plugin/.claude-plugin",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Create your first plugin 3",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n\"name\": \"my-first-plugin\",\n\"description\": \"A greeting plugin to learn the basics\",\n\"version\": \"1.0.0\",\n\"author\": {\n\"name\": \"Your Name\"\n}\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Create your first plugin 4",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "mkdir -p my-first-plugin/skills/hello",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Create your first plugin 5",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "---\ndescription: Greet the user with a friendly message\ndisable-model-invocation: true\n---\n\nGreet the user warmly and ask how you can help them today.",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Create your first plugin 6",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "claude --plugin-dir ./my-first-plugin",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Add Skills to your plugin 1",
+              "body": "这一段主要是认目录和文件摆放位置。先把地方放对，后面才不容易串。",
+              "code": "my-plugin/\n├── .claude-plugin/\n│   └── plugin.json\n└── skills/\n    └── code-review/\n        └── SKILL.md",
+              "kind": "structure"
+            },
+            {
+              "title": "原页关键片段：Add Skills to your plugin 2",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "---\nname: code-review\ndescription: Reviews code for best practices and potential issues. Use when reviewing code, checking PRs, or analyzing code quality.\n---\n\nWhen reviewing code, check for:\n1. Code organization and structure\n2. Error handling\n3. Security concerns\n4. Test coverage",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Add LSP servers to your plugin",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"go\": {\n    \"command\": \"gopls\",\n    \"args\": [\"serve\"],\n    \"extensionToLanguage\": {\n      \".go\": \"go\"\n    }\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Ship default settings with your plugin",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"agent\": \"security-reviewer\"\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Test your plugins locally 1",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude --plugin-dir ./my-plugin",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Test your plugins locally 2",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "When to use plugins vs standalone configuration",
+          "paragraphs": [
+            "这里是在帮你判断，到底该做成插件，还是在当前项目里单独配一下就够。",
+            "要是这套东西很多项目都要反复用，才更像插件；只是一时一地要用，就别急着打包。"
+          ]
+        },
+        {
+          "title": "Quickstart",
+          "paragraphs": [
+            "这里就是插件起步那几步，先把壳子搭起来，再让它能被 Claude 看见。",
+            "第一次别贪大，先做一个最小插件，能装上、能叫出来就算赢。"
+          ]
+        },
+        {
+          "title": "Prerequisites",
+          "paragraphs": [
+            "这里是在说开工前你得先备好什么，不然做到一半容易卡壳。",
+            "先把目录、工具和最基本的文件准备好，后面会顺很多。"
+          ]
+        },
+        {
+          "title": "Create your first plugin",
+          "paragraphs": [
+            "这里是手把手做第一个插件。先建目录，再写最小那几个文件，让它先活过来。",
+            "别想着第一回就做成大工具箱，能跑起来最重要。"
+          ],
+          "steps": [
+            {
+              "title": "Create your first plugin 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "mkdir my-first-plugin",
+              "kind": "command"
+            },
+            {
+              "title": "Create your first plugin 2",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "mkdir my-first-plugin/.claude-plugin",
+              "kind": "command"
+            },
+            {
+              "title": "Create your first plugin 3",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n\"name\": \"my-first-plugin\",\n\"description\": \"A greeting plugin to learn the basics\",\n\"version\": \"1.0.0\",\n\"author\": {\n\"name\": \"Your Name\"\n}\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Create your first plugin 4",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "mkdir -p my-first-plugin/skills/hello",
+              "kind": "command"
+            },
+            {
+              "title": "Create your first plugin 5",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "---\ndescription: Greet the user with a friendly message\ndisable-model-invocation: true\n---\n\nGreet the user warmly and ask how you can help them today.",
+              "kind": "config"
+            },
+            {
+              "title": "Create your first plugin 6",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "claude --plugin-dir ./my-first-plugin",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Plugin structure overview",
+          "paragraphs": [
+            "这里是在认插件的骨架，哪个文件像门牌，哪个文件装规矩，哪个目录放附加能力。",
+            "先把地方认清，后面才不会把东西塞错位置。"
+          ]
+        },
+        {
+          "title": "Develop more complex plugins",
+          "paragraphs": [
+            "这里开始讲插件做大以后怎么收拾，不然越塞越乱。",
+            "思路很简单：先分层，再分目录，别把所有能力糊成一坨。"
+          ]
+        },
+        {
+          "title": "Add Skills to your plugin",
+          "paragraphs": [
+            "这里讲怎么把 skill 装进插件里。说白了，就是把一套固定说法、固定做法打包进去。",
+            "适合那种反复要用、而且每次都想按同一路子干的活。"
+          ],
+          "steps": [
+            {
+              "title": "Add Skills to your plugin 1",
+              "body": "这一段主要是认目录和文件摆放位置。先把地方放对，后面才不容易串。",
+              "code": "my-plugin/\n├── .claude-plugin/\n│   └── plugin.json\n└── skills/\n    └── code-review/\n        └── SKILL.md",
+              "kind": "structure"
+            },
+            {
+              "title": "Add Skills to your plugin 2",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "---\nname: code-review\ndescription: Reviews code for best practices and potential issues. Use when reviewing code, checking PRs, or analyzing code quality.\n---\n\nWhen reviewing code, check for:\n1. Code organization and structure\n2. Error handling\n3. Security concerns\n4. Test coverage",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Add LSP servers to your plugin",
+          "paragraphs": [
+            "这里讲怎么把语言服务也塞进插件。这样 Claude 看某种语言的代码时，会更懂门道。",
+            "你只要记住一件事：先配好服务怎么启动，再让文件后缀对上它。"
+          ],
+          "steps": [
+            {
+              "title": "Add LSP servers to your plugin",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"go\": {\n    \"command\": \"gopls\",\n    \"args\": [\"serve\"],\n    \"extensionToLanguage\": {\n      \".go\": \"go\"\n    }\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Ship default settings with your plugin",
+          "paragraphs": [
+            "这里讲怎么把默认设置一块打包带走。这样别人装上插件后，不用再手搓同一套设置。",
+            "默认值要给得稳，不要一上来就给太猛的权限。"
+          ],
+          "steps": [
+            {
+              "title": "Ship default settings with your plugin",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"agent\": \"security-reviewer\"\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Organize complex plugins",
+          "paragraphs": [
+            "插件一大，就得开始收拾屋子。谁放哪儿、谁管哪摊，要提前分清。",
+            "不然后面加一个能力，就像往杂物堆里再扔一把铁锹。"
+          ]
+        },
+        {
+          "title": "Test your plugins locally",
+          "paragraphs": [
+            "这里讲怎么先在自己机器上试插件。先本地跑通，再给别人用，最稳。",
+            "这一步就是先在自家院里试水，别一上来就往正式环境扔。"
+          ],
+          "steps": [
+            {
+              "title": "Test your plugins locally 1",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude --plugin-dir ./my-plugin",
+              "kind": "command"
+            },
+            {
+              "title": "Test your plugins locally 2",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Debug plugin issues",
+          "paragraphs": [
+            "遇到这种内容，别急着大拆大改，先按它给的路子把问题缩小。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Share your plugins",
+          "paragraphs": [
+            "这里讲的是插件做好以后怎么给别人用。",
+            "先想清楚你是给自己团队发，还是打算公开给更多人装，这两种路子不一样。"
+          ]
+        },
+        {
+          "title": "Submit your plugin to the official marketplace",
+          "paragraphs": [
+            "这里讲怎么把插件送去官方市场。说白了，就是让别人以后能像逛摊子一样找到它。",
+            "这一步通常要把说明写清、结构收好，别把半成品端上去。"
+          ]
+        },
+        {
+          "title": "Convert existing configurations to plugins",
+          "paragraphs": [
+            "这里讲怎么把你手头零散的配置，收拢成一个正式插件。",
+            "先别急着全搬，先看哪些东西真值得打包进去。"
+          ]
+        },
+        {
+          "title": "Migration steps",
+          "paragraphs": [
+            "这里就是迁过去的顺序。照着一小步一小步搬，最不容易漏。",
+            "先搭骨架，再往里塞原来的东西，别一下全倒进去。"
+          ],
+          "steps": [
+            {
+              "title": "Migration steps 1",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "mkdir -p my-plugin/.claude-plugin",
+              "kind": "command"
+            },
+            {
+              "title": "Migration steps 2",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "{\n  \"name\": \"my-plugin\",\n  \"description\": \"Migrated from standalone configuration\",\n  \"version\": \"1.0.0\"\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Migration steps 3",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "# Copy commands\ncp -r .claude/commands my-plugin/\n\n# Copy agents (if any)\ncp -r .claude/agents my-plugin/\n\n# Copy skills (if any)\ncp -r .claude/skills my-plugin/",
+              "kind": "command"
+            },
+            {
+              "title": "Migration steps 4",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "mkdir my-plugin/hooks",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "What changes when migrating",
+          "paragraphs": [
+            "这里讲迁过去以后到底变了什么。你最该看的是：以后东西放哪儿、谁来读、谁来管。",
+            "这些边界弄清了，迁过去才不会手忙脚乱。"
+          ]
+        },
+        {
+          "title": "Next steps",
+          "paragraphs": [
+            "这里不是让你背“Next steps”这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
+          "title": "For plugin users",
+          "paragraphs": [
+            "这一段是写给装插件的人看的，重点是怎么装、怎么用、怎么确认真生效。",
+            "如果你不是开发插件的人，就主要看这段。"
+          ]
+        },
+        {
+          "title": "For plugin developers",
+          "paragraphs": [
+            "这一段是写给做插件的人看的，重点是怎么打包、怎么发、怎么让别人装得顺。",
+            "如果你准备长期维护插件，这段要多看两遍。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Create plugins",
+          "   |",
+          "   v",
+          "这是 Tools and plugins 里的一摊要紧活",
           "   |",
           "   v",
           "先弄懂，再下手"
@@ -5932,312 +6585,7 @@
           "Extend Claude with skills",
           "   |",
           "   v",
-          "这是 Build with Claude Code 里的一摊要紧活",
-          "   |",
-          "   v",
-          "先弄懂，再下手"
-        ],
-        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
-      }
-    },
-    "scheduled-tasks": {
-      "sourceLabel": "Run prompts on a schedule",
-      "sections": [
-        {
-          "title": "简要总结",
-          "paragraphs": [
-            "这页讲定时任务，让 Claude 到点自动跑提示。",
-            "适合循环提醒、轮询状态、固定时间做一遍检查。"
-          ]
-        },
-        {
-          "title": "农民伯伯版解释",
-          "paragraphs": [
-            "这像你让帮工每天早上先去看一眼水泵，每周一再盘一次仓库。",
-            "这一页会讲 `/loop` 怎么用、间隔语法、一次性提醒、任务怎么管理。",
-            "如果你总有重复催一次的事，这页特别省心。"
-          ]
-        },
-        {
-          "title": "上手时重点盯住什么",
-          "paragraphs": [
-            "先从最简单的重复活开始，不要一开始就排一大串复杂任务。",
-            "循环间隔和到期逻辑要看清，别设完就不管。",
-            "任务真跑起来后，要定期回头看有没有空转或误报。"
-          ],
-          "steps": [
-            {
-              "title": "原页关键片段：Schedule a recurring prompt with /loop",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Schedule a recurring prompt with /loop”这一段的意思去办。",
-              "code": "/loop 5m check if the deployment finished and tell me what happened",
-              "kind": "prompt"
-            },
-            {
-              "title": "原页关键片段：Loop over another command",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Loop over another command”这一段的意思去办。",
-              "code": "/loop 20m /review-pr 1234",
-              "kind": "prompt"
-            },
-            {
-              "title": "原页关键片段：Set a one-time reminder 1",
-              "body": "“Set a one-time reminder”这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "remind me at 3pm to push the release branch",
-              "kind": "code"
-            },
-            {
-              "title": "原页关键片段：Set a one-time reminder 2",
-              "body": "“Set a one-time reminder”这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "in 45 minutes, check whether the integration tests passed",
-              "kind": "code"
-            },
-            {
-              "title": "原页关键片段：Manage scheduled tasks 1",
-              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
-              "code": "what scheduled tasks do I have?",
-              "kind": "prompt"
-            },
-            {
-              "title": "原页关键片段：Manage scheduled tasks 2",
-              "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "cancel the deploy check job",
-              "kind": "code"
-            }
-          ]
-        },
-        {
-          "title": "Schedule a recurring prompt with /loop",
-          "paragraphs": [
-            "这里主要是在交代“Schedule a recurring prompt with /loop”这一块会碰到哪些事。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Schedule a recurring prompt with /loop",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Schedule a recurring prompt with /loop”这一段的意思去办。",
-              "code": "/loop 5m check if the deployment finished and tell me what happened",
-              "kind": "prompt"
-            }
-          ]
-        },
-        {
-          "title": "Interval syntax",
-          "paragraphs": [
-            "这种内容最怕想当然，老老实实照它列的格式走最稳。"
-          ]
-        },
-        {
-          "title": "Loop over another command",
-          "paragraphs": [
-            "这里主要是在交代“Loop over another command”这一块会碰到哪些事。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ],
-          "steps": [
-            {
-              "title": "Loop over another command",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Loop over another command”这一段的意思去办。",
-              "code": "/loop 20m /review-pr 1234",
-              "kind": "prompt"
-            }
-          ]
-        },
-        {
-          "title": "Set a one-time reminder",
-          "paragraphs": [
-            "这一块主要是在说“Set a one-time reminder”真到手上该怎么用，哪里最容易踩坑。"
-          ]
-        },
-        {
-          "title": "Manage scheduled tasks",
-          "paragraphs": [
-            "这段主要是在说平时怎么管，不是光教你怎么开。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Manage scheduled tasks",
-              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
-              "code": "what scheduled tasks do I have?",
-              "kind": "prompt"
-            }
-          ]
-        },
-        {
-          "title": "How scheduled tasks run",
-          "paragraphs": [
-            "这里主要是在交代“How scheduled tasks run”这一块会碰到哪些事。"
-          ]
-        },
-        {
-          "title": "Jitter",
-          "paragraphs": [
-            "这里不是让你背“Jitter”这个词，而是让你看它真干活时怎么使。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Three-day expiry",
-          "paragraphs": [
-            "这一段主要是在把“Three-day expiry”讲实，不是只摆个标题给你看。"
-          ]
-        },
-        {
-          "title": "Cron expression reference",
-          "paragraphs": [
-            "这一段就是给你查规矩的，像看说明书那样一项项对着来。"
-          ]
-        },
-        {
-          "title": "Disable scheduled tasks",
-          "paragraphs": [
-            "这里讲怎么把某个开关拧对。重点不是概念，而是你该在哪儿改、改完怎么确认生效。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ]
-        },
-        {
-          "title": "Limitations",
-          "paragraphs": [
-            "这一块主要是在说“Limitations”真到手上该怎么用，哪里最容易踩坑。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        }
-      ],
-      "illustration": {
-        "title": "一眼看懂这一页",
-        "lines": [
-          "Run prompts on a schedule",
-          "   |",
-          "   v",
-          "这是 Build with Claude Code 里的一摊要紧活",
-          "   |",
-          "   v",
-          "先弄懂，再下手"
-        ],
-        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
-      }
-    },
-    "output-styles": {
-      "sourceLabel": "Output styles",
-      "sections": [
-        {
-          "title": "简要总结",
-          "paragraphs": [
-            "这页讲输出风格，意思是 Claude 最后把结果说成什么样。",
-            "不只是写代码时能用，做摘要、报告、清单、结构化输出时也很有用。"
-          ]
-        },
-        {
-          "title": "农民伯伯版解释",
-          "paragraphs": [
-            "你可以把它想成给帮工提前定口径。是让它写成清单、写成报告、写成像客服话术，还是写成结构化格式，先说好，后面省很多返工。",
-            "这一页特别实用，因为很多时候问题不在 Claude 不会，而在它说出来的样子不合用。",
-            "如果你想把 Claude 从“程序员帮手”扩到更多工作场景，这页很值。"
-          ]
-        },
-        {
-          "title": "上手时重点盯住什么",
-          "paragraphs": [
-            "先用内置输出风格试手，确认哪种最适合你的活。",
-            "真要自定义时，先把格式目标讲清楚，不要又想自由发挥又想字段固定。",
-            "这页最好和 `CLAUDE.md`、agents、append-system-prompt 一起分清楚谁管什么。"
-          ],
-          "steps": [
-            {
-              "title": "原页关键片段：Change your output style",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"outputStyle\": \"Explanatory\"\n}",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Create a custom output style",
-              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "---\nname: My Custom Style\ndescription:\n  A brief description of what this style does, to be displayed to the user\n---\n\n# Custom Style Instructions\n\nYou are an interactive CLI tool that helps users with software engineering\ntasks. [Your custom instructions here...]\n\n## Specific Behaviors\n\n[Define how the assistant should behave in this style...]",
-              "kind": "config"
-            }
-          ]
-        },
-        {
-          "title": "Built-in output styles",
-          "paragraphs": [
-            "这一块主要是在说“Built-in output styles”真到手上该怎么用，哪里最容易踩坑。"
-          ]
-        },
-        {
-          "title": "How output styles work",
-          "paragraphs": [
-            "这里不是让你背“How output styles work”这个词，而是让你看它真干活时怎么使。"
-          ]
-        },
-        {
-          "title": "Change your output style",
-          "paragraphs": [
-            "这一段是在把 /config and select Output style to pick a style from a menu. Your selection is saved to .claude/settings.local.json at the local project level. 真跑起来。别只看命令长什么样，还得看跑完该出现什么。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Change your output style",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"outputStyle\": \"Explanatory\"\n}",
-              "kind": "config"
-            }
-          ]
-        },
-        {
-          "title": "Create a custom output style",
-          "paragraphs": [
-            "这里不是让你背“Create a custom output style”这个词，而是让你看它真干活时怎么使。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Create a custom output style",
-              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "---\nname: My Custom Style\ndescription:\n  A brief description of what this style does, to be displayed to the user\n---\n\n# Custom Style Instructions\n\nYou are an interactive CLI tool that helps users with software engineering\ntasks. [Your custom instructions here...]\n\n## Specific Behaviors\n\n[Define how the assistant should behave in this style...]",
-              "kind": "config"
-            }
-          ]
-        },
-        {
-          "title": "Frontmatter",
-          "paragraphs": [
-            "这里不是让你背“Frontmatter”这个词，而是让你看它真干活时怎么使。"
-          ]
-        },
-        {
-          "title": "Comparisons to related features",
-          "paragraphs": [
-            "这一块主要是在说“Comparisons to related features”真到手上该怎么用，哪里最容易踩坑。"
-          ]
-        },
-        {
-          "title": "Output Styles vs. CLAUDE.md vs. —append-system-prompt",
-          "paragraphs": [
-            "这一块主要是在说“Output Styles vs. CLAUDE.md vs. —append-system-prompt”真到手上该怎么用，哪里最容易踩坑。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Output Styles vs. Agents",
-          "paragraphs": [
-            "这里不是让你背“Output Styles vs. Agents”这个词，而是让你看它真干活时怎么使。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ]
-        },
-        {
-          "title": "Output Styles vs. Skills",
-          "paragraphs": [
-            "这里不是让你背“Output Styles vs. Skills”这个词，而是让你看它真干活时怎么使。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
-          ]
-        }
-      ],
-      "illustration": {
-        "title": "一眼看懂这一页",
-        "lines": [
-          "Output styles",
-          "   |",
-          "   v",
-          "这是 Build with Claude Code 里的一摊要紧活",
+          "这是 Tools and plugins 里的一摊要紧活",
           "   |",
           "   v",
           "先弄懂，再下手"
@@ -6705,7 +7053,355 @@
           "Automate with hooks",
           "   |",
           "   v",
-          "这是 Build with Claude Code 里的一摊要紧活",
+          "这是 Automation 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "channels": {
+      "sourceLabel": "Push events into a running session with channels",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Push external events to Claude：Use channels to push messages, alerts, and webhooks into your Claude Code session from an MCP server. Forward CI results, chat messages, and monitoring events so Claude can react while you're away.",
+            "你可以把它当成“Automation”这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把“Push external events to Claude”理解成 Automation 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Supported channels、Quickstart、Security、Enterprise controls 这些环节往下讲。",
+            "翻成人话，大概就是：Supported channels"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Supported channels -> Quickstart -> Security -> Enterprise controls。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Supported channels 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "/plugin install telegram@claude-plugins-official",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Supported channels 2",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Supported channels”这一段的意思去办。",
+              "code": "/telegram:configure <token>",
+              "kind": "prompt"
+            },
+            {
+              "title": "原页关键片段：Supported channels 3",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "claude --channels plugin:telegram@claude-plugins-official",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Quickstart 1",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "/plugin install fakechat@claude-plugins-official",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Quickstart 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --channels plugin:fakechat@claude-plugins-official",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Quickstart 3",
+              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
+              "code": "hey, what's in my working directory?",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Supported channels",
+          "paragraphs": [
+            "这里不是让你背“Supported channels”这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Supported channels 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "/plugin install telegram@claude-plugins-official",
+              "kind": "command"
+            },
+            {
+              "title": "Supported channels 2",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Supported channels”这一段的意思去办。",
+              "code": "/telegram:configure <token>",
+              "kind": "prompt"
+            },
+            {
+              "title": "Supported channels 3",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "claude --channels plugin:telegram@claude-plugins-official",
+              "kind": "command"
+            },
+            {
+              "title": "Supported channels 4",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Supported channels”这一段的意思去办。",
+              "code": "/telegram:access pair <code>",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Quickstart",
+          "paragraphs": [
+            "看到这里，就把“Quickstart”当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Quickstart 1",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "/plugin install fakechat@claude-plugins-official",
+              "kind": "command"
+            },
+            {
+              "title": "Quickstart 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --channels plugin:fakechat@claude-plugins-official",
+              "kind": "command"
+            },
+            {
+              "title": "Quickstart 3",
+              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
+              "code": "hey, what's in my working directory?",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Security",
+          "paragraphs": [
+            "这一段主要是在把“Security”讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Enterprise controls",
+          "paragraphs": [
+            "这一块主要是在说“Enterprise controls”真到手上该怎么用，哪里最容易踩坑。"
+          ]
+        },
+        {
+          "title": "Enable channels for your organization",
+          "paragraphs": [
+            "这里讲怎么把某个开关拧对。重点不是概念，而是你该在哪儿改、改完怎么确认生效。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Research preview",
+          "paragraphs": [
+            "看到这里，就把“Research preview”当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Next steps",
+          "paragraphs": [
+            "这里不是让你背“Next steps”这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Push external events to Claude",
+          "   |",
+          "   v",
+          "这是 Automation 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "scheduled-tasks": {
+      "sourceLabel": "Run prompts on a schedule",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页讲定时任务，让 Claude 到点自动跑提示。",
+            "适合循环提醒、轮询状态、固定时间做一遍检查。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "这像你让帮工每天早上先去看一眼水泵，每周一再盘一次仓库。",
+            "这一页会讲 `/loop` 怎么用、间隔语法、一次性提醒、任务怎么管理。",
+            "如果你总有重复催一次的事，这页特别省心。"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "先从最简单的重复活开始，不要一开始就排一大串复杂任务。",
+            "循环间隔和到期逻辑要看清，别设完就不管。",
+            "任务真跑起来后，要定期回头看有没有空转或误报。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Schedule a recurring prompt with /loop",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Schedule a recurring prompt with /loop”这一段的意思去办。",
+              "code": "/loop 5m check if the deployment finished and tell me what happened",
+              "kind": "prompt"
+            },
+            {
+              "title": "原页关键片段：Loop over another command",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Loop over another command”这一段的意思去办。",
+              "code": "/loop 20m /review-pr 1234",
+              "kind": "prompt"
+            },
+            {
+              "title": "原页关键片段：Set a one-time reminder 1",
+              "body": "“Set a one-time reminder”这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "remind me at 3pm to push the release branch",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Set a one-time reminder 2",
+              "body": "“Set a one-time reminder”这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "in 45 minutes, check whether the integration tests passed",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Manage scheduled tasks 1",
+              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
+              "code": "what scheduled tasks do I have?",
+              "kind": "prompt"
+            },
+            {
+              "title": "原页关键片段：Manage scheduled tasks 2",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "cancel the deploy check job",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Schedule a recurring prompt with /loop",
+          "paragraphs": [
+            "这里主要是在交代“Schedule a recurring prompt with /loop”这一块会碰到哪些事。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Schedule a recurring prompt with /loop",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Schedule a recurring prompt with /loop”这一段的意思去办。",
+              "code": "/loop 5m check if the deployment finished and tell me what happened",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Interval syntax",
+          "paragraphs": [
+            "这种内容最怕想当然，老老实实照它列的格式走最稳。"
+          ]
+        },
+        {
+          "title": "Loop over another command",
+          "paragraphs": [
+            "这里主要是在交代“Loop over another command”这一块会碰到哪些事。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Loop over another command",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Loop over another command”这一段的意思去办。",
+              "code": "/loop 20m /review-pr 1234",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Set a one-time reminder",
+          "paragraphs": [
+            "这一块主要是在说“Set a one-time reminder”真到手上该怎么用，哪里最容易踩坑。"
+          ]
+        },
+        {
+          "title": "Manage scheduled tasks",
+          "paragraphs": [
+            "这段主要是在说平时怎么管，不是光教你怎么开。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Manage scheduled tasks",
+              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
+              "code": "what scheduled tasks do I have?",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "How scheduled tasks run",
+          "paragraphs": [
+            "这里主要是在交代“How scheduled tasks run”这一块会碰到哪些事。"
+          ]
+        },
+        {
+          "title": "Jitter",
+          "paragraphs": [
+            "这里不是让你背“Jitter”这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Three-day expiry",
+          "paragraphs": [
+            "这一段主要是在把“Three-day expiry”讲实，不是只摆个标题给你看。"
+          ]
+        },
+        {
+          "title": "Cron expression reference",
+          "paragraphs": [
+            "这一段就是给你查规矩的，像看说明书那样一项项对着来。"
+          ]
+        },
+        {
+          "title": "Disable scheduled tasks",
+          "paragraphs": [
+            "这里讲怎么把某个开关拧对。重点不是概念，而是你该在哪儿改、改完怎么确认生效。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Limitations",
+          "paragraphs": [
+            "这一块主要是在说“Limitations”真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Run prompts on a schedule",
+          "   |",
+          "   v",
+          "这是 Automation 里的一摊要紧活",
           "   |",
           "   v",
           "先弄懂，再下手"
@@ -6953,659 +7649,7 @@
           "Programmatic usage",
           "   |",
           "   v",
-          "这是 Build with Claude Code 里的一摊要紧活",
-          "   |",
-          "   v",
-          "先弄懂，再下手"
-        ],
-        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
-      }
-    },
-    "mcp": {
-      "sourceLabel": "Connect Claude Code to tools via MCP",
-      "sections": [
-        {
-          "title": "简要总结",
-          "paragraphs": [
-            "这页讲 MCP，也就是怎么把 Claude Code 接到外部工具和数据源上。",
-            "说白了，就是给帮工装外接设备，让它别只盯着眼前这堆文件。"
-          ]
-        },
-        {
-          "title": "农民伯伯版解释",
-          "paragraphs": [
-            "你可以把 MCP 想成拖拉机后面的挂载口。接上去以后，Claude 才能碰到数据库、接口、知识库、内部工具这些外面的家伙事。",
-            "这页最值钱的地方，不是名词本身，而是它会告诉你有哪些接法、哪些现成服务器、该怎么装。",
-            "如果你想让 Claude 真正懂你们团队外面的系统，这页几乎绕不过去。"
-          ]
-        },
-        {
-          "title": "上手时重点盯住什么",
-          "paragraphs": [
-            "第一次上 MCP，先挑一个最刚需的外部工具接，不要一口气连十几个。",
-            "远程 HTTP、SSE、本地 stdio 这些接法分清楚，再决定走哪条。",
-            "接好后先做只读类试验，确认它看得懂、用得稳，再考虑更重的操作。"
-          ],
-          "steps": [
-            {
-              "title": "原页关键片段：Option 1: Add a remote HTTP server",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Basic syntax\nclaude mcp add --transport http <name> <url>\n\n# Real example: Connect to Notion\nclaude mcp add --transport http notion https://mcp.notion.com/mcp\n\n# Example with Bearer token\nclaude mcp add --transport http secure-api https://api.example.com/mcp \\\n  --header \"Authorization: Bearer your-token\"",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：Option 2: Add a remote SSE server",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Basic syntax\nclaude mcp add --transport sse <name> <url>\n\n# Real example: Connect to Asana\nclaude mcp add --transport sse asana https://mcp.asana.com/sse\n\n# Example with authentication header\nclaude mcp add --transport sse private-api https://api.company.com/sse \\\n  --header \"X-API-Key: your-key-here\"",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：Option 3: Add a local stdio server",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Basic syntax\nclaude mcp add [options] <name> -- <command> [args...]\n\n# Real example: Add Airtable server\nclaude mcp add --transport stdio --env AIRTABLE_API_KEY=YOUR_KEY airtable \\\n  -- npx -y airtable-mcp-server",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：Managing your servers",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "# List all configured servers\nclaude mcp list\n\n# Get details for a specific server\nclaude mcp get github\n\n# Remove a server\nclaude mcp remove github\n\n# (within Claude Code) Check server status\n/mcp",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：Dynamic tool updates",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# This creates command=\"cmd\" which Windows can execute\nclaude mcp add --transport stdio my-server -- cmd /c npx -y @some/package",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：Plugin-provided MCP servers 1",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"database-tools\": {\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n    \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/config.json\"],\n    \"env\": {\n      \"DB_URL\": \"${DB_URL}\"\n    }\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Plugin-provided MCP servers 2",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"name\": \"my-plugin\",\n  \"mcpServers\": {\n    \"plugin-api\": {\n      \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/api-server\",\n      \"args\": [\"--port\", \"8080\"]\n    }\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Plugin-provided MCP servers 3",
-              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
-              "code": "# Within Claude Code, see all MCP servers including plugin ones\n/mcp",
-              "kind": "prompt"
-            },
-            {
-              "title": "原页关键片段：Local scope",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Add a local-scoped server (default)\nclaude mcp add --transport http stripe https://mcp.stripe.com\n\n# Explicitly specify local scope\nclaude mcp add --transport http stripe --scope local https://mcp.stripe.com",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：Project scope 1",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Add a project-scoped server\nclaude mcp add --transport http paypal --scope project https://mcp.paypal.com/mcp",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：Project scope 2",
-              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"mcpServers\": {\n    \"shared-server\": {\n      \"command\": \"/path/to/server\",\n      \"args\": [],\n      \"env\": {}\n    }\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：User scope",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Add a user server\nclaude mcp add --transport http hubspot --scope user https://mcp.hubspot.com/anthropic",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "What you can do with MCP",
-          "paragraphs": [
-            "这里先讲 MCP 能帮你碰到什么外面的东西。接上以后，Claude 不只会看本地文件，还能去看外面的账本和工具。",
-            "你可以把它当成给帮工开了院门，让它能去外面拿材料。"
-          ]
-        },
-        {
-          "title": "Popular MCP servers",
-          "paragraphs": [
-            "这里是在给你看常见现成货，别人已经接好的那些 MCP 服务都有哪些。",
-            "第一次上手，优先挑现成成熟的，不要一上来就自己造。"
-          ]
-        },
-        {
-          "title": "Installing MCP servers",
-          "paragraphs": [
-            "这里讲怎么把 MCP 服务接进来。先连上，再看得到，再试着用，顺序别乱。",
-            "第一次别贪多，接一个最刚需的就够。"
-          ]
-        },
-        {
-          "title": "Option 1: Add a remote HTTP server",
-          "paragraphs": [
-            "这一种是走普通网页那条路，适合对方本来就给了一个远程地址。",
-            "你把地址填对，认证做好，基本就能连。"
-          ],
-          "steps": [
-            {
-              "title": "Option 1: Add a remote HTTP server",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Basic syntax\nclaude mcp add --transport http <name> <url>\n\n# Real example: Connect to Notion\nclaude mcp add --transport http notion https://mcp.notion.com/mcp\n\n# Example with Bearer token\nclaude mcp add --transport http secure-api https://api.example.com/mcp \\\n  --header \"Authorization: Bearer your-token\"",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Option 2: Add a remote SSE server",
-          "paragraphs": [
-            "这一种也是远程接法，只是对方用的是 SSE 这种推送路子。",
-            "如果服务端写明让你用 SSE，就别拿 HTTP 那套硬套。"
-          ],
-          "steps": [
-            {
-              "title": "Option 2: Add a remote SSE server",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Basic syntax\nclaude mcp add --transport sse <name> <url>\n\n# Real example: Connect to Asana\nclaude mcp add --transport sse asana https://mcp.asana.com/sse\n\n# Example with authentication header\nclaude mcp add --transport sse private-api https://api.company.com/sse \\\n  --header \"X-API-Key: your-key-here\"",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Option 3: Add a local stdio server",
-          "paragraphs": [
-            "这一种是把服务直接放在你自己机器上跑，再从本地接过去。",
-            "适合那些本来就得靠本机命令启动的工具。"
-          ],
-          "steps": [
-            {
-              "title": "Option 3: Add a local stdio server",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Basic syntax\nclaude mcp add [options] <name> -- <command> [args...]\n\n# Real example: Add Airtable server\nclaude mcp add --transport stdio --env AIRTABLE_API_KEY=YOUR_KEY airtable \\\n  -- npx -y airtable-mcp-server",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Managing your servers",
-          "paragraphs": [
-            "这里讲已经接上的那些服务平时怎么管。能列出来、能改、能删，才算真接稳。",
-            "别连上一次就不管了，后面出问题还得回来这里查。"
-          ],
-          "steps": [
-            {
-              "title": "Managing your servers",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "# List all configured servers\nclaude mcp list\n\n# Get details for a specific server\nclaude mcp get github\n\n# Remove a server\nclaude mcp remove github\n\n# (within Claude Code) Check server status\n/mcp",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Dynamic tool updates",
-          "paragraphs": [
-            "这里讲的是外面那套工具变了以后，Claude 这边怎么跟着知道。",
-            "说白了，就是别让它一直拿旧工具说明干活。"
-          ],
-          "steps": [
-            {
-              "title": "Dynamic tool updates",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# This creates command=\"cmd\" which Windows can execute\nclaude mcp add --transport stdio my-server -- cmd /c npx -y @some/package",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Plugin-provided MCP servers",
-          "paragraphs": [
-            "这里讲插件也能顺手带一个 MCP 服务进来，不用你每次再单独接一遍。",
-            "适合把一整套能力打成包一起发。"
-          ],
-          "steps": [
-            {
-              "title": "Plugin-provided MCP servers 1",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"database-tools\": {\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n    \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/config.json\"],\n    \"env\": {\n      \"DB_URL\": \"${DB_URL}\"\n    }\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "Plugin-provided MCP servers 2",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"name\": \"my-plugin\",\n  \"mcpServers\": {\n    \"plugin-api\": {\n      \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/api-server\",\n      \"args\": [\"--port\", \"8080\"]\n    }\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "Plugin-provided MCP servers 3",
-              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
-              "code": "# Within Claude Code, see all MCP servers including plugin ones\n/mcp",
-              "kind": "prompt"
-            }
-          ]
-        },
-        {
-          "title": "MCP installation scopes",
-          "paragraphs": [
-            "这里讲 MCP 装在哪一层。是只给当前项目用，还是你所有项目都能用，要先分清。",
-            "这一步分清了，后面就不容易出现“怎么这边改了那边也跟着变”。"
-          ]
-        },
-        {
-          "title": "Local scope",
-          "paragraphs": [
-            "本地这一层的意思是：只管眼前这个地方，不往外带。",
-            "适合临时试验，试完不满意也好收。"
-          ],
-          "steps": [
-            {
-              "title": "Local scope",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Add a local-scoped server (default)\nclaude mcp add --transport http stripe https://mcp.stripe.com\n\n# Explicitly specify local scope\nclaude mcp add --transport http stripe --scope local https://mcp.stripe.com",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Project scope",
-          "paragraphs": [
-            "项目这一层的意思是：这个仓库里的人都按同一套来。",
-            "适合团队共用的连接方式。"
-          ],
-          "steps": [
-            {
-              "title": "Project scope 1",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Add a project-scoped server\nclaude mcp add --transport http paypal --scope project https://mcp.paypal.com/mcp",
-              "kind": "command"
-            },
-            {
-              "title": "Project scope 2",
-              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"mcpServers\": {\n    \"shared-server\": {\n      \"command\": \"/path/to/server\",\n      \"args\": [],\n      \"env\": {}\n    }\n  }\n}",
-              "kind": "config"
-            }
-          ]
-        },
-        {
-          "title": "User scope",
-          "paragraphs": [
-            "用户这一层的意思是：你这个人以后到别的项目也能接着用。",
-            "适合你自己常用、但不一定要全团队共享的东西。"
-          ],
-          "steps": [
-            {
-              "title": "User scope",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Add a user server\nclaude mcp add --transport http hubspot --scope user https://mcp.hubspot.com/anthropic",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Choosing the right scope",
-          "paragraphs": [
-            "这里就是帮你选装在哪一层最合适。先想清楚“只这次用”还是“以后都要用”，答案就出来了。",
-            "别图省事全装到最大那层，后面不好收。"
-          ]
-        },
-        {
-          "title": "Scope hierarchy and precedence",
-          "paragraphs": [
-            "这里讲的是几层规则撞到一起时，最后到底听谁的。",
-            "你可以把它理解成：村规、队规、今天临时交代，谁更大，谁压谁。"
-          ]
-        },
-        {
-          "title": "Environment variable expansion in .mcp.json",
-          "paragraphs": [
-            "这里讲怎么在 `.mcp.json` 里借用环境变量，不把敏感东西硬写死在文件里。",
-            "像密钥、地址这类经常变的东西，这样放更稳。"
-          ],
-          "steps": [
-            {
-              "title": "Environment variable expansion in .mcp.json",
-              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"mcpServers\": {\n    \"api-server\": {\n      \"type\": \"http\",\n      \"url\": \"${API_BASE_URL:-https://api.example.com}/mcp\",\n      \"headers\": {\n        \"Authorization\": \"Bearer ${API_KEY}\"\n      }\n    }\n  }\n}",
-              "kind": "config"
-            }
-          ]
-        },
-        {
-          "title": "Practical examples",
-          "paragraphs": [
-            "这里开始上真例子了，就是拿几种常见活路告诉你，MCP 真接上以后能怎么用。",
-            "先挑一个和你手头最像的例子去照。"
-          ]
-        },
-        {
-          "title": "Example: Monitor errors with Sentry",
-          "paragraphs": [
-            "这个例子是在说怎么把报错系统接进来，让 Claude 直接看线上出什么事。",
-            "适合那种你老要来回翻报错平台的场景。"
-          ],
-          "steps": [
-            {
-              "title": "Example: Monitor errors with Sentry 1",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "claude mcp add --transport http sentry https://mcp.sentry.dev/mcp",
-              "kind": "command"
-            },
-            {
-              "title": "Example: Monitor errors with Sentry 2",
-              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
-              "code": "/mcp",
-              "kind": "prompt"
-            },
-            {
-              "title": "Example: Monitor errors with Sentry 3",
-              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
-              "code": "What are the most common errors in the last 24 hours?",
-              "kind": "prompt"
-            },
-            {
-              "title": "Example: Monitor errors with Sentry 4",
-              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
-              "code": "Show me the stack trace for error ID abc123",
-              "kind": "prompt"
-            },
-            {
-              "title": "Example: Monitor errors with Sentry 5",
-              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
-              "code": "Which deployment introduced these new errors?",
-              "kind": "prompt"
-            }
-          ]
-        },
-        {
-          "title": "Example: Connect to GitHub for code reviews",
-          "paragraphs": [
-            "这个例子是在说把 GitHub 接进来，让 Claude 直接看代码审查那一摊。",
-            "这样它看变更、看评论、看 PR 会顺手很多。"
-          ],
-          "steps": [
-            {
-              "title": "Example: Connect to GitHub for code reviews 1",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude mcp add --transport http github https://api.githubcopilot.com/mcp/",
-              "kind": "command"
-            },
-            {
-              "title": "Example: Connect to GitHub for code reviews 2",
-              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
-              "code": "/mcp",
-              "kind": "prompt"
-            },
-            {
-              "title": "Example: Connect to GitHub for code reviews 3",
-              "body": "“Example: Connect to GitHub for code reviews”这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "Review PR #456 and suggest improvements",
-              "kind": "code"
-            },
-            {
-              "title": "Example: Connect to GitHub for code reviews 4",
-              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
-              "code": "Create a new issue for the bug we just found",
-              "kind": "prompt"
-            },
-            {
-              "title": "Example: Connect to GitHub for code reviews 5",
-              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
-              "code": "Show me all open PRs assigned to me",
-              "kind": "prompt"
-            }
-          ]
-        },
-        {
-          "title": "Example: Query your PostgreSQL database",
-          "paragraphs": [
-            "这个例子是在说怎么让 Claude 去问数据库，但前提还是先把读和写分清。",
-            "第一次最好先只读，别急着让它改库。"
-          ],
-          "steps": [
-            {
-              "title": "Example: Query your PostgreSQL database 1",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "claude mcp add --transport stdio db -- npx -y @bytebase/dbhub \\\n  --dsn \"postgresql://readonly:[email protected]:5432/analytics\"",
-              "kind": "command"
-            },
-            {
-              "title": "Example: Query your PostgreSQL database 2",
-              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
-              "code": "What's our total revenue this month?",
-              "kind": "prompt"
-            },
-            {
-              "title": "Example: Query your PostgreSQL database 3",
-              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
-              "code": "Show me the schema for the orders table",
-              "kind": "prompt"
-            },
-            {
-              "title": "Example: Query your PostgreSQL database 4",
-              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
-              "code": "Find customers who haven't made a purchase in 90 days",
-              "kind": "prompt"
-            }
-          ]
-        },
-        {
-          "title": "Authenticate with remote MCP servers",
-          "paragraphs": [
-            "这里讲远程服务怎么认主。没认上，再多命令也白搭。",
-            "先把登录和授权走通，后面再谈干活。"
-          ],
-          "steps": [
-            {
-              "title": "Authenticate with remote MCP servers 1",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude mcp add --transport http sentry https://mcp.sentry.dev/mcp",
-              "kind": "command"
-            },
-            {
-              "title": "Authenticate with remote MCP servers 2",
-              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
-              "code": "/mcp",
-              "kind": "prompt"
-            }
-          ]
-        },
-        {
-          "title": "Use a fixed OAuth callback port",
-          "paragraphs": [
-            "这里讲回调端口固定下来这件事。这样网络和系统规则更容易放行，不容易每次变来变去。",
-            "适合对网络规矩比较严的环境。"
-          ],
-          "steps": [
-            {
-              "title": "Use a fixed OAuth callback port",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Fixed callback port with dynamic client registration\nclaude mcp add --transport http \\\n  --callback-port 8080 \\\n  my-server https://mcp.example.com/mcp",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Use pre-configured OAuth credentials",
-          "paragraphs": [
-            "这里讲提前把 OAuth 那套证件准备好，不用临时一边接一边找。",
-            "提前备好，接起来会顺很多。"
-          ],
-          "steps": [
-            {
-              "title": "Use pre-configured OAuth credentials 1",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "claude mcp add --transport http \\\n  --client-id your-client-id --client-secret --callback-port 8080 \\\n  my-server https://mcp.example.com/mcp",
-              "kind": "command"
-            },
-            {
-              "title": "Use pre-configured OAuth credentials 2",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "claude mcp add-json my-server \\\n  '{\"type\":\"http\",\"url\":\"https://mcp.example.com/mcp\",\"oauth\":{\"clientId\":\"your-client-id\",\"callbackPort\":8080}}' \\\n  --client-secret",
-              "kind": "command"
-            },
-            {
-              "title": "Use pre-configured OAuth credentials 3",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "claude mcp add-json my-server \\\n  '{\"type\":\"http\",\"url\":\"https://mcp.example.com/mcp\",\"oauth\":{\"callbackPort\":8080}}'",
-              "kind": "command"
-            },
-            {
-              "title": "Use pre-configured OAuth credentials 4",
-              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
-              "code": "MCP_CLIENT_SECRET=your-secret claude mcp add --transport http \\\n  --client-id your-client-id --client-secret --callback-port 8080 \\\n  my-server https://mcp.example.com/mcp",
-              "kind": "code"
-            }
-          ]
-        },
-        {
-          "title": "Override OAuth metadata discovery",
-          "paragraphs": [
-            "这里讲的是默认那套自动认路不灵时，你要手工告诉它该往哪儿认。",
-            "通常是环境比较特殊时才会用到。"
-          ],
-          "steps": [
-            {
-              "title": "Override OAuth metadata discovery",
-              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"mcpServers\": {\n    \"my-server\": {\n      \"type\": \"http\",\n      \"url\": \"https://mcp.example.com/mcp\",\n      \"oauth\": {\n        \"authServerMetadataUrl\": \"https://auth.example.com/.well-known/openid-configuration\"\n      }\n    }\n  }\n}",
-              "kind": "config"
-            }
-          ]
-        },
-        {
-          "title": "Add MCP servers from JSON configuration",
-          "paragraphs": [
-            "这里讲怎么直接从 JSON 配置里把一组 MCP 服务一起加进去。",
-            "适合团队想统一发一套现成配置，不想每个人手敲一遍。"
-          ],
-          "steps": [
-            {
-              "title": "Add MCP servers from JSON configuration 1",
-              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "# Basic syntax\nclaude mcp add-json <name> '<json>'\n\n# Example: Adding an HTTP server with JSON configuration\nclaude mcp add-json weather-api '{\"type\":\"http\",\"url\":\"https://api.weather.com/mcp\",\"headers\":{\"Authorization\":\"Bearer token\"}}'\n\n# Example: Adding a stdio server with JSON configuration\nclaude mcp add-json local-weather '{\"type\":\"stdio\",\"command\":\"/path/to/weather-cli\",\"args\":[\"--api-key\",\"abc123\"],\"env\":{\"CACHE_DIR\":\"/tmp\"}}'\n\n# Example: Adding an HTTP server with pre-configured OAuth credentials\nclaude mcp add-json my-server '{\"type\":\"http\",\"url\":\"https://mcp.example.com/mcp\",\"oauth\":{\"clientId\":\"your-client-id\",\"callbackPort\":8080}}' --client-secret",
-              "kind": "config"
-            },
-            {
-              "title": "Add MCP servers from JSON configuration 2",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude mcp get weather-api",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Import MCP servers from Claude Desktop",
-          "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Import MCP servers from Claude Desktop 1",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Basic syntax \nclaude mcp add-from-claude-desktop",
-              "kind": "command"
-            },
-            {
-              "title": "Import MCP servers from Claude Desktop 2",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude mcp list",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Use MCP servers from Claude.ai",
-          "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
-          ],
-          "steps": [
-            {
-              "title": "Use MCP servers from Claude.ai 1",
-              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
-              "code": "/mcp",
-              "kind": "prompt"
-            },
-            {
-              "title": "Use MCP servers from Claude.ai 2",
-              "body": "“Use MCP servers from Claude.ai”这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "ENABLE_CLAUDEAI_MCP_SERVERS=false claude",
-              "kind": "code"
-            }
-          ]
-        },
-        {
-          "title": "Use Claude Code as an MCP server",
-          "paragraphs": [
-            "这一段主要是在把“Use Claude Code as an MCP server”讲实，不是只摆个标题给你看。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Use Claude Code as an MCP server 1",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "# Start Claude as a stdio MCP server\nclaude mcp serve",
-              "kind": "command"
-            },
-            {
-              "title": "Use Claude Code as an MCP server 2",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"mcpServers\": {\n    \"claude-code\": {\n      \"type\": \"stdio\",\n      \"command\": \"claude\",\n      \"args\": [\"mcp\", \"serve\"],\n      \"env\": {}\n    }\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "Use Claude Code as an MCP server 3",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "which claude",
-              "kind": "command"
-            },
-            {
-              "title": "Use Claude Code as an MCP server 4",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"mcpServers\": {\n    \"claude-code\": {\n      \"type\": \"stdio\",\n      \"command\": \"/full/path/to/claude\",\n      \"args\": [\"mcp\", \"serve\"],\n      \"env\": {}\n    }\n  }\n}",
-              "kind": "config"
-            }
-          ]
-        },
-        {
-          "title": "MCP output limits and warnings",
-          "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ],
-          "steps": [
-            {
-              "title": "MCP output limits and warnings",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "# Set a higher limit for MCP tool outputs\nexport MAX_MCP_OUTPUT_TOKENS=50000\nclaude",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Respond to MCP elicitation requests",
-          "paragraphs": [
-            "看到这里，就把“Respond to MCP elicitation requests”当成一件真要上手的活来看。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Use MCP resources",
-          "paragraphs": [
-            "这一段主要是在把“Use MCP resources”讲实，不是只摆个标题给你看。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
-          ]
-        }
-      ],
-      "illustration": {
-        "title": "一眼看懂这一页",
-        "lines": [
-          "Model Context Protocol (MCP)",
-          "   |",
-          "   v",
-          "这是 Build with Claude Code 里的一摊要紧活",
+          "这是 Automation 里的一摊要紧活",
           "   |",
           "   v",
           "先弄懂，再下手"
@@ -8258,7 +8302,7 @@
           "Troubleshooting",
           "   |",
           "   v",
-          "这是 Build with Claude Code 里的一摊要紧活",
+          "这是 Troubleshooting 里的一摊要紧活",
           "   |",
           "   v",
           "先弄懂，再下手"
@@ -13244,6 +13288,136 @@
         "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
       }
     },
+    "output-styles": {
+      "sourceLabel": "Output styles",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页讲输出风格，意思是 Claude 最后把结果说成什么样。",
+            "不只是写代码时能用，做摘要、报告、清单、结构化输出时也很有用。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把它想成给帮工提前定口径。是让它写成清单、写成报告、写成像客服话术，还是写成结构化格式，先说好，后面省很多返工。",
+            "这一页特别实用，因为很多时候问题不在 Claude 不会，而在它说出来的样子不合用。",
+            "如果你想把 Claude 从“程序员帮手”扩到更多工作场景，这页很值。"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "先用内置输出风格试手，确认哪种最适合你的活。",
+            "真要自定义时，先把格式目标讲清楚，不要又想自由发挥又想字段固定。",
+            "这页最好和 `CLAUDE.md`、agents、append-system-prompt 一起分清楚谁管什么。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Change your output style",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"outputStyle\": \"Explanatory\"\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Create a custom output style",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "---\nname: My Custom Style\ndescription:\n  A brief description of what this style does, to be displayed to the user\n---\n\n# Custom Style Instructions\n\nYou are an interactive CLI tool that helps users with software engineering\ntasks. [Your custom instructions here...]\n\n## Specific Behaviors\n\n[Define how the assistant should behave in this style...]",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Built-in output styles",
+          "paragraphs": [
+            "这一块主要是在说“Built-in output styles”真到手上该怎么用，哪里最容易踩坑。"
+          ]
+        },
+        {
+          "title": "How output styles work",
+          "paragraphs": [
+            "这里不是让你背“How output styles work”这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
+          "title": "Change your output style",
+          "paragraphs": [
+            "这一段是在把 /config and select Output style to pick a style from a menu. Your selection is saved to .claude/settings.local.json at the local project level. 真跑起来。别只看命令长什么样，还得看跑完该出现什么。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Change your output style",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"outputStyle\": \"Explanatory\"\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Create a custom output style",
+          "paragraphs": [
+            "这里不是让你背“Create a custom output style”这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Create a custom output style",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "---\nname: My Custom Style\ndescription:\n  A brief description of what this style does, to be displayed to the user\n---\n\n# Custom Style Instructions\n\nYou are an interactive CLI tool that helps users with software engineering\ntasks. [Your custom instructions here...]\n\n## Specific Behaviors\n\n[Define how the assistant should behave in this style...]",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Frontmatter",
+          "paragraphs": [
+            "这里不是让你背“Frontmatter”这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
+          "title": "Comparisons to related features",
+          "paragraphs": [
+            "这一块主要是在说“Comparisons to related features”真到手上该怎么用，哪里最容易踩坑。"
+          ]
+        },
+        {
+          "title": "Output Styles vs. CLAUDE.md vs. —append-system-prompt",
+          "paragraphs": [
+            "这一块主要是在说“Output Styles vs. CLAUDE.md vs. —append-system-prompt”真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Output Styles vs. Agents",
+          "paragraphs": [
+            "这里不是让你背“Output Styles vs. Agents”这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Output Styles vs. Skills",
+          "paragraphs": [
+            "这里不是让你背“Output Styles vs. Skills”这个词，而是让你看它真干活时怎么使。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Output styles",
+          "   |",
+          "   v",
+          "这是 Configuration 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
     "statusline": {
       "sourceLabel": "Customize your status line",
       "sections": [
@@ -15564,6 +15738,287 @@
         "title": "一眼看懂这一页",
         "lines": [
           "Plugins reference",
+          "   |",
+          "   v",
+          "这是 Reference 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "channels-reference": {
+      "sourceLabel": "Channels reference",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Channels reference：Build an MCP server that pushes webhooks, alerts, and chat messages into a Claude Code session. Reference for the channel contract: capability declaration, notification events, reply tools, and sender gating.",
+            "你可以把它当成“Reference”这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把“Channels reference”理解成 Reference 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Overview、What you need、Example: build a webhook receiver、Test during the research preview 这些环节往下讲。",
+            "翻成人话，大概就是：Example: build a webhook receiver"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Overview -> What you need -> Example: build a webhook receiver -> Test during the research preview。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Example: build a webhook receiver 1",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "mkdir webhook-channel && cd webhook-channel\nbun add @modelcontextprotocol/sdk",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Example: build a webhook receiver 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "#!/usr/bin/env bun\nimport { Server } from '@modelcontextprotocol/sdk/server/index.js'\nimport { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'\n\n// Create the MCP server and declare it as a channel\nconst mcp = new Server(\n  { name: 'webhook', version: '0.0.1' },\n  {\n    // this key is what makes it a channel — Claude Code registers a listener for it\n    capabilities: { experimental: { 'claude/channel': {} } },\n    // added to Claude's system prompt so it knows how to handle these events\n    instructions: 'Events from the webhook channel arrive as <channel source=\"webhook\" ...>. They are one-way: read them and act, no reply expected.',\n  },\n)\n\n// Connect to Claude Code over stdio (Claude Code spawns this process)\nawait mcp.connect(new StdioServerTransport())\n\n// Start an HTTP server that forwards every POST to Claude\nBun.serve({\n  port: 8788,  // any open port works\n  // localhost-only: nothing outside this machine can POST\n  hostname: '127.0.0.1',\n  async fetch(req) {\n    const body = await req.text()\n    await mcp.notification({\n      method: 'notifications/claude/channel',\n      params: {\n        content: body,  // becomes the body of the <channel> tag\n        // each key becomes a tag attribute, e.g. <channel path=\"/\" method=\"POST\">\n        meta: { path: new URL(req.url).pathname, method: req.method },\n      },\n    })\n    return new Response('ok')\n  },\n})",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Example: build a webhook receiver 3",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"mcpServers\": {\n    \"webhook\": { \"command\": \"bun\", \"args\": [\"./webhook.ts\"] }\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Test during the research preview",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "# Testing a plugin you're developing\nclaude --dangerously-load-development-channels plugin:yourplugin@yourmarketplace\n\n# Testing a bare .mcp.json server (no plugin wrapper yet)\nclaude --dangerously-load-development-channels server:webhook",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Server options",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "import { Server } from '@modelcontextprotocol/sdk/server/index.js'\n\nconst mcp = new Server(\n  { name: 'your-channel', version: '0.0.1' },\n  {\n    capabilities: {\n      experimental: { 'claude/channel': {} },  // registers the channel listener\n      tools: {},  // omit for one-way channels\n    },\n    // added to Claude's system prompt so it knows how to handle your events\n    instructions: 'Messages arrive as <channel source=\"your-channel\" ...>. Reply with the reply tool.',\n  },\n)",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Notification format 1",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "await mcp.notification({\n  method: 'notifications/claude/channel',\n  params: {\n    content: 'build failed on main: https://ci.example.com/run/1234',\n    meta: { severity: 'high', run_id: '1234' },\n  },\n})",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Notification format 2",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "<channel source=\"your-channel\" severity=\"high\" run_id=\"1234\">\nbuild failed on main: https://ci.example.com/run/1234\n</channel>",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Expose a reply tool 1",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "capabilities: {\n  experimental: { 'claude/channel': {} },\n  tools: {},  // enables tool discovery\n},",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Expose a reply tool 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "// Add this import at the top of webhook.ts\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\n\n// Claude queries this at startup to discover what tools your server offers\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    // inputSchema tells Claude what arguments to pass\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\n// Claude calls this when it wants to invoke a tool\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    // your platform's send API\n    await yourPlatform.send(chat_id, text)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Expose a reply tool 3",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "instructions: 'Messages arrive as <channel source=\"webhook\" chat_id=\"...\">. Reply with the reply tool, passing the chat_id from the tag.'",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Gate inbound messages",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "const allowed = new Set(loadAllowlist())  // from your access.json or equivalent\n\n// inside your message handler, before emitting:\nif (!allowed.has(message.from.id)) {  // sender, not room\n  return  // drop silently\n}\nawait mcp.notification({ ... })",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Overview",
+          "paragraphs": [
+            "看到这里，就把“Overview”当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "What you need",
+          "paragraphs": [
+            "这一段不只是挂个标题，它是在说明“What you need”这一块到底负责什么。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Example: build a webhook receiver",
+          "paragraphs": [
+            "别把这段只当成标题看，它其实是在给“Example: build a webhook receiver”划边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Example: build a webhook receiver 1",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "mkdir webhook-channel && cd webhook-channel\nbun add @modelcontextprotocol/sdk",
+              "kind": "command"
+            },
+            {
+              "title": "Example: build a webhook receiver 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "#!/usr/bin/env bun\nimport { Server } from '@modelcontextprotocol/sdk/server/index.js'\nimport { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'\n\n// Create the MCP server and declare it as a channel\nconst mcp = new Server(\n  { name: 'webhook', version: '0.0.1' },\n  {\n    // this key is what makes it a channel — Claude Code registers a listener for it\n    capabilities: { experimental: { 'claude/channel': {} } },\n    // added to Claude's system prompt so it knows how to handle these events\n    instructions: 'Events from the webhook channel arrive as <channel source=\"webhook\" ...>. They are one-way: read them and act, no reply expected.',\n  },\n)\n\n// Connect to Claude Code over stdio (Claude Code spawns this process)\nawait mcp.connect(new StdioServerTransport())\n\n// Start an HTTP server that forwards every POST to Claude\nBun.serve({\n  port: 8788,  // any open port works\n  // localhost-only: nothing outside this machine can POST\n  hostname: '127.0.0.1',\n  async fetch(req) {\n    const body = await req.text()\n    await mcp.notification({\n      method: 'notifications/claude/channel',\n      params: {\n        content: body,  // becomes the body of the <channel> tag\n        // each key becomes a tag attribute, e.g. <channel path=\"/\" method=\"POST\">\n        meta: { path: new URL(req.url).pathname, method: req.method },\n      },\n    })\n    return new Response('ok')\n  },\n})",
+              "kind": "command"
+            },
+            {
+              "title": "Example: build a webhook receiver 3",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"mcpServers\": {\n    \"webhook\": { \"command\": \"bun\", \"args\": [\"./webhook.ts\"] }\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Example: build a webhook receiver 4",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --dangerously-load-development-channels server:webhook",
+              "kind": "command"
+            },
+            {
+              "title": "Example: build a webhook receiver 5",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "curl -X POST localhost:8788 -d \"build failed on main: https://ci.example.com/run/1234\"",
+              "kind": "command"
+            },
+            {
+              "title": "Example: build a webhook receiver 6",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "<channel source=\"webhook\" path=\"/\" method=\"POST\">build failed on main: https://ci.example.com/run/1234</channel>",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Test during the research preview",
+          "paragraphs": [
+            "这一块主要是在说“Test during the research preview”真到手上该怎么用，哪里最容易踩坑。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Test during the research preview",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "# Testing a plugin you're developing\nclaude --dangerously-load-development-channels plugin:yourplugin@yourmarketplace\n\n# Testing a bare .mcp.json server (no plugin wrapper yet)\nclaude --dangerously-load-development-channels server:webhook",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Server options",
+          "paragraphs": [
+            "看到这里，就把“Server options”当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Server options",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "import { Server } from '@modelcontextprotocol/sdk/server/index.js'\n\nconst mcp = new Server(\n  { name: 'your-channel', version: '0.0.1' },\n  {\n    capabilities: {\n      experimental: { 'claude/channel': {} },  // registers the channel listener\n      tools: {},  // omit for one-way channels\n    },\n    // added to Claude's system prompt so it knows how to handle your events\n    instructions: 'Messages arrive as <channel source=\"your-channel\" ...>. Reply with the reply tool.',\n  },\n)",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Notification format",
+          "paragraphs": [
+            "这一段主要是在把“Notification format”讲实，不是只摆个标题给你看。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ],
+          "steps": [
+            {
+              "title": "Notification format 1",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "await mcp.notification({\n  method: 'notifications/claude/channel',\n  params: {\n    content: 'build failed on main: https://ci.example.com/run/1234',\n    meta: { severity: 'high', run_id: '1234' },\n  },\n})",
+              "kind": "command"
+            },
+            {
+              "title": "Notification format 2",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "<channel source=\"your-channel\" severity=\"high\" run_id=\"1234\">\nbuild failed on main: https://ci.example.com/run/1234\n</channel>",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Expose a reply tool",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Expose a reply tool 1",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "capabilities: {\n  experimental: { 'claude/channel': {} },\n  tools: {},  // enables tool discovery\n},",
+              "kind": "code"
+            },
+            {
+              "title": "Expose a reply tool 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "// Add this import at the top of webhook.ts\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\n\n// Claude queries this at startup to discover what tools your server offers\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    // inputSchema tells Claude what arguments to pass\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\n// Claude calls this when it wants to invoke a tool\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    // your platform's send API\n    await yourPlatform.send(chat_id, text)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})",
+              "kind": "command"
+            },
+            {
+              "title": "Expose a reply tool 3",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "instructions: 'Messages arrive as <channel source=\"webhook\" chat_id=\"...\">. Reply with the reply tool, passing the chat_id from the tag.'",
+              "kind": "code"
+            },
+            {
+              "title": "Expose a reply tool 4",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "#!/usr/bin/env bun\nimport { Server } from '@modelcontextprotocol/sdk/server/index.js'\nimport { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\n\nconst mcp = new Server(\n  { name: 'webhook', version: '0.0.1' },\n  {\n    capabilities: {\n      experimental: { 'claude/channel': {} },\n      tools: {},\n    },\n    instructions: 'Messages arrive as <channel source=\"webhook\" chat_id=\"...\">. Reply with the reply tool, passing the chat_id from the tag.',\n  },\n)\n\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    // your platform's send API — replace with your real integration\n    console.error(`Reply to ${chat_id}: ${text}`)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})\n\nawait mcp.connect(new StdioServerTransport())\n\nlet nextId = 1\nBun.serve({\n  port: 8788,\n  hostname: '127.0.0.1',\n  async fetch(req) {\n    const body = await req.text()\n    const chat_id = String(nextId++)\n    await mcp.notification({\n      method: 'notifications/claude/channel',\n      params: {\n        content: body,\n        meta: { chat_id, path: new URL(req.url).pathname, method: req.method },\n      },\n    })\n    return new Response('ok')\n  },\n})",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Gate inbound messages",
+          "paragraphs": [
+            "这一段主要是在把“Gate inbound messages”讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Gate inbound messages",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "const allowed = new Set(loadAllowlist())  // from your access.json or equivalent\n\n// inside your message handler, before emitting:\nif (!allowed.has(message.from.id)) {  // sender, not room\n  return  // drop silently\n}\nawait mcp.notification({ ... })",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Package as a plugin",
+          "paragraphs": [
+            "这一段主要是在把“Package as a plugin”讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "See also",
+          "paragraphs": [
+            "这一段主要是在把“See also”讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Channels reference",
           "   |",
           "   v",
           "这是 Reference 里的一摊要紧活",
