@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="Claude Code 常见报错排查清单 | 通俗版 Claude Code 文档"
+	description="把最常见的安装、登录、权限、插件、MCP 这几类问题按排查顺序摊开讲清楚。"
+	canonical={new URL('/guides/common-errors-checklist', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原创实战指南</p>
+				<h1 class="doc-home__title">Claude Code 常见报错排查清单</h1>
+				<div class="doc-copy">
+					<p>很多人一看到报错就想大改配置，其实大多数问题都有顺手的排查顺序。先排简单的，再碰复杂的，别一上来掀桌子。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">先看是不是安装问题</p>
+				<div class="doc-copy">
+					<p>命令找不到、版本看不到、终端里根本认不出 Claude Code，这通常都是安装或 PATH 问题。先别跑远。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">再看是不是登录问题</p>
+				<div class="doc-copy">
+					<p>能装上，不等于能正常用。登录没走通、账号权限不对、第三方平台凭证没配好，都会让人误以为是工具坏了。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">再往下看权限和沙箱</p>
+				<div class="doc-copy">
+					<p>如果它能说话、能读项目，但一到执行命令或改文件就卡，多半是权限和沙箱设置在拦。</p>
+					<p>这类问题别靠猜，先看它到底是“不能读”“不能写”还是“不能执行”。三种不是一回事。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">插件和 MCP 问题最后再查</p>
+				<div class="doc-copy">
+					<p>如果你基础功能都稳，偏偏是插件、MCP、hooks 一挂就出事，那就缩小范围：先关掉新增那一项，再一点点加回来。</p>
+					<p>排错最怕一边改三样，最后连自己都不知道是哪一刀起作用了。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>

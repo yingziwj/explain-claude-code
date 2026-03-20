@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="Claude Code 权限到底该开到哪 | 通俗版 Claude Code 文档"
+	description="把权限这件事从“开不开”讲成“先开多少、什么时候补、什么时候必须收”。"
+	canonical={new URL('/guides/permission-boundaries', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原创实战指南</p>
+				<h1 class="doc-home__title">Claude Code 权限到底该开到哪</h1>
+				<div class="doc-copy">
+					<p>权限不是胆大就开、胆小就关。真正该想的是：你现在这件活，到底需要哪把钥匙。</p>
+					<p>很多人要么一把全开，图省事；要么一把不放，最后什么也做不动。两边都不稳。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">最稳的原则</p>
+				<div class="doc-copy">
+					<p>先给最小够用的一档。真卡住了，再补那一小口，不要一开始就把门全打开。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">什么时候可以放宽一点</p>
+				<div class="doc-copy">
+					<p>如果你在自己的测试项目里、改动范围也小、而且你看得懂它会做什么，这种时候可以比生产环境稍微放宽一点。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">什么时候必须收紧</p>
+				<div class="doc-copy">
+					<p>碰到正式仓库、团队共享环境、生产数据、外部服务、自动执行脚本这些东西时，权限一定要收紧，宁可多确认几次。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">一句最实在的话</p>
+				<div class="doc-copy">
+					<p>权限像借钥匙。借一把厨房钥匙，不等于把整栋楼都交出去。你每次都只借它今天真要用到的那几把，心里才稳。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>

@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="Claude Code 安装对照版：Windows、macOS、Linux | 通俗版 Claude Code 文档"
+	description="把不同系统上手 Claude Code 时最容易混的地方放在一页里对照讲清楚。"
+	canonical={new URL('/guides/installation-by-platform', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原创实战指南</p>
+				<h1 class="doc-home__title">Claude Code 安装对照版：Windows、macOS、Linux</h1>
+				<div class="doc-copy">
+					<p>官方文档会把安装步骤讲明白，但新手最常卡住的，不是“有没有步骤”，而是“我这台机器到底该看哪段”。这页就是把三种常见系统放在一起对照看。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">Windows</p>
+				<div class="doc-copy">
+					<p>Windows 用户最容易卡在两件事：终端环境和权限。你得先分清自己是在 PowerShell、CMD 还是别的终端里干活，不然同一条命令复制过去，表现可能不一样。</p>
+					<p>如果安装后命令找不到，先别怀疑 Claude Code 本身，先看 PATH 有没有生效、终端是不是重开了。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">macOS</p>
+				<div class="doc-copy">
+					<p>macOS 常见问题反而更朴素：系统版本够不够、终端壳是不是你平常用的那个、Homebrew 装没装稳。</p>
+					<p>如果你是新手，macOS 通常是三种系统里最顺手的，但也别因为顺手就跳过验证步骤，版本、登录、命令是否可用都得看一眼。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">Linux</p>
+				<div class="doc-copy">
+					<p>Linux 变化最大，因为发行版和环境差得多。你如果在服务器、容器或远程开发机里装，先想清楚到底是给“你这台本机”装，还是给“远端那台机器”装。</p>
+					<p>很多“本地能跑，远端不能跑”的问题，根子都在这里。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">最稳的共通做法</p>
+				<div class="doc-copy">
+					<p>不管你是哪种系统，都按一个笨办法走：装完先验命令、再验登录、再拿一个小目录做最小测试。别一装好就去啃大仓库。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>

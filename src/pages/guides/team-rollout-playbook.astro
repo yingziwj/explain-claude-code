@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="小团队怎么落地 Claude Code | 通俗版 Claude Code 文档"
+	description="不是讲大公司制度，而是讲一个小团队真想把 Claude Code 用起来，先从哪几步走。"
+	canonical={new URL('/guides/team-rollout-playbook', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原创实战指南</p>
+				<h1 class="doc-home__title">小团队怎么落地 Claude Code</h1>
+				<div class="doc-copy">
+					<p>团队落地最怕两头空：要么一句话“大家都去用 AI”，结果没人知道怎么用；要么一上来规矩写满墙，最后谁也懒得碰。</p>
+					<p>小团队最稳的走法，不是铺得很大，而是先拿一小撮人和一小类任务试出节奏。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第一步：先挑试点</p>
+				<div class="doc-copy">
+					<p>别全员同时开。先挑两三个人、两三类活，比如读代码、补测试、写小工具。这样出问题也好收。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第二步：先定边界</p>
+				<div class="doc-copy">
+					<p>最先定的不是 KPI，而是边界：哪些仓库能用，哪些命令先别放，哪些数据不能碰。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第三步：让大家用同一套起手动作</p>
+				<div class="doc-copy">
+					<p>如果每个人上手姿势都不一样，后面经验没法复用。最好先统一几种常见提问模板、常见检查顺序和常见回顾方式。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第四步：慢慢再加复杂能力</p>
+				<div class="doc-copy">
+					<p>等单人使用顺了，再考虑 plugins、sub-agents、hooks、MCP。顺序别反。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>
