@@ -14,11 +14,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 				<h1 class="doc-home__title">MCP 连不上时先查什么</h1>
 				<div class="doc-copy">
 					<p>MCP 这东西一旦连不上，很多人会觉得它特别玄。其实大多数时候还是那几类老问题：服务没起、配置挂错层、认证没通、网络被拦。</p>
+					<p>你可以先把它想成一根外接水管。水没流进来，不一定是 Claude Code 这头坏了，也可能是那头水龙头没开、管子接错口、阀门没授权。</p>
 				</div>
 			</section>
-			<section class="doc-panel"><p class="doc-eyebrow">先看服务是不是活着</p><div class="doc-copy"><p>先确认 MCP 服务自己是不是能正常起。服务本身都没活，后面所有配置都白搭。</p></div></section>
-			<section class="doc-panel"><p class="doc-eyebrow">再看配在哪一层</p><div class="doc-copy"><p>MCP 很容易配错位置。你得先搞清这是全局、项目、插件还是子代理自己的配置，不然明明写了也不生效。</p></div></section>
-			<section class="doc-panel"><p class="doc-eyebrow">再看认证和网络</p><div class="doc-copy"><p>如果服务活着、配置也像对的，那就去查认证和网络。很多“连不上”其实不是 Claude Code 的锅，而是那头不给过。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">第一步：先看服务是不是活着</p><div class="doc-copy"><p>先确认 MCP 服务自己是不是能正常起。服务本身都没活，后面所有配置都白搭。</p><p>别一上来就盯着 Claude Code 这边翻配置，先问一句：那头服务到底活着没有。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">第二步：再看配在哪一层</p><div class="doc-copy"><p>MCP 很容易配错位置。你得先搞清这是全局、项目、插件还是子代理自己的配置，不然明明写了也不生效。</p><p>这类问题最像“我明明写了怎么没用”，其实不是没用，是你写到别的抽屉里去了。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">第三步：再看认证和网络</p><div class="doc-copy"><p>如果服务活着、配置也像对的，那就去查认证和网络。很多“连不上”其实不是 Claude Code 的锅，而是那头不给过。</p><p>特别是公司内网、企业服务、带 OAuth 的东西，很容易卡在“服务在，但你不让进”。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">最常见的误判</p><div class="doc-copy"><p>最常见的误判，是把“服务不可达”和“配置没生效”混在一起。看起来都像没连上，实际修法完全不同。</p><p>第二种误判，是配置一层没生效，就同时改全局、项目、插件三层。这样最后就更难看出到底谁在起作用。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">最稳的排法</p><div class="doc-copy"><p>先看服务，再看配置层级，再看认证和网络，最后才去碰更复杂的组合问题。</p><p>你只要守住这个顺序，MCP 虽然新名词多，但排错思路其实并不神秘。</p></div></section>
 		</div>
 	</div>
 </BaseLayout>

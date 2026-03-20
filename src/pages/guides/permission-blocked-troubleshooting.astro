@@ -14,11 +14,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 				<h1 class="doc-home__title">Claude Code 被权限卡住时怎么判断</h1>
 				<div class="doc-copy">
 					<p>权限问题最烦的不是错，而是看起来都像“它不让我干”。其实读不了、写不了、执行不了，是三种完全不同的拦法。</p>
+					<p>你如果一看到拦截就一把全开，短期是省事，长期是埋雷。更稳的做法，是先判断拦的是哪道门，再补那一口够用的权限。</p>
 				</div>
 			</section>
-			<section class="doc-panel"><p class="doc-eyebrow">先分清是哪一类</p><div class="doc-copy"><p>先看它到底是看不到文件、改不了文件，还是命令跑不出去。别把三种问题搅成一锅。</p></div></section>
-			<section class="doc-panel"><p class="doc-eyebrow">再决定补哪一口权限</p><div class="doc-copy"><p>如果只是差一小步，就只补那一小步，不要因为一次拦截就整套放开。</p></div></section>
-			<section class="doc-panel"><p class="doc-eyebrow">最后回头收权限</p><div class="doc-copy"><p>临时放开的权限，用完最好再收回来。权限管理不是一次动作，是来回调的活。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">第一步：先分清是哪一类</p><div class="doc-copy"><p>先看它到底是看不到文件、改不了文件，还是命令跑不出去。别把三种问题搅成一锅。</p><p>这一步很关键，因为很多人会把“Bash 被拦”理解成“项目文件权限不够”，其实完全不是一回事。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">第二步：再决定补哪一口权限</p><div class="doc-copy"><p>如果只是差一小步，就只补那一小步，不要因为一次拦截就整套放开。</p><p>比如只是需要读一个目录，那就补读；不是说一有拦截，就把写、执行、网络一口气全开。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">第三步：判断这是临时还是长期需求</p><div class="doc-copy"><p>有些权限只是这一把活临时要用，干完就结束；有些则是这类工作以后都会反复要用。两种别混。</p><p>临时需求用临时补法，长期需求才值得写进更稳定的配置里。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">最后回头收权限</p><div class="doc-copy"><p>临时放开的权限，用完最好再收回来。权限管理不是一次动作，是来回调的活。</p><p>权限像借钥匙，不是今天借了一串，以后就永远挂脖子上不还。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">最常见的误判</p><div class="doc-copy"><p>最常见的误判有两个：一是把“功能被策略拦”误会成“Claude 不会做”；二是把“一小步不够”误会成“必须全开”。</p><p>这两个误判都会把事情越弄越大。先缩小，再补一口，通常才是正道。</p></div></section>
 		</div>
 	</div>
 </BaseLayout>

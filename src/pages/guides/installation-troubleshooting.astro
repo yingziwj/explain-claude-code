@@ -14,11 +14,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 				<h1 class="doc-home__title">Claude Code 安装失败时先查什么</h1>
 				<div class="doc-copy">
 					<p>安装失败最怕两种做法：一种是啥都不看就重装三遍，另一种是一激动就把整套环境全改了。都不划算。</p>
+					<p>更稳的做法，是先判断你现在卡在哪一层：是命令根本装不上，还是装上了但终端认不到，还是能认到命令却一运行就炸。三种毛病，修法完全不同。</p>
 				</div>
 			</section>
-			<section class="doc-panel"><p class="doc-eyebrow">先查系统和终端</p><div class="doc-copy"><p>先确认系统版本和你用的终端是不是官方步骤针对的那个环境。很多“照着做了也不行”，根子都在环境不一致。</p></div></section>
-			<section class="doc-panel"><p class="doc-eyebrow">再查 PATH 和命令可见性</p><div class="doc-copy"><p>安装完命令找不到，通常不是装没装，而是终端还没认到命令位置。先重开终端，再看 PATH。</p></div></section>
-			<section class="doc-panel"><p class="doc-eyebrow">最后才查更深的环境问题</p><div class="doc-copy"><p>像代理、权限、公司网络、容器环境这些，放到后面查。别一上来就怀疑最复杂的原因。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">第一步：先查系统和终端</p><div class="doc-copy"><p>先确认系统版本和你用的终端是不是官方步骤针对的那个环境。很多“照着做了也不行”，根子都在环境不一致。</p><p>尤其是 Windows 用户，很容易在 PowerShell、CMD、Git Bash 之间来回切，结果上一条命令和下一条命令根本不在一个世界里。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">第二步：再查 PATH 和命令可见性</p><div class="doc-copy"><p>安装完命令找不到，通常不是装没装，而是终端还没认到命令位置。先重开终端，再看 PATH。</p><p>这一步别急着删了重装。很多时候只是装完以后终端没刷新，或者你开的还是老窗口。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">第三步：看是不是权限或网络在拦</p><div class="doc-copy"><p>如果命令有了，但执行过程卡住，再去看权限、公司网络、代理、证书这类更深的环境问题。</p><p>这一步放后面，不是因为它不重要，而是因为它最容易把人带进大坑。你还没排掉前面那些简单问题，就先改代理和权限，十有八九越改越乱。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">最常见的误判</p><div class="doc-copy"><p>最常见的误判，就是把“命令找不到”理解成“软件没装上”。其实它可能已经装好了，只是当前终端没认到。</p><p>第二种误判，是把“登录没走通”误以为是“安装失败”。装和登录是两回事，别混着修。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">最稳的排法</p><div class="doc-copy"><p>我的建议顺序一直是：先系统和终端，再 PATH 和命令，再登录和权限，最后才碰更深的网络和代理。</p><p>你每次只排一层，心里才有数。不要一边重装、一边改 PATH、一边换终端，这样最后连自己都不知道是哪一步把问题弄好的。</p></div></section>
 		</div>
 	</div>
 </BaseLayout>

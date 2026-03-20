@@ -14,11 +14,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 				<h1 class="doc-home__title">Claude Code 登录失败时怎么排</h1>
 				<div class="doc-copy">
 					<p>登录失败很容易让人误以为是工具坏了。其实很多时候，是账号状态、认证方式、网络环境三样里有一样没对上。</p>
+					<p>你现在先别急着怀疑 Claude Code 本身，先把“我到底在走哪条登录路子”这件事弄清楚。Claude 直登、第三方云平台、企业托管，不是一套流程。</p>
 				</div>
 			</section>
-			<section class="doc-panel"><p class="doc-eyebrow">先看账号和权限</p><div class="doc-copy"><p>先确认你现在用的到底是哪种账号、有没有对应权限、是不是在正确的平台和入口登录。</p></div></section>
-			<section class="doc-panel"><p class="doc-eyebrow">再看认证方式</p><div class="doc-copy"><p>Claude 直登、第三方云平台、企业托管，这几种不是一回事。你要先分清自己走的是哪条路。</p></div></section>
-			<section class="doc-panel"><p class="doc-eyebrow">最后看网络和本机环境</p><div class="doc-copy"><p>公司网络、代理、浏览器跳转失败、本机凭证缓存，都可能把登录流程卡住。到这一步再查这些，才不乱。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">第一步：先看账号和权限</p><div class="doc-copy"><p>先确认你现在用的到底是哪种账号、有没有对应权限、是不是在正确的平台和入口登录。</p><p>如果你拿团队或企业环境的要求，去套个人账号的登录流程，当然会越走越偏。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">第二步：再看认证方式</p><div class="doc-copy"><p>Claude 直登、第三方云平台、企业托管，这几种不是一回事。你要先分清自己走的是哪条路。</p><p>很多人最容易错在这里：看了一篇教程就照抄，结果教程对应的根本不是自己的环境。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">第三步：最后看网络和本机环境</p><div class="doc-copy"><p>公司网络、代理、浏览器跳转失败、本机凭证缓存，都可能把登录流程卡住。到这一步再查这些，才不乱。</p><p>如果你是在公司机器上操作，这一层尤其容易出事，因为浏览器、终端和网络策略不一定站在一边。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">最常见的误判</p><div class="doc-copy"><p>最常见的误判，是把“没有权限登录这个方案”误以为“登录系统坏了”。实际上系统没坏，是你用错了门。</p><p>另一个常见误判，是登录跳不回终端就怀疑账号有问题。其实有时候只是浏览器跳转、代理或缓存没配合好。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">最稳的排法</p><div class="doc-copy"><p>先确认账号和平台对应关系，再确认认证流程，再看网络和本机环境，最后才去碰更深的缓存和代理问题。</p><p>你每次只怀疑一层，排得就快；三层一起怀疑，反而最容易乱。</p></div></section>
 		</div>
 	</div>
 </BaseLayout>
