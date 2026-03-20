@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="设置改了却不生效时怎么查 | 通俗版 Claude Code 文档"
+	description="把设置不生效最常见的几类原因拆开：层级、位置、覆盖关系、重载时机。"
+	canonical={new URL('/guides/settings-not-taking-effect', Astro.site).toString()}
+>
+	<div class="doc-shell"><div class="doc-home">
+		<section class="doc-panel"><p class="doc-eyebrow">原创问题页</p><h1 class="doc-home__title">设置改了却不生效时怎么查</h1><div class="doc-copy"><p>设置不生效，不是说这功能没有，而是你得先搞清楚：你改的是哪一层，谁又把谁盖掉了。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">先查改在哪</p><div class="doc-copy"><p>全局、项目、本地临时、插件自带，这几层很容易混。位置改错了，内容再对也白搭。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">再查谁覆盖了谁</p><div class="doc-copy"><p>很多“明明写了没用”，实际是被更近的一层盖掉了。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">最后查是否需要重载</p><div class="doc-copy"><p>有些改动不是写完立刻就吃进去，得等重载或新会话才明显。</p></div></section>
+	</div></div>
+</BaseLayout>

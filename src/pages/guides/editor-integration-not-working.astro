@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="VS Code / JetBrains 接不上时先查什么 | 通俗版 Claude Code 文档"
+	description="专门给编辑器集成问题用，先查版本、扩展状态、权限和工作目录。"
+	canonical={new URL('/guides/editor-integration-not-working', Astro.site).toString()}
+>
+	<div class="doc-shell"><div class="doc-home">
+		<section class="doc-panel"><p class="doc-eyebrow">原创问题页</p><h1 class="doc-home__title">VS Code / JetBrains 接不上时先查什么</h1><div class="doc-copy"><p>编辑器接不上时，先别急着重装整套。很多时候只是版本、扩展状态或者工作目录没对齐。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">先查版本和扩展</p><div class="doc-copy"><p>先确认编辑器版本够不够、扩展是不是装对了、有没有被禁用。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">再查工作目录和会话</p><div class="doc-copy"><p>你看到的是这个项目，不代表 Claude Code 现在挂的也是这个目录。先把路径对齐。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">最后看权限与沙箱</p><div class="doc-copy"><p>IDE 里能看到，不代表实际执行时就有权限。最后再查这一层。</p></div></section>
+	</div></div>
+</BaseLayout>

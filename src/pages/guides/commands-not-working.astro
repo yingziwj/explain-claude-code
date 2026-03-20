@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="命令能看到却跑不起来时怎么排 | 通俗版 Claude Code 文档"
+	description="把命令存在但运行不通的常见原因拆开：命令本身、环境、权限、上下文。"
+	canonical={new URL('/guides/commands-not-working', Astro.site).toString()}
+>
+	<div class="doc-shell"><div class="doc-home">
+		<section class="doc-panel"><p class="doc-eyebrow">原创问题页</p><h1 class="doc-home__title">命令能看到却跑不起来时怎么排</h1><div class="doc-copy"><p>命令挂在那儿，不等于就一定能顺跑。很多时候是环境不对、目录不对、权限不够，或者它本来就只在某种条件下才该出现。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">先查命令是不是该在这里用</p><div class="doc-copy"><p>有些命令跟平台、方案、工作目录有关。先别上来就怀疑命令坏了。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">再查环境和目录</p><div class="doc-copy"><p>你在哪个目录、哪个终端、哪种环境里跑，都会影响命令表现。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">最后查权限和外部依赖</p><div class="doc-copy"><p>命令本身能认出来，但一执行就炸，往往是权限或外部依赖没备齐。</p></div></section>
+	</div></div>
+</BaseLayout>

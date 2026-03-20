@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="Sub-agent 看起来没起作用时怎么办 | 通俗版 Claude Code 文档"
+	description="把 sub-agent 不工作常见原因拆开：角色没写清、工具不够、任务切得太乱。"
+	canonical={new URL('/guides/subagent-not-working', Astro.site).toString()}
+>
+	<div class="doc-shell"><div class="doc-home">
+		<section class="doc-panel"><p class="doc-eyebrow">原创问题页</p><h1 class="doc-home__title">Sub-agent 看起来没起作用时怎么办</h1><div class="doc-copy"><p>子代理没效果，很多时候不是“AI 不行”，而是角色没分清、任务没切开、给它的工具也不够。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">先查角色说明</p><div class="doc-copy"><p>如果你连它是来干嘛的都没说死，它当然容易和主代理抢活，或者回成一锅粥。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">再查任务是不是切得太碎或太大</p><div class="doc-copy"><p>太碎它没事干，太大它接不住。最稳的是切成能独立交付的一块。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">最后查工具和权限</p><div class="doc-copy"><p>你让它查代码，却不给读工具；让它改东西，却不给写权限，那它怎么干都像没起作用。</p></div></section>
+	</div></div>
+</BaseLayout>

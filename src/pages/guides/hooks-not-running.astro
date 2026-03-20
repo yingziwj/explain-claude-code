@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="Hooks 不触发时怎么排 | 通俗版 Claude Code 文档"
+	description="专门讲 hook 明明配了却没响时该怎么排，不再一上来怀疑整套系统。"
+	canonical={new URL('/guides/hooks-not-running', Astro.site).toString()}
+>
+	<div class="doc-shell"><div class="doc-home">
+		<section class="doc-panel"><p class="doc-eyebrow">原创问题页</p><h1 class="doc-home__title">Hooks 不触发时怎么排</h1><div class="doc-copy"><p>Hook 最烦的地方在于：它没响的时候，看起来像什么都没发生。越是这种情况，越得按顺序查。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">先查挂的事件对不对</p><div class="doc-copy"><p>很多人不是配错命令，而是把 hook 挂错了事件。事件没到，自然不会响。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">再查 matcher 和条件</p><div class="doc-copy"><p>条件写得太窄、匹配不到，表面看像 hook 坏了，实际是你把门槛设错了。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">最后看命令本身</p><div class="doc-copy"><p>如果事件和匹配都像对的，再看 hook 里真正执行的命令是不是自己就跑不通。</p></div></section>
+	</div></div>
+</BaseLayout>
