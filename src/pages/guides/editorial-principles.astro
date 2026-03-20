@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="这个站的编辑原则和更新原则 | 通俗版 Claude Code 文档"
+	description="说明本站怎样处理同步、改写、原创补充和错误修正，减少内容来源不明带来的不信任感。"
+	canonical={new URL('/guides/editorial-principles', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">站点说明</p>
+				<h1 class="doc-home__title">这个站的编辑原则和更新原则</h1>
+				<div class="doc-copy">
+					<p>这页就是告诉读者：本站不是随手拼内容，也不是今天兴致来了改两句，明天就不管了。至少原则得说清楚。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原则一：原文变了，这边尽量跟</p>
+				<div class="doc-copy">
+					<p>官方 docs 新增、删减、调整顺序时，这边会尽量同步。不同步的解释站，很快就会把人带沟里。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原则二：重要步骤不省略</p>
+				<div class="doc-copy">
+					<p>命令、代码、配置、文件名、参数名这些硬步骤，优先保留。说法可以更土，关键步骤不能缩水。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原则三：解释要尽量顺上下文</p>
+				<div class="doc-copy">
+					<p>不是每个小节孤零零解释一句就算完，而是尽量结合整页、整组功能、甚至整个站的上下文来讲，免得突兀。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原则四：原创内容单独做实</p>
+				<div class="doc-copy">
+					<p>原创就是原创，不假装它是官方文档的一部分。像新手路线、选型比较、团队落地、常见坑这些东西，会单独做成独立页。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原则五：发现错就改</p>
+				<div class="doc-copy">
+					<p>如果读者发现内容过时、解释不通、步骤丢失，优先修正。解释站最怕的不是有错，而是明明被指出来了还不改。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>

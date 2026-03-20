@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="Claude Code 新手提问模板 20 条 | 通俗版 Claude Code 文档"
+	description="不是教花哨 prompt，而是给新手一批真能直接照着用的问法。"
+	canonical={new URL('/guides/prompt-templates-for-beginners', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原创实战指南</p>
+				<h1 class="doc-home__title">Claude Code 新手提问模板 20 条</h1>
+				<div class="doc-copy">
+					<p>很多人不会用，不是不会打字，而是不知道怎么把活派清楚。这页不讲玄学，就给你一些能直接拿去说的话。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">读项目类</p>
+				<div class="doc-copy">
+					<p>1. 先帮我看这个项目的目录结构，告诉我最先该看哪几个文件。</p>
+					<p>2. 只看认证相关代码，别把整个项目全翻开。</p>
+					<p>3. 先解释这个函数在做什么，再告诉我它和哪些文件有关系。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">改代码类</p>
+				<div class="doc-copy">
+					<p>4. 先别动代码，先说你准备改哪几处、为什么这么改。</p>
+					<p>5. 只修这个 bug，别顺手重构别的地方。</p>
+					<p>6. 改完后列出你改了哪些文件、每个文件改了什么。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">排错类</p>
+				<div class="doc-copy">
+					<p>7. 先帮我判断这个报错更像安装问题、权限问题还是配置问题。</p>
+					<p>8. 不要一口气给 10 种可能，只先给最可能的 3 个方向。</p>
+					<p>9. 先给排查顺序，再告诉我每一步该看什么现象。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">收尾类</p>
+				<div class="doc-copy">
+					<p>10. 用普通人能看懂的话，总结这次改动到底解决了什么问题。</p>
+					<p>11. 列出我现在最该手动检查的 3 个地方。</p>
+					<p>12. 如果你觉得这次改动还有风险，直接说出来，别客气。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>

@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="这个站的内容是怎么做出来的 | 通俗版 Claude Code 文档"
+	description="把本站内容的生成、校对、同步和人工改写方式说明白，让读者知道这里不是胡乱拼页。"
+	canonical={new URL('/guides/how-this-site-is-made', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">站点说明</p>
+				<h1 class="doc-home__title">这个站的内容是怎么做出来的</h1>
+				<div class="doc-copy">
+					<p>这页不是文档教程，而是把本站做法摆到桌面上。原因很简单：如果一个站靠“翻译”和“自动生成”吃饭，却不解释自己怎么做内容，那可信度天然会打折。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第一层：跟官方结构走</p>
+				<div class="doc-copy">
+					<p>本站会尽量跟随 Claude Code 官方 docs 的导航、顺序和页面变化。这样做的好处是，你去对照官方原文时不容易迷路。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第二层：关键步骤尽量保留原样</p>
+				<div class="doc-copy">
+					<p>命令、参数、配置键名、代码片段这类硬东西，能保留就保留，不轻易改写。因为这不是散文，写顺嘴了但跑不起来，就害人了。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第三层：解释做人话改写</p>
+				<div class="doc-copy">
+					<p>正文解释会尽量改成更朴素的中文，让第一次看的人能明白“这段到底在干嘛”。但这一步也最容易出问题，所以一直在持续修。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第四层：另外补原创页</p>
+				<div class="doc-copy">
+					<p>如果一个站只做“官方文档改写”，附加价值还是不够。所以这里开始另外补原创实战页，专门讲选择、踩坑、上手顺序和团队落地这些官方文档不一定集中展开的东西。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>
