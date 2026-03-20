@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
 	title="隐私说明 | 通俗版 Claude Code 文档"
-	description="说明本站会收集哪些基础访问数据，以及未来接入 Google AdSense 时会涉及哪些广告相关处理。"
+	description="说明本站会收集哪些基础访问数据、Google 广告相关的数据处理方式，以及用户可以怎样控制 Cookie 与隐私设置。"
 	canonical={new URL('/privacy', Astro.site).toString()}
 >
 	<div class="doc-shell">
@@ -29,9 +29,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 			<section class="doc-panel">
 				<p class="doc-eyebrow">如果接入 Google AdSense 会怎样</p>
 				<div class="doc-copy">
-					<p>等正式接入 AdSense 后，页面里会出现 Google 提供的广告代码。到那时，Google 及其合作方可能会用 Cookie 或类似技术来决定广告怎么展示、怎么统计。</p>
-					<p>简单说，就是广告系统要知道哪个位置有人看、哪类页面更容易被点，这样它才知道广告怎么摆。</p>
-					<p>如果后面开启个性化广告，我们会再补更明确的提示；如果只放非个性化广告，也会在这里把做法写清楚。</p>
+					<p>等正式接入 AdSense 后，页面里会出现 Google 提供的广告代码。到那时，Google 及其合作方可能会用 Cookie、web beacon、设备标识符、IP 地址这类技术，来决定广告怎么展示、怎么统计表现，以及怎样防止广告欺诈。</p>
+					<p>说得再直白一点，就是广告系统需要知道：哪块广告有人看、有没有被点、这次访问大概来自什么地区或设备，这样它才知道广告怎么投、怎么结算、怎么查异常。</p>
+					<p>如果后面开启个性化广告，这里会进一步写清楚；如果只放非个性化广告，也会把做法单独说明。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">Google 可能怎样使用这些数据</p>
+				<div class="doc-copy">
+					<p>Google 可能会根据你访问过的页面、设备信息、浏览器信息、粗略地理位置等，决定广告展示、广告频次控制、效果统计和安全审计。</p>
+					<p>如果 Google 允许个性化广告，广告内容可能会更贴近你的兴趣；如果使用非个性化广告，广告更偏向页面内容和大致地区，而不是尽量按个人兴趣定向。</p>
+					<p>Google 对合作网站和应用数据使用方式的官方说明见这里：<a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noreferrer">How Google uses information from sites or apps that use our services</a>。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">Cookie 和第三方技术</p>
+				<div class="doc-copy">
+					<p>本站自己不会主动做复杂用户画像，但接入广告后，第三方广告服务可能会写入或读取 Cookie，或者用类似技术识别一次访问是否重复、广告是否被看见、广告是否被点击。</p>
+					<p>如果你不想让这类技术参与，你可以通过浏览器设置限制第三方 Cookie、清理站点数据，或使用广告拦截与隐私增强工具。不过这样做后，某些广告功能或统计可能会失效。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">面向欧洲经济区、英国和瑞士的同意机制</p>
+				<div class="doc-copy">
+					<p>如果本站正式向欧洲经济区、英国或瑞士用户展示 Google 广告，我们会按 Google 的要求接入合规的同意管理平台（CMP），让这些地区的用户先看到同意提示，再决定广告相关数据是否可以用于个性化处理。</p>
+					<p>在这部分正式启用前，广告功能不会按“先上再补”的方式胡来。涉及这些地区的广告合规设置，会在正式上线时补齐并写明。</p>
 				</div>
 			</section>
 
@@ -39,7 +64,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 				<p class="doc-eyebrow">你可以怎么处理</p>
 				<div class="doc-copy">
 					<p>你可以通过浏览器自己的设置来限制 Cookie、清理站点数据，或者使用广告拦截与隐私增强工具。</p>
-					<p>如果你用的是公司网络、学校网络或共享设备，也建议按本地规则处理，不要把隐私控制全押在网站一头。</p>
+					<p>如果你使用的是共享电脑、公司网络或学校网络，也建议结合本地设备和网络规则一起处理，不要把隐私控制全押在某一个网站上。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">联系和更新</p>
+				<div class="doc-copy">
+					<p>如果你对这页内容有疑问，或者发现这里写的做法和站点实际情况不一致，可以通过 GitHub 仓库提 Issue：<a href="https://github.com/yingziwj/explain-claude-code/issues" target="_blank" rel="noreferrer">https://github.com/yingziwj/explain-claude-code/issues</a>。</p>
+					<p>如果后面广告策略、数据处理方式或合规做法有明显变化，这一页会跟着更新。</p>
 				</div>
 			</section>
 		</div>

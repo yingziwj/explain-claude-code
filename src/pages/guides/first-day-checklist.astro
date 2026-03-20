@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="Claude Code 第一天上手清单 | 通俗版 Claude Code 文档"
+	description="不是把功能全讲一遍，而是告诉你第一天到底该先装什么、先试什么、先别碰什么。"
+	canonical={new URL('/guides/first-day-checklist', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原创实战指南</p>
+				<h1 class="doc-home__title">Claude Code 第一天上手清单</h1>
+				<div class="doc-copy">
+					<p>第一天最忌讳的，不是笨，而是贪。很多人一装好就去碰插件、hooks、MCP、子代理，结果锅还没烧热，先把厨房搞乱了。</p>
+					<p>如果你是第一次上手，我建议就按下面这个顺序来，先把最基本那几件事跑通。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第一步</p>
+				<div class="doc-copy">
+					<p>先确认 Claude Code 真装好了，命令能跑，版本能看，登录也没卡住。</p>
+					<p>如果这一步都没稳，后面看到的很多怪问题，其实都只是安装没装明白。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第二步</p>
+				<div class="doc-copy">
+					<p>别一开始就拿大仓库试刀，先找一个你自己看得懂的小项目，或者新建一个空目录，做两三个最简单的问答和改动。</p>
+					<p>你现在要验证的不是“它有多强”，而是“我说一句，它会怎么回；我给一个文件，它会不会读；我让它改一点，它会不会跑偏”。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第三步</p>
+				<div class="doc-copy">
+					<p>先把基础对话节奏练顺：提需求时说清目标、范围、输出形式，别一句“帮我看看这个项目”就甩过去。</p>
+					<p>很多新手觉得不好用，其实不是工具差，而是自己把活派得太虚。你得像请短工一样，把今天干哪一块、做到什么算完，说明白。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第四步</p>
+				<div class="doc-copy">
+					<p>第一天先别急着上这几样：Hooks、MCP、复杂权限、多人 agent team。</p>
+					<p>不是它们没用，而是这些都属于“锅上再架锅”。你连单人对话和单次改动都没练顺，就别急着搞流水线。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第五步</p>
+				<div class="doc-copy">
+					<p>到第一天结束时，你只要确认这三件事就够了：我能正常装、我能正常问、我能让它做一个小改动并看懂结果。</p>
+					<p>这三件事稳了，第二天再碰插件和更复杂的功能，心里才不虚。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>

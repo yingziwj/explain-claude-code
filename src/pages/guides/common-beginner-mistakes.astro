@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="Claude Code 新手最容易犯的 10 个错 | 通俗版 Claude Code 文档"
+	description="把新手最常见的误区一条条摊开讲清楚，重点不是吓人，而是让你少返工。"
+	canonical={new URL('/guides/common-beginner-mistakes', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原创实战指南</p>
+				<h1 class="doc-home__title">Claude Code 新手最容易犯的 10 个错</h1>
+				<div class="doc-copy">
+					<p>下面这些错，不是书上硬编的，是大多数人第一次用这类工具时都会踩的坑。你要是能提前避开一半，体验就会顺很多。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel"><p class="doc-eyebrow">1</p><div class="doc-copy"><p>上来就让它“看整个项目”。这活派得太空，结果通常是回得很多，落地很少。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">2</p><div class="doc-copy"><p>一开局就给大权限。权限像钥匙，不是越多越好，而是够用就行。先保守，真不够再补。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">3</p><div class="doc-copy"><p>把一个大活一股脑丢过去。正确做法是先切小块，让它先做一段、先看一眼、再往下走。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">4</p><div class="doc-copy"><p>看到插件、MCP、sub-agents 就全想装。功能越多，不代表当天就越顺，反而更容易把自己绕进去。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">5</p><div class="doc-copy"><p>只看它写了什么，不看它到底改了什么。结果一运行才发现把别的地方带坏了。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">6</p><div class="doc-copy"><p>把它当神仙，不当帮手。它很能干，但不是每次都懂你心里那句没说出口的话。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">7</p><div class="doc-copy"><p>提问不说“做到哪算完”。没有验收标准，做完没做完就都靠感觉。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">8</p><div class="doc-copy"><p>不回头看命令和配置。很多关键地方不是解释文字，而是那一条命令和那几行配置。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">9</p><div class="doc-copy"><p>遇到问题就大改配置。很多问题其实先看报错、先缩小范围就能解决，不用一上来翻天。</p></div></section>
+			<section class="doc-panel"><p class="doc-eyebrow">10</p><div class="doc-copy"><p>老想一步到位。真正顺手的节奏，通常是先跑通，再收紧，再加复杂能力。</p></div></section>
+		</div>
+	</div>
+</BaseLayout>

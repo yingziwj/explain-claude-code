@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="关于本站 | 通俗版 Claude Code 文档"
+	description="说明这个站是谁做的、为什么做、和 Claude 官方是什么关系，以及内容是怎么来的。"
+	canonical={new URL('/about', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">关于本站</p>
+				<h1 class="doc-home__title">这站是谁做的，想干什么</h1>
+				<div class="doc-copy">
+					<p>这个站是第三方整理站，不是 Anthropic 官方站。做它的目的很直接：官方文档有价值，但很多页又长又密，不少人看着费劲，所以这里想把它翻成更能照着走的人话版。</p>
+					<p>你可以把它当成“官方 docs 的中文解释手册”。导航结构、顺序和大方向尽量照官方来，但讲法会更朴素一点，尽量让第一次上手的人也能看懂。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">非官方声明</p>
+				<div class="doc-copy">
+					<p>Claude、Claude Code 及相关名称属于 Anthropic。本站与 Anthropic 没有官方隶属关系，也不代表官方立场。</p>
+					<p>如果本站内容和官方原文冲突，请以官方文档为准。本站更像一本“带解释的中文旁注版”，不是替代官方文档的权威来源。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">内容怎么来</p>
+				<div class="doc-copy">
+					<p>站里的基础结构和页面顺序，会跟着 Claude Code 官方 docs 走。官方加页、删页、改页，这边会尽量同步。</p>
+					<p>正文不是简单机翻，也不是只摘两句摘要。现在的做法是：尽量保留原页里的关键命令、配置、代码和步骤，再在上面加一层更通俗的中文解释。</p>
+					<p>但这类站有天然风险，就是太像“改写版文档”。所以后面还会继续补更多原创整理、踩坑总结、对比说明和实操建议，尽量把“额外价值”做实，而不是只换个说法。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">这站适合谁看</p>
+				<div class="doc-copy">
+					<p>适合第一次接触 Claude Code、英语阅读不顺、或者不想一上来就啃原版长文档的人。</p>
+					<p>如果你已经很熟官方文档，也可以把这里当成中文索引和复习用的提示板。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">怎么联系</p>
+				<div class="doc-copy">
+					<p>如果你发现内容过时、步骤漏了、解释太绕，最直接的方式是去 GitHub 仓库提 Issue：</p>
+					<p><a href="https://github.com/yingziwj/explain-claude-code/issues" target="_blank" rel="noreferrer">https://github.com/yingziwj/explain-claude-code/issues</a></p>
+					<p>如果后面补上单独邮箱或联系表单，这一页也会跟着更新。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>

@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="Sub-agents、Plugins、MCP 到底怎么选 | 通俗版 Claude Code 文档"
+	description="把三个最容易让新手犯迷糊的功能放在一张桌子上比较：它们各自是干什么的，什么时候上，什么时候别上。"
+	canonical={new URL('/guides/choose-subagents-plugins-mcp', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原创实战指南</p>
+				<h1 class="doc-home__title">Sub-agents、Plugins、MCP 到底怎么选</h1>
+				<div class="doc-copy">
+					<p>很多人第一次看到这三个词，会以为是三种差不多的高级功能。其实不是。它们像三种不同的农具，名字都新鲜，但干的不是一回事。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">先说最短的判断法</p>
+				<div class="doc-copy">
+					<p>如果你是想“把活拆给不同角色去干”，优先想 sub-agents。</p>
+					<p>如果你是想“把一套能力打包起来重复用”，优先想 plugins。</p>
+					<p>如果你是想“让 Claude 连上外部工具或外部服务”，优先想 MCP。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">Sub-agents 像什么</p>
+				<div class="doc-copy">
+					<p>它更像你临时叫来几个分工不同的帮手。一个看安全，一个查 bug，一个写测试。重点在“分角色、分任务”。</p>
+					<p>所以当你手里有一件活，明显可以拆成几块并行做时，sub-agents 才值当上。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">Plugins 像什么</p>
+				<div class="doc-copy">
+					<p>插件更像一个装好的工具箱。你把命令、skills、hooks、agents 这些东西打包好，下次还能重复装、重复用。</p>
+					<p>所以插件适合“这一套东西不是一次性活，我以后还会反复用”。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">MCP 像什么</p>
+				<div class="doc-copy">
+					<p>MCP 更像给 Claude 接外线。它不是单纯教 Claude 多会一点，而是让它能摸到外部数据库、浏览器、接口、内部服务这类外面的东西。</p>
+					<p>所以你只有在“Claude 需要碰站外工具”时，才值得考虑 MCP。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">新手怎么选最稳</p>
+				<div class="doc-copy">
+					<p>如果你还是新手，我建议顺序是：先学会单人单任务，再碰 sub-agents；等你发现一套能力老要重复配，才去做 plugin；等你真要连外部系统了，再去碰 MCP。</p>
+					<p>这不是保守，是省事。很多人卡住，不是功能不够，而是上来把锅架得太高。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>
