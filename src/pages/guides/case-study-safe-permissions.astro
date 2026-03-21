@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
+---
+
+<BaseLayout
+	title="案例：怎么一步步把权限放开，又不把门全卸了 | 通俗版 Claude Code 文档"
+	description="讲一个更现实的过程：一开始先保守开工，遇到拦截再补一口权限，而不是上来全开。"
+	canonical={new URL('/guides/case-study-safe-permissions', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原创案例页</p>
+				<h1 class="doc-home__title">案例：怎么一步步把权限放开，又不把门全卸了</h1>
+				<div class="doc-copy">
+					<p>很多人谈权限只剩两种姿势：要么全开图省事，要么全关图安心。这页讲的是第三种更现实的路：先保守开工，哪里真拦路，再补哪一口。</p>
+				</div>
+			</section>
+
+			<GuideMeta updatedAt={updatedAt} series="原创案例 / 权限管理" />
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">起手别太大</p>
+				<div class="doc-copy">
+					<p>一开始先让它读项目、解释代码、列出改法，不急着给写权限和执行权限。这样你先摸清它今天到底要干什么。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">真拦住了，再补一小口</p>
+				<div class="doc-copy">
+					<p>如果它现在只差写一个配置文件，就补这一步；如果只是要跑一条检查命令，就只放这条。不要因为一次拦截，就把整套权限门闩全拔了。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">做完回头收</p>
+				<div class="doc-copy">
+					<p>临时放开的权限，用完最好再收回来。权限不是今天配好就一劳永逸，它更像今天借钥匙、晚上还钥匙的活。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">这个案例想教的不是抠门</p>
+				<div class="doc-copy">
+					<p>真正的意思不是“永远别放权”，而是“别在还没摸清要干什么的时候，就把门全打开”。先看活，再给钥匙，这样心里才有底。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>

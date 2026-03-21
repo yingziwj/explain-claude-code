@@ -4,14 +4,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 <BaseLayout
 	title="原创实战指南 | 通俗版 Claude Code 文档"
-	description="收录本站独立整理的实战内容，不只是照着官方文档解释，而是补上新手路线、踩坑和选型建议。"
+	description="收录 Claude Code 原创实战指南，包括新手上手、报错排查、权限边界、工具选型、团队试点和真实案例复盘。"
 	canonical={new URL('/guides', Astro.site).toString()}
 >
 	<div class="doc-shell">
 		<div class="doc-home">
 			<section class="doc-panel">
 				<p class="doc-eyebrow">原创实战指南</p>
-				<h1 class="doc-home__title">这几页不是官方文档翻译，是另外给你整理的实战手册</h1>
+				<h1 class="doc-home__title">Claude Code 原创实战指南：新手上手、报错排查、选型和案例复盘</h1>
 				<div class="doc-copy">
 					<p>如果说 docs 页面更像“原文旁边的中文解释版”，那这里这几页就是另外起锅做的家常菜。</p>
 					<p>重点不在逐段对应官方原文，而在把新手真会碰到的选择、顺序、坑和判断标准拎出来说清楚。</p>
@@ -112,6 +112,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 					<div class="doc-practice-item">
 						<h2><a href="/guides/case-study-team-pilot">小团队试点怎么走最稳</a></h2>
 						<p>适合想推进团队试点，但又不想一开始就搞很重的人。</p>
+					</div>
+					<div class="doc-practice-item">
+						<h2><a href="/guides/case-study-bugfix-workflow">小 bug 修复节奏案例</a></h2>
+						<p>适合想看 Claude Code 怎么把一件小活从头收尾的人。</p>
+					</div>
+					<div class="doc-practice-item">
+						<h2><a href="/guides/case-study-safe-permissions">权限怎么一步步放开</a></h2>
+						<p>适合不想一上来全开，但又怕卡住活的人。</p>
 					</div>
 				</div>
 			</section>

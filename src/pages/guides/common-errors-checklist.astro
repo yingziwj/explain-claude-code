@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -16,6 +19,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 					<p>很多人一看到报错就想大改配置，其实大多数问题都有顺手的排查顺序。先排简单的，再碰复杂的，别一上来掀桌子。</p>
 				</div>
 			</section>
+
+			<GuideMeta updatedAt={updatedAt} series="原创实战指南 / 排错清单" />
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">先看是不是安装问题</p>

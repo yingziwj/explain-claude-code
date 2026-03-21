@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
+---
+
+<BaseLayout
+	title="案例：用 Claude Code 处理一个小 bug 的完整节奏 | 通俗版 Claude Code 文档"
+	description="从读报错、缩范围、改代码、回看改动到收尾检查，讲一个小 bug 怎么用 Claude Code 走完。"
+	canonical={new URL('/guides/case-study-bugfix-workflow', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原创案例页</p>
+				<h1 class="doc-home__title">案例：用 Claude Code 处理一个小 bug 的完整节奏</h1>
+				<div class="doc-copy">
+					<p>这页讲的不是“怎么提一个神奇 prompt”，而是一个更像正常开发会碰到的小 bug，从发现到修掉，怎么用 Claude Code 把节奏走顺。</p>
+				</div>
+			</section>
+
+			<GuideMeta updatedAt={updatedAt} series="原创案例 / Bug 修复流程" />
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第一步：先缩小范围</p>
+				<div class="doc-copy">
+					<p>最稳的起手不是“帮我修 bug”，而是先让它看报错、看相关文件、看最近改动，先把锅圈小。范围没缩小，后面每一步都容易飘。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第二步：先说改法，再动手</p>
+				<div class="doc-copy">
+					<p>让 Claude Code 先说它准备改哪里、为什么这么改，再真正下手。这样你至少知道它要砍哪棵树，不至于等砍完才发现方向错了。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第三步：改完先看差异，不急着夸</p>
+				<div class="doc-copy">
+					<p>它改完以后，先看具体改了哪些文件、哪几行发生变化，再决定要不要继续。很多 bug 不是修不了，而是“顺手修过了头”。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第四步：最后做收尾检查</p>
+				<div class="doc-copy">
+					<p>真正让人安心的，不是那句“已修复”，而是最后这一步：让它列出风险点、手动检查点、还没覆盖到的地方。收尾做得稳，bug 才不容易回魂。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>

@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -17,6 +20,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 					<p>如果你是第一次上手，我建议就按下面这个顺序来，先把最基本那几件事跑通。</p>
 				</div>
 			</section>
+
+			<GuideMeta updatedAt={updatedAt} series="原创实战指南 / 新手上手" />
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">第一步</p>

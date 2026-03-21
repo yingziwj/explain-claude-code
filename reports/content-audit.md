@@ -1,6 +1,6 @@
 # Content Audit
 
-Generated at: 2026-03-21T01:56:18.384Z
+Generated at: 2026-03-21T01:59:56.431Z
 
 ## Docs pages that still look thin
 
@@ -11,3 +11,5 @@ Generated at: 2026-03-21T01:56:18.384Z
 
 | slug | paragraphs | chars | score |
 | --- | ---: | ---: | ---: |
+| case-study-bugfix-workflow | 5 | 387 | 17 |
+| case-study-safe-permissions | 5 | 333 | 17 |
