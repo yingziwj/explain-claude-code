@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-20T04:22:27.312Z",
-  "sourceGeneratedAt": "2026-03-20T04:22:27.036Z",
+  "generatedAt": "2026-03-21T04:13:40.745Z",
+  "sourceGeneratedAt": "2026-03-21T04:13:40.491Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -515,7 +515,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把“Changelog”理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.80、2.1.79、2.1.78、2.1.77 这些环节往下讲。",
+            "原文这页大多会按 2.1.81、2.1.80、2.1.79、2.1.78 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -524,7 +524,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.80 -> 2.1.79 -> 2.1.78 -> 2.1.77。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.81 -> 2.1.80 -> 2.1.79 -> 2.1.78。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -3895,20 +3895,20 @@
             {
               "title": "原页关键片段：Control subagent capabilities 1",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "---\nname: safe-researcher\ndescription: Research agent with restricted capabilities\ntools: Read, Grep, Glob, Bash\ndisallowedTools: Write, Edit\n---",
+              "code": "---\nname: safe-researcher\ndescription: Research agent with restricted capabilities\ntools: Read, Grep, Glob, Bash\n---",
               "kind": "config"
             },
             {
               "title": "原页关键片段：Control subagent capabilities 2",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "---\nname: coordinator\ndescription: Coordinates work across specialized agents\ntools: Agent(worker, researcher), Read, Bash\n---",
+              "code": "---\nname: no-writes\ndescription: Inherits every tool except file writes\ndisallowedTools: Write, Edit\n---",
               "kind": "config"
             },
             {
               "title": "原页关键片段：Control subagent capabilities 3",
-              "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "tools: Agent, Read, Bash",
-              "kind": "code"
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "---\nname: coordinator\ndescription: Coordinates work across specialized agents\ntools: Agent(worker, researcher), Read, Bash\n---",
+              "kind": "config"
             },
             {
               "title": "原页关键片段：Define hooks for subagents 1",
@@ -4031,25 +4031,25 @@
             {
               "title": "Control subagent capabilities 1",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "---\nname: safe-researcher\ndescription: Research agent with restricted capabilities\ntools: Read, Grep, Glob, Bash\ndisallowedTools: Write, Edit\n---",
+              "code": "---\nname: safe-researcher\ndescription: Research agent with restricted capabilities\ntools: Read, Grep, Glob, Bash\n---",
               "kind": "config"
             },
             {
               "title": "Control subagent capabilities 2",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "---\nname: coordinator\ndescription: Coordinates work across specialized agents\ntools: Agent(worker, researcher), Read, Bash\n---",
+              "code": "---\nname: no-writes\ndescription: Inherits every tool except file writes\ndisallowedTools: Write, Edit\n---",
               "kind": "config"
             },
             {
               "title": "Control subagent capabilities 3",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "---\nname: browser-tester\ndescription: Tests features in a real browser using Playwright\nmcpServers:\n  # Inline definition: scoped to this subagent only\n  - playwright:\n      type: stdio\n      command: npx\n      args: [\"-y\", \"@playwright/mcp@latest\"]\n  # Reference by name: reuses an already-configured server\n  - github\n---\n\nUse the Playwright tools to navigate, screenshot, and interact with pages.",
+              "code": "---\nname: coordinator\ndescription: Coordinates work across specialized agents\ntools: Agent(worker, researcher), Read, Bash\n---",
               "kind": "config"
             },
             {
               "title": "Control subagent capabilities 4",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "---\nname: api-developer\ndescription: Implement API endpoints following team conventions\nskills:\n  - api-conventions\n  - error-handling-patterns\n---\n\nImplement API endpoints. Follow the conventions and patterns from the preloaded skills.",
+              "code": "---\nname: browser-tester\ndescription: Tests features in a real browser using Playwright\nmcpServers:\n  # Inline definition: scoped to this subagent only\n  - playwright:\n      type: stdio\n      command: npx\n      args: [\"-y\", \"@playwright/mcp@latest\"]\n  # Reference by name: reuses an already-configured server\n  - github\n---\n\nUse the Playwright tools to navigate, screenshot, and interact with pages.",
               "kind": "config"
             }
           ]
@@ -5390,7 +5390,7 @@
             {
               "title": "原页关键片段：Official Anthropic marketplace",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "/plugin install plugin-name@claude-plugins-official",
+              "code": "/plugin install github@claude-plugins-official",
               "kind": "command"
             },
             {
@@ -5477,7 +5477,7 @@
             {
               "title": "Official Anthropic marketplace",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "/plugin install plugin-name@claude-plugins-official",
+              "code": "/plugin install github@claude-plugins-official",
               "kind": "command"
             }
           ]
@@ -6533,7 +6533,7 @@
             {
               "title": "Generate visual output 2",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "---\nname: codebase-visualizer\ndescription: Generate an interactive collapsible tree visualization of your codebase. Use when exploring a new repo, understanding project structure, or identifying large files.\nallowed-tools: Bash(python *)\n---\n\n# Codebase Visualizer\n\nGenerate an interactive HTML tree view that shows your project's file structure with collapsible directories.\n\n## Usage\n\nRun the visualization script from your project root:\n\n```bash\npython ~/.claude/skills/codebase-visualizer/scripts/visualize.py .\n```text\n\nThis creates `codebase-map.html` in the current directory and opens it in your default browser.\n\n## What the visualization shows\n\n- **Collapsible directories**: Click folders to expand/collapse\n- **File sizes**: Displayed next to each file\n- **Colors**: Different colors for different file types\n- **Directory totals**: Shows aggregate size of each folder",
+              "code": "---\nname: codebase-visualizer\ndescription: Generate an interactive collapsible tree visualization of your codebase. Use when exploring a new repo, understanding project structure, or identifying large files.\nallowed-tools: Bash(python *)\n---\n\n# Codebase Visualizer\n\nGenerate an interactive HTML tree view that shows your project's file structure with collapsible directories.\n\n## Usage\n\nRun the visualization script from your project root:\n\n```bash\npython ~/.claude/skills/codebase-visualizer/scripts/visualize.py .\n```\n\nThis creates `codebase-map.html` in the current directory and opens it in your default browser.\n\n## What the visualization shows\n\n- **Collapsible directories**: Click folders to expand/collapse\n- **File sizes**: Displayed next to each file\n- **Colors**: Different colors for different file types\n- **Directory totals**: Shows aggregate size of each folder",
               "kind": "config"
             },
             {
@@ -7210,6 +7210,13 @@
           "paragraphs": [
             "看到这里，就把“Research preview”当成一件真要上手的活来看。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "How channels compare",
+          "paragraphs": [
+            "这一块主要是在说“How channels compare”真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -10222,9 +10229,15 @@
           ],
           "steps": [
             {
-              "title": "原页关键片段：Configure server-managed settings",
+              "title": "原页关键片段：Configure server-managed settings 1",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ],\n    \"disableBypassPermissionsMode\": \"disable\"\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Configure server-managed settings 2",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Edit|Write\",\n        \"hooks\": [\n          { \"type\": \"command\", \"command\": \"/usr/local/bin/audit-edit.sh\" }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             }
           ]
@@ -10250,9 +10263,15 @@
           ],
           "steps": [
             {
-              "title": "Configure server-managed settings",
+              "title": "Configure server-managed settings 1",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ],\n    \"disableBypassPermissionsMode\": \"disable\"\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Configure server-managed settings 2",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Edit|Write\",\n        \"hooks\": [\n          { \"type\": \"command\", \"command\": \"/usr/local/bin/audit-edit.sh\" }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             }
           ]
@@ -12104,7 +12123,7 @@
             {
               "title": "Plugin settings 4",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{ \"source\": \"github\", \"repo\": \"acme-corp/approved-plugins\" }\n{ \"source\": \"github\", \"repo\": \"acme-corp/security-tools\", \"ref\": \"v2.0\" }\n{ \"source\": \"github\", \"repo\": \"acme-corp/plugins\", \"ref\": \"main\", \"path\": \"marketplace\" }",
+              "code": "{\n  \"extraKnownMarketplaces\": {\n    \"team-tools\": {\n      \"source\": {\n        \"source\": \"settings\",\n        \"name\": \"team-tools\",\n        \"plugins\": [\n          {\n            \"name\": \"code-formatter\",\n            \"source\": {\n              \"source\": \"github\",\n              \"repo\": \"acme-corp/code-formatter\"\n            }\n          }\n        ]\n      }\n    }\n  }\n}",
               "kind": "config"
             }
           ]
@@ -13483,7 +13502,7 @@
             {
               "title": "原页关键片段：Available data",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-6\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\"\n  },\n  \"version\": \"1.0.80\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
+              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-6\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\"\n  },\n  \"version\": \"1.0.80\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
               "kind": "config"
             },
             {
@@ -13610,7 +13629,7 @@
             {
               "title": "Available data",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-6\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\"\n  },\n  \"version\": \"1.0.80\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
+              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-6\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\"\n  },\n  \"version\": \"1.0.80\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
               "kind": "config"
             }
           ]
@@ -13698,6 +13717,20 @@
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "#!/bin/bash\ninput=$(cat)\n\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\n\n# Convert git SSH URL to HTTPS\nREMOTE=$(git remote get-url origin 2>/dev/null | sed 's/[email protected]:/https:\\/\\/github.com\\//' | sed 's/\\.git$//')\n\nif [ -n \"$REMOTE\" ]; then\n    REPO_NAME=$(basename \"$REMOTE\")\n    # OSC 8 format: \\e]8;;URL\\a then TEXT then \\e]8;;\\a\n    # printf %b interprets escape sequences reliably across shells\n    printf '%b' \"[$MODEL] 🔗 \\e]8;;${REMOTE}\\a${REPO_NAME}\\e]8;;\\a\\n\"\nelse\n    echo \"[$MODEL]\"\nfi",
               "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Rate limit usage",
+          "paragraphs": [
+            "这一段主要是在把“Rate limit usage”讲实，不是只摆个标题给你看。"
+          ],
+          "steps": [
+            {
+              "title": "Rate limit usage",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "#!/bin/bash\ninput=$(cat)\n\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\n# \"// empty\" produces no output when rate_limits is absent\nFIVE_H=$(echo \"$input\" | jq -r '.rate_limits.five_hour.used_percentage // empty')\nWEEK=$(echo \"$input\" | jq -r '.rate_limits.seven_day.used_percentage // empty')\n\nLIMITS=\"\"\n[ -n \"$FIVE_H\" ] && LIMITS=\"5h: $(printf '%.0f' \"$FIVE_H\")%\"\n[ -n \"$WEEK\" ] && LIMITS=\"${LIMITS:+$LIMITS }7d: $(printf '%.0f' \"$WEEK\")%\"\n\n[ -n \"$LIMITS\" ] && echo \"[$MODEL] | $LIMITS\" || echo \"[$MODEL]\"",
+              "kind": "code"
             }
           ]
         },
