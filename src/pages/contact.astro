@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="联系本站 | 通俗版 Claude Code 文档"
+	description="联系通俗版 Claude Code 文档维护者，反馈内容错误、步骤缺漏、站点问题和合作相关事项。"
+	canonical={new URL('/contact', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">联系方式</p>
+				<h1 class="doc-home__title">联系本站维护者</h1>
+				<div class="doc-copy">
+					<p>如果你发现页面过时、解释太绕、步骤漏了、线上有问题，最直接的方式就是来这里找入口。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">内容反馈</p>
+				<div class="doc-copy">
+					<p>如果是文档解释不清、命令或代码漏了、导航顺序不对，最推荐直接去 GitHub 提 Issue：</p>
+					<p><a href="https://github.com/yingziwj/explain-claude-code/issues" target="_blank" rel="noreferrer">https://github.com/yingziwj/explain-claude-code/issues</a></p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">站点问题</p>
+				<div class="doc-copy">
+					<p>如果是页面打不开、样式乱了、跳转有问题、线上内容没同步，也建议走 GitHub Issue，因为这样更方便留痕和回查。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">合作与其他联系</p>
+				<div class="doc-copy">
+					<p>如果后面补上单独邮箱、表单或商务联系入口，这一页会继续更新。现阶段先以公开 Issue 作为主要联系渠道。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>

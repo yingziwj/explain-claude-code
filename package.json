@@ -12,7 +12,8 @@
     "refresh:docs": "npm run sync:docs && npm run generate:docs",
     "check:preflight": "node scripts/preflight-check.mjs",
     "check:live": "node scripts/live-check.mjs",
-    "check:content": "node scripts/content-audit.mjs"
+    "check:content": "node scripts/content-audit.mjs",
+    "check:seo": "node scripts/seo-audit.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.1.6",
