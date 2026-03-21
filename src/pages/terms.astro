@@ -1,11 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import TrustPageMeta from '../components/TrustPageMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
 	title="使用条款 | 通俗版 Claude Code 文档"
 	description="通俗版 Claude Code 文档使用条款：说明免责声明、非官方关系、版权、广告披露、外部链接与联系方式。"
 	canonical={new URL('/terms', Astro.site).toString()}
+	structuredData={{
+		'@context': 'https://schema.org',
+		'@type': 'WebPage',
+		name: '通俗版 Claude Code 文档使用条款',
+		description: '说明免责声明、非官方关系、版权、广告披露、外部链接与联系方式的使用条款页面。',
+		url: new URL('/terms', Astro.site).toString()
+	}}
 >
 	<div class="doc-shell">
 		<div class="doc-home">
@@ -16,6 +26,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 					<p>欢迎来到通俗版 Claude Code 文档。使用本站即表示你同意以下条款。</p>
 				</div>
 			</section>
+
+			<TrustPageMeta
+				updatedAt={updatedAt}
+				series="站点说明 / 条款与免责声明"
+				related={[
+					{ href: '/about', title: '关于本站' },
+					{ href: '/privacy', title: '隐私说明' },
+					{ href: '/advertising', title: '广告说明' }
+				]}
+			/>
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">本站内容</p>

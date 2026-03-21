@@ -1,0 +1,40 @@
+---
+const { updatedAt, series, related = [] } = Astro.props as {
+	updatedAt: string;
+	series: string;
+	related?: Array<{ href: string; title: string }>;
+};
+---
+
+<section class="doc-panel">
+	<p class="doc-eyebrow">页面信息</p>
+	<div class="doc-meta-grid">
+		<div class="doc-practice-item">
+			<h2>维护方式</h2>
+			<p>站点维护者持续更新</p>
+		</div>
+		<div class="doc-practice-item">
+			<h2>最后更新</h2>
+			<p>{updatedAt}</p>
+		</div>
+		<div class="doc-practice-item">
+			<h2>所属系列</h2>
+			<p>{series}</p>
+		</div>
+	</div>
+	{
+		related.length ? (
+			<div class="doc-copy">
+				<p>同系列顺手看：</p>
+				<p>
+					{related.map((item, index) => (
+						<>
+							{index ? ' · ' : ''}
+							<a href={item.href}>{item.title}</a>
+						</>
+					))}
+				</p>
+			</div>
+		) : null
+	}
+</section>

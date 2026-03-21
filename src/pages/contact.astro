@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import TrustPageMeta from '../components/TrustPageMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -23,6 +26,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 					<p>如果你发现页面过时、解释太绕、步骤漏了、线上有问题，最直接的方式就是来这里找入口。</p>
 				</div>
 			</section>
+
+			<TrustPageMeta
+				updatedAt={updatedAt}
+				series="站点说明 / 联系与反馈"
+				related={[
+					{ href: '/about', title: '关于本站' },
+					{ href: '/privacy', title: '隐私说明' },
+					{ href: '/guides/site-trust-faq', title: '站点说明 FAQ' }
+				]}
+			/>
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">内容反馈</p>

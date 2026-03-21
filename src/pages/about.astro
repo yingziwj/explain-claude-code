@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import TrustPageMeta from '../components/TrustPageMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -24,6 +27,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 					<p>你可以把它当成“官方 docs 的中文解释手册”。导航结构、顺序和大方向尽量照官方来，但讲法会更朴素一点，尽量让第一次上手的人也能看懂。</p>
 				</div>
 			</section>
+
+			<TrustPageMeta
+				updatedAt={updatedAt}
+				series="站点说明 / 非官方声明与内容来源"
+				related={[
+					{ href: '/guides/site-trust-faq', title: '站点说明 FAQ' },
+					{ href: '/guides/editorial-methodology', title: '内容方法总览' },
+					{ href: '/contact', title: '联系本站' }
+				]}
+			/>
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">非官方声明</p>

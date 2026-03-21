@@ -1,12 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AdSlot from '../components/AdSlot.astro';
+import TrustPageMeta from '../components/TrustPageMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
 	title="广告说明 | 通俗版 Claude Code 文档"
 	description="说明本站广告位怎么预留、什么时候会启用，以及 Cloudflare Pages 上需要配置哪些 AdSense 环境变量。"
 	canonical={new URL('/advertising', Astro.site).toString()}
+	structuredData={{
+		'@context': 'https://schema.org',
+		'@type': 'WebPage',
+		name: '通俗版 Claude Code 文档广告说明',
+		description: '说明广告位预留、何时启用广告、AdSense 变量配置和广告启用前提醒。',
+		url: new URL('/advertising', Astro.site).toString()
+	}}
 >
 	<div class="doc-shell">
 		<div class="doc-home">
@@ -17,6 +27,16 @@ import AdSlot from '../components/AdSlot.astro';
 					<p>广告不是先乱贴再说。这个站现在已经把位置和代码接口预留好了，但只有你把 AdSense 的账号和广告位填进去，它才会正式开始展示。</p>
 				</div>
 			</section>
+
+			<TrustPageMeta
+				updatedAt={updatedAt}
+				series="站点说明 / 广告与合规"
+				related={[
+					{ href: '/privacy', title: '隐私说明' },
+					{ href: '/terms', title: '使用条款' },
+					{ href: '/guides/adsense-readiness-checklist', title: '申请前复盘' }
+				]}
+			/>
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">现在已经准备好的位置</p>

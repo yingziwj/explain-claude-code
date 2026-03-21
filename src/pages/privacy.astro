@@ -1,11 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import TrustPageMeta from '../components/TrustPageMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
 	title="隐私说明 | 通俗版 Claude Code 文档"
 	description="通俗版 Claude Code 文档隐私说明：访问日志、Cookie、Google 广告数据处理、EEA/英国/瑞士同意机制与用户控制方式。"
 	canonical={new URL('/privacy', Astro.site).toString()}
+	structuredData={{
+		'@context': 'https://schema.org',
+		'@type': 'WebPage',
+		name: '通俗版 Claude Code 文档隐私说明',
+		description: '说明访问日志、Cookie、Google 广告数据处理、EEA/英国/瑞士同意机制与用户控制方式。',
+		url: new URL('/privacy', Astro.site).toString()
+	}}
 >
 	<div class="doc-shell">
 		<div class="doc-home">
@@ -16,6 +26,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 					<p>这页就是把话说明白：你来这个站看文档，我们尽量少碰你的资料；以后真接广告，也会提前把会发生什么摊开讲清楚。</p>
 				</div>
 			</section>
+
+			<TrustPageMeta
+				updatedAt={updatedAt}
+				series="站点说明 / 隐私与数据处理"
+				related={[
+					{ href: '/about', title: '关于本站' },
+					{ href: '/contact', title: '联系本站' },
+					{ href: '/guides/site-trust-faq', title: '站点说明 FAQ' }
+				]}
+			/>
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">现在站点会碰到哪些数据</p>
