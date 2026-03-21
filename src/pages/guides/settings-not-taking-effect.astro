@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -9,6 +12,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 >
 	<div class="doc-shell"><div class="doc-home">
 		<section class="doc-panel"><p class="doc-eyebrow">原创问题页</p><h1 class="doc-home__title">设置改了却不生效时怎么查</h1><div class="doc-copy"><p>设置不生效，不是说这功能没有，而是你得先搞清楚：你改的是哪一层，谁又把谁盖掉了。</p><p>这类问题最容易把人绕晕，因为你眼睛里看到的是“我明明写了”，但系统真正认的是“最后到底听谁的”。</p></div></section>
+		<GuideMeta
+			updatedAt={updatedAt}
+			series="问题排查 / 设置与覆盖关系"
+			related={[
+				{ href: '/docs/en/settings', title: '官方 settings 解释页' },
+				{ href: '/guides/permission-boundaries', title: '权限边界怎么拿捏' },
+				{ href: '/guides/commands-not-working', title: '命令跑不起来时怎么排' }
+			]}
+		/>
 		<section class="doc-panel"><p class="doc-eyebrow">第一步：先查改在哪</p><div class="doc-copy"><p>全局、项目、本地临时、插件自带，这几层很容易混。位置改错了，内容再对也白搭。</p><p>先把抽屉认清楚。你把东西放错抽屉，不等于东西不存在，只是系统不会去那儿拿。</p></div></section>
 		<section class="doc-panel"><p class="doc-eyebrow">第二步：再查谁覆盖了谁</p><div class="doc-copy"><p>很多“明明写了没用”，实际是被更近的一层盖掉了。</p><p>这一步别怕土办法，老老实实一层层看。最容易出问题的，不是值写错，而是顺序理解错。</p></div></section>
 		<section class="doc-panel"><p class="doc-eyebrow">第三步：最后查是否需要重载</p><div class="doc-copy"><p>有些改动不是写完立刻就吃进去，得等重载或新会话才明显。</p><p>你如果刚写完就盯着当前界面，可能会以为系统没理你。其实它只是要等你重新开门，它才换新规矩。</p></div></section>

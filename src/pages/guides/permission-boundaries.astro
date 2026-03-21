@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -17,6 +20,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 					<p>很多人要么一把全开，图省事；要么一把不放，最后什么也做不动。两边都不稳。</p>
 				</div>
 			</section>
+
+			<GuideMeta
+				updatedAt={updatedAt}
+				series="权限与安全 / 最小够用原则"
+				related={[
+					{ href: '/guides/permission-blocked-troubleshooting', title: '权限卡住怎么判断' },
+					{ href: '/guides/case-study-safe-permissions', title: '权限怎么一步步放开' },
+					{ href: '/docs/en/permissions', title: '官方 permissions 解释页' }
+				]}
+			/>
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">最稳的原则</p>
@@ -43,6 +56,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 				<p class="doc-eyebrow">一句最实在的话</p>
 				<div class="doc-copy">
 					<p>权限像借钥匙。借一把厨房钥匙，不等于把整栋楼都交出去。你每次都只借它今天真要用到的那几把，心里才稳。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">真卡住时怎么补最稳</p>
+				<div class="doc-copy">
+					<p>如果真被卡住了，先补一口最小的权限，再让它只做眼前这一步，别因为一处拦截就把后面一整片都放开。</p>
+					<p>你每次只多开一点，再看它到底是不是够用了，这样最容易把风险和效率一起兼顾住。</p>
 				</div>
 			</section>
 		</div>

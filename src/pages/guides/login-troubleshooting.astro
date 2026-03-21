@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -17,6 +20,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 					<p>你现在先别急着怀疑 Claude Code 本身，先把“我到底在走哪条登录路子”这件事弄清楚。Claude 直登、第三方云平台、企业托管，不是一套流程。</p>
 				</div>
 			</section>
+			<GuideMeta
+				updatedAt={updatedAt}
+				series="问题排查 / 登录与认证"
+				related={[
+					{ href: '/guides/common-errors-checklist', title: '常见报错排查清单' },
+					{ href: '/docs/en/authentication', title: '官方 authentication 解释页' },
+					{ href: '/guides/permission-boundaries', title: '权限边界怎么拿捏' }
+				]}
+			/>
 			<section class="doc-panel"><p class="doc-eyebrow">第一步：先看账号和权限</p><div class="doc-copy"><p>先确认你现在用的到底是哪种账号、有没有对应权限、是不是在正确的平台和入口登录。</p><p>如果你拿团队或企业环境的要求，去套个人账号的登录流程，当然会越走越偏。</p></div></section>
 			<section class="doc-panel"><p class="doc-eyebrow">第二步：再看认证方式</p><div class="doc-copy"><p>Claude 直登、第三方云平台、企业托管，这几种不是一回事。你要先分清自己走的是哪条路。</p><p>很多人最容易错在这里：看了一篇教程就照抄，结果教程对应的根本不是自己的环境。</p></div></section>
 			<section class="doc-panel"><p class="doc-eyebrow">第三步：最后看网络和本机环境</p><div class="doc-copy"><p>公司网络、代理、浏览器跳转失败、本机凭证缓存，都可能把登录流程卡住。到这一步再查这些，才不乱。</p><p>如果你是在公司机器上操作，这一层尤其容易出事，因为浏览器、终端和网络策略不一定站在一边。</p></div></section>

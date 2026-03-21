@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -16,6 +19,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 					<p>下面这些错，不是书上硬编的，是大多数人第一次用这类工具时都会踩的坑。你要是能提前避开一半，体验就会顺很多。</p>
 				</div>
 			</section>
+
+			<GuideMeta
+				updatedAt={updatedAt}
+				series="新手上手 / 常见误区"
+				related={[
+					{ href: '/guides/first-day-checklist', title: '第一天上手清单' },
+					{ href: '/guides/common-errors-checklist', title: '常见报错排查清单' },
+					{ href: '/guides/prompt-templates-for-beginners', title: '新手提问模板 20 条' }
+				]}
+			/>
 
 			<section class="doc-panel"><p class="doc-eyebrow">1</p><div class="doc-copy"><p>上来就让它“看整个项目”。这活派得太空，结果通常是回得很多，落地很少。</p></div></section>
 			<section class="doc-panel"><p class="doc-eyebrow">2</p><div class="doc-copy"><p>一开局就给大权限。权限像钥匙，不是越多越好，而是够用就行。先保守，真不够再补。</p></div></section>

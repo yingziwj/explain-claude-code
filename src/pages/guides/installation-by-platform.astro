@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -16,6 +19,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 					<p>官方文档会把安装步骤讲明白，但新手最常卡住的，不是“有没有步骤”，而是“我这台机器到底该看哪段”。这页就是把三种常见系统放在一起对照看。</p>
 				</div>
 			</section>
+
+			<GuideMeta
+				updatedAt={updatedAt}
+				series="安装与启动 / 跨平台对照"
+				related={[
+					{ href: '/guides/installation-troubleshooting', title: '安装失败先查什么' },
+					{ href: '/docs/en/setup', title: '官方 setup 解释页' },
+					{ href: '/guides/common-errors-checklist', title: '常见报错排查清单' }
+				]}
+			/>
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">Windows</p>

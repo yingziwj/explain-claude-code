@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -17,6 +20,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 					<p>小团队最稳的走法，不是铺得很大，而是先拿一小撮人和一小类任务试出节奏。</p>
 				</div>
 			</section>
+
+			<GuideMeta
+				updatedAt={updatedAt}
+				series="团队落地 / 小团队试点"
+				related={[
+					{ href: '/guides/case-study-team-pilot', title: '小团队试点怎么走最稳' },
+					{ href: '/guides/permission-boundaries', title: '权限边界怎么拿捏' },
+					{ href: '/docs/en/agent-teams', title: '官方 agent-teams 解释页' }
+				]}
+			/>
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">第一步：先挑试点</p>
@@ -43,6 +56,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 				<p class="doc-eyebrow">第四步：慢慢再加复杂能力</p>
 				<div class="doc-copy">
 					<p>等单人使用顺了，再考虑 plugins、sub-agents、hooks、MCP。顺序别反。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">试点结束后看什么</p>
+				<div class="doc-copy">
+					<p>试点完别只看“大家有没有觉得新鲜”，要看三件更实的事：是不是少走了弯路、是不是有人愿意继续用、是不是已经暴露出该先收紧的边界。</p>
+					<p>只要这三件事里有两件站得住，小团队就可以继续往前推；如果三件都说不清，那就别急着扩大范围。</p>
 				</div>
 			</section>
 		</div>

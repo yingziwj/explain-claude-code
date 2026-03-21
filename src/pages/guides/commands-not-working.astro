@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -9,6 +12,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 >
 	<div class="doc-shell"><div class="doc-home">
 		<section class="doc-panel"><p class="doc-eyebrow">原创问题页</p><h1 class="doc-home__title">命令能看到却跑不起来时怎么排</h1><div class="doc-copy"><p>命令挂在那儿，不等于就一定能顺跑。很多时候是环境不对、目录不对、权限不够，或者它本来就只在某种条件下才该出现。</p><p>这类问题最容易让人烦，因为你明明看见它了，心里会默认“既然有这个命令，就该能跑”。其实未必。</p></div></section>
+		<GuideMeta
+			updatedAt={updatedAt}
+			series="问题排查 / 命令与执行环境"
+			related={[
+				{ href: '/guides/installation-troubleshooting', title: '安装失败先查什么' },
+				{ href: '/guides/settings-not-taking-effect', title: '设置改了却不生效' },
+				{ href: '/docs/en/commands', title: '官方 commands 解释页' }
+			]}
+		/>
 		<section class="doc-panel"><p class="doc-eyebrow">第一步：先查命令是不是该在这里用</p><div class="doc-copy"><p>有些命令跟平台、方案、工作目录有关。先别上来就怀疑命令坏了。</p><p>比如某些命令只在特定平台、特定计划、特定目录或特定集成场景里才说得通。你如果场子不对，它能显示，不代表现在就该能用。</p></div></section>
 		<section class="doc-panel"><p class="doc-eyebrow">第二步：再查环境和目录</p><div class="doc-copy"><p>你在哪个目录、哪个终端、哪种环境里跑，都会影响命令表现。</p><p>很多命令不是光看名字，而是看“你现在站在哪块地里干活”。目录不对、上下文不对，命令就容易像打空枪。</p></div></section>
 		<section class="doc-panel"><p class="doc-eyebrow">第三步：最后查权限和外部依赖</p><div class="doc-copy"><p>命令本身能认出来，但一执行就炸，往往是权限或外部依赖没备齐。</p><p>这一步包括本机可执行文件、插件依赖、网络条件、第三方工具是否可用。命令是门把手，后面那扇门开不开，还得看配套齐不齐。</p></div></section>

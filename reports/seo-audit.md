@@ -1,6 +1,6 @@
 # SEO Audit
 
-Generated at: 2026-03-21T02:20:29.123Z
+Generated at: 2026-03-21T03:05:20.710Z
 
 ## Required routes
 
@@ -19,9 +19,6 @@ Generated at: 2026-03-21T02:20:29.123Z
 | /about | 25 | 54 |
 | /advertising | 25 | 61 |
 | /contact | 25 | 48 |
-| /docs/en/[...slug] | 0 | 0 |
-| /docs/en/overview | 0 | 0 |
-| /docs/en/quickstart | 0 | 0 |
 | /guides | 27 | 56 |
 | /guides/adsense-readiness-checklist | 45 | 64 |
 | /guides/case-study-bugfix-workflow | 53 | 51 |
@@ -51,14 +48,8 @@ Generated at: 2026-03-21T02:20:29.123Z
 | /guides/subagent-not-working | 42 | 40 |
 | /guides/team-rollout-playbook | 40 | 44 |
 | /privacy | 25 | 70 |
-| /terms | 25 | 17 |
+| /terms | 25 | 54 |
 
 ## Issues
 
-- /docs/en/[...slug]: 缺少 title
-- /docs/en/[...slug]: 缺少 description
-- /docs/en/overview: 缺少 title
-- /docs/en/overview: 缺少 description
-- /docs/en/quickstart: 缺少 title
-- /docs/en/quickstart: 缺少 description
-- /terms: description 太短（17）
+- 无明显缺项

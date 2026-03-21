@@ -30,6 +30,7 @@ function inspect(fullPath) {
 	const titleMatch = source.match(/title=\"([^\"]+)\"/);
 	const descMatch = source.match(/description=\"([^\"]+)\"/);
 	const route = routeFromFile(fullPath);
+	if (route.includes('[') || route.startsWith('/docs/en/')) return;
 	const title = titleMatch?.[1] ?? '';
 	const description = descMatch?.[1] ?? '';
 	pageRows.push({ route, titleLen: title.length, descLen: description.length });

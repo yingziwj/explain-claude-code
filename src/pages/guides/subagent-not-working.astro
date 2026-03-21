@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -9,6 +12,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 >
 	<div class="doc-shell"><div class="doc-home">
 		<section class="doc-panel"><p class="doc-eyebrow">原创问题页</p><h1 class="doc-home__title">Sub-agent 看起来没起作用时怎么办</h1><div class="doc-copy"><p>子代理没效果，很多时候不是“AI 不行”，而是角色没分清、任务没切开、给它的工具也不够。</p><p>你可以把它想成临时叫来的帮手。帮手不是越多越灵，分工不清、工具不齐、活派得太糊，它自然就像没帮上忙。</p></div></section>
+		<GuideMeta
+			updatedAt={updatedAt}
+			series="问题排查 / Sub-agent 与分工"
+			related={[
+				{ href: '/docs/en/sub-agents', title: '官方 sub-agents 解释页' },
+				{ href: '/guides/choose-subagents-plugins-mcp', title: 'Sub-agents、Plugins、MCP 怎么选' },
+				{ href: '/guides/team-rollout-playbook', title: '小团队怎么落地 Claude Code' }
+			]}
+		/>
 		<section class="doc-panel"><p class="doc-eyebrow">第一步：先查角色说明</p><div class="doc-copy"><p>如果你连它是来干嘛的都没说死，它当然容易和主代理抢活，或者回成一锅粥。</p><p>角色写得越虚，它越容易变成“又来一个什么都想掺一脚的人”。</p></div></section>
 		<section class="doc-panel"><p class="doc-eyebrow">第二步：再查任务是不是切得太碎或太大</p><div class="doc-copy"><p>太碎它没事干，太大它接不住。最稳的是切成能独立交付的一块。</p><p>真正顺手的 sub-agent，通常都有一块明确地盘，而不是让它去“帮忙看一眼整个项目”。</p></div></section>
 		<section class="doc-panel"><p class="doc-eyebrow">第三步：最后查工具和权限</p><div class="doc-copy"><p>你让它查代码，却不给读工具；让它改东西，却不给写权限，那它怎么干都像没起作用。</p><p>帮手不是光靠嘴干活。你派它下地干农活，结果连锄头都不给，它当然只能站着看。</p></div></section>

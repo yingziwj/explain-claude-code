@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -16,6 +19,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 					<p>很多人第一次看到这三个词，会以为是三种差不多的高级功能。其实不是。它们像三种不同的农具，名字都新鲜，但干的不是一回事。</p>
 				</div>
 			</section>
+
+			<GuideMeta
+				updatedAt={updatedAt}
+				series="工具选型 / Claude Code 能力边界"
+				related={[
+					{ href: '/guides/claude-code-vs-other-tools', title: 'Claude Code 和别的工具怎么选' },
+					{ href: '/docs/en/sub-agents', title: '官方 sub-agents 解释页' },
+					{ href: '/docs/en/mcp', title: '官方 MCP 解释页' }
+				]}
+			/>
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">先说最短的判断法</p>

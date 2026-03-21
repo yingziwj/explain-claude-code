@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -17,6 +20,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 					<p>你可以先把它想成一根外接水管。水没流进来，不一定是 Claude Code 这头坏了，也可能是那头水龙头没开、管子接错口、阀门没授权。</p>
 				</div>
 			</section>
+			<GuideMeta
+				updatedAt={updatedAt}
+				series="问题排查 / MCP 与外接服务"
+				related={[
+					{ href: '/guides/choose-subagents-plugins-mcp', title: 'Sub-agents、Plugins、MCP 怎么选' },
+					{ href: '/docs/en/mcp', title: '官方 MCP 解释页' },
+					{ href: '/guides/common-errors-checklist', title: '常见报错排查清单' }
+				]}
+			/>
 			<section class="doc-panel"><p class="doc-eyebrow">第一步：先看服务是不是活着</p><div class="doc-copy"><p>先确认 MCP 服务自己是不是能正常起。服务本身都没活，后面所有配置都白搭。</p><p>别一上来就盯着 Claude Code 这边翻配置，先问一句：那头服务到底活着没有。</p></div></section>
 			<section class="doc-panel"><p class="doc-eyebrow">第二步：再看配在哪一层</p><div class="doc-copy"><p>MCP 很容易配错位置。你得先搞清这是全局、项目、插件还是子代理自己的配置，不然明明写了也不生效。</p><p>这类问题最像“我明明写了怎么没用”，其实不是没用，是你写到别的抽屉里去了。</p></div></section>
 			<section class="doc-panel"><p class="doc-eyebrow">第三步：再看认证和网络</p><div class="doc-copy"><p>如果服务活着、配置也像对的，那就去查认证和网络。很多“连不上”其实不是 Claude Code 的锅，而是那头不给过。</p><p>特别是公司内网、企业服务、带 OAuth 的东西，很容易卡在“服务在，但你不让进”。</p></div></section>

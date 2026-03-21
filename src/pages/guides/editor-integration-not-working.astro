@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -9,6 +12,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 >
 	<div class="doc-shell"><div class="doc-home">
 		<section class="doc-panel"><p class="doc-eyebrow">原创问题页</p><h1 class="doc-home__title">VS Code / JetBrains 接不上时先查什么</h1><div class="doc-copy"><p>编辑器接不上时，先别急着重装整套。很多时候只是版本、扩展状态或者工作目录没对齐。</p><p>这类问题最像“看起来都连着，其实没真正连上”。界面在，功能没通，中间往往差一层。</p></div></section>
+		<GuideMeta
+			updatedAt={updatedAt}
+			series="问题排查 / 编辑器集成"
+			related={[
+				{ href: '/docs/en/vs-code', title: '官方 VS Code 解释页' },
+				{ href: '/docs/en/jetbrains', title: '官方 JetBrains 解释页' },
+				{ href: '/guides/commands-not-working', title: '命令跑不起来时怎么排' }
+			]}
+		/>
 		<section class="doc-panel"><p class="doc-eyebrow">第一步：先查版本和扩展</p><div class="doc-copy"><p>先确认编辑器版本够不够、扩展是不是装对了、有没有被禁用。</p><p>这一步最朴素，但也最值钱。版本差一截、扩展没启、扩展装错市场，后面排再久都像在雾里打转。</p></div></section>
 		<section class="doc-panel"><p class="doc-eyebrow">第二步：再查工作目录和会话</p><div class="doc-copy"><p>你看到的是这个项目，不代表 Claude Code 现在挂的也是这个目录。先把路径对齐。</p><p>很多时候不是“编辑器不工作”，而是你以为它在这个仓库里，实际上它盯着另一个目录或另一段会话。</p></div></section>
 		<section class="doc-panel"><p class="doc-eyebrow">第三步：最后看权限与沙箱</p><div class="doc-copy"><p>IDE 里能看到，不代表实际执行时就有权限。最后再查这一层。</p><p>尤其是读文件、执行命令、调用外部工具这些能力，UI 里看着连上了，不等于底层也放行了。</p></div></section>

@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -16,6 +19,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 					<p>很多人不会用，不是不会打字，而是不知道怎么把活派清楚。这页不讲玄学，就给你一些能直接拿去说的话。</p>
 				</div>
 			</section>
+
+			<GuideMeta
+				updatedAt={updatedAt}
+				series="新手上手 / 提问与派活"
+				related={[
+					{ href: '/guides/first-day-checklist', title: '第一天上手清单' },
+					{ href: '/guides/common-beginner-mistakes', title: '新手最容易犯的 10 个错' },
+					{ href: '/docs/en/quickstart', title: '官方 quickstart 解释页' }
+				]}
+			/>
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">读项目类</p>
