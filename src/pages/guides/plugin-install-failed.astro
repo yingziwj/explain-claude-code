@@ -8,9 +8,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 	canonical={new URL('/guides/plugin-install-failed', Astro.site).toString()}
 >
 	<div class="doc-shell"><div class="doc-home">
-		<section class="doc-panel"><p class="doc-eyebrow">原创问题页</p><h1 class="doc-home__title">插件装不上时先查什么</h1><div class="doc-copy"><p>插件装不上，很多时候不是插件本身坏了，而是来源、目录结构、依赖和权限这几样里有一样没对上。</p></div></section>
-		<section class="doc-panel"><p class="doc-eyebrow">先查来源</p><div class="doc-copy"><p>先看你装的是官方市场、第三方市场还是本地目录。三种装法的毛病不一样，别混着排。</p></div></section>
-		<section class="doc-panel"><p class="doc-eyebrow">再查目录和 manifest</p><div class="doc-copy"><p>目录摆错、关键文件名不对、manifest 少字段，这些都是最常见的硬错误。</p></div></section>
-		<section class="doc-panel"><p class="doc-eyebrow">最后查依赖和权限</p><div class="doc-copy"><p>如果目录看着没问题，再去看依赖是不是缺、安装时是不是被权限拦住了。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">原创问题页</p><h1 class="doc-home__title">插件装不上时先查什么</h1><div class="doc-copy"><p>插件装不上，很多时候不是插件本身坏了，而是来源、目录结构、依赖和权限这几样里有一样没对上。</p><p>这类问题很像买来的零件装不上车。零件不一定坏，可能只是型号不对、方向反了、配套没带齐。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">第一步：先查来源</p><div class="doc-copy"><p>先看你装的是官方市场、第三方市场还是本地目录。三种装法的毛病不一样，别混着排。</p><p>来源不同，信任边界和安装方式就不同。你先把入口认清，后面才知道该查哪边。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">第二步：再查目录和 manifest</p><div class="doc-copy"><p>目录摆错、关键文件名不对、manifest 少字段，这些都是最常见的硬错误。</p><p>这一步最像验货：先看箱子和单子对不对，再看里面东西全不全。别还没验清，就跑去怀疑更深的系统问题。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">第三步：最后查依赖和权限</p><div class="doc-copy"><p>如果目录看着没问题，再去看依赖是不是缺、安装时是不是被权限拦住了。</p><p>很多插件不是单独一张纸片，它后面还拖着脚本、服务或别的依赖。前台看起来像“装不上”，后台可能是别的零件没跟上。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">最常见的误判</p><div class="doc-copy"><p>最常见的误判，是把“插件装不上”直接等同于“这个插件有毒”或“这个系统不支持”。实际上，目录、manifest、依赖、权限这几层里，前两层出错的概率往往更高。</p><p>先认来源，再验目录和 manifest，最后查依赖与权限，这个顺序通常最省力。</p></div></section>
 	</div></div>
 </BaseLayout>

@@ -8,9 +8,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 	canonical={new URL('/guides/hooks-not-running', Astro.site).toString()}
 >
 	<div class="doc-shell"><div class="doc-home">
-		<section class="doc-panel"><p class="doc-eyebrow">原创问题页</p><h1 class="doc-home__title">Hooks 不触发时怎么排</h1><div class="doc-copy"><p>Hook 最烦的地方在于：它没响的时候，看起来像什么都没发生。越是这种情况，越得按顺序查。</p></div></section>
-		<section class="doc-panel"><p class="doc-eyebrow">先查挂的事件对不对</p><div class="doc-copy"><p>很多人不是配错命令，而是把 hook 挂错了事件。事件没到，自然不会响。</p></div></section>
-		<section class="doc-panel"><p class="doc-eyebrow">再查 matcher 和条件</p><div class="doc-copy"><p>条件写得太窄、匹配不到，表面看像 hook 坏了，实际是你把门槛设错了。</p></div></section>
-		<section class="doc-panel"><p class="doc-eyebrow">最后看命令本身</p><div class="doc-copy"><p>如果事件和匹配都像对的，再看 hook 里真正执行的命令是不是自己就跑不通。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">原创问题页</p><h1 class="doc-home__title">Hooks 不触发时怎么排</h1><div class="doc-copy"><p>Hook 最烦的地方在于：它没响的时候，看起来像什么都没发生。越是这种情况，越得按顺序查。</p><p>你不能因为它安静，就默认问题一定很深。很多时候只是挂错事件、条件写窄，或者底下那条命令自己就跑不通。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">第一步：先查挂的事件对不对</p><div class="doc-copy"><p>很多人不是配错命令，而是把 hook 挂错了事件。事件没到，自然不会响。</p><p>先别碰别的，先确认你盼着它触发的那个时机，和你实际挂上的事件是不是一回事。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">第二步：再查 matcher 和条件</p><div class="doc-copy"><p>条件写得太窄、匹配不到，表面看像 hook 坏了，实际是你把门槛设错了。</p><p>这一步很像撒网：你网眼要是开太小，鱼明明从前面游过去了，你也一条都捞不到。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">第三步：最后看命令本身</p><div class="doc-copy"><p>如果事件和匹配都像对的，再看 hook 里真正执行的命令是不是自己就跑不通。</p><p>很多人排 hook 排半天，最后发现 hook 本身没问题，底下那条 shell 命令单独跑也会炸。</p></div></section>
+		<section class="doc-panel"><p class="doc-eyebrow">最常见的误判</p><div class="doc-copy"><p>最常见的误判，是“一次没触发就觉得整套 hook 坏了”。其实更常见的是事件没到、条件没碰上、或底下命令有错。</p><p>先查事件，再查条件，最后查命令。照这个顺序走，最不容易绕远路。</p></div></section>
 	</div></div>
 </BaseLayout>
