@@ -1,6 +1,6 @@
 # SEO Audit
 
-Generated at: 2026-03-21T03:13:54.898Z
+Generated at: 2026-03-21T03:16:23.972Z
 
 ## Required routes
 
@@ -45,6 +45,7 @@ Generated at: 2026-03-21T03:13:54.898Z
 | /guides/plugin-install-failed | 31 | 31 |
 | /guides/prompt-templates-for-beginners | 44 | 31 |
 | /guides/settings-not-taking-effect | 33 | 33 |
+| /guides/site-trust-faq | 34 | 66 |
 | /guides/subagent-not-working | 42 | 40 |
 | /guides/team-rollout-playbook | 40 | 44 |
 | /privacy | 25 | 70 |

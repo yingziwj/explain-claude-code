@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
+const faqs = [
+	{
+		question: '这个站是不是 Claude Code 官方站？',
+		answer:
+			'不是。这个站是第三方非官方解释站，主要做两件事：一是尽量跟着官方 docs 的结构走，二是把很多新手看着费劲的地方改成更能照着做的中文解释。真遇到冲突时，还是以官方文档为准。'
+	},
+	{
+		question: '这里的内容是机翻吗？',
+		answer:
+			'不是纯机翻。现在的做法是尽量保留关键命令、配置、文件名和代码片段，再在上面加更通俗的中文解释。另外还单独补了一批原创指南、问题页和案例页，避免整站看起来只是“换个说法的副本”。'
+	},
+	{
+		question: '为什么这个站还要做原创页？',
+		answer:
+			'因为如果只做官方文档解释版，很容易显得附加价值不够。原创页的作用，是把真正会遇到的选择、排错顺序、权限边界、工具选型和团队落地经验单独讲清楚。这样读者不用每次都从官方原文里自己拼答案。'
+	},
+	{
+		question: '如果官方文档更新了，这里会不会过时？',
+		answer:
+			'有这个风险，所以站里做了同步和重生成链路，尽量跟着官方 docs 的新增、删除和改动一起更新。但就算这样，也不能保证每一页都永远零延迟，所以关键地方还是建议回官方原文核对。'
+	},
+	{
+		question: '为什么你们一直强调命令和代码不能省略？',
+		answer:
+			'因为这类东西不是“意思差不多就行”。命令、参数、配置键名、文件名这些，一旦被省掉或改糊了，读者就没法真照着做。通俗化可以改说法，但硬步骤最好保真。'
+	},
+	{
+		question: '这站以后为什么想接 Google AdSense？',
+		answer:
+			'说白了就是给站点长期维护找一个更稳定的收入来源。但前提不是先把广告挂满，而是先把内容价值、站点说明、隐私说明和原创内容做实。不然很容易既影响读者体验，也过不了审核。'
+	}
+];
+---
+
+<BaseLayout
+	title="关于本站最常被问的几个问题 | 通俗版 Claude Code 文档"
+	description="把通俗版 Claude Code 文档最常被问的几个问题摊开讲清楚：是不是官方、内容怎么来、为什么保留命令和代码、为什么要补原创页。"
+	canonical={new URL('/guides/site-trust-faq', Astro.site).toString()}
+	structuredData={{
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: faqs.map((item) => ({
+			'@type': 'Question',
+			name: item.question,
+			acceptedAnswer: {
+				'@type': 'Answer',
+				text: item.answer
+			}
+		}))
+	}}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">站点说明 FAQ</p>
+				<h1 class="doc-home__title">关于本站最常被问的几个问题</h1>
+				<div class="doc-copy">
+					<p>这页不是讲某个功能怎么用，而是把读者最容易先冒出来的疑问摊开说清楚。</p>
+					<p>你如果是在想“这站到底靠不靠谱”“和官方什么关系”“为什么这里既有 docs 解释页又有原创页”，从这页下手最快。</p>
+				</div>
+			</section>
+
+			<GuideMeta
+				updatedAt={updatedAt}
+				series="站点说明 / 常见问题"
+				related={[
+					{ href: '/about', title: '关于本站' },
+					{ href: '/guides/editorial-methodology', title: '内容方法总览' },
+					{ href: '/guides/adsense-readiness-checklist', title: '现在申请 AdSense 还差什么' }
+				]}
+			/>
+
+			{faqs.map((item) => (
+				<section class="doc-panel">
+					<p class="doc-eyebrow">常见问题</p>
+					<h2>{item.question}</h2>
+					<div class="doc-copy">
+						<p>{item.answer}</p>
+					</div>
+				</section>
+			))}
+		</div>
+	</div>
+</BaseLayout>
