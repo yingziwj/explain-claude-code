@@ -5,11 +5,97 @@ interface Props {
 	title: string;
 	description: string;
 	canonical: string;
+	structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
-const { title, description, canonical } = Astro.props;
+const { title, description, canonical, structuredData } = Astro.props;
 const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT?.trim() || '';
 const ogImage = new URL('/social-card.svg', canonical).toString();
+const pageUrl = new URL(canonical);
+const siteUrl = Astro.site?.toString() || `${pageUrl.origin}/`;
+const pathname = pageUrl.pathname.replace(/\/$/, '') || '/';
+const pageName = title.replace(/\s*\|\s*通俗版 Claude Code 文档$/, '');
+const pathSegments = pathname === '/' ? [] : pathname.split('/').filter(Boolean);
+const labelMap: Record<string, string> = {
+	guides: '原创指南',
+	docs: '文档解释',
+	en: 'English Docs'
+};
+const breadcrumbItems = [
+	{
+		'@type': 'ListItem',
+		position: 1,
+		name: '首页',
+		item: siteUrl
+	}
+];
+
+let runningPath = '';
+for (const segment of pathSegments) {
+	runningPath += `/${segment}`;
+	breadcrumbItems.push({
+		'@type': 'ListItem',
+		position: breadcrumbItems.length + 1,
+		name: labelMap[segment] || decodeURIComponent(segment).replace(/-/g, ' '),
+		item: new URL(runningPath, siteUrl).toString()
+	});
+}
+
+if (breadcrumbItems[breadcrumbItems.length - 1]?.name !== pageName) {
+	breadcrumbItems.push({
+		'@type': 'ListItem',
+		position: breadcrumbItems.length + 1,
+		name: pageName,
+		item: canonical
+	});
+}
+
+const defaultStructuredData = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		name: '通俗版 Claude Code 文档',
+		url: siteUrl,
+		description
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'Organization',
+		name: '通俗版 Claude Code 文档',
+		url: siteUrl,
+		description: '第三方非官方 Claude Code 中文解释与原创实战指南站点',
+		contactPoint: {
+			'@type': 'ContactPoint',
+			contactType: 'customer support',
+			url: new URL('/contact', siteUrl).toString()
+		},
+		sameAs: [
+			'https://github.com/yingziwj/explain-claude-code',
+			'https://github.com/yingziwj/explain-claude-code/issues'
+		]
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': pathname.startsWith('/guides/') ? 'Article' : 'WebPage',
+		headline: pageName,
+		name: pageName,
+		description,
+		url: canonical,
+		isPartOf: {
+			'@type': 'WebSite',
+			name: '通俗版 Claude Code 文档',
+			url: siteUrl
+		}
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: breadcrumbItems
+	}
+];
+const pageStructuredData = structuredData
+	? [...defaultStructuredData, ...(Array.isArray(structuredData) ? structuredData : [structuredData])]
+	: defaultStructuredData;
 ---
 
 <!doctype html>
@@ -35,13 +121,7 @@ const ogImage = new URL('/social-card.svg', canonical).toString();
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImage} />
 		{adsenseClient ? <meta name="google-adsense-account" content={adsenseClient} /> : null}
-		<script type="application/ld+json" set:html={JSON.stringify({
-			'@context': 'https://schema.org',
-			'@type': 'WebSite',
-			name: '通俗版 Claude Code 文档',
-			url: Astro.site,
-			description
-		})} />
+		<script type="application/ld+json" set:html={JSON.stringify(pageStructuredData)} />
 		{
 			adsenseClient ? (
 				<script
