@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
+---
+
+<BaseLayout
+	title="这个站的内容方法总览 | 通俗版 Claude Code 文档"
+	description="把通俗版 Claude Code 文档的内容方法、编辑规则、同步方式、原创补充和内容体检放在一页里讲清楚。"
+	canonical={new URL('/guides/editorial-methodology', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">站点说明</p>
+				<h1 class="doc-home__title">这个站的内容方法总览</h1>
+				<div class="doc-copy">
+					<p>如果只把页面一张张摆出来，读者还是很难判断：这站到底是怎么做内容的，哪些是跟官方走的，哪些是自己另外写的，哪些地方靠自动同步，哪些地方靠人工修。</p>
+					<p>所以这页专门把内容方法收成一张总表，让人一眼看明白这站不是随手拼起来的。</p>
+				</div>
+			</section>
+
+			<GuideMeta
+				updatedAt={updatedAt}
+				series="站点说明 / 内容方法总览"
+				related={[
+					{ href: '/guides/how-this-site-is-made', title: '这个站的内容是怎么做出来的' },
+					{ href: '/guides/editorial-principles', title: '编辑和更新原则' }
+				]}
+			/>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第一层：结构跟官方</p>
+				<div class="doc-copy">
+					<p>本站 docs 区的导航结构、顺序和页面分组，尽量跟 Claude Code 官方 docs 保持一致。这样做的目的很朴素：让读者在官方站和本站之间来回切时，不至于迷路。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第二层：关键步骤保硬</p>
+				<div class="doc-copy">
+					<p>命令、参数、配置键名、文件名、代码片段这些能保留就保留。因为这类内容不是“说个大概就行”，它得能复制、能对照、能跑。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第三层：解释做人话</p>
+				<div class="doc-copy">
+					<p>正文解释尽量用更通俗的中文，把“这一段在整页里到底负责什么”讲明白，而不是把标题又说一遍。这个环节最难，也最需要反复修。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第四层：原创内容单列</p>
+				<div class="doc-copy">
+					<p>原创指南、问题页、案例页不伪装成官方文档，而是明确单列。这样读者知道哪些是原文解释，哪些是本站自己的判断、经验和补充。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第五层：内容体检</p>
+				<div class="doc-copy">
+					<p>站里现在还有一层内容体检，会把明显偏薄的页面列出来。这样补内容时不是靠感觉拍脑袋，而是先看清单，再往下修。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>

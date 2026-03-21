@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
+---
+
+<BaseLayout
+	title="现在申请 Google AdSense 还差什么 | 通俗版 Claude Code 文档"
+	description="按内容价值、站点信任信号、广告合规和结构完整度，复盘通俗版 Claude Code 文档离 AdSense 申请还差哪些关键点。"
+	canonical={new URL('/guides/adsense-readiness-checklist', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">站点复盘</p>
+				<h1 class="doc-home__title">现在申请 Google AdSense 还差什么</h1>
+				<div class="doc-copy">
+					<p>这页不是给读者看的教程，更多是给站长自己看的验站单。目的很明确：别靠“差不多了吧”去申请，而是把还欠的东西摊开看。</p>
+				</div>
+			</section>
+
+			<GuideMeta
+				updatedAt={updatedAt}
+				series="站点说明 / AdSense 申请前复盘"
+				related={[
+					{ href: '/about', title: '关于本站' },
+					{ href: '/privacy', title: '隐私说明' },
+					{ href: '/guides/editorial-methodology', title: '内容方法总览' }
+				]}
+			/>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">已经做到的</p>
+				<div class="doc-copy">
+					<p>现在站里已经有 docs 中文解释版、原创指南、问题页、案例页、关于页、隐私页、条款页、广告说明页，也有作者、更新时间、系列关系和内容体检。</p>
+					<p>这说明站点已经不是单纯的“改写文档副本”，而是开始往一个有自己内容逻辑的内容站走。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">还没到非常稳的地方</p>
+				<div class="doc-copy">
+					<p>最大的不确定性还是内容类型。因为站点主轴仍然和官方 docs 强相关，所以即使补了原创页，也不能完全排除被 AdSense 觉得“附加价值还不够明显”的风险。</p>
+					<p>说白一点，现在已经比一开始稳很多，但还不能说“十拿九稳”。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">申请前最该再补的 3 件事</p>
+				<div class="doc-copy">
+					<p>第一，再多补几篇真正像“经验总结”和“工作流复盘”的原创页，让站点里原创内容的占比和份量继续往上抬。</p>
+					<p>第二，把原创页之间的系列关系、更新时间、作者信息继续铺开，不只铺在一部分页上。</p>
+					<p>第三，正式接广告前把 CMP、Cookie 同意和广告合规入口准备好，别等审核过了再临时补。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">什么时候更适合去申请</p>
+				<div class="doc-copy">
+					<p>我会更倾向于在下面这几条都满足后再去申请：原创页再多一批、站点内链更顺、About/Privacy/Methodology 都稳定、并且站里已经有一段时间持续更新痕迹。</p>
+					<p>这样去申请，不一定保证过，但至少不是拿半成品去试水。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>
