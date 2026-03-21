@@ -64,6 +64,33 @@ async function main() {
 	if (!check('permissions page is not homepage fallback', permissionsStatusOk && notHomepage, `initial=${permissions.initial.response.status} final=${permissions.final.response.status}`)) failures.push('permissions-fallback');
 	if (!check('permissions page contains permissions content', permissionsTitleOk)) failures.push('permissions-content');
 
+	const about = await fetchPage(`${baseUrl}/about`);
+	const aboutOk =
+		about.final.response.status === 200 &&
+		about.final.text.includes('关于通俗版 Claude Code 文档') &&
+		!about.final.text.includes('<title>通俗版 Claude Code 文档</title>');
+	if (!check('about page renders site info', aboutOk, `initial=${about.initial.response.status} final=${about.final.response.status}`)) failures.push('about');
+
+	const guides = await fetchPage(`${baseUrl}/guides`);
+	const guidesOk =
+		guides.final.response.status === 200 &&
+		guides.final.text.includes('原创实战指南') &&
+		!guides.final.text.includes('<title>通俗版 Claude Code 文档</title>');
+	if (!check('guides page renders guide index', guidesOk, `initial=${guides.initial.response.status} final=${guides.final.response.status}`)) failures.push('guides');
+
+	const trustFaq = await fetchPage(`${baseUrl}/guides/site-trust-faq`);
+	const trustFaqOk =
+		trustFaq.final.response.status === 200 &&
+		trustFaq.final.text.includes('关于本站最常被问的几个问题') &&
+		trustFaq.final.text.includes('FAQPage');
+	if (!check('site trust FAQ page renders and includes faq schema', trustFaqOk, `initial=${trustFaq.initial.response.status} final=${trustFaq.final.response.status}`)) failures.push('trust-faq');
+
+	const finalReadiness = await fetchPage(`${baseUrl}/guides/final-site-readiness-check`);
+	const finalReadinessOk =
+		finalReadiness.final.response.status === 200 &&
+		finalReadiness.final.text.includes('申请前最后怎么把整站过一遍');
+	if (!check('final readiness page renders', finalReadinessOk, `initial=${finalReadiness.initial.response.status} final=${finalReadiness.final.response.status}`)) failures.push('final-readiness');
+
 	const robots = await fetchText(`${baseUrl}/robots.txt`);
 	if (!check('robots has sitemap', robots.text.includes(`${baseUrl}/sitemap-index.xml`))) failures.push('robots');
 

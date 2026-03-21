@@ -60,6 +60,10 @@
 
 ```sh
 npm run refresh:docs
+npm run check:content
+npm run check:seo
+npm run check:adsense
+npm run check:site
 npm run build
 npm run check:preflight
 ```
@@ -69,6 +73,13 @@ npm run check:preflight
 ```sh
 npm run check:live
 ```
+
+当前 `check:live` 除了首页、`/docs` 跳转、`robots.txt`、`sitemap-index.xml` 和响应头，还会顺手检查：
+
+- `/about`
+- `/guides`
+- `/guides/site-trust-faq`
+- `/guides/final-site-readiness-check`
 
 如果你用了自定义域名，也可以这样检查：
 
