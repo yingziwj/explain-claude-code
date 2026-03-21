@@ -20,7 +20,15 @@ const updatedAt = '2026-03-21';
 				</div>
 			</section>
 
-			<GuideMeta updatedAt={updatedAt} series="原创实战指南 / 排错清单" />
+			<GuideMeta
+				updatedAt={updatedAt}
+				series="原创实战指南 / 排错清单"
+				related={[
+					{ href: '/guides/installation-troubleshooting', title: '安装失败先查什么' },
+					{ href: '/guides/login-troubleshooting', title: '登录失败怎么排' },
+					{ href: '/guides/permission-blocked-troubleshooting', title: '权限卡住怎么判断' }
+				]}
+			/>
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">先看是不是安装问题</p>

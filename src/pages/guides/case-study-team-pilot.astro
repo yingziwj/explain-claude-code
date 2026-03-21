@@ -20,7 +20,14 @@ const updatedAt = '2026-03-21';
 				</div>
 			</section>
 
-			<GuideMeta updatedAt={updatedAt} series="原创案例 / 团队落地试点" />
+			<GuideMeta
+				updatedAt={updatedAt}
+				series="原创案例 / 团队落地试点"
+				related={[
+					{ href: '/guides/team-rollout-playbook', title: '小团队落地手册' },
+					{ href: '/guides/permission-boundaries', title: '权限边界怎么拿捏' }
+				]}
+			/>
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">第一步：先挑人和活</p>

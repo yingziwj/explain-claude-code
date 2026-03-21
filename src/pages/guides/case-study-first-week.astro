@@ -20,7 +20,14 @@ const updatedAt = '2026-03-21';
 				</div>
 			</section>
 
-			<GuideMeta updatedAt={updatedAt} series="原创案例 / 新手上手路径" />
+			<GuideMeta
+				updatedAt={updatedAt}
+				series="原创案例 / 新手上手路径"
+				related={[
+					{ href: '/guides/first-day-checklist', title: '第一天上手清单' },
+					{ href: '/guides/common-beginner-mistakes', title: '新手最容易犯的 10 个错' }
+				]}
+			/>
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">第一天</p>

@@ -1,8 +1,9 @@
 ---
-const { author = '通俗版 Claude Code 文档维护者', updatedAt, series } = Astro.props as {
+const { author = '通俗版 Claude Code 文档维护者', updatedAt, series, related = [] } = Astro.props as {
 	author?: string;
 	updatedAt: string;
 	series: string;
+	related?: Array<{ href: string; title: string }>;
 };
 ---
 
@@ -22,4 +23,19 @@ const { author = '通俗版 Claude Code 文档维护者', updatedAt, series } = 
 			<p>{series}</p>
 		</div>
 	</div>
+	{
+		related.length ? (
+			<div class="doc-copy">
+				<p>同系列还可以顺手看：</p>
+				<p>
+					{related.map((item, index) => (
+						<>
+							{index ? ' · ' : ''}
+							<a href={item.href}>{item.title}</a>
+						</>
+					))}
+				</p>
+			</div>
+		) : null
+	}
 </section>

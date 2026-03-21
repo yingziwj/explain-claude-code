@@ -21,7 +21,14 @@ const updatedAt = '2026-03-21';
 				</div>
 			</section>
 
-			<GuideMeta updatedAt={updatedAt} series="原创案例 / Bug 修复流程" />
+			<GuideMeta
+				updatedAt={updatedAt}
+				series="原创案例 / Bug 修复流程"
+				related={[
+					{ href: '/guides/common-errors-checklist', title: '常见报错排查清单' },
+					{ href: '/guides/commands-not-working', title: '命令跑不起来时怎么排' }
+				]}
+			/>
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">第一步：先缩小范围</p>

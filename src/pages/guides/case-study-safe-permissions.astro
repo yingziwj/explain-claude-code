@@ -21,7 +21,14 @@ const updatedAt = '2026-03-21';
 				</div>
 			</section>
 
-			<GuideMeta updatedAt={updatedAt} series="原创案例 / 权限管理" />
+			<GuideMeta
+				updatedAt={updatedAt}
+				series="原创案例 / 权限管理"
+				related={[
+					{ href: '/guides/permission-boundaries', title: '权限边界怎么拿捏' },
+					{ href: '/guides/permission-blocked-troubleshooting', title: '权限卡住怎么判断' }
+				]}
+			/>
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">起手别太大</p>
