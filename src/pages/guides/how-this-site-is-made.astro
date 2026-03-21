@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -14,6 +16,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 				<h1 class="doc-home__title">这个站的内容是怎么做出来的</h1>
 				<div class="doc-copy">
 					<p>这页不是文档教程，而是把本站做法摆到桌面上。原因很简单：如果一个站靠“翻译”和“自动生成”吃饭，却不解释自己怎么做内容，那可信度天然会打折。</p>
+					<p>所以这页专门用来讲清：哪些东西是跟官方结构走的，哪些东西是本站自己重写的，哪些地方会自动同步，哪些地方需要人工继续修。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">页面信息</p>
+				<div class="doc-meta-grid">
+					<div class="doc-practice-item"><h2>作者</h2><p>通俗版 Claude Code 文档维护者</p></div>
+					<div class="doc-practice-item"><h2>最后更新</h2><p>{updatedAt}</p></div>
+					<div class="doc-practice-item"><h2>所属系列</h2><p>站点说明 / 内容生产方式</p></div>
 				</div>
 			</section>
 
@@ -21,6 +33,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 				<p class="doc-eyebrow">第一层：跟官方结构走</p>
 				<div class="doc-copy">
 					<p>本站会尽量跟随 Claude Code 官方 docs 的导航、顺序和页面变化。这样做的好处是，你去对照官方原文时不容易迷路。</p>
+					<p>这一步解决的是“找得到”的问题。你今天在官方站看到一个栏目，明天来这里，最好也能顺着差不多的路径找到同一页。</p>
 				</div>
 			</section>
 
@@ -28,6 +41,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 				<p class="doc-eyebrow">第二层：关键步骤尽量保留原样</p>
 				<div class="doc-copy">
 					<p>命令、参数、配置键名、代码片段这类硬东西，能保留就保留，不轻易改写。因为这不是散文，写顺嘴了但跑不起来，就害人了。</p>
+					<p>所以本站会尽量把这些硬步骤留住，再在它们前后加更好懂的中文解释。土话可以变，命令不能乱拧。</p>
 				</div>
 			</section>
 
@@ -35,6 +49,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 				<p class="doc-eyebrow">第三层：解释做人话改写</p>
 				<div class="doc-copy">
 					<p>正文解释会尽量改成更朴素的中文，让第一次看的人能明白“这段到底在干嘛”。但这一步也最容易出问题，所以一直在持续修。</p>
+					<p>难点就在这里：既不能变成硬翻译，也不能为了“通俗”把关键步骤抹掉。所以现在的做法是，一边保留硬步骤，一边继续修解释腔调。</p>
 				</div>
 			</section>
 
@@ -42,6 +57,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 				<p class="doc-eyebrow">第四层：另外补原创页</p>
 				<div class="doc-copy">
 					<p>如果一个站只做“官方文档改写”，附加价值还是不够。所以这里开始另外补原创实战页，专门讲选择、踩坑、上手顺序和团队落地这些官方文档不一定集中展开的东西。</p>
+					<p>这部分就是为了把站点从“解释版副本”往“带自己判断和经验的学习站”推。对读者有帮助，对搜索和广告审核也更稳。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第五层：自动体检和人工回看</p>
+				<div class="doc-copy">
+					<p>站里现在还有一层内容体检，会把偏薄的页面列出来。这样不是靠感觉猜哪里空，而是有一张清单能继续追着补。</p>
+					<p>但体检只能看“薄不薄”，看不出“讲得顺不顺”。所以后面还得靠人工回看，把那些虽然不短、但还不够像人在讲的页面继续往下修。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">最后说白一点</p>
+				<div class="doc-copy">
+					<p>这站不是神奇地一口气长出来的，而是一层一层搭出来的：先跟结构，再保硬步骤，再修解释，再补原创，再做体检。</p>
+					<p>你现在看到的不是终稿，而是一套还在继续往实里收的内容生产线。把这件事说出来，本身也是为了让读者知道，这站不是闭着眼乱拼的。</p>
 				</div>
 			</section>
 		</div>

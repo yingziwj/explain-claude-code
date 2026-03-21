@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const updatedAt = '2026-03-21';
 ---
 
 <BaseLayout
@@ -14,6 +16,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 				<h1 class="doc-home__title">这个站的编辑原则和更新原则</h1>
 				<div class="doc-copy">
 					<p>这页就是告诉读者：本站不是随手拼内容，也不是今天兴致来了改两句，明天就不管了。至少原则得说清楚。</p>
+					<p>原则写出来，不是为了摆样子，而是为了让后面每次改内容、补页面、删空话，都有一把尺子可以照。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">页面信息</p>
+				<div class="doc-meta-grid">
+					<div class="doc-practice-item"><h2>作者</h2><p>通俗版 Claude Code 文档维护者</p></div>
+					<div class="doc-practice-item"><h2>最后更新</h2><p>{updatedAt}</p></div>
+					<div class="doc-practice-item"><h2>所属系列</h2><p>站点说明 / 编辑原则</p></div>
 				</div>
 			</section>
 
@@ -21,6 +33,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 				<p class="doc-eyebrow">原则一：原文变了，这边尽量跟</p>
 				<div class="doc-copy">
 					<p>官方 docs 新增、删减、调整顺序时，这边会尽量同步。不同步的解释站，很快就会把人带沟里。</p>
+					<p>所以这站宁可先把结构跟上，也不想放着旧导航旧顺序不管。读者最怕的，就是点着点着发现你讲的是上个月那版东西。</p>
 				</div>
 			</section>
 
@@ -28,6 +41,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 				<p class="doc-eyebrow">原则二：重要步骤不省略</p>
 				<div class="doc-copy">
 					<p>命令、代码、配置、文件名、参数名这些硬步骤，优先保留。说法可以更土，关键步骤不能缩水。</p>
+					<p>这是本站最硬的一条。解释站要是把真正能复制运行的东西讲没了，那就只剩下听上去热闹。</p>
 				</div>
 			</section>
 
@@ -35,6 +49,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 				<p class="doc-eyebrow">原则三：解释要尽量顺上下文</p>
 				<div class="doc-copy">
 					<p>不是每个小节孤零零解释一句就算完，而是尽量结合整页、整组功能、甚至整个站的上下文来讲，免得突兀。</p>
+					<p>这条是后来越做越深的。因为只解释标题，不解释它前后怎么接，读者还是会觉得“我看懂了句子，没看懂这段为什么在这里”。</p>
 				</div>
 			</section>
 
@@ -42,6 +57,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 				<p class="doc-eyebrow">原则四：原创内容单独做实</p>
 				<div class="doc-copy">
 					<p>原创就是原创，不假装它是官方文档的一部分。像新手路线、选型比较、团队落地、常见坑这些东西，会单独做成独立页。</p>
+					<p>这条也很现实。只做文档改写，附加价值不够；原创内容不单列，又容易把边界搞混。所以最好是各走各的路，但互相有内链。</p>
 				</div>
 			</section>
 
@@ -49,6 +65,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 				<p class="doc-eyebrow">原则五：发现错就改</p>
 				<div class="doc-copy">
 					<p>如果读者发现内容过时、解释不通、步骤丢失，优先修正。解释站最怕的不是有错，而是明明被指出来了还不改。</p>
+					<p>这条说起来简单，做起来最磨人。因为很多时候页面不是完全错，而是“差一点”，但真正影响体验的，往往就是这一点。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原则六：先保真实，再谈好看</p>
+				<div class="doc-copy">
+					<p>页面可以好看，插画可以加，卡片可以做，但前提是别把读者真正要找的东西埋掉。</p>
+					<p>尤其是对这类解释站来说，读者多半是带着问题来的。问题没解决，样式再花也只是好看。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原则七：能量化的就别只靠感觉</p>
+				<div class="doc-copy">
+					<p>现在站里已经加了内容体检脚本，会把偏薄的页先挑出来。这样至少能知道先补谁，而不是全凭主观印象。</p>
+					<p>当然，数字不是全部。体检能看出“短”，看不出“呆”。所以后面还是要人工回看，把那些不短但仍然不顺口的页继续修。</p>
 				</div>
 			</section>
 		</div>

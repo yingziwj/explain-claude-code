@@ -616,6 +616,12 @@ a {
 	line-height: 1.8;
 }
 
+.doc-meta-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 0.9rem;
+}
+
 .doc-steps {
 	display: grid;
 	gap: 0.9rem;
@@ -766,6 +772,10 @@ a {
 	}
 
 	.doc-practice-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.doc-meta-grid {
 		grid-template-columns: 1fr;
 	}
 
