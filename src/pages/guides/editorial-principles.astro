@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
 
 const updatedAt = '2026-03-21';
 ---
@@ -20,14 +21,7 @@ const updatedAt = '2026-03-21';
 				</div>
 			</section>
 
-			<section class="doc-panel">
-				<p class="doc-eyebrow">页面信息</p>
-				<div class="doc-meta-grid">
-					<div class="doc-practice-item"><h2>作者</h2><p>通俗版 Claude Code 文档维护者</p></div>
-					<div class="doc-practice-item"><h2>最后更新</h2><p>{updatedAt}</p></div>
-					<div class="doc-practice-item"><h2>所属系列</h2><p>站点说明 / 编辑原则</p></div>
-				</div>
-			</section>
+			<GuideMeta updatedAt={updatedAt} series="站点说明 / 编辑原则" />
 
 			<section class="doc-panel">
 				<p class="doc-eyebrow">原则一：原文变了，这边尽量跟</p>

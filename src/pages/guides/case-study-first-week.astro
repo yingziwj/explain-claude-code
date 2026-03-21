@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
+---
+
+<BaseLayout
+	title="案例：第一次用 Claude Code 的一周会怎么走 | 通俗版 Claude Code 文档"
+	description="不是讲抽象原则，而是按第一周常见节奏，讲一个人从刚装好到逐渐顺手会经历什么。"
+	canonical={new URL('/guides/case-study-first-week', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原创案例页</p>
+				<h1 class="doc-home__title">案例：第一次用 Claude Code 的一周会怎么走</h1>
+				<div class="doc-copy">
+					<p>这页不是官方文档旁注，也不是功能清单，而是一个更贴地的使用节奏样板：如果一个人第一周开始接触 Claude Code，大概率会怎么走、会卡在哪、会在哪一天突然顺起来。</p>
+				</div>
+			</section>
+
+			<GuideMeta updatedAt={updatedAt} series="原创案例 / 新手上手路径" />
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第一天</p>
+				<div class="doc-copy">
+					<p>第一天通常不是学高级功能，而是把安装、登录、进项目、看懂最基本的对话节奏走通。很多人这时候最容易犯的错，就是一上来就拿大仓库做大活。</p>
+					<p>真正稳的走法，是先拿一个自己看得懂的小目录，让 Claude Code 帮你读几个文件、解释一段函数、做一个很小的改动。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第二到第三天</p>
+				<div class="doc-copy">
+					<p>这两天通常会开始碰到第一批真实不顺手的地方，比如命令不按预期执行、权限拦住、自己提问太虚、结果回得又长又空。</p>
+					<p>也是在这时候，很多人第一次意识到：这工具不是不能用，而是自己得学会派活。问题说明白，回来的东西就会实很多。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第四到第五天</p>
+				<div class="doc-copy">
+					<p>到了这一步，通常会开始想碰插件、sub-agents、MCP 这些功能。这里最容易分叉：一种人会突然觉得“太高级了”，另一种人会一下子全想装。</p>
+					<p>更稳的办法，是只加一种你眼下真需要的能力。比如你现在老是重复某个小动作，那去看插件；如果你只是想把任务拆给不同角色，那再去看 sub-agents。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第六到第七天</p>
+				<div class="doc-copy">
+					<p>第一周结束时，真正重要的不是你会了多少术语，而是你有没有形成自己的起手顺序：先看什么、先问什么、先验什么、什么时候该停下来回看改动。</p>
+					<p>如果这套节奏有了，你后面再去学更复杂的功能，基本都会顺很多。没有这套节奏，再多高级功能也容易变成新的负担。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">这个案例真正想说明什么</p>
+				<div class="doc-copy">
+					<p>Claude Code 真正的上手点，不是“知道有多少功能”，而是“知道自己现在该用哪一档能力”。第一周能把基础节奏练顺，后面学什么都快；第一周就想把所有功能都揣兜里，通常反而最慢。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>

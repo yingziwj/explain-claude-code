@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
+---
+
+<BaseLayout
+	title="案例：一个小团队试点 Claude Code 时最稳的走法 | 通俗版 Claude Code 文档"
+	description="讲一个小团队从试点到初步落地的现实节奏，重点不是制度，而是先做哪几步最不容易翻车。"
+	canonical={new URL('/guides/case-study-team-pilot', Astro.site).toString()}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">原创案例页</p>
+				<h1 class="doc-home__title">案例：一个小团队试点 Claude Code 时最稳的走法</h1>
+				<div class="doc-copy">
+					<p>很多团队不是不会试 AI，而是要么推得太猛，要么拖得太散。这页讲的是一种更像正常团队会发生的节奏：先试点，再收边界，再慢慢扩，不靠一开始写一大本制度。</p>
+				</div>
+			</section>
+
+			<GuideMeta updatedAt={updatedAt} series="原创案例 / 团队落地试点" />
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第一步：先挑人和活</p>
+				<div class="doc-copy">
+					<p>最稳的起点，不是“全员上线”，而是先挑两三个人，再挑两三类活，比如读项目、补测试、查 bug。人和活都别太多，这样团队才看得清到底哪块在起作用。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第二步：先收边界，不先谈大词</p>
+				<div class="doc-copy">
+					<p>试点期最该先定的，不是 KPI，也不是 fancy 流程，而是边界：哪些仓库能碰，哪些命令先别放，哪些数据不许带出去，哪些权限要保守一点。</p>
+					<p>边界先立住，团队心里才不慌。否则一出问题，大家最先怀疑的不是流程，而是“这玩意是不是本来就不该上”。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第三步：统一最小动作</p>
+				<div class="doc-copy">
+					<p>团队不需要一开始就完全统一，但至少要统一几件小事：怎么提需求、怎么验结果、怎么记录一次好用或不好用的案例。</p>
+					<p>如果每个人都按自己的脾气乱用，后面经验根本攒不起来，最后只会剩“有人说好用，有人说没用”。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第四步：别急着上最复杂那档</p>
+				<div class="doc-copy">
+					<p>团队试点期最容易犯的错，就是刚有点甜头就想上 plugins、sub-agents、hooks、MCP 一整套。实际上，单人单任务都还没跑顺的时候，上这些只会让问题更难分辨。</p>
+					<p>试点要的是“看清楚”，不是“看上去很先进”。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第五步：把案例沉淀下来</p>
+				<div class="doc-copy">
+					<p>团队真正能扩开，不是因为开了会，而是因为有几条真实案例能复用：什么任务适合、什么不适合、什么权限最稳、什么提问最容易得到好结果。</p>
+					<p>这也是为什么原创案例页有价值。它们不是在背原理，而是在告诉后来的人“这条路别人已经走过了”。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>

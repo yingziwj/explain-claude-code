@@ -1,0 +1,25 @@
+---
+const { author = '通俗版 Claude Code 文档维护者', updatedAt, series } = Astro.props as {
+	author?: string;
+	updatedAt: string;
+	series: string;
+};
+---
+
+<section class="doc-panel">
+	<p class="doc-eyebrow">页面信息</p>
+	<div class="doc-meta-grid">
+		<div class="doc-practice-item">
+			<h2>作者</h2>
+			<p>{author}</p>
+		</div>
+		<div class="doc-practice-item">
+			<h2>最后更新</h2>
+			<p>{updatedAt}</p>
+		</div>
+		<div class="doc-practice-item">
+			<h2>所属系列</h2>
+			<p>{series}</p>
+		</div>
+	</div>
+</section>
