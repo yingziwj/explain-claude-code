@@ -1,12 +1,36 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { siteData } from '../data/site-data';
+
+const featuredGuides = [
+	{ href: '/guides/first-day-checklist', title: '第一天上手清单' },
+	{ href: '/guides/common-errors-checklist', title: '常见报错排查清单' },
+	{ href: '/guides/claude-code-vs-other-tools', title: '和别的工具怎么选' },
+	{ href: '/guides/case-study-first-week', title: '第一次上手的一周会怎么走' },
+	{ href: '/guides/case-study-team-pilot', title: '小团队试点怎么走最稳' }
+];
 ---
 
 <BaseLayout
 	title="通俗版 Claude Code 文档"
 	description="通俗版 Claude Code 文档，提供官方 docs 的中文解释版、原创实战指南、常见报错排查和团队落地经验。"
 	canonical={new URL('/', Astro.site).toString()}
+	structuredData={{
+		'@context': 'https://schema.org',
+		'@type': 'CollectionPage',
+		name: '通俗版 Claude Code 文档首页',
+		description: '聚合 Claude Code 官方 docs 中文解释版、原创实战指南、报错排查和团队落地经验的首页。',
+		url: new URL('/', Astro.site).toString(),
+		mainEntity: {
+			'@type': 'ItemList',
+			itemListElement: featuredGuides.map((item, index) => ({
+				'@type': 'ListItem',
+				position: index + 1,
+				name: item.title,
+				url: new URL(item.href, Astro.site).toString()
+			}))
+		}
+	}}
 >
 	<div class="doc-shell">
 		<header class="doc-topbar">
@@ -74,6 +98,14 @@ import { siteData } from '../data/site-data';
 				</section>
 
 				<section class="doc-panel">
+					<p class="doc-eyebrow">站点说明入口</p>
+					<div class="doc-copy">
+						<p>如果你想先判断这个站靠不靠谱，再决定要不要继续看，可以顺手去看 <a href="/about">关于本站</a>、<a href="/contact">联系本站</a>、<a href="/privacy">隐私说明</a> 和 <a href="/guides/editorial-methodology">内容方法总览</a>。</p>
+						<p>这些页不是摆样子，是专门把这站是谁做的、怎么做内容、怎么纠错、怎么联系讲清楚。</p>
+					</div>
+				</section>
+
+				<section class="doc-panel">
 					<p class="doc-eyebrow">原创实战指南</p>
 					<div class="doc-copy">
 						<p>如果你不想只看 docs 解释版，也可以看另外整理的原创内容。那几页不照着官方文档一段段翻，而是专门讲新手路线、常见坑和功能怎么选。</p>
@@ -85,23 +117,23 @@ import { siteData } from '../data/site-data';
 					<p class="doc-eyebrow">现在最值得先看</p>
 					<div class="doc-practice-grid">
 						<div class="doc-practice-item">
-							<h2><a href="/guides/first-day-checklist">第一天上手清单</a></h2>
+							<h2><a href={featuredGuides[0].href}>{featuredGuides[0].title}</a></h2>
 							<p>适合刚装好，还不知道先做哪三步的人。</p>
 						</div>
 						<div class="doc-practice-item">
-							<h2><a href="/guides/common-errors-checklist">常见报错排查清单</a></h2>
+							<h2><a href={featuredGuides[1].href}>{featuredGuides[1].title}</a></h2>
 							<p>适合一出错就想大拆环境的人。</p>
 						</div>
 						<div class="doc-practice-item">
-							<h2><a href="/guides/claude-code-vs-other-tools">和别的工具怎么选</a></h2>
+							<h2><a href={featuredGuides[2].href}>{featuredGuides[2].title}</a></h2>
 							<p>适合还在 Claude Code、Cursor、Copilot、ChatGPT 之间犹豫的人。</p>
 						</div>
 						<div class="doc-practice-item">
-							<h2><a href="/guides/case-study-first-week">第一次上手的一周会怎么走</a></h2>
+							<h2><a href={featuredGuides[3].href}>{featuredGuides[3].title}</a></h2>
 							<p>适合想看真实上手节奏，而不是只看功能名词的人。</p>
 						</div>
 						<div class="doc-practice-item">
-							<h2><a href="/guides/case-study-team-pilot">小团队试点怎么走最稳</a></h2>
+							<h2><a href={featuredGuides[4].href}>{featuredGuides[4].title}</a></h2>
 							<p>适合准备在团队里推 Claude Code，但又不想一下子推太猛的人。</p>
 						</div>
 					</div>

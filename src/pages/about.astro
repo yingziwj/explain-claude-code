@@ -6,6 +6,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	title="关于本站 | 通俗版 Claude Code 文档"
 	description="关于通俗版 Claude Code 文档：第三方非官方站点说明、内容来源、更新方式、联系入口与原创内容方向。"
 	canonical={new URL('/about', Astro.site).toString()}
+	structuredData={{
+		'@context': 'https://schema.org',
+		'@type': 'AboutPage',
+		name: '关于通俗版 Claude Code 文档',
+		description: '说明本站的非官方关系、内容来源、更新方式、联系入口与原创内容方向。',
+		url: new URL('/about', Astro.site).toString()
+	}}
 >
 	<div class="doc-shell">
 		<div class="doc-home">
@@ -49,6 +56,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 					<p>如果你发现内容过时、步骤漏了、解释太绕，最直接的方式是去 GitHub 仓库提 Issue：</p>
 					<p><a href="https://github.com/yingziwj/explain-claude-code/issues" target="_blank" rel="noreferrer">https://github.com/yingziwj/explain-claude-code/issues</a></p>
 					<p>如果后面补上单独邮箱或联系表单，这一页也会跟着更新。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">顺手再看</p>
+				<div class="doc-copy">
+					<p>如果你想继续判断这个站的内容做法够不够稳，下一步建议看 <a href="/guides/editorial-methodology">内容方法总览</a>、<a href="/guides/editorial-principles">编辑和更新原则</a>、<a href="/privacy">隐私说明</a> 和 <a href="/contact">联系本站</a>。</p>
 				</div>
 			</section>
 		</div>
