@@ -17,6 +17,7 @@ const updatedAt = '2026-03-21';
 				<h1 class="doc-home__title">案例：用 Claude Code 处理一个小 bug 的完整节奏</h1>
 				<div class="doc-copy">
 					<p>这页讲的不是“怎么提一个神奇 prompt”，而是一个更像正常开发会碰到的小 bug，从发现到修掉，怎么用 Claude Code 把节奏走顺。</p>
+					<p>真正的难点往往不在修本身，而在别把范围越修越大。很多小 bug 最后变成大折腾，不是因为 bug 难，而是因为人一着急就想一步到位。</p>
 				</div>
 			</section>
 
@@ -26,6 +27,7 @@ const updatedAt = '2026-03-21';
 				<p class="doc-eyebrow">第一步：先缩小范围</p>
 				<div class="doc-copy">
 					<p>最稳的起手不是“帮我修 bug”，而是先让它看报错、看相关文件、看最近改动，先把锅圈小。范围没缩小，后面每一步都容易飘。</p>
+					<p>你可以把这一步理解成先围田埂。田埂不围，小水沟一开，哪块地都可能进水。修 bug 也是一样，先圈范围，才知道从哪儿下手最省力。</p>
 				</div>
 			</section>
 
@@ -33,6 +35,7 @@ const updatedAt = '2026-03-21';
 				<p class="doc-eyebrow">第二步：先说改法，再动手</p>
 				<div class="doc-copy">
 					<p>让 Claude Code 先说它准备改哪里、为什么这么改，再真正下手。这样你至少知道它要砍哪棵树，不至于等砍完才发现方向错了。</p>
+					<p>这一步其实是在防“顺手改过头”。它如果一上来就直接改，你可能只看到结果；让它先讲改法，你就还有机会在动手前喊停。</p>
 				</div>
 			</section>
 
@@ -40,6 +43,7 @@ const updatedAt = '2026-03-21';
 				<p class="doc-eyebrow">第三步：改完先看差异，不急着夸</p>
 				<div class="doc-copy">
 					<p>它改完以后，先看具体改了哪些文件、哪几行发生变化，再决定要不要继续。很多 bug 不是修不了，而是“顺手修过了头”。</p>
+					<p>很多人一看到“已完成”就松气，其实最该警惕的恰恰是这个时候。越是看起来修好了，越得看看有没有顺手带坏别处。</p>
 				</div>
 			</section>
 
@@ -47,6 +51,23 @@ const updatedAt = '2026-03-21';
 				<p class="doc-eyebrow">第四步：最后做收尾检查</p>
 				<div class="doc-copy">
 					<p>真正让人安心的，不是那句“已修复”，而是最后这一步：让它列出风险点、手动检查点、还没覆盖到的地方。收尾做得稳，bug 才不容易回魂。</p>
+					<p>收尾这一步常常最不起眼，但它决定了你是“今天暂时不报错”，还是“这次真的收住了”。让它把还没验证的地方也说出来，心里才踏实。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">这个案例最容易跑偏的地方</p>
+				<div class="doc-copy">
+					<p>最容易跑偏的地方有两个：一个是范围没圈住，结果从一个小 bug 牵出一串顺手重构；另一个是没看 diff，光听了一句“修好了”就往前走。</p>
+					<p>这两个坑都不是 Claude Code 独有的，是所有 AI 辅助修 bug 都容易踩的坑。你要是能把这两步守住，小 bug 处理起来就会稳很多。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">这条流程值钱在哪</p>
+				<div class="doc-copy">
+					<p>这条流程的值钱处，不是快，而是稳。先缩范围、先讲改法、先看差异、最后收尾，这几步让你不容易把一件小事干成连环事故。</p>
+					<p>真正顺手以后，你会发现 Claude Code 最有用的，不只是写代码快，而是能帮你把这条处理节奏固定下来。</p>
 				</div>
 			</section>
 		</div>
