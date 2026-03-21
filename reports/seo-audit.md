@@ -1,6 +1,6 @@
 # SEO Audit
 
-Generated at: 2026-03-21T03:37:16.738Z
+Generated at: 2026-03-21T08:06:10.109Z
 
 ## Required routes
 

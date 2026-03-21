@@ -11,6 +11,19 @@ if (!doc) {
 const canonical = new URL(doc.path, Astro.site).toString();
 ---
 
-<BaseLayout title={`${doc.title} | 通俗版 Claude Code 文档`} description={doc.summary} canonical={canonical}>
+<BaseLayout
+	title={`${doc.title} | 通俗版 Claude Code 文档`}
+	description={doc.summary}
+	canonical={canonical}
+	structuredData={{
+		'@context': 'https://schema.org',
+		'@type': 'TechArticle',
+		headline: doc.title,
+		description: doc.summary,
+		url: canonical,
+		about: 'Claude Code documentation',
+		isBasedOn: doc.sourceUrl
+	}}
+>
 	<DocShell page={doc} siteData={siteData} currentPath={doc.path} />
 </BaseLayout>

@@ -107,6 +107,28 @@ function stepKindLabel(kind?: string) {
 				</header>
 
 				<section class="doc-panel">
+					<p class="doc-eyebrow">页面信息</p>
+					<div class="doc-meta-grid">
+						<div class="doc-practice-item">
+							<h2>对应原页</h2>
+							<p>{page.content.sourceLabel}</p>
+						</div>
+						<div class="doc-practice-item">
+							<h2>页面性质</h2>
+							<p>第三方中文解释页</p>
+						</div>
+						<div class="doc-practice-item">
+							<h2>使用建议</h2>
+							<p>先看人话解释，再对照原页命令和代码</p>
+						</div>
+					</div>
+					<div class="doc-copy">
+						<p>这页不是官方原文，而是顺着官方文档结构做的中文解释版。命令、参数、配置名这些硬东西尽量保留，解释部分则尽量讲成人能照着做的话。</p>
+						<p>如果你碰到特别敏感的配置、权限或企业环境差异，最好顺手点上面的“查看原始文档”再核一遍。</p>
+					</div>
+				</section>
+
+				<section class="doc-panel">
 					<p class="doc-eyebrow">这一页先讲明白</p>
 					<div class="doc-copy">
 						{summarySection?.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
