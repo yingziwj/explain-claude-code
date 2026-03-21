@@ -1,6 +1,6 @@
 # SEO Audit
 
-Generated at: 2026-03-21T03:32:58.928Z
+Generated at: 2026-03-21T03:37:16.738Z
 
 ## Required routes
 
@@ -33,6 +33,7 @@ Generated at: 2026-03-21T03:32:58.928Z
 | /guides/editor-integration-not-working | 49 | 30 |
 | /guides/editorial-methodology | 31 | 53 |
 | /guides/editorial-principles | 34 | 40 |
+| /guides/final-site-readiness-check | 34 | 54 |
 | /guides/first-day-checklist | 40 | 37 |
 | /guides/hooks-not-running | 34 | 34 |
 | /guides/how-this-site-is-made | 34 | 39 |

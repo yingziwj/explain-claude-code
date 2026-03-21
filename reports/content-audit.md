@@ -1,6 +1,6 @@
 # Content Audit
 
-Generated at: 2026-03-21T02:16:56.779Z
+Generated at: 2026-03-21T03:37:16.730Z
 
 ## Docs pages that still look thin
 
@@ -11,3 +11,4 @@ Generated at: 2026-03-21T02:16:56.779Z
 
 | slug | paragraphs | chars | score |
 | --- | ---: | ---: | ---: |
+| site-trust-faq | 3 | 259 | 10 |

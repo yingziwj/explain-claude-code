@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideMeta from '../../components/GuideMeta.astro';
+
+const updatedAt = '2026-03-21';
+---
+
+<BaseLayout
+	title="申请前最后怎么把整站过一遍 | 通俗版 Claude Code 文档"
+	description="给站长自己的最后验站单：先看哪些页面，跑哪些检查，哪些信号必须稳住，再去申请 Google AdSense。"
+	canonical={new URL('/guides/final-site-readiness-check', Astro.site).toString()}
+	structuredData={{
+		'@context': 'https://schema.org',
+		'@type': 'Article',
+		headline: '申请前最后怎么把整站过一遍',
+		description: '给站长自己的最后验站单：先看哪些页面，跑哪些检查，哪些信号必须稳住，再去申请 Google AdSense。',
+		url: new URL('/guides/final-site-readiness-check', Astro.site).toString()
+	}}
+>
+	<div class="doc-shell">
+		<div class="doc-home">
+			<section class="doc-panel">
+				<p class="doc-eyebrow">申请前收尾</p>
+				<h1 class="doc-home__title">申请前最后怎么把整站过一遍</h1>
+				<div class="doc-copy">
+					<p>这页不是讲“要不要申请”，而是讲“决定申请前，最后怎么把整站再过一遍”。</p>
+					<p>目的很简单：别靠感觉去赌审核，先把自己能看、能改、能补的地方再扫一遍。</p>
+				</div>
+			</section>
+
+			<GuideMeta
+				updatedAt={updatedAt}
+				series="站点说明 / 申请前最后验站"
+				related={[
+					{ href: '/guides/adsense-readiness-checklist', title: '现在申请 AdSense 还差什么' },
+					{ href: '/guides/site-trust-faq', title: '站点说明 FAQ' },
+					{ href: '/guides/editorial-methodology', title: '内容方法总览' }
+				]}
+			/>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第一步：先看 5 个关键入口</p>
+				<div class="doc-copy">
+					<p>先把首页、关于本站、隐私说明、原创指南总入口、申请前复盘页这 5 个页面从头到尾过一遍。</p>
+					<p>这几页最像审核员第一眼会碰到的门面。这里如果看起来像内容仓库、像拼装站，后面别的页面再多也不一定能救回来。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第二步：再看原创页像不像真的原创</p>
+				<div class="doc-copy">
+					<p>重点看原创指南是不是只是换个说法，还是确实把选择、顺序、踩坑和判断标准讲明白了。</p>
+					<p>如果一页看完以后，读者还是只能回官方文档重新拼答案，那这页对审核来说就还不够值钱。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第三步：跑站内检查命令</p>
+				<div class="doc-copy">
+					<p>申请前至少跑一遍这几条：</p>
+					<p><code>npm run check:content</code></p>
+					<p><code>npm run check:seo</code></p>
+					<p><code>npm run check:adsense</code></p>
+					<p><code>npm run check:site</code></p>
+					<p>它们不是替你做决定，但能把“是不是又冒出薄页”“入口页 description 掉没掉”“信任页是不是还全着”这类问题先照出来。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">第四步：最后看广告是不是还太着急</p>
+				<div class="doc-copy">
+					<p>广告位预留好了，不等于就该立刻塞满。申请前和刚启用时，广告最好少、轻、别压正文。</p>
+					<p>如果页面看起来像在催人点广告，而不是在认真讲内容，那审核观感会很差。</p>
+				</div>
+			</section>
+
+			<section class="doc-panel">
+				<p class="doc-eyebrow">最后一个笨判断</p>
+				<div class="doc-copy">
+					<p>你自己回头看这站，如果第一感觉还是“这更像文档镜像站”，那就继续补原创页和案例页；如果第一感觉已经更像“有主线、有方法、有维护痕迹的内容站”，那才更适合去申请。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</BaseLayout>

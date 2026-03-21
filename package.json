@@ -14,7 +14,8 @@
     "check:live": "node scripts/live-check.mjs",
     "check:content": "node scripts/content-audit.mjs",
     "check:seo": "node scripts/seo-audit.mjs",
-    "check:adsense": "node scripts/adsense-audit.mjs"
+    "check:adsense": "node scripts/adsense-audit.mjs",
+    "check:site": "node scripts/site-readiness-audit.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.1.6",
