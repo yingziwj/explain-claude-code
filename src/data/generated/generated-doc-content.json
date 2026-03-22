@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-21T04:13:40.745Z",
-  "sourceGeneratedAt": "2026-03-21T04:13:40.491Z",
+  "generatedAt": "2026-03-22T04:28:52.886Z",
+  "sourceGeneratedAt": "2026-03-22T04:28:52.640Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -10744,7 +10744,8 @@
         {
           "title": "Standard attributes",
           "paragraphs": [
-            "这一段主要是在把“Standard attributes”讲实，不是只摆个标题给你看。"
+            "这一段主要是在把“Standard attributes”讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -12696,6 +12697,14 @@
             "先把最影响体验的地方调顺，比如显示、输入、编码和复制粘贴。",
             "如果你总觉得命令行用着别扭，多半这页有你要的答案。",
             "环境调好后，再去谈更高级的用法，事半功倍。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Notification setup",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "set -g allow-passthrough on",
+              "kind": "code"
+            }
           ]
         },
         {
@@ -15349,7 +15358,7 @@
             {
               "title": "原页关键片段：Agents",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "---\nname: agent-name\ndescription: What this agent specializes in and when Claude should invoke it\n---\n\nDetailed system prompt for the agent describing its role, expertise, and behavior.",
+              "code": "---\nname: agent-name\ndescription: What this agent specializes in and when Claude should invoke it\nmodel: sonnet\neffort: medium\nmaxTurns: 20\ndisallowedTools: Write, Edit\n---\n\nDetailed system prompt for the agent describing its role, expertise, and behavior.",
               "kind": "config"
             },
             {
@@ -15446,7 +15455,7 @@
             {
               "title": "Agents",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "---\nname: agent-name\ndescription: What this agent specializes in and when Claude should invoke it\n---\n\nDetailed system prompt for the agent describing its role, expertise, and behavior.",
+              "code": "---\nname: agent-name\ndescription: What this agent specializes in and when Claude should invoke it\nmodel: sonnet\neffort: medium\nmaxTurns: 20\ndisallowedTools: Write, Edit\n---\n\nDetailed system prompt for the agent describing its role, expertise, and behavior.",
               "kind": "config"
             }
           ]

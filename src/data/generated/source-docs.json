@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-21T04:13:40.491Z",
+  "generatedAt": "2026-03-22T04:28:52.640Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -10242,7 +10242,8 @@
         "Open BotFather in Telegram and send /newbot. Give it a display name and a unique username ending in bot. Copy the token BotFather returns.",
         "Install the plugin",
         "In Claude Code, run:",
-        "If Claude Code reports that the plugin is not found in any marketplace, run /plugin marketplace add anthropics/claude-plugins-official first and retry the install.",
+        "If Claude Code reports that the plugin is not found in any marketplace, your marketplace is either missing or outdated. Run /plugin marketplace update claude-plugins-official to refresh it, or /plugin marketplace add anthropics/claude-plugins-official if you haven’t added it before. Then retry the install.",
+        "After installing, run /reload-plugins to activate the plugin’s configure command.",
         "Configure your token",
         "Run the configure command with the token from BotFather:",
         "This saves it to ~/.claude/channels/telegram/.env. You can also set TELEGRAM_BOT_TOKEN in your shell environment before launching Claude Code.",
@@ -10356,11 +10357,11 @@
             "Open BotFather in Telegram and send /newbot. Give it a display name and a unique username ending in bot. Copy the token BotFather returns.",
             "Install the plugin",
             "In Claude Code, run:",
-            "If Claude Code reports that the plugin is not found in any marketplace, run /plugin marketplace add anthropics/claude-plugins-official first and retry the install.",
+            "If Claude Code reports that the plugin is not found in any marketplace, your marketplace is either missing or outdated. Run /plugin marketplace update claude-plugins-official to refresh it, or /plugin marketplace add anthropics/claude-plugins-official if you haven’t added it before. Then retry the install.",
+            "After installing, run /reload-plugins to activate the plugin’s configure command.",
             "Configure your token",
             "Run the configure command with the token from BotFather:",
-            "This saves it to ~/.claude/channels/telegram/.env. You can also set TELEGRAM_BOT_TOKEN in your shell environment before launching Claude Code.",
-            "Restart with channels enabled"
+            "This saves it to ~/.claude/channels/telegram/.env. You can also set TELEGRAM_BOT_TOKEN in your shell environment before launching Claude Code."
           ],
           "codeBlocks": [
             "/plugin install telegram@claude-plugins-official",
@@ -10382,7 +10383,7 @@
             "Team/Enterprise users: your organization admin must enable channels in managed settings",
             "Install the fakechat channel plugin",
             "Start a Claude Code session and run the install command:",
-            "If Claude Code reports that the plugin is not found in any marketplace, run /plugin marketplace add anthropics/claude-plugins-official first and retry the install.",
+            "If Claude Code reports that the plugin is not found in any marketplace, your marketplace is either missing or outdated. Run /plugin marketplace update claude-plugins-official to refresh it, or /plugin marketplace add anthropics/claude-plugins-official if you haven’t added it before. Then retry the install.",
             "Restart with the channel enabled",
             "Exit Claude Code, then restart with --channels and pass the fakechat plugin you installed:",
             "The fakechat server starts automatically."
@@ -14812,6 +14813,9 @@
         "Note: wrapping values in quotes doesn’t escape spaces. For example, org.name=\"My Company\" results in the literal value \"My Company\" (with quotes included), not My Company.",
         "Set these environment variables before running claude. Each block shows a complete configuration for a different exporter or deployment scenario:",
         "All metrics and events share these standard attributes:",
+        "Events additionally include the following attributes. These are never attached to metrics because they would cause unbounded cardinality:",
+        "prompt.id: UUID correlating a user prompt with all subsequent events until the next prompt. See Event correlation attributes.",
+        "workspace.host_paths: host workspace directories selected in the desktop app, as a string array",
         "Claude Code exports the following metrics:",
         "Each metric includes the standard attributes listed above. Metrics with additional context-specific attributes are noted below.",
         "Incremented at the start of each session.",
@@ -14888,7 +14892,7 @@
         "Cost spikes",
         "Unusual token consumption",
         "High session volume from specific users",
-        "All metrics can be segmented by user.account_uuid, organization.id, session.id, model, and app.version.",
+        "All metrics can be segmented by user.account_uuid, user.account_id, organization.id, session.id, model, and app.version.",
         "The event data provides detailed insights into Claude Code interactions:",
         "Tool Usage Patterns: analyze tool result events to identify:",
         "Most frequently used tools",
@@ -14918,8 +14922,7 @@
         "When authenticated via OAuth, user.email is included in telemetry attributes. If this is a concern for your organization, work with your telemetry backend to filter or redact this field",
         "User prompt content is not collected by default. Only prompt length is recorded. To include prompt content, set OTEL_LOG_USER_PROMPTS=1",
         "MCP server/tool names and skill names are not logged by default because they can reveal user-specific configurations. To include them, set OTEL_LOG_TOOL_DETAILS=1",
-        "For detailed Claude Code usage monitoring guidance for Amazon Bedrock, see Claude Code Monitoring Implementation (Bedrock).",
-        "Was this page helpful?"
+        "For detailed Claude Code usage monitoring guidance for Amazon Bedrock, see Claude Code Monitoring Implementation (Bedrock)."
       ],
       "codeBlocks": [
         "# 1. Enable telemetry\nexport CLAUDE_CODE_ENABLE_TELEMETRY=1\n\n# 2. Choose exporters (both are optional - configure only what you need)\nexport OTEL_METRICS_EXPORTER=otlp       # Options: otlp, prometheus, console\nexport OTEL_LOGS_EXPORTER=otlp          # Options: otlp, console\n\n# 3. Configure OTLP endpoint (for OTLP exporter)\nexport OTEL_EXPORTER_OTLP_PROTOCOL=grpc\nexport OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317\n\n# 4. Set authentication (if required)\nexport OTEL_EXPORTER_OTLP_HEADERS=\"Authorization=Bearer your-token\"\n\n# 5. For debugging: reduce export intervals\nexport OTEL_METRIC_EXPORT_INTERVAL=10000  # 10 seconds (default: 60000ms)\nexport OTEL_LOGS_EXPORT_INTERVAL=5000     # 5 seconds (default: 5000ms)\n\n# 6. Run Claude Code\nclaude",
@@ -15040,7 +15043,10 @@
         {
           "title": "​Standard attributes",
           "paragraphs": [
-            "All metrics and events share these standard attributes:"
+            "All metrics and events share these standard attributes:",
+            "Events additionally include the following attributes. These are never attached to metrics because they would cause unbounded cardinality:",
+            "prompt.id: UUID correlating a user prompt with all subsequent events until the next prompt. See Event correlation attributes.",
+            "workspace.host_paths: host workspace directories selected in the desktop app, as a string array"
           ],
           "codeBlocks": []
         },
@@ -15116,7 +15122,7 @@
             "Cost spikes",
             "Unusual token consumption",
             "High session volume from specific users",
-            "All metrics can be segmented by user.account_uuid, organization.id, session.id, model, and app.version."
+            "All metrics can be segmented by user.account_uuid, user.account_id, organization.id, session.id, model, and app.version."
           ],
           "codeBlocks": []
         },
@@ -17997,13 +18003,15 @@
         "Enable “Notification Center Alerts”",
         "Click “Filter Alerts” and check “Send escape sequence-generated alerts”",
         "If notifications aren’t appearing, verify that your terminal app has notification permissions in your OS settings.",
+        "When running Claude Code inside tmux, notifications and the terminal progress bar only reach the outer terminal, such as iTerm2, Kitty, or Ghostty, if you enable passthrough in your tmux configuration:",
+        "Without this setting, tmux intercepts the escape sequences and they do not reach the terminal application.",
         "Other terminals, including the default macOS Terminal, do not support native notifications. Use notification hooks instead.",
         "To add custom behavior when notifications fire, such as playing a sound or sending a message, configure a notification hook. Hooks run alongside terminal notifications, not as a replacement.",
         "When working with extensive code or long instructions:",
         "Avoid direct pasting: Claude Code may struggle with very long pasted content",
         "Use file-based workflows: Write content to a file and ask Claude to read it",
         "Be aware of VS Code limitations: The VS Code terminal is particularly prone to truncating long pastes",
-        "Claude Code supports a subset of Vim keybindings that can be enabled with /vim or configured via /config.",
+        "Claude Code supports a subset of Vim keybindings that can be enabled with /vim or configured via /config. To set the mode directly in your config file, set the editorMode global config key to \"vim\" in ~/.claude.json.",
         "The supported subset includes:",
         "Mode switching: Esc (to NORMAL), i/I, a/A, o/O (to INSERT)",
         "Navigation: h/j/k/l, w/e/b, 0/$/^, gg/G, f/F/t/T with ;/, repeat",
@@ -18015,7 +18023,9 @@
         "See Interactive mode for the complete reference.",
         "Was this page helpful?"
       ],
-      "codeBlocks": [],
+      "codeBlocks": [
+        "set -g allow-passthrough on"
+      ],
       "sectionBlocks": [
         {
           "title": "",
@@ -18066,10 +18076,14 @@
             "Enable “Notification Center Alerts”",
             "Click “Filter Alerts” and check “Send escape sequence-generated alerts”",
             "If notifications aren’t appearing, verify that your terminal app has notification permissions in your OS settings.",
+            "When running Claude Code inside tmux, notifications and the terminal progress bar only reach the outer terminal, such as iTerm2, Kitty, or Ghostty, if you enable passthrough in your tmux configuration:",
+            "Without this setting, tmux intercepts the escape sequences and they do not reach the terminal application.",
             "Other terminals, including the default macOS Terminal, do not support native notifications. Use notification hooks instead.",
             "To add custom behavior when notifications fire, such as playing a sound or sending a message, configure a notification hook. Hooks run alongside terminal notifications, not as a replacement."
           ],
-          "codeBlocks": []
+          "codeBlocks": [
+            "set -g allow-passthrough on"
+          ]
         },
         {
           "title": "​Handling large inputs",
@@ -18084,7 +18098,7 @@
         {
           "title": "​Vim Mode",
           "paragraphs": [
-            "Claude Code supports a subset of Vim keybindings that can be enabled with /vim or configured via /config.",
+            "Claude Code supports a subset of Vim keybindings that can be enabled with /vim or configured via /config. To set the mode directly in your config file, set the editorMode global config key to \"vim\" in ~/.claude.json.",
             "The supported subset includes:",
             "Mode switching: Esc (to NORMAL), i/I, a/A, o/O (to INSERT)",
             "Navigation: h/j/k/l, w/e/b, 0/$/^, gg/G, f/F/t/T with ;/, repeat",
@@ -21602,6 +21616,7 @@
         "Location: agents/ directory in plugin root",
         "File format: Markdown files describing agent capabilities",
         "Agent structure:",
+        "Plugin agents support name, description, model, effort, maxTurns, tools, disallowedTools, skills, memory, background, and isolation frontmatter fields. The only valid isolation value is \"worktree\". For security reasons, hooks, mcpServers, and permissionMode are not supported for plugin-shipped agents.",
         "Integration points:",
         "Agents appear in the /agents interface",
         "Claude can invoke agents automatically based on task context",
@@ -21729,12 +21744,11 @@
         "MAJOR: Breaking changes (incompatible API changes)",
         "MINOR: New features (backward-compatible additions)",
         "PATCH: Bug fixes (backward-compatible fixes)",
-        "Best practices:",
-        "Start at 1.0.0 for your first stable release"
+        "Best practices:"
       ],
       "codeBlocks": [
         "skills/\n├── pdf-processor/\n│   ├── SKILL.md\n│   ├── reference.md (optional)\n│   └── scripts/ (optional)\n└── code-reviewer/\n    └── SKILL.md",
-        "---\nname: agent-name\ndescription: What this agent specializes in and when Claude should invoke it\n---\n\nDetailed system prompt for the agent describing its role, expertise, and behavior.",
+        "---\nname: agent-name\ndescription: What this agent specializes in and when Claude should invoke it\nmodel: sonnet\neffort: medium\nmaxTurns: 20\ndisallowedTools: Write, Edit\n---\n\nDetailed system prompt for the agent describing its role, expertise, and behavior.",
         "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/format-code.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
         "{\n  \"mcpServers\": {\n    \"plugin-database\": {\n      \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n      \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/config.json\"],\n      \"env\": {\n        \"DB_PATH\": \"${CLAUDE_PLUGIN_ROOT}/data\"\n      }\n    },\n    \"plugin-api-client\": {\n      \"command\": \"npx\",\n      \"args\": [\"@company/mcp-server\", \"--plugin-mode\"],\n      \"cwd\": \"${CLAUDE_PLUGIN_ROOT}\"\n    }\n  }\n}",
         "{\n  \"go\": {\n    \"command\": \"gopls\",\n    \"args\": [\"serve\"],\n    \"extensionToLanguage\": {\n      \".go\": \"go\"\n    }\n  }\n}",
@@ -21803,6 +21817,7 @@
             "Location: agents/ directory in plugin root",
             "File format: Markdown files describing agent capabilities",
             "Agent structure:",
+            "Plugin agents support name, description, model, effort, maxTurns, tools, disallowedTools, skills, memory, background, and isolation frontmatter fields. The only valid isolation value is \"worktree\". For security reasons, hooks, mcpServers, and permissionMode are not supported for plugin-shipped agents.",
             "Integration points:",
             "Agents appear in the /agents interface",
             "Claude can invoke agents automatically based on task context",
@@ -21811,7 +21826,7 @@
             "For complete details, see Subagents."
           ],
           "codeBlocks": [
-            "---\nname: agent-name\ndescription: What this agent specializes in and when Claude should invoke it\n---\n\nDetailed system prompt for the agent describing its role, expertise, and behavior."
+            "---\nname: agent-name\ndescription: What this agent specializes in and when Claude should invoke it\nmodel: sonnet\neffort: medium\nmaxTurns: 20\ndisallowedTools: Write, Edit\n---\n\nDetailed system prompt for the agent describing its role, expertise, and behavior."
           ]
         },
         {
