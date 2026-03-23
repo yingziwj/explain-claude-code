@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-22T04:28:52.886Z",
-  "sourceGeneratedAt": "2026-03-22T04:28:52.640Z",
+  "generatedAt": "2026-03-23T04:38:17.464Z",
+  "sourceGeneratedAt": "2026-03-23T04:38:17.205Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -7449,6 +7449,12 @@
               "kind": "command"
             },
             {
+              "title": "原页关键片段：Start faster with bare mode",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "claude --bare -p \"Summarize this file\" --allowedTools \"Read\"",
+              "kind": "command"
+            },
+            {
               "title": "原页关键片段：Get structured output 1",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
               "code": "claude -p \"Summarize this project\" --output-format json",
@@ -7521,6 +7527,21 @@
               "title": "Basic usage",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "claude -p \"What does the auth module do?\"",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Start faster with bare mode",
+          "paragraphs": [
+            "这里不是让你背“Start faster with bare mode”这个词，而是让你看它真干活时怎么使。",
+            "如果这里反复提 lead 和 teammate，通常是在提醒主代理别抢队友还没做完的活，先等人把结果交回来再继续统筹。"
+          ],
+          "steps": [
+            {
+              "title": "Start faster with bare mode",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "claude --bare -p \"Summarize this file\" --allowedTools \"Read\"",
               "kind": "command"
             }
           ]
@@ -15796,7 +15817,7 @@
         {
           "title": "简要总结",
           "paragraphs": [
-            "这页主要讲 Channels reference：Build an MCP server that pushes webhooks, alerts, and chat messages into a Claude Code session. Reference for the channel contract: capability declaration, notification events, reply tools, and sender gating.",
+            "这页主要讲 Channels reference：Build an MCP server that pushes webhooks, alerts, and chat messages into a Claude Code session. Reference for the channel contract: capability declaration, notification events, reply tools, sender gating, and permission relay.",
             "你可以把它当成“Reference”这块里专门管这一摊事的说明书。"
           ]
         },
@@ -15867,7 +15888,7 @@
             {
               "title": "原页关键片段：Expose a reply tool 2",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "// Add this import at the top of webhook.ts\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\n\n// Claude queries this at startup to discover what tools your server offers\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    // inputSchema tells Claude what arguments to pass\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\n// Claude calls this when it wants to invoke a tool\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    // your platform's send API\n    await yourPlatform.send(chat_id, text)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})",
+              "code": "// Add this import at the top of webhook.ts\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\n\n// Claude queries this at startup to discover what tools your server offers\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    // inputSchema tells Claude what arguments to pass\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\n// Claude calls this when it wants to invoke a tool\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    // send() is your outbound: POST to your chat platform, or for local\n    // testing the SSE broadcast shown in the full example below.\n    send(`Reply to ${chat_id}: ${text}`)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})",
               "kind": "command"
             },
             {
@@ -15881,6 +15902,12 @@
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "const allowed = new Set(loadAllowlist())  // from your access.json or equivalent\n\n// inside your message handler, before emitting:\nif (!allowed.has(message.from.id)) {  // sender, not room\n  return  // drop silently\n}\nawait mcp.notification({ ... })",
               "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Add relay to a chat bridge 1",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "capabilities: {\n  experimental: {\n    'claude/channel': {},\n    'claude/channel/permission': {},  // opt in to permission relay\n  },\n  tools: {},\n},",
+              "kind": "code"
             }
           ]
         },
@@ -16010,7 +16037,7 @@
             {
               "title": "Expose a reply tool 2",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "// Add this import at the top of webhook.ts\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\n\n// Claude queries this at startup to discover what tools your server offers\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    // inputSchema tells Claude what arguments to pass\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\n// Claude calls this when it wants to invoke a tool\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    // your platform's send API\n    await yourPlatform.send(chat_id, text)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})",
+              "code": "// Add this import at the top of webhook.ts\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\n\n// Claude queries this at startup to discover what tools your server offers\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    // inputSchema tells Claude what arguments to pass\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\n// Claude calls this when it wants to invoke a tool\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    // send() is your outbound: POST to your chat platform, or for local\n    // testing the SSE broadcast shown in the full example below.\n    send(`Reply to ${chat_id}: ${text}`)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})",
               "kind": "command"
             },
             {
@@ -16022,7 +16049,7 @@
             {
               "title": "Expose a reply tool 4",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "#!/usr/bin/env bun\nimport { Server } from '@modelcontextprotocol/sdk/server/index.js'\nimport { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\n\nconst mcp = new Server(\n  { name: 'webhook', version: '0.0.1' },\n  {\n    capabilities: {\n      experimental: { 'claude/channel': {} },\n      tools: {},\n    },\n    instructions: 'Messages arrive as <channel source=\"webhook\" chat_id=\"...\">. Reply with the reply tool, passing the chat_id from the tag.',\n  },\n)\n\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    // your platform's send API — replace with your real integration\n    console.error(`Reply to ${chat_id}: ${text}`)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})\n\nawait mcp.connect(new StdioServerTransport())\n\nlet nextId = 1\nBun.serve({\n  port: 8788,\n  hostname: '127.0.0.1',\n  async fetch(req) {\n    const body = await req.text()\n    const chat_id = String(nextId++)\n    await mcp.notification({\n      method: 'notifications/claude/channel',\n      params: {\n        content: body,\n        meta: { chat_id, path: new URL(req.url).pathname, method: req.method },\n      },\n    })\n    return new Response('ok')\n  },\n})",
+              "code": "#!/usr/bin/env bun\nimport { Server } from '@modelcontextprotocol/sdk/server/index.js'\nimport { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\n\n// --- Outbound: write to any curl -N listeners on /events --------------------\n// A real bridge would POST to your chat platform instead.\nconst listeners = new Set<(chunk: string) => void>()\nfunction send(text: string) {\n  const chunk = text.split('\\n').map(l => `data: ${l}\\n`).join('') + '\\n'\n  for (const emit of listeners) emit(chunk)\n}\n\nconst mcp = new Server(\n  { name: 'webhook', version: '0.0.1' },\n  {\n    capabilities: {\n      experimental: { 'claude/channel': {} },\n      tools: {},\n    },\n    instructions: 'Messages arrive as <channel source=\"webhook\" chat_id=\"...\">. Reply with the reply tool, passing the chat_id from the tag.',\n  },\n)\n\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    send(`Reply to ${chat_id}: ${text}`)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})\n\nawait mcp.connect(new StdioServerTransport())\n\nlet nextId = 1\nBun.serve({\n  port: 8788,\n  hostname: '127.0.0.1',\n  idleTimeout: 0,  // don't close idle SSE streams\n  async fetch(req) {\n    const url = new URL(req.url)\n\n    // GET /events: SSE stream so curl -N can watch Claude's replies live\n    if (req.method === 'GET' && url.pathname === '/events') {\n      const stream = new ReadableStream({\n        start(ctrl) {\n          ctrl.enqueue(': connected\\n\\n')  // so curl shows something immediately\n          const emit = (chunk: string) => ctrl.enqueue(chunk)\n          listeners.add(emit)\n          req.signal.addEventListener('abort', () => listeners.delete(emit))\n        },\n      })\n      return new Response(stream, {\n        headers: { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache' },\n      })\n    }\n\n    // POST: forward to Claude as a channel event\n    const body = await req.text()\n    const chat_id = String(nextId++)\n    await mcp.notification({\n      method: 'notifications/claude/channel',\n      params: {\n        content: body,\n        meta: { chat_id, path: url.pathname, method: req.method },\n      },\n    })\n    return new Response('ok')\n  },\n})",
               "kind": "command"
             }
           ]
@@ -16039,6 +16066,93 @@
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "const allowed = new Set(loadAllowlist())  // from your access.json or equivalent\n\n// inside your message handler, before emitting:\nif (!allowed.has(message.from.id)) {  // sender, not room\n  return  // drop silently\n}\nawait mcp.notification({ ... })",
               "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Relay permission prompts",
+          "paragraphs": [
+            "看到这里，就把“Relay permission prompts”当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "How relay works",
+          "paragraphs": [
+            "看懂这里，后面出怪事时你心里会更有底。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Permission request fields",
+          "paragraphs": [
+            "这一段就是给你查规矩的，像看说明书那样一项项对着来。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Add relay to a chat bridge",
+          "paragraphs": [
+            "看到这里，就把“Add relay to a chat bridge”当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Add relay to a chat bridge 1",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "capabilities: {\n  experimental: {\n    'claude/channel': {},\n    'claude/channel/permission': {},  // opt in to permission relay\n  },\n  tools: {},\n},",
+              "kind": "code"
+            },
+            {
+              "title": "Add relay to a chat bridge 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "import { z } from 'zod'\n\n// setNotificationHandler routes by z.literal on the method field,\n// so this schema is both the validator and the dispatch key\nconst PermissionRequestSchema = z.object({\n  method: z.literal('notifications/claude/channel/permission_request'),\n  params: z.object({\n    request_id: z.string(),     // five lowercase letters, include verbatim in your prompt\n    tool_name: z.string(),      // e.g. \"Bash\", \"Write\"\n    description: z.string(),    // human-readable summary of this call\n    input_preview: z.string(),  // tool args as JSON, truncated to ~200 chars\n  }),\n})\n\nmcp.setNotificationHandler(PermissionRequestSchema, async ({ params }) => {\n  // send() is your outbound: POST to your chat platform, or for local\n  // testing the SSE broadcast shown in the full example below.\n  send(\n    `Claude wants to run ${params.tool_name}: ${params.description}\\n\\n` +\n    // the ID in the instruction is what your inbound handler parses in Step 3\n    `Reply \"yes ${params.request_id}\" or \"no ${params.request_id}\"`,\n  )\n})",
+              "kind": "command"
+            },
+            {
+              "title": "Add relay to a chat bridge 3",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "// matches \"y abcde\", \"yes abcde\", \"n abcde\", \"no abcde\"\n// [a-km-z] is the ID alphabet Claude Code uses (lowercase, skips 'l')\n// /i tolerates phone autocorrect; lowercase the capture before sending\nconst PERMISSION_REPLY_RE = /^\\s*(y|yes|n|no)\\s+([a-km-z]{5})\\s*$/i\n\nasync function onInbound(message: PlatformMessage) {\n  if (!allowed.has(message.from.id)) return  // gate on sender first\n\n  const m = PERMISSION_REPLY_RE.exec(message.text)\n  if (m) {\n    // m[1] is the verdict word, m[2] is the request ID\n    // emit the verdict notification back to Claude Code instead of chat\n    await mcp.notification({\n      method: 'notifications/claude/channel/permission',\n      params: {\n        request_id: m[2].toLowerCase(),  // normalize in case of autocorrect caps\n        behavior: m[1].toLowerCase().startsWith('y') ? 'allow' : 'deny',\n      },\n    })\n    return  // handled as verdict, don't also forward as chat\n  }\n\n  // didn't match verdict format: fall through to the normal chat path\n  await mcp.notification({\n    method: 'notifications/claude/channel',\n    params: { content: message.text, meta: { chat_id: String(message.chat.id) } },\n  })\n}",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Full example",
+          "paragraphs": [
+            "别把这段只当成标题看，它其实是在给“Full example”划边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Full example 1",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "#!/usr/bin/env bun\nimport { Server } from '@modelcontextprotocol/sdk/server/index.js'\nimport { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\nimport { z } from 'zod'\n\n// --- Outbound: write to any curl -N listeners on /events --------------------\n// A real bridge would POST to your chat platform instead.\nconst listeners = new Set<(chunk: string) => void>()\nfunction send(text: string) {\n  const chunk = text.split('\\n').map(l => `data: ${l}\\n`).join('') + '\\n'\n  for (const emit of listeners) emit(chunk)\n}\n\n// Sender allowlist. For the local walkthrough we trust the single X-Sender\n// header value \"dev\"; a real bridge would check the platform's user ID.\nconst allowed = new Set(['dev'])\n\nconst mcp = new Server(\n  { name: 'webhook', version: '0.0.1' },\n  {\n    capabilities: {\n      experimental: {\n        'claude/channel': {},\n        'claude/channel/permission': {},  // opt in to permission relay\n      },\n      tools: {},\n    },\n    instructions:\n      'Messages arrive as <channel source=\"webhook\" chat_id=\"...\">. ' +\n      'Reply with the reply tool, passing the chat_id from the tag.',\n  },\n)\n\n// --- reply tool: Claude calls this to send a message back -------------------\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    send(`Reply to ${chat_id}: ${text}`)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})\n\n// --- permission relay: Claude Code (not Claude) calls this when a dialog opens\nconst PermissionRequestSchema = z.object({\n  method: z.literal('notifications/claude/channel/permission_request'),\n  params: z.object({\n    request_id: z.string(),\n    tool_name: z.string(),\n    description: z.string(),\n    input_preview: z.string(),\n  }),\n})\n\nmcp.setNotificationHandler(PermissionRequestSchema, async ({ params }) => {\n  send(\n    `Claude wants to run ${params.tool_name}: ${params.description}\\n\\n` +\n    `Reply \"yes ${params.request_id}\" or \"no ${params.request_id}\"`,\n  )\n})\n\nawait mcp.connect(new StdioServerTransport())\n\n// --- HTTP on :8788: GET /events streams outbound, POST routes inbound -------\nconst PERMISSION_REPLY_RE = /^\\s*(y|yes|n|no)\\s+([a-km-z]{5})\\s*$/i\nlet nextId = 1\n\nBun.serve({\n  port: 8788,\n  hostname: '127.0.0.1',\n  idleTimeout: 0,  // don't close idle SSE streams\n  async fetch(req) {\n    const url = new URL(req.url)\n\n    // GET /events: SSE stream so curl -N can watch replies and prompts live\n    if (req.method === 'GET' && url.pathname === '/events') {\n      const stream = new ReadableStream({\n        start(ctrl) {\n          ctrl.enqueue(': connected\\n\\n')  // so curl shows something immediately\n          const emit = (chunk: string) => ctrl.enqueue(chunk)\n          listeners.add(emit)\n          req.signal.addEventListener('abort', () => listeners.delete(emit))\n        },\n      })\n      return new Response(stream, {\n        headers: { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache' },\n      })\n    }\n\n    // everything else is inbound: gate on sender first\n    const body = await req.text()\n    const sender = req.headers.get('X-Sender') ?? ''\n    if (!allowed.has(sender)) return new Response('forbidden', { status: 403 })\n\n    // check for verdict format before treating as chat\n    const m = PERMISSION_REPLY_RE.exec(body)\n    if (m) {\n      await mcp.notification({\n        method: 'notifications/claude/channel/permission',\n        params: {\n          request_id: m[2].toLowerCase(),\n          behavior: m[1].toLowerCase().startsWith('y') ? 'allow' : 'deny',\n        },\n      })\n      return new Response('verdict recorded')\n    }\n\n    // normal chat: forward to Claude as a channel event\n    const chat_id = String(nextId++)\n    await mcp.notification({\n      method: 'notifications/claude/channel',\n      params: { content: body, meta: { chat_id, path: url.pathname } },\n    })\n    return new Response('ok')\n  },\n})",
+              "kind": "command"
+            },
+            {
+              "title": "Full example 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --dangerously-load-development-channels server:webhook",
+              "kind": "command"
+            },
+            {
+              "title": "Full example 3",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "curl -N localhost:8788/events",
+              "kind": "command"
+            },
+            {
+              "title": "Full example 4",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "curl -d \"list the files in this directory\" -H \"X-Sender: dev\" localhost:8788",
+              "kind": "command"
+            },
+            {
+              "title": "Full example 5",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "curl -d \"yes <id>\" -H \"X-Sender: dev\" localhost:8788",
+              "kind": "command"
             }
           ]
         },

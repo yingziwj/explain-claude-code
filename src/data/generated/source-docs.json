@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-22T04:28:52.640Z",
+  "generatedAt": "2026-03-23T04:38:17.205Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -1273,7 +1273,7 @@
         "To branch off and try a different approach without affecting the original session, use the --fork-session flag:",
         "This creates a new session ID while preserving the conversation history up to that point. The original session remains unchanged. Like resume, forked sessions don’t inherit session-scoped permissions.",
         "Same session in multiple terminals: If you resume the same session in multiple terminals, both terminals write to the same session file. Messages from both get interleaved, like two people writing in the same notebook. Nothing corrupts, but the conversation becomes jumbled. Each terminal only sees its own messages during the session, but if you resume that session later, you’ll see everything interleaved. For parallel work from the same starting point, use --fork-session to give each terminal its own clean session.",
-        "Claude’s context window holds your conversation history, file contents, command outputs, CLAUDE.md, loaded skills, and system instructions. As you work, context fills up. Claude compacts automatically, but instructions from early in the conversation can get lost. Put persistent rules in CLAUDE.md, and run /context to see what’s using space.",
+        "Claude’s context window holds your conversation history, file contents, command outputs, CLAUDE.md, auto memory, loaded skills, and system instructions. As you work, context fills up. Claude compacts automatically, but instructions from early in the conversation can get lost. Put persistent rules in CLAUDE.md, and run /context to see what’s using space.",
         "Claude Code manages context automatically as you approach the limit. It clears older tool outputs first, then summarizes the conversation if needed. Your requests and key code snippets are preserved; detailed instructions from early in the conversation may be lost. Put persistent rules in CLAUDE.md rather than relying on conversation history.",
         "To control what’s preserved during compaction, add a “Compact Instructions” section to CLAUDE.md or run /compact with a focus (like /compact focus on the API changes).",
         "Run /context to see what’s using space. MCP servers add tool definitions to every request, so a few servers can consume significant context before you start working. Run /mcp to check per-server costs.",
@@ -1445,7 +1445,7 @@
         {
           "title": "​The context window",
           "paragraphs": [
-            "Claude’s context window holds your conversation history, file contents, command outputs, CLAUDE.md, loaded skills, and system instructions. As you work, context fills up. Claude compacts automatically, but instructions from early in the conversation can get lost. Put persistent rules in CLAUDE.md, and run /context to see what’s using space.",
+            "Claude’s context window holds your conversation history, file contents, command outputs, CLAUDE.md, auto memory, loaded skills, and system instructions. As you work, context fills up. Claude compacts automatically, but instructions from early in the conversation can get lost. Put persistent rules in CLAUDE.md, and run /context to see what’s using space.",
             "Claude Code manages context automatically as you approach the limit. It clears older tool outputs first, then summarizes the conversation if needed. Your requests and key code snippets are preserved; detailed instructions from early in the conversation may be lost. Put persistent rules in CLAUDE.md rather than relying on conversation history.",
             "To control what’s preserved during compaction, add a “Compact Instructions” section to CLAUDE.md or run /compact with a focus (like /compact focus on the API changes).",
             "Run /context to see what’s using space. MCP servers add tool definitions to every request, so a few servers can consume significant context before you start working. Run /mcp to check per-server costs.",
@@ -7601,7 +7601,7 @@
         "OAuth authentication works with HTTP servers",
         "Some MCP servers require a specific redirect URI registered in advance. By default, Claude Code picks a random available port for the OAuth callback. Use --callback-port to fix the port so it matches a pre-registered redirect URI of the form http://localhost:PORT/callback.",
         "You can use --callback-port on its own (with dynamic client registration) or together with --client-id (with pre-configured credentials).",
-        "Some MCP servers don’t support automatic OAuth setup. If you see an error like “Incompatible auth server: does not support dynamic client registration,” the server requires pre-configured credentials. Register an OAuth app through the server’s developer portal first, then provide the credentials when adding the server.",
+        "Some MCP servers don’t support automatic OAuth setup via Dynamic Client Registration. If you see an error like “Incompatible auth server: does not support dynamic client registration,” the server requires pre-configured credentials. Claude Code also supports servers that use a Client ID Metadata Document (CIMD) instead of Dynamic Client Registration, and discovers these automatically. If automatic discovery fails, register an OAuth app through the server’s developer portal first, then provide the credentials when adding the server.",
         "Register an OAuth app with the server",
         "Create an app through the server’s developer portal and note your client ID and client secret.",
         "Many servers also require a redirect URI. If so, choose a port and register a redirect URI in the format http://localhost:PORT/callback. Use that same port with --callback-port in the next step.",
@@ -7961,7 +7961,7 @@
         {
           "title": "​Use pre-configured OAuth credentials",
           "paragraphs": [
-            "Some MCP servers don’t support automatic OAuth setup. If you see an error like “Incompatible auth server: does not support dynamic client registration,” the server requires pre-configured credentials. Register an OAuth app through the server’s developer portal first, then provide the credentials when adding the server.",
+            "Some MCP servers don’t support automatic OAuth setup via Dynamic Client Registration. If you see an error like “Incompatible auth server: does not support dynamic client registration,” the server requires pre-configured credentials. Claude Code also supports servers that use a Client ID Metadata Document (CIMD) instead of Dynamic Client Registration, and discovers these automatically. If automatic discovery fails, register an OAuth app through the server’s developer portal first, then provide the credentials when adding the server.",
             "Register an OAuth app with the server",
             "Create an app through the server’s developer portal and note your client ID and client secret.",
             "Many servers also require a redirect URI. If so, choose a port and register a redirect URI in the format http://localhost:PORT/callback. Use that same port with --callback-port in the next step.",
@@ -10287,7 +10287,7 @@
         "Push a message in",
         "Open the fakechat UI at http://localhost:8787 and type a message:",
         "The message arrives in your Claude Code session as a <channel source=\"fakechat\"> event. Claude reads it, does the work, and calls fakechat’s reply tool. The answer shows up in the chat UI.",
-        "If Claude hits a permission prompt while you’re away from the terminal, the session pauses until you approve locally. For unattended use, --dangerously-skip-permissions bypasses prompts, but only use it in environments you trust.",
+        "If Claude hits a permission prompt while you’re away from the terminal, the session pauses until you respond. Channel servers that declare the permission relay capability can forward these prompts to you so you can approve or deny remotely. For unattended use, --dangerously-skip-permissions bypasses prompts entirely, but only use it in environments you trust.",
         "Every approved channel plugin maintains a sender allowlist: only IDs you’ve added can push messages, and everyone else is silently dropped.",
         "Telegram and Discord bootstrap the list by pairing:",
         "Find your bot in Telegram or Discord and send it any message",
@@ -10296,6 +10296,7 @@
         "Your sender ID is added to the allowlist",
         "On top of that, you control which servers are enabled each session with --channels, and on Team and Enterprise plans your organization controls availability with channelsEnabled.",
         "Being in .mcp.json isn’t enough to push messages: a server also has to be named in --channels.",
+        "The allowlist also gates permission relay if the channel declares it. Anyone who can reply through the channel can approve or deny tool use in your session, so only allowlist senders you trust with that authority.",
         "Channels are controlled by the channelsEnabled setting in managed settings.",
         "Admins can enable channels from claude.ai → Admin settings → Claude Code → Channels, or by setting channelsEnabled to true in managed settings.",
         "Once enabled, users in your organization can use --channels to opt channel servers into individual sessions. If the setting is disabled or unset, the MCP server still connects and its tools work, but channel messages won’t arrive. A startup warning tells the user to have an admin enable the setting.",
@@ -10404,7 +10405,8 @@
             "In your Claude Code session, approve the code when prompted",
             "Your sender ID is added to the allowlist",
             "On top of that, you control which servers are enabled each session with --channels, and on Team and Enterprise plans your organization controls availability with channelsEnabled.",
-            "Being in .mcp.json isn’t enough to push messages: a server also has to be named in --channels."
+            "Being in .mcp.json isn’t enough to push messages: a server also has to be named in --channels.",
+            "The allowlist also gates permission relay if the channel declares it. Anyone who can reply through the channel can approve or deny tool use in your session, so only allowlist senders you trust with that authority."
           ],
           "codeBlocks": []
         },
@@ -10673,6 +10675,7 @@
       "metaDescription": "Use the Agent SDK to run Claude Code programmatically from the CLI, Python, or TypeScript.",
       "headings": [
         "​Basic usage",
+        "​Start faster with bare mode",
         "​Examples",
         "​Get structured output",
         "​Stream responses",
@@ -10684,6 +10687,7 @@
       ],
       "toc": [
         "Basic usage",
+        "Start faster with bare mode",
         "Examples",
         "Get structured output",
         "Stream responses",
@@ -10695,6 +10699,7 @@
       ],
       "paragraphs": [
         "Basic usage",
+        "Start faster with bare mode",
         "Examples",
         "Get structured output",
         "Stream responses",
@@ -10713,7 +10718,13 @@
         "--allowedTools for auto-approving tools",
         "--output-format for structured output",
         "This example asks Claude a question about your codebase and prints the response:",
-        "These examples highlight common CLI patterns.",
+        "Add --bare to reduce startup time by skipping auto-discovery of hooks, skills, plugins, MCP servers, auto memory, and CLAUDE.md. Without it, claude -p loads the same context an interactive session would, including anything configured in the working directory or ~/.claude.",
+        "Bare mode is useful for CI and scripts where you need the same result on every machine. A hook in a teammate’s ~/.claude or an MCP server in the project’s .mcp.json won’t run, because bare mode never reads them. Only flags you pass explicitly take effect.",
+        "This example runs a one-off summarize task in bare mode and pre-approves the Read tool so the call completes without a permission prompt:",
+        "In bare mode Claude has access to the Bash, file read, and file edit tools. Pass any context you need with a flag:",
+        "Bare mode skips OAuth and keychain reads. Anthropic authentication must come from ANTHROPIC_API_KEY or an apiKeyHelper in the JSON passed to --settings. Bedrock, Vertex, and Foundry use their usual provider credentials.",
+        "--bare is the recommended mode for scripted and SDK calls, and will become the default for -p in a future release.",
+        "These examples highlight common CLI patterns. For CI and other scripted calls, add --bare so they don’t pick up whatever happens to be configured locally.",
         "Use --output-format to control how responses are returned:",
         "text (default): plain text output",
         "json: structured JSON with result, session ID, and metadata",
@@ -10743,6 +10754,7 @@
       "codeBlocks": [
         "claude -p \"Find and fix the bug in auth.py\" --allowedTools \"Read,Edit,Bash\"",
         "claude -p \"What does the auth module do?\"",
+        "claude --bare -p \"Summarize this file\" --allowedTools \"Read\"",
         "claude -p \"Summarize this project\" --output-format json",
         "claude -p \"Extract the main function names from auth.py\" \\\n  --output-format json \\\n  --json-schema '{\"type\":\"object\",\"properties\":{\"functions\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}}},\"required\":[\"functions\"]}'",
         "# Extract the text result\nclaude -p \"Summarize this project\" --output-format json | jq -r '.result'\n\n# Extract structured output\nclaude -p \"Extract function names from auth.py\" \\\n  --output-format json \\\n  --json-schema '{\"type\":\"object\",\"properties\":{\"functions\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}}},\"required\":[\"functions\"]}' \\\n  | jq '.structured_output'",
@@ -10759,6 +10771,7 @@
           "title": "",
           "paragraphs": [
             "Basic usage",
+            "Start faster with bare mode",
             "Examples",
             "Get structured output",
             "Stream responses",
@@ -10768,8 +10781,7 @@
             "Continue conversations",
             "Next steps",
             "Use the Agent SDK to run Claude Code programmatically from the CLI, Python, or TypeScript.",
-            "The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code. It’s available as a CLI for scripts and CI/CD, or as Python and TypeScript packages for full programmatic control.",
-            "The CLI was previously called “headless mode.” The -p flag and all CLI options work the same way."
+            "The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code. It’s available as a CLI for scripts and CI/CD, or as Python and TypeScript packages for full programmatic control."
           ],
           "codeBlocks": [
             "claude -p \"Find and fix the bug in auth.py\" --allowedTools \"Read,Edit,Bash\""
@@ -10789,9 +10801,23 @@
           ]
         },
         {
+          "title": "​Start faster with bare mode",
+          "paragraphs": [
+            "Add --bare to reduce startup time by skipping auto-discovery of hooks, skills, plugins, MCP servers, auto memory, and CLAUDE.md. Without it, claude -p loads the same context an interactive session would, including anything configured in the working directory or ~/.claude.",
+            "Bare mode is useful for CI and scripts where you need the same result on every machine. A hook in a teammate’s ~/.claude or an MCP server in the project’s .mcp.json won’t run, because bare mode never reads them. Only flags you pass explicitly take effect.",
+            "This example runs a one-off summarize task in bare mode and pre-approves the Read tool so the call completes without a permission prompt:",
+            "In bare mode Claude has access to the Bash, file read, and file edit tools. Pass any context you need with a flag:",
+            "Bare mode skips OAuth and keychain reads. Anthropic authentication must come from ANTHROPIC_API_KEY or an apiKeyHelper in the JSON passed to --settings. Bedrock, Vertex, and Foundry use their usual provider credentials.",
+            "--bare is the recommended mode for scripted and SDK calls, and will become the default for -p in a future release."
+          ],
+          "codeBlocks": [
+            "claude --bare -p \"Summarize this file\" --allowedTools \"Read\""
+          ]
+        },
+        {
           "title": "​Examples",
           "paragraphs": [
-            "These examples highlight common CLI patterns."
+            "These examples highlight common CLI patterns. For CI and other scripted calls, add --bare so they don’t pick up whatever happens to be configured locally."
           ],
           "codeBlocks": []
         },
@@ -17186,6 +17212,7 @@
         "Add these rules to the deny array in your settings or use the --disallowedTools CLI flag to disable specific agents. To disable the Explore agent:",
         "Claude Code hooks provide a way to register custom shell commands to perform permission evaluation at runtime. When Claude Code makes a tool call, PreToolUse hooks run before the permission prompt. The hook output can deny the tool call, force a prompt, or skip the prompt to let the call proceed.",
         "Skipping the prompt does not bypass permission rules. Deny and ask rules are still evaluated after a hook returns \"allow\", so a matching deny rule still blocks the call. This preserves the deny-first precedence described in Manage permissions, including deny rules set in managed settings.",
+        "A blocking hook also takes precedence over allow rules. A hook that exits with code 2 stops the tool call before permission rules are evaluated, so the block applies even when an allow rule would otherwise let the call proceed. To run all Bash commands without prompts except for a few you want blocked, add \"Bash\" to your allow list and register a PreToolUse hook that rejects those specific commands. See Block edits to protected files for a hook script you can adapt.",
         "By default, Claude has access to files in the directory where it was launched. You can extend this access:",
         "During startup: use --add-dir <path> CLI argument",
         "During session: use /add-dir command",
@@ -17372,7 +17399,8 @@
           "title": "​Extend permissions with hooks",
           "paragraphs": [
             "Claude Code hooks provide a way to register custom shell commands to perform permission evaluation at runtime. When Claude Code makes a tool call, PreToolUse hooks run before the permission prompt. The hook output can deny the tool call, force a prompt, or skip the prompt to let the call proceed.",
-            "Skipping the prompt does not bypass permission rules. Deny and ask rules are still evaluated after a hook returns \"allow\", so a matching deny rule still blocks the call. This preserves the deny-first precedence described in Manage permissions, including deny rules set in managed settings."
+            "Skipping the prompt does not bypass permission rules. Deny and ask rules are still evaluated after a hook returns \"allow\", so a matching deny rule still blocks the call. This preserves the deny-first precedence described in Manage permissions, including deny rules set in managed settings.",
+            "A blocking hook also takes precedence over allow rules. A hook that exits with code 2 stops the tool call before permission rules are evaluated, so the block applies even when an allow rule would otherwise let the call proceed. To run all Bash commands without prompts except for a few you want blocked, add \"Bash\" to your allow list and register a PreToolUse hook that rejects those specific commands. See Block edits to protected files for a hook script you can adapt."
           ],
           "codeBlocks": []
         },
@@ -22136,7 +22164,7 @@
       "path": "/docs/en/channels-reference",
       "url": "https://code.claude.com/docs/en/channels-reference",
       "title": "Channels reference",
-      "metaDescription": "Build an MCP server that pushes webhooks, alerts, and chat messages into a Claude Code session. Reference for the channel contract: capability declaration, notification events, reply tools, and sender gating.",
+      "metaDescription": "Build an MCP server that pushes webhooks, alerts, and chat messages into a Claude Code session. Reference for the channel contract: capability declaration, notification events, reply tools, sender gating, and permission relay.",
       "headings": [
         "​Overview",
         "​What you need",
@@ -22146,6 +22174,11 @@
         "​Notification format",
         "​Expose a reply tool",
         "​Gate inbound messages",
+        "​Relay permission prompts",
+        "​How relay works",
+        "​Permission request fields",
+        "​Add relay to a chat bridge",
+        "​Full example",
         "​Package as a plugin",
         "​See also"
       ],
@@ -22158,6 +22191,11 @@
         "Notification format",
         "Expose a reply tool",
         "Gate inbound messages",
+        "Relay permission prompts",
+        "How relay works",
+        "Permission request fields",
+        "Add relay to a chat bridge",
+        "Full example",
         "Package as a plugin",
         "See also"
       ],
@@ -22170,12 +22208,17 @@
         "Notification format",
         "Expose a reply tool",
         "Gate inbound messages",
+        "Relay permission prompts",
+        "How relay works",
+        "Permission request fields",
+        "Add relay to a chat bridge",
+        "Full example",
         "Package as a plugin",
         "See also",
-        "Build an MCP server that pushes webhooks, alerts, and chat messages into a Claude Code session. Reference for the channel contract: capability declaration, notification events, reply tools, and sender gating.",
+        "Build an MCP server that pushes webhooks, alerts, and chat messages into a Claude Code session. Reference for the channel contract: capability declaration, notification events, reply tools, sender gating, and permission relay.",
         "Channels are in research preview and require Claude Code v2.1.80 or later. They require claude.ai login. Console and API key authentication is not supported. Team and Enterprise organizations must explicitly enable them.",
         "A channel is an MCP server that pushes events into a Claude Code session so Claude can react to things happening outside the terminal.",
-        "You can build a one-way or two-way channel. One-way channels forward alerts, webhooks, or monitoring events for Claude to act on. Two-way channels like chat bridges also expose a reply tool so Claude can send messages back.",
+        "You can build a one-way or two-way channel. One-way channels forward alerts, webhooks, or monitoring events for Claude to act on. Two-way channels like chat bridges also expose a reply tool so Claude can send messages back. A channel with a trusted sender path can also opt in to relay permission prompts so you can approve or deny tool use remotely.",
         "This page covers:",
         "Overview: how channels work",
         "What you need: requirements and general steps",
@@ -22184,6 +22227,7 @@
         "Notification format: the event payload",
         "Expose a reply tool: let Claude send messages back",
         "Gate inbound messages: sender checks to prevent prompt injection",
+        "Relay permission prompts: forward tool approval prompts to remote channels",
         "To use an existing channel instead of building one, see Channels. Telegram, Discord, and fakechat are included in the research preview.",
         "A channel is an MCP server that runs on the same machine as Claude Code. Claude Code spawns it as a subprocess and communicates over stdio. Your channel server is the bridge between external systems and the Claude Code session:",
         "Chat platforms (Telegram, Discord): your plugin runs locally and polls the platform’s API for new messages. When someone DMs your bot, the plugin receives the message and forwards it to Claude. No URL to expose.",
@@ -22214,12 +22258,15 @@
         "In a separate terminal, simulate a webhook by sending an HTTP POST with a message to your server. This example sends a CI failure alert to port 8788 (or whichever port you configured):",
         "The payload arrives in your Claude Code session as a <channel> tag:",
         "In your Claude Code terminal, you’ll see Claude receive the message and start responding: reading files, running commands, or whatever the message calls for. This is a one-way channel, so Claude acts in your session but doesn’t send anything back through the webhook. To add replies, see Expose a reply tool.",
+        "If the event doesn’t arrive, the diagnosis depends on what curl returned:",
+        "curl succeeds but nothing reaches Claude: run /mcp in your session to check the server’s status. “Failed to connect” usually means a dependency or import error in your server file; check the debug log at ~/.claude/debug/<session-id>.txt for the stderr trace.",
+        "curl fails with “connection refused”: the port is either not bound yet or a stale process from an earlier run is holding it. lsof -i :<port> shows what’s listening; kill the stale process before restarting your session.",
         "The fakechat server extends this pattern with a web UI, file attachments, and a reply tool for two-way chat.",
         "During the research preview, every channel must be on the approved allowlist to register. The development flag bypasses the allowlist for specific entries after a confirmation prompt. This example shows both entry types:",
         "The bypass is per-entry. Combining this flag with --channels doesn’t extend the bypass to the --channels entries. During the research preview, the approved allowlist is Anthropic-curated, so your channel stays on the development flag while you build and test.",
         "This flag skips the allowlist only. The channelsEnabled organization policy still applies. Don’t use it to run channels from untrusted sources.",
-        "A channel sets these options in the Server constructor. The instructions and capabilities.tools fields are standard MCP; capabilities.experimental['claude/channel'] is the channel-specific addition:",
-        "To create a one-way channel, omit capabilities.tools. This example shows a two-way setup with all three options set:",
+        "A channel sets these options in the Server constructor. The instructions and capabilities.tools fields are standard MCP; capabilities.experimental['claude/channel'] and capabilities.experimental['claude/channel/permission'] are the channel-specific additions:",
+        "To create a one-way channel, omit capabilities.tools. This example shows a two-way setup with the channel capability, tools, and instructions set:",
         "To push an event, call mcp.notification() with method notifications/claude/channel. The params are in the next section.",
         "Your server emits notifications/claude/channel with two params:",
         "Your server pushes events by calling mcp.notification() on the Server instance. This example pushes a CI failure alert with two meta keys:",
@@ -22235,12 +22282,52 @@
         "Add the following to webhook.ts. The import goes at the top of the file with your other imports; the two handlers go between the Server constructor and mcp.connect(). This registers a reply tool that Claude can call with a chat_id and text:",
         "Update the instructions",
         "Update the instructions string in your Server constructor so Claude knows to route replies back through the tool. This example tells Claude to pass chat_id from the inbound tag:",
-        "Here’s the complete webhook.ts with two-way support, combining the one-way receiver from the walkthrough with the reply tool additions:",
+        "Here’s the complete webhook.ts with two-way support. Outbound replies stream over GET /events using Server-Sent Events (SSE), so curl -N localhost:8788/events can watch them live; inbound chat arrives on POST /:",
         "The fakechat server shows a more complete example with file attachments and message editing.",
         "An ungated channel is a prompt injection vector. Anyone who can reach your endpoint can put text in front of Claude. A channel listening to a chat platform or a public endpoint needs a real sender check before it emits anything.",
         "Check the sender against an allowlist before calling mcp.notification(). This example drops any message from a sender not in the set:",
         "Gate on the sender’s identity, not the chat or room identity: message.from.id in the example, not message.chat.id. In group chats, these differ, and gating on the room would let anyone in an allowlisted group inject messages into the session.",
         "The Telegram and Discord channels gate on a sender allowlist the same way. They bootstrap the list by pairing: the user DMs the bot, the bot replies with a pairing code, the user approves it in their Claude Code session, and their platform ID is added. See either implementation for the full pairing flow.",
+        "Permission relay requires Claude Code v2.1.81 or later. Earlier versions ignore the claude/channel/permission capability.",
+        "When Claude calls a tool that needs approval, the local terminal dialog opens and the session waits. A two-way channel can opt in to receive the same prompt in parallel and relay it to you on another device. Both stay live: you can answer in the terminal or on your phone, and Claude Code applies whichever answer arrives first and closes the other.",
+        "Relay covers tool-use approvals like Bash, Write, and Edit. Project trust and MCP server consent dialogs don’t relay; those only appear in the local terminal.",
+        "When a permission prompt opens, the relay loop has four steps:",
+        "Claude Code generates a short request ID and notifies your server",
+        "Your server forwards the prompt and ID to your chat app",
+        "The remote user replies with a yes or no and that ID",
+        "Your inbound handler parses the reply into a verdict, and Claude Code applies it only if the ID matches an open request",
+        "The local terminal dialog stays open through all of this. If someone at the terminal answers before the remote verdict arrives, that answer is applied instead and the pending remote request is dropped.",
+        "The outbound notification from Claude Code is notifications/claude/channel/permission_request. Like the channel notification, the transport is standard MCP but the method and schema are Claude Code extensions. The params object has four string fields your server formats into the outgoing prompt:",
+        "The verdict your server sends back is notifications/claude/channel/permission with two fields: request_id echoing the ID above, and behavior set to 'allow' or 'deny'. Allow lets the tool call proceed; deny rejects it, the same as answering No in the local dialog. Neither verdict affects future calls.",
+        "Adding permission relay to a two-way channel takes three components:",
+        "A claude/channel/permission: {} entry under experimental capabilities in your Server constructor so Claude Code knows to forward prompts",
+        "A notification handler for notifications/claude/channel/permission_request that formats the prompt and sends it out through your platform API",
+        "A check in your inbound message handler that recognizes yes <id> or no <id> and emits a notifications/claude/channel/permission verdict instead of forwarding the text to Claude",
+        "Only declare the capability if your channel authenticates the sender, because anyone who can reply through your channel can approve or deny tool use in your session.",
+        "To add these to a two-way chat bridge like the one assembled in Expose a reply tool:",
+        "Declare the permission capability",
+        "In your Server constructor, add claude/channel/permission: {} alongside claude/channel under experimental:",
+        "Handle the incoming request",
+        "Register a notification handler between your Server constructor and mcp.connect(). Claude Code calls it with the four request fields when a permission dialog opens. Your handler formats the prompt for your platform and includes instructions for replying with the ID:",
+        "Intercept the verdict in your inbound handler",
+        "Your inbound handler is the loop or callback that receives messages from your platform: the same place you gate on sender and emit notifications/claude/channel to forward chat to Claude. Add a check before the chat-forwarding call that recognizes the verdict format and emits the permission notification instead.",
+        "The regex matches the ID format Claude Code generates: five letters, never l. The /i flag tolerates phone autocorrect capitalizing the reply; lowercase the captured ID before sending it back.",
+        "Claude Code also keeps the local terminal dialog open, so you can answer in either place, and the first answer to arrive is applied. A remote reply that doesn’t exactly match the expected format fails in one of two ways, and in both cases the dialog stays open:",
+        "Different format: your inbound handler’s regex fails to match, so text like approve it or yes without an ID falls through as a normal message to Claude.",
+        "Right format, wrong ID: your server emits a verdict, but Claude Code finds no open request with that ID and drops it silently.",
+        "The assembled webhook.ts below combines all three extensions from this page: the reply tool, sender gating, and permission relay. If you’re starting here, you’ll also need the project setup and .mcp.json entry from the initial walkthrough.",
+        "To make both directions testable from curl, the HTTP listener serves two paths:",
+        "GET /events: holds an SSE stream open and pushes each outbound message as a data: line, so curl -N can watch Claude’s replies and permission prompts arrive live.",
+        "POST /: the inbound side, the same handler as earlier, now with the verdict-format check inserted before the chat-forward branch.",
+        "Test the verdict path in three terminals. The first is your Claude Code session, started with the development flag so it spawns webhook.ts:",
+        "In the second, stream the outbound side so you can see Claude’s replies and any permission prompts as they fire:",
+        "In the third, send a message that will make Claude try to run a command:",
+        "The local permission dialog opens in your Claude Code terminal. A moment later the prompt appears in the /events stream, including the five-letter ID. Approve it from the remote side:",
+        "The local dialog closes and the tool runs. Claude’s reply comes back through the reply tool and lands in the stream too.",
+        "The three channel-specific pieces in this file:",
+        "Capabilities in the Server constructor: claude/channel registers the notification listener, claude/channel/permission opts in to permission relay, tools lets Claude discover the reply tool.",
+        "Outbound paths: the reply tool handler is what Claude calls for conversational responses; the PermissionRequestSchema notification handler is what Claude Code calls when a permission dialog opens. Both call send() to broadcast over /events, but they’re triggered by different parts of the system.",
+        "HTTP handler: GET /events holds an SSE stream open so curl can watch outbound live; POST is inbound, gated on the X-Sender header. A yes <id> or no <id> body goes to Claude Code as a verdict notification and never reaches Claude; anything else is forwarded to Claude as a channel event.",
         "To make your channel installable and shareable, wrap it in a plugin and publish it to a marketplace. Users install it with /plugin install, then enable it per session with --channels plugin:<name>@<marketplace>.",
         "A channel published to your own marketplace still needs --dangerously-load-development-channels to run, since it isn’t on the approved allowlist. To get it added, submit it to the official marketplace. Channel plugins go through security review before being approved.",
         "Channels to install and use Telegram, Discord, or the fakechat demo, and to enable channels for a Team or Enterprise org",
@@ -22261,10 +22348,17 @@
         "await mcp.notification({\n  method: 'notifications/claude/channel',\n  params: {\n    content: 'build failed on main: https://ci.example.com/run/1234',\n    meta: { severity: 'high', run_id: '1234' },\n  },\n})",
         "<channel source=\"your-channel\" severity=\"high\" run_id=\"1234\">\nbuild failed on main: https://ci.example.com/run/1234\n</channel>",
         "capabilities: {\n  experimental: { 'claude/channel': {} },\n  tools: {},  // enables tool discovery\n},",
-        "// Add this import at the top of webhook.ts\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\n\n// Claude queries this at startup to discover what tools your server offers\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    // inputSchema tells Claude what arguments to pass\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\n// Claude calls this when it wants to invoke a tool\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    // your platform's send API\n    await yourPlatform.send(chat_id, text)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})",
+        "// Add this import at the top of webhook.ts\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\n\n// Claude queries this at startup to discover what tools your server offers\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    // inputSchema tells Claude what arguments to pass\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\n// Claude calls this when it wants to invoke a tool\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    // send() is your outbound: POST to your chat platform, or for local\n    // testing the SSE broadcast shown in the full example below.\n    send(`Reply to ${chat_id}: ${text}`)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})",
         "instructions: 'Messages arrive as <channel source=\"webhook\" chat_id=\"...\">. Reply with the reply tool, passing the chat_id from the tag.'",
-        "#!/usr/bin/env bun\nimport { Server } from '@modelcontextprotocol/sdk/server/index.js'\nimport { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\n\nconst mcp = new Server(\n  { name: 'webhook', version: '0.0.1' },\n  {\n    capabilities: {\n      experimental: { 'claude/channel': {} },\n      tools: {},\n    },\n    instructions: 'Messages arrive as <channel source=\"webhook\" chat_id=\"...\">. Reply with the reply tool, passing the chat_id from the tag.',\n  },\n)\n\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    // your platform's send API — replace with your real integration\n    console.error(`Reply to ${chat_id}: ${text}`)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})\n\nawait mcp.connect(new StdioServerTransport())\n\nlet nextId = 1\nBun.serve({\n  port: 8788,\n  hostname: '127.0.0.1',\n  async fetch(req) {\n    const body = await req.text()\n    const chat_id = String(nextId++)\n    await mcp.notification({\n      method: 'notifications/claude/channel',\n      params: {\n        content: body,\n        meta: { chat_id, path: new URL(req.url).pathname, method: req.method },\n      },\n    })\n    return new Response('ok')\n  },\n})",
-        "const allowed = new Set(loadAllowlist())  // from your access.json or equivalent\n\n// inside your message handler, before emitting:\nif (!allowed.has(message.from.id)) {  // sender, not room\n  return  // drop silently\n}\nawait mcp.notification({ ... })"
+        "#!/usr/bin/env bun\nimport { Server } from '@modelcontextprotocol/sdk/server/index.js'\nimport { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\n\n// --- Outbound: write to any curl -N listeners on /events --------------------\n// A real bridge would POST to your chat platform instead.\nconst listeners = new Set<(chunk: string) => void>()\nfunction send(text: string) {\n  const chunk = text.split('\\n').map(l => `data: ${l}\\n`).join('') + '\\n'\n  for (const emit of listeners) emit(chunk)\n}\n\nconst mcp = new Server(\n  { name: 'webhook', version: '0.0.1' },\n  {\n    capabilities: {\n      experimental: { 'claude/channel': {} },\n      tools: {},\n    },\n    instructions: 'Messages arrive as <channel source=\"webhook\" chat_id=\"...\">. Reply with the reply tool, passing the chat_id from the tag.',\n  },\n)\n\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    send(`Reply to ${chat_id}: ${text}`)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})\n\nawait mcp.connect(new StdioServerTransport())\n\nlet nextId = 1\nBun.serve({\n  port: 8788,\n  hostname: '127.0.0.1',\n  idleTimeout: 0,  // don't close idle SSE streams\n  async fetch(req) {\n    const url = new URL(req.url)\n\n    // GET /events: SSE stream so curl -N can watch Claude's replies live\n    if (req.method === 'GET' && url.pathname === '/events') {\n      const stream = new ReadableStream({\n        start(ctrl) {\n          ctrl.enqueue(': connected\\n\\n')  // so curl shows something immediately\n          const emit = (chunk: string) => ctrl.enqueue(chunk)\n          listeners.add(emit)\n          req.signal.addEventListener('abort', () => listeners.delete(emit))\n        },\n      })\n      return new Response(stream, {\n        headers: { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache' },\n      })\n    }\n\n    // POST: forward to Claude as a channel event\n    const body = await req.text()\n    const chat_id = String(nextId++)\n    await mcp.notification({\n      method: 'notifications/claude/channel',\n      params: {\n        content: body,\n        meta: { chat_id, path: url.pathname, method: req.method },\n      },\n    })\n    return new Response('ok')\n  },\n})",
+        "const allowed = new Set(loadAllowlist())  // from your access.json or equivalent\n\n// inside your message handler, before emitting:\nif (!allowed.has(message.from.id)) {  // sender, not room\n  return  // drop silently\n}\nawait mcp.notification({ ... })",
+        "capabilities: {\n  experimental: {\n    'claude/channel': {},\n    'claude/channel/permission': {},  // opt in to permission relay\n  },\n  tools: {},\n},",
+        "import { z } from 'zod'\n\n// setNotificationHandler routes by z.literal on the method field,\n// so this schema is both the validator and the dispatch key\nconst PermissionRequestSchema = z.object({\n  method: z.literal('notifications/claude/channel/permission_request'),\n  params: z.object({\n    request_id: z.string(),     // five lowercase letters, include verbatim in your prompt\n    tool_name: z.string(),      // e.g. \"Bash\", \"Write\"\n    description: z.string(),    // human-readable summary of this call\n    input_preview: z.string(),  // tool args as JSON, truncated to ~200 chars\n  }),\n})\n\nmcp.setNotificationHandler(PermissionRequestSchema, async ({ params }) => {\n  // send() is your outbound: POST to your chat platform, or for local\n  // testing the SSE broadcast shown in the full example below.\n  send(\n    `Claude wants to run ${params.tool_name}: ${params.description}\\n\\n` +\n    // the ID in the instruction is what your inbound handler parses in Step 3\n    `Reply \"yes ${params.request_id}\" or \"no ${params.request_id}\"`,\n  )\n})",
+        "// matches \"y abcde\", \"yes abcde\", \"n abcde\", \"no abcde\"\n// [a-km-z] is the ID alphabet Claude Code uses (lowercase, skips 'l')\n// /i tolerates phone autocorrect; lowercase the capture before sending\nconst PERMISSION_REPLY_RE = /^\\s*(y|yes|n|no)\\s+([a-km-z]{5})\\s*$/i\n\nasync function onInbound(message: PlatformMessage) {\n  if (!allowed.has(message.from.id)) return  // gate on sender first\n\n  const m = PERMISSION_REPLY_RE.exec(message.text)\n  if (m) {\n    // m[1] is the verdict word, m[2] is the request ID\n    // emit the verdict notification back to Claude Code instead of chat\n    await mcp.notification({\n      method: 'notifications/claude/channel/permission',\n      params: {\n        request_id: m[2].toLowerCase(),  // normalize in case of autocorrect caps\n        behavior: m[1].toLowerCase().startsWith('y') ? 'allow' : 'deny',\n      },\n    })\n    return  // handled as verdict, don't also forward as chat\n  }\n\n  // didn't match verdict format: fall through to the normal chat path\n  await mcp.notification({\n    method: 'notifications/claude/channel',\n    params: { content: message.text, meta: { chat_id: String(message.chat.id) } },\n  })\n}",
+        "#!/usr/bin/env bun\nimport { Server } from '@modelcontextprotocol/sdk/server/index.js'\nimport { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\nimport { z } from 'zod'\n\n// --- Outbound: write to any curl -N listeners on /events --------------------\n// A real bridge would POST to your chat platform instead.\nconst listeners = new Set<(chunk: string) => void>()\nfunction send(text: string) {\n  const chunk = text.split('\\n').map(l => `data: ${l}\\n`).join('') + '\\n'\n  for (const emit of listeners) emit(chunk)\n}\n\n// Sender allowlist. For the local walkthrough we trust the single X-Sender\n// header value \"dev\"; a real bridge would check the platform's user ID.\nconst allowed = new Set(['dev'])\n\nconst mcp = new Server(\n  { name: 'webhook', version: '0.0.1' },\n  {\n    capabilities: {\n      experimental: {\n        'claude/channel': {},\n        'claude/channel/permission': {},  // opt in to permission relay\n      },\n      tools: {},\n    },\n    instructions:\n      'Messages arrive as <channel source=\"webhook\" chat_id=\"...\">. ' +\n      'Reply with the reply tool, passing the chat_id from the tag.',\n  },\n)\n\n// --- reply tool: Claude calls this to send a message back -------------------\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    send(`Reply to ${chat_id}: ${text}`)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})\n\n// --- permission relay: Claude Code (not Claude) calls this when a dialog opens\nconst PermissionRequestSchema = z.object({\n  method: z.literal('notifications/claude/channel/permission_request'),\n  params: z.object({\n    request_id: z.string(),\n    tool_name: z.string(),\n    description: z.string(),\n    input_preview: z.string(),\n  }),\n})\n\nmcp.setNotificationHandler(PermissionRequestSchema, async ({ params }) => {\n  send(\n    `Claude wants to run ${params.tool_name}: ${params.description}\\n\\n` +\n    `Reply \"yes ${params.request_id}\" or \"no ${params.request_id}\"`,\n  )\n})\n\nawait mcp.connect(new StdioServerTransport())\n\n// --- HTTP on :8788: GET /events streams outbound, POST routes inbound -------\nconst PERMISSION_REPLY_RE = /^\\s*(y|yes|n|no)\\s+([a-km-z]{5})\\s*$/i\nlet nextId = 1\n\nBun.serve({\n  port: 8788,\n  hostname: '127.0.0.1',\n  idleTimeout: 0,  // don't close idle SSE streams\n  async fetch(req) {\n    const url = new URL(req.url)\n\n    // GET /events: SSE stream so curl -N can watch replies and prompts live\n    if (req.method === 'GET' && url.pathname === '/events') {\n      const stream = new ReadableStream({\n        start(ctrl) {\n          ctrl.enqueue(': connected\\n\\n')  // so curl shows something immediately\n          const emit = (chunk: string) => ctrl.enqueue(chunk)\n          listeners.add(emit)\n          req.signal.addEventListener('abort', () => listeners.delete(emit))\n        },\n      })\n      return new Response(stream, {\n        headers: { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache' },\n      })\n    }\n\n    // everything else is inbound: gate on sender first\n    const body = await req.text()\n    const sender = req.headers.get('X-Sender') ?? ''\n    if (!allowed.has(sender)) return new Response('forbidden', { status: 403 })\n\n    // check for verdict format before treating as chat\n    const m = PERMISSION_REPLY_RE.exec(body)\n    if (m) {\n      await mcp.notification({\n        method: 'notifications/claude/channel/permission',\n        params: {\n          request_id: m[2].toLowerCase(),\n          behavior: m[1].toLowerCase().startsWith('y') ? 'allow' : 'deny',\n        },\n      })\n      return new Response('verdict recorded')\n    }\n\n    // normal chat: forward to Claude as a channel event\n    const chat_id = String(nextId++)\n    await mcp.notification({\n      method: 'notifications/claude/channel',\n      params: { content: body, meta: { chat_id, path: url.pathname } },\n    })\n    return new Response('ok')\n  },\n})",
+        "curl -N localhost:8788/events",
+        "curl -d \"list the files in this directory\" -H \"X-Sender: dev\" localhost:8788",
+        "curl -d \"yes <id>\" -H \"X-Sender: dev\" localhost:8788"
       ],
       "sectionBlocks": [
         {
@@ -22278,10 +22372,10 @@
             "Notification format",
             "Expose a reply tool",
             "Gate inbound messages",
-            "Package as a plugin",
-            "See also",
-            "Build an MCP server that pushes webhooks, alerts, and chat messages into a Claude Code session. Reference for the channel contract: capability declaration, notification events, reply tools, and sender gating.",
-            "Channels are in research preview and require Claude Code v2.1.80 or later. They require claude.ai login. Console and API key authentication is not supported. Team and Enterprise organizations must explicitly enable them."
+            "Relay permission prompts",
+            "How relay works",
+            "Permission request fields",
+            "Add relay to a chat bridge"
           ],
           "codeBlocks": []
         },
@@ -22346,8 +22440,8 @@
         {
           "title": "​Server options",
           "paragraphs": [
-            "A channel sets these options in the Server constructor. The instructions and capabilities.tools fields are standard MCP; capabilities.experimental['claude/channel'] is the channel-specific addition:",
-            "To create a one-way channel, omit capabilities.tools. This example shows a two-way setup with all three options set:",
+            "A channel sets these options in the Server constructor. The instructions and capabilities.tools fields are standard MCP; capabilities.experimental['claude/channel'] and capabilities.experimental['claude/channel/permission'] are the channel-specific additions:",
+            "To create a one-way channel, omit capabilities.tools. This example shows a two-way setup with the channel capability, tools, and instructions set:",
             "To push an event, call mcp.notification() with method notifications/claude/channel. The params are in the next section."
           ],
           "codeBlocks": [
@@ -22380,13 +22474,13 @@
             "Add the following to webhook.ts. The import goes at the top of the file with your other imports; the two handlers go between the Server constructor and mcp.connect(). This registers a reply tool that Claude can call with a chat_id and text:",
             "Update the instructions",
             "Update the instructions string in your Server constructor so Claude knows to route replies back through the tool. This example tells Claude to pass chat_id from the inbound tag:",
-            "Here’s the complete webhook.ts with two-way support, combining the one-way receiver from the walkthrough with the reply tool additions:"
+            "Here’s the complete webhook.ts with two-way support. Outbound replies stream over GET /events using Server-Sent Events (SSE), so curl -N localhost:8788/events can watch them live; inbound chat arrives on POST /:"
           ],
           "codeBlocks": [
             "capabilities: {\n  experimental: { 'claude/channel': {} },\n  tools: {},  // enables tool discovery\n},",
-            "// Add this import at the top of webhook.ts\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\n\n// Claude queries this at startup to discover what tools your server offers\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    // inputSchema tells Claude what arguments to pass\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\n// Claude calls this when it wants to invoke a tool\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    // your platform's send API\n    await yourPlatform.send(chat_id, text)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})",
+            "// Add this import at the top of webhook.ts\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\n\n// Claude queries this at startup to discover what tools your server offers\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    // inputSchema tells Claude what arguments to pass\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\n// Claude calls this when it wants to invoke a tool\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    // send() is your outbound: POST to your chat platform, or for local\n    // testing the SSE broadcast shown in the full example below.\n    send(`Reply to ${chat_id}: ${text}`)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})",
             "instructions: 'Messages arrive as <channel source=\"webhook\" chat_id=\"...\">. Reply with the reply tool, passing the chat_id from the tag.'",
-            "#!/usr/bin/env bun\nimport { Server } from '@modelcontextprotocol/sdk/server/index.js'\nimport { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\n\nconst mcp = new Server(\n  { name: 'webhook', version: '0.0.1' },\n  {\n    capabilities: {\n      experimental: { 'claude/channel': {} },\n      tools: {},\n    },\n    instructions: 'Messages arrive as <channel source=\"webhook\" chat_id=\"...\">. Reply with the reply tool, passing the chat_id from the tag.',\n  },\n)\n\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    // your platform's send API — replace with your real integration\n    console.error(`Reply to ${chat_id}: ${text}`)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})\n\nawait mcp.connect(new StdioServerTransport())\n\nlet nextId = 1\nBun.serve({\n  port: 8788,\n  hostname: '127.0.0.1',\n  async fetch(req) {\n    const body = await req.text()\n    const chat_id = String(nextId++)\n    await mcp.notification({\n      method: 'notifications/claude/channel',\n      params: {\n        content: body,\n        meta: { chat_id, path: new URL(req.url).pathname, method: req.method },\n      },\n    })\n    return new Response('ok')\n  },\n})"
+            "#!/usr/bin/env bun\nimport { Server } from '@modelcontextprotocol/sdk/server/index.js'\nimport { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\n\n// --- Outbound: write to any curl -N listeners on /events --------------------\n// A real bridge would POST to your chat platform instead.\nconst listeners = new Set<(chunk: string) => void>()\nfunction send(text: string) {\n  const chunk = text.split('\\n').map(l => `data: ${l}\\n`).join('') + '\\n'\n  for (const emit of listeners) emit(chunk)\n}\n\nconst mcp = new Server(\n  { name: 'webhook', version: '0.0.1' },\n  {\n    capabilities: {\n      experimental: { 'claude/channel': {} },\n      tools: {},\n    },\n    instructions: 'Messages arrive as <channel source=\"webhook\" chat_id=\"...\">. Reply with the reply tool, passing the chat_id from the tag.',\n  },\n)\n\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    send(`Reply to ${chat_id}: ${text}`)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})\n\nawait mcp.connect(new StdioServerTransport())\n\nlet nextId = 1\nBun.serve({\n  port: 8788,\n  hostname: '127.0.0.1',\n  idleTimeout: 0,  // don't close idle SSE streams\n  async fetch(req) {\n    const url = new URL(req.url)\n\n    // GET /events: SSE stream so curl -N can watch Claude's replies live\n    if (req.method === 'GET' && url.pathname === '/events') {\n      const stream = new ReadableStream({\n        start(ctrl) {\n          ctrl.enqueue(': connected\\n\\n')  // so curl shows something immediately\n          const emit = (chunk: string) => ctrl.enqueue(chunk)\n          listeners.add(emit)\n          req.signal.addEventListener('abort', () => listeners.delete(emit))\n        },\n      })\n      return new Response(stream, {\n        headers: { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache' },\n      })\n    }\n\n    // POST: forward to Claude as a channel event\n    const body = await req.text()\n    const chat_id = String(nextId++)\n    await mcp.notification({\n      method: 'notifications/claude/channel',\n      params: {\n        content: body,\n        meta: { chat_id, path: url.pathname, method: req.method },\n      },\n    })\n    return new Response('ok')\n  },\n})"
           ]
         },
         {
@@ -22399,6 +22493,81 @@
           ],
           "codeBlocks": [
             "const allowed = new Set(loadAllowlist())  // from your access.json or equivalent\n\n// inside your message handler, before emitting:\nif (!allowed.has(message.from.id)) {  // sender, not room\n  return  // drop silently\n}\nawait mcp.notification({ ... })"
+          ]
+        },
+        {
+          "title": "​Relay permission prompts",
+          "paragraphs": [
+            "Permission relay requires Claude Code v2.1.81 or later. Earlier versions ignore the claude/channel/permission capability.",
+            "When Claude calls a tool that needs approval, the local terminal dialog opens and the session waits. A two-way channel can opt in to receive the same prompt in parallel and relay it to you on another device. Both stay live: you can answer in the terminal or on your phone, and Claude Code applies whichever answer arrives first and closes the other.",
+            "Relay covers tool-use approvals like Bash, Write, and Edit. Project trust and MCP server consent dialogs don’t relay; those only appear in the local terminal."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​How relay works",
+          "paragraphs": [
+            "When a permission prompt opens, the relay loop has four steps:",
+            "Claude Code generates a short request ID and notifies your server",
+            "Your server forwards the prompt and ID to your chat app",
+            "The remote user replies with a yes or no and that ID",
+            "Your inbound handler parses the reply into a verdict, and Claude Code applies it only if the ID matches an open request",
+            "The local terminal dialog stays open through all of this. If someone at the terminal answers before the remote verdict arrives, that answer is applied instead and the pending remote request is dropped."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Permission request fields",
+          "paragraphs": [
+            "The outbound notification from Claude Code is notifications/claude/channel/permission_request. Like the channel notification, the transport is standard MCP but the method and schema are Claude Code extensions. The params object has four string fields your server formats into the outgoing prompt:",
+            "The verdict your server sends back is notifications/claude/channel/permission with two fields: request_id echoing the ID above, and behavior set to 'allow' or 'deny'. Allow lets the tool call proceed; deny rejects it, the same as answering No in the local dialog. Neither verdict affects future calls."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Add relay to a chat bridge",
+          "paragraphs": [
+            "Adding permission relay to a two-way channel takes three components:",
+            "A claude/channel/permission: {} entry under experimental capabilities in your Server constructor so Claude Code knows to forward prompts",
+            "A notification handler for notifications/claude/channel/permission_request that formats the prompt and sends it out through your platform API",
+            "A check in your inbound message handler that recognizes yes <id> or no <id> and emits a notifications/claude/channel/permission verdict instead of forwarding the text to Claude",
+            "Only declare the capability if your channel authenticates the sender, because anyone who can reply through your channel can approve or deny tool use in your session.",
+            "To add these to a two-way chat bridge like the one assembled in Expose a reply tool:",
+            "Declare the permission capability",
+            "In your Server constructor, add claude/channel/permission: {} alongside claude/channel under experimental:",
+            "Handle the incoming request",
+            "Register a notification handler between your Server constructor and mcp.connect(). Claude Code calls it with the four request fields when a permission dialog opens. Your handler formats the prompt for your platform and includes instructions for replying with the ID:",
+            "Intercept the verdict in your inbound handler",
+            "Your inbound handler is the loop or callback that receives messages from your platform: the same place you gate on sender and emit notifications/claude/channel to forward chat to Claude. Add a check before the chat-forwarding call that recognizes the verdict format and emits the permission notification instead."
+          ],
+          "codeBlocks": [
+            "capabilities: {\n  experimental: {\n    'claude/channel': {},\n    'claude/channel/permission': {},  // opt in to permission relay\n  },\n  tools: {},\n},",
+            "import { z } from 'zod'\n\n// setNotificationHandler routes by z.literal on the method field,\n// so this schema is both the validator and the dispatch key\nconst PermissionRequestSchema = z.object({\n  method: z.literal('notifications/claude/channel/permission_request'),\n  params: z.object({\n    request_id: z.string(),     // five lowercase letters, include verbatim in your prompt\n    tool_name: z.string(),      // e.g. \"Bash\", \"Write\"\n    description: z.string(),    // human-readable summary of this call\n    input_preview: z.string(),  // tool args as JSON, truncated to ~200 chars\n  }),\n})\n\nmcp.setNotificationHandler(PermissionRequestSchema, async ({ params }) => {\n  // send() is your outbound: POST to your chat platform, or for local\n  // testing the SSE broadcast shown in the full example below.\n  send(\n    `Claude wants to run ${params.tool_name}: ${params.description}\\n\\n` +\n    // the ID in the instruction is what your inbound handler parses in Step 3\n    `Reply \"yes ${params.request_id}\" or \"no ${params.request_id}\"`,\n  )\n})",
+            "// matches \"y abcde\", \"yes abcde\", \"n abcde\", \"no abcde\"\n// [a-km-z] is the ID alphabet Claude Code uses (lowercase, skips 'l')\n// /i tolerates phone autocorrect; lowercase the capture before sending\nconst PERMISSION_REPLY_RE = /^\\s*(y|yes|n|no)\\s+([a-km-z]{5})\\s*$/i\n\nasync function onInbound(message: PlatformMessage) {\n  if (!allowed.has(message.from.id)) return  // gate on sender first\n\n  const m = PERMISSION_REPLY_RE.exec(message.text)\n  if (m) {\n    // m[1] is the verdict word, m[2] is the request ID\n    // emit the verdict notification back to Claude Code instead of chat\n    await mcp.notification({\n      method: 'notifications/claude/channel/permission',\n      params: {\n        request_id: m[2].toLowerCase(),  // normalize in case of autocorrect caps\n        behavior: m[1].toLowerCase().startsWith('y') ? 'allow' : 'deny',\n      },\n    })\n    return  // handled as verdict, don't also forward as chat\n  }\n\n  // didn't match verdict format: fall through to the normal chat path\n  await mcp.notification({\n    method: 'notifications/claude/channel',\n    params: { content: message.text, meta: { chat_id: String(message.chat.id) } },\n  })\n}"
+          ]
+        },
+        {
+          "title": "​Full example",
+          "paragraphs": [
+            "The assembled webhook.ts below combines all three extensions from this page: the reply tool, sender gating, and permission relay. If you’re starting here, you’ll also need the project setup and .mcp.json entry from the initial walkthrough.",
+            "To make both directions testable from curl, the HTTP listener serves two paths:",
+            "GET /events: holds an SSE stream open and pushes each outbound message as a data: line, so curl -N can watch Claude’s replies and permission prompts arrive live.",
+            "POST /: the inbound side, the same handler as earlier, now with the verdict-format check inserted before the chat-forward branch.",
+            "Test the verdict path in three terminals. The first is your Claude Code session, started with the development flag so it spawns webhook.ts:",
+            "In the second, stream the outbound side so you can see Claude’s replies and any permission prompts as they fire:",
+            "In the third, send a message that will make Claude try to run a command:",
+            "The local permission dialog opens in your Claude Code terminal. A moment later the prompt appears in the /events stream, including the five-letter ID. Approve it from the remote side:",
+            "The local dialog closes and the tool runs. Claude’s reply comes back through the reply tool and lands in the stream too.",
+            "The three channel-specific pieces in this file:",
+            "Capabilities in the Server constructor: claude/channel registers the notification listener, claude/channel/permission opts in to permission relay, tools lets Claude discover the reply tool.",
+            "Outbound paths: the reply tool handler is what Claude calls for conversational responses; the PermissionRequestSchema notification handler is what Claude Code calls when a permission dialog opens. Both call send() to broadcast over /events, but they’re triggered by different parts of the system."
+          ],
+          "codeBlocks": [
+            "#!/usr/bin/env bun\nimport { Server } from '@modelcontextprotocol/sdk/server/index.js'\nimport { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'\nimport { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'\nimport { z } from 'zod'\n\n// --- Outbound: write to any curl -N listeners on /events --------------------\n// A real bridge would POST to your chat platform instead.\nconst listeners = new Set<(chunk: string) => void>()\nfunction send(text: string) {\n  const chunk = text.split('\\n').map(l => `data: ${l}\\n`).join('') + '\\n'\n  for (const emit of listeners) emit(chunk)\n}\n\n// Sender allowlist. For the local walkthrough we trust the single X-Sender\n// header value \"dev\"; a real bridge would check the platform's user ID.\nconst allowed = new Set(['dev'])\n\nconst mcp = new Server(\n  { name: 'webhook', version: '0.0.1' },\n  {\n    capabilities: {\n      experimental: {\n        'claude/channel': {},\n        'claude/channel/permission': {},  // opt in to permission relay\n      },\n      tools: {},\n    },\n    instructions:\n      'Messages arrive as <channel source=\"webhook\" chat_id=\"...\">. ' +\n      'Reply with the reply tool, passing the chat_id from the tag.',\n  },\n)\n\n// --- reply tool: Claude calls this to send a message back -------------------\nmcp.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{\n    name: 'reply',\n    description: 'Send a message back over this channel',\n    inputSchema: {\n      type: 'object',\n      properties: {\n        chat_id: { type: 'string', description: 'The conversation to reply in' },\n        text: { type: 'string', description: 'The message to send' },\n      },\n      required: ['chat_id', 'text'],\n    },\n  }],\n}))\n\nmcp.setRequestHandler(CallToolRequestSchema, async req => {\n  if (req.params.name === 'reply') {\n    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }\n    send(`Reply to ${chat_id}: ${text}`)\n    return { content: [{ type: 'text', text: 'sent' }] }\n  }\n  throw new Error(`unknown tool: ${req.params.name}`)\n})\n\n// --- permission relay: Claude Code (not Claude) calls this when a dialog opens\nconst PermissionRequestSchema = z.object({\n  method: z.literal('notifications/claude/channel/permission_request'),\n  params: z.object({\n    request_id: z.string(),\n    tool_name: z.string(),\n    description: z.string(),\n    input_preview: z.string(),\n  }),\n})\n\nmcp.setNotificationHandler(PermissionRequestSchema, async ({ params }) => {\n  send(\n    `Claude wants to run ${params.tool_name}: ${params.description}\\n\\n` +\n    `Reply \"yes ${params.request_id}\" or \"no ${params.request_id}\"`,\n  )\n})\n\nawait mcp.connect(new StdioServerTransport())\n\n// --- HTTP on :8788: GET /events streams outbound, POST routes inbound -------\nconst PERMISSION_REPLY_RE = /^\\s*(y|yes|n|no)\\s+([a-km-z]{5})\\s*$/i\nlet nextId = 1\n\nBun.serve({\n  port: 8788,\n  hostname: '127.0.0.1',\n  idleTimeout: 0,  // don't close idle SSE streams\n  async fetch(req) {\n    const url = new URL(req.url)\n\n    // GET /events: SSE stream so curl -N can watch replies and prompts live\n    if (req.method === 'GET' && url.pathname === '/events') {\n      const stream = new ReadableStream({\n        start(ctrl) {\n          ctrl.enqueue(': connected\\n\\n')  // so curl shows something immediately\n          const emit = (chunk: string) => ctrl.enqueue(chunk)\n          listeners.add(emit)\n          req.signal.addEventListener('abort', () => listeners.delete(emit))\n        },\n      })\n      return new Response(stream, {\n        headers: { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache' },\n      })\n    }\n\n    // everything else is inbound: gate on sender first\n    const body = await req.text()\n    const sender = req.headers.get('X-Sender') ?? ''\n    if (!allowed.has(sender)) return new Response('forbidden', { status: 403 })\n\n    // check for verdict format before treating as chat\n    const m = PERMISSION_REPLY_RE.exec(body)\n    if (m) {\n      await mcp.notification({\n        method: 'notifications/claude/channel/permission',\n        params: {\n          request_id: m[2].toLowerCase(),\n          behavior: m[1].toLowerCase().startsWith('y') ? 'allow' : 'deny',\n        },\n      })\n      return new Response('verdict recorded')\n    }\n\n    // normal chat: forward to Claude as a channel event\n    const chat_id = String(nextId++)\n    await mcp.notification({\n      method: 'notifications/claude/channel',\n      params: { content: body, meta: { chat_id, path: url.pathname } },\n    })\n    return new Response('ok')\n  },\n})",
+            "claude --dangerously-load-development-channels server:webhook",
+            "curl -N localhost:8788/events",
+            "curl -d \"list the files in this directory\" -H \"X-Sender: dev\" localhost:8788",
+            "curl -d \"yes <id>\" -H \"X-Sender: dev\" localhost:8788"
           ]
         },
         {
