@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-23T04:38:17.464Z",
-  "sourceGeneratedAt": "2026-03-23T04:38:17.205Z",
+  "generatedAt": "2026-03-24T04:27:26.051Z",
+  "sourceGeneratedAt": "2026-03-24T04:27:25.797Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -2279,6 +2279,95 @@
         "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
       }
     },
+    "platforms": {
+      "sourceLabel": "Platforms and integrations",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Overview：Choose where to run Claude Code and what to connect it to. Compare the CLI, Desktop, VS Code, JetBrains, web, and integrations like Chrome, Slack, and CI/CD.",
+            "你可以把它当成“Platforms and integrations”这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把“Overview”理解成 Platforms and integrations 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Where to run Claude Code、Connect your tools、Work when you are away from your terminal、Related resources 这些环节往下讲。",
+            "翻成人话，大概就是：Where to run Claude Code"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Where to run Claude Code -> Connect your tools -> Work when you are away from your terminal -> Related resources。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ]
+        },
+        {
+          "title": "Where to run Claude Code",
+          "paragraphs": [
+            "这一段是在帮你从几个选项里挑 a platform based on how you like to work and where your project lives.。重点不只是知道有哪些，更是看代价和场景。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Connect your tools",
+          "paragraphs": [
+            "这里不是让你背“Connect your tools”这个词，而是让你看它真干活时怎么使。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ]
+        },
+        {
+          "title": "Work when you are away from your terminal",
+          "paragraphs": [
+            "看到这里，就把“Work when you are away from your terminal”当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Related resources",
+          "paragraphs": [
+            "这一段主要是在把“Related resources”讲实，不是只摆个标题给你看。"
+          ]
+        },
+        {
+          "title": "Platforms",
+          "paragraphs": [
+            "这一段主要是在把“Platforms”讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Integrations",
+          "paragraphs": [
+            "看到这里，就把“Integrations”当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Remote access",
+          "paragraphs": [
+            "这里不是让你背“Remote access”这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Overview",
+          "   |",
+          "   v",
+          "这是 Platforms and integrations 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
     "remote-control": {
       "sourceLabel": "Continue local sessions from any device with Remote Control",
       "sections": [
@@ -2441,6 +2530,12 @@
           ]
         },
         {
+          "title": "Choose the right approach",
+          "paragraphs": [
+            "这段主要是让你挑，不是让你全要。"
+          ]
+        },
+        {
           "title": "Related resources",
           "paragraphs": [
             "这一段主要是在把“Related resources”讲实，不是只摆个标题给你看。",
@@ -2452,349 +2547,6 @@
         "title": "一眼看懂这一页",
         "lines": [
           "Remote Control",
-          "   |",
-          "   v",
-          "这是 Platforms and integrations 里的一摊要紧活",
-          "   |",
-          "   v",
-          "先弄懂，再下手"
-        ],
-        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
-      }
-    },
-    "claude-code-on-the-web": {
-      "sourceLabel": "Claude Code on the web",
-      "sections": [
-        {
-          "title": "简要总结",
-          "paragraphs": [
-            "这页讲网页版 Claude Code，也就是把任务放到云上跑，不必全靠你本地机器撑着。",
-            "适合异步长任务、跨设备续上工作。"
-          ]
-        },
-        {
-          "title": "农民伯伯版解释",
-          "paragraphs": [
-            "这像把活送去一个安全工棚里慢慢做，你人不一定守在旁边。",
-            "这一页会讲谁能用、怎么开始、网页版到底怎么运作、怎么在网页和终端之间来回接力。",
-            "如果你想把长任务丢出去跑，或者在外头也能接着看结果，这页特别值。"
-          ]
-        },
-        {
-          "title": "上手时重点盯住什么",
-          "paragraphs": [
-            "先拿一个不太重但也不是太小的任务试试网页版节奏。",
-            "网页版和终端不是二选一，很多时候是配合着用。",
-            "如果任务和本地环境强绑定，还是先想清楚该不该搬到网页上。"
-          ],
-          "steps": [
-            {
-              "title": "原页关键片段：From terminal to web 1",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude --remote \"Fix the authentication bug in src/auth/login.ts\"",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：From terminal to web 2",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude --permission-mode plan",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：From terminal to web 3",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude --remote \"Execute the migration plan in docs/migration-plan.md\"",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：Default image",
-              "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "check-tools",
-              "kind": "code"
-            },
-            {
-              "title": "原页关键片段：Environment configuration",
-              "body": "“Environment configuration”这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "API_KEY=your_api_key\nDEBUG=true",
-              "kind": "code"
-            },
-            {
-              "title": "原页关键片段：Setup scripts",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "#!/bin/bash\napt update && apt install -y gh",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：Dependency management 1",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "#!/bin/bash\nnpm install\npip install -r requirements.txt",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：Dependency management 2",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"hooks\": {\n    \"SessionStart\": [\n      {\n        \"matcher\": \"startup\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"\\\"$CLAUDE_PROJECT_DIR\\\"/scripts/install_pkgs.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Dependency management 3",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "#!/bin/bash\n\n# Only run in remote environments\nif [ \"$CLAUDE_CODE_REMOTE\" != \"true\" ]; then\n  exit 0\nfi\n\nnpm install\npip install -r requirements.txt\nexit 0",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "What is Claude Code on the web?",
-          "paragraphs": [
-            "这一段主要是在把“What is Claude Code on the web?”讲实，不是只摆个标题给你看。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Who can use Claude Code on the web?",
-          "paragraphs": [
-            "这一块主要是在说“Who can use Claude Code on the web?”真到手上该怎么用，哪里最容易踩坑。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Getting started",
-          "paragraphs": [
-            "这一块主要是在说“Getting started”真到手上该怎么用，哪里最容易踩坑。"
-          ]
-        },
-        {
-          "title": "How it works",
-          "paragraphs": [
-            "这里讲底层是怎么运转的。你把它看明白，后面遇到异常时就知道该往哪儿查。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ]
-        },
-        {
-          "title": "Review changes with diff view",
-          "paragraphs": [
-            "看到这里，就把“Review changes with diff view”当成一件真要上手的活来看。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ]
-        },
-        {
-          "title": "Moving tasks between web and terminal",
-          "paragraphs": [
-            "这一块主要是在说“Moving tasks between web and terminal”真到手上该怎么用，哪里最容易踩坑。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "From terminal to web",
-          "paragraphs": [
-            "这一块主要是在说“From terminal to web”真到手上该怎么用，哪里最容易踩坑。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "From terminal to web 1",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude --remote \"Fix the authentication bug in src/auth/login.ts\"",
-              "kind": "command"
-            },
-            {
-              "title": "From terminal to web 2",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude --permission-mode plan",
-              "kind": "command"
-            },
-            {
-              "title": "From terminal to web 3",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude --remote \"Execute the migration plan in docs/migration-plan.md\"",
-              "kind": "command"
-            },
-            {
-              "title": "From terminal to web 4",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude --remote \"Fix the flaky test in auth.spec.ts\"\nclaude --remote \"Update the API documentation\"\nclaude --remote \"Refactor the logger to use structured output\"",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "From web to terminal",
-          "paragraphs": [
-            "这一块主要是在说“From web to terminal”真到手上该怎么用，哪里最容易踩坑。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Sharing sessions",
-          "paragraphs": [
-            "看到这里，就把“Sharing sessions”当成一件真要上手的活来看。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Managing sessions",
-          "paragraphs": [
-            "这一块主要是在说“Managing sessions”真到手上该怎么用，哪里最容易踩坑。"
-          ]
-        },
-        {
-          "title": "Archiving sessions",
-          "paragraphs": [
-            "这里不是让你背“Archiving sessions”这个词，而是让你看它真干活时怎么使。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Deleting sessions",
-          "paragraphs": [
-            "看到这里，就把“Deleting sessions”当成一件真要上手的活来看。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Cloud environment",
-          "paragraphs": [
-            "这一段主要是在把“Cloud environment”讲实，不是只摆个标题给你看。"
-          ]
-        },
-        {
-          "title": "Default image",
-          "paragraphs": [
-            "这一段主要是在把“Default image”讲实，不是只摆个标题给你看。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ]
-        },
-        {
-          "title": "Environment configuration",
-          "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Environment configuration",
-              "body": "“Environment configuration”这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "API_KEY=your_api_key\nDEBUG=true",
-              "kind": "code"
-            }
-          ]
-        },
-        {
-          "title": "Setup scripts",
-          "paragraphs": [
-            "这段就是开工前的准备清单，先把地基打好。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Setup scripts",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "#!/bin/bash\napt update && apt install -y gh",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Dependency management",
-          "paragraphs": [
-            "这一段主要是在把“Dependency management”讲实，不是只摆个标题给你看。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Dependency management 1",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "#!/bin/bash\nnpm install\npip install -r requirements.txt",
-              "kind": "command"
-            },
-            {
-              "title": "Dependency management 2",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"hooks\": {\n    \"SessionStart\": [\n      {\n        \"matcher\": \"startup\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"\\\"$CLAUDE_PROJECT_DIR\\\"/scripts/install_pkgs.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "Dependency management 3",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "#!/bin/bash\n\n# Only run in remote environments\nif [ \"$CLAUDE_CODE_REMOTE\" != \"true\" ]; then\n  exit 0\nfi\n\nnpm install\npip install -r requirements.txt\nexit 0",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Network access and security",
-          "paragraphs": [
-            "看到这里，就把“Network access and security”当成一件真要上手的活来看。"
-          ]
-        },
-        {
-          "title": "Network policy",
-          "paragraphs": [
-            "这里不是让你背“Network policy”这个词，而是让你看它真干活时怎么使。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Access levels",
-          "paragraphs": [
-            "这一块主要是在说“Access levels”真到手上该怎么用，哪里最容易踩坑。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ]
-        },
-        {
-          "title": "Default allowed domains",
-          "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ]
-        },
-        {
-          "title": "Security best practices for customized network access",
-          "paragraphs": [
-            "看到这里，就当是前人踩完坑留下来的顺手做法。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ]
-        },
-        {
-          "title": "Security and isolation",
-          "paragraphs": [
-            "这一块主要是在说“Security and isolation”真到手上该怎么用，哪里最容易踩坑。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Pricing and rate limits",
-          "paragraphs": [
-            "这一块主要是在说“Pricing and rate limits”真到手上该怎么用，哪里最容易踩坑。"
-          ]
-        },
-        {
-          "title": "Limitations",
-          "paragraphs": [
-            "这一块主要是在说“Limitations”真到手上该怎么用，哪里最容易踩坑。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Best practices",
-          "paragraphs": [
-            "这段算经验活，听劝通常能省事。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Related resources",
-          "paragraphs": [
-            "这一段主要是在把“Related resources”讲实，不是只摆个标题给你看。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
-          ]
-        }
-      ],
-      "illustration": {
-        "title": "一眼看懂这一页",
-        "lines": [
-          "Claude Code on the web",
           "   |",
           "   v",
           "这是 Platforms and integrations 里的一摊要紧活",
@@ -7306,6 +7058,13 @@
           ]
         },
         {
+          "title": "Compare scheduling options",
+          "paragraphs": [
+            "像 Compare scheduling options 这种标题，通常就是怕你把两个看着差不多的东西混着用。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
           "title": "Schedule a recurring prompt with /loop",
           "paragraphs": [
             "这里主要是在交代“Schedule a recurring prompt with /loop”这一块会碰到哪些事。",
@@ -11360,7 +11119,7 @@
             {
               "title": "Walkthrough: create a local marketplace 6",
               "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
-              "code": "/review",
+              "code": "/quality-review",
               "kind": "prompt"
             }
           ]
@@ -12669,6 +12428,13 @@
           "title": "Limitations",
           "paragraphs": [
             "这一块主要是在说“Limitations”真到手上该怎么用，哪里最容易踩坑。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "What sandboxing does not cover",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说“What sandboxing does not cover”管到哪儿。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
