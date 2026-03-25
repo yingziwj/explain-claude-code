@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-24T04:27:25.797Z",
+  "generatedAt": "2026-03-25T04:28:46.096Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -55,10 +55,19 @@
         {
           "title": "Extend Claude Code",
           "path": "/docs/en/features-overview"
-        },
+        }
+      ]
+    },
+    {
+      "title": "Use Claude Code",
+      "items": [
         {
           "title": "Store instructions and memories",
           "path": "/docs/en/memory"
+        },
+        {
+          "title": "Permission modes",
+          "path": "/docs/en/permission-modes"
         },
         {
           "title": "Common workflows",
@@ -1294,6 +1303,7 @@
         "Default: Claude asks before file edits and shell commands",
         "Auto-accept edits: Claude edits files without asking, still asks for commands",
         "Plan mode: Claude uses read-only tools only, creating a plan you can approve before execution",
+        "Auto mode: Claude evaluates all actions with background safety checks. Currently a research preview",
         "You can also allow specific commands in .claude/settings.json so Claude doesn’t ask each time. This is useful for trusted commands like npm test or git status. Settings can be scoped from organization-wide policies down to personal preferences. See Permissions for details.",
         "These tips help you get better results from Claude Code.",
         "Claude Code can teach you how to use it. Ask questions like “how do I set up hooks?” or “what’s the best way to structure my CLAUDE.md?” and Claude will explain.",
@@ -1484,6 +1494,7 @@
             "Default: Claude asks before file edits and shell commands",
             "Auto-accept edits: Claude edits files without asking, still asks for commands",
             "Plan mode: Claude uses read-only tools only, creating a plan you can approve before execution",
+            "Auto mode: Claude evaluates all actions with background safety checks. Currently a research preview",
             "You can also allow specific commands in .claude/settings.json so Claude doesn’t ask each time. This is useful for trusted commands like npm test or git status. Settings can be scoped from organization-wide policies down to personal preferences. See Permissions for details."
           ],
           "codeBlocks": []
@@ -1903,7 +1914,7 @@
       ]
     },
     {
-      "section": "Core concepts",
+      "section": "Use Claude Code",
       "path": "/docs/en/memory",
       "url": "https://code.claude.com/docs/en/memory",
       "title": "How Claude remembers your project",
@@ -2349,7 +2360,373 @@
       ]
     },
     {
-      "section": "Core concepts",
+      "section": "Use Claude Code",
+      "path": "/docs/en/permission-modes",
+      "url": "https://code.claude.com/docs/en/permission-modes",
+      "title": "Choose a permission mode",
+      "metaDescription": "Switch between supervised editing, read-only planning, and auto mode where a background classifier replaces manual permission prompts. Cycle modes with Shift+Tab in the CLI or use the mode selector in VS Code, Desktop, and claude.ai.",
+      "headings": [
+        "​Switch permission modes",
+        "​Available modes",
+        "​Analyze before you edit with plan mode",
+        "​When to use plan mode",
+        "​Start and use plan mode",
+        "​Eliminate prompts with auto mode",
+        "​How actions are evaluated",
+        "​How auto mode handles subagents",
+        "​What the classifier blocks by default",
+        "​When auto mode falls back",
+        "​Allow only pre-approved tools with dontAsk mode",
+        "​Skip all checks with bypassPermissions mode",
+        "​Compare permission approaches",
+        "​Customize permissions further",
+        "​See also"
+      ],
+      "toc": [
+        "Switch permission modes",
+        "Available modes",
+        "Analyze before you edit with plan mode",
+        "When to use plan mode",
+        "Start and use plan mode",
+        "Eliminate prompts with auto mode",
+        "How actions are evaluated",
+        "How auto mode handles subagents",
+        "What the classifier blocks by default",
+        "When auto mode falls back",
+        "Allow only pre-approved tools with dontAsk mode",
+        "Skip all checks with bypassPermissions mode",
+        "Compare permission approaches",
+        "Customize permissions further",
+        "See also"
+      ],
+      "paragraphs": [
+        "Switch permission modes",
+        "Available modes",
+        "Analyze before you edit with plan mode",
+        "When to use plan mode",
+        "Start and use plan mode",
+        "Eliminate prompts with auto mode",
+        "How actions are evaluated",
+        "How auto mode handles subagents",
+        "What the classifier blocks by default",
+        "When auto mode falls back",
+        "Allow only pre-approved tools with dontAsk mode",
+        "Skip all checks with bypassPermissions mode",
+        "Compare permission approaches",
+        "Customize permissions further",
+        "See also",
+        "Switch between supervised editing, read-only planning, and auto mode where a background classifier replaces manual permission prompts. Cycle modes with Shift+Tab in the CLI or use the mode selector in VS Code, Desktop, and claude.ai.",
+        "Permission modes control whether Claude asks before acting. Different tasks call for different levels of autonomy: you might want full oversight for sensitive work, minimal interruptions for a long refactor, or read-only access while exploring a codebase.",
+        "This page covers how to:",
+        "Switch modes during a session, at startup, or as a default",
+        "Choose a mode based on what Claude should be able to do without asking",
+        "Run auto mode with background safety checks, and see what it blocks by default",
+        "Plan changes read-only before approving edits",
+        "Restrict Claude to pre-approved tools for locked-down environments",
+        "Skip checks entirely in isolated environments",
+        "You can switch modes at any time during a session, at startup, or as a persistent default. The mechanism depends on where you’re running Claude Code.",
+        "JetBrains",
+        "Web and mobile",
+        "During a session: press Shift+Tab to cycle through default → acceptEdits → plan → auto. The current mode appears in the status bar. auto does not appear in the cycle until you pass --enable-auto-mode at startup. Auto also requires a Team (or Enterprise/API once available) plan and Claude Sonnet 4.6 or Opus 4.6, so the option may remain unavailable even with the flag. If bypassPermissions is also enabled, it appears in the cycle between plan and auto.",
+        "At startup: pass the mode as a CLI flag:",
+        "As a default: set defaultMode in your settings file:",
+        "Non-interactively: the same flag works with -p for scripted runs:",
+        "dontAsk is never in the Shift+Tab cycle. bypassPermissions appears in the cycle only if you started the session with --permission-mode bypassPermissions, --dangerously-skip-permissions, or --allow-dangerously-skip-permissions. The third flag adds the mode to the cycle without activating it, so you can compose it with a different starting mode like --permission-mode plan. Set any of these at startup or in your settings file.",
+        "The JetBrains plugin launches Claude Code in the IDE terminal, so switching modes works the same as in the CLI: press Shift+Tab to cycle, or pass --permission-mode when launching.",
+        "During a session: click the mode indicator at the bottom of the prompt box to switch modes.",
+        "As a default: set claudeCode.initialPermissionMode in VS Code settings, or use the Claude Code extension settings panel.",
+        "The VS Code UI uses friendly labels that map to the settings keys below:",
+        "Auto and Bypass permissions appear only after you enable Allow dangerously skip permissions in the extension settings. Auto also requires a Team plan and Claude Sonnet 4.6 or Opus 4.6, so the option may remain unavailable even with the toggle on.",
+        "See the VS Code guide for extension-specific details.",
+        "During a session: use the mode selector next to the send button. You can change it before or during a session.",
+        "The Desktop UI uses friendly labels that map to the settings keys below:",
+        "Auto and Bypass permissions appear in the selector only after you enable them in Desktop settings. See the Desktop guide for details.",
+        "During a session: use the mode dropdown next to the prompt box on claude.ai/code or in the Claude mobile app.",
+        "For Claude Code on the web sessions running on Anthropic’s cloud VMs, the dropdown offers Auto accept edits and Plan mode. Ask permissions and Auto are not available for cloud sessions.",
+        "For Remote Control sessions running on your local machine, the dropdown offers Ask permissions, Auto accept edits, and Plan mode. You can also set the starting mode when you launch the local host:",
+        "Permission prompts appear in claude.ai for approval.",
+        "Permission modes are set through the UI, CLI flags, or settings files. Telling Claude “stop asking for permission” in the chat does not change the mode. See Permissions for how modes interact with allow, ask, and deny rules.",
+        "Each mode makes a different tradeoff between convenience and oversight. Pick the one that matches your task.",
+        "Plan mode tells Claude to research and propose changes without making them. Claude reads files, runs shell commands to explore, asks clarifying questions, and writes a plan file, but does not edit your source code. Permission prompts work the same as default mode: you still approve Bash commands, network requests, and other actions that would normally prompt.",
+        "Plan mode is useful when you want Claude to research and propose an approach before making changes:",
+        "Multi-step implementation: when a feature requires edits across many files",
+        "Code exploration: when you want to research the codebase before changing anything",
+        "Interactive development: when you want to iterate on the direction with Claude",
+        "Enter plan mode for a single request by prefixing your prompt with /plan, or switch the whole session into plan mode by pressing Shift+Tab to cycle through permission modes. You can also start in plan mode from the CLI:",
+        "This example starts a planning session for a complex refactor:",
+        "Claude analyzes the current implementation and creates a plan. Refine with follow-ups:",
+        "When the plan is ready, Claude presents it and asks how to proceed. From that prompt you can:",
+        "Approve and start in auto mode",
+        "Approve and accept edits",
+        "Approve and manually review each edit",
+        "Keep planning, which sends your feedback back to Claude for another round",
+        "Each approve option also offers to clear the planning context first.",
+        "Auto mode is available on Team plans, with Enterprise and API support rolling out shortly. On Team and Enterprise, an admin must enable it in Claude Code admin settings before users can turn it on. It requires Claude Sonnet 4.6 or Claude Opus 4.6, and is not available on Haiku, claude-3 models, or third-party providers (Bedrock, Vertex, Foundry).",
+        "Auto mode lets Claude execute actions without showing permission prompts. Before each action runs, a separate classifier model reviews the conversation and decides whether the action matches what you asked for: it blocks actions that escalate beyond the task scope, target infrastructure the classifier doesn’t recognize as trusted, or appear to be driven by hostile content encountered in a file or web page. For a deeper look at how the classifier is designed, see the auto mode announcement.",
+        "Auto mode is a research preview. It reduces prompts but does not guarantee safety. It provides more protection than bypassPermissions but is not as thorough as manually reviewing each action. Use it for tasks where you trust the general direction, not as a replacement for review on sensitive operations.",
+        "Model: the classifier runs on Claude Sonnet 4.6, even if your main session uses a different model.",
+        "Cost: classifier calls count toward your token usage the same as main-session calls. Each checked action sends a portion of the conversation transcript plus the pending action to the classifier. The extra cost comes mainly from shell commands and network operations, since read-only actions and file edits in your working directory don’t trigger a classifier call.",
+        "Latency: each classifier check adds a round-trip before the action executes.",
+        "Each action goes through a fixed decision order. The first matching step wins:",
+        "Actions matching your allow or deny rules resolve immediately",
+        "Read-only actions and file edits in your working directory are auto-approved",
+        "Everything else goes to the classifier",
+        "If the classifier blocks, Claude receives the reason and attempts an alternative approach",
+        "On entering auto mode, Claude Code drops any allow rule that is known to grant arbitrary code execution: blanket shell access like Bash(*), wildcarded script interpreters like Bash(python*) or Bash(node*), package-manager run commands, and any Agent allow rule. These rules would auto-approve the commands and subagent delegations most capable of causing damage before the classifier ever sees them. Narrow rules like Bash(npm test) carry over. The dropped rules are restored when you leave auto mode.",
+        "The classifier receives user messages and tool calls as input, with Claude’s own text and tool results stripped out. It also receives your CLAUDE.md content, so actions described in your project instructions are factored into allow and block decisions. Because tool results never reach the classifier, hostile content in a file or web page cannot manipulate it directly. The classifier evaluates the pending action against a customizable set of block and allow rules, checking whether the action is an overeager escalation beyond what you asked for, a mistake about what’s safe to touch, or a sudden departure from your stated intent that suggests Claude may have been steered by something it read.",
+        "Unlike your permission rules, which match tool names and argument patterns, the classifier reads prose descriptions of what to block and allow: it reasons about the action in context rather than matching syntax.",
+        "When Claude spawns a subagent, the classifier evaluates the delegated task before the subagent starts. A task description that looks dangerous on its own, like “delete all remote branches matching this pattern”, is blocked at spawn time.",
+        "Inside the subagent, auto mode runs with the same block and allow rules as the parent session. Any permissionMode the subagent defines in its own frontmatter is ignored. The subagent’s own tool calls go through the classifier independently.",
+        "When the subagent finishes, the classifier reviews its full action history. A subagent that was benign at spawn could have been compromised mid-run by content it read. If the return check flags a concern, a security warning is prepended to the subagent’s results so the main agent can decide how to proceed.",
+        "Out of the box, the classifier trusts your working directory and, if you’re in a git repo, that repo’s configured remotes. Everything else is treated as external: your company’s source control orgs, cloud buckets, and internal services are unknown until you tell the classifier about them.",
+        "Blocked by default:",
+        "Downloading and executing code, like curl | bash or scripts from cloned repos",
+        "Sending sensitive data to external endpoints",
+        "Production deploys and migrations",
+        "Mass deletion on cloud storage",
+        "Granting IAM or repo permissions",
+        "Modifying shared infrastructure",
+        "Irreversibly destroying files that existed before the session started",
+        "Destructive source control operations like force push or pushing directly to main",
+        "Allowed by default:",
+        "Local file operations in your working directory",
+        "Installing dependencies already declared in your lock files or manifests",
+        "Reading .env and sending credentials to their matching API",
+        "Read-only HTTP requests",
+        "Pushing to the branch you started on or one Claude created",
+        "To see the full default rule lists as the classifier receives them, run claude auto-mode defaults.",
+        "If auto mode blocks something routine for your team, like pushing to your own org’s repo or writing to a company bucket, it’s because the classifier doesn’t know those are trusted. Administrators can add trusted repos, buckets, and internal services via the autoMode.environment setting: see Configure the auto mode classifier for the full configuration guide.",
+        "The fallback design keeps false positives from derailing a session: a mistaken block costs Claude a retry, not your progress. If the classifier blocks an action 3 times in a row or 20 times total in one session, auto mode pauses and Claude Code resumes prompting for each action. These thresholds are not configurable.",
+        "CLI: you see a notification in the status area. Approving the prompted action resets the denial counters, so you can continue in auto mode",
+        "Non-interactive mode with the -p flag: aborts the session, since there is no user to prompt",
+        "Repeated blocks usually mean one of two things: the task genuinely requires actions the classifier is built to stop, or the classifier is missing context about your trusted infrastructure and treating safe actions as risky. If the blocks look like false positives, or if the classifier misses something it should have caught, use /feedback to report it. If blocks are happening because the classifier doesn’t recognize your repos or services as trusted, have an administrator configure trusted infrastructure in managed settings.",
+        "dontAsk mode auto-denies every tool that is not explicitly allowed. Only actions matching your /permissions allow rules or permissions.allow settings can execute. If a tool has an explicit ask rule, the action is also denied rather than prompting. This makes the mode fully non-interactive, suitable for CI pipelines or restricted environments where you pre-define exactly what Claude is permitted to do.",
+        "bypassPermissions mode disables all permission prompts and safety checks. Every tool call executes immediately without any verification. Only use this in isolated environments like containers, VMs, or devcontainers without internet access, where Claude Code cannot cause damage to your host system.",
+        "The --dangerously-skip-permissions flag is equivalent to --permission-mode bypassPermissions:",
+        "bypassPermissions mode offers no protection against prompt injection or unintended actions. For a safer alternative that still maintains background safety checks, use auto mode. Administrators can block this mode by setting permissions.disableBypassPermissionsMode to \"disable\" in managed settings.",
+        "The table below summarizes the key differences in how each mode handles approvals. plan is omitted since it restricts what Claude can do rather than how approvals work.",
+        "Permission modes set the baseline approval behavior. For control over individual tools or commands, layer additional configuration on top of the active mode.",
+        "Permission rules are the first stop. Add allow, ask, or deny entries to your settings file to pre-approve safe commands, force a prompt for risky ones, or block specific tools entirely. Rules apply in every mode except bypassPermissions, which skips the permission layer entirely, and are matched by tool name and argument pattern. See Manage permissions for syntax and examples.",
+        "Hooks cover logic that pattern-matching rules can’t express. A PreToolUse hook runs before every tool call and can allow, deny, or escalate based on command content, file paths, time of day, or a response from an external policy service. A PermissionRequest hook intercepts the permission dialog itself and answers on your behalf. See Hooks for configuration.",
+        "Permissions: permission rules, syntax, managed policies",
+        "Hooks: custom permission logic, lifecycle scripting",
+        "Security: security safeguards and best practices",
+        "Sandboxing: filesystem and network isolation for Bash commands",
+        "Non-interactive mode: run Claude Code programmatically with the -p flag",
+        "Was this page helpful?"
+      ],
+      "codeBlocks": [
+        "claude --permission-mode plan",
+        "{\n  \"permissions\": {\n    \"defaultMode\": \"acceptEdits\"\n  }\n}",
+        "claude -p \"refactor auth\" --permission-mode acceptEdits",
+        "claude remote-control --permission-mode acceptEdits",
+        "I need to refactor our authentication system to use OAuth2. Create a detailed migration plan.",
+        "What about backward compatibility?\nHow should we handle database migration?",
+        "claude --permission-mode dontAsk",
+        "claude --permission-mode bypassPermissions",
+        "claude -p \"refactor the auth module\" --dangerously-skip-permissions"
+      ],
+      "sectionBlocks": [
+        {
+          "title": "",
+          "paragraphs": [
+            "Switch permission modes",
+            "Available modes",
+            "Analyze before you edit with plan mode",
+            "When to use plan mode",
+            "Start and use plan mode",
+            "Eliminate prompts with auto mode",
+            "How actions are evaluated",
+            "How auto mode handles subagents",
+            "What the classifier blocks by default",
+            "When auto mode falls back",
+            "Allow only pre-approved tools with dontAsk mode",
+            "Skip all checks with bypassPermissions mode"
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Switch permission modes",
+          "paragraphs": [
+            "You can switch modes at any time during a session, at startup, or as a persistent default. The mechanism depends on where you’re running Claude Code.",
+            "JetBrains",
+            "Web and mobile",
+            "During a session: press Shift+Tab to cycle through default → acceptEdits → plan → auto. The current mode appears in the status bar. auto does not appear in the cycle until you pass --enable-auto-mode at startup. Auto also requires a Team (or Enterprise/API once available) plan and Claude Sonnet 4.6 or Opus 4.6, so the option may remain unavailable even with the flag. If bypassPermissions is also enabled, it appears in the cycle between plan and auto.",
+            "At startup: pass the mode as a CLI flag:",
+            "As a default: set defaultMode in your settings file:",
+            "Non-interactively: the same flag works with -p for scripted runs:",
+            "dontAsk is never in the Shift+Tab cycle. bypassPermissions appears in the cycle only if you started the session with --permission-mode bypassPermissions, --dangerously-skip-permissions, or --allow-dangerously-skip-permissions. The third flag adds the mode to the cycle without activating it, so you can compose it with a different starting mode like --permission-mode plan. Set any of these at startup or in your settings file.",
+            "The JetBrains plugin launches Claude Code in the IDE terminal, so switching modes works the same as in the CLI: press Shift+Tab to cycle, or pass --permission-mode when launching.",
+            "During a session: click the mode indicator at the bottom of the prompt box to switch modes.",
+            "As a default: set claudeCode.initialPermissionMode in VS Code settings, or use the Claude Code extension settings panel.",
+            "The VS Code UI uses friendly labels that map to the settings keys below:"
+          ],
+          "codeBlocks": [
+            "claude --permission-mode plan",
+            "{\n  \"permissions\": {\n    \"defaultMode\": \"acceptEdits\"\n  }\n}",
+            "claude -p \"refactor auth\" --permission-mode acceptEdits",
+            "claude remote-control --permission-mode acceptEdits"
+          ]
+        },
+        {
+          "title": "​Available modes",
+          "paragraphs": [
+            "Each mode makes a different tradeoff between convenience and oversight. Pick the one that matches your task."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Analyze before you edit with plan mode",
+          "paragraphs": [
+            "Plan mode tells Claude to research and propose changes without making them. Claude reads files, runs shell commands to explore, asks clarifying questions, and writes a plan file, but does not edit your source code. Permission prompts work the same as default mode: you still approve Bash commands, network requests, and other actions that would normally prompt."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​When to use plan mode",
+          "paragraphs": [
+            "Plan mode is useful when you want Claude to research and propose an approach before making changes:",
+            "Multi-step implementation: when a feature requires edits across many files",
+            "Code exploration: when you want to research the codebase before changing anything",
+            "Interactive development: when you want to iterate on the direction with Claude"
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Start and use plan mode",
+          "paragraphs": [
+            "Enter plan mode for a single request by prefixing your prompt with /plan, or switch the whole session into plan mode by pressing Shift+Tab to cycle through permission modes. You can also start in plan mode from the CLI:",
+            "This example starts a planning session for a complex refactor:",
+            "Claude analyzes the current implementation and creates a plan. Refine with follow-ups:",
+            "When the plan is ready, Claude presents it and asks how to proceed. From that prompt you can:",
+            "Approve and start in auto mode",
+            "Approve and accept edits",
+            "Approve and manually review each edit",
+            "Keep planning, which sends your feedback back to Claude for another round",
+            "Each approve option also offers to clear the planning context first."
+          ],
+          "codeBlocks": [
+            "claude --permission-mode plan",
+            "I need to refactor our authentication system to use OAuth2. Create a detailed migration plan.",
+            "What about backward compatibility?\nHow should we handle database migration?"
+          ]
+        },
+        {
+          "title": "​Eliminate prompts with auto mode",
+          "paragraphs": [
+            "Auto mode is available on Team plans, with Enterprise and API support rolling out shortly. On Team and Enterprise, an admin must enable it in Claude Code admin settings before users can turn it on. It requires Claude Sonnet 4.6 or Claude Opus 4.6, and is not available on Haiku, claude-3 models, or third-party providers (Bedrock, Vertex, Foundry).",
+            "Auto mode lets Claude execute actions without showing permission prompts. Before each action runs, a separate classifier model reviews the conversation and decides whether the action matches what you asked for: it blocks actions that escalate beyond the task scope, target infrastructure the classifier doesn’t recognize as trusted, or appear to be driven by hostile content encountered in a file or web page. For a deeper look at how the classifier is designed, see the auto mode announcement.",
+            "Auto mode is a research preview. It reduces prompts but does not guarantee safety. It provides more protection than bypassPermissions but is not as thorough as manually reviewing each action. Use it for tasks where you trust the general direction, not as a replacement for review on sensitive operations.",
+            "Model: the classifier runs on Claude Sonnet 4.6, even if your main session uses a different model.",
+            "Cost: classifier calls count toward your token usage the same as main-session calls. Each checked action sends a portion of the conversation transcript plus the pending action to the classifier. The extra cost comes mainly from shell commands and network operations, since read-only actions and file edits in your working directory don’t trigger a classifier call.",
+            "Latency: each classifier check adds a round-trip before the action executes."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​How actions are evaluated",
+          "paragraphs": [
+            "Each action goes through a fixed decision order. The first matching step wins:",
+            "Actions matching your allow or deny rules resolve immediately",
+            "Read-only actions and file edits in your working directory are auto-approved",
+            "Everything else goes to the classifier",
+            "If the classifier blocks, Claude receives the reason and attempts an alternative approach",
+            "On entering auto mode, Claude Code drops any allow rule that is known to grant arbitrary code execution: blanket shell access like Bash(*), wildcarded script interpreters like Bash(python*) or Bash(node*), package-manager run commands, and any Agent allow rule. These rules would auto-approve the commands and subagent delegations most capable of causing damage before the classifier ever sees them. Narrow rules like Bash(npm test) carry over. The dropped rules are restored when you leave auto mode.",
+            "The classifier receives user messages and tool calls as input, with Claude’s own text and tool results stripped out. It also receives your CLAUDE.md content, so actions described in your project instructions are factored into allow and block decisions. Because tool results never reach the classifier, hostile content in a file or web page cannot manipulate it directly. The classifier evaluates the pending action against a customizable set of block and allow rules, checking whether the action is an overeager escalation beyond what you asked for, a mistake about what’s safe to touch, or a sudden departure from your stated intent that suggests Claude may have been steered by something it read.",
+            "Unlike your permission rules, which match tool names and argument patterns, the classifier reads prose descriptions of what to block and allow: it reasons about the action in context rather than matching syntax."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​How auto mode handles subagents",
+          "paragraphs": [
+            "When Claude spawns a subagent, the classifier evaluates the delegated task before the subagent starts. A task description that looks dangerous on its own, like “delete all remote branches matching this pattern”, is blocked at spawn time.",
+            "Inside the subagent, auto mode runs with the same block and allow rules as the parent session. Any permissionMode the subagent defines in its own frontmatter is ignored. The subagent’s own tool calls go through the classifier independently.",
+            "When the subagent finishes, the classifier reviews its full action history. A subagent that was benign at spawn could have been compromised mid-run by content it read. If the return check flags a concern, a security warning is prepended to the subagent’s results so the main agent can decide how to proceed."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​What the classifier blocks by default",
+          "paragraphs": [
+            "Out of the box, the classifier trusts your working directory and, if you’re in a git repo, that repo’s configured remotes. Everything else is treated as external: your company’s source control orgs, cloud buckets, and internal services are unknown until you tell the classifier about them.",
+            "Blocked by default:",
+            "Downloading and executing code, like curl | bash or scripts from cloned repos",
+            "Sending sensitive data to external endpoints",
+            "Production deploys and migrations",
+            "Mass deletion on cloud storage",
+            "Granting IAM or repo permissions",
+            "Modifying shared infrastructure",
+            "Irreversibly destroying files that existed before the session started",
+            "Destructive source control operations like force push or pushing directly to main",
+            "Allowed by default:",
+            "Local file operations in your working directory"
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​When auto mode falls back",
+          "paragraphs": [
+            "The fallback design keeps false positives from derailing a session: a mistaken block costs Claude a retry, not your progress. If the classifier blocks an action 3 times in a row or 20 times total in one session, auto mode pauses and Claude Code resumes prompting for each action. These thresholds are not configurable.",
+            "CLI: you see a notification in the status area. Approving the prompted action resets the denial counters, so you can continue in auto mode",
+            "Non-interactive mode with the -p flag: aborts the session, since there is no user to prompt",
+            "Repeated blocks usually mean one of two things: the task genuinely requires actions the classifier is built to stop, or the classifier is missing context about your trusted infrastructure and treating safe actions as risky. If the blocks look like false positives, or if the classifier misses something it should have caught, use /feedback to report it. If blocks are happening because the classifier doesn’t recognize your repos or services as trusted, have an administrator configure trusted infrastructure in managed settings."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Allow only pre-approved tools with dontAsk mode",
+          "paragraphs": [
+            "dontAsk mode auto-denies every tool that is not explicitly allowed. Only actions matching your /permissions allow rules or permissions.allow settings can execute. If a tool has an explicit ask rule, the action is also denied rather than prompting. This makes the mode fully non-interactive, suitable for CI pipelines or restricted environments where you pre-define exactly what Claude is permitted to do."
+          ],
+          "codeBlocks": [
+            "claude --permission-mode dontAsk"
+          ]
+        },
+        {
+          "title": "​Skip all checks with bypassPermissions mode",
+          "paragraphs": [
+            "bypassPermissions mode disables all permission prompts and safety checks. Every tool call executes immediately without any verification. Only use this in isolated environments like containers, VMs, or devcontainers without internet access, where Claude Code cannot cause damage to your host system.",
+            "The --dangerously-skip-permissions flag is equivalent to --permission-mode bypassPermissions:",
+            "bypassPermissions mode offers no protection against prompt injection or unintended actions. For a safer alternative that still maintains background safety checks, use auto mode. Administrators can block this mode by setting permissions.disableBypassPermissionsMode to \"disable\" in managed settings."
+          ],
+          "codeBlocks": [
+            "claude --permission-mode bypassPermissions",
+            "claude -p \"refactor the auth module\" --dangerously-skip-permissions"
+          ]
+        },
+        {
+          "title": "​Compare permission approaches",
+          "paragraphs": [
+            "The table below summarizes the key differences in how each mode handles approvals. plan is omitted since it restricts what Claude can do rather than how approvals work."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Customize permissions further",
+          "paragraphs": [
+            "Permission modes set the baseline approval behavior. For control over individual tools or commands, layer additional configuration on top of the active mode.",
+            "Permission rules are the first stop. Add allow, ask, or deny entries to your settings file to pre-approve safe commands, force a prompt for risky ones, or block specific tools entirely. Rules apply in every mode except bypassPermissions, which skips the permission layer entirely, and are matched by tool name and argument pattern. See Manage permissions for syntax and examples.",
+            "Hooks cover logic that pattern-matching rules can’t express. A PreToolUse hook runs before every tool call and can allow, deny, or escalate based on command content, file paths, time of day, or a response from an external policy service. A PermissionRequest hook intercepts the permission dialog itself and answers on your behalf. See Hooks for configuration."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​See also",
+          "paragraphs": [
+            "Permissions: permission rules, syntax, managed policies",
+            "Hooks: custom permission logic, lifecycle scripting",
+            "Security: security safeguards and best practices",
+            "Sandboxing: filesystem and network isolation for Bash commands",
+            "Non-interactive mode: run Claude Code programmatically with the -p flag",
+            "Was this page helpful?"
+          ],
+          "codeBlocks": []
+        }
+      ]
+    },
+    {
+      "section": "Use Claude Code",
       "path": "/docs/en/common-workflows",
       "url": "https://code.claude.com/docs/en/common-workflows",
       "title": "Common workflows",
@@ -3071,7 +3448,7 @@
       ]
     },
     {
-      "section": "Core concepts",
+      "section": "Use Claude Code",
       "path": "/docs/en/best-practices",
       "url": "https://code.claude.com/docs/en/best-practices",
       "title": "Best Practices for Claude Code",
@@ -3147,6 +3524,7 @@
         "Run non-interactive mode",
         "Run multiple Claude sessions",
         "Fan out across files",
+        "Run autonomously with auto mode",
         "Avoid common failure patterns",
         "Develop your intuition",
         "Related resources",
@@ -3200,13 +3578,12 @@
         "Project root (./CLAUDE.md): check into git to share with your team",
         "Parent directories: useful for monorepos where both root/CLAUDE.md and root/foo/CLAUDE.md are pulled in automatically",
         "Child directories: Claude pulls in child CLAUDE.md files on demand when working with files in those directories",
-        "Use /permissions to allowlist safe commands or /sandbox for OS-level isolation. This reduces interruptions while keeping you in control.",
-        "By default, Claude Code requests permission for actions that might modify your system: file writes, Bash commands, MCP tools, etc. This is safe but tedious. After the tenth approval you’re not really reviewing anymore, you’re just clicking through. There are two ways to reduce these interruptions:",
-        "Permission allowlists: permit specific tools you know are safe (like npm run lint or git commit)",
+        "Use auto mode to let a classifier handle approvals, /permissions to allowlist specific commands, or /sandbox for OS-level isolation. Each reduces interruptions while keeping you in control.",
+        "By default, Claude Code requests permission for actions that might modify your system: file writes, Bash commands, MCP tools, etc. This is safe but tedious. After the tenth approval you’re not really reviewing anymore, you’re just clicking through. There are three ways to reduce these interruptions:",
+        "Auto mode: a separate classifier model reviews commands and blocks only what looks risky: scope escalation, unknown infrastructure, or hostile-content-driven actions. Best when you trust the general direction of a task but don’t want to click through every step",
+        "Permission allowlists: permit specific tools you know are safe, like npm run lint or git commit",
         "Sandboxing: enable OS-level isolation that restricts filesystem and network access, allowing Claude to work more freely within defined boundaries",
-        "Alternatively, use --dangerously-skip-permissions to bypass permission prompts for contained workflows like fixing lint errors or generating boilerplate. See permission modes for what is and isn’t skipped.",
-        "Letting Claude run arbitrary commands can result in data loss, system corruption, or data exfiltration via prompt injection. Only use --dangerously-skip-permissions in a sandbox without internet access.",
-        "Read more about configuring permissions and enabling sandboxing.",
+        "Read more about permission modes, permission rules, and sandboxing.",
         "Tell Claude Code to use CLI tools like gh, aws, gcloud, and sentry-cli when interacting with external services.",
         "CLI tools are the most context-efficient way to interact with external services. If you use GitHub, install the gh CLI. Claude knows how to use it for creating issues, opening pull requests, and reading comments. Without gh, Claude can still use the GitHub API, but unauthenticated requests often hit rate limits.",
         "Claude is also effective at learning CLI tools it doesn’t already know. Try prompts like Use 'foo-cli-tool --help' to learn about foo tool, then use it to solve A, B, C.",
@@ -3287,6 +3664,8 @@
         "Refine your prompt based on what goes wrong with the first 2-3 files, then run on the full set. The --allowedTools flag restricts what Claude can do, which matters when you’re running unattended.",
         "You can also integrate Claude into existing data/processing pipelines:",
         "Use --verbose for debugging during development, and turn it off in production.",
+        "For uninterrupted execution with background safety checks, use auto mode. A classifier model reviews commands before they run, blocking scope escalation, unknown infrastructure, and hostile-content-driven actions while letting routine work proceed without prompts.",
+        "For non-interactive runs with the -p flag, auto mode aborts if the classifier repeatedly blocks actions, since there is no user to fall back to. See when auto mode falls back for thresholds.",
         "These are common mistakes. Recognizing them early saves time:",
         "The kitchen sink session. You start with one task, then ask Claude something unrelated, then go back to the first task. Context is full of irrelevant information. Fix: /clear between unrelated tasks.",
         "Fix: /clear between unrelated tasks.",
@@ -3298,9 +3677,7 @@
         "Fix: Always provide verification (tests, scripts, screenshots). If you can’t verify it, don’t ship it.",
         "The infinite exploration. You ask Claude to “investigate” something without scoping it. Claude reads hundreds of files, filling the context. Fix: Scope investigations narrowly or use subagents so the exploration doesn’t consume your main context.",
         "Fix: Scope investigations narrowly or use subagents so the exploration doesn’t consume your main context.",
-        "The patterns in this guide aren’t set in stone. They’re starting points that work well in general, but might not be optimal for every situation.",
-        "Sometimes you should let context accumulate because you’re deep in one complex problem and the history is valuable. Sometimes you should skip planning and let Claude figure it out because the task is exploratory. Sometimes a vague prompt is exactly right because you want to see how Claude interprets the problem before constraining it.",
-        "Pay attention to what works. When Claude produces great output, notice what you did: the prompt structure, the context you provided, the mode you were in. When Claude struggles, ask why. Was the context too noisy? The prompt too vague? The task too big for one pass?"
+        "The patterns in this guide aren’t set in stone. They’re starting points that work well in general, but might not be optimal for every situation."
       ],
       "codeBlocks": [
         "read /src/auth and understand how we handle sessions and login.\nalso look at how we manage environment variables for secrets.",
@@ -3318,7 +3695,8 @@
         "claude --continue    # Resume the most recent conversation\nclaude --resume      # Select from recent conversations",
         "# One-off queries\nclaude -p \"Explain what this project does\"\n\n# Structured output for scripts\nclaude -p \"List all API endpoints\" --output-format json\n\n# Streaming for real-time processing\nclaude -p \"Analyze this log file\" --output-format stream-json",
         "for file in $(cat files.txt); do\n  claude -p \"Migrate $file from React to Vue. Return OK or FAIL.\" \\\n    --allowedTools \"Edit,Bash(git commit *)\"\ndone",
-        "claude -p \"<your prompt>\" --output-format json | your_command"
+        "claude -p \"<your prompt>\" --output-format json | your_command",
+        "claude --permission-mode auto -p \"fix all lint errors\""
       ],
       "sectionBlocks": [
         {
@@ -3426,13 +3804,12 @@
         {
           "title": "​Configure permissions",
           "paragraphs": [
-            "Use /permissions to allowlist safe commands or /sandbox for OS-level isolation. This reduces interruptions while keeping you in control.",
-            "By default, Claude Code requests permission for actions that might modify your system: file writes, Bash commands, MCP tools, etc. This is safe but tedious. After the tenth approval you’re not really reviewing anymore, you’re just clicking through. There are two ways to reduce these interruptions:",
-            "Permission allowlists: permit specific tools you know are safe (like npm run lint or git commit)",
+            "Use auto mode to let a classifier handle approvals, /permissions to allowlist specific commands, or /sandbox for OS-level isolation. Each reduces interruptions while keeping you in control.",
+            "By default, Claude Code requests permission for actions that might modify your system: file writes, Bash commands, MCP tools, etc. This is safe but tedious. After the tenth approval you’re not really reviewing anymore, you’re just clicking through. There are three ways to reduce these interruptions:",
+            "Auto mode: a separate classifier model reviews commands and blocks only what looks risky: scope escalation, unknown infrastructure, or hostile-content-driven actions. Best when you trust the general direction of a task but don’t want to click through every step",
+            "Permission allowlists: permit specific tools you know are safe, like npm run lint or git commit",
             "Sandboxing: enable OS-level isolation that restricts filesystem and network access, allowing Claude to work more freely within defined boundaries",
-            "Alternatively, use --dangerously-skip-permissions to bypass permission prompts for contained workflows like fixing lint errors or generating boilerplate. See permission modes for what is and isn’t skipped.",
-            "Letting Claude run arbitrary commands can result in data loss, system corruption, or data exfiltration via prompt injection. Only use --dangerously-skip-permissions in a sandbox without internet access.",
-            "Read more about configuring permissions and enabling sandboxing."
+            "Read more about permission modes, permission rules, and sandboxing."
           ],
           "codeBlocks": []
         },
@@ -3645,6 +4022,16 @@
           "codeBlocks": [
             "for file in $(cat files.txt); do\n  claude -p \"Migrate $file from React to Vue. Return OK or FAIL.\" \\\n    --allowedTools \"Edit,Bash(git commit *)\"\ndone",
             "claude -p \"<your prompt>\" --output-format json | your_command"
+          ]
+        },
+        {
+          "title": "​Run autonomously with auto mode",
+          "paragraphs": [
+            "For uninterrupted execution with background safety checks, use auto mode. A classifier model reviews commands before they run, blocking scope escalation, unknown infrastructure, and hostile-content-driven actions while letting routine work proceed without prompts.",
+            "For non-interactive runs with the -p flag, auto mode aborts if the classifier repeatedly blocks actions, since there is no user to fall back to. See when auto mode falls back for thresholds."
+          ],
+          "codeBlocks": [
+            "claude --permission-mode auto -p \"fix all lint errors\""
           ]
         },
         {
@@ -3938,7 +4325,7 @@
         "Session creation failed: if you also see Session creation failed — see debug log, the failure happened earlier in setup. Check that your subscription is active.",
         "Claude Code offers several ways to work when you’re not at your terminal. They differ in what triggers the work, where Claude runs, and how much you need to set up.",
         "Claude Code on the web: run sessions in Anthropic-managed cloud environments instead of on your machine",
-        "Channels: forward Telegram or Discord into a session so Claude reacts to messages while you’re away",
+        "Channels: forward Telegram, Discord, or iMessage into a session so Claude reacts to messages while you’re away",
         "Dispatch: message a task from your phone and it can spawn a Desktop session to handle it",
         "Authentication: set up /login and manage credentials for claude.ai",
         "CLI reference: full list of flags and commands including claude remote-control",
@@ -4106,7 +4493,7 @@
           "title": "​Related resources",
           "paragraphs": [
             "Claude Code on the web: run sessions in Anthropic-managed cloud environments instead of on your machine",
-            "Channels: forward Telegram or Discord into a session so Claude reacts to messages while you’re away",
+            "Channels: forward Telegram, Discord, or iMessage into a session so Claude reacts to messages while you’re away",
             "Dispatch: message a task from your phone and it can spawn a Desktop session to handle it",
             "Authentication: set up /login and manage credentials for claude.ai",
             "CLI reference: full list of flags and commands including claude remote-control",
@@ -6009,9 +6396,9 @@
         "Each entry in the list is either an inline server definition or a string referencing an MCP server already configured in your session:",
         "Inline definitions use the same schema as .mcp.json server entries (stdio, http, sse, ws), keyed by the server name.",
         "To keep an MCP server out of the main conversation entirely and avoid its tool descriptions consuming context there, define it inline here rather than in .mcp.json. The subagent gets the tools; the parent conversation does not.",
-        "The permissionMode field controls how the subagent handles permission prompts. Subagents inherit the permission context from the main conversation but can override the mode.",
+        "The permissionMode field controls how the subagent handles permission prompts. Subagents inherit the permission context from the main conversation and can override the mode, except when the parent mode takes precedence as described below.",
         "Use bypassPermissions with caution. It skips permission prompts, allowing the subagent to execute operations without approval. Writes to .git, .claude, .vscode, and .idea directories still prompt for confirmation, except for .claude/commands, .claude/agents, and .claude/skills. See permission modes for details.",
-        "If the parent uses bypassPermissions, this takes precedence and cannot be overridden.",
+        "If the parent uses bypassPermissions, this takes precedence and cannot be overridden. If the parent uses auto mode, the subagent inherits auto mode and any permissionMode in its frontmatter is ignored: the classifier evaluates the subagent’s tool calls with the same block and allow rules as the parent session.",
         "Use the skills field to inject skill content into a subagent’s context at startup. This gives the subagent domain knowledge without requiring it to discover and load skills during execution.",
         "The full content of each skill is injected into the subagent’s context, not just made available for invocation. Subagents don’t inherit skills from the parent conversation; you must list them explicitly.",
         "This is the inverse of running a skill in a subagent. With skills in a subagent, the subagent controls the system prompt and loads skill content. With context: fork in a skill, the skill content is injected into the agent you specify. Both use the same underlying system.",
@@ -7051,6 +7438,7 @@
         "Use a fixed OAuth callback port",
         "Use pre-configured OAuth credentials",
         "Override OAuth metadata discovery",
+        "Use dynamic headers for custom authentication",
         "Add MCP servers from JSON configuration",
         "Import MCP servers from Claude Desktop",
         "Use MCP servers from Claude.ai",
@@ -7200,12 +7588,11 @@
         "If your MCP server returns errors on the standard OAuth metadata endpoint (/.well-known/oauth-authorization-server) but exposes a working OIDC endpoint, you can tell Claude Code to fetch OAuth metadata directly from a URL you specify, bypassing the standard discovery chain.",
         "Set authServerMetadataUrl in the oauth object of your server’s config in .mcp.json:",
         "The URL must use https://. This option requires Claude Code v2.1.64 or later.",
-        "If you have a JSON configuration for an MCP server, you can add it directly:",
-        "Add an MCP server from JSON",
-        "Verify the server was added",
-        "Make sure the JSON is properly escaped in your shell",
-        "The JSON must conform to the MCP server configuration schema",
-        "You can use --scope user to add the server to your user configuration instead of the project-specific one"
+        "If your MCP server uses an authentication scheme other than OAuth (such as Kerberos, short-lived tokens, or an internal SSO), use headersHelper to generate request headers at connection time. Claude Code runs the command and merges its output into the connection headers.",
+        "The command can also be inline:",
+        "Requirements:",
+        "The command must write a JSON object of string key-value pairs to stdout",
+        "The command runs in a shell with a 10-second timeout"
       ],
       "codeBlocks": [
         "# Basic syntax\nclaude mcp add --transport http <name> <url>\n\n# Real example: Connect to Notion\nclaude mcp add --transport http notion https://mcp.notion.com/mcp\n\n# Example with Bearer token\nclaude mcp add --transport http secure-api https://api.example.com/mcp \\\n  --header \"Authorization: Bearer your-token\"",
@@ -7213,7 +7600,7 @@
         "# Basic syntax\nclaude mcp add [options] <name> -- <command> [args...]\n\n# Real example: Add Airtable server\nclaude mcp add --transport stdio --env AIRTABLE_API_KEY=YOUR_KEY airtable \\\n  -- npx -y airtable-mcp-server",
         "# List all configured servers\nclaude mcp list\n\n# Get details for a specific server\nclaude mcp get github\n\n# Remove a server\nclaude mcp remove github\n\n# (within Claude Code) Check server status\n/mcp",
         "# This creates command=\"cmd\" which Windows can execute\nclaude mcp add --transport stdio my-server -- cmd /c npx -y @some/package",
-        "{\n  \"database-tools\": {\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n    \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/config.json\"],\n    \"env\": {\n      \"DB_URL\": \"${DB_URL}\"\n    }\n  }\n}",
+        "{\n  \"mcpServers\": {\n    \"database-tools\": {\n      \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n      \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/config.json\"],\n      \"env\": {\n        \"DB_URL\": \"${DB_URL}\"\n      }\n    }\n  }\n}",
         "{\n  \"name\": \"my-plugin\",\n  \"mcpServers\": {\n    \"plugin-api\": {\n      \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/api-server\",\n      \"args\": [\"--port\", \"8080\"]\n    }\n  }\n}",
         "# Within Claude Code, see all MCP servers including plugin ones\n/mcp",
         "# Add a local-scoped server (default)\nclaude mcp add --transport http stripe https://mcp.stripe.com\n\n# Explicitly specify local scope\nclaude mcp add --transport http stripe --scope local https://mcp.stripe.com",
@@ -7374,7 +7761,7 @@
             "Environment variables: use ${CLAUDE_PLUGIN_ROOT} for bundled plugin files and ${CLAUDE_PLUGIN_DATA} for persistent state that survives plugin updates"
           ],
           "codeBlocks": [
-            "{\n  \"database-tools\": {\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n    \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/config.json\"],\n    \"env\": {\n      \"DB_URL\": \"${DB_URL}\"\n    }\n  }\n}",
+            "{\n  \"mcpServers\": {\n    \"database-tools\": {\n      \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n      \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/config.json\"],\n      \"env\": {\n        \"DB_URL\": \"${DB_URL}\"\n      }\n    }\n  }\n}",
             "{\n  \"name\": \"my-plugin\",\n  \"mcpServers\": {\n    \"plugin-api\": {\n      \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/api-server\",\n      \"args\": [\"--port\", \"8080\"]\n    }\n  }\n}",
             "# Within Claude Code, see all MCP servers including plugin ones\n/mcp"
           ]
@@ -7568,6 +7955,23 @@
           ]
         },
         {
+          "title": "​Use dynamic headers for custom authentication",
+          "paragraphs": [
+            "If your MCP server uses an authentication scheme other than OAuth (such as Kerberos, short-lived tokens, or an internal SSO), use headersHelper to generate request headers at connection time. Claude Code runs the command and merges its output into the connection headers.",
+            "The command can also be inline:",
+            "Requirements:",
+            "The command must write a JSON object of string key-value pairs to stdout",
+            "The command runs in a shell with a 10-second timeout",
+            "Dynamic headers override any static headers with the same name",
+            "The helper runs fresh on each connection (at session start and on reconnect). There is no caching, so your script is responsible for any token reuse.",
+            "headersHelper executes arbitrary shell commands. When defined at project or local scope, it only runs after you accept the workspace trust dialog."
+          ],
+          "codeBlocks": [
+            "{\n  \"mcpServers\": {\n    \"internal-api\": {\n      \"type\": \"http\",\n      \"url\": \"https://mcp.internal.example.com\",\n      \"headersHelper\": \"/opt/bin/get-mcp-auth-headers.sh\"\n    }\n  }\n}",
+            "{\n  \"mcpServers\": {\n    \"internal-api\": {\n      \"type\": \"http\",\n      \"url\": \"https://mcp.internal.example.com\",\n      \"headersHelper\": \"echo '{\\\"Authorization\\\": \\\"Bearer '\\\"$(get-token)\\\"'\\\"}'\"\n    }\n  }\n}"
+          ]
+        },
+        {
           "title": "​Add MCP servers from JSON configuration",
           "paragraphs": [
             "If you have a JSON configuration for an MCP server, you can add it directly:",
@@ -7656,18 +8060,6 @@
           "codeBlocks": [
             "# Set a higher limit for MCP tool outputs\nexport MAX_MCP_OUTPUT_TOKENS=50000\nclaude"
           ]
-        },
-        {
-          "title": "​Respond to MCP elicitation requests",
-          "paragraphs": [
-            "MCP servers can request structured input from you mid-task using elicitation. When a server needs information it can’t get on its own, Claude Code displays an interactive dialog and passes your response back to the server. No configuration is required on your side: elicitation dialogs appear automatically when a server requests them.",
-            "Servers can request input in two ways:",
-            "Form mode: Claude Code shows a dialog with form fields defined by the server (for example, a username and password prompt). Fill in the fields and submit.",
-            "URL mode: Claude Code opens a browser URL for authentication or approval. Complete the flow in the browser, then confirm in the CLI.",
-            "To auto-respond to elicitation requests without showing a dialog, use the Elicitation hook.",
-            "If you’re building an MCP server that uses elicitation, see the MCP elicitation specification for protocol details and schema examples."
-          ],
-          "codeBlocks": []
         }
       ]
     },
@@ -9801,10 +10193,10 @@
         "Channels are in research preview and require Claude Code v2.1.80 or later. They require claude.ai login. Console and API key authentication is not supported. Team and Enterprise organizations must explicitly enable them.",
         "A channel is an MCP server that pushes events into your running Claude Code session, so Claude can react to things that happen while you’re not at the terminal. Channels can be two-way: Claude reads the event and replies back through the same channel, like a chat bridge. Events only arrive while the session is open, so for an always-on setup you run Claude in a background process or persistent terminal.",
         "Unlike integrations that spawn a fresh cloud session or wait to be polled, the event arrives in the session you already have open: see how channels compare.",
-        "You install a channel as a plugin and configure it with your own credentials. Telegram and Discord are included in the research preview.",
+        "You install a channel as a plugin and configure it with your own credentials. Telegram, Discord, and iMessage are included in the research preview.",
         "When Claude replies through a channel, you see the inbound message in your terminal but not the reply text. The terminal shows the tool call and a confirmation (like “sent”), and the actual reply appears on the other platform.",
         "This page covers:",
-        "Supported channels: Telegram and Discord setup",
+        "Supported channels: Telegram, Discord, and iMessage setup",
         "Install and run a channel with fakechat, a localhost demo",
         "Who can push messages: sender allowlists and how you pair",
         "Enable channels for your organization on Team and Enterprise",
@@ -9812,6 +10204,7 @@
         "To build your own channel, see the Channels reference.",
         "Each supported channel is a plugin that requires Bun. For a hands-on demo of the plugin flow before connecting a real platform, try the fakechat quickstart.",
         "Telegram",
+        "iMessage",
         "View the full Telegram plugin source.",
         "Create a Telegram bot",
         "Open BotFather in Telegram and send /newbot. Give it a display name and a unique username ending in bot. Copy the token BotFather returns.",
@@ -9846,9 +10239,20 @@
         "This saves it to ~/.claude/channels/discord/.env. You can also set DISCORD_BOT_TOKEN in your shell environment before launching Claude Code.",
         "Exit Claude Code and restart with the channel flag. This connects the Discord plugin so your bot can receive and respond to messages:",
         "DM your bot on Discord. The bot replies with a pairing code.",
+        "View the full iMessage plugin source.",
+        "The iMessage channel reads your Messages database directly and sends replies through AppleScript. It requires macOS and needs no bot token or external service.",
+        "Grant Full Disk Access",
+        "The Messages database at ~/Library/Messages/chat.db is protected by macOS. The first time the server reads it, macOS prompts for access: click Allow. The prompt names whichever app launched Bun, such as Terminal, iTerm, or your IDE.",
+        "If the prompt doesn’t appear or you clicked Don’t Allow, grant access manually under System Settings > Privacy & Security > Full Disk Access and add your terminal. Without this, the server exits immediately with authorization denied.",
+        "Exit Claude Code and restart with the channel flag:",
+        "Text yourself",
+        "Open Messages on any device signed into your Apple ID and send a message to yourself. It reaches Claude immediately: self-chat bypasses access control with no setup.",
+        "Allow other senders",
+        "By default, only your own messages pass through. To let another contact reach Claude, add their handle:",
+        "Handles are phone numbers in +country format or Apple ID emails like [email protected].",
         "You can also build your own channel for systems that don’t have a plugin yet.",
         "Fakechat is an officially supported demo channel that runs a chat UI on localhost, with nothing to authenticate and no external service to configure.",
-        "Once you install and enable fakechat, you can type in the browser and the message arrives in your Claude Code session. Claude replies, and the reply shows up back in the browser. After you’ve tested the fakechat interface, try out Telegram or Discord.",
+        "Once you install and enable fakechat, you can type in the browser and the message arrives in your Claude Code session. Claude replies, and the reply shows up back in the browser. After you’ve tested the fakechat interface, try out Telegram, Discord, or iMessage.",
         "To try the fakechat demo, you’ll need:",
         "Claude Code installed and authenticated with a claude.ai account",
         "Bun installed. The pre-built channel plugins are Bun scripts. Check with bun --version; if that fails, install Bun.",
@@ -9869,6 +10273,7 @@
         "The bot replies with a pairing code",
         "In your Claude Code session, approve the code when prompted",
         "Your sender ID is added to the allowlist",
+        "iMessage works differently: texting yourself bypasses the gate automatically, and you add other contacts by handle with /imessage:access allow.",
         "On top of that, you control which servers are enabled each session with --channels, and on Team and Enterprise plans your organization controls availability with channelsEnabled.",
         "Being in .mcp.json isn’t enough to push messages: a server also has to be named in --channels.",
         "The allowlist also gates permission relay if the channel declares it. Anyone who can reply through the channel can approve or deny tool use in your session, so only allowlist senders you trust with that authority.",
@@ -9881,7 +10286,7 @@
         "Report issues or feedback on the Claude Code GitHub repository.",
         "Several Claude Code features connect to systems outside the terminal, each suited to a different kind of work:",
         "Channels fill the gap in that list by pushing events from non-Claude sources into your already-running local session.",
-        "Chat bridge: ask Claude something from your phone via Telegram or Discord, and the answer comes back in the same chat while the work runs on your machine against your real files.",
+        "Chat bridge: ask Claude something from your phone via Telegram, Discord, or iMessage, and the answer comes back in the same chat while the work runs on your machine against your real files.",
         "Webhook receiver: a webhook from CI, your error tracker, a deploy pipeline, or other external service arrives where Claude already has your files open and remembers what you were debugging.",
         "Once you have a channel running, explore these related features:",
         "Build your own channel for systems that don’t have plugins yet",
@@ -9900,6 +10305,9 @@
         "claude --channels plugin:discord@claude-plugins-official",
         "/discord:access pair <code>",
         "/discord:access policy allowlist",
+        "/plugin install imessage@claude-plugins-official",
+        "claude --channels plugin:imessage@claude-plugins-official",
+        "/imessage:access allow +15551234567",
         "/plugin install fakechat@claude-plugins-official",
         "claude --channels plugin:fakechat@claude-plugins-official",
         "hey, what's in my working directory?"
@@ -9928,6 +10336,7 @@
           "paragraphs": [
             "Each supported channel is a plugin that requires Bun. For a hands-on demo of the plugin flow before connecting a real platform, try the fakechat quickstart.",
             "Telegram",
+            "iMessage",
             "View the full Telegram plugin source.",
             "Create a Telegram bot",
             "Open BotFather in Telegram and send /newbot. Give it a display name and a unique username ending in bot. Copy the token BotFather returns.",
@@ -9936,8 +10345,7 @@
             "If Claude Code reports that the plugin is not found in any marketplace, your marketplace is either missing or outdated. Run /plugin marketplace update claude-plugins-official to refresh it, or /plugin marketplace add anthropics/claude-plugins-official if you haven’t added it before. Then retry the install.",
             "After installing, run /reload-plugins to activate the plugin’s configure command.",
             "Configure your token",
-            "Run the configure command with the token from BotFather:",
-            "This saves it to ~/.claude/channels/telegram/.env. You can also set TELEGRAM_BOT_TOKEN in your shell environment before launching Claude Code."
+            "Run the configure command with the token from BotFather:"
           ],
           "codeBlocks": [
             "/plugin install telegram@claude-plugins-official",
@@ -9952,7 +10360,7 @@
           "title": "​Quickstart",
           "paragraphs": [
             "Fakechat is an officially supported demo channel that runs a chat UI on localhost, with nothing to authenticate and no external service to configure.",
-            "Once you install and enable fakechat, you can type in the browser and the message arrives in your Claude Code session. Claude replies, and the reply shows up back in the browser. After you’ve tested the fakechat interface, try out Telegram or Discord.",
+            "Once you install and enable fakechat, you can type in the browser and the message arrives in your Claude Code session. Claude replies, and the reply shows up back in the browser. After you’ve tested the fakechat interface, try out Telegram, Discord, or iMessage.",
             "To try the fakechat demo, you’ll need:",
             "Claude Code installed and authenticated with a claude.ai account",
             "Bun installed. The pre-built channel plugins are Bun scripts. Check with bun --version; if that fails, install Bun.",
@@ -9979,6 +10387,7 @@
             "The bot replies with a pairing code",
             "In your Claude Code session, approve the code when prompted",
             "Your sender ID is added to the allowlist",
+            "iMessage works differently: texting yourself bypasses the gate automatically, and you add other contacts by handle with /imessage:access allow.",
             "On top of that, you control which servers are enabled each session with --channels, and on Team and Enterprise plans your organization controls availability with channelsEnabled.",
             "Being in .mcp.json isn’t enough to push messages: a server also has to be named in --channels.",
             "The allowlist also gates permission relay if the channel declares it. Anyone who can reply through the channel can approve or deny tool use in your session, so only allowlist senders you trust with that authority."
@@ -10015,7 +10424,7 @@
           "paragraphs": [
             "Several Claude Code features connect to systems outside the terminal, each suited to a different kind of work:",
             "Channels fill the gap in that list by pushing events from non-Claude sources into your already-running local session.",
-            "Chat bridge: ask Claude something from your phone via Telegram or Discord, and the answer comes back in the same chat while the work runs on your machine against your real files.",
+            "Chat bridge: ask Claude something from your phone via Telegram, Discord, or iMessage, and the answer comes back in the same chat while the work runs on your machine against your real files.",
             "Webhook receiver: a webhook from CI, your error tracker, a deploy pipeline, or other external service arrives where Claude already has your files open and remembers what you were debugging."
           ],
           "codeBlocks": []
@@ -12386,6 +12795,10 @@
         "Claude Code determines which features to enable based on the API format. When using the Anthropic Messages format with Bedrock or Vertex, you may need to set environment variable CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1.",
         "By default, Claude Code will use standard model names for the selected API format.",
         "If you have configured custom model names in your gateway, use the environment variables documented in Model configuration to match your custom names.",
+        "LiteLLM PyPI versions 1.82.7 and 1.82.8 were compromised with credential-stealing malware. Do not install these versions. If you have already installed them:",
+        "Remove the package",
+        "Rotate all credentials on affected systems",
+        "Follow the remediation steps in BerriAI/litellm#24518",
         "LiteLLM is a third-party proxy service. Anthropic doesn’t endorse, maintain, or audit LiteLLM’s security or functionality. This guide is provided for informational purposes and may become outdated. Use at your own discretion.",
         "Claude Code updated to the latest version",
         "LiteLLM Proxy Server deployed and accessible",
@@ -12474,6 +12887,10 @@
         {
           "title": "​LiteLLM configuration",
           "paragraphs": [
+            "LiteLLM PyPI versions 1.82.7 and 1.82.8 were compromised with credential-stealing malware. Do not install these versions. If you have already installed them:",
+            "Remove the package",
+            "Rotate all credentials on affected systems",
+            "Follow the remediation steps in BerriAI/litellm#24518",
             "LiteLLM is a third-party proxy service. Anthropic doesn’t endorse, maintain, or audit LiteLLM’s security or functionality. This guide is provided for informational purposes and may become outdated. Use at your own discretion."
           ],
           "codeBlocks": []
@@ -13778,11 +14195,12 @@
         "Open the admin console",
         "In Claude.ai, navigate to Admin Settings > Claude Code > Managed settings.",
         "Define your settings",
-        "Add your configuration as JSON. All settings available in settings.json are supported, including hooks, environment variables, and managed-only settings like disableBypassPermissionsMode.",
+        "Add your configuration as JSON. All settings available in settings.json are supported, including hooks, environment variables, and managed-only settings like allowManagedPermissionRulesOnly.",
         "This example enforces a permission deny list and prevents users from bypassing permissions:",
         "Hooks use the same format as in settings.json.",
         "This example runs an audit script after every file edit across the organization:",
-        "Because hooks execute shell commands, users see a security approval dialog before they’re applied.",
+        "To configure the auto mode classifier so it knows which repos, buckets, and domains your organization trusts:",
+        "Because hooks execute shell commands, users see a security approval dialog before they’re applied. See Configure the auto mode classifier for how the autoMode entries affect what the classifier blocks and important warnings about the allow and soft_deny fields.",
         "Save and deploy",
         "Save your changes. Claude Code clients receive the updated settings on their next startup or hourly polling cycle.",
         "To confirm that settings are being applied, ask a user to restart Claude Code. If the configuration includes settings that trigger the security approval dialog, the user sees a prompt describing the managed settings on startup. You can also verify that managed permission rules are active by having a user run /permissions to view their effective permission rules.",
@@ -13828,7 +14246,8 @@
       ],
       "codeBlocks": [
         "{\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ],\n    \"disableBypassPermissionsMode\": \"disable\"\n  }\n}",
-        "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Edit|Write\",\n        \"hooks\": [\n          { \"type\": \"command\", \"command\": \"/usr/local/bin/audit-edit.sh\" }\n        ]\n      }\n    ]\n  }\n}"
+        "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Edit|Write\",\n        \"hooks\": [\n          { \"type\": \"command\", \"command\": \"/usr/local/bin/audit-edit.sh\" }\n        ]\n      }\n    ]\n  }\n}",
+        "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com\"\n    ]\n  }\n}"
       ],
       "sectionBlocks": [
         {
@@ -13873,17 +14292,19 @@
             "Open the admin console",
             "In Claude.ai, navigate to Admin Settings > Claude Code > Managed settings.",
             "Define your settings",
-            "Add your configuration as JSON. All settings available in settings.json are supported, including hooks, environment variables, and managed-only settings like disableBypassPermissionsMode.",
+            "Add your configuration as JSON. All settings available in settings.json are supported, including hooks, environment variables, and managed-only settings like allowManagedPermissionRulesOnly.",
             "This example enforces a permission deny list and prevents users from bypassing permissions:",
             "Hooks use the same format as in settings.json.",
             "This example runs an audit script after every file edit across the organization:",
-            "Because hooks execute shell commands, users see a security approval dialog before they’re applied.",
+            "To configure the auto mode classifier so it knows which repos, buckets, and domains your organization trusts:",
+            "Because hooks execute shell commands, users see a security approval dialog before they’re applied. See Configure the auto mode classifier for how the autoMode entries affect what the classifier blocks and important warnings about the allow and soft_deny fields.",
             "Save and deploy",
             "Save your changes. Claude Code clients receive the updated settings on their next startup or hourly polling cycle."
           ],
           "codeBlocks": [
             "{\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ],\n    \"disableBypassPermissionsMode\": \"disable\"\n  }\n}",
-            "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Edit|Write\",\n        \"hooks\": [\n          { \"type\": \"command\", \"command\": \"/usr/local/bin/audit-edit.sh\" }\n        ]\n      }\n    ]\n  }\n}"
+            "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Edit|Write\",\n        \"hooks\": [\n          { \"type\": \"command\", \"command\": \"/usr/local/bin/audit-edit.sh\" }\n        ]\n      }\n    ]\n  }\n}",
+            "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com\"\n    ]\n  }\n}"
           ]
         },
         {
@@ -16272,7 +16693,7 @@
         "User settings (~/.claude/settings.json) Personal global settings",
         "User settings (~/.claude/settings.json)",
         "Personal global settings",
-        "This hierarchy ensures that organizational policies are always enforced while still allowing teams and individuals to customize their experience.",
+        "This hierarchy ensures that organizational policies are always enforced while still allowing teams and individuals to customize their experience. The same precedence applies whether you run Claude Code from the CLI, the VS Code extension, or a JetBrains IDE.",
         "For example, if your user settings allow Bash(npm run *) but a project’s shared settings deny it, the project setting takes precedence and the command is blocked.",
         "Array settings merge across scopes. When the same array-valued setting (such as sandbox.filesystem.allowWrite or permissions.allow) appears in multiple scopes, the arrays are concatenated and deduplicated, not replaced. This means lower-priority scopes can add entries without overriding those set by higher-priority scopes, and vice versa. For example, if managed settings set allowWrite to [\"/opt/company-tools\"] and a user adds [\"~/.kube\"], both paths are included in the final configuration.",
         "Run /status inside Claude Code to see which settings sources are active and where they come from. The output shows each configuration layer (managed, user, project) along with its origin, such as Enterprise managed settings (remote), Enterprise managed settings (plist), Enterprise managed settings (HKLM), or Enterprise managed settings (file). If a settings file contains errors, /status reports the issue so you can fix it.",
@@ -16703,8 +17124,8 @@
         "​How permissions interact with sandboxing",
         "​Managed settings",
         "​Managed-only settings",
-        "​Settings precedence",
-        "​Example configurations"
+        "​Configure the auto mode classifier",
+        "​Define trusted infrastructure"
       ],
       "toc": [
         "Permission system",
@@ -16725,8 +17146,8 @@
         "How permissions interact with sandboxing",
         "Managed settings",
         "Managed-only settings",
-        "Settings precedence",
-        "Example configurations"
+        "Configure the auto mode classifier",
+        "Define trusted infrastructure"
       ],
       "paragraphs": [
         "Permission system",
@@ -16745,6 +17166,10 @@
         "How permissions interact with sandboxing",
         "Managed settings",
         "Managed-only settings",
+        "Configure the auto mode classifier",
+        "Define trusted infrastructure",
+        "Override the block and allow rules",
+        "Inspect the defaults and your effective config",
         "Settings precedence",
         "Example configurations",
         "See also",
@@ -16756,8 +17181,9 @@
         "Ask rules prompt for confirmation whenever Claude Code tries to use the specified tool.",
         "Deny rules prevent Claude Code from using the specified tool.",
         "Rules are evaluated in order: deny -> ask -> allow. The first matching rule wins, so deny rules always take precedence.",
-        "Claude Code supports several permission modes that control how tools are approved. Set the defaultMode in your settings files:",
+        "Claude Code supports several permission modes that control how tools are approved. See Permission modes for when to use each one. Set the defaultMode in your settings files:",
         "bypassPermissions mode skips permission prompts. Writes to .git, .claude, .vscode, and .idea directories still prompt for confirmation to prevent accidental corruption of repository state and local configuration. Writes to .claude/commands, .claude/agents, and .claude/skills are exempt and do not prompt, because Claude routinely writes there when creating skills, subagents, and commands. Only use this mode in isolated environments like containers or VMs where Claude Code cannot cause damage. Administrators can prevent this mode by setting disableBypassPermissionsMode to \"disable\" in managed settings.",
+        "To prevent bypassPermissions or auto mode from being used, set permissions.disableBypassPermissionsMode or disableAutoMode to \"disable\" in any settings file. These are most useful in managed settings where they cannot be overridden.",
         "Permission rules follow the format Tool or Tool(specifier).",
         "To match all uses of a tool, use just the tool name without parentheses:",
         "Bash(*) is equivalent to Bash and matches all Bash commands.",
@@ -16823,6 +17249,27 @@
         "For organizations that need centralized control over Claude Code configuration, administrators can deploy managed settings that cannot be overridden by user or project settings. These policy settings follow the same format as regular settings files and can be delivered through MDM/OS-level policies, managed settings files, or server-managed settings. See settings files for delivery mechanisms and file locations.",
         "Some settings are only effective in managed settings:",
         "Access to Remote Control and web sessions is not controlled by a managed settings key. On Team and Enterprise plans, an admin enables or disables these features in Claude Code admin settings.",
+        "Auto mode uses a classifier model to decide whether each action is safe to run without prompting. Out of the box it trusts only the working directory and, if present, the current repo’s remotes. Actions like pushing to your company’s source control org or writing to a team cloud bucket will be blocked as potential data exfiltration. The autoMode settings block lets you tell the classifier which infrastructure your organization trusts.",
+        "The classifier reads autoMode from user settings, .claude/settings.local.json, and managed settings. It does not read from shared project settings in .claude/settings.json, because a checked-in repo could otherwise inject its own allow rules.",
+        "Entries from each scope are combined. A developer can extend environment, allow, and soft_deny with personal entries but cannot remove entries that managed settings provide. Because allow rules act as exceptions to block rules inside the classifier, a developer-added allow entry can override an organization soft_deny entry: the combination is additive, not a hard policy boundary. If you need a rule that developers cannot work around, use permissions.deny in managed settings instead, which blocks actions before the classifier is consulted.",
+        "For most organizations, autoMode.environment is the only field you need to set. It tells the classifier which repos, buckets, and domains are trusted, without touching the built-in block and allow rules. The classifier uses environment to decide what “external” means: any destination not listed is a potential exfiltration target.",
+        "Entries are prose, not regex or tool patterns. The classifier reads them as natural-language rules. Write them the way you would describe your infrastructure to a new engineer. A thorough environment section covers:",
+        "Organization: your company name and what Claude Code is primarily used for, like software development, infrastructure automation, or data engineering",
+        "Source control: every GitHub, GitLab, or Bitbucket org your developers push to",
+        "Cloud providers and trusted buckets: bucket names or prefixes that Claude should be able to read from and write to",
+        "Trusted internal domains: hostnames for APIs, dashboards, and services inside your network, like *.internal.example.com",
+        "Key internal services: CI, artifact registries, internal package indexes, incident tooling",
+        "Additional context: regulated-industry constraints, multi-tenant infrastructure, or compliance requirements that affect what the classifier should treat as risky",
+        "A useful starting template: fill in the bracketed fields and remove any lines that don’t apply:",
+        "The more specific context you give, the better the classifier can distinguish routine internal operations from exfiltration attempts.",
+        "You don’t need to fill everything in at once. A reasonable rollout: start with the defaults and add your source control org and key internal services, which resolves the most common false positives like pushing to your own repos. Add trusted domains and cloud buckets next. Fill the rest as blocks come up.",
+        "Two additional fields let you replace the classifier’s built-in rule lists: autoMode.soft_deny controls what gets blocked, and autoMode.allow controls which exceptions apply. Each is an array of prose descriptions, read as natural-language rules.",
+        "Inside the classifier, the precedence is: soft_deny rules block first, then allow rules override as exceptions, then explicit user intent overrides both. If the user’s message directly and specifically describes the exact action Claude is about to take, the classifier allows it even if a soft_deny rule matches. General requests don’t count: asking Claude to “clean up the repo” does not authorize force-pushing, but asking Claude to “force-push this branch” does.",
+        "To loosen: remove rules from soft_deny when the defaults block something your pipeline already guards against with PR review, CI, or staging environments, or add to allow when the classifier repeatedly flags a routine pattern the default exceptions don’t cover. To tighten: add to soft_deny for risks specific to your environment that the defaults miss, or remove from allow to hold a default exception to the block rules. In all cases, run claude auto-mode defaults to get the full default lists, then copy and edit: never start from an empty list.",
+        "Setting allow or soft_deny replaces the entire default list for that section. If you set soft_deny with a single entry, every built-in block rule is discarded: force push, data exfiltration, curl | bash, production deploys, and all other default block rules become allowed. To customize safely, run claude auto-mode defaults to print the built-in rules, copy them into your settings file, then review each rule against your own pipeline and risk tolerance. Only remove rules for risks your infrastructure already mitigates.",
+        "The three sections are evaluated independently, so setting environment alone leaves the default allow and soft_deny lists intact.",
+        "Because setting allow or soft_deny replaces the defaults, start any customization by copying the full default lists. Three CLI subcommands help you inspect and validate:",
+        "Save the output of claude auto-mode defaults to a file, edit the lists to match your policy, and paste the result into your settings file. After saving, run claude auto-mode config to confirm the effective rules are what you expect. If you’ve written custom rules, claude auto-mode critique reviews them and flags entries that are ambiguous, redundant, or likely to cause false positives.",
         "Permission rules follow the same settings precedence as all other Claude Code settings:",
         "Managed settings: cannot be overridden by any other level, including command line arguments",
         "Command line arguments: temporary session overrides",
@@ -16841,7 +17288,11 @@
       ],
       "codeBlocks": [
         "{\n  \"permissions\": {\n    \"allow\": [\n      \"Bash(npm run *)\",\n      \"Bash(git commit *)\",\n      \"Bash(git * main)\",\n      \"Bash(* --version)\",\n      \"Bash(* --help *)\"\n    ],\n    \"deny\": [\n      \"Bash(git push *)\"\n    ]\n  }\n}",
-        "{\n  \"permissions\": {\n    \"deny\": [\"Agent(Explore)\"]\n  }\n}"
+        "{\n  \"permissions\": {\n    \"deny\": [\"Agent(Explore)\"]\n  }\n}",
+        "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com, api.internal.example.com\",\n      \"Key internal services: Jenkins at ci.example.com, Artifactory at artifacts.example.com\"\n    ]\n  }\n}",
+        "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Organization: {COMPANY_NAME}. Primary use: {PRIMARY_USE_CASE, e.g. software development, infrastructure automation}\",\n      \"Source control: {SOURCE_CONTROL, e.g. GitHub org github.example.com/acme-corp}\",\n      \"Cloud provider(s): {CLOUD_PROVIDERS, e.g. AWS, GCP, Azure}\",\n      \"Trusted cloud buckets: {TRUSTED_BUCKETS, e.g. s3://acme-builds, gs://acme-datasets}\",\n      \"Trusted internal domains: {TRUSTED_DOMAINS, e.g. *.internal.example.com, api.example.com}\",\n      \"Key internal services: {SERVICES, e.g. Jenkins at ci.example.com, Artifactory at artifacts.example.com}\",\n      \"Additional context: {EXTRA, e.g. regulated industry, multi-tenant infrastructure, compliance requirements}\"\n    ]\n  }\n}",
+        "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\",\n      \"...copy full default soft_deny list here first, then add your rules...\"\n    ]\n  }\n}",
+        "claude auto-mode defaults  # the built-in environment, allow, and soft_deny rules\nclaude auto-mode config    # what the classifier actually uses: your settings where set, defaults otherwise\nclaude auto-mode critique  # get AI feedback on your custom allow and soft_deny rules"
       ],
       "sectionBlocks": [
         {
@@ -16883,8 +17334,9 @@
         {
           "title": "​Permission modes",
           "paragraphs": [
-            "Claude Code supports several permission modes that control how tools are approved. Set the defaultMode in your settings files:",
-            "bypassPermissions mode skips permission prompts. Writes to .git, .claude, .vscode, and .idea directories still prompt for confirmation to prevent accidental corruption of repository state and local configuration. Writes to .claude/commands, .claude/agents, and .claude/skills are exempt and do not prompt, because Claude routinely writes there when creating skills, subagents, and commands. Only use this mode in isolated environments like containers or VMs where Claude Code cannot cause damage. Administrators can prevent this mode by setting disableBypassPermissionsMode to \"disable\" in managed settings."
+            "Claude Code supports several permission modes that control how tools are approved. See Permission modes for when to use each one. Set the defaultMode in your settings files:",
+            "bypassPermissions mode skips permission prompts. Writes to .git, .claude, .vscode, and .idea directories still prompt for confirmation to prevent accidental corruption of repository state and local configuration. Writes to .claude/commands, .claude/agents, and .claude/skills are exempt and do not prompt, because Claude routinely writes there when creating skills, subagents, and commands. Only use this mode in isolated environments like containers or VMs where Claude Code cannot cause damage. Administrators can prevent this mode by setting disableBypassPermissionsMode to \"disable\" in managed settings.",
+            "To prevent bypassPermissions or auto mode from being used, set permissions.disableBypassPermissionsMode or disableAutoMode to \"disable\" in any settings file. These are most useful in managed settings where they cannot be overridden."
           ],
           "codeBlocks": []
         },
@@ -17037,6 +17489,58 @@
             "Access to Remote Control and web sessions is not controlled by a managed settings key. On Team and Enterprise plans, an admin enables or disables these features in Claude Code admin settings."
           ],
           "codeBlocks": []
+        },
+        {
+          "title": "​Configure the auto mode classifier",
+          "paragraphs": [
+            "Auto mode uses a classifier model to decide whether each action is safe to run without prompting. Out of the box it trusts only the working directory and, if present, the current repo’s remotes. Actions like pushing to your company’s source control org or writing to a team cloud bucket will be blocked as potential data exfiltration. The autoMode settings block lets you tell the classifier which infrastructure your organization trusts.",
+            "The classifier reads autoMode from user settings, .claude/settings.local.json, and managed settings. It does not read from shared project settings in .claude/settings.json, because a checked-in repo could otherwise inject its own allow rules.",
+            "Entries from each scope are combined. A developer can extend environment, allow, and soft_deny with personal entries but cannot remove entries that managed settings provide. Because allow rules act as exceptions to block rules inside the classifier, a developer-added allow entry can override an organization soft_deny entry: the combination is additive, not a hard policy boundary. If you need a rule that developers cannot work around, use permissions.deny in managed settings instead, which blocks actions before the classifier is consulted."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Define trusted infrastructure",
+          "paragraphs": [
+            "For most organizations, autoMode.environment is the only field you need to set. It tells the classifier which repos, buckets, and domains are trusted, without touching the built-in block and allow rules. The classifier uses environment to decide what “external” means: any destination not listed is a potential exfiltration target.",
+            "Entries are prose, not regex or tool patterns. The classifier reads them as natural-language rules. Write them the way you would describe your infrastructure to a new engineer. A thorough environment section covers:",
+            "Organization: your company name and what Claude Code is primarily used for, like software development, infrastructure automation, or data engineering",
+            "Source control: every GitHub, GitLab, or Bitbucket org your developers push to",
+            "Cloud providers and trusted buckets: bucket names or prefixes that Claude should be able to read from and write to",
+            "Trusted internal domains: hostnames for APIs, dashboards, and services inside your network, like *.internal.example.com",
+            "Key internal services: CI, artifact registries, internal package indexes, incident tooling",
+            "Additional context: regulated-industry constraints, multi-tenant infrastructure, or compliance requirements that affect what the classifier should treat as risky",
+            "A useful starting template: fill in the bracketed fields and remove any lines that don’t apply:",
+            "The more specific context you give, the better the classifier can distinguish routine internal operations from exfiltration attempts.",
+            "You don’t need to fill everything in at once. A reasonable rollout: start with the defaults and add your source control org and key internal services, which resolves the most common false positives like pushing to your own repos. Add trusted domains and cloud buckets next. Fill the rest as blocks come up."
+          ],
+          "codeBlocks": [
+            "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com, api.internal.example.com\",\n      \"Key internal services: Jenkins at ci.example.com, Artifactory at artifacts.example.com\"\n    ]\n  }\n}",
+            "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Organization: {COMPANY_NAME}. Primary use: {PRIMARY_USE_CASE, e.g. software development, infrastructure automation}\",\n      \"Source control: {SOURCE_CONTROL, e.g. GitHub org github.example.com/acme-corp}\",\n      \"Cloud provider(s): {CLOUD_PROVIDERS, e.g. AWS, GCP, Azure}\",\n      \"Trusted cloud buckets: {TRUSTED_BUCKETS, e.g. s3://acme-builds, gs://acme-datasets}\",\n      \"Trusted internal domains: {TRUSTED_DOMAINS, e.g. *.internal.example.com, api.example.com}\",\n      \"Key internal services: {SERVICES, e.g. Jenkins at ci.example.com, Artifactory at artifacts.example.com}\",\n      \"Additional context: {EXTRA, e.g. regulated industry, multi-tenant infrastructure, compliance requirements}\"\n    ]\n  }\n}"
+          ]
+        },
+        {
+          "title": "​Override the block and allow rules",
+          "paragraphs": [
+            "Two additional fields let you replace the classifier’s built-in rule lists: autoMode.soft_deny controls what gets blocked, and autoMode.allow controls which exceptions apply. Each is an array of prose descriptions, read as natural-language rules.",
+            "Inside the classifier, the precedence is: soft_deny rules block first, then allow rules override as exceptions, then explicit user intent overrides both. If the user’s message directly and specifically describes the exact action Claude is about to take, the classifier allows it even if a soft_deny rule matches. General requests don’t count: asking Claude to “clean up the repo” does not authorize force-pushing, but asking Claude to “force-push this branch” does.",
+            "To loosen: remove rules from soft_deny when the defaults block something your pipeline already guards against with PR review, CI, or staging environments, or add to allow when the classifier repeatedly flags a routine pattern the default exceptions don’t cover. To tighten: add to soft_deny for risks specific to your environment that the defaults miss, or remove from allow to hold a default exception to the block rules. In all cases, run claude auto-mode defaults to get the full default lists, then copy and edit: never start from an empty list.",
+            "Setting allow or soft_deny replaces the entire default list for that section. If you set soft_deny with a single entry, every built-in block rule is discarded: force push, data exfiltration, curl | bash, production deploys, and all other default block rules become allowed. To customize safely, run claude auto-mode defaults to print the built-in rules, copy them into your settings file, then review each rule against your own pipeline and risk tolerance. Only remove rules for risks your infrastructure already mitigates.",
+            "The three sections are evaluated independently, so setting environment alone leaves the default allow and soft_deny lists intact."
+          ],
+          "codeBlocks": [
+            "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\",\n      \"...copy full default soft_deny list here first, then add your rules...\"\n    ]\n  }\n}"
+          ]
+        },
+        {
+          "title": "​Inspect the defaults and your effective config",
+          "paragraphs": [
+            "Because setting allow or soft_deny replaces the defaults, start any customization by copying the full default lists. Three CLI subcommands help you inspect and validate:",
+            "Save the output of claude auto-mode defaults to a file, edit the lists to match your policy, and paste the result into your settings file. After saving, run claude auto-mode config to confirm the effective rules are what you expect. If you’ve written custom rules, claude auto-mode critique reviews them and flags entries that are ambiguous, redundant, or likely to cause false positives."
+          ],
+          "codeBlocks": [
+            "claude auto-mode defaults  # the built-in environment, allow, and soft_deny rules\nclaude auto-mode config    # what the classifier actually uses: your settings where set, defaults otherwise\nclaude auto-mode critique  # get AI feedback on your custom allow and soft_deny rules"
+          ]
         },
         {
           "title": "​Settings precedence",
@@ -21835,7 +22339,7 @@
         "Expose a reply tool: let Claude send messages back",
         "Gate inbound messages: sender checks to prevent prompt injection",
         "Relay permission prompts: forward tool approval prompts to remote channels",
-        "To use an existing channel instead of building one, see Channels. Telegram, Discord, and fakechat are included in the research preview.",
+        "To use an existing channel instead of building one, see Channels. Telegram, Discord, iMessage, and fakechat are included in the research preview.",
         "A channel is an MCP server that runs on the same machine as Claude Code. Claude Code spawns it as a subprocess and communicates over stdio. Your channel server is the bridge between external systems and the Claude Code session:",
         "Chat platforms (Telegram, Discord): your plugin runs locally and polls the platform’s API for new messages. When someone DMs your bot, the plugin receives the message and forwards it to Claude. No URL to expose.",
         "Webhooks (CI, monitoring): your server listens on a local HTTP port. External systems POST to that port, and your server pushes the payload to Claude.",
@@ -21894,7 +22398,7 @@
         "An ungated channel is a prompt injection vector. Anyone who can reach your endpoint can put text in front of Claude. A channel listening to a chat platform or a public endpoint needs a real sender check before it emits anything.",
         "Check the sender against an allowlist before calling mcp.notification(). This example drops any message from a sender not in the set:",
         "Gate on the sender’s identity, not the chat or room identity: message.from.id in the example, not message.chat.id. In group chats, these differ, and gating on the room would let anyone in an allowlisted group inject messages into the session.",
-        "The Telegram and Discord channels gate on a sender allowlist the same way. They bootstrap the list by pairing: the user DMs the bot, the bot replies with a pairing code, the user approves it in their Claude Code session, and their platform ID is added. See either implementation for the full pairing flow.",
+        "The Telegram and Discord channels gate on a sender allowlist the same way. They bootstrap the list by pairing: the user DMs the bot, the bot replies with a pairing code, the user approves it in their Claude Code session, and their platform ID is added. See either implementation for the full pairing flow. The iMessage channel takes a different approach: it detects the user’s own addresses from the Messages database at startup and lets them through automatically, with other senders added by handle.",
         "Permission relay requires Claude Code v2.1.81 or later. Earlier versions ignore the claude/channel/permission capability.",
         "When Claude calls a tool that needs approval, the local terminal dialog opens and the session waits. A two-way channel can opt in to receive the same prompt in parallel and relay it to you on another device. Both stay live: you can answer in the terminal or on your phone, and Claude Code applies whichever answer arrives first and closes the other.",
         "Relay covers tool-use approvals like Bash, Write, and Edit. Project trust and MCP server consent dialogs don’t relay; those only appear in the local terminal.",
@@ -21937,7 +22441,7 @@
         "HTTP handler: GET /events holds an SSE stream open so curl can watch outbound live; POST is inbound, gated on the X-Sender header. A yes <id> or no <id> body goes to Claude Code as a verdict notification and never reaches Claude; anything else is forwarded to Claude as a channel event.",
         "To make your channel installable and shareable, wrap it in a plugin and publish it to a marketplace. Users install it with /plugin install, then enable it per session with --channels plugin:<name>@<marketplace>.",
         "A channel published to your own marketplace still needs --dangerously-load-development-channels to run, since it isn’t on the approved allowlist. To get it added, submit it to the official marketplace. Channel plugins go through security review before being approved.",
-        "Channels to install and use Telegram, Discord, or the fakechat demo, and to enable channels for a Team or Enterprise org",
+        "Channels to install and use Telegram, Discord, iMessage, or the fakechat demo, and to enable channels for a Team or Enterprise org",
         "Working channel implementations for complete server code with pairing flows, reply tools, and file attachments",
         "MCP for the underlying protocol that channel servers implement",
         "Plugins to package your channel so users can install it with /plugin install",
@@ -22096,7 +22600,7 @@
             "An ungated channel is a prompt injection vector. Anyone who can reach your endpoint can put text in front of Claude. A channel listening to a chat platform or a public endpoint needs a real sender check before it emits anything.",
             "Check the sender against an allowlist before calling mcp.notification(). This example drops any message from a sender not in the set:",
             "Gate on the sender’s identity, not the chat or room identity: message.from.id in the example, not message.chat.id. In group chats, these differ, and gating on the room would let anyone in an allowlisted group inject messages into the session.",
-            "The Telegram and Discord channels gate on a sender allowlist the same way. They bootstrap the list by pairing: the user DMs the bot, the bot replies with a pairing code, the user approves it in their Claude Code session, and their platform ID is added. See either implementation for the full pairing flow."
+            "The Telegram and Discord channels gate on a sender allowlist the same way. They bootstrap the list by pairing: the user DMs the bot, the bot replies with a pairing code, the user approves it in their Claude Code session, and their platform ID is added. See either implementation for the full pairing flow. The iMessage channel takes a different approach: it detects the user’s own addresses from the Messages database at startup and lets them through automatically, with other senders added by handle."
           ],
           "codeBlocks": [
             "const allowed = new Set(loadAllowlist())  // from your access.json or equivalent\n\n// inside your message handler, before emitting:\nif (!allowed.has(message.from.id)) {  // sender, not room\n  return  // drop silently\n}\nawait mcp.notification({ ... })"
@@ -22188,7 +22692,7 @@
         {
           "title": "​See also",
           "paragraphs": [
-            "Channels to install and use Telegram, Discord, or the fakechat demo, and to enable channels for a Team or Enterprise org",
+            "Channels to install and use Telegram, Discord, iMessage, or the fakechat demo, and to enable channels for a Team or Enterprise org",
             "Working channel implementations for complete server code with pairing flows, reply tools, and file attachments",
             "MCP for the underlying protocol that channel servers implement",
             "Plugins to package your channel so users can install it with /plugin install",

@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-24T04:27:26.051Z",
-  "sourceGeneratedAt": "2026-03-24T04:27:25.797Z",
+  "generatedAt": "2026-03-25T04:28:46.349Z",
+  "sourceGeneratedAt": "2026-03-25T04:28:46.096Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -1001,13 +1001,13 @@
           "title": "简要总结",
           "paragraphs": [
             "这页主要讲 Store instructions and memories：Give Claude persistent instructions with CLAUDE.md files, and let Claude accumulate learnings automatically with auto memory.",
-            "你可以把它当成“Core concepts”这块里专门管这一摊事的说明书。"
+            "你可以把它当成“Use Claude Code”这块里专门管这一摊事的说明书。"
           ]
         },
         {
           "title": "农民伯伯版解释",
           "paragraphs": [
-            "你可以把“Store instructions and memories”理解成 Core concepts 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "你可以把“Store instructions and memories”理解成 Use Claude Code 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 CLAUDE.md vs auto memory、CLAUDE.md files、Choose where to put CLAUDE.md files、Set up a project CLAUDE.md 这些环节往下讲。",
             "翻成人话，大概就是：CLAUDE.md vs auto memory"
           ]
@@ -1313,7 +1313,275 @@
           "Store instructions and memories",
           "   |",
           "   v",
-          "这是 Core concepts 里的一摊要紧活",
+          "这是 Use Claude Code 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "permission-modes": {
+      "sourceLabel": "Choose a permission mode",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Permission modes：Switch between supervised editing, read-only planning, and auto mode where a background classifier replaces manual permission prompts. Cycle modes with Shift+Tab in the CLI or use the mode selector in VS Code, Desktop, and claude.ai.",
+            "你可以把它当成“Use Claude Code”这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把“Permission modes”理解成 Use Claude Code 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Switch permission modes、Available modes、Analyze before you edit with plan mode、When to use plan mode 这些环节往下讲。",
+            "翻成人话，大概就是：Switch permission modes"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Switch permission modes -> Available modes -> Analyze before you edit with plan mode -> When to use plan mode。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Switch permission modes 1",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --permission-mode plan",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Switch permission modes 2",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"permissions\": {\n    \"defaultMode\": \"acceptEdits\"\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Switch permission modes 3",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude -p \"refactor auth\" --permission-mode acceptEdits",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Start and use plan mode 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "claude --permission-mode plan",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Start and use plan mode 2",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Start and use plan mode”这一段的意思去办。",
+              "code": "I need to refactor our authentication system to use OAuth2. Create a detailed migration plan.",
+              "kind": "prompt"
+            },
+            {
+              "title": "原页关键片段：Start and use plan mode 3",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Start and use plan mode”这一段的意思去办。",
+              "code": "What about backward compatibility?\nHow should we handle database migration?",
+              "kind": "prompt"
+            },
+            {
+              "title": "原页关键片段：Allow only pre-approved tools with dontAsk mode",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude --permission-mode dontAsk",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Skip all checks with bypassPermissions mode 1",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude --permission-mode bypassPermissions",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Skip all checks with bypassPermissions mode 2",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude -p \"refactor the auth module\" --dangerously-skip-permissions",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Switch permission modes",
+          "paragraphs": [
+            "这里讲几种常见的放权方式，有的每次都问你，有的先按规则走。",
+            "重点不是背名字，而是分清哪种更适合你现在这摊活。"
+          ],
+          "steps": [
+            {
+              "title": "Switch permission modes 1",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --permission-mode plan",
+              "kind": "command"
+            },
+            {
+              "title": "Switch permission modes 2",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"permissions\": {\n    \"defaultMode\": \"acceptEdits\"\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Switch permission modes 3",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude -p \"refactor auth\" --permission-mode acceptEdits",
+              "kind": "command"
+            },
+            {
+              "title": "Switch permission modes 4",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude remote-control --permission-mode acceptEdits",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Available modes",
+          "paragraphs": [
+            "这一块主要是在说“Available modes”真到手上该怎么用，哪里最容易踩坑。"
+          ]
+        },
+        {
+          "title": "Analyze before you edit with plan mode",
+          "paragraphs": [
+            "这里不是让你背“Analyze before you edit with plan mode”这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "When to use plan mode",
+          "paragraphs": [
+            "这里不是催你全用上，而是在说 When to use plan mode 什么时候用才划算。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Start and use plan mode",
+          "paragraphs": [
+            "这里不是让你背“Start and use plan mode”这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Start and use plan mode 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "claude --permission-mode plan",
+              "kind": "command"
+            },
+            {
+              "title": "Start and use plan mode 2",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Start and use plan mode”这一段的意思去办。",
+              "code": "I need to refactor our authentication system to use OAuth2. Create a detailed migration plan.",
+              "kind": "prompt"
+            },
+            {
+              "title": "Start and use plan mode 3",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按“Start and use plan mode”这一段的意思去办。",
+              "code": "What about backward compatibility?\nHow should we handle database migration?",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Eliminate prompts with auto mode",
+          "paragraphs": [
+            "看到这里，就把“Eliminate prompts with auto mode”当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "How actions are evaluated",
+          "paragraphs": [
+            "这种内容最怕想当然，老老实实照它列的格式走最稳。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "How auto mode handles subagents",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "What the classifier blocks by default",
+          "paragraphs": [
+            "这一段主要是在把“What the classifier blocks by default”讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "When auto mode falls back",
+          "paragraphs": [
+            "别把这段只当成标题看，它其实是在给“When auto mode falls back”划边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Allow only pre-approved tools with dontAsk mode",
+          "paragraphs": [
+            "这一段主要是在把“Allow only pre-approved tools with dontAsk mode”讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Allow only pre-approved tools with dontAsk mode",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude --permission-mode dontAsk",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Skip all checks with bypassPermissions mode",
+          "paragraphs": [
+            "这一段主要是在把“Skip all checks with bypassPermissions mode”讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Skip all checks with bypassPermissions mode 1",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude --permission-mode bypassPermissions",
+              "kind": "command"
+            },
+            {
+              "title": "Skip all checks with bypassPermissions mode 2",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude -p \"refactor the auth module\" --dangerously-skip-permissions",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Compare permission approaches",
+          "paragraphs": [
+            "这里就是把两条像样的路摆一块，让你别走岔。"
+          ]
+        },
+        {
+          "title": "Customize permissions further",
+          "paragraphs": [
+            "看到这里，就把“Customize permissions further”当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "See also",
+          "paragraphs": [
+            "这一段主要是在把“See also”讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Permission modes",
+          "   |",
+          "   v",
+          "这是 Use Claude Code 里的一摊要紧活",
           "   |",
           "   v",
           "先弄懂，再下手"
@@ -1856,7 +2124,7 @@
           "Common workflows",
           "   |",
           "   v",
-          "这是 Core concepts 里的一摊要紧活",
+          "这是 Use Claude Code 里的一摊要紧活",
           "   |",
           "   v",
           "先弄懂，再下手"
@@ -2043,7 +2311,7 @@
           "title": "Configure permissions",
           "paragraphs": [
             "这一段主要是在拧开关，地方和顺序都别搞错。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -2245,6 +2513,21 @@
           ]
         },
         {
+          "title": "Run autonomously with auto mode",
+          "paragraphs": [
+            "这里不是让你背“Run autonomously with auto mode”这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Run autonomously with auto mode",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "claude --permission-mode auto -p \"fix all lint errors\"",
+              "kind": "command"
+            }
+          ]
+        },
+        {
           "title": "Avoid common failure patterns",
           "paragraphs": [
             "这一块主要是在说“Avoid common failure patterns”真到手上该怎么用，哪里最容易踩坑。",
@@ -2271,7 +2554,7 @@
           "Best practices",
           "   |",
           "   v",
-          "这是 Core concepts 里的一摊要紧活",
+          "这是 Use Claude Code 里的一摊要紧活",
           "   |",
           "   v",
           "先弄懂，再下手"
@@ -4520,7 +4803,7 @@
             {
               "title": "原页关键片段：Plugin-provided MCP servers 1",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"database-tools\": {\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n    \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/config.json\"],\n    \"env\": {\n      \"DB_URL\": \"${DB_URL}\"\n    }\n  }\n}",
+              "code": "{\n  \"mcpServers\": {\n    \"database-tools\": {\n      \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n      \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/config.json\"],\n      \"env\": {\n        \"DB_URL\": \"${DB_URL}\"\n      }\n    }\n  }\n}",
               "kind": "config"
             },
             {
@@ -4674,7 +4957,7 @@
             {
               "title": "Plugin-provided MCP servers 1",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"database-tools\": {\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n    \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/config.json\"],\n    \"env\": {\n      \"DB_URL\": \"${DB_URL}\"\n    }\n  }\n}",
+              "code": "{\n  \"mcpServers\": {\n    \"database-tools\": {\n      \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n      \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/config.json\"],\n      \"env\": {\n        \"DB_URL\": \"${DB_URL}\"\n      }\n    }\n  }\n}",
               "kind": "config"
             },
             {
@@ -4981,6 +5264,27 @@
           ]
         },
         {
+          "title": "Use dynamic headers for custom authentication",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Use dynamic headers for custom authentication 1",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"mcpServers\": {\n    \"internal-api\": {\n      \"type\": \"http\",\n      \"url\": \"https://mcp.internal.example.com\",\n      \"headersHelper\": \"/opt/bin/get-mcp-auth-headers.sh\"\n    }\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Use dynamic headers for custom authentication 2",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"mcpServers\": {\n    \"internal-api\": {\n      \"type\": \"http\",\n      \"url\": \"https://mcp.internal.example.com\",\n      \"headersHelper\": \"echo '{\\\"Authorization\\\": \\\"Bearer '\\\"$(get-token)\\\"'\\\"}'\"\n    }\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
           "title": "Add MCP servers from JSON configuration",
           "paragraphs": [
             "这里讲怎么直接从 JSON 配置里把一组 MCP 服务一起加进去。",
@@ -5089,13 +5393,6 @@
               "code": "# Set a higher limit for MCP tool outputs\nexport MAX_MCP_OUTPUT_TOKENS=50000\nclaude",
               "kind": "command"
             }
-          ]
-        },
-        {
-          "title": "Respond to MCP elicitation requests",
-          "paragraphs": [
-            "看到这里，就把“Respond to MCP elicitation requests”当成一件真要上手的活来看。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         }
       ],
@@ -9094,7 +9391,8 @@
         {
           "title": "LiteLLM configuration",
           "paragraphs": [
-            "看到这里，就把“LiteLLM configuration”当成一件真要上手的活来看。"
+            "看到这里，就把“LiteLLM configuration”当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -10019,6 +10317,12 @@
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Edit|Write\",\n        \"hooks\": [\n          { \"type\": \"command\", \"command\": \"/usr/local/bin/audit-edit.sh\" }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Configure server-managed settings 3",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com\"\n    ]\n  }\n}",
+              "kind": "config"
             }
           ]
         },
@@ -10052,6 +10356,12 @@
               "title": "Configure server-managed settings 2",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Edit|Write\",\n        \"hooks\": [\n          { \"type\": \"command\", \"command\": \"/usr/local/bin/audit-edit.sh\" }\n        ]\n      }\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Configure server-managed settings 3",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com\"\n    ]\n  }\n}",
               "kind": "config"
             }
           ]
@@ -11989,6 +12299,30 @@
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"permissions\": {\n    \"deny\": [\"Agent(Explore)\"]\n  }\n}",
               "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Define trusted infrastructure 1",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com, api.internal.example.com\",\n      \"Key internal services: Jenkins at ci.example.com, Artifactory at artifacts.example.com\"\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Define trusted infrastructure 2",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Organization: {COMPANY_NAME}. Primary use: {PRIMARY_USE_CASE, e.g. software development, infrastructure automation}\",\n      \"Source control: {SOURCE_CONTROL, e.g. GitHub org github.example.com/acme-corp}\",\n      \"Cloud provider(s): {CLOUD_PROVIDERS, e.g. AWS, GCP, Azure}\",\n      \"Trusted cloud buckets: {TRUSTED_BUCKETS, e.g. s3://acme-builds, gs://acme-datasets}\",\n      \"Trusted internal domains: {TRUSTED_DOMAINS, e.g. *.internal.example.com, api.example.com}\",\n      \"Key internal services: {SERVICES, e.g. Jenkins at ci.example.com, Artifactory at artifacts.example.com}\",\n      \"Additional context: {EXTRA, e.g. regulated industry, multi-tenant infrastructure, compliance requirements}\"\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Override the block and allow rules",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\",\n      \"...copy full default soft_deny list here first, then add your rules...\"\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Inspect the defaults and your effective config",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude auto-mode defaults  # the built-in environment, allow, and soft_deny rules\nclaude auto-mode config    # what the classifier actually uses: your settings where set, defaults otherwise\nclaude auto-mode critique  # get AI feedback on your custom allow and soft_deny rules",
+              "kind": "command"
             }
           ]
         },
@@ -12132,6 +12466,64 @@
           "paragraphs": [
             "这里讲只能由管理员来定的那部分。",
             "普通用户看明白就行，不是叫你自己去改。"
+          ]
+        },
+        {
+          "title": "Configure the auto mode classifier",
+          "paragraphs": [
+            "这一段主要是在拧开关，地方和顺序都别搞错。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Define trusted infrastructure",
+          "paragraphs": [
+            "看到这里，就把“Define trusted infrastructure”当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Define trusted infrastructure 1",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com, api.internal.example.com\",\n      \"Key internal services: Jenkins at ci.example.com, Artifactory at artifacts.example.com\"\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Define trusted infrastructure 2",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Organization: {COMPANY_NAME}. Primary use: {PRIMARY_USE_CASE, e.g. software development, infrastructure automation}\",\n      \"Source control: {SOURCE_CONTROL, e.g. GitHub org github.example.com/acme-corp}\",\n      \"Cloud provider(s): {CLOUD_PROVIDERS, e.g. AWS, GCP, Azure}\",\n      \"Trusted cloud buckets: {TRUSTED_BUCKETS, e.g. s3://acme-builds, gs://acme-datasets}\",\n      \"Trusted internal domains: {TRUSTED_DOMAINS, e.g. *.internal.example.com, api.example.com}\",\n      \"Key internal services: {SERVICES, e.g. Jenkins at ci.example.com, Artifactory at artifacts.example.com}\",\n      \"Additional context: {EXTRA, e.g. regulated industry, multi-tenant infrastructure, compliance requirements}\"\n    ]\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Override the block and allow rules",
+          "paragraphs": [
+            "这一块主要是在说“Override the block and allow rules”真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Override the block and allow rules",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\",\n      \"...copy full default soft_deny list here first, then add your rules...\"\n    ]\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Inspect the defaults and your effective config",
+          "paragraphs": [
+            "这一段主要是在把“Inspect the defaults and your effective config”讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Inspect the defaults and your effective config",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude auto-mode defaults  # the built-in environment, allow, and soft_deny rules\nclaude auto-mode config    # what the classifier actually uses: your settings where set, defaults otherwise\nclaude auto-mode critique  # get AI feedback on your custom allow and soft_deny rules",
+              "kind": "command"
+            }
           ]
         },
         {
