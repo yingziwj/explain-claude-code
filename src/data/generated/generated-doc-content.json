@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-25T04:28:46.349Z",
-  "sourceGeneratedAt": "2026-03-25T04:28:46.096Z",
+  "generatedAt": "2026-03-26T04:41:30.608Z",
+  "sourceGeneratedAt": "2026-03-26T04:41:30.344Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -515,7 +515,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把“Changelog”理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.81、2.1.80、2.1.79、2.1.78 这些环节往下讲。",
+            "原文这页大多会按 2.1.84、2.1.83、2.1.81、2.1.80 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -524,7 +524,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.81 -> 2.1.80 -> 2.1.79 -> 2.1.78。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.84 -> 2.1.83 -> 2.1.81 -> 2.1.80。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -1033,6 +1033,12 @@
               "kind": "command"
             },
             {
+              "title": "原页关键片段：AGENTS.md",
+              "body": "“AGENTS.md”这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "@AGENTS.md\n\n## Claude Code\n\nUse plan mode for changes under `src/billing/`.",
+              "kind": "code"
+            },
+            {
               "title": "原页关键片段：How CLAUDE.md files load",
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
               "code": "CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1 claude --add-dir ../shared-config",
@@ -1135,6 +1141,21 @@
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "# Individual Preferences\n- @~/.claude/my-project-instructions.md",
               "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "AGENTS.md",
+          "paragraphs": [
+            "这一块主要是在说“AGENTS.md”真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "AGENTS.md",
+              "body": "“AGENTS.md”这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "@AGENTS.md\n\n## Claude Code\n\nUse plan mode for changes under `src/billing/`.",
+              "kind": "code"
             }
           ]
         },
@@ -3179,6 +3200,18 @@
               "kind": "code"
             },
             {
+              "title": "原页关键片段：Launch a VS Code tab from other tools 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "open \"vscode://anthropic.claude-code/open\"",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Launch a VS Code tab from other tools 2",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "vscode://anthropic.claude-code/open?prompt=review%20my%20changes",
+              "kind": "code"
+            },
+            {
               "title": "原页关键片段：Connect to external tools with MCP",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
               "code": "claude mcp add --transport http github https://api.githubcopilot.com/mcp/",
@@ -3314,6 +3347,27 @@
           ]
         },
         {
+          "title": "Launch a VS Code tab from other tools",
+          "paragraphs": [
+            "这里主要是在交代“Launch a VS Code tab from other tools”这一块会碰到哪些事。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Launch a VS Code tab from other tools 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "open \"vscode://anthropic.claude-code/open\"",
+              "kind": "command"
+            },
+            {
+              "title": "Launch a VS Code tab from other tools 2",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "vscode://anthropic.claude-code/open?prompt=review%20my%20changes",
+              "kind": "code"
+            }
+          ]
+        },
+        {
           "title": "Configure settings",
           "paragraphs": [
             "这里讲怎么把某个开关拧对。重点不是概念，而是你该在哪儿改、改完怎么确认生效。",
@@ -3426,13 +3480,6 @@
           "paragraphs": [
             "这一块主要是在说“Security and privacy”真到手上该怎么用，哪里最容易踩坑。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ]
-        },
-        {
-          "title": "The built-in IDE MCP server",
-          "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         }
       ],
@@ -6729,15 +6776,15 @@
               "kind": "config"
             },
             {
-              "title": "原页关键片段：Auto-approve specific permission prompts 1",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"hooks\": {\n    \"PermissionRequest\": [\n      {\n        \"matcher\": \"ExitPlanMode\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo '{\\\"hookSpecificOutput\\\": {\\\"hookEventName\\\": \\\"PermissionRequest\\\", \\\"decision\\\": {\\\"behavior\\\": \\\"allow\\\"}}}'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "title": "原页关键片段：Reload environment when directory or files change 1",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "{\n  \"hooks\": {\n    \"CwdChanged\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash >> \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             },
             {
-              "title": "原页关键片段：Auto-approve specific permission prompts 2",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PermissionRequest\",\n    \"decision\": {\n      \"behavior\": \"allow\",\n      \"updatedPermissions\": [\n        { \"type\": \"setMode\", \"mode\": \"acceptEdits\", \"destination\": \"session\" }\n      ]\n    }\n  }\n}",
+              "title": "原页关键片段：Reload environment when directory or files change 2",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "{\n  \"hooks\": {\n    \"FileChanged\": [\n      {\n        \"matcher\": \".envrc|.env\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash >> \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             }
           ]
@@ -6859,6 +6906,27 @@
               "title": "Audit configuration changes",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"hooks\": {\n    \"ConfigChange\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"jq -c '{timestamp: now | todate, source: .source, file: .file_path}' >> ~/claude-config-audit.log\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Reload environment when directory or files change",
+          "paragraphs": [
+            "这一块主要是在说“Reload environment when directory or files change”真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Reload environment when directory or files change 1",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "{\n  \"hooks\": {\n    \"CwdChanged\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash >> \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Reload environment when directory or files change 2",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "{\n  \"hooks\": {\n    \"FileChanged\": [\n      {\n        \"matcher\": \".envrc|.env\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash >> \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             }
           ]
@@ -7171,6 +7239,12 @@
               "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
               "code": "hey, what's in my working directory?",
               "kind": "prompt"
+            },
+            {
+              "title": "原页关键片段：Restrict which channel plugins can run",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "{\n  \"channelsEnabled\": true,\n  \"allowedChannelPlugins\": [\n    { \"marketplace\": \"claude-plugins-official\", \"plugin\": \"telegram\" },\n    { \"marketplace\": \"claude-plugins-official\", \"plugin\": \"discord\" },\n    { \"marketplace\": \"acme-corp-plugins\", \"plugin\": \"internal-alerts\" }\n  ]\n}",
+              "kind": "config"
             }
           ]
         },
@@ -7244,7 +7318,8 @@
         {
           "title": "Enterprise controls",
           "paragraphs": [
-            "这一块主要是在说“Enterprise controls”真到手上该怎么用，哪里最容易踩坑。"
+            "这一块主要是在说“Enterprise controls”真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -7252,6 +7327,21 @@
           "paragraphs": [
             "这里讲怎么把某个开关拧对。重点不是概念，而是你该在哪儿改、改完怎么确认生效。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Restrict which channel plugins can run",
+          "paragraphs": [
+            "这一块主要是在说“Restrict which channel plugins can run”真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Restrict which channel plugins can run",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "{\n  \"channelsEnabled\": true,\n  \"allowedChannelPlugins\": [\n    { \"marketplace\": \"claude-plugins-official\", \"plugin\": \"telegram\" },\n    { \"marketplace\": \"claude-plugins-official\", \"plugin\": \"discord\" },\n    { \"marketplace\": \"acme-corp-plugins\", \"plugin\": \"internal-alerts\" }\n  ]\n}",
+              "kind": "config"
+            }
           ]
         },
         {
@@ -13005,6 +13095,12 @@
               "kind": "command"
             },
             {
+              "title": "原页关键片段：Customize pinned model display and capabilities",
+              "body": "“Customize pinned model display and capabilities”这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='arn:aws:bedrock:us-east-1:123456789012:custom-model/abc'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_NAME='Opus via Bedrock'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_DESCRIPTION='Opus 4.6 routed through a Bedrock custom endpoint'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_SUPPORTED_CAPABILITIES='effort,max_effort,thinking,adaptive_thinking,interleaved_thinking'",
+              "kind": "code"
+            },
+            {
               "title": "原页关键片段：Override model IDs per version",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
               "code": "{\n  \"modelOverrides\": {\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-prod\",\n    \"claude-opus-4-5-20251101\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-45-prod\",\n    \"claude-sonnet-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/sonnet-prod\"\n  }\n}",
@@ -13174,6 +13270,21 @@
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
               "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-6[1m]'",
               "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Customize pinned model display and capabilities",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+          ],
+          "steps": [
+            {
+              "title": "Customize pinned model display and capabilities",
+              "body": "“Customize pinned model display and capabilities”这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='arn:aws:bedrock:us-east-1:123456789012:custom-model/abc'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_NAME='Opus via Bedrock'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_DESCRIPTION='Opus 4.6 routed through a Bedrock custom endpoint'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_SUPPORTED_CAPABILITIES='effort,max_effort,thinking,adaptive_thinking,interleaved_thinking'",
+              "kind": "code"
             }
           ]
         },
@@ -14448,7 +14559,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把“Tools reference”理解成 Reference 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 Bash tool behavior、See also 这些环节往下讲。",
+            "原文这页大多会按 Bash tool behavior、PowerShell tool、Enable the PowerShell tool、Shell selection in settings, hooks, and skills 这些环节往下讲。",
             "翻成人话，大概就是：Bash tool behavior"
           ]
         },
@@ -14457,7 +14568,15 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：Bash tool behavior -> See also。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：Bash tool behavior -> PowerShell tool -> Enable the PowerShell tool -> Shell selection in settings, hooks, and skills。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Enable the PowerShell tool",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"env\": {\n    \"CLAUDE_CODE_USE_POWERSHELL_TOOL\": \"1\"\n  }\n}",
+              "kind": "config"
+            }
           ]
         },
         {
@@ -14465,6 +14584,41 @@
           "paragraphs": [
             "这里讲 Bash 这把刀平时是怎么出手的。",
             "它最能干活，也最容易出事，所以规矩要看清。"
+          ]
+        },
+        {
+          "title": "PowerShell tool",
+          "paragraphs": [
+            "看到这里，就把“PowerShell tool”当成一件真要上手的活来看。"
+          ]
+        },
+        {
+          "title": "Enable the PowerShell tool",
+          "paragraphs": [
+            "看到这类标题，就当是在调一个具体开关。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Enable the PowerShell tool",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"env\": {\n    \"CLAUDE_CODE_USE_POWERSHELL_TOOL\": \"1\"\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Shell selection in settings, hooks, and skills",
+          "paragraphs": [
+            "看到这里，就把“Shell selection in settings, hooks, and skills”当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Preview limitations",
+          "paragraphs": [
+            "别把这段只当成标题看，它其实是在给“Preview limitations”划边界。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -14575,6 +14729,12 @@
           "paragraphs": [
             "这里讲那些快口令，少敲点字就能叫出常用动作。",
             "熟了以后，效率会上来很明显。"
+          ]
+        },
+        {
+          "title": "Transcript viewer",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。"
           ]
         },
         {
@@ -15571,6 +15731,18 @@
               "kind": "config"
             },
             {
+              "title": "原页关键片段：User configuration",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"userConfig\": {\n    \"api_endpoint\": {\n      \"description\": \"Your team's API endpoint\",\n      \"sensitive\": false\n    },\n    \"api_token\": {\n      \"description\": \"API authentication token\",\n      \"sensitive\": true\n    }\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Channels",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"channels\": [\n    {\n      \"server\": \"telegram\",\n      \"userConfig\": {\n        \"bot_token\": { \"description\": \"Telegram bot token\", \"sensitive\": true },\n        \"owner_id\": { \"description\": \"Your Telegram user ID\", \"sensitive\": false }\n      }\n    }\n  ]\n}",
+              "kind": "config"
+            },
+            {
               "title": "原页关键片段：Path behavior rules",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"commands\": [\n    \"./specialized/deploy.md\",\n    \"./utilities/batch-process.md\"\n  ],\n  \"agents\": [\n    \"./custom-agents/reviewer.md\",\n    \"./custom-agents/tester.md\"\n  ]\n}",
@@ -15587,18 +15759,6 @@
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
               "code": "{\n  \"hooks\": {\n    \"SessionStart\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"diff -q \\\"${CLAUDE_PLUGIN_ROOT}/package.json\\\" \\\"${CLAUDE_PLUGIN_DATA}/package.json\\\" >/dev/null 2>&1 || (cd \\\"${CLAUDE_PLUGIN_DATA}\\\" && cp \\\"${CLAUDE_PLUGIN_ROOT}/package.json\\\" . && npm install) || rm -f \\\"${CLAUDE_PLUGIN_DATA}/package.json\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Environment variables 3",
-              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"mcpServers\": {\n    \"routines\": {\n      \"command\": \"node\",\n      \"args\": [\"${CLAUDE_PLUGIN_ROOT}/server.js\"],\n      \"env\": {\n        \"NODE_PATH\": \"${CLAUDE_PLUGIN_DATA}/node_modules\"\n      }\n    }\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Working with external dependencies",
-              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "# Inside your plugin directory\nln -s /path/to/shared-utils ./shared-utils",
-              "kind": "code"
             }
           ]
         },
@@ -15736,6 +15896,36 @@
           ]
         },
         {
+          "title": "User configuration",
+          "paragraphs": [
+            "别把这段只当成标题看，它其实是在给“User configuration”划边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "User configuration",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"userConfig\": {\n    \"api_endpoint\": {\n      \"description\": \"Your team's API endpoint\",\n      \"sensitive\": false\n    },\n    \"api_token\": {\n      \"description\": \"API authentication token\",\n      \"sensitive\": true\n    }\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Channels",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说“Channels”管到哪儿。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Channels",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"channels\": [\n    {\n      \"server\": \"telegram\",\n      \"userConfig\": {\n        \"bot_token\": { \"description\": \"Telegram bot token\", \"sensitive\": true },\n        \"owner_id\": { \"description\": \"Your Telegram user ID\", \"sensitive\": false }\n      }\n    }\n  ]\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
           "title": "Path behavior rules",
           "paragraphs": [
             "这里讲路径写法会怎么被认。",
@@ -15823,7 +16013,7 @@
             {
               "title": "Standard plugin layout",
               "body": "这一段主要是认目录和文件摆放位置。先把地方放对，后面才不容易串。",
-              "code": "enterprise-plugin/\n├── .claude-plugin/           # Metadata directory (optional)\n│   └── plugin.json             # plugin manifest\n├── commands/                 # Default command location\n│   ├── status.md\n│   └── logs.md\n├── agents/                   # Default agent location\n│   ├── security-reviewer.md\n│   ├── performance-tester.md\n│   └── compliance-checker.md\n├── skills/                   # Agent Skills\n│   ├── code-reviewer/\n│   │   └── SKILL.md\n│   └── pdf-processor/\n│       ├── SKILL.md\n│       └── scripts/\n├── hooks/                    # Hook configurations\n│   ├── hooks.json           # Main hook config\n│   └── security-hooks.json  # Additional hooks\n├── settings.json            # Default settings for the plugin\n├── .mcp.json                # MCP server definitions\n├── .lsp.json                # LSP server configurations\n├── scripts/                 # Hook and utility scripts\n│   ├── security-scan.sh\n│   ├── format-code.py\n│   └── deploy.js\n├── LICENSE                  # License file\n└── CHANGELOG.md             # Version history",
+              "code": "enterprise-plugin/\n├── .claude-plugin/           # Metadata directory (optional)\n│   └── plugin.json             # plugin manifest\n├── commands/                 # Default command location\n│   ├── status.md\n│   └── logs.md\n├── agents/                   # Default agent location\n│   ├── security-reviewer.md\n│   ├── performance-tester.md\n│   └── compliance-checker.md\n├── skills/                   # Agent Skills\n│   ├── code-reviewer/\n│   │   └── SKILL.md\n│   └── pdf-processor/\n│       ├── SKILL.md\n│       └── scripts/\n├── output-styles/            # Output style definitions\n│   └── terse.md\n├── hooks/                    # Hook configurations\n│   ├── hooks.json           # Main hook config\n│   └── security-hooks.json  # Additional hooks\n├── settings.json            # Default settings for the plugin\n├── .mcp.json                # MCP server definitions\n├── .lsp.json                # LSP server configurations\n├── scripts/                 # Hook and utility scripts\n│   ├── security-scan.sh\n│   ├── format-code.py\n│   └── deploy.js\n├── LICENSE                  # License file\n└── CHANGELOG.md             # Version history",
               "kind": "structure"
             }
           ]
@@ -15938,20 +16128,6 @@
           "title": "Common issues",
           "paragraphs": [
             "这里讲的是怎么找毛病，先查明白哪一步出错，再决定怎么修。"
-          ]
-        },
-        {
-          "title": "Example error messages",
-          "paragraphs": [
-            "看到例子时，先学它的架子，再决定怎么照你自己情况改。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
-          ]
-        },
-        {
-          "title": "Hook troubleshooting",
-          "paragraphs": [
-            "这里讲的是怎么找毛病，先查明白哪一步出错，再决定怎么修。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         }
       ],
