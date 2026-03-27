@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-26T04:41:30.608Z",
-  "sourceGeneratedAt": "2026-03-26T04:41:30.344Z",
+  "generatedAt": "2026-03-27T04:42:11.831Z",
+  "sourceGeneratedAt": "2026-03-27T04:42:11.569Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -515,7 +515,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把“Changelog”理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.84、2.1.83、2.1.81、2.1.80 这些环节往下讲。",
+            "原文这页大多会按 2.1.85、2.1.84、2.1.83、2.1.81 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -524,7 +524,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.84 -> 2.1.83 -> 2.1.81 -> 2.1.80。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.85 -> 2.1.84 -> 2.1.83 -> 2.1.81。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -905,7 +905,7 @@
           "title": "Understand context costs",
           "paragraphs": [
             "这一块主要是在说“Understand context costs”真到手上该怎么用，哪里最容易踩坑。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -984,6 +984,136 @@
         "title": "一眼看懂这一页",
         "lines": [
           "Extend Claude Code",
+          "   |",
+          "   v",
+          "这是 Core concepts 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "claude-directory": {
+      "sourceLabel": "Explore the .claude directory",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Explore the .claude directory：Where Claude Code reads CLAUDE.md, settings.json, hooks, skills, commands, subagents, rules, and auto memory. Explore the .claude directory in your project and ~/.claude in your home directory.",
+            "你可以把它当成“Core concepts”这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把“Explore the .claude directory”理解成 Core concepts 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 What’s not shown、File reference、Check what loaded 这些环节往下讲。",
+            "翻成人话，大概就是：Where Claude Code reads CLAUDE.md, settings.json, hooks, skills, commands, subagents, rules, and auto memory. Explore the .claude directory in your project and ~/.claude in your home directory."
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：What’s not shown -> File reference -> Check what loaded。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ]
+        },
+        {
+          "title": "What’s not shown",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说“What’s not shown”管到哪儿。"
+          ]
+        },
+        {
+          "title": "File reference",
+          "paragraphs": [
+            "这种内容最怕想当然，老老实实照它列的格式走最稳。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Check what loaded",
+          "paragraphs": [
+            "别把这段只当成标题看，它其实是在给“Check what loaded”划边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Related resources",
+          "paragraphs": [
+            "这一段主要是在把“Related resources”讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Explore the .claude directory",
+          "   |",
+          "   v",
+          "这是 Core concepts 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "context-window": {
+      "sourceLabel": "Explore the context window",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Explore the context window：An interactive simulation of how Claude Code's context window fills during a session. See what loads automatically, what each file read costs, and when rules and hooks fire.",
+            "你可以把它当成“Core concepts”这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把“Explore the context window”理解成 Core concepts 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 What the timeline shows、Check your own session、Related resources 这些环节往下讲。",
+            "翻成人话，大概就是：An interactive simulation of how Claude Code’s context window fills during a session. See what loads automatically, what each file read costs, and when rules and hooks fire."
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：What the timeline shows -> Check your own session -> Related resources。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ]
+        },
+        {
+          "title": "What the timeline shows",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说“What the timeline shows”管到哪儿。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Check your own session",
+          "paragraphs": [
+            "这一段不只是挂个标题，它是在说明“Check your own session”这一块到底负责什么。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ]
+        },
+        {
+          "title": "Related resources",
+          "paragraphs": [
+            "这一段主要是在把“Related resources”讲实，不是只摆个标题给你看。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Explore the context window",
           "   |",
           "   v",
           "这是 Core concepts 里的一摊要紧活",
@@ -2054,6 +2184,21 @@
           ]
         },
         {
+          "title": "Copy gitignored files to worktrees",
+          "paragraphs": [
+            "看到这里，就把“Copy gitignored files to worktrees”当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Copy gitignored files to worktrees",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": ".env\n.env.local\nconfig/secrets.json",
+              "kind": "config"
+            }
+          ]
+        },
+        {
           "title": "Manage worktrees manually",
           "paragraphs": [
             "看到这类标题，就把它当成日常管摊子的规矩。",
@@ -2120,21 +2265,6 @@
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
               "code": "// package.json\n{\n    ...\n    \"scripts\": {\n        ...\n        \"lint:claude\": \"claude -p 'you are a linter. please look at the changes vs. main and report any issues related to typos. report the filename and line number on one line, and a description of the issue on the second line. do not return any other text.'\"\n    }\n}",
               "kind": "config"
-            }
-          ]
-        },
-        {
-          "title": "Pipe in, pipe out",
-          "paragraphs": [
-            "看到这里，就把“Pipe in, pipe out”当成一件真要上手的活来看。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ],
-          "steps": [
-            {
-              "title": "Pipe in, pipe out",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "cat build-error.txt | claude -p 'concisely explain the root cause of this build error' > output.txt",
-              "kind": "command"
             }
           ]
         }
@@ -2803,6 +2933,25 @@
           "title": "Troubleshooting",
           "paragraphs": [
             "这里讲的是怎么找毛病，先查明白哪一步出错，再决定怎么修。"
+          ]
+        },
+        {
+          "title": "”Remote Control requires a claude.ai subscription”",
+          "paragraphs": [
+            "看到这里，就把“”Remote Control requires a claude.ai subscription””当成一件真要上手的活来看。"
+          ]
+        },
+        {
+          "title": "”Remote Control requires a full-scope login token”",
+          "paragraphs": [
+            "这一段主要是在把“”Remote Control requires a full-scope login token””讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "”Unable to determine your organization for Remote Control eligibility”",
+          "paragraphs": [
+            "这一段主要是在把“”Unable to determine your organization for Remote Control eligibility””讲实，不是只摆个标题给你看。"
           ]
         },
         {
@@ -14142,9 +14291,15 @@
               "kind": "code"
             },
             {
-              "title": "原页关键片段：Unbind default shortcuts",
+              "title": "原页关键片段：Unbind default shortcuts 1",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"ctrl+s\": null\n      }\n    }\n  ]\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Unbind default shortcuts 2",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"ctrl+x ctrl+k\": null,\n        \"ctrl+x ctrl+e\": null,\n        \"ctrl+x\": \"chat:newline\"\n      }\n    }\n  ]\n}",
               "kind": "config"
             }
           ]
@@ -14348,9 +14503,15 @@
           ],
           "steps": [
             {
-              "title": "Unbind default shortcuts",
+              "title": "Unbind default shortcuts 1",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"ctrl+s\": null\n      }\n    }\n  ]\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Unbind default shortcuts 2",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"ctrl+x ctrl+k\": null,\n        \"ctrl+x ctrl+e\": null,\n        \"ctrl+x\": \"chat:newline\"\n      }\n    }\n  ]\n}",
               "kind": "config"
             }
           ]
@@ -15543,6 +15704,48 @@
           ]
         },
         {
+          "title": "TaskCreated",
+          "paragraphs": [
+            "看到这里，就把“TaskCreated”当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "TaskCreated 1",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"TaskCreated\",\n  \"task_id\": \"task-001\",\n  \"task_subject\": \"Implement user authentication\",\n  \"task_description\": \"Add login and signup endpoints\",\n  \"teammate_name\": \"implementer\",\n  \"team_name\": \"my-project\"\n}",
+              "kind": "config"
+            },
+            {
+              "title": "TaskCreated 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "#!/bin/bash\nINPUT=$(cat)\nTASK_SUBJECT=$(echo \"$INPUT\" | jq -r '.task_subject')\n\nif [[ ! \"$TASK_SUBJECT\" =~ ^\\[TICKET-[0-9]+\\] ]]; then\n  echo \"Task subject must start with a ticket number, e.g. '[TICKET-123] Add feature'\" >&2\n  exit 2\nfi\n\nexit 0",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "TaskCompleted",
+          "paragraphs": [
+            "这里讲任务准备算完成那一下会触发什么。",
+            "适合在交卷前再加一道检查。"
+          ],
+          "steps": [
+            {
+              "title": "TaskCompleted 1",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"TaskCompleted\",\n  \"task_id\": \"task-001\",\n  \"task_subject\": \"Implement user authentication\",\n  \"task_description\": \"Add login and signup endpoints\",\n  \"teammate_name\": \"implementer\",\n  \"team_name\": \"my-project\"\n}",
+              "kind": "config"
+            },
+            {
+              "title": "TaskCompleted 2",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "#!/bin/bash\nINPUT=$(cat)\nTASK_SUBJECT=$(echo \"$INPUT\" | jq -r '.task_subject')\n\n# Run the test suite\nif ! npm test 2>&1; then\n  echo \"Tests not passing. Fix failing tests before completing: $TASK_SUBJECT\" >&2\n  exit 2\nfi\n\nexit 0",
+              "kind": "command"
+            }
+          ]
+        },
+        {
           "title": "Stop",
           "paragraphs": [
             "这里不是让你背“Stop”这个词，而是让你看它真干活时怎么使。",
@@ -15596,54 +15799,6 @@
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
               "code": "#!/bin/bash\n\nif [ ! -f \"./dist/output.js\" ]; then\n  echo \"Build artifact missing. Run the build before stopping.\" >&2\n  exit 2\nfi\n\nexit 0",
               "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "TaskCompleted",
-          "paragraphs": [
-            "这里讲任务准备算完成那一下会触发什么。",
-            "适合在交卷前再加一道检查。"
-          ],
-          "steps": [
-            {
-              "title": "TaskCompleted 1",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"TaskCompleted\",\n  \"task_id\": \"task-001\",\n  \"task_subject\": \"Implement user authentication\",\n  \"task_description\": \"Add login and signup endpoints\",\n  \"teammate_name\": \"implementer\",\n  \"team_name\": \"my-project\"\n}",
-              "kind": "config"
-            },
-            {
-              "title": "TaskCompleted 2",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "#!/bin/bash\nINPUT=$(cat)\nTASK_SUBJECT=$(echo \"$INPUT\" | jq -r '.task_subject')\n\n# Run the test suite\nif ! npm test 2>&1; then\n  echo \"Tests not passing. Fix failing tests before completing: $TASK_SUBJECT\" >&2\n  exit 2\nfi\n\nexit 0",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "ConfigChange",
-          "paragraphs": [
-            "这里讲配置一变动时会触发什么。",
-            "适合留痕、告警或者补审。"
-          ],
-          "steps": [
-            {
-              "title": "ConfigChange 1",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"hooks\": {\n    \"ConfigChange\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"\\\"$CLAUDE_PROJECT_DIR\\\"/.claude/hooks/audit-config-change.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "ConfigChange 2",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"hook_event_name\": \"ConfigChange\",\n  \"source\": \"project_settings\",\n  \"file_path\": \"/Users/.../my-project/.claude/settings.json\"\n}",
-              "kind": "config"
-            },
-            {
-              "title": "ConfigChange 3",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"decision\": \"block\",\n  \"reason\": \"Configuration changes to project settings require admin approval\"\n}",
-              "kind": "config"
             }
           ]
         }

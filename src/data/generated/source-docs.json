@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-26T04:41:30.344Z",
+  "generatedAt": "2026-03-27T04:42:11.569Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -55,6 +55,14 @@
         {
           "title": "Extend Claude Code",
           "path": "/docs/en/features-overview"
+        },
+        {
+          "title": "Explore the .claude directory",
+          "path": "/docs/en/claude-directory"
+        },
+        {
+          "title": "Explore the context window",
+          "path": "/docs/en/context-window"
         }
       ]
     },
@@ -946,6 +954,7 @@
       "metaDescription": "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
       "headings": [],
       "toc": [
+        "2.1.85",
         "2.1.84",
         "2.1.83",
         "2.1.81",
@@ -964,13 +973,42 @@
         "2.1.68",
         "2.1.66",
         "2.1.63",
-        "2.1.62",
-        "2.1.61"
+        "2.1.62"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Added CLAUDE_CODE_MCP_SERVER_NAME and CLAUDE_CODE_MCP_SERVER_URL environment variables to MCP headersHelper scripts, allowing one helper to serve multiple servers",
+        "Added conditional if field for hooks using permission rule syntax (e.g., Bash(git *)) to filter when they run, reducing process spawning overhead",
+        "Added timestamp markers in transcripts when scheduled tasks (/loop, CronCreate) fire",
+        "Added trailing space after [Image #N] placeholder when pasting images",
+        "Deep link queries (claude-cli://open?q=…) now support up to 5,000 characters, with a “scroll to review” warning for long pre-filled prompts",
+        "MCP OAuth now follows RFC 9728 Protected Resource Metadata discovery to find the authorization server",
+        "Plugins blocked by organization policy (managed-settings.json) can no longer be installed or enabled, and are hidden from marketplace views",
+        "PreToolUse hooks can now satisfy AskUserQuestion by returning updatedInput alongside permissionDecision: \"allow\", enabling headless integrations that collect answers via their own UI",
+        "tool_parameters in OpenTelemetry tool_result events are now gated behind OTEL_LOG_TOOL_DETAILS=1",
+        "Fixed /compact failing with “context exceeded” when the conversation has grown too large for the compact request itself to fit",
+        "Fixed /plugin enable and /plugin disable failing when a plugin’s install location differs from where it’s declared in settings",
+        "Fixed --worktree exiting with an error in non-git repositories before the WorktreeCreate hook could run",
+        "Fixed deniedMcpServers setting not blocking claude.ai MCP servers",
+        "Fixed switch_display in the computer-use tool returning “not available in this session” on multi-monitor setups",
+        "Fixed crash when OTEL_LOGS_EXPORTER, OTEL_METRICS_EXPORTER, or OTEL_TRACES_EXPORTER is set to none",
+        "Fixed diff syntax highlighting not working in non-native builds",
+        "Fixed MCP step-up authorization failing when a refresh token exists — servers requesting elevated scopes via 403 insufficient_scope now correctly trigger the re-authorization flow",
+        "Fixed memory leak in remote sessions when a streaming response is interrupted",
+        "Fixed persistent ECONNRESET errors during edge connection churn by using a fresh TCP connection on retry",
+        "Fixed prompts getting stuck in the queue after running certain slash commands, with up-arrow unable to retrieve them",
+        "Fixed Python Agent SDK: type:'sdk' MCP servers passed via --mcp-config are no longer dropped during startup",
+        "Fixed raw key sequences appearing in the prompt when running over SSH or in the VS Code integrated terminal",
+        "Fixed Remote Control session status staying stuck on “Requires Action” after a permission is resolved",
+        "Fixed shift+enter and meta+enter being intercepted by typeahead suggestions instead of inserting newlines",
+        "Fixed stale content bleeding through when scrolling up during streaming",
+        "Fixed terminal left in enhanced keyboard mode after exit in Ghostty, Kitty, WezTerm, and other terminals supporting the Kitty keyboard protocol — Ctrl+C and Ctrl+D now work correctly after quitting",
+        "Improved @-mention file autocomplete performance on large repositories",
+        "Improved PowerShell dangerous command detection",
+        "Improved scroll performance with large transcripts by replacing WASM yoga-layout with a pure TypeScript implementation",
+        "Reduced UI stutter when compaction triggers on large sessions",
         "Added PowerShell tool for Windows as an opt-in preview. Learn more at https://code.claude.com/docs/en/tools-reference#powershell-tool",
         "Added ANTHROPIC_DEFAULT_{OPUS,SONNET,HAIKU}_MODEL_SUPPORTS env vars to override effort/thinking capability detection for pinned default models for 3p (Bedrock, Vertex, Foundry), and _MODEL_NAME/_DESCRIPTION to customize the /model picker label",
         "Added CLAUDE_STREAM_IDLE_TIMEOUT_MS env var to configure the streaming idle watchdog threshold (default 90s)",
@@ -1117,37 +1155,7 @@
         "Added rate_limits field to statusline scripts for displaying Claude.ai rate limit usage (5-hour and 7-day windows with used_percentage and resets_at)",
         "Added source: 'settings' plugin marketplace source — declare plugin entries inline in settings.json",
         "Added CLI tool usage detection to plugin tips, in addition to file pattern matching",
-        "Added effort frontmatter support for skills and slash commands to override the model effort level when invoked",
-        "Added --channels (research preview) — allow MCP servers to push messages into your session",
-        "Fixed --resume dropping parallel tool results — sessions with parallel tool calls now restore all tool_use/tool_result pairs instead of showing [Tool result missing] placeholders",
-        "Fixed voice mode WebSocket failures caused by Cloudflare bot detection on non-browser TLS fingerprints",
-        "Fixed 400 errors when using fine-grained tool streaming through API proxies, Bedrock, or Vertex",
-        "Fixed /remote-control appearing for gateway and third-party provider deployments where it cannot function",
-        "Fixed /sandbox tab switching not responding to Tab or arrow keys",
-        "Improved responsiveness of @ file autocomplete in large git repositories",
-        "Improved /effort to show what auto currently resolves to, matching the status bar indicator",
-        "Improved /permissions — Tab and arrow keys now switch tabs from within a list",
-        "Improved background tasks panel — left arrow now closes from the list view",
-        "Simplified plugin install tips to use a single /plugin install command instead of a two-step flow",
-        "Reduced memory usage on startup in large repositories (~80 MB saved on 250k-file repos)",
-        "Fixed managed settings (enabledPlugins, permissions.defaultMode, policy-set env vars) not being applied at startup when remote-settings.json was cached from a prior session",
-        "Added --console flag to claude auth login for Anthropic Console (API billing) authentication",
-        "Added “Show turn duration” toggle to the /config menu",
-        "Fixed claude -p hanging when spawned as a subprocess without explicit stdin (e.g. Python subprocess.run)",
-        "Fixed Ctrl+C not working in -p (print) mode",
-        "Fixed /btw returning the main agent’s output instead of answering the side question when triggered during streaming",
-        "Fixed voice mode not activating correctly on startup when voiceEnabled: true is set",
-        "Fixed left/right arrow tab navigation in /permissions",
-        "Fixed CLAUDE_CODE_DISABLE_TERMINAL_TITLE not preventing terminal title from being set on startup",
-        "Fixed custom status line showing nothing when workspace trust is blocking it",
-        "Fixed enterprise users being unable to retry on rate limit (429) errors",
-        "Fixed SessionEnd hooks not firing when using interactive /resume to switch sessions",
-        "Improved startup memory usage by ~18MB across all scenarios",
-        "Improved non-streaming API fallback with a 2-minute per-attempt timeout, preventing sessions from hanging indefinitely",
-        "CLAUDE_CODE_PLUGIN_SEED_DIR now supports multiple seed directories separated by the platform path delimiter (: on Unix, ; on Windows)",
-        "[VSCode] Added /remote-control — bridge your session to claude.ai/code to continue from a browser or phone",
-        "[VSCode] Session tabs now get AI-generated titles based on your first message",
-        "[VSCode] Fixed the thinking pill showing “Thinking” instead of “Thought for Ns” after a response completes"
+        "Added effort frontmatter support for skills and slash commands to override the model effort level when invoked"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1157,15 +1165,15 @@
             "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Added PowerShell tool for Windows as an opt-in preview. Learn more at https://code.claude.com/docs/en/tools-reference#powershell-tool",
-            "Added ANTHROPIC_DEFAULT_{OPUS,SONNET,HAIKU}_MODEL_SUPPORTS env vars to override effort/thinking capability detection for pinned default models for 3p (Bedrock, Vertex, Foundry), and _MODEL_NAME/_DESCRIPTION to customize the /model picker label",
-            "Added CLAUDE_STREAM_IDLE_TIMEOUT_MS env var to configure the streaming idle watchdog threshold (default 90s)",
-            "Added TaskCreated hook that fires when a task is created via TaskCreate",
-            "Added WorktreeCreate hook support for type: \"http\" — return the created worktree path via hookSpecificOutput.worktreePath in the response JSON",
-            "Added allowedChannelPlugins managed setting for team/enterprise admins to define a channel plugin allowlist",
-            "Added x-client-request-id header to API requests for debugging timeouts",
-            "Added idle-return prompt that nudges users returning after 75+ minutes to /clear, reducing unnecessary token re-caching on stale sessions",
-            "Deep links (claude-cli://) now open in your preferred terminal instead of whichever terminal happens to be first in the detection list"
+            "Added CLAUDE_CODE_MCP_SERVER_NAME and CLAUDE_CODE_MCP_SERVER_URL environment variables to MCP headersHelper scripts, allowing one helper to serve multiple servers",
+            "Added conditional if field for hooks using permission rule syntax (e.g., Bash(git *)) to filter when they run, reducing process spawning overhead",
+            "Added timestamp markers in transcripts when scheduled tasks (/loop, CronCreate) fire",
+            "Added trailing space after [Image #N] placeholder when pasting images",
+            "Deep link queries (claude-cli://open?q=…) now support up to 5,000 characters, with a “scroll to review” warning for long pre-filled prompts",
+            "MCP OAuth now follows RFC 9728 Protected Resource Metadata discovery to find the authorization server",
+            "Plugins blocked by organization policy (managed-settings.json) can no longer be installed or enabled, and are hidden from marketplace views",
+            "PreToolUse hooks can now satisfy AskUserQuestion by returning updatedInput alongside permissionDecision: \"allow\", enabling headless integrations that collect answers via their own UI",
+            "tool_parameters in OpenTelemetry tool_result events are now gated behind OTEL_LOG_TOOL_DETAILS=1"
           ],
           "codeBlocks": []
         }
@@ -1273,7 +1281,7 @@
         "Your terminal. Any command you could run: build tools, git, package managers, system utilities, scripts. If you can do it from the command line, Claude can too.",
         "Your git state. Current branch, uncommitted changes, and recent commit history.",
         "Your CLAUDE.md. A markdown file where you store project-specific instructions, conventions, and context that Claude should know every session.",
-        "Auto memory. Learnings Claude saves automatically as you work, like project patterns and your preferences. The first 200 lines of MEMORY.md are loaded at the start of each session.",
+        "Auto memory. Learnings Claude saves automatically as you work, like project patterns and your preferences. The first 200 lines or 25KB of MEMORY.md, whichever comes first, load at the start of each session.",
         "Extensions you configure. MCP servers for external services, skills for workflows, subagents for delegated work, and Claude in Chrome for browser interaction.",
         "Because Claude sees your whole project, it can work across it. When you ask Claude to “fix the authentication bug,” it searches for relevant files, reads multiple files to understand context, makes coordinated edits across them, runs tests to verify the fix, and commits the changes if you ask. This is different from inline code assistants that only see the current file.",
         "The agentic loop, tools, and capabilities described above are the same everywhere you use Claude Code. What changes is where the code executes and how you interact with it.",
@@ -1289,9 +1297,10 @@
         "This creates a new session ID while preserving the conversation history up to that point. The original session remains unchanged. Like resume, forked sessions don’t inherit session-scoped permissions.",
         "Same session in multiple terminals: If you resume the same session in multiple terminals, both terminals write to the same session file. Messages from both get interleaved, like two people writing in the same notebook. Nothing corrupts, but the conversation becomes jumbled. Each terminal only sees its own messages during the session, but if you resume that session later, you’ll see everything interleaved. For parallel work from the same starting point, use --fork-session to give each terminal its own clean session.",
         "Claude’s context window holds your conversation history, file contents, command outputs, CLAUDE.md, auto memory, loaded skills, and system instructions. As you work, context fills up. Claude compacts automatically, but instructions from early in the conversation can get lost. Put persistent rules in CLAUDE.md, and run /context to see what’s using space.",
+        "For an interactive walkthrough of what loads and when, see Explore the context window.",
         "Claude Code manages context automatically as you approach the limit. It clears older tool outputs first, then summarizes the conversation if needed. Your requests and key code snippets are preserved; detailed instructions from early in the conversation may be lost. Put persistent rules in CLAUDE.md rather than relying on conversation history.",
         "To control what’s preserved during compaction, add a “Compact Instructions” section to CLAUDE.md or run /compact with a focus (like /compact focus on the API changes).",
-        "Run /context to see what’s using space. MCP servers add tool definitions to every request, so a few servers can consume significant context before you start working. Run /mcp to check per-server costs.",
+        "Run /context to see what’s using space. MCP tool definitions are deferred by default and loaded on demand via tool search, so only tool names consume context until Claude uses a specific tool. Run /mcp to check per-server costs.",
         "Beyond compaction, you can use other features to control what loads into context.",
         "Skills load on demand. Claude sees skill descriptions at session start, but the full content only loads when a skill is used. For skills you invoke manually, set disable-model-invocation: true to keep descriptions out of context until you need them.",
         "Subagents get their own fresh context, completely separate from your main conversation. Their work doesn’t bloat your context. When done, they return a summary. This isolation is why subagents help with long sessions.",
@@ -1402,7 +1411,7 @@
             "Your terminal. Any command you could run: build tools, git, package managers, system utilities, scripts. If you can do it from the command line, Claude can too.",
             "Your git state. Current branch, uncommitted changes, and recent commit history.",
             "Your CLAUDE.md. A markdown file where you store project-specific instructions, conventions, and context that Claude should know every session.",
-            "Auto memory. Learnings Claude saves automatically as you work, like project patterns and your preferences. The first 200 lines of MEMORY.md are loaded at the start of each session.",
+            "Auto memory. Learnings Claude saves automatically as you work, like project patterns and your preferences. The first 200 lines or 25KB of MEMORY.md, whichever comes first, load at the start of each session.",
             "Extensions you configure. MCP servers for external services, skills for workflows, subagents for delegated work, and Claude in Chrome for browser interaction.",
             "Because Claude sees your whole project, it can work across it. When you ask Claude to “fix the authentication bug,” it searches for relevant files, reads multiple files to understand context, makes coordinated edits across them, runs tests to verify the fix, and commits the changes if you ask. This is different from inline code assistants that only see the current file."
           ],
@@ -1462,9 +1471,10 @@
           "title": "​The context window",
           "paragraphs": [
             "Claude’s context window holds your conversation history, file contents, command outputs, CLAUDE.md, auto memory, loaded skills, and system instructions. As you work, context fills up. Claude compacts automatically, but instructions from early in the conversation can get lost. Put persistent rules in CLAUDE.md, and run /context to see what’s using space.",
+            "For an interactive walkthrough of what loads and when, see Explore the context window.",
             "Claude Code manages context automatically as you approach the limit. It clears older tool outputs first, then summarizes the conversation if needed. Your requests and key code snippets are preserved; detailed instructions from early in the conversation may be lost. Put persistent rules in CLAUDE.md rather than relying on conversation history.",
             "To control what’s preserved during compaction, add a “Compact Instructions” section to CLAUDE.md or run /compact with a focus (like /compact focus on the API changes).",
-            "Run /context to see what’s using space. MCP servers add tool definitions to every request, so a few servers can consume significant context before you start working. Run /mcp to check per-server costs.",
+            "Run /context to see what’s using space. MCP tool definitions are deferred by default and loaded on demand via tool search, so only tool names consume context until Claude uses a specific tool. Run /mcp to check per-server costs.",
             "Beyond compaction, you can use other features to control what loads into context.",
             "Skills load on demand. Claude sees skill descriptions at session start, but the full content only loads when a skill is used. For skills you invoke manually, set disable-model-invocation: true to keep descriptions out of context until you need them.",
             "Subagents get their own fresh context, completely separate from your main conversation. Their work doesn’t bloat your context. When done, they return a summary. This isolation is why subagents help with long sessions.",
@@ -1693,7 +1703,7 @@
         "Hooks merge: all registered hooks fire for their matching events regardless of source. See hooks.",
         "Each extension solves a different problem: CLAUDE.md handles always-on context, skills handle on-demand knowledge and workflows, MCP handles external connections, subagents handle isolation, and hooks handle automation. Real setups combine them based on your workflow.",
         "For example, you might use CLAUDE.md for project conventions, a skill for your deployment workflow, MCP to connect to your database, and a hook to run linting after every edit. Each feature handles what it’s best at.",
-        "Every feature you add consumes some of Claude’s context. Too much can fill up your context window, but it can also add noise that makes Claude less effective; skills may not trigger correctly, or Claude may lose track of your conventions. Understanding these trade-offs helps you build an effective setup.",
+        "Every feature you add consumes some of Claude’s context. Too much can fill up your context window, but it can also add noise that makes Claude less effective; skills may not trigger correctly, or Claude may lose track of your conventions. Understanding these trade-offs helps you build an effective setup. For an interactive view of how these features combine in a running session, see Explore the context window.",
         "Each feature has a different loading strategy and context cost:",
         "*By default, skill descriptions load at session start so Claude can decide when to use them. Set disable-model-invocation: true in a skill’s frontmatter to hide it from Claude entirely until you invoke it manually. This reduces context cost to zero for skills you only trigger yourself.",
         "Each feature loads at different points in your session. The tabs below explain when each one loads and what goes into context.",
@@ -1710,8 +1720,8 @@
         "Context cost: Low until used. User-only skills have zero cost until invoked.",
         "In subagents: Skills work differently in subagents. Instead of on-demand loading, skills passed to a subagent are fully preloaded into its context at launch. Subagents don’t inherit skills from the main session; you must specify them explicitly.",
         "When: Session start.",
-        "What loads: All tool definitions and JSON schemas from connected servers.",
-        "Context cost: Tool search (enabled by default) loads MCP tools up to 10% of context and defers the rest until needed.",
+        "What loads: Tool names from connected servers. Full JSON schemas stay deferred until Claude needs a specific tool.",
+        "Context cost: Tool search is on by default, so idle MCP tools consume minimal context.",
         "Reliability note: MCP connections can fail silently mid-session. If a server disconnects, its tools disappear without warning. Claude may try to use a tool that no longer exists. If you notice Claude failing to use an MCP tool it previously could access, check the connection with /mcp.",
         "When: On demand, when you or Claude spawns one for a task.",
         "What loads: Fresh, isolated context containing:",
@@ -1817,7 +1827,7 @@
         {
           "title": "​Understand context costs",
           "paragraphs": [
-            "Every feature you add consumes some of Claude’s context. Too much can fill up your context window, but it can also add noise that makes Claude less effective; skills may not trigger correctly, or Claude may lose track of your conventions. Understanding these trade-offs helps you build an effective setup."
+            "Every feature you add consumes some of Claude’s context. Too much can fill up your context window, but it can also add noise that makes Claude less effective; skills may not trigger correctly, or Claude may lose track of your conventions. Understanding these trade-offs helps you build an effective setup. For an interactive view of how these features combine in a running session, see Explore the context window."
           ],
           "codeBlocks": []
         },
@@ -1907,6 +1917,165 @@
           "title": "Marketplaces",
           "paragraphs": [
             "Host and distribute plugin collections",
+            "Was this page helpful?"
+          ],
+          "codeBlocks": []
+        }
+      ]
+    },
+    {
+      "section": "Core concepts",
+      "path": "/docs/en/claude-directory",
+      "url": "https://code.claude.com/docs/en/claude-directory",
+      "title": "Explore the .claude directory",
+      "metaDescription": "Where Claude Code reads CLAUDE.md, settings.json, hooks, skills, commands, subagents, rules, and auto memory. Explore the .claude directory in your project and ~/.claude in your home directory.",
+      "headings": [
+        "​What’s not shown",
+        "​File reference",
+        "​Check what loaded",
+        "​Related resources"
+      ],
+      "toc": [],
+      "paragraphs": [
+        "Where Claude Code reads CLAUDE.md, settings.json, hooks, skills, commands, subagents, rules, and auto memory. Explore the .claude directory in your project and ~/.claude in your home directory.",
+        "Claude Code reads instructions, settings, skills, subagents, and memory from your project directory and from ~/.claude in your home directory. Commit project files to git to share them with your team; files in ~/.claude are personal configuration that applies across all your projects.",
+        "Most users only edit CLAUDE.md and settings.json. The rest of the directory is optional: add skills, rules, or subagents as you need them.",
+        "This page is an interactive explorer: click files in the tree to see what each one does, when it loads, and an example. For a quick reference, see the file reference table below.",
+        "The explorer covers the files you’ll interact with most. A few things live elsewhere:",
+        "This table lists every file the explorer covers. Project-scope files live in your repo under .claude/ (or at the root for CLAUDE.md and .mcp.json). Global-scope files live in ~/.claude/ and apply across all projects.",
+        "Several things can override what you put in these files:",
+        "Managed settings deployed by your organization take precedence over everything",
+        "CLI flags like --permission-mode or --settings override settings.json for that session",
+        "Some environment variables take precedence over their equivalent setting, but this varies: check the environment variables reference for each one",
+        "See settings precedence for the full order.",
+        "Click a filename to open that node in the explorer above.",
+        "The explorer shows what files can exist. To see what actually loaded in your current session, use these commands:",
+        "Run /context first for the overview, then the specific command for the area you want to investigate.",
+        "Manage Claude’s memory: write and organize CLAUDE.md, rules, and auto memory",
+        "Configure settings: set permissions, hooks, environment variables, and model defaults",
+        "Create skills: build reusable prompts and workflows",
+        "Configure subagents: define specialized agents with their own context",
+        "Was this page helpful?"
+      ],
+      "codeBlocks": [],
+      "sectionBlocks": [
+        {
+          "title": "",
+          "paragraphs": [
+            "Where Claude Code reads CLAUDE.md, settings.json, hooks, skills, commands, subagents, rules, and auto memory. Explore the .claude directory in your project and ~/.claude in your home directory.",
+            "Claude Code reads instructions, settings, skills, subagents, and memory from your project directory and from ~/.claude in your home directory. Commit project files to git to share them with your team; files in ~/.claude are personal configuration that applies across all your projects.",
+            "Most users only edit CLAUDE.md and settings.json. The rest of the directory is optional: add skills, rules, or subagents as you need them.",
+            "This page is an interactive explorer: click files in the tree to see what each one does, when it loads, and an example. For a quick reference, see the file reference table below."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​What’s not shown",
+          "paragraphs": [
+            "The explorer covers the files you’ll interact with most. A few things live elsewhere:"
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​File reference",
+          "paragraphs": [
+            "This table lists every file the explorer covers. Project-scope files live in your repo under .claude/ (or at the root for CLAUDE.md and .mcp.json). Global-scope files live in ~/.claude/ and apply across all projects.",
+            "Several things can override what you put in these files:",
+            "Managed settings deployed by your organization take precedence over everything",
+            "CLI flags like --permission-mode or --settings override settings.json for that session",
+            "Some environment variables take precedence over their equivalent setting, but this varies: check the environment variables reference for each one",
+            "See settings precedence for the full order.",
+            "Click a filename to open that node in the explorer above."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Check what loaded",
+          "paragraphs": [
+            "The explorer shows what files can exist. To see what actually loaded in your current session, use these commands:",
+            "Run /context first for the overview, then the specific command for the area you want to investigate."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Related resources",
+          "paragraphs": [
+            "Manage Claude’s memory: write and organize CLAUDE.md, rules, and auto memory",
+            "Configure settings: set permissions, hooks, environment variables, and model defaults",
+            "Create skills: build reusable prompts and workflows",
+            "Configure subagents: define specialized agents with their own context",
+            "Was this page helpful?"
+          ],
+          "codeBlocks": []
+        }
+      ]
+    },
+    {
+      "section": "Core concepts",
+      "path": "/docs/en/context-window",
+      "url": "https://code.claude.com/docs/en/context-window",
+      "title": "Explore the context window",
+      "metaDescription": "An interactive simulation of how Claude Code's context window fills during a session. See what loads automatically, what each file read costs, and when rules and hooks fire.",
+      "headings": [
+        "​What the timeline shows",
+        "​Check your own session",
+        "​Related resources"
+      ],
+      "toc": [],
+      "paragraphs": [
+        "An interactive simulation of how Claude Code’s context window fills during a session. See what loads automatically, what each file read costs, and when rules and hooks fire.",
+        "Claude Code’s context window holds everything Claude knows about your session: your instructions, the files it reads, its own responses, and content that never appears in your terminal. The timeline below walks through what loads and when. See the written breakdown for the same content as a list.",
+        "The session walks through a realistic flow with representative token counts:",
+        "Before you type anything: CLAUDE.md, auto memory, MCP tool names, and skill descriptions all load into context. Your own setup may add more here, like an output style or text from --append-system-prompt, which both go into the system prompt the same way.",
+        "As Claude works: each file read adds to context, path-scoped rules load automatically alongside matching files, and a PostToolUse hook fires after each edit.",
+        "The follow-up prompt: a subagent handles the research in its own separate context window, so the large file reads stay out of yours. Only the summary and a small metadata trailer come back.",
+        "At the end: /compact replaces the conversation with a structured summary. Most startup content reloads automatically. The skill listing is the one exception.",
+        "The visualization uses representative numbers. To see your actual context usage at any point, run /context for a live breakdown by category with optimization suggestions. Run /memory to check which CLAUDE.md and auto memory files loaded at startup.",
+        "For deeper coverage of the features shown in the timeline, see these pages:",
+        "Extend Claude Code: when to use CLAUDE.md vs skills vs rules vs hooks vs MCP",
+        "Store instructions and memories: CLAUDE.md hierarchy and auto memory",
+        "Subagents: delegate research to a separate context window",
+        "Best practices: managing context as your primary constraint",
+        "Reduce token usage: strategies for keeping context usage low",
+        "Was this page helpful?"
+      ],
+      "codeBlocks": [],
+      "sectionBlocks": [
+        {
+          "title": "",
+          "paragraphs": [
+            "An interactive simulation of how Claude Code’s context window fills during a session. See what loads automatically, what each file read costs, and when rules and hooks fire.",
+            "Claude Code’s context window holds everything Claude knows about your session: your instructions, the files it reads, its own responses, and content that never appears in your terminal. The timeline below walks through what loads and when. See the written breakdown for the same content as a list."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​What the timeline shows",
+          "paragraphs": [
+            "The session walks through a realistic flow with representative token counts:",
+            "Before you type anything: CLAUDE.md, auto memory, MCP tool names, and skill descriptions all load into context. Your own setup may add more here, like an output style or text from --append-system-prompt, which both go into the system prompt the same way.",
+            "As Claude works: each file read adds to context, path-scoped rules load automatically alongside matching files, and a PostToolUse hook fires after each edit.",
+            "The follow-up prompt: a subagent handles the research in its own separate context window, so the large file reads stay out of yours. Only the summary and a small metadata trailer come back.",
+            "At the end: /compact replaces the conversation with a structured summary. Most startup content reloads automatically. The skill listing is the one exception."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Check your own session",
+          "paragraphs": [
+            "The visualization uses representative numbers. To see your actual context usage at any point, run /context for a live breakdown by category with optimization suggestions. Run /memory to check which CLAUDE.md and auto memory files loaded at startup."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Related resources",
+          "paragraphs": [
+            "For deeper coverage of the features shown in the timeline, see these pages:",
+            "Extend Claude Code: when to use CLAUDE.md vs skills vs rules vs hooks vs MCP",
+            "Store instructions and memories: CLAUDE.md hierarchy and auto memory",
+            "Subagents: delegate research to a separate context window",
+            "Best practices: managing context as your primary constraint",
+            "Reduce token usage: strategies for keeping context usage low",
             "Was this page helpful?"
           ],
           "codeBlocks": []
@@ -2012,7 +2181,7 @@
         "A project CLAUDE.md can be stored in either ./CLAUDE.md or ./.claude/CLAUDE.md. Create this file and add instructions that apply to anyone working on the project: build and test commands, coding standards, architectural decisions, naming conventions, and common workflows. These instructions are shared with your team through version control, so focus on project-level standards rather than personal preferences.",
         "Run /init to generate a starting CLAUDE.md automatically. Claude analyzes your codebase and creates a file with build commands, test instructions, and project conventions it discovers. If a CLAUDE.md already exists, /init suggests improvements rather than overwriting it. Refine from there with instructions Claude wouldn’t discover on its own.",
         "Set CLAUDE_CODE_NEW_INIT=true to enable an interactive multi-phase flow. /init asks which artifacts to set up: CLAUDE.md files, skills, and hooks. It then explores your codebase with a subagent, fills in gaps via follow-up questions, and presents a reviewable proposal before writing any files.",
-        "CLAUDE.md files are loaded into the context window at the start of every session, consuming tokens alongside your conversation. Because they’re context rather than enforced configuration, how you write instructions affects how reliably Claude follows them. Specific, concise, well-structured instructions work best.",
+        "CLAUDE.md files are loaded into the context window at the start of every session, consuming tokens alongside your conversation. The context window visualization shows where CLAUDE.md loads relative to the rest of the startup context. Because they’re context rather than enforced configuration, how you write instructions affects how reliably Claude follows them. Specific, concise, well-structured instructions work best.",
         "Size: target under 200 lines per CLAUDE.md file. Longer files consume more context and reduce adherence. If your instructions are growing large, split them using imports or .claude/rules/ files.",
         "Structure: use markdown headers and bullets to group related instructions. Claude scans structure the same way readers do: organized sections are easier to follow than dense paragraphs.",
         "Specificity: write instructions that are concrete enough to verify. For example:",
@@ -2069,8 +2238,8 @@
         "The directory contains a MEMORY.md entrypoint and optional topic files:",
         "MEMORY.md acts as an index of the memory directory. Claude reads and writes files in this directory throughout your session, using MEMORY.md to keep track of what’s stored where.",
         "Auto memory is machine-local. All worktrees and subdirectories within the same git repository share one auto memory directory. Files are not shared across machines or cloud environments.",
-        "The first 200 lines of MEMORY.md are loaded at the start of every conversation. Content beyond line 200 is not loaded at session start. Claude keeps MEMORY.md concise by moving detailed notes into separate topic files.",
-        "This 200-line limit applies only to MEMORY.md. CLAUDE.md files are loaded in full regardless of length, though shorter files produce better adherence.",
+        "The first 200 lines of MEMORY.md, or the first 25KB, whichever comes first, are loaded at the start of every conversation. Content beyond that threshold is not loaded at session start. Claude keeps MEMORY.md concise by moving detailed notes into separate topic files.",
+        "This limit applies only to MEMORY.md. CLAUDE.md files are loaded in full regardless of length, though shorter files produce better adherence.",
         "Topic files like debugging.md or patterns.md are not loaded at startup. Claude reads them on demand using its standard file tools when it needs the information.",
         "Claude reads and writes memory files during your session. When you see “Writing memory” or “Recalled memory” in the Claude Code interface, Claude is actively updating or reading from ~/.claude/projects/<project>/memory/.",
         "Auto memory files are plain markdown you can edit or delete at any time. Run /memory to browse and open memory files from within a session.",
@@ -2166,7 +2335,7 @@
         {
           "title": "​Write effective instructions",
           "paragraphs": [
-            "CLAUDE.md files are loaded into the context window at the start of every session, consuming tokens alongside your conversation. Because they’re context rather than enforced configuration, how you write instructions affects how reliably Claude follows them. Specific, concise, well-structured instructions work best.",
+            "CLAUDE.md files are loaded into the context window at the start of every session, consuming tokens alongside your conversation. The context window visualization shows where CLAUDE.md loads relative to the rest of the startup context. Because they’re context rather than enforced configuration, how you write instructions affects how reliably Claude follows them. Specific, concise, well-structured instructions work best.",
             "Size: target under 200 lines per CLAUDE.md file. Longer files consume more context and reduce adherence. If your instructions are growing large, split them using imports or .claude/rules/ files.",
             "Structure: use markdown headers and bullets to group related instructions. Claude scans structure the same way readers do: organized sections are easier to follow than dense paragraphs.",
             "Specificity: write instructions that are concrete enough to verify. For example:",
@@ -2295,8 +2464,8 @@
         {
           "title": "​How it works",
           "paragraphs": [
-            "The first 200 lines of MEMORY.md are loaded at the start of every conversation. Content beyond line 200 is not loaded at session start. Claude keeps MEMORY.md concise by moving detailed notes into separate topic files.",
-            "This 200-line limit applies only to MEMORY.md. CLAUDE.md files are loaded in full regardless of length, though shorter files produce better adherence.",
+            "The first 200 lines of MEMORY.md, or the first 25KB, whichever comes first, are loaded at the start of every conversation. Content beyond that threshold is not loaded at session start. Claude keeps MEMORY.md concise by moving detailed notes into separate topic files.",
+            "This limit applies only to MEMORY.md. CLAUDE.md files are loaded in full regardless of length, though shorter files produce better adherence.",
             "Topic files like debugging.md or patterns.md are not loaded at startup. Claude reads them on demand using its standard file tools when it needs the information.",
             "Claude reads and writes memory files during your session. When you see “Writing memory” or “Recalled memory” in the Claude Code interface, Claude is actively updating or reading from ~/.claude/projects/<project>/memory/."
           ],
@@ -2815,6 +2984,7 @@
         "Run parallel Claude Code sessions with Git worktrees",
         "Subagent worktrees",
         "Worktree cleanup",
+        "Copy gitignored files to worktrees",
         "Manage worktrees manually",
         "Non-git version control",
         "Get notified when Claude needs your attention",
@@ -2968,8 +3138,7 @@
         "Message count",
         "Git branch (if applicable)",
         "Forked sessions (created with /branch, /rewind, or --fork-session) are grouped together under their root session, making it easier to find related conversations.",
-        "Name sessions early: Use /rename when starting work on a distinct task: it’s much easier to find “payment-integration” than “explain this function” later",
-        "Use --continue for quick access to your most recent conversation in the current directory"
+        "Name sessions early: Use /rename when starting work on a distinct task: it’s much easier to find “payment-integration” than “explain this function” later"
       ],
       "codeBlocks": [
         "cd /path/to/project",
@@ -3391,6 +3560,17 @@
           "codeBlocks": []
         },
         {
+          "title": "​Copy gitignored files to worktrees",
+          "paragraphs": [
+            "Git worktrees are fresh checkouts, so they don’t include untracked files like .env or .env.local from your main repository. To automatically copy these files when Claude creates a worktree, add a .worktreeinclude file to your project root.",
+            "The file uses .gitignore syntax to list which files to copy. Only files that match a pattern and are also gitignored get copied, so tracked files are never duplicated.",
+            "This applies to worktrees created with --worktree, subagent worktrees, and parallel sessions in the desktop app."
+          ],
+          "codeBlocks": [
+            ".env\n.env.local\nconfig/secrets.json"
+          ]
+        },
+        {
           "title": "​Manage worktrees manually",
           "paragraphs": [
             "For more control over worktree location and branch configuration, create worktrees with Git directly. This is useful when you need to check out a specific existing branch or place the worktree outside the repository.",
@@ -3444,19 +3624,6 @@
           ],
           "codeBlocks": [
             "// package.json\n{\n    ...\n    \"scripts\": {\n        ...\n        \"lint:claude\": \"claude -p 'you are a linter. please look at the changes vs. main and report any issues related to typos. report the filename and line number on one line, and a description of the issue on the second line. do not return any other text.'\"\n    }\n}"
-          ]
-        },
-        {
-          "title": "​Pipe in, pipe out",
-          "paragraphs": [
-            "Suppose you want to pipe data into Claude, and get back data in a structured format.",
-            "Pipe data through Claude:",
-            "Use pipes to integrate Claude into existing shell scripts",
-            "Combine with other Unix tools for powerful workflows",
-            "Consider using —output-format for structured output"
-          ],
-          "codeBlocks": [
-            "cat build-error.txt | claude -p 'concisely explain the root cause of this build error' > output.txt"
           ]
         }
       ]
@@ -3549,7 +3716,7 @@
         "This guide covers patterns that have proven effective across Anthropic’s internal teams and for engineers using Claude Code across various codebases, languages, and environments. For how the agentic loop works under the hood, see How Claude Code works.",
         "Most best practices are based on one constraint: Claude’s context window fills up fast, and performance degrades as it fills.",
         "Claude’s context window holds your entire conversation, including every message, every file Claude reads, and every command output. However, this can fill up fast. A single debugging session or codebase exploration might generate and consume tens of thousands of tokens.",
-        "This matters since LLM performance degrades as context fills. When the context window is getting full, Claude may start “forgetting” earlier instructions or making more mistakes. The context window is the most important resource to manage. Track context usage continuously with a custom status line, and see Reduce token usage for strategies on reducing token usage.",
+        "This matters since LLM performance degrades as context fills. When the context window is getting full, Claude may start “forgetting” earlier instructions or making more mistakes. The context window is the most important resource to manage. To see how a session fills up in practice, watch an interactive walkthrough of what loads at startup and what each file read costs. Track context usage continuously with a custom status line, and see Reduce token usage for strategies on reducing token usage.",
         "Include tests, screenshots, or expected outputs so Claude can check itself. This is the single highest-leverage thing you can do.",
         "Claude performs dramatically better when it can verify its own work, like run tests, compare screenshots, and validate outputs.",
         "Without clear success criteria, it might produce something that looks right but actually doesn’t work. You become the only feedback loop, and every mistake requires your attention.",
@@ -4242,6 +4409,9 @@
         "​Remote Control vs Claude Code on the web",
         "​Limitations",
         "​Troubleshooting",
+        "​”Remote Control requires a claude.ai subscription”",
+        "​”Remote Control requires a full-scope login token”",
+        "​”Unable to determine your organization for Remote Control eligibility”",
         "​”Remote Control is not yet enabled for your account”",
         "​”Remote Control is disabled by your organization’s policy”",
         "​”Remote credentials fetch failed”",
@@ -4257,6 +4427,9 @@
         "Remote Control vs Claude Code on the web",
         "Limitations",
         "Troubleshooting",
+        "”Remote Control requires a claude.ai subscription”",
+        "”Remote Control requires a full-scope login token”",
+        "”Unable to determine your organization for Remote Control eligibility”",
         "”Remote Control is not yet enabled for your account”",
         "”Remote Control is disabled by your organization’s policy”",
         "”Remote credentials fetch failed”",
@@ -4272,6 +4445,9 @@
         "Remote Control vs Claude Code on the web",
         "Limitations",
         "Troubleshooting",
+        "”Remote Control requires a claude.ai subscription”",
+        "”Remote Control requires a full-scope login token”",
+        "”Unable to determine your organization for Remote Control eligibility”",
         "”Remote Control is not yet enabled for your account”",
         "”Remote Control is disabled by your organization’s policy”",
         "”Remote credentials fetch failed”",
@@ -4324,6 +4500,9 @@
         "One remote session per interactive process: outside of server mode, each Claude Code instance supports one remote session at a time. Use server mode with --spawn to run multiple concurrent sessions from a single process.",
         "Terminal must stay open: Remote Control runs as a local process. If you close the terminal or stop the claude process, the session ends. Run claude remote-control again to start a new one.",
         "Extended network outage: if your machine is awake but unable to reach the network for more than roughly 10 minutes, the session times out and the process exits. Run claude remote-control again to start a new session.",
+        "You’re not authenticated with a claude.ai account. Run claude auth login and choose the claude.ai option. If ANTHROPIC_API_KEY is set in your environment, unset it first.",
+        "You’re authenticated with a long-lived token from claude setup-token or the CLAUDE_CODE_OAUTH_TOKEN environment variable. These tokens are limited to inference-only and cannot establish Remote Control sessions. Run claude auth login to authenticate with a full-scope session token instead.",
+        "Your cached account information is stale or incomplete. Run claude auth login to refresh it.",
         "The eligibility check can fail with certain environment variables present:",
         "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC or DISABLE_TELEMETRY: unset them and try again.",
         "CLAUDE_CODE_USE_BEDROCK, CLAUDE_CODE_USE_VERTEX, or CLAUDE_CODE_USE_FOUNDRY: Remote Control requires claude.ai authentication and does not work with third-party providers.",
@@ -4367,10 +4546,10 @@
             "Remote Control vs Claude Code on the web",
             "Limitations",
             "Troubleshooting",
-            "”Remote Control is not yet enabled for your account”",
-            "”Remote Control is disabled by your organization’s policy”",
-            "”Remote credentials fetch failed”",
-            "Choose the right approach"
+            "”Remote Control requires a claude.ai subscription”",
+            "”Remote Control requires a full-scope login token”",
+            "”Unable to determine your organization for Remote Control eligibility”",
+            "”Remote Control is not yet enabled for your account”"
           ],
           "codeBlocks": []
         },
@@ -4461,6 +4640,27 @@
         {
           "title": "​Troubleshooting",
           "paragraphs": [],
+          "codeBlocks": []
+        },
+        {
+          "title": "​”Remote Control requires a claude.ai subscription”",
+          "paragraphs": [
+            "You’re not authenticated with a claude.ai account. Run claude auth login and choose the claude.ai option. If ANTHROPIC_API_KEY is set in your environment, unset it first."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​”Remote Control requires a full-scope login token”",
+          "paragraphs": [
+            "You’re authenticated with a long-lived token from claude setup-token or the CLAUDE_CODE_OAUTH_TOKEN environment variable. These tokens are limited to inference-only and cannot establish Remote Control sessions. Run claude auth login to authenticate with a full-scope session token instead."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​”Unable to determine your organization for Remote Control eligibility”",
+          "paragraphs": [
+            "Your cached account information is stale or incomplete. Run claude auth login to refresh it."
+          ],
           "codeBlocks": []
         },
         {
@@ -6327,7 +6527,7 @@
         "Database query validator",
         "Next steps",
         "Create and use specialized AI subagents in Claude Code for task-specific workflows and improved context management.",
-        "Subagents are specialized AI assistants that handle specific types of tasks. Each subagent runs in its own context window with a custom system prompt, specific tool access, and independent permissions. When Claude encounters a task that matches a subagent’s description, it delegates to that subagent, which works independently and returns results.",
+        "Subagents are specialized AI assistants that handle specific types of tasks. Each subagent runs in its own context window with a custom system prompt, specific tool access, and independent permissions. When Claude encounters a task that matches a subagent’s description, it delegates to that subagent, which works independently and returns results. To see the context savings in practice, the context window visualization walks through a session where a subagent handles research in its own separate window.",
         "If you need multiple agents working in parallel and communicating with each other, see agent teams instead. Subagents work within a single session; agent teams coordinate across separate sessions.",
         "Subagents help you:",
         "Preserve context by keeping exploration and implementation out of your main conversation",
@@ -6429,12 +6629,12 @@
         "Choose a scope based on how broadly the memory should apply:",
         "When memory is enabled:",
         "The subagent’s system prompt includes instructions for reading and writing to the memory directory.",
-        "The subagent’s system prompt also includes the first 200 lines of MEMORY.md in the memory directory, with instructions to curate MEMORY.md if it exceeds 200 lines.",
+        "The subagent’s system prompt also includes the first 200 lines or 25KB of MEMORY.md in the memory directory, whichever comes first, with instructions to curate MEMORY.md if it exceeds that limit.",
         "Read, Write, and Edit tools are automatically enabled so the subagent can manage its memory files.",
         "project is the recommended default scope. It makes subagent knowledge shareable via version control. Use user when the subagent’s knowledge is broadly applicable across projects, or local when the knowledge should not be checked into version control.",
         "Ask the subagent to consult its memory before starting work: “Review this PR, and check your memory for patterns you’ve seen before.”",
         "Ask the subagent to update its memory after completing a task: “Now that you’re done, save what you learned to your memory.” Over time, this builds a knowledge base that makes the subagent more effective.",
-        "Include memory instructions directly in the subagent’s markdown file so it proactively maintains its own knowledge base: Report incorrect codeCopyAsk AIUpdate your agent memory as you discover codepaths, patterns, library locations, and key architectural decisions. This builds up institutional knowledge across conversations. Write concise notes about what you found and where.",
+        "Include memory instructions directly in the subagent’s markdown file so it proactively maintains its own knowledge base: Update your agent memory as you discover codepaths, patterns, library locations, and key architectural decisions. This builds up institutional knowledge across conversations. Write concise notes about what you found and where.",
         "Include memory instructions directly in the subagent’s markdown file so it proactively maintains its own knowledge base:",
         "For more dynamic control over tool usage, use PreToolUse hooks to validate operations before they execute. This is useful when you need to allow some operations of a tool while blocking others.",
         "This example creates a subagent that only allows read-only database queries. The PreToolUse hook runs the script specified in command before each Bash command executes:",
@@ -6979,8 +7179,9 @@
         "When you’re done, ask the lead to clean up:",
         "This removes the shared team resources. When the lead runs cleanup, it checks for active teammates and fails if any are still running, so shut them down first.",
         "Always use the lead to clean up. Teammates should not run cleanup because their team context may not resolve correctly, potentially leaving resources in an inconsistent state.",
-        "Use hooks to enforce rules when teammates finish work or tasks complete:",
+        "Use hooks to enforce rules when teammates finish work or tasks are created or completed:",
         "TeammateIdle: runs when a teammate is about to go idle. Exit with code 2 to send feedback and keep the teammate working.",
+        "TaskCreated: runs when a task is being created. Exit with code 2 to prevent creation and send feedback.",
         "TaskCompleted: runs when a task is being marked complete. Exit with code 2 to prevent completion and send feedback.",
         "This section covers the architecture and mechanics behind agent teams. If you want to start using them, see Control your agent team above.",
         "There are two ways agent teams get started:",
@@ -7029,7 +7230,7 @@
         "If teammates aren’t appearing after you ask Claude to create a team:",
         "In in-process mode, teammates may already be running but not visible. Press Shift+Down to cycle through active teammates.",
         "Check that the task you gave Claude was complex enough to warrant a team. Claude decides whether to spawn teammates based on the task.",
-        "If you explicitly requested split panes, ensure tmux is installed and available in your PATH: Report incorrect codeCopyAsk AIwhich tmux",
+        "If you explicitly requested split panes, ensure tmux is installed and available in your PATH: which tmux",
         "For iTerm2, verify the it2 CLI is installed and the Python API is enabled in iTerm2 preferences.",
         "Teammate permission requests bubble up to the lead, which can create friction. Pre-approve common operations in your permission settings before spawning teammates to reduce interruptions.",
         "Teammates may stop after encountering errors instead of recovering. Check their output using Shift+Down in in-process mode or by clicking the pane in split mode, then either:",
@@ -7219,8 +7420,9 @@
         {
           "title": "​Enforce quality gates with hooks",
           "paragraphs": [
-            "Use hooks to enforce rules when teammates finish work or tasks complete:",
+            "Use hooks to enforce rules when teammates finish work or tasks are created or completed:",
             "TeammateIdle: runs when a teammate is about to go idle. Exit with code 2 to send feedback and keep the teammate working.",
+            "TaskCreated: runs when a task is being created. Exit with code 2 to prevent creation and send feedback.",
             "TaskCompleted: runs when a task is being marked complete. Exit with code 2 to prevent completion and send feedback."
           ],
           "codeBlocks": []
@@ -7558,6 +7760,7 @@
         "Project scope: .mcp.json in your project root (checked into source control)",
         "Managed: managed-mcp.json in system directories (see Managed MCP configuration)",
         "MCP server configurations follow a clear precedence hierarchy. When servers with the same name exist at multiple scopes, the system resolves conflicts by prioritizing local-scoped servers first, followed by project-scoped servers, and finally user-scoped servers. This design ensures that personal configurations can override shared ones when needed.",
+        "If a server is configured both locally and through a claude.ai connector, the local configuration takes precedence and the connector entry is skipped.",
         "Claude Code supports environment variable expansion in .mcp.json files, allowing teams to share configurations while maintaining flexibility for machine-specific paths and sensitive values like API keys.",
         "Supported syntax:",
         "${VAR} - Expands to the value of environment variable VAR",
@@ -7614,8 +7817,7 @@
         "If your MCP server uses an authentication scheme other than OAuth (such as Kerberos, short-lived tokens, or an internal SSO), use headersHelper to generate request headers at connection time. Claude Code runs the command and merges its output into the connection headers.",
         "The command can also be inline:",
         "Requirements:",
-        "The command must write a JSON object of string key-value pairs to stdout",
-        "The command runs in a shell with a 10-second timeout"
+        "The command must write a JSON object of string key-value pairs to stdout"
       ],
       "codeBlocks": [
         "# Basic syntax\nclaude mcp add --transport http <name> <url>\n\n# Real example: Connect to Notion\nclaude mcp add --transport http notion https://mcp.notion.com/mcp\n\n# Example with Bearer token\nclaude mcp add --transport http secure-api https://api.example.com/mcp \\\n  --header \"Authorization: Bearer your-token\"",
@@ -7844,7 +8046,8 @@
         {
           "title": "​Scope hierarchy and precedence",
           "paragraphs": [
-            "MCP server configurations follow a clear precedence hierarchy. When servers with the same name exist at multiple scopes, the system resolves conflicts by prioritizing local-scoped servers first, followed by project-scoped servers, and finally user-scoped servers. This design ensures that personal configurations can override shared ones when needed."
+            "MCP server configurations follow a clear precedence hierarchy. When servers with the same name exist at multiple scopes, the system resolves conflicts by prioritizing local-scoped servers first, followed by project-scoped servers, and finally user-scoped servers. This design ensures that personal configurations can override shared ones when needed.",
+            "If a server is configured both locally and through a claude.ai connector, the local configuration takes precedence and the connector entry is skipped."
           ],
           "codeBlocks": []
         },
@@ -8767,7 +8970,7 @@
         "Run Claude Code with the --plugin-dir flag to load your plugin:",
         "Once Claude Code starts, try your new skill:",
         "You’ll see Claude respond with a greeting. Run /help to see your skill listed under the plugin namespace.",
-        "Why namespacing? Plugin skills are always namespaced (like /greet:hello) to prevent conflicts when multiple plugins have skills with the same name.",
+        "Why namespacing? Plugin skills are always namespaced (like /my-first-plugin:hello) to prevent conflicts when multiple plugins have skills with the same name.",
         "To change the namespace prefix, update the name field in plugin.json.",
         "Add skill arguments",
         "Make your skill dynamic by accepting user input. The $ARGUMENTS placeholder captures any text the user provides after the skill name.",
@@ -9807,7 +10010,7 @@
         "Verify you’re triggering the right event type (e.g., PreToolUse fires before tool execution, PostToolUse fires after)",
         "If using PermissionRequest hooks in non-interactive mode (-p), switch to PreToolUse instead",
         "You see a message like “PreToolUse hook error: …” in the transcript.",
-        "Your script exited with a non-zero code unexpectedly. Test it manually by piping sample JSON: Report incorrect codeCopyAsk AIecho '{\"tool_name\":\"Bash\",\"tool_input\":{\"command\":\"ls\"}}' | ./my-hook.sh echo $? # Check the exit code",
+        "Your script exited with a non-zero code unexpectedly. Test it manually by piping sample JSON: echo '{\"tool_name\":\"Bash\",\"tool_input\":{\"command\":\"ls\"}}' | ./my-hook.sh echo $? # Check the exit code",
         "If you see “command not found”, use absolute paths or $CLAUDE_PROJECT_DIR to reference scripts",
         "If you see “jq: command not found”, install jq or use Python/Node.js for JSON parsing",
         "If the script isn’t running at all, make it executable: chmod +x ./my-hook.sh",
@@ -10137,7 +10340,7 @@
           "title": "​Hook error in output",
           "paragraphs": [
             "You see a message like “PreToolUse hook error: …” in the transcript.",
-            "Your script exited with a non-zero code unexpectedly. Test it manually by piping sample JSON: Report incorrect codeCopyAsk AIecho '{\"tool_name\":\"Bash\",\"tool_input\":{\"command\":\"ls\"}}' | ./my-hook.sh echo $? # Check the exit code",
+            "Your script exited with a non-zero code unexpectedly. Test it manually by piping sample JSON: echo '{\"tool_name\":\"Bash\",\"tool_input\":{\"command\":\"ls\"}}' | ./my-hook.sh echo $? # Check the exit code",
             "If you see “command not found”, use absolute paths or $CLAUDE_PROJECT_DIR to reference scripts",
             "If you see “jq: command not found”, install jq or use Python/Node.js for JSON parsing",
             "If the script isn’t running at all, make it executable: chmod +x ./my-hook.sh"
@@ -11113,7 +11316,7 @@
         "This means the install URL returned an HTML page instead of the install script. If the HTML page says “App unavailable in region,” Claude Code is not available in your country. See supported countries.",
         "Otherwise, this can happen due to network issues, regional routing, or a temporary service disruption.",
         "Solutions:",
-        "Use an alternative install method: On macOS or Linux, install via Homebrew: Report incorrect codeCopyAsk AIbrew install --cask claude-code On Windows, install via WinGet: Report incorrect codeCopyAsk AIwinget install Anthropic.ClaudeCode",
+        "Use an alternative install method: On macOS or Linux, install via Homebrew: brew install --cask claude-code On Windows, install via WinGet: winget install Anthropic.ClaudeCode",
         "Use an alternative install method:",
         "On macOS or Linux, install via Homebrew:",
         "On Windows, install via WinGet:",
@@ -11121,49 +11324,49 @@
         "The install finished but claude doesn’t work. The exact error varies by platform:",
         "This means the install directory isn’t in your shell’s search path. See Verify your PATH for the fix on each platform.",
         "The curl ... | bash command downloads the script and passes it directly to Bash for execution using a pipe (|). This error means the connection broke before the script finished downloading. Common causes include network interruptions, the download being blocked mid-stream, or system resource limits.",
-        "Check network stability: Claude Code binaries are hosted on Google Cloud Storage. Test that you can reach it: Report incorrect codeCopyAsk AIcurl -fsSL https://storage.googleapis.com -o /dev/null If the command completes silently, your connection is fine and the issue is likely intermittent. Retry the install command. If you see an error, your network may be blocking the download.",
+        "Check network stability: Claude Code binaries are hosted on Google Cloud Storage. Test that you can reach it: curl -fsSL https://storage.googleapis.com -o /dev/null If the command completes silently, your connection is fine and the issue is likely intermittent. Retry the install command. If you see an error, your network may be blocking the download.",
         "Check network stability: Claude Code binaries are hosted on Google Cloud Storage. Test that you can reach it:",
         "If the command completes silently, your connection is fine and the issue is likely intermittent. Retry the install command. If you see an error, your network may be blocking the download.",
-        "Try an alternative install method: On macOS or Linux: Report incorrect codeCopyAsk AIbrew install --cask claude-code On Windows: Report incorrect codeCopyAsk AIwinget install Anthropic.ClaudeCode",
+        "Try an alternative install method: On macOS or Linux: brew install --cask claude-code On Windows: winget install Anthropic.ClaudeCode",
         "Try an alternative install method:",
         "On macOS or Linux:",
         "On Windows:",
         "Errors like curl: (35) TLS connect error, schannel: next InitializeSecurityContext failed, or PowerShell’s Could not establish trust relationship for the SSL/TLS secure channel indicate TLS handshake failures.",
-        "Update your system CA certificates: On Ubuntu/Debian: Report incorrect codeCopyAsk AIsudo apt-get update && sudo apt-get install ca-certificates On macOS via Homebrew: Report incorrect codeCopyAsk AIbrew install ca-certificates",
+        "Update your system CA certificates: On Ubuntu/Debian: sudo apt-get update && sudo apt-get install ca-certificates On macOS via Homebrew: brew install ca-certificates",
         "Update your system CA certificates:",
         "On Ubuntu/Debian:",
         "On macOS via Homebrew:",
-        "On Windows, enable TLS 1.2 in PowerShell before running the installer: Report incorrect codeCopyAsk AI[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 irm https://claude.ai/install.ps1 | iex",
+        "On Windows, enable TLS 1.2 in PowerShell before running the installer: [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 irm https://claude.ai/install.ps1 | iex",
         "On Windows, enable TLS 1.2 in PowerShell before running the installer:",
-        "Check for proxy or firewall interference: corporate proxies that perform TLS inspection can cause these errors, including unable to get local issuer certificate. Set NODE_EXTRA_CA_CERTS to your corporate CA certificate bundle: Report incorrect codeCopyAsk AIexport NODE_EXTRA_CA_CERTS=/path/to/corporate-ca.pem Ask your IT team for the certificate file if you don’t have it. You can also try on a direct connection to confirm the proxy is the cause.",
+        "Check for proxy or firewall interference: corporate proxies that perform TLS inspection can cause these errors, including unable to get local issuer certificate. Set NODE_EXTRA_CA_CERTS to your corporate CA certificate bundle: export NODE_EXTRA_CA_CERTS=/path/to/corporate-ca.pem Ask your IT team for the certificate file if you don’t have it. You can also try on a direct connection to confirm the proxy is the cause.",
         "Check for proxy or firewall interference: corporate proxies that perform TLS inspection can cause these errors, including unable to get local issuer certificate. Set NODE_EXTRA_CA_CERTS to your corporate CA certificate bundle:",
         "Ask your IT team for the certificate file if you don’t have it. You can also try on a direct connection to confirm the proxy is the cause.",
         "The installer couldn’t reach the download server. This typically means storage.googleapis.com is blocked on your network.",
-        "Test connectivity directly: Report incorrect codeCopyAsk AIcurl -sI https://storage.googleapis.com",
+        "Test connectivity directly: curl -sI https://storage.googleapis.com",
         "Test connectivity directly:",
-        "If behind a proxy, set HTTPS_PROXY so the installer can route through it. See proxy configuration for details. Report incorrect codeCopyAsk AIexport HTTPS_PROXY=http://proxy.example.com:8080 curl -fsSL https://claude.ai/install.sh | bash",
+        "If behind a proxy, set HTTPS_PROXY so the installer can route through it. See proxy configuration for details. export HTTPS_PROXY=http://proxy.example.com:8080 curl -fsSL https://claude.ai/install.sh | bash",
         "If behind a proxy, set HTTPS_PROXY so the installer can route through it. See proxy configuration for details.",
-        "If on a restricted network, try a different network or VPN, or use an alternative install method: On macOS or Linux: Report incorrect codeCopyAsk AIbrew install --cask claude-code On Windows: Report incorrect codeCopyAsk AIwinget install Anthropic.ClaudeCode",
+        "If on a restricted network, try a different network or VPN, or use an alternative install method: On macOS or Linux: brew install --cask claude-code On Windows: winget install Anthropic.ClaudeCode",
         "If on a restricted network, try a different network or VPN, or use an alternative install method:",
         "If you see 'irm' is not recognized or The token '&&' is not valid, you’re running the wrong command for your shell.",
-        "irm not recognized: you’re in CMD, not PowerShell. You have two options: Open PowerShell by searching for “PowerShell” in the Start menu, then run the original install command: Report incorrect codeCopyAsk AIirm https://claude.ai/install.ps1 | iex Or stay in CMD and use the CMD installer instead: Report incorrect codeCopyAsk AIcurl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd",
+        "irm not recognized: you’re in CMD, not PowerShell. You have two options: Open PowerShell by searching for “PowerShell” in the Start menu, then run the original install command: irm https://claude.ai/install.ps1 | iex Or stay in CMD and use the CMD installer instead: curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd",
         "irm not recognized: you’re in CMD, not PowerShell. You have two options:",
         "Open PowerShell by searching for “PowerShell” in the Start menu, then run the original install command:",
         "Or stay in CMD and use the CMD installer instead:",
-        "&& not valid: you’re in PowerShell but ran the CMD installer command. Use the PowerShell installer: Report incorrect codeCopyAsk AIirm https://claude.ai/install.ps1 | iex",
+        "&& not valid: you’re in PowerShell but ran the CMD installer command. Use the PowerShell installer: irm https://claude.ai/install.ps1 | iex",
         "&& not valid: you’re in PowerShell but ran the CMD installer command. Use the PowerShell installer:",
         "If you see Killed during installation on a VPS or cloud instance:",
         "The Linux OOM killer terminated the process because the system ran out of memory. Claude Code requires at least 4 GB of available RAM.",
-        "Add swap space if your server has limited RAM. Swap uses disk space as overflow memory, letting the install complete even with low physical RAM. Create a 2 GB swap file and enable it: Report incorrect codeCopyAsk AIsudo fallocate -l 2G /swapfile sudo chmod 600 /swapfile sudo mkswap /swapfile sudo swapon /swapfile Then retry the installation: Report incorrect codeCopyAsk AIcurl -fsSL https://claude.ai/install.sh | bash",
+        "Add swap space if your server has limited RAM. Swap uses disk space as overflow memory, letting the install complete even with low physical RAM. Create a 2 GB swap file and enable it: sudo fallocate -l 2G /swapfile sudo chmod 600 /swapfile sudo mkswap /swapfile sudo swapon /swapfile Then retry the installation: curl -fsSL https://claude.ai/install.sh | bash",
         "Add swap space if your server has limited RAM. Swap uses disk space as overflow memory, letting the install complete even with low physical RAM.",
         "Create a 2 GB swap file and enable it:",
         "Then retry the installation:",
         "Close other processes to free memory before installing.",
         "Use a larger instance if possible. Claude Code requires at least 4 GB of RAM.",
         "When installing Claude Code in a Docker container, installing as root into / can cause hangs.",
-        "Set a working directory before running the installer. When run from /, the installer scans the entire filesystem, which causes excessive memory usage. Setting WORKDIR limits the scan to a small directory: Report incorrect codeCopyAsk AIWORKDIR /tmp RUN curl -fsSL https://claude.ai/install.sh | bash",
+        "Set a working directory before running the installer. When run from /, the installer scans the entire filesystem, which causes excessive memory usage. Setting WORKDIR limits the scan to a small directory: WORKDIR /tmp RUN curl -fsSL https://claude.ai/install.sh | bash",
         "Set a working directory before running the installer. When run from /, the installer scans the entire filesystem, which causes excessive memory usage. Setting WORKDIR limits the scan to a small directory:",
-        "Increase Docker memory limits if using Docker Desktop: Report incorrect codeCopyAsk AIdocker build --memory=4g .",
+        "Increase Docker memory limits if using Docker Desktop: docker build --memory=4g .",
         "Increase Docker memory limits if using Docker Desktop:",
         "If you installed an older version of Claude Desktop, it may register a Claude.exe in the WindowsApps directory that takes PATH priority over Claude Code CLI. Running claude opens the Desktop app instead of the CLI.",
         "Update Claude Desktop to the latest version to fix this issue.",
@@ -11173,22 +11376,22 @@
         "If your Git is installed somewhere else, find the path by running where.exe git in PowerShell and use the bin\\bash.exe path from that directory.",
         "If you see errors about missing shared libraries like libstdc++.so.6 or libgcc_s.so.1 after installation, the installer may have downloaded the wrong binary variant for your system.",
         "This can happen on glibc-based systems that have musl cross-compilation packages installed, causing the installer to misdetect the system as musl.",
-        "Check which libc your system uses: Report incorrect codeCopyAsk AIldd /bin/ls | head -1 If it shows linux-vdso.so or references to /lib/x86_64-linux-gnu/, you’re on glibc. If it shows musl, you’re on musl.",
+        "Check which libc your system uses: ldd /bin/ls | head -1 If it shows linux-vdso.so or references to /lib/x86_64-linux-gnu/, you’re on glibc. If it shows musl, you’re on musl.",
         "Check which libc your system uses:",
         "If it shows linux-vdso.so or references to /lib/x86_64-linux-gnu/, you’re on glibc. If it shows musl, you’re on musl.",
         "If you’re on glibc but got the musl binary, remove the installation and reinstall. You can also manually download the correct binary from the GCS bucket at https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/{VERSION}/manifest.json. File a GitHub issue with the output of ldd /bin/ls and ls /lib/libc.musl*.",
-        "If you’re actually on musl (Alpine Linux), install the required packages: Report incorrect codeCopyAsk AIapk add libgcc libstdc++ ripgrep",
+        "If you’re actually on musl (Alpine Linux), install the required packages: apk add libgcc libstdc++ ripgrep",
         "If you’re actually on musl (Alpine Linux), install the required packages:",
         "If the installer prints Illegal instruction instead of the OOM Killed message, the downloaded binary doesn’t match your CPU architecture. This commonly happens on ARM servers that receive an x86 binary, or on older CPUs that lack required instruction sets.",
-        "Verify your architecture: Report incorrect codeCopyAsk AIuname -m x86_64 means 64-bit Intel/AMD, aarch64 means ARM64. If the binary doesn’t match, file a GitHub issue with the output.",
+        "Verify your architecture: uname -m x86_64 means 64-bit Intel/AMD, aarch64 means ARM64. If the binary doesn’t match, file a GitHub issue with the output.",
         "Verify your architecture:",
         "x86_64 means 64-bit Intel/AMD, aarch64 means ARM64. If the binary doesn’t match, file a GitHub issue with the output.",
-        "Try an alternative install method while the architecture issue is resolved: Report incorrect codeCopyAsk AIbrew install --cask claude-code",
+        "Try an alternative install method while the architecture issue is resolved: brew install --cask claude-code",
         "Try an alternative install method while the architecture issue is resolved:",
         "If you see dyld: cannot load or Abort trap: 6 during installation, the binary is incompatible with your macOS version or hardware.",
         "Check your macOS version: Claude Code requires macOS 13.0 or later. Open the Apple menu and select About This Mac to check your version.",
         "Update macOS if you’re on an older version. The binary uses load commands that older macOS versions don’t support.",
-        "Try Homebrew as an alternative install method: Report incorrect codeCopyAsk AIbrew install --cask claude-code",
+        "Try Homebrew as an alternative install method: brew install --cask claude-code",
         "Try Homebrew as an alternative install method:",
         "You might encounter the following issues in WSL:",
         "OS/platform detection issues: if you receive an error during installation, WSL may be using Windows npm. Try:",
@@ -11373,7 +11576,7 @@
             "This means the install URL returned an HTML page instead of the install script. If the HTML page says “App unavailable in region,” Claude Code is not available in your country. See supported countries.",
             "Otherwise, this can happen due to network issues, regional routing, or a temporary service disruption.",
             "Solutions:",
-            "Use an alternative install method: On macOS or Linux, install via Homebrew: Report incorrect codeCopyAsk AIbrew install --cask claude-code On Windows, install via WinGet: Report incorrect codeCopyAsk AIwinget install Anthropic.ClaudeCode",
+            "Use an alternative install method: On macOS or Linux, install via Homebrew: brew install --cask claude-code On Windows, install via WinGet: winget install Anthropic.ClaudeCode",
             "Use an alternative install method:",
             "On macOS or Linux, install via Homebrew:",
             "On Windows, install via WinGet:",
@@ -11399,10 +11602,10 @@
           "paragraphs": [
             "The curl ... | bash command downloads the script and passes it directly to Bash for execution using a pipe (|). This error means the connection broke before the script finished downloading. Common causes include network interruptions, the download being blocked mid-stream, or system resource limits.",
             "Solutions:",
-            "Check network stability: Claude Code binaries are hosted on Google Cloud Storage. Test that you can reach it: Report incorrect codeCopyAsk AIcurl -fsSL https://storage.googleapis.com -o /dev/null If the command completes silently, your connection is fine and the issue is likely intermittent. Retry the install command. If you see an error, your network may be blocking the download.",
+            "Check network stability: Claude Code binaries are hosted on Google Cloud Storage. Test that you can reach it: curl -fsSL https://storage.googleapis.com -o /dev/null If the command completes silently, your connection is fine and the issue is likely intermittent. Retry the install command. If you see an error, your network may be blocking the download.",
             "Check network stability: Claude Code binaries are hosted on Google Cloud Storage. Test that you can reach it:",
             "If the command completes silently, your connection is fine and the issue is likely intermittent. Retry the install command. If you see an error, your network may be blocking the download.",
-            "Try an alternative install method: On macOS or Linux: Report incorrect codeCopyAsk AIbrew install --cask claude-code On Windows: Report incorrect codeCopyAsk AIwinget install Anthropic.ClaudeCode",
+            "Try an alternative install method: On macOS or Linux: brew install --cask claude-code On Windows: winget install Anthropic.ClaudeCode",
             "Try an alternative install method:",
             "On macOS or Linux:",
             "On Windows:"
@@ -11418,13 +11621,13 @@
           "paragraphs": [
             "Errors like curl: (35) TLS connect error, schannel: next InitializeSecurityContext failed, or PowerShell’s Could not establish trust relationship for the SSL/TLS secure channel indicate TLS handshake failures.",
             "Solutions:",
-            "Update your system CA certificates: On Ubuntu/Debian: Report incorrect codeCopyAsk AIsudo apt-get update && sudo apt-get install ca-certificates On macOS via Homebrew: Report incorrect codeCopyAsk AIbrew install ca-certificates",
+            "Update your system CA certificates: On Ubuntu/Debian: sudo apt-get update && sudo apt-get install ca-certificates On macOS via Homebrew: brew install ca-certificates",
             "Update your system CA certificates:",
             "On Ubuntu/Debian:",
             "On macOS via Homebrew:",
-            "On Windows, enable TLS 1.2 in PowerShell before running the installer: Report incorrect codeCopyAsk AI[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 irm https://claude.ai/install.ps1 | iex",
+            "On Windows, enable TLS 1.2 in PowerShell before running the installer: [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 irm https://claude.ai/install.ps1 | iex",
             "On Windows, enable TLS 1.2 in PowerShell before running the installer:",
-            "Check for proxy or firewall interference: corporate proxies that perform TLS inspection can cause these errors, including unable to get local issuer certificate. Set NODE_EXTRA_CA_CERTS to your corporate CA certificate bundle: Report incorrect codeCopyAsk AIexport NODE_EXTRA_CA_CERTS=/path/to/corporate-ca.pem Ask your IT team for the certificate file if you don’t have it. You can also try on a direct connection to confirm the proxy is the cause.",
+            "Check for proxy or firewall interference: corporate proxies that perform TLS inspection can cause these errors, including unable to get local issuer certificate. Set NODE_EXTRA_CA_CERTS to your corporate CA certificate bundle: export NODE_EXTRA_CA_CERTS=/path/to/corporate-ca.pem Ask your IT team for the certificate file if you don’t have it. You can also try on a direct connection to confirm the proxy is the cause.",
             "Check for proxy or firewall interference: corporate proxies that perform TLS inspection can cause these errors, including unable to get local issuer certificate. Set NODE_EXTRA_CA_CERTS to your corporate CA certificate bundle:",
             "Ask your IT team for the certificate file if you don’t have it. You can also try on a direct connection to confirm the proxy is the cause."
           ],
@@ -11440,11 +11643,11 @@
           "paragraphs": [
             "The installer couldn’t reach the download server. This typically means storage.googleapis.com is blocked on your network.",
             "Solutions:",
-            "Test connectivity directly: Report incorrect codeCopyAsk AIcurl -sI https://storage.googleapis.com",
+            "Test connectivity directly: curl -sI https://storage.googleapis.com",
             "Test connectivity directly:",
-            "If behind a proxy, set HTTPS_PROXY so the installer can route through it. See proxy configuration for details. Report incorrect codeCopyAsk AIexport HTTPS_PROXY=http://proxy.example.com:8080 curl -fsSL https://claude.ai/install.sh | bash",
+            "If behind a proxy, set HTTPS_PROXY so the installer can route through it. See proxy configuration for details. export HTTPS_PROXY=http://proxy.example.com:8080 curl -fsSL https://claude.ai/install.sh | bash",
             "If behind a proxy, set HTTPS_PROXY so the installer can route through it. See proxy configuration for details.",
-            "If on a restricted network, try a different network or VPN, or use an alternative install method: On macOS or Linux: Report incorrect codeCopyAsk AIbrew install --cask claude-code On Windows: Report incorrect codeCopyAsk AIwinget install Anthropic.ClaudeCode",
+            "If on a restricted network, try a different network or VPN, or use an alternative install method: On macOS or Linux: brew install --cask claude-code On Windows: winget install Anthropic.ClaudeCode",
             "If on a restricted network, try a different network or VPN, or use an alternative install method:",
             "On macOS or Linux:",
             "On Windows:"
@@ -11460,11 +11663,11 @@
           "title": "​Windows: irm or && not recognized",
           "paragraphs": [
             "If you see 'irm' is not recognized or The token '&&' is not valid, you’re running the wrong command for your shell.",
-            "irm not recognized: you’re in CMD, not PowerShell. You have two options: Open PowerShell by searching for “PowerShell” in the Start menu, then run the original install command: Report incorrect codeCopyAsk AIirm https://claude.ai/install.ps1 | iex Or stay in CMD and use the CMD installer instead: Report incorrect codeCopyAsk AIcurl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd",
+            "irm not recognized: you’re in CMD, not PowerShell. You have two options: Open PowerShell by searching for “PowerShell” in the Start menu, then run the original install command: irm https://claude.ai/install.ps1 | iex Or stay in CMD and use the CMD installer instead: curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd",
             "irm not recognized: you’re in CMD, not PowerShell. You have two options:",
             "Open PowerShell by searching for “PowerShell” in the Start menu, then run the original install command:",
             "Or stay in CMD and use the CMD installer instead:",
-            "&& not valid: you’re in PowerShell but ran the CMD installer command. Use the PowerShell installer: Report incorrect codeCopyAsk AIirm https://claude.ai/install.ps1 | iex",
+            "&& not valid: you’re in PowerShell but ran the CMD installer command. Use the PowerShell installer: irm https://claude.ai/install.ps1 | iex",
             "&& not valid: you’re in PowerShell but ran the CMD installer command. Use the PowerShell installer:"
           ],
           "codeBlocks": [
@@ -11478,7 +11681,7 @@
             "If you see Killed during installation on a VPS or cloud instance:",
             "The Linux OOM killer terminated the process because the system ran out of memory. Claude Code requires at least 4 GB of available RAM.",
             "Solutions:",
-            "Add swap space if your server has limited RAM. Swap uses disk space as overflow memory, letting the install complete even with low physical RAM. Create a 2 GB swap file and enable it: Report incorrect codeCopyAsk AIsudo fallocate -l 2G /swapfile sudo chmod 600 /swapfile sudo mkswap /swapfile sudo swapon /swapfile Then retry the installation: Report incorrect codeCopyAsk AIcurl -fsSL https://claude.ai/install.sh | bash",
+            "Add swap space if your server has limited RAM. Swap uses disk space as overflow memory, letting the install complete even with low physical RAM. Create a 2 GB swap file and enable it: sudo fallocate -l 2G /swapfile sudo chmod 600 /swapfile sudo mkswap /swapfile sudo swapon /swapfile Then retry the installation: curl -fsSL https://claude.ai/install.sh | bash",
             "Add swap space if your server has limited RAM. Swap uses disk space as overflow memory, letting the install complete even with low physical RAM.",
             "Create a 2 GB swap file and enable it:",
             "Then retry the installation:",
@@ -11496,9 +11699,9 @@
           "paragraphs": [
             "When installing Claude Code in a Docker container, installing as root into / can cause hangs.",
             "Solutions:",
-            "Set a working directory before running the installer. When run from /, the installer scans the entire filesystem, which causes excessive memory usage. Setting WORKDIR limits the scan to a small directory: Report incorrect codeCopyAsk AIWORKDIR /tmp RUN curl -fsSL https://claude.ai/install.sh | bash",
+            "Set a working directory before running the installer. When run from /, the installer scans the entire filesystem, which causes excessive memory usage. Setting WORKDIR limits the scan to a small directory: WORKDIR /tmp RUN curl -fsSL https://claude.ai/install.sh | bash",
             "Set a working directory before running the installer. When run from /, the installer scans the entire filesystem, which causes excessive memory usage. Setting WORKDIR limits the scan to a small directory:",
-            "Increase Docker memory limits if using Docker Desktop: Report incorrect codeCopyAsk AIdocker build --memory=4g .",
+            "Increase Docker memory limits if using Docker Desktop: docker build --memory=4g .",
             "Increase Docker memory limits if using Docker Desktop:"
           ],
           "codeBlocks": [
@@ -11532,11 +11735,11 @@
             "If you see errors about missing shared libraries like libstdc++.so.6 or libgcc_s.so.1 after installation, the installer may have downloaded the wrong binary variant for your system.",
             "This can happen on glibc-based systems that have musl cross-compilation packages installed, causing the installer to misdetect the system as musl.",
             "Solutions:",
-            "Check which libc your system uses: Report incorrect codeCopyAsk AIldd /bin/ls | head -1 If it shows linux-vdso.so or references to /lib/x86_64-linux-gnu/, you’re on glibc. If it shows musl, you’re on musl.",
+            "Check which libc your system uses: ldd /bin/ls | head -1 If it shows linux-vdso.so or references to /lib/x86_64-linux-gnu/, you’re on glibc. If it shows musl, you’re on musl.",
             "Check which libc your system uses:",
             "If it shows linux-vdso.so or references to /lib/x86_64-linux-gnu/, you’re on glibc. If it shows musl, you’re on musl.",
             "If you’re on glibc but got the musl binary, remove the installation and reinstall. You can also manually download the correct binary from the GCS bucket at https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/{VERSION}/manifest.json. File a GitHub issue with the output of ldd /bin/ls and ls /lib/libc.musl*.",
-            "If you’re actually on musl (Alpine Linux), install the required packages: Report incorrect codeCopyAsk AIapk add libgcc libstdc++ ripgrep",
+            "If you’re actually on musl (Alpine Linux), install the required packages: apk add libgcc libstdc++ ripgrep",
             "If you’re actually on musl (Alpine Linux), install the required packages:"
           ],
           "codeBlocks": [
@@ -11550,10 +11753,10 @@
           "paragraphs": [
             "If the installer prints Illegal instruction instead of the OOM Killed message, the downloaded binary doesn’t match your CPU architecture. This commonly happens on ARM servers that receive an x86 binary, or on older CPUs that lack required instruction sets.",
             "Solutions:",
-            "Verify your architecture: Report incorrect codeCopyAsk AIuname -m x86_64 means 64-bit Intel/AMD, aarch64 means ARM64. If the binary doesn’t match, file a GitHub issue with the output.",
+            "Verify your architecture: uname -m x86_64 means 64-bit Intel/AMD, aarch64 means ARM64. If the binary doesn’t match, file a GitHub issue with the output.",
             "Verify your architecture:",
             "x86_64 means 64-bit Intel/AMD, aarch64 means ARM64. If the binary doesn’t match, file a GitHub issue with the output.",
-            "Try an alternative install method while the architecture issue is resolved: Report incorrect codeCopyAsk AIbrew install --cask claude-code",
+            "Try an alternative install method while the architecture issue is resolved: brew install --cask claude-code",
             "Try an alternative install method while the architecture issue is resolved:"
           ],
           "codeBlocks": [
@@ -11569,7 +11772,7 @@
             "Solutions:",
             "Check your macOS version: Claude Code requires macOS 13.0 or later. Open the Apple menu and select About This Mac to check your version.",
             "Update macOS if you’re on an older version. The binary uses load commands that older macOS versions don’t support.",
-            "Try Homebrew as an alternative install method: Report incorrect codeCopyAsk AIbrew install --cask claude-code",
+            "Try Homebrew as an alternative install method: brew install --cask claude-code",
             "Try Homebrew as an alternative install method:"
           ],
           "codeBlocks": [
@@ -14964,11 +15167,11 @@
         "decision_source: Decision source - \"config\", \"hook\", \"user_permanent\", \"user_temporary\", \"user_abort\", or \"user_reject\"",
         "tool_result_size_bytes: Size of the tool result in bytes",
         "mcp_server_scope: MCP server scope identifier (for MCP tools)",
-        "tool_parameters: JSON string containing tool-specific parameters (when available) For Bash tool: includes bash_command, full_command, timeout, description, dangerouslyDisableSandbox, and git_commit_id (the commit SHA, when a git commit command succeeds) For MCP tools (when OTEL_LOG_TOOL_DETAILS=1): includes mcp_server_name, mcp_tool_name For Skill tool (when OTEL_LOG_TOOL_DETAILS=1): includes skill_name",
+        "tool_parameters (when OTEL_LOG_TOOL_DETAILS=1): JSON string containing tool-specific parameters For Bash tool: includes bash_command, full_command, timeout, description, dangerouslyDisableSandbox, and git_commit_id (the commit SHA, when a git commit command succeeds) For MCP tools: includes mcp_server_name, mcp_tool_name For Skill tool: includes skill_name",
         "For Bash tool: includes bash_command, full_command, timeout, description, dangerouslyDisableSandbox, and git_commit_id (the commit SHA, when a git commit command succeeds)",
-        "For MCP tools (when OTEL_LOG_TOOL_DETAILS=1): includes mcp_server_name, mcp_tool_name",
-        "For Skill tool (when OTEL_LOG_TOOL_DETAILS=1): includes skill_name",
-        "tool_input (when OTEL_LOG_TOOL_DETAILS=1): JSON-serialized tool arguments. Individual values over 512 characters are truncated, and the full payload is bounded to ~4 K characters. Applies to all tools including MCP tools.",
+        "For MCP tools: includes mcp_server_name, mcp_tool_name",
+        "For Skill tool: includes skill_name",
+        "tool_input (when OTEL_LOG_TOOL_DETAILS=1): JSON-serialized tool arguments with long strings truncated. Bounded to ~4 K characters. Applies to all tools including MCP tools.",
         "Logged for each API request to Claude.",
         "Event Name: claude_code.api_request",
         "event.name: \"api_request\"",
@@ -15026,10 +15229,10 @@
         "Meter Name: com.anthropic.claude_code",
         "For a comprehensive guide on measuring return on investment for Claude Code, including telemetry setup, cost analysis, productivity metrics, and automated reporting, see the Claude Code ROI Measurement Guide. This repository provides ready-to-use Docker Compose configurations, Prometheus and OpenTelemetry setups, and templates for generating productivity reports integrated with tools like Linear.",
         "Telemetry is opt-in and requires explicit configuration",
-        "Raw file contents and code snippets are not included in metrics or events. Tool execution events include bash commands and file paths in the tool_parameters field, which may contain sensitive values. If your commands may include secrets, configure your telemetry backend to filter or redact tool_parameters",
+        "Raw file contents and code snippets are not included in metrics or events",
         "When authenticated via OAuth, user.email is included in telemetry attributes. If this is a concern for your organization, work with your telemetry backend to filter or redact this field",
         "User prompt content is not collected by default. Only prompt length is recorded. To include prompt content, set OTEL_LOG_USER_PROMPTS=1",
-        "Tool input arguments are not logged by default. To include them, set OTEL_LOG_TOOL_DETAILS=1. When enabled, tool_result events include MCP server/tool names and skill names plus a tool_input attribute with file paths, URLs, search patterns, and other arguments. Individual values over 512 characters are truncated and the total is bounded to ~4 K characters, but the arguments may still contain sensitive values. Configure your telemetry backend to filter or redact tool_input as needed"
+        "Tool input arguments and parameters are not logged by default. To include them, set OTEL_LOG_TOOL_DETAILS=1. When enabled, tool_result events include a tool_parameters attribute (bash commands, MCP server/tool names, skill names) and a tool_input attribute (file paths, URLs, search patterns, and other arguments). Individual values over 512 characters are truncated and the total is bounded to ~4 K characters, but the arguments may still contain sensitive values. Configure your telemetry backend to filter or redact these attributes as needed"
       ],
       "codeBlocks": [
         "# 1. Enable telemetry\nexport CLAUDE_CODE_ENABLE_TELEMETRY=1\n\n# 2. Choose exporters (both are optional - configure only what you need)\nexport OTEL_METRICS_EXPORTER=otlp       # Options: otlp, prometheus, console\nexport OTEL_LOGS_EXPORTER=otlp          # Options: otlp, console\n\n# 3. Configure OTLP endpoint (for OTLP exporter)\nexport OTEL_EXPORTER_OTLP_PROTOCOL=grpc\nexport OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317\n\n# 4. Set authentication (if required)\nexport OTEL_EXPORTER_OTLP_HEADERS=\"Authorization=Bearer your-token\"\n\n# 5. For debugging: reduce export intervals\nexport OTEL_METRIC_EXPORT_INTERVAL=10000  # 10 seconds (default: 60000ms)\nexport OTEL_LOGS_EXPORT_INTERVAL=5000     # 5 seconds (default: 5000ms)\n\n# 6. Run Claude Code\nclaude",
@@ -15297,10 +15500,10 @@
           "title": "​Security and privacy",
           "paragraphs": [
             "Telemetry is opt-in and requires explicit configuration",
-            "Raw file contents and code snippets are not included in metrics or events. Tool execution events include bash commands and file paths in the tool_parameters field, which may contain sensitive values. If your commands may include secrets, configure your telemetry backend to filter or redact tool_parameters",
+            "Raw file contents and code snippets are not included in metrics or events",
             "When authenticated via OAuth, user.email is included in telemetry attributes. If this is a concern for your organization, work with your telemetry backend to filter or redact this field",
             "User prompt content is not collected by default. Only prompt length is recorded. To include prompt content, set OTEL_LOG_USER_PROMPTS=1",
-            "Tool input arguments are not logged by default. To include them, set OTEL_LOG_TOOL_DETAILS=1. When enabled, tool_result events include MCP server/tool names and skill names plus a tool_input attribute with file paths, URLs, search patterns, and other arguments. Individual values over 512 characters are truncated and the total is bounded to ~4 K characters, but the arguments may still contain sensitive values. Configure your telemetry backend to filter or redact tool_input as needed"
+            "Tool input arguments and parameters are not logged by default. To include them, set OTEL_LOG_TOOL_DETAILS=1. When enabled, tool_result events include a tool_parameters attribute (bash commands, MCP server/tool names, skill names) and a tool_input attribute (file paths, URLs, search patterns, and other arguments). Individual values over 512 characters are truncated and the total is bounded to ~4 K characters, but the arguments may still contain sensitive values. Configure your telemetry backend to filter or redact these attributes as needed"
           ],
           "codeBlocks": []
         },
@@ -15409,10 +15612,9 @@
         "Add custom compaction instructions: /compact Focus on code samples and API usage tells Claude what to preserve during summarization.",
         "You can also customize compaction behavior in your CLAUDE.md:",
         "Sonnet handles most coding tasks well and costs less than Opus. Reserve Opus for complex architectural decisions or multi-step reasoning. Use /model to switch models mid-session, or set a default in /config. For simple subagent tasks, specify model: haiku in your subagent configuration.",
-        "Each MCP server adds tool definitions to your context, even when idle. Run /context to see what’s consuming space.",
-        "Prefer CLI tools when available: Tools like gh, aws, gcloud, and sentry-cli are more context-efficient than MCP servers because they don’t add persistent tool definitions. Claude can run CLI commands directly without the overhead.",
+        "MCP tool definitions are deferred by default, so only tool names enter context until Claude uses a specific tool. Run /context to see what’s consuming space.",
+        "Prefer CLI tools when available: Tools like gh, aws, gcloud, and sentry-cli are still more context-efficient than MCP servers because they don’t add any per-tool listing. Claude can run CLI commands directly.",
         "Disable unused servers: Run /mcp to see configured servers and disable any you’re not actively using.",
-        "Tool search is automatic: When MCP tool descriptions exceed 10% of your context window, Claude Code automatically defers them and loads tools on-demand via tool search. Since deferred tools only enter context when actually used, a lower threshold means fewer idle tool definitions consuming space. Set a lower threshold with ENABLE_TOOL_SEARCH=auto:<N> (for example, auto:5 triggers when tools exceed 5% of your context window).",
         "Code intelligence plugins give Claude precise symbol navigation instead of text-based search, reducing unnecessary file reads when exploring unfamiliar code. A single “go to definition” call replaces what might otherwise be a grep followed by reading multiple candidate files. Installed language servers also report type errors automatically after edits, so Claude catches mistakes without running a compiler.",
         "Custom hooks can preprocess data before Claude sees it. Instead of Claude reading a 10,000-line log file to find errors, a hook can grep for ERROR and return only matching lines, reducing context from tens of thousands of tokens to hundreds.",
         "A skill can give Claude domain knowledge so it doesn’t have to explore. For example, a “codebase-overview” skill could describe your project’s architecture, key directories, and naming conventions. When Claude invokes the skill, it gets this context immediately instead of spending tokens reading multiple files to understand the structure.",
@@ -15540,10 +15742,9 @@
         {
           "title": "​Reduce MCP server overhead",
           "paragraphs": [
-            "Each MCP server adds tool definitions to your context, even when idle. Run /context to see what’s consuming space.",
-            "Prefer CLI tools when available: Tools like gh, aws, gcloud, and sentry-cli are more context-efficient than MCP servers because they don’t add persistent tool definitions. Claude can run CLI commands directly without the overhead.",
-            "Disable unused servers: Run /mcp to see configured servers and disable any you’re not actively using.",
-            "Tool search is automatic: When MCP tool descriptions exceed 10% of your context window, Claude Code automatically defers them and loads tools on-demand via tool search. Since deferred tools only enter context when actually used, a lower threshold means fewer idle tool definitions consuming space. Set a lower threshold with ENABLE_TOOL_SEARCH=auto:<N> (for example, auto:5 triggers when tools exceed 5% of your context window)."
+            "MCP tool definitions are deferred by default, so only tool names enter context until Claude uses a specific tool. Run /context to see what’s consuming space.",
+            "Prefer CLI tools when available: Tools like gh, aws, gcloud, and sentry-cli are still more context-efficient than MCP servers because they don’t add any per-tool listing. Claude can run CLI commands directly.",
+            "Disable unused servers: Run /mcp to see configured servers and disable any you’re not actively using."
           ],
           "codeBlocks": []
         },
@@ -16175,7 +16376,7 @@
         "Solution: Increase the timeout using the CLAUDE_CODE_PLUGIN_GIT_TIMEOUT_MS environment variable. The value is in milliseconds:",
         "Symptoms: Added a marketplace via URL (such as https://example.com/marketplace.json), but plugins with relative path sources like \"./plugins/my-plugin\" fail to install with “path not found” errors.",
         "Cause: URL-based marketplaces only download the marketplace.json file itself. They do not download plugin files from the server. Relative paths in the marketplace entry reference files on the remote server that were not downloaded.",
-        "Use external sources: Change plugin entries to use GitHub, npm, or git URL sources instead of relative paths: Report incorrect codeCopyAsk AI{ \"name\": \"my-plugin\", \"source\": { \"source\": \"github\", \"repo\": \"owner/repo\" } }",
+        "Use external sources: Change plugin entries to use GitHub, npm, or git URL sources instead of relative paths: { \"name\": \"my-plugin\", \"source\": { \"source\": \"github\", \"repo\": \"owner/repo\" } }",
         "Use a Git-based marketplace: Host your marketplace in a Git repository and add it with the git URL. Git-based marketplaces clone the entire repository, making relative paths work correctly.",
         "Symptoms: Plugin installs but references to files fail, especially files outside the plugin directory"
       ],
@@ -19875,6 +20076,8 @@
         "up, down, left, right - Arrow keys",
         "backspace, delete - Delete keys",
         "Set an action to null to unbind a default shortcut:",
+        "This also works for chord bindings. Unbinding every chord that shares a prefix frees that prefix for use as a single-key binding:",
+        "If you unbind some but not all chords on a prefix, pressing the prefix still enters chord-wait mode for the remaining bindings.",
         "These shortcuts cannot be rebound:",
         "Some shortcuts may conflict with terminal multiplexers:",
         "When vim mode is enabled (/vim), keybindings and vim mode operate independently:",
@@ -19896,7 +20099,8 @@
         "{\n  \"$schema\": \"https://www.schemastore.org/claude-code-keybindings.json\",\n  \"$docs\": \"https://code.claude.com/docs/en/keybindings\",\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"ctrl+e\": \"chat:externalEditor\",\n        \"ctrl+u\": null\n      }\n    }\n  ]\n}",
         "ctrl+k          Single key with modifier\nshift+tab       Shift + Tab\nmeta+p          Command/Meta + P\nctrl+shift+c    Multiple modifiers",
         "ctrl+k ctrl+s   Press Ctrl+K, release, then Ctrl+S",
-        "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"ctrl+s\": null\n      }\n    }\n  ]\n}"
+        "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"ctrl+s\": null\n      }\n    }\n  ]\n}",
+        "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"ctrl+x ctrl+k\": null,\n        \"ctrl+x ctrl+e\": null,\n        \"ctrl+x\": \"chat:newline\"\n      }\n    }\n  ]\n}"
       ],
       "sectionBlocks": [
         {
@@ -20140,10 +20344,13 @@
         {
           "title": "​Unbind default shortcuts",
           "paragraphs": [
-            "Set an action to null to unbind a default shortcut:"
+            "Set an action to null to unbind a default shortcut:",
+            "This also works for chord bindings. Unbinding every chord that shares a prefix frees that prefix for use as a single-key binding:",
+            "If you unbind some but not all chords on a prefix, pressing the prefix still enters chord-wait mode for the remaining bindings."
           ],
           "codeBlocks": [
-            "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"ctrl+s\": null\n      }\n    }\n  ]\n}"
+            "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"ctrl+s\": null\n      }\n    }\n  ]\n}",
+            "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"ctrl+x ctrl+k\": null,\n        \"ctrl+x ctrl+e\": null,\n        \"ctrl+x\": \"chat:newline\"\n      }\n    }\n  ]\n}"
           ]
         },
         {
@@ -21197,6 +21404,12 @@
         "SubagentStart input",
         "SubagentStop",
         "SubagentStop input",
+        "TaskCreated",
+        "TaskCreated input",
+        "TaskCreated decision control",
+        "TaskCompleted",
+        "TaskCompleted input",
+        "TaskCompleted decision control",
         "Stop input",
         "Stop decision control",
         "StopFailure",
@@ -21204,9 +21417,6 @@
         "TeammateIdle",
         "TeammateIdle input",
         "TeammateIdle decision control",
-        "TaskCompleted",
-        "TaskCompleted input",
-        "TaskCompleted decision control",
         "ConfigChange",
         "ConfigChange input",
         "ConfigChange decision control",
@@ -21280,7 +21490,7 @@
         "The matcher field is a regex string that filters when hooks fire. Use \"*\", \"\", or omit matcher entirely to match all occurrences. Each event type matches on a different field:",
         "The matcher is a regex, so Edit|Write matches either tool and Notebook.* matches any tool starting with Notebook. The matcher runs against a field from the JSON input that Claude Code sends to your hook on stdin. For tool events, that field is tool_name. Each hook event section lists the full set of matcher values and the input schema for that event.",
         "This example runs a linting script only when Claude writes or edits a file:",
-        "UserPromptSubmit, Stop, TeammateIdle, TaskCompleted, WorktreeCreate, WorktreeRemove, and CwdChanged don’t support matchers and always fire on every occurrence. If you add a matcher field to these events, it is silently ignored.",
+        "UserPromptSubmit, Stop, TeammateIdle, TaskCreated, TaskCompleted, WorktreeCreate, WorktreeRemove, and CwdChanged don’t support matchers and always fire on every occurrence. If you add a matcher field to these events, it is silently ignored.",
         "MCP server tools appear as regular tools in tool events (PreToolUse, PostToolUse, PostToolUseFailure, PermissionRequest), so you can match them the same way you match any other tool name.",
         "MCP tools follow the naming pattern mcp__<server>__<tool>, for example:",
         "mcp__memory__create_entities: Memory server’s create entities tool",
@@ -21321,10 +21531,7 @@
         "Type /hooks in Claude Code to open a read-only browser for your configured hooks. The menu shows every hook event with a count of configured hooks, lets you drill into matchers, and shows the full details of each hook handler. Use it to verify configuration, check which settings file a hook came from, or inspect a hook’s command, prompt, or URL.",
         "The menu displays all four hook types: command, prompt, agent, and http. Each hook is labeled with a [type] prefix and a source indicating where it was defined:",
         "User: from ~/.claude/settings.json",
-        "Project: from .claude/settings.json",
-        "Local: from .claude/settings.local.json",
-        "Plugin: from a plugin’s hooks/hooks.json",
-        "Session: registered in memory for the current session"
+        "Project: from .claude/settings.json"
       ],
       "codeBlocks": [
         "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \".claude/hooks/block-rm.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
@@ -21436,7 +21643,7 @@
             "The matcher field is a regex string that filters when hooks fire. Use \"*\", \"\", or omit matcher entirely to match all occurrences. Each event type matches on a different field:",
             "The matcher is a regex, so Edit|Write matches either tool and Notebook.* matches any tool starting with Notebook. The matcher runs against a field from the JSON input that Claude Code sends to your hook on stdin. For tool events, that field is tool_name. Each hook event section lists the full set of matcher values and the input schema for that event.",
             "This example runs a linting script only when Claude writes or edits a file:",
-            "UserPromptSubmit, Stop, TeammateIdle, TaskCompleted, WorktreeCreate, WorktreeRemove, and CwdChanged don’t support matchers and always fire on every occurrence. If you add a matcher field to these events, it is silently ignored.",
+            "UserPromptSubmit, Stop, TeammateIdle, TaskCreated, TaskCompleted, WorktreeCreate, WorktreeRemove, and CwdChanged don’t support matchers and always fire on every occurrence. If you add a matcher field to these events, it is silently ignored.",
             "MCP server tools appear as regular tools in tool events (PreToolUse, PostToolUse, PostToolUseFailure, PermissionRequest), so you can match them the same way you match any other tool name.",
             "MCP tools follow the naming pattern mcp__<server>__<tool>, for example:",
             "mcp__memory__create_entities: Memory server’s create entities tool",
@@ -21754,6 +21961,38 @@
           ]
         },
         {
+          "title": "​TaskCreated",
+          "paragraphs": [
+            "Runs when a task is being created via the TaskCreate tool. Use this to enforce naming conventions, require task descriptions, or prevent certain tasks from being created.",
+            "When a TaskCreated hook exits with code 2, the task is not created and the stderr message is fed back to the model as feedback. To stop the teammate entirely instead of re-running it, return JSON with {\"continue\": false, \"stopReason\": \"...\"}. TaskCreated hooks do not support matchers and fire on every occurrence.",
+            "In addition to the common input fields, TaskCreated hooks receive task_id, task_subject, and optionally task_description, teammate_name, and team_name.",
+            "TaskCreated hooks support two ways to control task creation:",
+            "Exit code 2: the task is not created and the stderr message is fed back to the model as feedback.",
+            "JSON {\"continue\": false, \"stopReason\": \"...\"}: stops the teammate entirely, matching Stop hook behavior. The stopReason is shown to the user.",
+            "This example blocks tasks whose subjects don’t follow the required format:"
+          ],
+          "codeBlocks": [
+            "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"TaskCreated\",\n  \"task_id\": \"task-001\",\n  \"task_subject\": \"Implement user authentication\",\n  \"task_description\": \"Add login and signup endpoints\",\n  \"teammate_name\": \"implementer\",\n  \"team_name\": \"my-project\"\n}",
+            "#!/bin/bash\nINPUT=$(cat)\nTASK_SUBJECT=$(echo \"$INPUT\" | jq -r '.task_subject')\n\nif [[ ! \"$TASK_SUBJECT\" =~ ^\\[TICKET-[0-9]+\\] ]]; then\n  echo \"Task subject must start with a ticket number, e.g. '[TICKET-123] Add feature'\" >&2\n  exit 2\nfi\n\nexit 0"
+          ]
+        },
+        {
+          "title": "​TaskCompleted",
+          "paragraphs": [
+            "Runs when a task is being marked as completed. This fires in two situations: when any agent explicitly marks a task as completed through the TaskUpdate tool, or when an agent team teammate finishes its turn with in-progress tasks. Use this to enforce completion criteria like passing tests or lint checks before a task can close.",
+            "When a TaskCompleted hook exits with code 2, the task is not marked as completed and the stderr message is fed back to the model as feedback. To stop the teammate entirely instead of re-running it, return JSON with {\"continue\": false, \"stopReason\": \"...\"}. TaskCompleted hooks do not support matchers and fire on every occurrence.",
+            "In addition to the common input fields, TaskCompleted hooks receive task_id, task_subject, and optionally task_description, teammate_name, and team_name.",
+            "TaskCompleted hooks support two ways to control task completion:",
+            "Exit code 2: the task is not marked as completed and the stderr message is fed back to the model as feedback.",
+            "JSON {\"continue\": false, \"stopReason\": \"...\"}: stops the teammate entirely, matching Stop hook behavior. The stopReason is shown to the user.",
+            "This example runs tests and blocks task completion if they fail:"
+          ],
+          "codeBlocks": [
+            "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"TaskCompleted\",\n  \"task_id\": \"task-001\",\n  \"task_subject\": \"Implement user authentication\",\n  \"task_description\": \"Add login and signup endpoints\",\n  \"teammate_name\": \"implementer\",\n  \"team_name\": \"my-project\"\n}",
+            "#!/bin/bash\nINPUT=$(cat)\nTASK_SUBJECT=$(echo \"$INPUT\" | jq -r '.task_subject')\n\n# Run the test suite\nif ! npm test 2>&1; then\n  echo \"Tests not passing. Fix failing tests before completing: $TASK_SUBJECT\" >&2\n  exit 2\nfi\n\nexit 0"
+          ]
+        },
+        {
           "title": "​Stop",
           "paragraphs": [
             "Runs when the main Claude Code agent has finished responding. Does not run if the stoppage occurred due to a user interrupt. API errors fire StopFailure instead.",
@@ -21790,39 +22029,6 @@
           "codeBlocks": [
             "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"TeammateIdle\",\n  \"teammate_name\": \"researcher\",\n  \"team_name\": \"my-project\"\n}",
             "#!/bin/bash\n\nif [ ! -f \"./dist/output.js\" ]; then\n  echo \"Build artifact missing. Run the build before stopping.\" >&2\n  exit 2\nfi\n\nexit 0"
-          ]
-        },
-        {
-          "title": "​TaskCompleted",
-          "paragraphs": [
-            "Runs when a task is being marked as completed. This fires in two situations: when any agent explicitly marks a task as completed through the TaskUpdate tool, or when an agent team teammate finishes its turn with in-progress tasks. Use this to enforce completion criteria like passing tests or lint checks before a task can close.",
-            "When a TaskCompleted hook exits with code 2, the task is not marked as completed and the stderr message is fed back to the model as feedback. To stop the teammate entirely instead of re-running it, return JSON with {\"continue\": false, \"stopReason\": \"...\"}. TaskCompleted hooks do not support matchers and fire on every occurrence.",
-            "In addition to the common input fields, TaskCompleted hooks receive task_id, task_subject, and optionally task_description, teammate_name, and team_name.",
-            "TaskCompleted hooks support two ways to control task completion:",
-            "Exit code 2: the task is not marked as completed and the stderr message is fed back to the model as feedback.",
-            "JSON {\"continue\": false, \"stopReason\": \"...\"}: stops the teammate entirely, matching Stop hook behavior. The stopReason is shown to the user.",
-            "This example runs tests and blocks task completion if they fail:"
-          ],
-          "codeBlocks": [
-            "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"TaskCompleted\",\n  \"task_id\": \"task-001\",\n  \"task_subject\": \"Implement user authentication\",\n  \"task_description\": \"Add login and signup endpoints\",\n  \"teammate_name\": \"implementer\",\n  \"team_name\": \"my-project\"\n}",
-            "#!/bin/bash\nINPUT=$(cat)\nTASK_SUBJECT=$(echo \"$INPUT\" | jq -r '.task_subject')\n\n# Run the test suite\nif ! npm test 2>&1; then\n  echo \"Tests not passing. Fix failing tests before completing: $TASK_SUBJECT\" >&2\n  exit 2\nfi\n\nexit 0"
-          ]
-        },
-        {
-          "title": "​ConfigChange",
-          "paragraphs": [
-            "Runs when a configuration file changes during a session. Use this to audit settings changes, enforce security policies, or block unauthorized modifications to configuration files.",
-            "ConfigChange hooks fire for changes to settings files, managed policy settings, and skill files. The source field in the input tells you which type of configuration changed, and the optional file_path field provides the path to the changed file.",
-            "The matcher filters on the configuration source:",
-            "This example logs all configuration changes for security auditing:",
-            "In addition to the common input fields, ConfigChange hooks receive source and optionally file_path. The source field indicates which configuration type changed, and file_path provides the path to the specific file that was modified.",
-            "ConfigChange hooks can block configuration changes from taking effect. Use exit code 2 or a JSON decision to prevent the change. When blocked, the new settings are not applied to the running session.",
-            "policy_settings changes cannot be blocked. Hooks still fire for policy_settings sources, so you can use them for audit logging, but any blocking decision is ignored. This ensures enterprise-managed settings always take effect."
-          ],
-          "codeBlocks": [
-            "{\n  \"hooks\": {\n    \"ConfigChange\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"\\\"$CLAUDE_PROJECT_DIR\\\"/.claude/hooks/audit-config-change.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
-            "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"hook_event_name\": \"ConfigChange\",\n  \"source\": \"project_settings\",\n  \"file_path\": \"/Users/.../my-project/.claude/settings.json\"\n}",
-            "{\n  \"decision\": \"block\",\n  \"reason\": \"Configuration changes to project settings require admin approval\"\n}"
           ]
         }
       ]
