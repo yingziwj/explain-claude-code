@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-28T04:29:02.586Z",
-  "sourceGeneratedAt": "2026-03-28T04:29:02.353Z",
+  "generatedAt": "2026-03-29T04:45:13.131Z",
+  "sourceGeneratedAt": "2026-03-29T04:45:12.881Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -6786,9 +6786,9 @@
           ]
         },
         {
-          "title": "Claude doesn’t see all my skills",
+          "title": "Skill descriptions are cut short",
           "paragraphs": [
-            "这里不是让你背\"Claude doesn’t see all my skills\"这个词，而是让你看它真干活时怎么使。",
+            "这里不是让你背\"Skill descriptions are cut short\"这个词，而是让你看它真干活时怎么使。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
@@ -6854,14 +6854,14 @@
             },
             {
               "title": "原页关键片段：Get notified when Claude needs input 2",
-              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"notify-send 'Claude Code' 'Claude Code needs your attention'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
-              "kind": "config"
+              "body": "\"Get notified when Claude needs input\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "osascript -e 'display notification \"test\"'",
+              "kind": "code"
             },
             {
               "title": "原页关键片段：Get notified when Claude needs input 3",
               "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"powershell.exe -Command \\\"[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code needs your attention', 'Claude Code')\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "code": "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"notify-send 'Claude Code' 'Claude Code needs your attention'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             },
             {

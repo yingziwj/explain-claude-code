@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-28T04:29:02.353Z",
+  "generatedAt": "2026-03-29T04:45:12.881Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -9401,7 +9401,7 @@
         "Troubleshooting",
         "Skill not triggering",
         "Skill triggers too often",
-        "Claude doesn’t see all my skills",
+        "Skill descriptions are cut short",
         "Related resources",
         "Create, manage, and share skills to extend Claude’s capabilities in Claude Code. Includes custom commands and bundled skills.",
         "Skills extend what Claude can do. Create a SKILL.md file with instructions, and Claude adds it to its toolkit. Claude uses skills when relevant, or you can invoke one directly with /skill-name.",
@@ -9501,8 +9501,8 @@
         "If Claude uses your skill when you don’t want it:",
         "Make the description more specific",
         "Add disable-model-invocation: true if you only want manual invocation",
-        "Skill descriptions are loaded into context so Claude knows what’s available. If you have many skills, they may exceed the character budget. The budget scales dynamically at 2% of the context window, with a fallback of 16,000 characters. Run /context to check for a warning about excluded skills.",
-        "To override the limit, set the SLASH_COMMAND_TOOL_CHAR_BUDGET environment variable.",
+        "Skill descriptions are loaded into context so Claude knows what’s available. All skill names are always included, but if you have many skills, descriptions are shortened to fit the character budget, which can strip the keywords Claude needs to match your request. The budget scales dynamically at 1% of the context window, with a fallback of 8,000 characters.",
+        "To raise the limit, set the SLASH_COMMAND_TOOL_CHAR_BUDGET environment variable. Or trim descriptions at the source: front-load the key use case, since each entry is capped at 250 characters regardless of budget.",
         "Subagents: delegate tasks to specialized agents",
         "Plugins: package and distribute skills with other extensions",
         "Hooks: automate workflows around tool events",
@@ -9802,10 +9802,10 @@
           "codeBlocks": []
         },
         {
-          "title": "​Claude doesn’t see all my skills",
+          "title": "​Skill descriptions are cut short",
           "paragraphs": [
-            "Skill descriptions are loaded into context so Claude knows what’s available. If you have many skills, they may exceed the character budget. The budget scales dynamically at 2% of the context window, with a fallback of 16,000 characters. Run /context to check for a warning about excluded skills.",
-            "To override the limit, set the SLASH_COMMAND_TOOL_CHAR_BUDGET environment variable."
+            "Skill descriptions are loaded into context so Claude knows what’s available. All skill names are always included, but if you have many skills, descriptions are shortened to fit the character budget, which can strip the keywords Claude needs to match your request. The budget scales dynamically at 1% of the context window, with a fallback of 8,000 characters.",
+            "To raise the limit, set the SLASH_COMMAND_TOOL_CHAR_BUDGET environment variable. Or trim descriptions at the source: front-load the key use case, since each entry is capped at 250 characters regardless of budget."
           ],
           "codeBlocks": []
         },
@@ -9923,6 +9923,9 @@
         "Get a desktop notification whenever Claude finishes working and needs your input, so you can switch to other tasks without checking the terminal.",
         "This hook uses the Notification event, which fires when Claude is waiting for input or permission. Each tab below uses the platform’s native notification command. Add this to ~/.claude/settings.json:",
         "Windows (PowerShell)",
+        "If no notification appears",
+        "osascript routes notifications through the built-in Script Editor app. If Script Editor doesn’t have notification permission, the command fails silently, and macOS won’t prompt you to grant it. Run this in Terminal once to make Script Editor appear in your notification settings:",
+        "Nothing will appear yet. Open System Settings > Notifications, find Script Editor in the list, and turn on Allow Notifications. Run the command again to confirm the test notification appears.",
         "Automatically run Prettier on every file Claude edits, so formatting stays consistent without manual intervention.",
         "This hook uses the PostToolUse event with an Edit|Write matcher, so it runs only after file-editing tools. The command extracts the edited file path with jq and passes it to Prettier. Add this to .claude/settings.json in your project root:",
         "The Bash examples on this page use jq for JSON parsing. Install it with brew install jq (macOS), apt-get install jq (Debian/Ubuntu), or see jq downloads.",
@@ -10044,6 +10047,7 @@
       ],
       "codeBlocks": [
         "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+        "osascript -e 'display notification \"test\"'",
         "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"notify-send 'Claude Code' 'Claude Code needs your attention'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
         "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"powershell.exe -Command \\\"[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code needs your attention', 'Claude Code')\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
         "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Edit|Write\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"jq -r '.tool_input.file_path' | xargs npx prettier --write\"\n          }\n        ]\n      }\n    ]\n  }\n}",
@@ -10128,10 +10132,14 @@
           "paragraphs": [
             "Get a desktop notification whenever Claude finishes working and needs your input, so you can switch to other tasks without checking the terminal.",
             "This hook uses the Notification event, which fires when Claude is waiting for input or permission. Each tab below uses the platform’s native notification command. Add this to ~/.claude/settings.json:",
-            "Windows (PowerShell)"
+            "Windows (PowerShell)",
+            "If no notification appears",
+            "osascript routes notifications through the built-in Script Editor app. If Script Editor doesn’t have notification permission, the command fails silently, and macOS won’t prompt you to grant it. Run this in Terminal once to make Script Editor appear in your notification settings:",
+            "Nothing will appear yet. Open System Settings > Notifications, find Script Editor in the list, and turn on Allow Notifications. Run the command again to confirm the test notification appears."
           ],
           "codeBlocks": [
             "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+            "osascript -e 'display notification \"test\"'",
             "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"notify-send 'Claude Code' 'Claude Code needs your attention'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
             "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"powershell.exe -Command \\\"[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code needs your attention', 'Claude Code')\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}"
           ]
@@ -13074,6 +13082,8 @@
         "Vertex rawPredict: :rawPredict, :streamRawPredict, /count-tokens:rawPredict",
         "Failure to forward headers or preserve body fields may result in reduced functionality or inability to use Claude Code features.",
         "Claude Code determines which features to enable based on the API format. When using the Anthropic Messages format with Bedrock or Vertex, you may need to set environment variable CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1.",
+        "Request headers",
+        "Claude Code includes the following headers on every API request:",
         "By default, Claude Code will use standard model names for the selected API format.",
         "If you have configured custom model names in your gateway, use the environment variables documented in Model configuration to match your custom names.",
         "LiteLLM PyPI versions 1.82.7 and 1.82.8 were compromised with credential-stealing malware. Do not install these versions. If you have already installed them:",
@@ -14772,7 +14782,7 @@
         "For security details about cloud execution, see Security.",
         "Claude Code connects from users’ machines to the Statsig service to log operational metrics such as latency, reliability, and usage patterns. This logging does not include any code or file paths. Data is encrypted in transit using TLS and at rest using 256-bit AES encryption. Read more in the Statsig security documentation. To opt out of Statsig telemetry, set the DISABLE_TELEMETRY environment variable.",
         "Claude Code connects from users’ machines to Sentry for operational error logging. The data is encrypted in transit using TLS and at rest using 256-bit AES encryption. Read more in the Sentry security documentation. To opt out of error logging, set the DISABLE_ERROR_REPORTING environment variable.",
-        "When users run the /feedback command, a copy of their full conversation history including code is sent to Anthropic. The data is encrypted in transit and at rest. Optionally, a Github issue is created in our public repository. To opt out, set the DISABLE_FEEDBACK_COMMAND environment variable.",
+        "When users run the /feedback command, a copy of their full conversation history including code is sent to Anthropic. The data is encrypted in transit and at rest. Optionally, a Github issue is created in our public repository. To opt out, set the DISABLE_FEEDBACK_COMMAND environment variable to 1.",
         "By default, error reporting, telemetry, and bug reporting are disabled when using Bedrock, Vertex, or Foundry. Session quality surveys are the exception and appear regardless of provider. You can opt out of all non-essential traffic, including surveys, at once by setting CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC. Here are the full default behaviors:",
         "All environment variables can be checked into settings.json (read more).",
         "Was this page helpful?"
@@ -14883,7 +14893,7 @@
           "paragraphs": [
             "Claude Code connects from users’ machines to the Statsig service to log operational metrics such as latency, reliability, and usage patterns. This logging does not include any code or file paths. Data is encrypted in transit using TLS and at rest using 256-bit AES encryption. Read more in the Statsig security documentation. To opt out of Statsig telemetry, set the DISABLE_TELEMETRY environment variable.",
             "Claude Code connects from users’ machines to Sentry for operational error logging. The data is encrypted in transit using TLS and at rest using 256-bit AES encryption. Read more in the Sentry security documentation. To opt out of error logging, set the DISABLE_ERROR_REPORTING environment variable.",
-            "When users run the /feedback command, a copy of their full conversation history including code is sent to Anthropic. The data is encrypted in transit and at rest. Optionally, a Github issue is created in our public repository. To opt out, set the DISABLE_FEEDBACK_COMMAND environment variable."
+            "When users run the /feedback command, a copy of their full conversation history including code is sent to Anthropic. The data is encrypted in transit and at rest. Optionally, a Github issue is created in our public repository. To opt out, set the DISABLE_FEEDBACK_COMMAND environment variable to 1."
           ],
           "codeBlocks": []
         },
