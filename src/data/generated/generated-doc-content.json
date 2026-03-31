@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-30T05:07:10.532Z",
-  "sourceGeneratedAt": "2026-03-30T05:07:10.290Z",
+  "generatedAt": "2026-03-31T04:44:23.198Z",
+  "sourceGeneratedAt": "2026-03-31T04:44:22.948Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -514,7 +514,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.86、2.1.85、2.1.84、2.1.83 这些环节往下讲。",
+            "原文这页大多会按 2.1.88、2.1.87、2.1.86、2.1.85 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -523,7 +523,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.86 -> 2.1.85 -> 2.1.84 -> 2.1.83。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.88 -> 2.1.87 -> 2.1.86 -> 2.1.85。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -3299,6 +3299,243 @@
         "title": "一眼看懂这一页",
         "lines": [
           "Chrome extension (beta)",
+          "   |",
+          "   v",
+          "这是 Platforms and integrations 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "computer-use": {
+      "sourceLabel": "Let Claude use your computer from the CLI",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Computer use (preview)：Enable computer use in the Claude Code CLI so Claude can open apps, click, type, and see your screen on macOS. Test native apps, debug visual issues, and automate GUI-only tools without leaving your terminal.",
+            "你可以把它当成\"Platforms and integrations\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Computer use (preview)\"理解成 Platforms and integrations 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 What you can do with computer use、When computer use applies、Enable computer use、Approve apps per session 这些环节往下讲。",
+            "翻成人话，大概就是：What you can do with computer use"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：What you can do with computer use -> When computer use applies -> Enable computer use -> Approve apps per session。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Enable computer use 1",
+              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
+              "code": "/mcp",
+              "kind": "prompt"
+            },
+            {
+              "title": "原页关键片段：Enable computer use 2",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "Build the app target, launch it, and click through each tab to make\nsure nothing crashes. Screenshot any error states you find.",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Validate a native build",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "Build the MenuBarStats target, launch it, open the preferences window,\nand verify the interval slider updates the label. Screenshot the\npreferences window when you're done.",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Reproduce a layout bug",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "The settings modal clips its footer on narrow windows. Resize the app\nwindow down until you can reproduce it, screenshot the clipped state,\nthen check the CSS for the modal container.",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Test a simulator flow",
+              "body": "\"Test a simulator flow\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "Open the iOS Simulator, launch the app, tap through the onboarding\nscreens, and tell me if any screen takes more than a second to load.",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "What you can do with computer use",
+          "paragraphs": [
+            "这里不是让你背\"What you can do with computer use\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "When computer use applies",
+          "paragraphs": [
+            "这里不是催你全用上，而是在说 When computer use applies 什么时候用才划算。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Enable computer use",
+          "paragraphs": [
+            "这一段主要是在拧开关，地方和顺序都别搞错。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Enable computer use 1",
+              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
+              "code": "/mcp",
+              "kind": "prompt"
+            },
+            {
+              "title": "Enable computer use 2",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "Build the app target, launch it, and click through each tab to make\nsure nothing crashes. Screenshot any error states you find.",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Approve apps per session",
+          "paragraphs": [
+            "这一段主要是在把\"Approve apps per session\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "How Claude works on your screen",
+          "paragraphs": [
+            "这里不是让你背\"How Claude works on your screen\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
+          "title": "One session at a time",
+          "paragraphs": [
+            "看到这里，就把\"One session at a time\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Apps are hidden while Claude works",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Stop at any time",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。"
+          ]
+        },
+        {
+          "title": "Safety and the trust boundary",
+          "paragraphs": [
+            "这里不是让你背\"Safety and the trust boundary\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Example workflows",
+          "paragraphs": [
+            "这一段主要是拿例子给你看路数，不是让你一字不差照搬。"
+          ]
+        },
+        {
+          "title": "Validate a native build",
+          "paragraphs": [
+            "这里不是让你背\"Validate a native build\"这个词，而是让你看它真干活时怎么使。"
+          ],
+          "steps": [
+            {
+              "title": "Validate a native build",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "Build the MenuBarStats target, launch it, open the preferences window,\nand verify the interval slider updates the label. Screenshot the\npreferences window when you're done.",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Reproduce a layout bug",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Reproduce a layout bug",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "The settings modal clips its footer on narrow windows. Resize the app\nwindow down until you can reproduce it, screenshot the clipped state,\nthen check the CSS for the modal container.",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Test a simulator flow",
+          "paragraphs": [
+            "这一块主要是在说\"Test a simulator flow\"真到手上该怎么用，哪里最容易踩坑。"
+          ],
+          "steps": [
+            {
+              "title": "Test a simulator flow",
+              "body": "\"Test a simulator flow\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "Open the iOS Simulator, launch the app, tap through the onboarding\nscreens, and tell me if any screen takes more than a second to load.",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Differences from the Desktop app",
+          "paragraphs": [
+            "这里主要是在交代\"Differences from the Desktop app\"这一块会碰到哪些事。"
+          ]
+        },
+        {
+          "title": "Troubleshooting",
+          "paragraphs": [
+            "这里讲的是怎么找毛病，先查明白哪一步出错，再决定怎么修。"
+          ]
+        },
+        {
+          "title": "”Computer use is in use by another Claude session”",
+          "paragraphs": [
+            "这一段主要是在把\"”Computer use is in use by another Claude session”\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "macOS permissions prompt keeps reappearing",
+          "paragraphs": [
+            "看到这里，就把\"macOS permissions prompt keeps reappearing\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "computer-use doesn’t appear in /mcp",
+          "paragraphs": [
+            "这里主要是在交代\"computer-use doesn’t appear in /mcp\"这一块会碰到哪些事。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "See also",
+          "paragraphs": [
+            "这一段主要是在把\"See also\"讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Computer use (preview)",
           "   |",
           "   v",
           "这是 Platforms and integrations 里的一摊要紧活",
@@ -9718,7 +9955,7 @@
         {
           "title": "Getting started in 4 steps",
           "paragraphs": [
-            "这一段就是安装 VS Code and the Remote - Containers extension。这种地方最怕跳步骤，最好老老实实按顺序来。"
+            "这一段就是安装 VS Code and the Dev Containers extension。这种地方最怕跳步骤，最好老老实实按顺序来。"
           ]
         },
         {
@@ -13102,6 +13339,13 @@
           ]
         },
         {
+          "title": "Reduce flicker and memory usage",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
           "title": "Handling large inputs",
           "paragraphs": [
             "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
@@ -13120,6 +13364,171 @@
         "title": "一眼看懂这一页",
         "lines": [
           "Terminal configuration",
+          "   |",
+          "   v",
+          "这是 Configuration 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "fullscreen": {
+      "sourceLabel": "Fullscreen rendering",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Fullscreen rendering：Enable a smoother, flicker-free rendering mode with mouse support and stable memory usage in long conversations.",
+            "你可以把它当成\"Configuration\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Fullscreen rendering\"理解成 Configuration 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Enable fullscreen rendering、What changes、Use the mouse、Scroll the conversation 这些环节往下讲。",
+            "翻成人话，大概就是：Enable fullscreen rendering"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Enable fullscreen rendering -> What changes -> Use the mouse -> Scroll the conversation。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Enable fullscreen rendering 1",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "CLAUDE_CODE_NO_FLICKER=1 claude",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Enable fullscreen rendering 2",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "export CLAUDE_CODE_NO_FLICKER=1",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Adjust wheel scroll speed",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "export CLAUDE_CODE_SCROLL_SPEED=3",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Use with tmux",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "set -g mouse on",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Keep native text selection",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "CLAUDE_CODE_NO_FLICKER=1 CLAUDE_CODE_DISABLE_MOUSE=1 claude",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Enable fullscreen rendering",
+          "paragraphs": [
+            "这里讲怎么把某个开关拧对。重点不是概念，而是你该在哪儿改、改完怎么确认生效。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Enable fullscreen rendering 1",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "CLAUDE_CODE_NO_FLICKER=1 claude",
+              "kind": "code"
+            },
+            {
+              "title": "Enable fullscreen rendering 2",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "export CLAUDE_CODE_NO_FLICKER=1",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "What changes",
+          "paragraphs": [
+            "这一块主要是在说\"What changes\"真到手上该怎么用，哪里最容易踩坑。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ]
+        },
+        {
+          "title": "Use the mouse",
+          "paragraphs": [
+            "看到这里，就把\"Use the mouse\"当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Scroll the conversation",
+          "paragraphs": [
+            "看到这里，就把\"Scroll the conversation\"当成一件真要上手的活来看。"
+          ]
+        },
+        {
+          "title": "Adjust wheel scroll speed",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Adjust wheel scroll speed",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "export CLAUDE_CODE_SCROLL_SPEED=3",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Search and review the conversation",
+          "paragraphs": [
+            "看到这里，就把\"Search and review the conversation\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Use with tmux",
+          "paragraphs": [
+            "看到这里，就把\"Use with tmux\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Keep native text selection",
+          "paragraphs": [
+            "看到这里，就把\"Keep native text selection\"当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Keep native text selection",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "CLAUDE_CODE_NO_FLICKER=1 CLAUDE_CODE_DISABLE_MOUSE=1 claude",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Research preview",
+          "paragraphs": [
+            "看到这里，就把\"Research preview\"当成一件真要上手的活来看。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Fullscreen rendering",
           "   |",
           "   v",
           "这是 Configuration 里的一摊要紧活",
@@ -13177,7 +13586,7 @@
             {
               "title": "原页关键片段：Control the model users run on",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"model\": \"sonnet\",\n  \"availableModels\": [\"sonnet\", \"haiku\"]\n}",
+              "code": "{\n  \"model\": \"claude-sonnet-4-5\",\n  \"availableModels\": [\"claude-sonnet-4-5\", \"haiku\"],\n  \"env\": {\n    \"ANTHROPIC_DEFAULT_SONNET_MODEL\": \"claude-sonnet-4-5\"\n  }\n}",
               "kind": "config"
             },
             {
@@ -13278,7 +13687,7 @@
             {
               "title": "Control the model users run on",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"model\": \"sonnet\",\n  \"availableModels\": [\"sonnet\", \"haiku\"]\n}",
+              "code": "{\n  \"model\": \"claude-sonnet-4-5\",\n  \"availableModels\": [\"claude-sonnet-4-5\", \"haiku\"],\n  \"env\": {\n    \"ANTHROPIC_DEFAULT_SONNET_MODEL\": \"claude-sonnet-4-5\"\n  }\n}",
               "kind": "config"
             }
           ]
