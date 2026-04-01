@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-31T04:44:23.198Z",
-  "sourceGeneratedAt": "2026-03-31T04:44:22.948Z",
+  "generatedAt": "2026-04-01T05:08:08.841Z",
+  "sourceGeneratedAt": "2026-04-01T05:08:08.630Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -514,7 +514,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.88、2.1.87、2.1.86、2.1.85 这些环节往下讲。",
+            "原文这页大多会按 2.1.89、2.1.87、2.1.86、2.1.85 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -523,7 +523,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.88 -> 2.1.87 -> 2.1.86 -> 2.1.85。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.89 -> 2.1.87 -> 2.1.86 -> 2.1.85。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -4825,6 +4825,12 @@
               "kind": "prompt"
             },
             {
+              "title": "原页关键片段：Use subagent definitions for teammates",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Use subagent definitions for teammates\"这一段的意思去办。",
+              "code": "Spawn a teammate using the security-reviewer agent type to audit the auth module.",
+              "kind": "prompt"
+            },
+            {
               "title": "原页关键片段：Run a parallel code review",
               "body": "这一段要真抓重点，通常就抓下面这块原文。",
               "code": "Create an agent team to review PR #142. Spawn three reviewers:\n- One focused on security implications\n- One checking performance impact\n- One validating test coverage\nHave them each review and report findings.",
@@ -4841,12 +4847,6 @@
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
               "code": "Spawn a security reviewer teammate with the prompt: \"Review the authentication module\nat src/auth/ for security vulnerabilities. Focus on token handling, session\nmanagement, and input validation. The app uses JWT tokens stored in\nhttpOnly cookies. Report any issues with severity ratings.\"",
               "kind": "code"
-            },
-            {
-              "title": "原页关键片段：Wait for teammates to finish",
-              "body": "这句话是拿来踩刹车的，提醒带队的那个先别急着往前冲，等队友把手头活交回来再说。",
-              "code": "Wait for your teammates to complete their tasks before proceeding",
-              "kind": "prompt"
             }
           ]
         },
@@ -5019,6 +5019,21 @@
           ]
         },
         {
+          "title": "Use subagent definitions for teammates",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Use subagent definitions for teammates",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Use subagent definitions for teammates\"这一段的意思去办。",
+              "code": "Spawn a teammate using the security-reviewer agent type to audit the auth module.",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
           "title": "Permissions",
           "paragraphs": [
             "这一段主要是在把\"Permissions\"讲实，不是只摆个标题给你看。",
@@ -5141,12 +5156,6 @@
           "title": "Monitor and steer",
           "paragraphs": [
             "这里不是让你背\"Monitor and steer\"这个词，而是让你看它真干活时怎么使。"
-          ]
-        },
-        {
-          "title": "Troubleshooting",
-          "paragraphs": [
-            "这里讲的是怎么找毛病，先查明白哪一步出错，再决定怎么修。"
           ]
         }
       ],
@@ -6192,7 +6201,7 @@
             {
               "title": "Configure auto-updates",
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
-              "code": "export DISABLE_AUTOUPDATER=true\nexport FORCE_AUTOUPDATE_PLUGINS=true",
+              "code": "export DISABLE_AUTOUPDATER=1\nexport FORCE_AUTOUPDATE_PLUGINS=1",
               "kind": "code"
             }
           ]
@@ -7443,6 +7452,13 @@
           "title": "Limitations",
           "paragraphs": [
             "这一块主要是在说\"Limitations\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Hooks and permission modes",
+          "paragraphs": [
+            "这一段主要是在把\"Hooks and permission modes\"讲实，不是只摆个标题给你看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
@@ -9103,7 +9119,7 @@
             {
               "title": "原页关键片段：3. Configure Claude Code",
               "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the region for the small/fast model (Haiku)\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2",
+              "code": "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the region for the small/fast model (Haiku)\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2\n\n# Optional: Override the Bedrock endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_BEDROCK_BASE_URL=https://bedrock-runtime.us-east-1.amazonaws.com",
               "kind": "code"
             },
             {
@@ -9201,7 +9217,7 @@
             {
               "title": "3. Configure Claude Code",
               "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the region for the small/fast model (Haiku)\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2",
+              "code": "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the region for the small/fast model (Haiku)\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2\n\n# Optional: Override the Bedrock endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_BEDROCK_BASE_URL=https://bedrock-runtime.us-east-1.amazonaws.com",
               "kind": "code"
             }
           ]
@@ -9269,6 +9285,18 @@
           ]
         },
         {
+          "title": "Authentication loop with SSO and corporate proxies",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。"
+          ]
+        },
+        {
+          "title": "Region issues",
+          "paragraphs": [
+            "这段就是排错时拿来照着查的，先一项项看清楚，再动手改。"
+          ]
+        },
+        {
           "title": "Additional resources",
           "paragraphs": [
             "这一段主要是在把\"Additional resources\"讲实，不是只摆个标题给你看。"
@@ -9323,9 +9351,9 @@
             },
             {
               "title": "原页关键片段：4. Configure Claude Code",
-              "body": "\"4. Configure Claude Code\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "# Enable Vertex AI integration\nexport CLAUDE_CODE_USE_VERTEX=1\nexport CLOUD_ML_REGION=global\nexport ANTHROPIC_VERTEX_PROJECT_ID=YOUR-PROJECT-ID\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# When CLOUD_ML_REGION=global, override region for unsupported models\nexport VERTEX_REGION_CLAUDE_3_5_HAIKU=us-east5\n\n# Optional: Override regions for other specific models\nexport VERTEX_REGION_CLAUDE_3_5_SONNET=us-east5\nexport VERTEX_REGION_CLAUDE_3_7_SONNET=us-east5\nexport VERTEX_REGION_CLAUDE_4_0_OPUS=europe-west1\nexport VERTEX_REGION_CLAUDE_4_0_SONNET=us-east5\nexport VERTEX_REGION_CLAUDE_4_1_OPUS=europe-west1",
-              "kind": "code"
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "# Enable Vertex AI integration\nexport CLAUDE_CODE_USE_VERTEX=1\nexport CLOUD_ML_REGION=global\nexport ANTHROPIC_VERTEX_PROJECT_ID=YOUR-PROJECT-ID\n\n# Optional: Override the Vertex endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_VERTEX_BASE_URL=https://aiplatform.googleapis.com\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# When CLOUD_ML_REGION=global, override region for models that don't support global endpoints\nexport VERTEX_REGION_CLAUDE_HAIKU_4_5=us-east5\nexport VERTEX_REGION_CLAUDE_4_6_SONNET=europe-west1",
+              "kind": "command"
             },
             {
               "title": "原页关键片段：5. Pin model versions 1",
@@ -9397,9 +9425,9 @@
           "steps": [
             {
               "title": "4. Configure Claude Code",
-              "body": "\"4. Configure Claude Code\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "# Enable Vertex AI integration\nexport CLAUDE_CODE_USE_VERTEX=1\nexport CLOUD_ML_REGION=global\nexport ANTHROPIC_VERTEX_PROJECT_ID=YOUR-PROJECT-ID\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# When CLOUD_ML_REGION=global, override region for unsupported models\nexport VERTEX_REGION_CLAUDE_3_5_HAIKU=us-east5\n\n# Optional: Override regions for other specific models\nexport VERTEX_REGION_CLAUDE_3_5_SONNET=us-east5\nexport VERTEX_REGION_CLAUDE_3_7_SONNET=us-east5\nexport VERTEX_REGION_CLAUDE_4_0_OPUS=europe-west1\nexport VERTEX_REGION_CLAUDE_4_0_SONNET=us-east5\nexport VERTEX_REGION_CLAUDE_4_1_OPUS=europe-west1",
-              "kind": "code"
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "# Enable Vertex AI integration\nexport CLAUDE_CODE_USE_VERTEX=1\nexport CLOUD_ML_REGION=global\nexport ANTHROPIC_VERTEX_PROJECT_ID=YOUR-PROJECT-ID\n\n# Optional: Override the Vertex endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_VERTEX_BASE_URL=https://aiplatform.googleapis.com\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# When CLOUD_ML_REGION=global, override region for models that don't support global endpoints\nexport VERTEX_REGION_CLAUDE_HAIKU_4_5=us-east5\nexport VERTEX_REGION_CLAUDE_4_6_SONNET=europe-west1",
+              "kind": "command"
             }
           ]
         },
@@ -10748,7 +10776,7 @@
             {
               "title": "原页关键片段：Configure server-managed settings 1",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ],\n    \"disableBypassPermissionsMode\": \"disable\"\n  }\n}",
+              "code": "{\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ],\n    \"disableBypassPermissionsMode\": \"disable\"\n  },\n  \"allowManagedPermissionRulesOnly\": true\n}",
               "kind": "config"
             },
             {
@@ -10788,7 +10816,7 @@
             {
               "title": "Configure server-managed settings 1",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ],\n    \"disableBypassPermissionsMode\": \"disable\"\n  }\n}",
+              "code": "{\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ],\n    \"disableBypassPermissionsMode\": \"disable\"\n  },\n  \"allowManagedPermissionRulesOnly\": true\n}",
               "kind": "config"
             },
             {
@@ -10816,6 +10844,13 @@
           "title": "Access control",
           "paragraphs": [
             "别把这段只当成标题看，它其实是在给\"Access control\"划边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Managed-only settings",
+          "paragraphs": [
+            "这一块主要是在说\"Managed-only settings\"真到手上该怎么用，哪里最容易踩坑。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
@@ -12880,6 +12915,13 @@
           ]
         },
         {
+          "title": "Additional directories grant file access, not configuration",
+          "paragraphs": [
+            "这一块主要是在说\"Additional directories grant file access, not configuration\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
           "title": "How permissions interact with sandboxing",
           "paragraphs": [
             "这一块主要是在说\"How permissions interact with sandboxing\"真到手上该怎么用，哪里最容易踩坑。",
@@ -12896,7 +12938,7 @@
         {
           "title": "Managed-only settings",
           "paragraphs": [
-            "这一块主要是在说\"Managed-only settings\"真到手上该怎么用，哪里最容易踩坑。",
+            "这一段不只是挂个标题，它是在说明\"Managed-only settings\"这一块到底负责什么。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
@@ -15079,7 +15121,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Tools reference\"理解成 Reference 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 Bash tool behavior、PowerShell tool、Enable the PowerShell tool、Shell selection in settings, hooks, and skills 这些环节往下讲。",
+            "原文这页大多会按 Bash tool behavior、LSP tool behavior、PowerShell tool、Enable the PowerShell tool 这些环节往下讲。",
             "翻成人话，大概就是：Bash tool behavior"
           ]
         },
@@ -15088,7 +15130,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：Bash tool behavior -> PowerShell tool -> Enable the PowerShell tool -> Shell selection in settings, hooks, and skills。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：Bash tool behavior -> LSP tool behavior -> PowerShell tool -> Enable the PowerShell tool。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ],
           "steps": [
             {
@@ -15096,6 +15138,12 @@
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
               "code": "{\n  \"env\": {\n    \"CLAUDE_CODE_USE_POWERSHELL_TOOL\": \"1\"\n  }\n}",
               "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Check which tools are available",
+              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
+              "code": "What tools do you have access to?",
+              "kind": "prompt"
             }
           ]
         },
@@ -15104,6 +15152,13 @@
           "paragraphs": [
             "这段看着像个标题，其实是在说\"Bash tool behavior\"管到哪儿。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "LSP tool behavior",
+          "paragraphs": [
+            "这一段不只是挂个标题，它是在说明\"LSP tool behavior\"这一块到底负责什么。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -15139,6 +15194,21 @@
           "paragraphs": [
             "别把这段只当成标题看，它其实是在给\"Preview limitations\"划边界。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Check which tools are available",
+          "paragraphs": [
+            "看到这里，就把\"Check which tools are available\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Check which tools are available",
+              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
+              "code": "What tools do you have access to?",
+              "kind": "prompt"
+            }
           ]
         },
         {
