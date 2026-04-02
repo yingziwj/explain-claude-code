@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-01T05:08:08.841Z",
-  "sourceGeneratedAt": "2026-04-01T05:08:08.630Z",
+  "generatedAt": "2026-04-02T04:38:38.111Z",
+  "sourceGeneratedAt": "2026-04-02T04:38:37.855Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -514,7 +514,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.89、2.1.87、2.1.86、2.1.85 这些环节往下讲。",
+            "原文这页大多会按 2.1.90、2.1.89、2.1.87、2.1.86 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -523,7 +523,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.89 -> 2.1.87 -> 2.1.86 -> 2.1.85。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.90 -> 2.1.89 -> 2.1.87 -> 2.1.86。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -10397,6 +10397,32 @@
           "title": "Binary integrity and code signing",
           "paragraphs": [
             "这一块主要是在说\"Binary integrity and code signing\"真到手上该怎么用，哪里最容易踩坑。"
+          ],
+          "steps": [
+            {
+              "title": "Binary integrity and code signing 1",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "curl -fsSL https://downloads.claude.ai/keys/claude-code.asc | gpg --import",
+              "kind": "command"
+            },
+            {
+              "title": "Binary integrity and code signing 2",
+              "body": "\"Binary integrity and code signing\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "gpg --fingerprint [email protected]",
+              "kind": "code"
+            },
+            {
+              "title": "Binary integrity and code signing 3",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "REPO=https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases\nVERSION=2.1.89\ncurl -fsSLO \"$REPO/$VERSION/manifest.json\"\ncurl -fsSLO \"$REPO/$VERSION/manifest.json.sig\"",
+              "kind": "config"
+            },
+            {
+              "title": "Binary integrity and code signing 4",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "gpg --verify manifest.json.sig manifest.json",
+              "kind": "config"
+            }
           ]
         },
         {
@@ -12943,6 +12969,13 @@
           ]
         },
         {
+          "title": "Review auto mode denials",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Configure the auto mode classifier",
           "paragraphs": [
             "这一段主要是在拧开关，地方和顺序都别搞错。",
@@ -13512,7 +13545,8 @@
         {
           "title": "Scroll the conversation",
           "paragraphs": [
-            "看到这里，就把\"Scroll the conversation\"当成一件真要上手的活来看。"
+            "看到这里，就把\"Scroll the conversation\"当成一件真要上手的活来看。",
+            "这一段还会谈显示方式和终端环境，重点是先选一个你当前最稳能用的模式，不必一上来追求花哨。"
           ]
         },
         {
@@ -14205,7 +14239,8 @@
         {
           "title": "How output styles work",
           "paragraphs": [
-            "这里不是让你背\"How output styles work\"这个词，而是让你看它真干活时怎么使。"
+            "这里不是让你背\"How output styles work\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -15995,9 +16030,15 @@
           ],
           "steps": [
             {
-              "title": "PreToolUse",
+              "title": "PreToolUse 1",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
               "code": "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PreToolUse\",\n    \"permissionDecision\": \"allow\",\n    \"permissionDecisionReason\": \"My reason here\",\n    \"updatedInput\": {\n      \"field_to_modify\": \"new value\"\n    },\n    \"additionalContext\": \"Current environment: production. Proceed with caution.\"\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "PreToolUse 2",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"type\": \"result\",\n  \"subtype\": \"success\",\n  \"stop_reason\": \"tool_deferred\",\n  \"session_id\": \"abc123\",\n  \"deferred_tool_use\": {\n    \"id\": \"toolu_01abc\",\n    \"name\": \"AskUserQuestion\",\n    \"input\": { \"questions\": [{ \"question\": \"Which framework?\", \"header\": \"Framework\", \"options\": [{\"label\": \"React\"}, {\"label\": \"Vue\"}], \"multiSelect\": false }] }\n  }\n}",
               "kind": "config"
             }
           ]
@@ -16061,6 +16102,27 @@
               "title": "PostToolUseFailure 2",
               "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
               "code": "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolUseFailure\",\n    \"additionalContext\": \"Additional information about the failure for Claude\"\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "PermissionDenied",
+          "paragraphs": [
+            "这里不是让你背\"PermissionDenied\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "PermissionDenied 1",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"auto\",\n  \"hook_event_name\": \"PermissionDenied\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"rm -rf /tmp/build\",\n    \"description\": \"Clean build directory\"\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"reason\": \"Auto mode denied: command targets a path outside the project\"\n}",
+              "kind": "config"
+            },
+            {
+              "title": "PermissionDenied 2",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PermissionDenied\",\n    \"retry\": true\n  }\n}",
               "kind": "config"
             }
           ]
@@ -16197,27 +16259,6 @@
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
               "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"hook_event_name\": \"StopFailure\",\n  \"error\": \"rate_limit\",\n  \"error_details\": \"429 Too Many Requests\",\n  \"last_assistant_message\": \"API Error: Rate limit reached\"\n}",
               "kind": "config"
-            }
-          ]
-        },
-        {
-          "title": "TeammateIdle",
-          "paragraphs": [
-            "这一段主要是在把\"TeammateIdle\"讲实，不是只摆个标题给你看。",
-            "如果这里反复提 lead 和 teammate，通常是在提醒主代理别抢队友还没做完的活，先等人把结果交回来再继续统筹。"
-          ],
-          "steps": [
-            {
-              "title": "TeammateIdle 1",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"TeammateIdle\",\n  \"teammate_name\": \"researcher\",\n  \"team_name\": \"my-project\"\n}",
-              "kind": "config"
-            },
-            {
-              "title": "TeammateIdle 2",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "#!/bin/bash\n\nif [ ! -f \"./dist/output.js\" ]; then\n  echo \"Build artifact missing. Run the build before stopping.\" >&2\n  exit 2\nfi\n\nexit 0",
-              "kind": "command"
             }
           ]
         }

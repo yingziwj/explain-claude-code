@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-01T05:08:08.630Z",
+  "generatedAt": "2026-04-02T04:38:37.855Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -390,6 +390,7 @@
         "macOS, Linux, WSL:",
         "Windows PowerShell:",
         "Windows CMD:",
+        "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows PS C:\\ when you’re in PowerShell.",
         "Windows requires Git for Windows. Install it first if you don’t have it.",
         "Native installations automatically update in the background to keep you on the latest version.",
         "Homebrew installations do not auto-update. Run brew upgrade claude-code periodically to get the latest features and security fixes.",
@@ -497,7 +498,7 @@
             "macOS, Linux, WSL:",
             "Windows PowerShell:",
             "Windows CMD:",
-            "Windows requires Git for Windows. Install it first if you don’t have it."
+            "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows PS C:\\ when you’re in PowerShell."
           ],
           "codeBlocks": [
             "curl -fsSL https://claude.ai/install.sh | bash",
@@ -622,6 +623,7 @@
         "macOS, Linux, WSL:",
         "Windows PowerShell:",
         "Windows CMD:",
+        "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows PS C:\\ when you’re in PowerShell.",
         "Windows requires Git for Windows. Install it first if you don’t have it.",
         "Native installations automatically update in the background to keep you on the latest version.",
         "Homebrew installations do not auto-update. Run brew upgrade claude-code periodically to get the latest features and security fixes.",
@@ -758,6 +760,7 @@
             "macOS, Linux, WSL:",
             "Windows PowerShell:",
             "Windows CMD:",
+            "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows PS C:\\ when you’re in PowerShell.",
             "Windows requires Git for Windows. Install it first if you don’t have it.",
             "Native installations automatically update in the background to keep you on the latest version.",
             "Homebrew installations do not auto-update. Run brew upgrade claude-code periodically to get the latest features and security fixes.",
@@ -962,6 +965,7 @@
       "metaDescription": "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
       "headings": [],
       "toc": [
+        "2.1.90",
         "2.1.89",
         "2.1.87",
         "2.1.86",
@@ -980,13 +984,31 @@
         "2.1.72",
         "2.1.71",
         "2.1.70",
-        "2.1.69",
-        "2.1.68"
+        "2.1.69"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Added /powerup — interactive lessons teaching Claude Code features with animated demos",
+        "Added CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE env var to keep the existing marketplace cache when git pull fails, useful in offline environments",
+        "Added .husky to protected directories (acceptEdits mode)",
+        "Fixed an infinite loop where the rate-limit options dialog would repeatedly auto-open after hitting your usage limit, eventually crashing the session",
+        "Fixed --resume causing a full prompt-cache miss on the first request for users with deferred tools, MCP servers, or custom agents (regression since v2.1.69)",
+        "Fixed Edit/Write failing with “File content has changed” when a PostToolUse format-on-save hook rewrites the file between consecutive edits",
+        "Fixed PreToolUse hooks that emit JSON to stdout and exit with code 2 not correctly blocking the tool call",
+        "Fixed collapsed search/read summary badge appearing multiple times in fullscreen scrollback when a CLAUDE.md file auto-loads during a tool call",
+        "Fixed auto mode not respecting explicit user boundaries (“don’t push”, “wait for X before Y”) even when the action would otherwise be allowed",
+        "Fixed click-to-expand hover text being nearly invisible on light terminal themes",
+        "Fixed UI crash when malformed tool input reached the permission dialog",
+        "Fixed headers disappearing when scrolling /model, /config, and other selection screens",
+        "Hardened PowerShell tool permission checks: fixed trailing & background job bypass, -ErrorAction Break debugger hang, archive-extraction TOCTOU, and parse-fail fallback deny-rule degradation",
+        "Improved performance: eliminated per-turn JSON.stringify of MCP tool schemas on cache-key lookup",
+        "Improved performance: SSE transport now handles large streamed frames in linear time (was quadratic)",
+        "Improved performance: SDK sessions with long conversations no longer slow down quadratically on transcript writes",
+        "Improved /resume all-projects view to load project sessions in parallel, improving load times for users with many projects",
+        "Changed --resume picker to no longer show sessions created by claude -p or SDK invocations",
+        "Removed Get-DnsClientCache and ipconfig /displaydns from auto-allow (DNS cache privacy)",
         "Added \"defer\" permission decision to PreToolUse hooks — headless sessions can pause at a tool call and resume with -p --resume to have the hook re-evaluate",
         "Added CLAUDE_CODE_NO_FLICKER=1 environment variable to opt into flicker-free alt-screen rendering with virtualized scrollback",
         "Added PermissionDenied hook that fires after auto mode classifier denials — return {retry: true} to tell the model it can retry",
@@ -1144,26 +1166,7 @@
         "Added transcript search — press / in transcript mode (Ctrl+O) to search, n/N to step through matches",
         "Added Ctrl+X Ctrl+E as an alias for opening the external editor (readline-native binding; Ctrl+G still works)",
         "Pasted images now insert an [Image #N] chip at the cursor so you can reference them positionally in your prompt",
-        "Agents can now declare initialPrompt in frontmatter to auto-submit a first turn",
-        "chat:killAgents and chat:fastMode are now rebindable via ~/.claude/keybindings.json",
-        "Fixed mouse tracking escape sequences leaking to shell prompt after exit",
-        "Fixed Claude Code hanging on exit on macOS",
-        "Fixed screen flashing blank after being idle for a few seconds",
-        "Fixed a hang when diffing very large files with few common lines — diffs now time out after 5 seconds and fall back gracefully",
-        "Fixed a 1–8 second UI freeze on startup when voice input was enabled, caused by eagerly loading the native audio module",
-        "Fixed a startup regression where Claude Code would wait ~3s for claude.ai MCP config fetch before proceeding",
-        "Fixed --mcp-config CLI flag bypassing allowedMcpServers/deniedMcpServers managed policy enforcement",
-        "Fixed claude.ai MCP connectors (Slack, Gmail, etc.) not being available in single-turn --print mode",
-        "Fixed caffeinate process not properly terminating when Claude Code exits, preventing Mac from sleeping",
-        "Fixed bash mode not activating when tab-accepting !-prefixed command suggestions",
-        "Fixed stale slash command selection showing wrong highlighted command after navigating suggestions",
-        "Fixed /config menu showing both the search cursor and list selection at the same time",
-        "Fixed background subagents becoming invisible after context compaction, which could cause duplicate agents to be spawned",
-        "Fixed background agent tasks staying stuck in “running” state when git or API calls hang during cleanup",
-        "Fixed --channels showing “Channels are not currently available” on first launch after upgrade",
-        "Fixed uninstalled plugin hooks continuing to fire until the next session",
-        "Fixed queued commands flickering during streaming responses",
-        "Fixed slash commands being sent to the model as text when submitted while a message is processing"
+        "Agents can now declare initialPrompt in frontmatter to auto-submit a first turn"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1173,15 +1176,15 @@
             "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Added \"defer\" permission decision to PreToolUse hooks — headless sessions can pause at a tool call and resume with -p --resume to have the hook re-evaluate",
-            "Added CLAUDE_CODE_NO_FLICKER=1 environment variable to opt into flicker-free alt-screen rendering with virtualized scrollback",
-            "Added PermissionDenied hook that fires after auto mode classifier denials — return {retry: true} to tell the model it can retry",
-            "Added named subagents to @ mention typeahead suggestions",
-            "Added MCP_CONNECTION_NONBLOCKING=true for -p mode to skip the MCP connection wait entirely, and bounded --mcp-config server connections at 5s instead of blocking on the slowest server",
-            "Auto mode: denied commands now show a notification and appear in /permissions → Recent tab where you can retry with r",
-            "Fixed Edit(//path/**) and Read(//path/**) allow rules to check the resolved symlink target, not just the requested path",
-            "Fixed voice push-to-talk not activating for some modifier-combo bindings, and voice mode on Windows failing with “WebSocket upgrade rejected with HTTP 101”",
-            "Fixed Edit/Write tools doubling CRLF on Windows and stripping Markdown hard line breaks (two trailing spaces)"
+            "Added /powerup — interactive lessons teaching Claude Code features with animated demos",
+            "Added CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE env var to keep the existing marketplace cache when git pull fails, useful in offline environments",
+            "Added .husky to protected directories (acceptEdits mode)",
+            "Fixed an infinite loop where the rate-limit options dialog would repeatedly auto-open after hitting your usage limit, eventually crashing the session",
+            "Fixed --resume causing a full prompt-cache miss on the first request for users with deferred tools, MCP servers, or custom agents (regression since v2.1.69)",
+            "Fixed Edit/Write failing with “File content has changed” when a PostToolUse format-on-save hook rewrites the file between consecutive edits",
+            "Fixed PreToolUse hooks that emit JSON to stdout and exit with code 2 not correctly blocking the tool call",
+            "Fixed collapsed search/read summary badge appearing multiple times in fullscreen scrollback when a CLAUDE.md file auto-loads during a tool call",
+            "Fixed auto mode not respecting explicit user boundaries (“don’t push”, “wait for X before Y”) even when the action would otherwise be allowed"
           ],
           "codeBlocks": []
         }
@@ -2688,7 +2691,7 @@
         "To see the full default rule lists as the classifier receives them, run claude auto-mode defaults.",
         "If auto mode blocks something routine for your team, like pushing to your own org’s repo or writing to a company bucket, it’s because the classifier doesn’t know those are trusted. Administrators can add trusted repos, buckets, and internal services via the autoMode.environment setting: see Configure the auto mode classifier for the full configuration guide.",
         "The fallback design keeps false positives from derailing a session: a mistaken block costs Claude a retry, not your progress. If the classifier blocks an action 3 times in a row or 20 times total in one session, auto mode pauses and Claude Code resumes prompting for each action. These thresholds are not configurable.",
-        "CLI: you see a notification in the status area. Approving the prompted action resets the denial counters, so you can continue in auto mode",
+        "CLI: you see a notification in the status area, and the denied action appears in /permissions under the Recently denied tab. Approving the prompted action resets the denial counters, so you can continue in auto mode",
         "Non-interactive mode with the -p flag: aborts the session, since there is no user to prompt",
         "Repeated blocks usually mean one of two things: the task genuinely requires actions the classifier is built to stop, or the classifier is missing context about your trusted infrastructure and treating safe actions as risky. If the blocks look like false positives, or if the classifier misses something it should have caught, use /feedback to report it. If blocks are happening because the classifier doesn’t recognize your repos or services as trusted, have an administrator configure trusted infrastructure in managed settings.",
         "dontAsk mode auto-denies every tool that is not explicitly allowed. Only actions matching your /permissions allow rules or permissions.allow settings can execute. If a tool has an explicit ask rule, the action is also denied rather than prompting. This makes the mode fully non-interactive, suitable for CI pipelines or restricted environments where you pre-define exactly what Claude is permitted to do.",
@@ -2859,7 +2862,7 @@
           "title": "​When auto mode falls back",
           "paragraphs": [
             "The fallback design keeps false positives from derailing a session: a mistaken block costs Claude a retry, not your progress. If the classifier blocks an action 3 times in a row or 20 times total in one session, auto mode pauses and Claude Code resumes prompting for each action. These thresholds are not configurable.",
-            "CLI: you see a notification in the status area. Approving the prompted action resets the denial counters, so you can continue in auto mode",
+            "CLI: you see a notification in the status area, and the denied action appears in /permissions under the Recently denied tab. Approving the prompted action resets the denial counters, so you can continue in auto mode",
             "Non-interactive mode with the -p flag: aborts the session, since there is no user to prompt",
             "Repeated blocks usually mean one of two things: the task genuinely requires actions the classifier is built to stop, or the classifier is missing context about your trusted infrastructure and treating safe actions as risky. If the blocks look like false positives, or if the classifier misses something it should have caught, use /feedback to report it. If blocks are happening because the classifier doesn’t recognize your repos or services as trusted, have an administrator configure trusted infrastructure in managed settings."
           ],
@@ -3122,7 +3125,7 @@
         "With Opus 4.6 and Sonnet 4.6, thinking uses adaptive reasoning: the model dynamically allocates thinking tokens based on the effort level you select. This is the recommended way to tune the tradeoff between speed and reasoning depth.",
         "With older models, thinking uses a fixed token budget drawn from your output allocation. The budget varies by model; see MAX_THINKING_TOKENS for per-model ceilings. You can limit the budget with that environment variable, or disable thinking entirely via /config or the Option+T/Alt+T toggle.",
         "On Opus 4.6 and Sonnet 4.6, adaptive reasoning controls thinking depth, so MAX_THINKING_TOKENS only applies when set to 0 to disable thinking, or when CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1 reverts these models to the fixed budget. See environment variables.",
-        "You’re charged for all thinking tokens used, even though Claude 4 models show summarized thinking",
+        "You’re charged for all thinking tokens used even when thinking summaries are redacted. In interactive mode, thinking appears as a collapsed stub by default. Set showThinkingSummaries: true in settings.json to show full summaries.",
         "When starting Claude Code, you can resume a previous session:",
         "claude --continue continues the most recent conversation in the current directory",
         "claude --resume opens a conversation picker or resumes by name",
@@ -3482,7 +3485,7 @@
             "With Opus 4.6 and Sonnet 4.6, thinking uses adaptive reasoning: the model dynamically allocates thinking tokens based on the effort level you select. This is the recommended way to tune the tradeoff between speed and reasoning depth.",
             "With older models, thinking uses a fixed token budget drawn from your output allocation. The budget varies by model; see MAX_THINKING_TOKENS for per-model ceilings. You can limit the budget with that environment variable, or disable thinking entirely via /config or the Option+T/Alt+T toggle.",
             "On Opus 4.6 and Sonnet 4.6, adaptive reasoning controls thinking depth, so MAX_THINKING_TOKENS only applies when set to 0 to disable thinking, or when CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1 reverts these models to the fixed budget. See environment variables.",
-            "You’re charged for all thinking tokens used, even though Claude 4 models show summarized thinking"
+            "You’re charged for all thinking tokens used even when thinking summaries are redacted. In interactive mode, thinking appears as a collapsed stub by default. Set showThinkingSummaries: true in settings.json to show full summaries."
           ],
           "codeBlocks": []
         },
@@ -7034,7 +7037,7 @@
         "For natural language, there’s no special syntax. Name the subagent and Claude typically delegates:",
         "@-mention the subagent. Type @ and pick the subagent from the typeahead, the same way you @-mention files. This ensures that specific subagent runs rather than leaving the choice to Claude:",
         "Your full message still goes to Claude, which writes the subagent’s task prompt based on what you asked. The @-mention controls which subagent Claude invokes, not what prompt it receives.",
-        "Subagents provided by an enabled plugin appear in the typeahead as <plugin-name>:<agent-name>. You can also type the mention manually without using the picker: @agent-<name> for local subagents, or @agent-<plugin-name>:<agent-name> for plugin subagents.",
+        "Subagents provided by an enabled plugin appear in the typeahead as <plugin-name>:<agent-name>. Named background subagents currently running in the session also appear in the typeahead, showing their status next to the name. You can also type the mention manually without using the picker: @agent-<name> for local subagents, or @agent-<plugin-name>:<agent-name> for plugin subagents.",
         "Run the whole session as a subagent. Pass --agent <name> to start a session where the main thread itself takes on that subagent’s system prompt, tool restrictions, and model:",
         "The subagent’s system prompt replaces the default Claude Code system prompt entirely, the same way --system-prompt does. CLAUDE.md files and project memory still load through the normal message flow. The agent name appears as @<name> in the startup header so you can confirm it’s active.",
         "This works with built-in and custom subagents, and the choice persists when you resume the session.",
@@ -7263,7 +7266,7 @@
             "For natural language, there’s no special syntax. Name the subagent and Claude typically delegates:",
             "@-mention the subagent. Type @ and pick the subagent from the typeahead, the same way you @-mention files. This ensures that specific subagent runs rather than leaving the choice to Claude:",
             "Your full message still goes to Claude, which writes the subagent’s task prompt based on what you asked. The @-mention controls which subagent Claude invokes, not what prompt it receives.",
-            "Subagents provided by an enabled plugin appear in the typeahead as <plugin-name>:<agent-name>. You can also type the mention manually without using the picker: @agent-<name> for local subagents, or @agent-<plugin-name>:<agent-name> for plugin subagents.",
+            "Subagents provided by an enabled plugin appear in the typeahead as <plugin-name>:<agent-name>. Named background subagents currently running in the session also appear in the typeahead, showing their status next to the name. You can also type the mention manually without using the picker: @agent-<name> for local subagents, or @agent-<plugin-name>:<agent-name> for plugin subagents.",
             "Run the whole session as a subagent. Pass --agent <name> to start a session where the main thread itself takes on that subagent’s system prompt, tool restrictions, and model:",
             "The subagent’s system prompt replaces the default Claude Code system prompt entirely, the same way --system-prompt does. CLAUDE.md files and project memory still load through the normal message flow. The agent name appears as @<name> in the startup header so you can confirm it’s active.",
             "This works with built-in and custom subagents, and the choice persists when you resume the session.",
@@ -10358,10 +10361,11 @@
         "Exit codes give you two options: allow or block. For more control, exit 0 and print a JSON object to stdout instead.",
         "Use exit 2 to block with a stderr message, or exit 0 with JSON for structured control. Don’t mix them: Claude Code ignores JSON when you exit 2.",
         "For example, a PreToolUse hook can deny a tool call and tell Claude why, or escalate it to the user for approval:",
-        "Claude Code reads permissionDecision and cancels the tool call, then feeds permissionDecisionReason back to Claude as feedback. These three options are specific to PreToolUse:",
+        "With \"deny\", Claude Code cancels the tool call and feeds permissionDecisionReason back to Claude. These permissionDecision values are specific to PreToolUse:",
         "\"allow\": skip the interactive permission prompt. Deny and ask rules, including enterprise managed deny lists, still apply",
         "\"deny\": cancel the tool call and send the reason to Claude",
         "\"ask\": show the permission prompt to the user as normal",
+        "A fourth value, \"defer\", is available in non-interactive mode with the -p flag. It exits the process with the tool call preserved so an Agent SDK wrapper can collect input and resume. See Defer a tool call for later in the reference.",
         "Returning \"allow\" skips the interactive prompt but does not override permission rules. If a deny rule matches the tool call, the call is blocked even when your hook returns \"allow\". If an ask rule matches, the user is still prompted. This means deny rules from any settings scope, including managed settings, always take precedence over hook approvals.",
         "Other events use different decision patterns. For example, PostToolUse and Stop hooks use a top-level decision: \"block\" field, while PermissionRequest uses hookSpecificOutput.decision.behavior. See the summary table in the reference for a full breakdown by event.",
         "For UserPromptSubmit hooks, use additionalContext instead to inject text into Claude’s context. Prompt-based hooks (type: \"prompt\") handle output differently: see Prompt-based hooks.",
@@ -10381,7 +10385,7 @@
         "The if field uses permission rule syntax to filter hooks by tool name and arguments together, so the hook process only spawns when the tool call matches. This goes beyond matcher, which filters at the group level by tool name only.",
         "For example, to run a hook only when Claude uses git commands rather than all Bash commands:",
         "The hook process only spawns when the Bash command starts with git. Other Bash commands skip this handler entirely. The if field accepts the same patterns as permission rules: \"Bash(git *)\", \"Edit(*.ts)\", and so on. To match multiple tool names, use separate handlers each with its own if value, or match at the matcher level where pipe alternation is supported.",
-        "if only works on tool events: PreToolUse, PostToolUse, PostToolUseFailure, and PermissionRequest. Adding it to any other event prevents the hook from running.",
+        "if only works on tool events: PreToolUse, PostToolUse, PostToolUseFailure, PermissionRequest, and PermissionDenied. Adding it to any other event prevents the hook from running.",
         "Where you add a hook determines its scope:",
         "Run /hooks in Claude Code to browse all configured hooks grouped by event. To disable all hooks at once, set \"disableAllHooks\": true in your settings file.",
         "If you edit settings files directly while Claude Code is running, the file watcher normally picks up hook changes automatically.",
@@ -10641,7 +10645,7 @@
             "Exit codes give you two options: allow or block. For more control, exit 0 and print a JSON object to stdout instead.",
             "Use exit 2 to block with a stderr message, or exit 0 with JSON for structured control. Don’t mix them: Claude Code ignores JSON when you exit 2.",
             "For example, a PreToolUse hook can deny a tool call and tell Claude why, or escalate it to the user for approval:",
-            "Claude Code reads permissionDecision and cancels the tool call, then feeds permissionDecisionReason back to Claude as feedback. These three options are specific to PreToolUse:"
+            "With \"deny\", Claude Code cancels the tool call and feeds permissionDecisionReason back to Claude. These permissionDecision values are specific to PreToolUse:"
           ],
           "codeBlocks": [
             "{\n  \"session_id\": \"abc123\",          // unique ID for this session\n  \"cwd\": \"/Users/sarah/myproject\", // working directory when the event fired\n  \"hook_event_name\": \"PreToolUse\", // which event triggered this hook\n  \"tool_name\": \"Bash\",             // the tool Claude is about to use\n  \"tool_input\": {                  // the arguments Claude passed to the tool\n    \"command\": \"npm test\"          // for Bash, this is the shell command\n  }\n}",
@@ -13346,7 +13350,7 @@
         "platform.claude.com: authentication for Anthropic Console accounts",
         "Ensure these URLs are allowlisted in your proxy configuration and firewall rules. This is especially important when using Claude Code in containerized or restricted network environments.",
         "The native installer and update checks also require the following URLs. If you install Claude Code through npm or manage your own binary distribution, end users may not need access:",
-        "downloads.claude.ai: CDN hosting the install script, version pointers, manifests, and executables",
+        "downloads.claude.ai: CDN hosting the install script, version pointers, manifests, signing keys, and executables",
         "storage.googleapis.com: legacy download bucket, deprecation in progress",
         "Claude Code on the web and Code Review connect to your repositories from Anthropic-managed infrastructure. If your GitHub Enterprise Cloud organization restricts access by IP address, enable IP allow list inheritance for installed GitHub Apps. The Claude GitHub App registers its IP ranges, so enabling this setting allows access without manual configuration. To add the ranges to your allow list manually instead, or to configure other firewalls, see the Anthropic API IP addresses.",
         "For self-hosted GitHub Enterprise Server instances behind a firewall, allowlist the same Anthropic API IP addresses so Anthropic infrastructure can reach your GHES host to clone repositories and post review comments.",
@@ -13431,7 +13435,7 @@
             "platform.claude.com: authentication for Anthropic Console accounts",
             "Ensure these URLs are allowlisted in your proxy configuration and firewall rules. This is especially important when using Claude Code in containerized or restricted network environments.",
             "The native installer and update checks also require the following URLs. If you install Claude Code through npm or manage your own binary distribution, end users may not need access:",
-            "downloads.claude.ai: CDN hosting the install script, version pointers, manifests, and executables",
+            "downloads.claude.ai: CDN hosting the install script, version pointers, manifests, signing keys, and executables",
             "storage.googleapis.com: legacy download bucket, deprecation in progress",
             "Claude Code on the web and Code Review connect to your repositories from Anthropic-managed infrastructure. If your GitHub Enterprise Cloud organization restricts access by IP address, enable IP allow list inheritance for installed GitHub Apps. The Claude GitHub App registers its IP ranges, so enabling this setting allows access without manual configuration. To add the ranges to your allow list manually instead, or to configure other firewalls, see the Anthropic API IP addresses.",
             "For self-hosted GitHub Enterprise Server instances behind a firewall, allowlist the same Anthropic API IP addresses so Anthropic infrastructure can reach your GHES host to clone repositories and post review comments."
@@ -13897,8 +13901,8 @@
         "Migrate from npm to native",
         "Install with npm",
         "Binary integrity and code signing",
-        "Uninstall Claude Code",
-        "Native installation"
+        "Verify the manifest signature",
+        "Platform code signatures"
       ],
       "paragraphs": [
         "System requirements",
@@ -13919,6 +13923,8 @@
         "Migrate from npm to native",
         "Install with npm",
         "Binary integrity and code signing",
+        "Verify the manifest signature",
+        "Platform code signatures",
         "Uninstall Claude Code",
         "Native installation",
         "Homebrew installation",
@@ -13946,6 +13952,7 @@
         "macOS, Linux, WSL:",
         "Windows PowerShell:",
         "Windows CMD:",
+        "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows PS C:\\ when you’re in PowerShell.",
         "Windows requires Git for Windows. Install it first if you don’t have it.",
         "Native installations automatically update in the background to keep you on the latest version.",
         "Homebrew installations do not auto-update. Run brew upgrade claude-code periodically to get the latest features and security fixes.",
@@ -13991,11 +13998,25 @@
         "You can also run claude install from an existing npm installation to install the native binary alongside it, then remove the npm version.",
         "If you need npm installation for compatibility reasons, you must have Node.js 18+ installed. Install the package globally:",
         "Do NOT use sudo npm install -g as this can lead to permission issues and security risks. If you encounter permission errors, see troubleshooting permission errors.",
-        "You can verify the integrity of Claude Code binaries using SHA256 checksums and code signatures.",
-        "SHA256 checksums for all platforms are published in the release manifests at https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/{VERSION}/manifest.json. Replace {VERSION} with a version number such as 2.0.30.",
-        "Signed binaries are distributed for the following platforms: macOS: signed by “Anthropic PBC” and notarized by Apple Windows: signed by “Anthropic, PBC”",
-        "macOS: signed by “Anthropic PBC” and notarized by Apple",
-        "Windows: signed by “Anthropic, PBC”",
+        "Each release publishes a manifest.json containing SHA256 checksums for every platform binary. The manifest is signed with an Anthropic GPG key, so verifying the signature on the manifest transitively verifies every binary it lists.",
+        "The following steps require a POSIX shell with gpg and curl. On Windows, run them in Git Bash or WSL.",
+        "Download and import the public key",
+        "The release signing key is published at a fixed URL.",
+        "Display the fingerprint of the imported key.",
+        "Confirm the output includes this fingerprint:",
+        "Download the manifest and signature",
+        "Set VERSION to the release you want to verify.",
+        "Verify the signature",
+        "Verify the detached signature against the manifest.",
+        "A valid result reports Good signature from \"Anthropic Claude Code Release Signing <[email protected]>\".",
+        "gpg also prints WARNING: This key is not certified with a trusted signature! for any freshly imported key. This is expected. The Good signature line confirms the cryptographic check passed. The fingerprint comparison in Step 1 confirms the key itself is authentic.",
+        "Check the binary against the manifest",
+        "Compare the SHA256 checksum of your downloaded binary with the value listed under platforms.<platform>.checksum in manifest.json.",
+        "Manifest signatures are available for releases from 2.1.89 onward. Earlier releases publish checksums in manifest.json without a detached signature.",
+        "In addition to the signed manifest, individual binaries carry platform-native code signatures where supported.",
+        "macOS: signed by “Anthropic PBC” and notarized by Apple. Verify with codesign --verify --verbose ./claude.",
+        "Windows: signed by “Anthropic, PBC”. Verify with Get-AuthenticodeSignature .\\claude.exe.",
+        "Linux: use the manifest signature above to verify integrity. Linux binaries are not individually code-signed.",
         "To remove Claude Code, follow the instructions for your installation method.",
         "Remove the Claude Code binary and version files:",
         "Remove the Homebrew cask:",
@@ -14028,13 +14049,16 @@
         "curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd 1.0.58 && del install.cmd",
         "# Install the native binary\ncurl -fsSL https://claude.ai/install.sh | bash\n\n# Remove the old npm installation\nnpm uninstall -g @anthropic-ai/claude-code",
         "npm install -g @anthropic-ai/claude-code",
+        "curl -fsSL https://downloads.claude.ai/keys/claude-code.asc | gpg --import",
+        "gpg --fingerprint [email protected]",
+        "31DD DE24 DDFA B679 F42D  7BD2 BAA9 29FF 1A7E CACE",
+        "REPO=https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases\nVERSION=2.1.89\ncurl -fsSLO \"$REPO/$VERSION/manifest.json\"\ncurl -fsSLO \"$REPO/$VERSION/manifest.json.sig\"",
+        "gpg --verify manifest.json.sig manifest.json",
+        "sha256sum claude",
+        "shasum -a 256 claude",
+        "(Get-FileHash claude.exe -Algorithm SHA256).Hash.ToLower()",
         "rm -f ~/.local/bin/claude\nrm -rf ~/.local/share/claude",
-        "Remove-Item -Path \"$env:USERPROFILE\\.local\\bin\\claude.exe\" -Force\nRemove-Item -Path \"$env:USERPROFILE\\.local\\share\\claude\" -Recurse -Force",
-        "brew uninstall --cask claude-code",
-        "winget uninstall Anthropic.ClaudeCode",
-        "npm uninstall -g @anthropic-ai/claude-code",
-        "# Remove user settings and state\nrm -rf ~/.claude\nrm ~/.claude.json\n\n# Remove project-specific settings (run from your project directory)\nrm -rf .claude\nrm -f .mcp.json",
-        "# Remove user settings and state\nRemove-Item -Path \"$env:USERPROFILE\\.claude\" -Recurse -Force\nRemove-Item -Path \"$env:USERPROFILE\\.claude.json\" -Force\n\n# Remove project-specific settings (run from your project directory)\nRemove-Item -Path \".claude\" -Recurse -Force\nRemove-Item -Path \".mcp.json\" -Force"
+        "Remove-Item -Path \"$env:USERPROFILE\\.local\\bin\\claude.exe\" -Force\nRemove-Item -Path \"$env:USERPROFILE\\.local\\share\\claude\" -Recurse -Force"
       ],
       "sectionBlocks": [
         {
@@ -14090,10 +14114,10 @@
             "macOS, Linux, WSL:",
             "Windows PowerShell:",
             "Windows CMD:",
+            "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows PS C:\\ when you’re in PowerShell.",
             "Windows requires Git for Windows. Install it first if you don’t have it.",
             "Native installations automatically update in the background to keep you on the latest version.",
-            "Homebrew installations do not auto-update. Run brew upgrade claude-code periodically to get the latest features and security fixes.",
-            "WinGet installations do not auto-update. Run winget upgrade Anthropic.ClaudeCode periodically to get the latest features and security fixes."
+            "Homebrew installations do not auto-update. Run brew upgrade claude-code periodically to get the latest features and security fixes."
           ],
           "codeBlocks": [
             "curl -fsSL https://claude.ai/install.sh | bash",
@@ -14242,13 +14266,27 @@
         {
           "title": "​Binary integrity and code signing",
           "paragraphs": [
-            "You can verify the integrity of Claude Code binaries using SHA256 checksums and code signatures.",
-            "SHA256 checksums for all platforms are published in the release manifests at https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/{VERSION}/manifest.json. Replace {VERSION} with a version number such as 2.0.30.",
-            "Signed binaries are distributed for the following platforms: macOS: signed by “Anthropic PBC” and notarized by Apple Windows: signed by “Anthropic, PBC”",
-            "macOS: signed by “Anthropic PBC” and notarized by Apple",
-            "Windows: signed by “Anthropic, PBC”"
+            "Each release publishes a manifest.json containing SHA256 checksums for every platform binary. The manifest is signed with an Anthropic GPG key, so verifying the signature on the manifest transitively verifies every binary it lists.",
+            "The following steps require a POSIX shell with gpg and curl. On Windows, run them in Git Bash or WSL.",
+            "Download and import the public key",
+            "The release signing key is published at a fixed URL.",
+            "Display the fingerprint of the imported key.",
+            "Confirm the output includes this fingerprint:",
+            "Download the manifest and signature",
+            "Set VERSION to the release you want to verify.",
+            "Verify the signature",
+            "Verify the detached signature against the manifest.",
+            "A valid result reports Good signature from \"Anthropic Claude Code Release Signing <[email protected]>\".",
+            "gpg also prints WARNING: This key is not certified with a trusted signature! for any freshly imported key. This is expected. The Good signature line confirms the cryptographic check passed. The fingerprint comparison in Step 1 confirms the key itself is authentic."
           ],
-          "codeBlocks": []
+          "codeBlocks": [
+            "curl -fsSL https://downloads.claude.ai/keys/claude-code.asc | gpg --import",
+            "gpg --fingerprint [email protected]",
+            "31DD DE24 DDFA B679 F42D  7BD2 BAA9 29FF 1A7E CACE",
+            "REPO=https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases\nVERSION=2.1.89\ncurl -fsSLO \"$REPO/$VERSION/manifest.json\"\ncurl -fsSLO \"$REPO/$VERSION/manifest.json.sig\"",
+            "gpg --verify manifest.json.sig manifest.json",
+            "sha256sum claude"
+          ]
         },
         {
           "title": "​Uninstall Claude Code",
@@ -16771,6 +16809,7 @@
         "You can configure your repository so team members are automatically prompted to install your marketplace when they trust the project folder. Add your marketplace to .claude/settings.json:",
         "You can also specify which plugins should be enabled by default:",
         "For full configuration options, see Plugin settings.",
+        "If you use a local directory or file source with a relative path, the path resolves against your repository’s main checkout. When you run Claude Code from a git worktree, the path still points at the main checkout, so all worktrees share the same marketplace location. Marketplace state is stored once per user in ~/.claude/plugins/known_marketplaces.json, not per project.",
         "For container images and CI environments, you can pre-populate a plugins directory at build time so Claude Code starts with marketplaces and plugins already available, without cloning anything at runtime. Set the CLAUDE_CODE_PLUGIN_SEED_DIR environment variable to point at this directory.",
         "To layer multiple seed directories, separate paths with : on Unix or ; on Windows. Claude Code searches each directory in order, and the first seed that contains a given marketplace or plugin cache wins.",
         "The seed directory mirrors the structure of ~/.claude/plugins:",
@@ -16842,8 +16881,7 @@
         "Symptoms: Added a marketplace via URL (such as https://example.com/marketplace.json), but plugins with relative path sources like \"./plugins/my-plugin\" fail to install with “path not found” errors.",
         "Cause: URL-based marketplaces only download the marketplace.json file itself. They do not download plugin files from the server. Relative paths in the marketplace entry reference files on the remote server that were not downloaded.",
         "Use external sources: Change plugin entries to use GitHub, npm, or git URL sources instead of relative paths: { \"name\": \"my-plugin\", \"source\": { \"source\": \"github\", \"repo\": \"owner/repo\" } }",
-        "Use a Git-based marketplace: Host your marketplace in a Git repository and add it with the git URL. Git-based marketplaces clone the entire repository, making relative paths work correctly.",
-        "Symptoms: Plugin installs but references to files fail, especially files outside the plugin directory"
+        "Use a Git-based marketplace: Host your marketplace in a Git repository and add it with the git URL. Git-based marketplaces clone the entire repository, making relative paths work correctly."
       ],
       "codeBlocks": [
         "mkdir -p my-marketplace/.claude-plugin\nmkdir -p my-marketplace/plugins/quality-review-plugin/.claude-plugin\nmkdir -p my-marketplace/plugins/quality-review-plugin/skills/quality-review",
@@ -17130,7 +17168,8 @@
           "paragraphs": [
             "You can configure your repository so team members are automatically prompted to install your marketplace when they trust the project folder. Add your marketplace to .claude/settings.json:",
             "You can also specify which plugins should be enabled by default:",
-            "For full configuration options, see Plugin settings."
+            "For full configuration options, see Plugin settings.",
+            "If you use a local directory or file source with a relative path, the path resolves against your repository’s main checkout. When you run Claude Code from a git worktree, the path still points at the main checkout, so all worktrees share the same marketplace location. Marketplace state is stored once per user in ~/.claude/plugins/known_marketplaces.json, not per project."
           ],
           "codeBlocks": [
             "{\n  \"extraKnownMarketplaces\": {\n    \"company-tools\": {\n      \"source\": {\n        \"source\": \"github\",\n        \"repo\": \"your-org/claude-plugins\"\n      }\n    }\n  }\n}",
@@ -17858,7 +17897,7 @@
         "​How permissions interact with sandboxing",
         "​Managed settings",
         "​Managed-only settings",
-        "​Configure the auto mode classifier"
+        "​Review auto mode denials"
       ],
       "toc": [
         "Permission system",
@@ -17880,7 +17919,7 @@
         "How permissions interact with sandboxing",
         "Managed settings",
         "Managed-only settings",
-        "Configure the auto mode classifier"
+        "Review auto mode denials"
       ],
       "paragraphs": [
         "Permission system",
@@ -17900,6 +17939,7 @@
         "How permissions interact with sandboxing",
         "Managed settings",
         "Managed-only settings",
+        "Review auto mode denials",
         "Configure the auto mode classifier",
         "Define trusted infrastructure",
         "Override the block and allow rules",
@@ -17990,6 +18030,8 @@
         "The following settings are only read from managed settings. Placing them in user or project settings files has no effect.",
         "disableBypassPermissionsMode is typically placed in managed settings to enforce organizational policy, but it works from any scope. A user can set it in their own settings to lock themselves out of bypass mode.",
         "Access to Remote Control and web sessions is not controlled by a managed settings key. On Team and Enterprise plans, an admin enables or disables these features in Claude Code admin settings.",
+        "When auto mode denies a tool call, a notification appears and the denied action is recorded in /permissions under the Recently denied tab. Press r on a denied action to mark it for retry: when you exit the dialog, Claude Code sends a message telling the model it may retry that tool call and resumes the conversation.",
+        "To react to denials programmatically, use the PermissionDenied hook.",
         "Auto mode uses a classifier model to decide whether each action is safe to run without prompting. Out of the box it trusts only the working directory and, if present, the current repo’s remotes. Actions like pushing to your company’s source control org or writing to a team cloud bucket will be blocked as potential data exfiltration. The autoMode settings block lets you tell the classifier which infrastructure your organization trusts.",
         "The classifier reads autoMode from user settings, .claude/settings.local.json, and managed settings. It does not read from shared project settings in .claude/settings.json, because a checked-in repo could otherwise inject its own allow rules.",
         "Entries from each scope are combined. A developer can extend environment, allow, and soft_deny with personal entries but cannot remove entries that managed settings provide. Because allow rules act as exceptions to block rules inside the classifier, a developer-added allow entry can override an organization soft_deny entry: the combination is additive, not a hard policy boundary. If you need a rule that developers cannot work around, use permissions.deny in managed settings instead, which blocks actions before the classifier is consulted.",
@@ -18241,6 +18283,14 @@
             "The following settings are only read from managed settings. Placing them in user or project settings files has no effect.",
             "disableBypassPermissionsMode is typically placed in managed settings to enforce organizational policy, but it works from any scope. A user can set it in their own settings to lock themselves out of bypass mode.",
             "Access to Remote Control and web sessions is not controlled by a managed settings key. On Team and Enterprise plans, an admin enables or disables these features in Claude Code admin settings."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Review auto mode denials",
+          "paragraphs": [
+            "When auto mode denies a tool call, a notification appears and the denied action is recorded in /permissions under the Recently denied tab. Press r on a denied action to mark it for retry: when you exit the dialog, Claude Code sends a message telling the model it may retry that tool call and resumes the conversation.",
+            "To react to denials programmatically, use the PermissionDenied hook."
           ],
           "codeBlocks": []
         },
@@ -19081,6 +19131,7 @@
         "On keyboards without dedicated PgUp, PgDn, Home, or End keys, like MacBook keyboards, hold Fn with the arrow keys: Fn+↑ sends PgUp, Fn+↓ sends PgDn, Fn+← sends Home, and Fn+→ sends End. That makes Ctrl+Fn+→ the jump-to-bottom shortcut. If that feels awkward, scroll to the bottom with the mouse wheel to resume following, or rebind scroll:bottom to something reachable.",
         "Scrolling up pauses auto-follow so new output does not pull you back to the bottom. Press Ctrl+End or scroll to the bottom to resume following.",
         "These actions are rebindable. See Keybindings to customize them. The action names are scroll:pageUp, scroll:pageDown, scroll:top, and scroll:bottom. Additional actions with no default binding include scroll:lineUp, scroll:lineDown, scroll:halfPageUp, scroll:halfPageDown, scroll:fullPageUp, and scroll:fullPageDown.",
+        "Mouse wheel scrolling requires your terminal to forward mouse events to Claude Code. Most terminals do this whenever an application requests it. iTerm2 makes it a per-profile setting: if the wheel does nothing but PgUp and PgDn work, open Settings → Profiles → Terminal and turn on Enable mouse reporting. The same setting is also required for click-to-expand and text selection to work.",
         "If mouse wheel scrolling feels slow, your terminal may be sending one scroll event per physical notch with no multiplier. Some terminals, like Ghostty and iTerm2 with faster scrolling enabled, already amplify wheel events. Others, including the VS Code integrated terminal, send exactly one event per notch. Claude Code cannot detect which.",
         "Set CLAUDE_CODE_SCROLL_SPEED to multiply the base scroll distance:",
         "A value of 3 matches the default in vim and similar applications. The setting accepts values from 1 to 20.",
@@ -19167,7 +19218,8 @@
             "Fullscreen rendering handles scrolling inside the app. Use these shortcuts to navigate:",
             "On keyboards without dedicated PgUp, PgDn, Home, or End keys, like MacBook keyboards, hold Fn with the arrow keys: Fn+↑ sends PgUp, Fn+↓ sends PgDn, Fn+← sends Home, and Fn+→ sends End. That makes Ctrl+Fn+→ the jump-to-bottom shortcut. If that feels awkward, scroll to the bottom with the mouse wheel to resume following, or rebind scroll:bottom to something reachable.",
             "Scrolling up pauses auto-follow so new output does not pull you back to the bottom. Press Ctrl+End or scroll to the bottom to resume following.",
-            "These actions are rebindable. See Keybindings to customize them. The action names are scroll:pageUp, scroll:pageDown, scroll:top, and scroll:bottom. Additional actions with no default binding include scroll:lineUp, scroll:lineDown, scroll:halfPageUp, scroll:halfPageDown, scroll:fullPageUp, and scroll:fullPageDown."
+            "These actions are rebindable. See Keybindings to customize them. The action names are scroll:pageUp, scroll:pageDown, scroll:top, and scroll:bottom. Additional actions with no default binding include scroll:lineUp, scroll:lineDown, scroll:halfPageUp, scroll:halfPageDown, scroll:fullPageUp, and scroll:fullPageDown.",
+            "Mouse wheel scrolling requires your terminal to forward mouse events to Claude Code. Most terminals do this whenever an application requests it. iTerm2 makes it a per-profile setting: if the wheel does nothing but PgUp and PgDn work, open Settings → Profiles → Terminal and turn on Enable mouse reporting. The same setting is also required for click-to-expand and text selection to work."
           ],
           "codeBlocks": []
         },
@@ -20097,10 +20149,10 @@
         "Explanatory: Provides educational “Insights” in between helping you complete software engineering tasks. Helps you understand implementation choices and codebase patterns.",
         "Learning: Collaborative, learn-by-doing mode where Claude will not only share “Insights” while coding, but also ask you to contribute small, strategic pieces of code yourself. Claude Code will add TODO(human) markers in your code for you to implement.",
         "Output styles directly modify Claude Code’s system prompt.",
-        "All output styles exclude instructions for efficient output (such as responding concisely).",
         "Custom output styles exclude instructions for coding (such as verifying code with tests), unless keep-coding-instructions is true.",
         "All output styles have their own custom instructions added to the end of the system prompt.",
         "All output styles trigger reminders for Claude to adhere to the output style instructions during the conversation.",
+        "Token usage depends on the style. Adding instructions to the system prompt increases input tokens, though prompt caching reduces this cost after the first request in a session. The built-in Explanatory and Learning styles produce longer responses than Default by design, which increases output tokens. For custom styles, output token usage depends on what your instructions tell Claude to produce.",
         "Run /config and select Output style to pick a style from a menu. Your selection is saved to .claude/settings.local.json at the local project level.",
         "To set a style without the menu, edit the outputStyle field directly in a settings file:",
         "Because the output style is set in the system prompt at session start, changes take effect the next time you start a new session. This keeps the system prompt stable throughout a conversation so prompt caching can reduce latency and cost.",
@@ -20148,10 +20200,10 @@
           "title": "​How output styles work",
           "paragraphs": [
             "Output styles directly modify Claude Code’s system prompt.",
-            "All output styles exclude instructions for efficient output (such as responding concisely).",
             "Custom output styles exclude instructions for coding (such as verifying code with tests), unless keep-coding-instructions is true.",
             "All output styles have their own custom instructions added to the end of the system prompt.",
-            "All output styles trigger reminders for Claude to adhere to the output style instructions during the conversation."
+            "All output styles trigger reminders for Claude to adhere to the output style instructions during the conversation.",
+            "Token usage depends on the style. Adding instructions to the system prompt increases input tokens, though prompt caching reduces this cost after the first request in a session. The built-in Explanatory and Learning styles produce longer responses than Default by design, which increases output tokens. For custom styles, output token usage depends on what your instructions tell Claude to produce."
           ],
           "codeBlocks": []
         },
@@ -21582,6 +21634,7 @@
         "Does not require Claude to interpret or approve the command",
         "Supports history-based autocomplete: type a partial command and press Tab to complete from previous ! commands in the current project",
         "Exit with Escape, Backspace, or Ctrl+U on an empty prompt",
+        "Pasting text that starts with ! into an empty prompt enters bash mode automatically, matching typed ! behavior",
         "This is useful for quick shell operations while maintaining conversation context.",
         "When you first open a session, a grayed-out example command appears in the prompt input to help you get started. Claude Code picks this from your project’s git history, so it reflects files you’ve been working on recently.",
         "After Claude responds, suggestions continue to appear based on your conversation history, such as a follow-up step from a multi-part request or a natural continuation of your workflow.",
@@ -21796,6 +21849,7 @@
             "Does not require Claude to interpret or approve the command",
             "Supports history-based autocomplete: type a partial command and press Tab to complete from previous ! commands in the current project",
             "Exit with Escape, Backspace, or Ctrl+U on an empty prompt",
+            "Pasting text that starts with ! into an empty prompt enters bash mode automatically, matching typed ! behavior",
             "This is useful for quick shell operations while maintaining conversation context."
           ],
           "codeBlocks": [
@@ -22149,6 +22203,7 @@
         "PreToolUse",
         "PreToolUse input",
         "PreToolUse decision control",
+        "Defer a tool call for later",
         "PermissionRequest",
         "PermissionRequest input",
         "PermissionRequest decision control",
@@ -22159,6 +22214,9 @@
         "PostToolUseFailure",
         "PostToolUseFailure input",
         "PostToolUseFailure decision control",
+        "PermissionDenied",
+        "PermissionDenied input",
+        "PermissionDenied decision control",
         "Notification",
         "Notification input",
         "SubagentStart",
@@ -22255,7 +22313,7 @@
         "This example runs a linting script only when Claude writes or edits a file:",
         "UserPromptSubmit, Stop, TeammateIdle, TaskCreated, TaskCompleted, WorktreeCreate, WorktreeRemove, and CwdChanged don’t support matchers and always fire on every occurrence. If you add a matcher field to these events, it is silently ignored.",
         "For tool events, you can filter more narrowly by setting the if field on individual hook handlers. if uses permission rule syntax to match against the tool name and arguments together, so \"Bash(git *)\" runs only for git commands and \"Edit(*.ts)\" runs only for TypeScript files.",
-        "MCP server tools appear as regular tools in tool events (PreToolUse, PostToolUse, PostToolUseFailure, PermissionRequest), so you can match them the same way you match any other tool name.",
+        "MCP server tools appear as regular tools in tool events (PreToolUse, PostToolUse, PostToolUseFailure, PermissionRequest, PermissionDenied), so you can match them the same way you match any other tool name.",
         "MCP tools follow the naming pattern mcp__<server>__<tool>, for example:",
         "mcp__memory__create_entities: Memory server’s create entities tool",
         "mcp__filesystem__read_file: Filesystem server’s read file tool",
@@ -22288,11 +22346,7 @@
         "This example runs a formatting script bundled with the plugin:",
         "See the plugin components reference for details on creating plugin hooks.",
         "In addition to settings files and plugins, hooks can be defined directly in skills and subagents using frontmatter. These hooks are scoped to the component’s lifecycle and only run when that component is active.",
-        "All hook events are supported. For subagents, Stop hooks are automatically converted to SubagentStop since that is the event that fires when a subagent completes.",
-        "Hooks use the same configuration format as settings-based hooks but are scoped to the component’s lifetime and cleaned up when it finishes.",
-        "This skill defines a PreToolUse hook that runs a security validation script before each Bash command:",
-        "Agents use the same format in their YAML frontmatter.",
-        "Type /hooks in Claude Code to open a read-only browser for your configured hooks. The menu shows every hook event with a count of configured hooks, lets you drill into matchers, and shows the full details of each hook handler. Use it to verify configuration, check which settings file a hook came from, or inspect a hook’s command, prompt, or URL."
+        "All hook events are supported. For subagents, Stop hooks are automatically converted to SubagentStop since that is the event that fires when a subagent completes."
       ],
       "codeBlocks": [
         "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"if\": \"Bash(rm *)\",\n            \"command\": \"\\\"$CLAUDE_PROJECT_DIR\\\"/.claude/hooks/block-rm.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
@@ -22319,14 +22373,14 @@
         "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"UserPromptSubmit\",\n  \"prompt\": \"Write a function to calculate the factorial of a number\"\n}",
         "{\n  \"decision\": \"block\",\n  \"reason\": \"Explanation for decision\",\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"UserPromptSubmit\",\n    \"additionalContext\": \"My additional context here\"\n  }\n}",
         "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PreToolUse\",\n    \"permissionDecision\": \"allow\",\n    \"permissionDecisionReason\": \"My reason here\",\n    \"updatedInput\": {\n      \"field_to_modify\": \"new value\"\n    },\n    \"additionalContext\": \"Current environment: production. Proceed with caution.\"\n  }\n}",
+        "{\n  \"type\": \"result\",\n  \"subtype\": \"success\",\n  \"stop_reason\": \"tool_deferred\",\n  \"session_id\": \"abc123\",\n  \"deferred_tool_use\": {\n    \"id\": \"toolu_01abc\",\n    \"name\": \"AskUserQuestion\",\n    \"input\": { \"questions\": [{ \"question\": \"Which framework?\", \"header\": \"Framework\", \"options\": [{\"label\": \"React\"}, {\"label\": \"Vue\"}], \"multiSelect\": false }] }\n  }\n}",
         "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PermissionRequest\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"rm -rf node_modules\",\n    \"description\": \"Remove node_modules directory\"\n  },\n  \"permission_suggestions\": [\n    {\n      \"type\": \"addRules\",\n      \"rules\": [{ \"toolName\": \"Bash\", \"ruleContent\": \"rm -rf node_modules\" }],\n      \"behavior\": \"allow\",\n      \"destination\": \"localSettings\"\n    }\n  ]\n}",
         "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUse\",\n  \"tool_name\": \"Write\",\n  \"tool_input\": {\n    \"file_path\": \"/path/to/file.txt\",\n    \"content\": \"file content\"\n  },\n  \"tool_response\": {\n    \"filePath\": \"/path/to/file.txt\",\n    \"success\": true\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\"\n}",
         "{\n  \"decision\": \"block\",\n  \"reason\": \"Explanation for decision\",\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolUse\",\n    \"additionalContext\": \"Additional information for Claude\"\n  }\n}",
         "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUseFailure\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"npm test\",\n    \"description\": \"Run test suite\"\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"error\": \"Command exited with non-zero status code 1\",\n  \"is_interrupt\": false\n}",
         "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolUseFailure\",\n    \"additionalContext\": \"Additional information about the failure for Claude\"\n  }\n}",
-        "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"permission_prompt\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"/path/to/permission-alert.sh\"\n          }\n        ]\n      },\n      {\n        \"matcher\": \"idle_prompt\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"/path/to/idle-notification.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
-        "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"hook_event_name\": \"Notification\",\n  \"message\": \"Claude needs your permission to use Bash\",\n  \"title\": \"Permission needed\",\n  \"notification_type\": \"permission_prompt\"\n}",
-        "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"hook_event_name\": \"SubagentStart\",\n  \"agent_id\": \"agent-abc123\",\n  \"agent_type\": \"Explore\"\n}"
+        "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"auto\",\n  \"hook_event_name\": \"PermissionDenied\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"rm -rf /tmp/build\",\n    \"description\": \"Clean build directory\"\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"reason\": \"Auto mode denied: command targets a path outside the project\"\n}",
+        "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PermissionDenied\",\n    \"retry\": true\n  }\n}"
       ],
       "sectionBlocks": [
         {
@@ -22406,7 +22460,7 @@
             "This example runs a linting script only when Claude writes or edits a file:",
             "UserPromptSubmit, Stop, TeammateIdle, TaskCreated, TaskCompleted, WorktreeCreate, WorktreeRemove, and CwdChanged don’t support matchers and always fire on every occurrence. If you add a matcher field to these events, it is silently ignored.",
             "For tool events, you can filter more narrowly by setting the if field on individual hook handlers. if uses permission rule syntax to match against the tool name and arguments together, so \"Bash(git *)\" runs only for git commands and \"Edit(*.ts)\" runs only for TypeScript files.",
-            "MCP server tools appear as regular tools in tool events (PreToolUse, PostToolUse, PostToolUseFailure, PermissionRequest), so you can match them the same way you match any other tool name.",
+            "MCP server tools appear as regular tools in tool events (PreToolUse, PostToolUse, PostToolUseFailure, PermissionRequest, PermissionDenied), so you can match them the same way you match any other tool name.",
             "MCP tools follow the naming pattern mcp__<server>__<tool>, for example:",
             "mcp__memory__create_entities: Memory server’s create entities tool",
             "mcp__filesystem__read_file: Filesystem server’s read file tool",
@@ -22548,6 +22602,7 @@
             "Exit codes let you allow or block, but JSON output gives you finer-grained control. Instead of exiting with code 2 to block, exit 0 and print a JSON object to stdout. Claude Code reads specific fields from that JSON to control behavior, including decision control for blocking, allowing, or escalating to the user.",
             "You must choose one approach per hook, not both: either use exit codes alone for signaling, or exit 0 and print JSON for structured control. Claude Code only processes JSON on exit 0. If you exit 2, any JSON is ignored.",
             "Your hook’s stdout must contain only the JSON object. If your shell profile prints text on startup, it can interfere with JSON parsing. See JSON validation failed in the troubleshooting guide.",
+            "Hook output injected into context (additionalContext, systemMessage, or plain stdout) is capped at 10,000 characters. Output that exceeds this limit is saved to a file and replaced with a preview and file path, the same way large tool results are handled.",
             "The JSON object supports three kinds of fields:",
             "Universal fields like continue work across all events. These are listed in the table below.",
             "Top-level decision and reason are used by some events to block or provide feedback.",
@@ -22555,8 +22610,7 @@
             "To stop Claude entirely regardless of event type:",
             "Not every event supports blocking or controlling behavior through JSON. The events that do each use a different set of fields to express that decision. Use this table as a quick reference before writing a hook:",
             "Here are examples of each pattern in action:",
-            "Top-level decision",
-            "PreToolUse"
+            "Top-level decision"
           ],
           "codeBlocks": [
             "{ \"continue\": false, \"stopReason\": \"Build failed, fix errors before continuing\" }",
@@ -22627,7 +22681,7 @@
           "title": "​PreToolUse",
           "paragraphs": [
             "Runs after Claude creates tool parameters and before processing the tool call. Matches on tool name: Bash, Edit, Write, Read, Glob, Grep, Agent, WebFetch, WebSearch, AskUserQuestion, ExitPlanMode, and any MCP tool names.",
-            "Use PreToolUse decision control to allow, deny, or ask for permission to use the tool.",
+            "Use PreToolUse decision control to allow, deny, ask, or defer the tool call.",
             "In addition to the common input fields, PreToolUse hooks receive tool_name, tool_input, and tool_use_id. The tool_input fields depend on the tool:",
             "Executes shell commands.",
             "Creates or overwrites a file.",
@@ -22640,7 +22694,8 @@
             "Spawns a subagent."
           ],
           "codeBlocks": [
-            "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PreToolUse\",\n    \"permissionDecision\": \"allow\",\n    \"permissionDecisionReason\": \"My reason here\",\n    \"updatedInput\": {\n      \"field_to_modify\": \"new value\"\n    },\n    \"additionalContext\": \"Current environment: production. Proceed with caution.\"\n  }\n}"
+            "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PreToolUse\",\n    \"permissionDecision\": \"allow\",\n    \"permissionDecisionReason\": \"My reason here\",\n    \"updatedInput\": {\n      \"field_to_modify\": \"new value\"\n    },\n    \"additionalContext\": \"Current environment: production. Proceed with caution.\"\n  }\n}",
+            "{\n  \"type\": \"result\",\n  \"subtype\": \"success\",\n  \"stop_reason\": \"tool_deferred\",\n  \"session_id\": \"abc123\",\n  \"deferred_tool_use\": {\n    \"id\": \"toolu_01abc\",\n    \"name\": \"AskUserQuestion\",\n    \"input\": { \"questions\": [{ \"question\": \"Which framework?\", \"header\": \"Framework\", \"options\": [{\"label\": \"React\"}, {\"label\": \"Vue\"}], \"multiSelect\": false }] }\n  }\n}"
           ]
         },
         {
@@ -22683,6 +22738,20 @@
           "codeBlocks": [
             "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUseFailure\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"npm test\",\n    \"description\": \"Run test suite\"\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"error\": \"Command exited with non-zero status code 1\",\n  \"is_interrupt\": false\n}",
             "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolUseFailure\",\n    \"additionalContext\": \"Additional information about the failure for Claude\"\n  }\n}"
+          ]
+        },
+        {
+          "title": "​PermissionDenied",
+          "paragraphs": [
+            "Runs when the auto mode classifier denies a tool call. This hook only fires in auto mode: it does not run when you manually deny a permission dialog, when a PreToolUse hook blocks a call, or when a deny rule matches. Use it to log classifier denials, adjust configuration, or tell the model it may retry the tool call.",
+            "Matches on tool name, same values as PreToolUse.",
+            "In addition to the common input fields, PermissionDenied hooks receive tool_name, tool_input, tool_use_id, and reason.",
+            "PermissionDenied hooks can tell the model it may retry the denied tool call. Return a JSON object with hookSpecificOutput.retry set to true:",
+            "When retry is true, Claude Code adds a message to the conversation telling the model it may retry the tool call. The denial itself is not reversed. If your hook does not return JSON, or returns retry: false, the denial stands and the model receives the original rejection message."
+          ],
+          "codeBlocks": [
+            "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"auto\",\n  \"hook_event_name\": \"PermissionDenied\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"rm -rf /tmp/build\",\n    \"description\": \"Clean build directory\"\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"reason\": \"Auto mode denied: command targets a path outside the project\"\n}",
+            "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PermissionDenied\",\n    \"retry\": true\n  }\n}"
           ]
         },
         {
@@ -22774,22 +22843,6 @@
           ],
           "codeBlocks": [
             "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"hook_event_name\": \"StopFailure\",\n  \"error\": \"rate_limit\",\n  \"error_details\": \"429 Too Many Requests\",\n  \"last_assistant_message\": \"API Error: Rate limit reached\"\n}"
-          ]
-        },
-        {
-          "title": "​TeammateIdle",
-          "paragraphs": [
-            "Runs when an agent team teammate is about to go idle after finishing its turn. Use this to enforce quality gates before a teammate stops working, such as requiring passing lint checks or verifying that output files exist.",
-            "When a TeammateIdle hook exits with code 2, the teammate receives the stderr message as feedback and continues working instead of going idle. To stop the teammate entirely instead of re-running it, return JSON with {\"continue\": false, \"stopReason\": \"...\"}. TeammateIdle hooks do not support matchers and fire on every occurrence.",
-            "In addition to the common input fields, TeammateIdle hooks receive teammate_name and team_name.",
-            "TeammateIdle hooks support two ways to control teammate behavior:",
-            "Exit code 2: the teammate receives the stderr message as feedback and continues working instead of going idle.",
-            "JSON {\"continue\": false, \"stopReason\": \"...\"}: stops the teammate entirely, matching Stop hook behavior. The stopReason is shown to the user.",
-            "This example checks that a build artifact exists before allowing a teammate to go idle:"
-          ],
-          "codeBlocks": [
-            "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"TeammateIdle\",\n  \"teammate_name\": \"researcher\",\n  \"team_name\": \"my-project\"\n}",
-            "#!/bin/bash\n\nif [ ! -f \"./dist/output.js\" ]; then\n  echo \"Build artifact missing. Run the build before stopping.\" >&2\n  exit 2\nfi\n\nexit 0"
           ]
         }
       ]
