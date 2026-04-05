@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-04T04:25:49.871Z",
+  "generatedAt": "2026-04-05T04:45:38.627Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -4516,7 +4516,8 @@
         "The name you passed to --name, --remote-control, or /remote-control",
         "The title you set with /rename",
         "The last meaningful message in existing conversation history",
-        "Your first prompt once you send one",
+        "An auto-generated name like myhost-graceful-unicorn, where myhost is your machine’s hostname or the prefix you set with --remote-control-session-name-prefix",
+        "If you didn’t set an explicit name, the title updates to reflect your prompt once you send one.",
         "If the environment already has an active session, you’ll be asked whether to continue it or start a new one.",
         "If you don’t have the Claude app yet, use the /mobile command inside Claude Code to display a download QR code for iOS or Android.",
         "By default, Remote Control only activates when you explicitly run claude remote-control, claude --remote-control, or /remote-control. To enable it automatically for every interactive session, run /config inside Claude Code and set Enable Remote Control for all sessions to true. Set it back to false to disable.",
@@ -4628,7 +4629,8 @@
             "The name you passed to --name, --remote-control, or /remote-control",
             "The title you set with /rename",
             "The last meaningful message in existing conversation history",
-            "Your first prompt once you send one",
+            "An auto-generated name like myhost-graceful-unicorn, where myhost is your machine’s hostname or the prefix you set with --remote-control-session-name-prefix",
+            "If you didn’t set an explicit name, the title updates to reflect your prompt once you send one.",
             "If the environment already has an active session, you’ll be asked whether to continue it or start a new one.",
             "If you don’t have the Claude app yet, use the /mobile command inside Claude Code to display a download QR code for iOS or Android."
           ],
@@ -9867,6 +9869,8 @@
         "The output replaces the placeholder in the skill content",
         "Claude receives the fully-rendered prompt with actual PR data",
         "This is preprocessing, not something Claude executes. Claude only sees the final result.",
+        "For multi-line commands, use a fenced code block opened with ```! instead of the inline form:",
+        "To disable this behavior for skills and custom commands from user, project, plugin, or additional-directory sources, set \"disableSkillShellExecution\": true in settings. Each command is replaced with [shell command execution disabled by policy] instead of being run. Bundled and managed skills are not affected. This setting is most useful in managed settings, where users cannot override it.",
         "To enable extended thinking in a skill, include the word “ultrathink” anywhere in your skill content.",
         "Add context: fork to your frontmatter when you want a skill to run in isolation. The skill content becomes the prompt that drives the subagent. It won’t have access to your conversation history.",
         "context: fork only makes sense for skills with explicit instructions. If your skill contains guidelines like “use these API conventions” without a task, the subagent receives the guidelines but no actionable prompt, and returns without meaningful output.",
@@ -9936,6 +9940,7 @@
         "---\nname: migrate-component\ndescription: Migrate a component from one framework to another\n---\n\nMigrate the $ARGUMENTS[0] component from $ARGUMENTS[1] to $ARGUMENTS[2].\nPreserve all existing behavior and tests.",
         "---\nname: migrate-component\ndescription: Migrate a component from one framework to another\n---\n\nMigrate the $0 component from $1 to $2.\nPreserve all existing behavior and tests.",
         "---\nname: pr-summary\ndescription: Summarize changes in a pull request\ncontext: fork\nagent: Explore\nallowed-tools: Bash(gh *)\n---\n\n## Pull request context\n- PR diff: !`gh pr diff`\n- PR comments: !`gh pr view --comments`\n- Changed files: !`gh pr diff --name-only`\n\n## Your task\nSummarize this pull request...",
+        "## Environment\n```!\nnode --version\nnpm --version\ngit status --short\n```",
         "---\nname: deep-research\ndescription: Research a topic thoroughly\ncontext: fork\nagent: Explore\n---\n\nResearch $ARGUMENTS thoroughly:\n\n1. Find relevant files using Glob and Grep\n2. Read and analyze the code\n3. Summarize findings with specific file references",
         "# Add to deny rules:\nSkill",
         "# Allow only specific skills\nSkill(commit)\nSkill(review-pr *)\n\n# Deny specific skills\nSkill(deploy *)",
@@ -10112,10 +10117,13 @@
             "The output replaces the placeholder in the skill content",
             "Claude receives the fully-rendered prompt with actual PR data",
             "This is preprocessing, not something Claude executes. Claude only sees the final result.",
+            "For multi-line commands, use a fenced code block opened with ```! instead of the inline form:",
+            "To disable this behavior for skills and custom commands from user, project, plugin, or additional-directory sources, set \"disableSkillShellExecution\": true in settings. Each command is replaced with [shell command execution disabled by policy] instead of being run. Bundled and managed skills are not affected. This setting is most useful in managed settings, where users cannot override it.",
             "To enable extended thinking in a skill, include the word “ultrathink” anywhere in your skill content."
           ],
           "codeBlocks": [
-            "---\nname: pr-summary\ndescription: Summarize changes in a pull request\ncontext: fork\nagent: Explore\nallowed-tools: Bash(gh *)\n---\n\n## Pull request context\n- PR diff: !`gh pr diff`\n- PR comments: !`gh pr view --comments`\n- Changed files: !`gh pr diff --name-only`\n\n## Your task\nSummarize this pull request..."
+            "---\nname: pr-summary\ndescription: Summarize changes in a pull request\ncontext: fork\nagent: Explore\nallowed-tools: Bash(gh *)\n---\n\n## Pull request context\n- PR diff: !`gh pr diff`\n- PR comments: !`gh pr view --comments`\n- Changed files: !`gh pr diff --name-only`\n\n## Your task\nSummarize this pull request...",
+            "## Environment\n```!\nnode --version\nnpm --version\ngit status --short\n```"
           ]
         },
         {
@@ -12257,7 +12265,8 @@
           "paragraphs": [
             "Sandboxing is supported on WSL2 but requires installing additional packages. If you see an error about missing bubblewrap or socat when running /sandbox, install the dependencies:",
             "Ubuntu/Debian",
-            "WSL1 does not support sandboxing. If you see “Sandboxing requires WSL2”, you need to upgrade to WSL2 or run Claude Code without sandboxing."
+            "WSL1 does not support sandboxing. If you see “Sandboxing requires WSL2”, you need to upgrade to WSL2 or run Claude Code without sandboxing.",
+            "Sandboxed commands cannot launch Windows binaries such as cmd.exe, powershell.exe, or executables under /mnt/c/. WSL hands these off to the Windows host over a Unix socket, which the sandbox blocks. If a command needs to invoke a Windows binary, add it to excludedCommands so it runs outside the sandbox."
           ],
           "codeBlocks": [
             "sudo apt-get install bubblewrap socat",
@@ -12599,6 +12608,7 @@
       "metaDescription": "Learn about configuring Claude Code through Amazon Bedrock, including setup, IAM configuration, and troubleshooting.",
       "headings": [
         "​Prerequisites",
+        "​Set up with the interactive wizard",
         "​Setup",
         "​1. Submit use case details",
         "​2. Configure AWS credentials",
@@ -12614,6 +12624,7 @@
       ],
       "toc": [
         "Prerequisites",
+        "Set up with the interactive wizard",
         "Setup",
         "1. Submit use case details",
         "2. Configure AWS credentials",
@@ -12631,6 +12642,7 @@
       ],
       "paragraphs": [
         "Prerequisites",
+        "Set up with the interactive wizard",
         "1. Submit use case details",
         "2. Configure AWS credentials",
         "Advanced credential configuration",
@@ -12651,6 +12663,12 @@
         "AWS CLI installed and configured (optional - only needed if you don’t have another mechanism for getting credentials)",
         "Appropriate IAM permissions",
         "If you are deploying Claude Code to multiple users, pin your model versions to prevent breakage when Anthropic releases new models.",
+        "The login screen includes an interactive Bedrock setup wizard for first-time configuration. Select 3rd-party platform at the claude login prompt, then choose Amazon Bedrock to launch it. The wizard guides you through each step and writes the resulting configuration to your settings:",
+        "AWS authentication",
+        "Region selection",
+        "Credential verification",
+        "Model pinning",
+        "Once Bedrock is active, use /setup-bedrock to return to the wizard and update your credentials, region, or model pins.",
         "First-time users of Anthropic models are required to submit use case details before invoking a model. This is done once per AWS account.",
         "Ensure you have the right IAM permissions described below",
         "Navigate to the Amazon Bedrock console",
@@ -12727,6 +12745,7 @@
           "title": "",
           "paragraphs": [
             "Prerequisites",
+            "Set up with the interactive wizard",
             "1. Submit use case details",
             "2. Configure AWS credentials",
             "Advanced credential configuration",
@@ -12736,8 +12755,7 @@
             "IAM configuration",
             "1M token context window",
             "AWS Guardrails",
-            "Troubleshooting",
-            "Authentication loop with SSO and corporate proxies"
+            "Troubleshooting"
           ],
           "codeBlocks": []
         },
@@ -12750,6 +12768,18 @@
             "AWS CLI installed and configured (optional - only needed if you don’t have another mechanism for getting credentials)",
             "Appropriate IAM permissions",
             "If you are deploying Claude Code to multiple users, pin your model versions to prevent breakage when Anthropic releases new models."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Set up with the interactive wizard",
+          "paragraphs": [
+            "The login screen includes an interactive Bedrock setup wizard for first-time configuration. Select 3rd-party platform at the claude login prompt, then choose Amazon Bedrock to launch it. The wizard guides you through each step and writes the resulting configuration to your settings:",
+            "AWS authentication",
+            "Region selection",
+            "Credential verification",
+            "Model pinning",
+            "Once Bedrock is active, use /setup-bedrock to return to the wizard and update your credentials, region, or model pins."
           ],
           "codeBlocks": []
         },
@@ -14945,6 +14975,7 @@
         "​Settings delivery",
         "​Settings precedence",
         "​Fetch and caching behavior",
+        "​Enforce fail-closed startup",
         "​Security approval dialogs",
         "​Platform availability",
         "​Audit logging",
@@ -14962,6 +14993,7 @@
         "Settings delivery",
         "Settings precedence",
         "Fetch and caching behavior",
+        "Enforce fail-closed startup",
         "Security approval dialogs",
         "Platform availability",
         "Audit logging",
@@ -14979,6 +15011,7 @@
         "Settings delivery",
         "Settings precedence",
         "Fetch and caching behavior",
+        "Enforce fail-closed startup",
         "Security approval dialogs",
         "Platform availability",
         "Audit logging",
@@ -15026,6 +15059,10 @@
         "Claude Code fetches fresh settings in the background",
         "Cached settings persist through network failures",
         "Claude Code applies settings updates automatically without a restart, except for advanced settings like OpenTelemetry configuration, which require a full restart to take effect.",
+        "By default, if the remote settings fetch fails at startup, the CLI continues without managed settings. For environments where this brief unenforced window is unacceptable, set forceRemoteSettingsRefresh: true in your managed settings.",
+        "When this setting is active, the CLI blocks at startup until remote settings are freshly fetched. If the fetch fails, the CLI exits rather than proceeding without the policy. This setting self-perpetuates: once delivered from the server, it is also cached locally so that subsequent startups enforce the same behavior even before the first successful fetch of a new session.",
+        "To enable this, add the key to your managed settings configuration:",
+        "Before enabling this setting, ensure your network policies allow connectivity to api.anthropic.com. If that endpoint is unreachable, the CLI exits at startup and users cannot start Claude Code.",
         "Certain settings that could pose security risks require explicit user approval before being applied:",
         "Shell command settings: settings that execute shell commands",
         "Custom environment variables: variables not in the known safe allowlist",
@@ -15052,7 +15089,8 @@
       "codeBlocks": [
         "{\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ],\n    \"disableBypassPermissionsMode\": \"disable\"\n  },\n  \"allowManagedPermissionRulesOnly\": true\n}",
         "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Edit|Write\",\n        \"hooks\": [\n          { \"type\": \"command\", \"command\": \"/usr/local/bin/audit-edit.sh\" }\n        ]\n      }\n    ]\n  }\n}",
-        "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com\"\n    ]\n  }\n}"
+        "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com\"\n    ]\n  }\n}",
+        "{\n  \"forceRemoteSettingsRefresh\": true\n}"
       ],
       "sectionBlocks": [
         {
@@ -15068,8 +15106,8 @@
             "Settings delivery",
             "Settings precedence",
             "Fetch and caching behavior",
-            "Security approval dialogs",
-            "Platform availability"
+            "Enforce fail-closed startup",
+            "Security approval dialogs"
           ],
           "codeBlocks": []
         },
@@ -15173,6 +15211,18 @@
             "Claude Code applies settings updates automatically without a restart, except for advanced settings like OpenTelemetry configuration, which require a full restart to take effect."
           ],
           "codeBlocks": []
+        },
+        {
+          "title": "​Enforce fail-closed startup",
+          "paragraphs": [
+            "By default, if the remote settings fetch fails at startup, the CLI continues without managed settings. For environments where this brief unenforced window is unacceptable, set forceRemoteSettingsRefresh: true in your managed settings.",
+            "When this setting is active, the CLI blocks at startup until remote settings are freshly fetched. If the fetch fails, the CLI exits rather than proceeding without the policy. This setting self-perpetuates: once delivered from the server, it is also cached locally so that subsequent startups enforce the same behavior even before the first successful fetch of a new session.",
+            "To enable this, add the key to your managed settings configuration:",
+            "Before enabling this setting, ensure your network policies allow connectivity to api.anthropic.com. If that endpoint is unreachable, the CLI exits at startup and users cannot start Claude Code."
+          ],
+          "codeBlocks": [
+            "{\n  \"forceRemoteSettingsRefresh\": true\n}"
+          ]
         },
         {
           "title": "​Security approval dialogs",
@@ -15305,7 +15355,7 @@
         "Claude Code connects from users’ machines to Sentry for operational error logging. The data is encrypted in transit using TLS and at rest using 256-bit AES encryption. Read more in the Sentry security documentation. To opt out of error logging, set the DISABLE_ERROR_REPORTING environment variable.",
         "When users run the /feedback command, a copy of their full conversation history including code is sent to Anthropic. The data is encrypted in transit and at rest. Optionally, a Github issue is created in our public repository. To opt out, set the DISABLE_FEEDBACK_COMMAND environment variable to 1.",
         "By default, error reporting, telemetry, and bug reporting are disabled when using Bedrock, Vertex, or Foundry. Session quality surveys are the exception and appear regardless of provider. You can opt out of all non-essential traffic, including surveys, at once by setting CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC. Here are the full default behaviors:",
-        "All environment variables can be checked into settings.json (read more).",
+        "All environment variables can be checked into settings.json (see settings reference).",
         "Was this page helpful?"
       ],
       "codeBlocks": [],
@@ -15422,7 +15472,7 @@
           "title": "​Default behaviors by API provider",
           "paragraphs": [
             "By default, error reporting, telemetry, and bug reporting are disabled when using Bedrock, Vertex, or Foundry. Session quality surveys are the exception and appear regardless of provider. You can opt out of all non-essential traffic, including surveys, at once by setting CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC. Here are the full default behaviors:",
-            "All environment variables can be checked into settings.json (read more).",
+            "All environment variables can be checked into settings.json (see settings reference).",
             "Was this page helpful?"
           ],
           "codeBlocks": []
@@ -19040,7 +19090,7 @@
         "Avoid direct pasting: Claude Code may struggle with very long pasted content",
         "Use file-based workflows: Write content to a file and ask Claude to read it",
         "Be aware of VS Code limitations: The VS Code terminal is particularly prone to truncating long pastes",
-        "Claude Code supports a subset of Vim keybindings that can be enabled with /vim or configured via /config. To set the mode directly in your config file, set the editorMode global config key to \"vim\" in ~/.claude.json.",
+        "Claude Code supports a subset of Vim keybindings that can be enabled via /config → Editor mode. To set the mode directly in your config file, set the editorMode global config key to \"vim\" in ~/.claude.json.",
         "The supported subset includes:",
         "Mode switching: Esc (to NORMAL), i/I, a/A, o/O (to INSERT)",
         "Navigation: h/j/k/l, w/e/b, 0/$/^, gg/G, f/F/t/T with ;/, repeat",
@@ -19135,7 +19185,7 @@
         {
           "title": "​Vim Mode",
           "paragraphs": [
-            "Claude Code supports a subset of Vim keybindings that can be enabled with /vim or configured via /config. To set the mode directly in your config file, set the editorMode global config key to \"vim\" in ~/.claude.json.",
+            "Claude Code supports a subset of Vim keybindings that can be enabled via /config → Editor mode. To set the mode directly in your config file, set the editorMode global config key to \"vim\" in ~/.claude.json.",
             "The supported subset includes:",
             "Mode switching: Esc (to NORMAL), i/I, a/A, o/O (to INSERT)",
             "Navigation: h/j/k/l, w/e/b, 0/$/^, gg/G, f/F/t/T with ;/, repeat",
@@ -20923,7 +20973,7 @@
         "If you unbind some but not all chords on a prefix, pressing the prefix still enters chord-wait mode for the remaining bindings.",
         "These shortcuts cannot be rebound:",
         "Some shortcuts may conflict with terminal multiplexers:",
-        "When vim mode is enabled (/vim), keybindings and vim mode operate independently:",
+        "When vim mode is enabled via /config → Editor mode, keybindings and vim mode operate independently:",
         "Vim mode handles input at the text input level (cursor movement, modes, motions)",
         "Keybindings handle actions at the component level (toggle todos, submit, etc.)",
         "The Escape key in vim mode switches INSERT to NORMAL mode; it does not trigger chat:cancel",
@@ -21668,7 +21718,7 @@
         "When the transcript viewer is open (toggled with Ctrl+O), these shortcuts are available. Ctrl+E can be rebound via transcript:toggleShowAll.",
         "Type / in Claude Code to see all available commands, or type / followed by any letters to filter. The / menu shows both built-in commands and bundled skills like /simplify. Not all commands are visible to every user since some depend on your platform or plan.",
         "See the commands reference for the full list of built-in commands. To create your own commands, see skills.",
-        "Enable vim-style editing with /vim command or configure permanently via /config.",
+        "Enable vim-style editing via /config → Editor mode.",
         "In vim normal mode, if the cursor is at the beginning or end of input and cannot move further, the arrow keys navigate command history instead.",
         "Text objects work with operators like d, c, and y:",
         "Claude Code maintains command history for the current session:",
@@ -21835,7 +21885,7 @@
         {
           "title": "​Vim editor mode",
           "paragraphs": [
-            "Enable vim-style editing with /vim command or configure permanently via /config."
+            "Enable vim-style editing via /config → Editor mode."
           ],
           "codeBlocks": []
         },

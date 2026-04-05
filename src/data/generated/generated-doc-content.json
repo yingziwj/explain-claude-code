@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-04T04:25:50.135Z",
-  "sourceGeneratedAt": "2026-04-04T04:25:49.871Z",
+  "generatedAt": "2026-04-05T04:45:38.879Z",
+  "sourceGeneratedAt": "2026-04-05T04:45:38.627Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -6890,14 +6890,20 @@
           "title": "Inject dynamic context",
           "paragraphs": [
             "别把这段只当成标题看，它其实是在给\"Inject dynamic context\"划边界。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
-              "title": "Inject dynamic context",
+              "title": "Inject dynamic context 1",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
               "code": "---\nname: pr-summary\ndescription: Summarize changes in a pull request\ncontext: fork\nagent: Explore\nallowed-tools: Bash(gh *)\n---\n\n## Pull request context\n- PR diff: !`gh pr diff`\n- PR comments: !`gh pr view --comments`\n- Changed files: !`gh pr diff --name-only`\n\n## Your task\nSummarize this pull request...",
               "kind": "config"
+            },
+            {
+              "title": "Inject dynamic context 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "## Environment\n```!\nnode --version\nnpm --version\ngit status --short\n```",
+              "kind": "command"
             }
           ]
         },
@@ -9128,6 +9134,13 @@
           ]
         },
         {
+          "title": "Set up with the interactive wizard",
+          "paragraphs": [
+            "这段就是开工前的准备清单，先把地基打好。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Setup",
           "paragraphs": [
             "这一块主要是在说\"Setup\"真到手上该怎么用，哪里最容易踩坑。"
@@ -10788,6 +10801,12 @@
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com\"\n    ]\n  }\n}",
               "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Enforce fail-closed startup",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"forceRemoteSettingsRefresh\": true\n}",
+              "kind": "config"
             }
           ]
         },
@@ -10876,6 +10895,21 @@
           "paragraphs": [
             "这里不是让你背\"Fetch and caching behavior\"这个词，而是让你看它真干活时怎么使。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Enforce fail-closed startup",
+          "paragraphs": [
+            "这一段主要是在把\"Enforce fail-closed startup\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Enforce fail-closed startup",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"forceRemoteSettingsRefresh\": true\n}",
+              "kind": "config"
+            }
           ]
         },
         {
