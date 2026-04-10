@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-09T04:42:40.823Z",
-  "sourceGeneratedAt": "2026-04-09T04:42:40.534Z",
+  "generatedAt": "2026-04-10T05:09:14.228Z",
+  "sourceGeneratedAt": "2026-04-10T05:09:13.940Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -514,7 +514,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.97、2.1.96、2.1.94、2.1.92 这些环节往下讲。",
+            "原文这页大多会按 2.1.98、2.1.97、2.1.96、2.1.94 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -523,7 +523,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.97 -> 2.1.96 -> 2.1.94 -> 2.1.92。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.98 -> 2.1.97 -> 2.1.96 -> 2.1.94。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -880,6 +880,13 @@
           ]
         },
         {
+          "title": "Build your setup over time",
+          "paragraphs": [
+            "看到这里，就把\"Build your setup over time\"当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Compare similar features",
           "paragraphs": [
             "这里就是把两条像样的路摆一块，让你别走岔。",
@@ -1110,7 +1117,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Explore the context window\"理解成 Core concepts 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 What the timeline shows、Check your own session、Related resources 这些环节往下讲。",
+            "原文这页大多会按 What the timeline shows、What survives compaction、Check your own session 这些环节往下讲。",
             "翻成人话，大概就是：An interactive simulation of how Claude Code’s context window fills during a session. See what loads automatically, what each file read costs, and when rules and hooks fire."
           ]
         },
@@ -1119,13 +1126,20 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：What the timeline shows -> Check your own session -> Related resources。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：What the timeline shows -> What survives compaction -> Check your own session。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         },
         {
           "title": "What the timeline shows",
           "paragraphs": [
             "这段看着像个标题，其实是在说\"What the timeline shows\"管到哪儿。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "What survives compaction",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
@@ -1172,7 +1186,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Store instructions and memories\"理解成 Use Claude Code 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 CLAUDE.md vs auto memory、CLAUDE.md files、Choose where to put CLAUDE.md files、Set up a project CLAUDE.md 这些环节往下讲。",
+            "原文这页大多会按 CLAUDE.md vs auto memory、CLAUDE.md files、When to add to CLAUDE.md、Choose where to put CLAUDE.md files 这些环节往下讲。",
             "翻成人话，大概就是：CLAUDE.md vs auto memory"
           ]
         },
@@ -1181,7 +1195,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：CLAUDE.md vs auto memory -> CLAUDE.md files -> Choose where to put CLAUDE.md files -> Set up a project CLAUDE.md。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：CLAUDE.md vs auto memory -> CLAUDE.md files -> When to add to CLAUDE.md -> Choose where to put CLAUDE.md files。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ],
           "steps": [
             {
@@ -1263,6 +1277,13 @@
           "title": "CLAUDE.md files",
           "paragraphs": [
             "这一段主要是在把\"CLAUDE.md files\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "When to add to CLAUDE.md",
+          "paragraphs": [
+            "When to add to CLAUDE.md 到底什么时候值得上，这一段就是在算这笔账。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
@@ -9202,20 +9223,21 @@
           "title": "Prerequisites",
           "paragraphs": [
             "这一块主要是在说\"Prerequisites\"真到手上该怎么用，哪里最容易踩坑。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Set up with the interactive wizard",
-          "paragraphs": [
-            "这段就是开工前的准备清单，先把地基打好。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
-          "title": "Setup",
+          "title": "Sign in with Bedrock",
           "paragraphs": [
-            "这一块主要是在说\"Setup\"真到手上该怎么用，哪里最容易踩坑。"
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Set up manually",
+          "paragraphs": [
+            "这段就是开工前的准备清单，先把地基打好。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
           ]
         },
         {
@@ -9298,6 +9320,13 @@
               "code": "{\n  \"modelOverrides\": {\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-46-prod\",\n    \"claude-opus-4-5-20251101\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-45-prod\",\n    \"claude-opus-4-1-20250805\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-41-prod\"\n  }\n}",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "Startup model checks",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -9520,15 +9549,23 @@
           ]
         },
         {
-          "title": "Region Configuration",
+          "title": "Sign in with Vertex AI",
           "paragraphs": [
-            "这一段主要是在把\"Region Configuration\"讲实，不是只摆个标题给你看。"
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
-          "title": "Setup",
+          "title": "Region configuration",
           "paragraphs": [
-            "这一块主要是在说\"Setup\"真到手上该怎么用，哪里最容易踩坑。"
+            "这一段主要是在把\"Region configuration\"讲实，不是只摆个标题给你看。"
+          ]
+        },
+        {
+          "title": "Set up manually",
+          "paragraphs": [
+            "这段就是开工前的准备清单，先把地基打好。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
           ]
         },
         {
@@ -9593,6 +9630,13 @@
               "code": "export ANTHROPIC_MODEL='claude-opus-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "Startup model checks",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -10697,6 +10741,20 @@
             "个人先把最基础的登录跑通，再去碰团队或企业认证。",
             "团队接入时，先确认账号体系和权限体系是谁说了算。",
             "认证相关问题一旦出错，先查登录方式、组织归属和令牌来源。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Generate a long-lived token 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "claude setup-token",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Generate a long-lived token 2",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "export CLAUDE_CODE_OAUTH_TOKEN=your-token",
+              "kind": "code"
+            }
           ]
         },
         {
@@ -10745,6 +10803,27 @@
           "paragraphs": [
             "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Generate a long-lived token",
+          "paragraphs": [
+            "这里不是让你背\"Generate a long-lived token\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Generate a long-lived token 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "claude setup-token",
+              "kind": "command"
+            },
+            {
+              "title": "Generate a long-lived token 2",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "export CLAUDE_CODE_OAUTH_TOKEN=your-token",
+              "kind": "code"
+            }
           ]
         }
       ],
@@ -11553,6 +11632,13 @@
           "title": "Alerting and segmentation",
           "paragraphs": [
             "看到这里，就把\"Alerting and segmentation\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Detect retry exhaustion",
+          "paragraphs": [
+            "看到这里，就把\"Detect retry exhaustion\"当成一件真要上手的活来看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
@@ -14392,6 +14478,13 @@
           ]
         },
         {
+          "title": "Terminal not listed in macOS Microphone settings",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "See also",
           "paragraphs": [
             "这一段主要是在把\"See also\"讲实，不是只摆个标题给你看。",
@@ -15132,6 +15225,12 @@
           ]
         },
         {
+          "title": "Scroll actions",
+          "paragraphs": [
+            "看到这里，就别靠猜了，字段、格式和写法都得按说明来。"
+          ]
+        },
+        {
           "title": "Keystroke syntax",
           "paragraphs": [
             "看到这里，就别靠猜了，字段、格式和写法都得按说明来。"
@@ -15187,12 +15286,6 @@
               "code": "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"ctrl+x ctrl+k\": null,\n        \"ctrl+x ctrl+e\": null,\n        \"ctrl+x\": \"chat:newline\"\n      }\n    }\n  ]\n}",
               "kind": "config"
             }
-          ]
-        },
-        {
-          "title": "Reserved shortcuts",
-          "paragraphs": [
-            "看到这里，就把\"Reserved shortcuts\"当成一件真要上手的活来看。"
           ]
         }
       ],
@@ -15277,21 +15370,21 @@
       }
     },
     "commands": {
-      "sourceLabel": "Built-in commands",
+      "sourceLabel": "Commands",
       "sections": [
         {
           "title": "简要总结",
           "paragraphs": [
-            "这页主要讲 Built-in commands：Complete reference for built-in commands available in Claude Code.",
+            "这页主要讲 Commands：Complete reference for commands available in Claude Code, including built-in commands and bundled skills.",
             "你可以把它当成\"Reference\"这块里专门管这一摊事的说明书。"
           ]
         },
         {
           "title": "农民伯伯版解释",
           "paragraphs": [
-            "你可以把\"Built-in commands\"理解成 Reference 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "你可以把\"Commands\"理解成 Reference 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 MCP prompts、See also 这些环节往下讲。",
-            "翻成人话，大概就是：Complete reference for built-in commands available in Claude Code."
+            "翻成人话，大概就是：Complete reference for commands available in Claude Code, including built-in commands and bundled skills."
           ]
         },
         {
@@ -15320,7 +15413,7 @@
       "illustration": {
         "title": "一眼看懂这一页",
         "lines": [
-          "Built-in commands",
+          "Commands",
           "   |",
           "   v",
           "这是 Reference 里的一摊要紧活",
@@ -15393,7 +15486,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Tools reference\"理解成 Reference 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 Bash tool behavior、LSP tool behavior、PowerShell tool、Enable the PowerShell tool 这些环节往下讲。",
+            "原文这页大多会按 Bash tool behavior、LSP tool behavior、Monitor tool、PowerShell tool 这些环节往下讲。",
             "翻成人话，大概就是：Bash tool behavior"
           ]
         },
@@ -15402,7 +15495,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：Bash tool behavior -> LSP tool behavior -> PowerShell tool -> Enable the PowerShell tool。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：Bash tool behavior -> LSP tool behavior -> Monitor tool -> PowerShell tool。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ],
           "steps": [
             {
@@ -15431,6 +15524,13 @@
           "paragraphs": [
             "这一段不只是挂个标题，它是在说明\"LSP tool behavior\"这一块到底负责什么。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Monitor tool",
+          "paragraphs": [
+            "这里主要是在交代\"Monitor tool\"这一块会碰到哪些事。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -15602,9 +15702,9 @@
           ]
         },
         {
-          "title": "Built-in commands",
+          "title": "Commands",
           "paragraphs": [
-            "这里不是让你背\"Built-in commands\"这个词，而是让你看它真干活时怎么使。",
+            "这里不是让你背\"Commands\"这个词，而是让你看它真干活时怎么使。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
@@ -16579,7 +16679,7 @@
             {
               "title": "原页关键片段：Complete schema",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"[email protected]\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"skills\": \"./custom/skills/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\"\n}",
+              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"[email protected]\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\"\n}",
               "kind": "config"
             },
             {
@@ -16723,7 +16823,7 @@
             {
               "title": "Complete schema",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"[email protected]\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"skills\": \"./custom/skills/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\"\n}",
+              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"[email protected]\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\"\n}",
               "kind": "config"
             }
           ]
@@ -16840,7 +16940,7 @@
             {
               "title": "Working with external dependencies",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "# Inside your plugin directory\nln -s /path/to/shared-utils ./shared-utils",
+              "code": "ln -s /path/to/shared-utils ./shared-utils",
               "kind": "code"
             }
           ]
@@ -16861,7 +16961,7 @@
             {
               "title": "Standard plugin layout",
               "body": "这一段主要是认目录和文件摆放位置。先把地方放对，后面才不容易串。",
-              "code": "enterprise-plugin/\n├── .claude-plugin/           # Metadata directory (optional)\n│   └── plugin.json             # plugin manifest\n├── commands/                 # Default command location\n│   ├── status.md\n│   └── logs.md\n├── agents/                   # Default agent location\n│   ├── security-reviewer.md\n│   ├── performance-tester.md\n│   └── compliance-checker.md\n├── skills/                   # Agent Skills\n│   ├── code-reviewer/\n│   │   └── SKILL.md\n│   └── pdf-processor/\n│       ├── SKILL.md\n│       └── scripts/\n├── output-styles/            # Output style definitions\n│   └── terse.md\n├── hooks/                    # Hook configurations\n│   ├── hooks.json           # Main hook config\n│   └── security-hooks.json  # Additional hooks\n├── bin/                      # Plugin executables added to PATH\n│   └── my-tool               # Invokable as bare command in Bash tool\n├── settings.json            # Default settings for the plugin\n├── .mcp.json                # MCP server definitions\n├── .lsp.json                # LSP server configurations\n├── scripts/                 # Hook and utility scripts\n│   ├── security-scan.sh\n│   ├── format-code.py\n│   └── deploy.js\n├── LICENSE                  # License file\n└── CHANGELOG.md             # Version history",
+              "code": "enterprise-plugin/\n├── .claude-plugin/           # Metadata directory (optional)\n│   └── plugin.json             # plugin manifest\n├── skills/                   # Skills\n│   ├── code-reviewer/\n│   │   └── SKILL.md\n│   └── pdf-processor/\n│       ├── SKILL.md\n│       └── scripts/\n├── commands/                 # Skills as flat .md files\n│   ├── status.md\n│   └── logs.md\n├── agents/                   # Subagent definitions\n│   ├── security-reviewer.md\n│   ├── performance-tester.md\n│   └── compliance-checker.md\n├── output-styles/            # Output style definitions\n│   └── terse.md\n├── hooks/                    # Hook configurations\n│   ├── hooks.json           # Main hook config\n│   └── security-hooks.json  # Additional hooks\n├── bin/                      # Plugin executables added to PATH\n│   └── my-tool               # Invokable as bare command in Bash tool\n├── settings.json            # Default settings for the plugin\n├── .mcp.json                # MCP server definitions\n├── .lsp.json                # LSP server configurations\n├── scripts/                 # Hook and utility scripts\n│   ├── security-scan.sh\n│   ├── format-code.py\n│   └── deploy.js\n├── LICENSE                  # License file\n└── CHANGELOG.md             # Version history",
               "kind": "structure"
             }
           ]
