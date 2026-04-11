@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-10T05:09:13.940Z",
+  "generatedAt": "2026-04-11T04:29:56.370Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -241,7 +241,7 @@
           "path": "/docs/en/security"
         },
         {
-          "title": "Server-managed settings (beta)",
+          "title": "Server-managed settings",
           "path": "/docs/en/server-managed-settings"
         },
         {
@@ -574,7 +574,8 @@
         "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows PS C:\\ when you’re in PowerShell.",
         "Windows requires Git for Windows. Install it first if you don’t have it.",
         "Native installations automatically update in the background to keep you on the latest version.",
-        "Homebrew installations do not auto-update. Run brew upgrade claude-code periodically to get the latest features and security fixes.",
+        "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship.",
+        "Homebrew installations do not auto-update. Run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed, to get the latest features and security fixes.",
         "WinGet installations do not auto-update. Run winget upgrade Anthropic.ClaudeCode periodically to get the latest features and security fixes.",
         "Then start Claude Code in any project:",
         "You’ll be prompted to log in on first use. That’s it! Continue with the Quickstart →",
@@ -807,7 +808,8 @@
         "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows PS C:\\ when you’re in PowerShell.",
         "Windows requires Git for Windows. Install it first if you don’t have it.",
         "Native installations automatically update in the background to keep you on the latest version.",
-        "Homebrew installations do not auto-update. Run brew upgrade claude-code periodically to get the latest features and security fixes.",
+        "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship.",
+        "Homebrew installations do not auto-update. Run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed, to get the latest features and security fixes.",
         "WinGet installations do not auto-update. Run winget upgrade Anthropic.ClaudeCode periodically to get the latest features and security fixes.",
         "Claude Code requires an account to use. When you start an interactive session with the claude command, you’ll need to log in:",
         "You can log in using any of these account types:",
@@ -944,7 +946,8 @@
             "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows PS C:\\ when you’re in PowerShell.",
             "Windows requires Git for Windows. Install it first if you don’t have it.",
             "Native installations automatically update in the background to keep you on the latest version.",
-            "Homebrew installations do not auto-update. Run brew upgrade claude-code periodically to get the latest features and security fixes.",
+            "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship.",
+            "Homebrew installations do not auto-update. Run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed, to get the latest features and security fixes.",
             "WinGet installations do not auto-update. Run winget upgrade Anthropic.ClaudeCode periodically to get the latest features and security fixes."
           ],
           "codeBlocks": [
@@ -1146,6 +1149,7 @@
       "metaDescription": "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
       "headings": [],
       "toc": [
+        "2.1.101",
         "2.1.98",
         "2.1.97",
         "2.1.96",
@@ -1164,13 +1168,58 @@
         "2.1.79",
         "2.1.78",
         "2.1.77",
-        "2.1.76",
-        "2.1.75"
+        "2.1.76"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Added /team-onboarding command to generate a teammate ramp-up guide from your local Claude Code usage",
+        "Added OS CA certificate store trust by default, so enterprise TLS proxies work without extra setup (set CLAUDE_CODE_CERT_STORE=bundled to use only bundled CAs)",
+        "/ultraplan and other remote-session features now auto-create a default cloud environment instead of requiring web setup first",
+        "Improved brief mode to retry once when Claude responds with plain text instead of a structured message",
+        "Improved focus mode: Claude now writes more self-contained summaries since it knows you only see its final message",
+        "Improved tool-not-available errors to explain why and how to proceed when the model calls a tool that exists but isn’t available in the current context",
+        "Improved rate-limit retry messages to show which limit was hit and when it resets instead of an opaque seconds countdown",
+        "Improved refusal error messages to include the API-provided explanation when available",
+        "Improved claude -p --resume <name> to accept session titles set via /rename or --name",
+        "Improved settings resilience: an unrecognized hook event name in settings.json no longer causes the entire file to be ignored",
+        "Improved plugin hooks from plugins force-enabled by managed settings to run when allowManagedHooksOnly is set",
+        "Improved /plugin and claude plugin update to show a warning when the marketplace could not be refreshed, instead of silently reporting a stale version",
+        "Improved plan mode to hide the “Refine with Ultraplan” option when the user’s org or auth setup can’t reach Claude Code on the web",
+        "Improved beta tracing to honor OTEL_LOG_USER_PROMPTS, OTEL_LOG_TOOL_DETAILS, and OTEL_LOG_TOOL_CONTENT; sensitive span attributes are no longer emitted unless opted in",
+        "Improved SDK query() to clean up subprocess and temp files when consumers break from for await or use await using",
+        "Fixed a command injection vulnerability in the POSIX which fallback used by LSP binary detection",
+        "Fixed a memory leak where long sessions retained dozens of historical copies of the message list in the virtual scroller",
+        "Fixed --resume/--continue losing conversation context on large sessions when the loader anchored on a dead-end branch instead of the live conversation",
+        "Fixed --resume chain recovery bridging into an unrelated subagent conversation when a subagent message landed near a main-chain write gap",
+        "Fixed a crash on --resume when a persisted Edit/Write tool result was missing its file_path",
+        "Fixed a hardcoded 5-minute request timeout that aborted slow backends (local LLMs, extended thinking, slow gateways) regardless of API_TIMEOUT_MS",
+        "Fixed permissions.deny rules not overriding a PreToolUse hook’s permissionDecision: \"ask\" — previously the hook could downgrade a deny into a prompt",
+        "Fixed --setting-sources without user causing background cleanup to ignore cleanupPeriodDays and delete conversation history older than 30 days",
+        "Fixed Bedrock SigV4 authentication failing with 403 when ANTHROPIC_AUTH_TOKEN, apiKeyHelper, or ANTHROPIC_CUSTOM_HEADERS set an Authorization header",
+        "Fixed claude -w <name> failing with “already exists” after a previous session’s worktree cleanup left a stale directory",
+        "Fixed subagents not inheriting MCP tools from dynamically-injected servers",
+        "Fixed sub-agents running in isolated worktrees being denied Read/Edit access to files inside their own worktree",
+        "Fixed sandboxed Bash commands failing with mktemp: No such file or directory after a fresh boot",
+        "Fixed claude mcp serve tool calls failing with “Tool execution failed” in MCP clients that validate outputSchema",
+        "Fixed RemoteTrigger tool’s run action sending an empty body and being rejected by the server",
+        "Fixed several /resume picker issues: narrow default view hiding sessions from other projects, unreachable preview on Windows Terminal, incorrect cwd in worktrees, session-not-found errors not surfacing in stderr, terminal title not being set, and resume hint overlapping the prompt input",
+        "Fixed Grep tool ENOENT when the embedded ripgrep binary path becomes stale (VS Code extension auto-update, macOS App Translocation); now falls back to system rg and self-heals mid-session",
+        "Fixed /btw writing a copy of the entire conversation to disk on every use",
+        "Fixed /context Free space and Messages breakdown disagreeing with the header percentage",
+        "Fixed several plugin issues: slash commands resolving to the wrong plugin with duplicate name: frontmatter, /plugin update failing with ENAMETOOLONG, Discover showing already-installed plugins, directory-source plugins loading from a stale version cache, and skills not honoring context: fork and agent frontmatter fields",
+        "Fixed the /mcp menu offering OAuth-specific actions for MCP servers configured with headersHelper; Reconnect is now offered instead to re-invoke the helper script",
+        "Fixed ctrl+], ctrl+\\, and ctrl+^ keybindings not firing in terminals that send raw C0 control bytes (Terminal.app, default iTerm2, xterm)",
+        "Fixed /login OAuth URL rendering with padding that prevented clean mouse selection",
+        "Fixed rendering issues: flicker in non-fullscreen mode when content above the visible area changed, terminal scrollback being wiped during long sessions in non-fullscreen mode, and mouse-scroll escape sequences occasionally leaking into the prompt as text",
+        "Fixed crash when settings.json env values are numbers instead of strings",
+        "Fixed in-app settings writes (e.g. /add-dir --remember, /config) not refreshing the in-memory snapshot, preventing removed directories from being revoked mid-session",
+        "Fixed custom keybindings (~/.claude/keybindings.json) not loading on Bedrock, Vertex, and other third-party providers",
+        "Fixed claude --continue -p not correctly continuing sessions created by -p or the SDK",
+        "Fixed several Remote Control issues: worktrees removed on session crash, connection failures not persisting in the transcript, spurious “Disconnected” indicator in brief mode for local sessions, and /remote-control failing over SSH when only CLAUDE_CODE_ORGANIZATION_UUID is set",
+        "Fixed /insights sometimes omitting the report file link from its response",
+        "[VSCode] Fixed the file attachment below the chat input not clearing when the last editor tab is closed",
         "Added interactive Google Vertex AI setup wizard accessible from the login screen when selecting “3rd-party platform”, guiding you through GCP authentication, project and region configuration, credential verification, and model pinning",
         "Added CLAUDE_CODE_PERFORCE_MODE env var: when set, Edit/Write/NotebookEdit fail on read-only files with a p4 edit hint instead of silently overwriting them",
         "Added Monitor tool for streaming events from background scripts",
@@ -1301,53 +1350,7 @@
         "Added forceRemoteSettingsRefresh policy setting: when set, the CLI blocks startup until remote managed settings are freshly fetched, and exits if the fetch fails (fail-closed)",
         "Added interactive Bedrock setup wizard accessible from the login screen when selecting “3rd-party platform” — guides you through AWS authentication, region configuration, credential verification, and model pinning",
         "Added per-model and cache-hit breakdown to /cost for subscription users",
-        "/release-notes is now an interactive version picker",
-        "Remote Control session names now use your hostname as the default prefix (e.g. myhost-graceful-unicorn), overridable with --remote-control-session-name-prefix",
-        "Pro users now see a footer hint when returning to a session after the prompt cache has expired, showing roughly how many tokens the next turn will send uncached",
-        "Fixed subagent spawning permanently failing with “Could not determine pane count” after tmux windows are killed or renumbered during a long-running session",
-        "Fixed prompt-type Stop hooks incorrectly failing when the small fast model returns ok:false, and restored preventContinuation:true semantics for non-Stop prompt-type hooks",
-        "Fixed tool input validation failures when streaming emits array/object fields as JSON-encoded strings",
-        "Fixed an API 400 error that could occur when extended thinking produced a whitespace-only text block alongside real content",
-        "Fixed accidental feedback survey submissions from auto-pilot keypresses and consecutive-prompt digit collisions",
-        "Fixed misleading “esc to interrupt” hint appearing alongside “esc to clear” when a text selection exists in fullscreen mode during processing",
-        "Fixed Homebrew install update prompts to use the cask’s release channel (claude-code → stable, claude-code@latest → latest)",
-        "Fixed ctrl+e jumping to the end of the next line when already at end of line in multiline prompts",
-        "Fixed an issue where the same message could appear at two positions when scrolling up in fullscreen mode (iTerm2, Ghostty, and other terminals with DEC 2026 support)",
-        "Fixed idle-return “/clear to save X tokens” hint showing cumulative session tokens instead of current context size",
-        "Fixed plugin MCP servers stuck “connecting” on session start when they duplicate a claude.ai connector that is unauthenticated",
-        "Improved Write tool diff computation speed for large files (60% faster on files with tabs/&/$)",
-        "Removed /tag command",
-        "Removed /vim command (toggle vim mode via /config → Editor mode)",
-        "Linux sandbox now ships the apply-seccomp helper in both npm and native builds, restoring unix-socket blocking for sandboxed commands",
-        "Added MCP tool result persistence override via _meta[\"anthropic/maxResultSizeChars\"] annotation (up to 500K), allowing larger results like DB schemas to pass through without truncation",
-        "Added disableSkillShellExecution setting to disable inline shell execution in skills, custom slash commands, and plugin commands",
-        "Added support for multi-line prompts in claude-cli://open?q= deep links (encoded newlines %0A no longer rejected)",
-        "Plugins can now ship executables under bin/ and invoke them as bare commands from the Bash tool",
-        "Fixed transcript chain breaks on --resume that could lose conversation history when async transcript writes fail silently",
-        "Fixed cmd+delete not deleting to start of line on iTerm2, kitty, WezTerm, Ghostty, and Windows Terminal",
-        "Fixed plan mode in remote sessions losing track of the plan file after a container restart, which caused permission prompts on plan edits and an empty plan-approval modal",
-        "Fixed JSON schema validation for permissions.defaultMode: \"auto\" in settings.json",
-        "Fixed Windows version cleanup not protecting the active version’s rollback copy",
-        "/feedback now explains why it’s unavailable instead of disappearing from the slash menu",
-        "Improved /claude-api skill guidance for agent design patterns including tool surface decisions, context management, and caching strategy",
-        "Improved performance: faster stripAnsi on Bun by routing through Bun.stripANSI",
-        "Edit tool now uses shorter old_string anchors, reducing output tokens",
-        "Added /powerup — interactive lessons teaching Claude Code features with animated demos",
-        "Added CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE env var to keep the existing marketplace cache when git pull fails, useful in offline environments",
-        "Added .husky to protected directories (acceptEdits mode)",
-        "Fixed an infinite loop where the rate-limit options dialog would repeatedly auto-open after hitting your usage limit, eventually crashing the session",
-        "Fixed --resume causing a full prompt-cache miss on the first request for users with deferred tools, MCP servers, or custom agents (regression since v2.1.69)",
-        "Fixed Edit/Write failing with “File content has changed” when a PostToolUse format-on-save hook rewrites the file between consecutive edits",
-        "Fixed PreToolUse hooks that emit JSON to stdout and exit with code 2 not correctly blocking the tool call",
-        "Fixed collapsed search/read summary badge appearing multiple times in fullscreen scrollback when a CLAUDE.md file auto-loads during a tool call",
-        "Fixed auto mode not respecting explicit user boundaries (“don’t push”, “wait for X before Y”) even when the action would otherwise be allowed",
-        "Fixed click-to-expand hover text being nearly invisible on light terminal themes",
-        "Fixed UI crash when malformed tool input reached the permission dialog",
-        "Fixed headers disappearing when scrolling /model, /config, and other selection screens",
-        "Hardened PowerShell tool permission checks: fixed trailing & background job bypass, -ErrorAction Break debugger hang, archive-extraction TOCTOU, and parse-fail fallback deny-rule degradation",
-        "Improved performance: eliminated per-turn JSON.stringify of MCP tool schemas on cache-key lookup",
-        "Improved performance: SSE transport now handles large streamed frames in linear time (was quadratic)",
-        "Improved performance: SDK sessions with long conversations no longer slow down quadratically on transcript writes"
+        "/release-notes is now an interactive version picker"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1357,15 +1360,15 @@
             "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Added interactive Google Vertex AI setup wizard accessible from the login screen when selecting “3rd-party platform”, guiding you through GCP authentication, project and region configuration, credential verification, and model pinning",
-            "Added CLAUDE_CODE_PERFORCE_MODE env var: when set, Edit/Write/NotebookEdit fail on read-only files with a p4 edit hint instead of silently overwriting them",
-            "Added Monitor tool for streaming events from background scripts",
-            "Added subprocess sandboxing with PID namespace isolation on Linux when CLAUDE_CODE_SUBPROCESS_ENV_SCRUB is set, and CLAUDE_CODE_SCRIPT_CAPS env var to limit per-session script invocations",
-            "Added --exclude-dynamic-system-prompt-sections flag to print mode for improved cross-user prompt caching",
-            "Added workspace.git_worktree to the status line JSON input, set whenever the current directory is inside a linked git worktree",
-            "Added W3C TRACEPARENT env var to Bash tool subprocesses when OTEL tracing is enabled, so child-process spans correctly parent to Claude Code’s trace tree",
-            "LSP: Claude Code now identifies itself to language servers via clientInfo in the initialize request",
-            "Fixed a Bash tool permission bypass where a backslash-escaped flag could be auto-allowed as read-only and lead to arbitrary code execution"
+            "Added /team-onboarding command to generate a teammate ramp-up guide from your local Claude Code usage",
+            "Added OS CA certificate store trust by default, so enterprise TLS proxies work without extra setup (set CLAUDE_CODE_CERT_STORE=bundled to use only bundled CAs)",
+            "/ultraplan and other remote-session features now auto-create a default cloud environment instead of requiring web setup first",
+            "Improved brief mode to retry once when Claude responds with plain text instead of a structured message",
+            "Improved focus mode: Claude now writes more self-contained summaries since it knows you only see its final message",
+            "Improved tool-not-available errors to explain why and how to proceed when the model calls a tool that exists but isn’t available in the current context",
+            "Improved rate-limit retry messages to show which limit was hit and when it resets instead of an opaque seconds countdown",
+            "Improved refusal error messages to include the API-provided explanation when available",
+            "Improved claude -p --resume <name> to accept session titles set via /rename or --name"
           ],
           "codeBlocks": []
         }
@@ -2550,7 +2553,6 @@
         "See Write effective instructions for guidance on size, structure, and specificity.",
         "Skills: package repeatable workflows that load on demand",
         "Settings: configure Claude Code behavior with settings files",
-        "Manage sessions: manage context, resume conversations, and run parallel sessions",
         "Subagent memory: let subagents maintain their own auto memory",
         "Was this page helpful?"
       ],
@@ -2840,7 +2842,6 @@
           "paragraphs": [
             "Skills: package repeatable workflows that load on demand",
             "Settings: configure Claude Code behavior with settings files",
-            "Manage sessions: manage context, resume conversations, and run parallel sessions",
             "Subagent memory: let subagents maintain their own auto memory",
             "Was this page helpful?"
           ],
@@ -5428,6 +5429,7 @@
         "​How Claude works on your screen",
         "​One session at a time",
         "​Apps are hidden while Claude works",
+        "​Screenshots are downscaled automatically",
         "​Stop at any time",
         "​Safety and the trust boundary",
         "​Example workflows",
@@ -5449,6 +5451,7 @@
         "How Claude works on your screen",
         "One session at a time",
         "Apps are hidden while Claude works",
+        "Screenshots are downscaled automatically",
         "Stop at any time",
         "Safety and the trust boundary",
         "Example workflows",
@@ -5470,6 +5473,7 @@
         "How Claude works on your screen",
         "One session at a time",
         "Apps are hidden while Claude works",
+        "Screenshots are downscaled automatically",
         "Stop at any time",
         "Safety and the trust boundary",
         "Example workflows",
@@ -5521,6 +5525,8 @@
         "Computer use holds a machine-wide lock while active. If another Claude Code session is already using your computer, new attempts fail with a message telling you which session holds the lock. Finish or exit that session first.",
         "When Claude starts controlling your screen, other visible apps are hidden so Claude interacts with only the approved apps. Your terminal window stays visible and is excluded from screenshots, so you can watch the session and Claude never sees its own output.",
         "When Claude finishes the turn, hidden apps are restored automatically.",
+        "Claude Code downscales every screenshot before sending it to the model. You don’t need to lower your display resolution or resize windows on Retina or other high-resolution displays. A 16-inch MacBook Pro at native Retina resolution captures at 3456×2234 and downscales to roughly 1372×887, preserving aspect ratio.",
+        "There is no setting to change the target size. If on-screen text or controls are too small for Claude to read after downscaling, increase their size in the app rather than changing your display resolution.",
         "When Claude acquires the lock, a macOS notification appears: “Claude is using your computer · press Esc to stop.” Press Esc anywhere to abort the current action immediately, or press Ctrl+C in the terminal. Either way, Claude releases the lock, unhides your apps, and returns control to you.",
         "A second notification appears when Claude is done.",
         "Unlike the sandboxed Bash tool, computer use runs on your actual desktop with access to the apps you approve. Claude checks each action and flags potential prompt injection from on-screen content, but the trust boundary is different. See the computer use safety guide for best practices.",
@@ -5571,11 +5577,11 @@
             "How Claude works on your screen",
             "One session at a time",
             "Apps are hidden while Claude works",
+            "Screenshots are downscaled automatically",
             "Stop at any time",
             "Safety and the trust boundary",
             "Example workflows",
-            "Validate a native build",
-            "Reproduce a layout bug"
+            "Validate a native build"
           ],
           "codeBlocks": []
         },
@@ -5656,6 +5662,14 @@
           "paragraphs": [
             "When Claude starts controlling your screen, other visible apps are hidden so Claude interacts with only the approved apps. Your terminal window stays visible and is excluded from screenshots, so you can watch the session and Claude never sees its own output.",
             "When Claude finishes the turn, hidden apps are restored automatically."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Screenshots are downscaled automatically",
+          "paragraphs": [
+            "Claude Code downscales every screenshot before sending it to the model. You don’t need to lower your display resolution or resize windows on Retina or other high-resolution displays. A 16-inch MacBook Pro at native Retina resolution captures at 3456×2234 and downscales to roughly 1372×887, preserving aspect ratio.",
+            "There is no setting to change the target size. If on-screen text or controls are too small for Claude to read after downscaling, increase their size in the app rather than changing your display resolution."
           ],
           "codeBlocks": []
         },
@@ -7267,6 +7281,7 @@
         "Subagent files use YAML frontmatter for configuration, followed by the system prompt in Markdown:",
         "Subagents are loaded at session start. If you create a subagent by manually adding a file, restart your session or use /agents to load it immediately.",
         "The frontmatter defines the subagent’s metadata and configuration. The body becomes the system prompt that guides the subagent’s behavior. Subagents receive only this system prompt (plus basic environment details like working directory), not the full Claude Code system prompt.",
+        "A subagent starts in the main conversation’s current working directory. Within a subagent, cd commands do not persist between Bash or PowerShell tool calls and do not affect the main conversation’s working directory. To give the subagent an isolated copy of the repository instead, set isolation: worktree.",
         "The following fields can be used in the YAML frontmatter. Only name and description are required.",
         "The model field controls which AI model the subagent uses:",
         "Model alias: Use one of the available aliases: sonnet, opus, or haiku",
@@ -7334,8 +7349,7 @@
         "@-mention the subagent. Type @ and pick the subagent from the typeahead, the same way you @-mention files. This ensures that specific subagent runs rather than leaving the choice to Claude:",
         "Your full message still goes to Claude, which writes the subagent’s task prompt based on what you asked. The @-mention controls which subagent Claude invokes, not what prompt it receives.",
         "Subagents provided by an enabled plugin appear in the typeahead as <plugin-name>:<agent-name>. Named background subagents currently running in the session also appear in the typeahead, showing their status next to the name. You can also type the mention manually without using the picker: @agent-<name> for local subagents, or @agent-<plugin-name>:<agent-name> for plugin subagents.",
-        "Run the whole session as a subagent. Pass --agent <name> to start a session where the main thread itself takes on that subagent’s system prompt, tool restrictions, and model:",
-        "The subagent’s system prompt replaces the default Claude Code system prompt entirely, the same way --system-prompt does. CLAUDE.md files and project memory still load through the normal message flow. The agent name appears as @<name> in the startup header so you can confirm it’s active."
+        "Run the whole session as a subagent. Pass --agent <name> to start a session where the main thread itself takes on that subagent’s system prompt, tool restrictions, and model:"
       ],
       "codeBlocks": [
         "/agents",
@@ -7473,6 +7487,7 @@
             "Subagent files use YAML frontmatter for configuration, followed by the system prompt in Markdown:",
             "Subagents are loaded at session start. If you create a subagent by manually adding a file, restart your session or use /agents to load it immediately.",
             "The frontmatter defines the subagent’s metadata and configuration. The body becomes the system prompt that guides the subagent’s behavior. Subagents receive only this system prompt (plus basic environment details like working directory), not the full Claude Code system prompt.",
+            "A subagent starts in the main conversation’s current working directory. Within a subagent, cd commands do not persist between Bash or PowerShell tool calls and do not affect the main conversation’s working directory. To give the subagent an isolated copy of the repository instead, set isolation: worktree.",
             "The following fields can be used in the YAML frontmatter. Only name and description are required."
           ],
           "codeBlocks": [
@@ -8445,8 +8460,10 @@
         "The resulting .mcp.json file follows a standardized format:",
         "For security reasons, Claude Code prompts for approval before using project-scoped servers from .mcp.json files. If you need to reset these approval choices, use the claude mcp reset-project-choices command.",
         "User-scoped servers are stored in ~/.claude.json and provide cross-project accessibility, making them available across all projects on your machine while remaining private to your user account. This scope works well for personal utility servers, development tools, or services you frequently use across different projects.",
-        "MCP server configurations follow a clear precedence hierarchy. When servers with the same name exist at multiple scopes, the system resolves conflicts by prioritizing local-scoped servers first, followed by project-scoped servers, and finally user-scoped servers. This design ensures that personal configurations can override shared ones when needed.",
-        "If a server is configured both locally and through a claude.ai connector, the local configuration takes precedence and the connector entry is skipped.",
+        "When the same server is defined in more than one place, Claude Code connects to it once, using the definition from the highest-precedence source:",
+        "Plugin-provided servers",
+        "claude.ai connectors",
+        "The three scopes match duplicates by name. Plugins and connectors match by endpoint, so one that points at the same URL or command as a server above is treated as a duplicate.",
         "Claude Code supports environment variable expansion in .mcp.json files, allowing teams to share configurations while maintaining flexibility for machine-specific paths and sensitive values like API keys.",
         "Supported syntax:",
         "${VAR} - Expands to the value of environment variable VAR",
@@ -8507,9 +8524,7 @@
         "The command runs in a shell with a 10-second timeout",
         "Dynamic headers override any static headers with the same name",
         "The helper runs fresh on each connection (at session start and on reconnect). There is no caching, so your script is responsible for any token reuse.",
-        "Claude Code sets these environment variables when executing the helper:",
-        "Use these to write a single helper script that serves multiple MCP servers.",
-        "headersHelper executes arbitrary shell commands. When defined at project or local scope, it only runs after you accept the workspace trust dialog."
+        "Claude Code sets these environment variables when executing the helper:"
       ],
       "codeBlocks": [
         "# Basic syntax\nclaude mcp add --transport http <name> <url>\n\n# Real example: Connect to Notion\nclaude mcp add --transport http notion https://mcp.notion.com/mcp\n\n# Example with Bearer token\nclaude mcp add --transport http secure-api https://api.example.com/mcp \\\n  --header \"Authorization: Bearer your-token\"",
@@ -8726,8 +8741,13 @@
         {
           "title": "​Scope hierarchy and precedence",
           "paragraphs": [
-            "MCP server configurations follow a clear precedence hierarchy. When servers with the same name exist at multiple scopes, the system resolves conflicts by prioritizing local-scoped servers first, followed by project-scoped servers, and finally user-scoped servers. This design ensures that personal configurations can override shared ones when needed.",
-            "If a server is configured both locally and through a claude.ai connector, the local configuration takes precedence and the connector entry is skipped."
+            "When the same server is defined in more than one place, Claude Code connects to it once, using the definition from the highest-precedence source:",
+            "Local scope",
+            "Project scope",
+            "User scope",
+            "Plugin-provided servers",
+            "claude.ai connectors",
+            "The three scopes match duplicates by name. Plugins and connectors match by endpoint, so one that points at the same URL or command as a server above is treated as a duplicate."
           ],
           "codeBlocks": []
         },
@@ -9183,8 +9203,8 @@
         "Plugins and marketplaces are highly trusted components that can execute arbitrary code on your machine with your user privileges. Only install plugins and add marketplaces from sources you trust. Organizations can restrict which marketplaces users are allowed to add using managed marketplace restrictions.",
         "If you see “unknown command” or the /plugin command doesn’t appear:",
         "Check your version: Run claude --version to see what’s installed.",
-        "Update Claude Code: Homebrew: brew upgrade claude-code npm: npm update -g @anthropic-ai/claude-code Native installer: Re-run the install command from Setup",
-        "Homebrew: brew upgrade claude-code",
+        "Update Claude Code: Homebrew: brew upgrade claude-code (or brew upgrade claude-code@latest if you installed that cask) npm: npm update -g @anthropic-ai/claude-code Native installer: Re-run the install command from Setup",
+        "Homebrew: brew upgrade claude-code (or brew upgrade claude-code@latest if you installed that cask)",
         "npm: npm update -g @anthropic-ai/claude-code",
         "Native installer: Re-run the install command from Setup",
         "Restart Claude Code: After updating, restart your terminal and run claude again.",
@@ -9518,8 +9538,8 @@
           "paragraphs": [
             "If you see “unknown command” or the /plugin command doesn’t appear:",
             "Check your version: Run claude --version to see what’s installed.",
-            "Update Claude Code: Homebrew: brew upgrade claude-code npm: npm update -g @anthropic-ai/claude-code Native installer: Re-run the install command from Setup",
-            "Homebrew: brew upgrade claude-code",
+            "Update Claude Code: Homebrew: brew upgrade claude-code (or brew upgrade claude-code@latest if you installed that cask) npm: npm update -g @anthropic-ai/claude-code Native installer: Re-run the install command from Setup",
+            "Homebrew: brew upgrade claude-code (or brew upgrade claude-code@latest if you installed that cask)",
             "npm: npm update -g @anthropic-ai/claude-code",
             "Native installer: Re-run the install command from Setup",
             "Restart Claude Code: After updating, restart your terminal and run claude again."
@@ -10627,7 +10647,8 @@
         "To create a hook, add a hooks block to a settings file. This walkthrough creates a desktop notification hook, so you get alerted whenever Claude is waiting for your input instead of watching the terminal.",
         "Add the hook to your settings",
         "Open ~/.claude/settings.json and add a Notification hook. The example below uses osascript for macOS; see Get notified when Claude needs input for Linux and Windows commands.",
-        "If your settings file already has a hooks key, merge the Notification entry into it rather than replacing the whole object. You can also ask Claude to write the hook for you by describing what you want in the CLI.",
+        "If your settings file already has a hooks key, add Notification as a sibling of the existing event keys rather than replacing the whole object. Each event name is a key inside the single hooks object:",
+        "You can also ask Claude to write the hook for you by describing what you want in the CLI.",
         "Verify the configuration",
         "Type /hooks to open the hooks browser. You’ll see a list of all available hook events, with a count next to each event that has hooks configured. Select Notification to confirm your new hook appears in the list. Selecting the hook shows its details: the event, matcher, type, source file, and command.",
         "Test the hook",
@@ -10768,6 +10789,7 @@
       ],
       "codeBlocks": [
         "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+        "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Edit|Write\",\n        \"hooks\": [{ \"type\": \"command\", \"command\": \"jq -r '.tool_input.file_path' | xargs npx prettier --write\" }]\n      }\n    ],\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [{ \"type\": \"command\", \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\" }]\n      }\n    ]\n  }\n}",
         "osascript -e 'display notification \"test\"'",
         "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"notify-send 'Claude Code' 'Claude Code needs your attention'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
         "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"powershell.exe -Command \\\"[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code needs your attention', 'Claude Code')\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
@@ -10822,7 +10844,8 @@
             "To create a hook, add a hooks block to a settings file. This walkthrough creates a desktop notification hook, so you get alerted whenever Claude is waiting for your input instead of watching the terminal.",
             "Add the hook to your settings",
             "Open ~/.claude/settings.json and add a Notification hook. The example below uses osascript for macOS; see Get notified when Claude needs input for Linux and Windows commands.",
-            "If your settings file already has a hooks key, merge the Notification entry into it rather than replacing the whole object. You can also ask Claude to write the hook for you by describing what you want in the CLI.",
+            "If your settings file already has a hooks key, add Notification as a sibling of the existing event keys rather than replacing the whole object. Each event name is a key inside the single hooks object:",
+            "You can also ask Claude to write the hook for you by describing what you want in the CLI.",
             "Verify the configuration",
             "Type /hooks to open the hooks browser. You’ll see a list of all available hook events, with a count next to each event that has hooks configured. Select Notification to confirm your new hook appears in the list. Selecting the hook shows its details: the event, matcher, type, source file, and command.",
             "Test the hook",
@@ -10830,7 +10853,8 @@
             "The /hooks menu is read-only. To add, modify, or remove hooks, edit your settings JSON directly or ask Claude to make the change."
           ],
           "codeBlocks": [
-            "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}"
+            "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+            "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Edit|Write\",\n        \"hooks\": [{ \"type\": \"command\", \"command\": \"jq -r '.tool_input.file_path' | xargs npx prettier --write\" }]\n      }\n    ],\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [{ \"type\": \"command\", \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\" }]\n      }\n    ]\n  }\n}"
           ]
         },
         {
@@ -11471,9 +11495,11 @@
       "metaDescription": "Use /loop and the cron scheduling tools to run prompts repeatedly, poll for status, or set one-time reminders within a Claude Code session.",
       "headings": [
         "​Compare scheduling options",
-        "​Schedule a recurring prompt with /loop",
-        "​Interval syntax",
-        "​Loop over another command",
+        "​Run a prompt repeatedly with /loop",
+        "​Run on a fixed interval",
+        "​Let Claude choose the interval",
+        "​Run the built-in maintenance prompt",
+        "​Customize the default prompt with loop.md",
         "​Set a one-time reminder",
         "​Manage scheduled tasks",
         "​How scheduled tasks run",
@@ -11485,9 +11511,11 @@
       ],
       "toc": [
         "Compare scheduling options",
-        "Schedule a recurring prompt with /loop",
-        "Interval syntax",
-        "Loop over another command",
+        "Run a prompt repeatedly with /loop",
+        "Run on a fixed interval",
+        "Let Claude choose the interval",
+        "Run the built-in maintenance prompt",
+        "Customize the default prompt with loop.md",
         "Set a one-time reminder",
         "Manage scheduled tasks",
         "How scheduled tasks run",
@@ -11499,9 +11527,11 @@
       ],
       "paragraphs": [
         "Compare scheduling options",
-        "Schedule a recurring prompt with /loop",
-        "Interval syntax",
-        "Loop over another command",
+        "Run a prompt repeatedly with /loop",
+        "Run on a fixed interval",
+        "Let Claude choose the interval",
+        "Run the built-in maintenance prompt",
+        "Customize the default prompt with loop.md",
         "Set a one-time reminder",
         "Manage scheduled tasks",
         "How scheduled tasks run",
@@ -11515,12 +11545,27 @@
         "Tasks are session-scoped: they live in the current Claude Code process and are gone when you exit. For durable scheduling that survives restarts, use Cloud or Desktop scheduled tasks, or GitHub Actions.",
         "Claude Code offers three ways to schedule recurring work:",
         "Use cloud tasks for work that should run reliably without your machine. Use Desktop tasks when you need access to local files and tools. Use /loop for quick polling during a session.",
-        "The /loop bundled skill is the quickest way to schedule a recurring prompt. Pass an optional interval and a prompt, and Claude sets up a cron job that fires in the background while the session stays open.",
-        "Claude parses the interval, converts it to a cron expression, schedules the job, and confirms the cadence and job ID.",
-        "Intervals are optional. You can lead with them, trail with them, or leave them out entirely.",
-        "Supported units are s for seconds, m for minutes, h for hours, and d for days. Seconds are rounded up to the nearest minute since cron has one-minute granularity. Intervals that don’t divide evenly into their unit, such as 7m or 90m, are rounded to the nearest clean interval and Claude tells you what it picked.",
-        "The scheduled prompt can itself be a command or skill invocation. This is useful for re-running a workflow you’ve already packaged.",
-        "Each time the job fires, Claude runs /review-pr 1234 as if you had typed it.",
+        "The /loop bundled skill is the quickest way to run a prompt on repeat while the session stays open. Both the interval and the prompt are optional, and what you provide determines how the loop behaves.",
+        "You can also pass another command as the prompt, for example /loop 20m /review-pr 1234, to re-run a packaged workflow each iteration.",
+        "When you supply an interval, Claude converts it to a cron expression, schedules the job, and confirms the cadence and job ID.",
+        "The interval can lead the prompt as a bare token like 30m, or trail it as a clause like every 2 hours. Supported units are s for seconds, m for minutes, h for hours, and d for days.",
+        "Seconds are rounded up to the nearest minute since cron has one-minute granularity. Intervals that don’t map to a clean cron step, such as 7m or 90m, are rounded to the nearest interval that does and Claude tells you what it picked.",
+        "When you omit the interval, Claude chooses one dynamically instead of running on a fixed cron schedule. After each iteration it picks a delay between one minute and one hour based on what it observed: short waits while a build is finishing or a PR is active, longer waits when nothing is pending. The chosen delay and the reason for it are printed at the end of each iteration.",
+        "The example below checks CI and review comments, with Claude waiting longer between iterations once the PR goes quiet:",
+        "When you ask for a dynamic /loop schedule, Claude may use the Monitor tool directly. Monitor runs a background script and streams each output line back, which avoids polling altogether and is often more token-efficient and responsive than re-running a prompt on an interval.",
+        "A dynamically scheduled loop appears in your scheduled task list like any other task, so you can list or cancel it the same way. The jitter rules don’t apply to it, but the seven-day expiry does: the loop ends automatically seven days after you start it.",
+        "On Bedrock, Vertex AI, and Microsoft Foundry, a prompt with no interval runs on a fixed 10-minute schedule instead.",
+        "When you omit the prompt, Claude uses a built-in maintenance prompt instead of one you supply. On each iteration it works through the following, in order:",
+        "continue any unfinished work from the conversation",
+        "tend to the current branch’s pull request: review comments, failed CI runs, merge conflicts",
+        "run cleanup passes such as bug hunts or simplification when nothing else is pending",
+        "Claude does not start new initiatives outside that scope, and irreversible actions such as pushing or deleting only proceed when they continue something the transcript already authorized.",
+        "A bare /loop runs this prompt at a dynamically chosen interval. Add an interval, for example /loop 15m, to run it on a fixed schedule instead. To replace the built-in prompt with your own default, see Customize the default prompt with loop.md.",
+        "On Bedrock, Vertex AI, and Microsoft Foundry, /loop with no prompt prints the usage message instead of starting the maintenance loop.",
+        "A loop.md file replaces the built-in maintenance prompt with your own instructions. It defines a single default prompt for bare /loop, not a list of separate scheduled tasks, and is ignored whenever you supply a prompt on the command line. To schedule additional prompts alongside it, use /loop <prompt> or ask Claude directly.",
+        "Claude looks for the file in two locations and uses the first one it finds.",
+        "The file is plain Markdown with no required structure. Write it as if you were typing the /loop prompt directly. The following example keeps a release branch healthy:",
+        "Edits to loop.md take effect on the next iteration, so you can refine the instructions while a loop is running. When no loop.md exists in either location, the loop falls back to the built-in maintenance prompt. Keep the file concise: content beyond 25,000 bytes is truncated.",
         "For one-shot reminders, describe what you want in natural language instead of using /loop. Claude schedules a single-fire task that deletes itself after running.",
         "Claude pins the fire time to a specific minute and hour using a cron expression and confirms when it will fire.",
         "Ask Claude in natural language to list or cancel tasks, or reference the underlying tools directly.",
@@ -11549,7 +11594,9 @@
       ],
       "codeBlocks": [
         "/loop 5m check if the deployment finished and tell me what happened",
-        "/loop 20m /review-pr 1234",
+        "/loop check whether CI passed and address any review comments",
+        "/loop",
+        "Check the `release/next` PR. If CI is red, pull the failing job log,\ndiagnose, and push a minimal fix. If new review comments have arrived,\naddress each one and resolve the thread. If everything is green and\nquiet, say so in one line.",
         "remind me at 3pm to push the release branch",
         "in 45 minutes, check whether the integration tests passed",
         "what scheduled tasks do I have?",
@@ -11560,17 +11607,17 @@
           "title": "",
           "paragraphs": [
             "Compare scheduling options",
-            "Schedule a recurring prompt with /loop",
-            "Interval syntax",
-            "Loop over another command",
+            "Run a prompt repeatedly with /loop",
+            "Run on a fixed interval",
+            "Let Claude choose the interval",
+            "Run the built-in maintenance prompt",
+            "Customize the default prompt with loop.md",
             "Set a one-time reminder",
             "Manage scheduled tasks",
             "How scheduled tasks run",
             "Seven-day expiry",
             "Cron expression reference",
-            "Disable scheduled tasks",
-            "Limitations",
-            "Use /loop and the cron scheduling tools to run prompts repeatedly, poll for status, or set one-time reminders within a Claude Code session."
+            "Disable scheduled tasks"
           ],
           "codeBlocks": []
         },
@@ -11583,31 +11630,62 @@
           "codeBlocks": []
         },
         {
-          "title": "​Schedule a recurring prompt with /loop",
+          "title": "​Run a prompt repeatedly with /loop",
           "paragraphs": [
-            "The /loop bundled skill is the quickest way to schedule a recurring prompt. Pass an optional interval and a prompt, and Claude sets up a cron job that fires in the background while the session stays open.",
-            "Claude parses the interval, converts it to a cron expression, schedules the job, and confirms the cadence and job ID."
+            "The /loop bundled skill is the quickest way to run a prompt on repeat while the session stays open. Both the interval and the prompt are optional, and what you provide determines how the loop behaves.",
+            "You can also pass another command as the prompt, for example /loop 20m /review-pr 1234, to re-run a packaged workflow each iteration."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Run on a fixed interval",
+          "paragraphs": [
+            "When you supply an interval, Claude converts it to a cron expression, schedules the job, and confirms the cadence and job ID.",
+            "The interval can lead the prompt as a bare token like 30m, or trail it as a clause like every 2 hours. Supported units are s for seconds, m for minutes, h for hours, and d for days.",
+            "Seconds are rounded up to the nearest minute since cron has one-minute granularity. Intervals that don’t map to a clean cron step, such as 7m or 90m, are rounded to the nearest interval that does and Claude tells you what it picked."
           ],
           "codeBlocks": [
             "/loop 5m check if the deployment finished and tell me what happened"
           ]
         },
         {
-          "title": "​Interval syntax",
+          "title": "​Let Claude choose the interval",
           "paragraphs": [
-            "Intervals are optional. You can lead with them, trail with them, or leave them out entirely.",
-            "Supported units are s for seconds, m for minutes, h for hours, and d for days. Seconds are rounded up to the nearest minute since cron has one-minute granularity. Intervals that don’t divide evenly into their unit, such as 7m or 90m, are rounded to the nearest clean interval and Claude tells you what it picked."
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Loop over another command",
-          "paragraphs": [
-            "The scheduled prompt can itself be a command or skill invocation. This is useful for re-running a workflow you’ve already packaged.",
-            "Each time the job fires, Claude runs /review-pr 1234 as if you had typed it."
+            "When you omit the interval, Claude chooses one dynamically instead of running on a fixed cron schedule. After each iteration it picks a delay between one minute and one hour based on what it observed: short waits while a build is finishing or a PR is active, longer waits when nothing is pending. The chosen delay and the reason for it are printed at the end of each iteration.",
+            "The example below checks CI and review comments, with Claude waiting longer between iterations once the PR goes quiet:",
+            "When you ask for a dynamic /loop schedule, Claude may use the Monitor tool directly. Monitor runs a background script and streams each output line back, which avoids polling altogether and is often more token-efficient and responsive than re-running a prompt on an interval.",
+            "A dynamically scheduled loop appears in your scheduled task list like any other task, so you can list or cancel it the same way. The jitter rules don’t apply to it, but the seven-day expiry does: the loop ends automatically seven days after you start it.",
+            "On Bedrock, Vertex AI, and Microsoft Foundry, a prompt with no interval runs on a fixed 10-minute schedule instead."
           ],
           "codeBlocks": [
-            "/loop 20m /review-pr 1234"
+            "/loop check whether CI passed and address any review comments"
+          ]
+        },
+        {
+          "title": "​Run the built-in maintenance prompt",
+          "paragraphs": [
+            "When you omit the prompt, Claude uses a built-in maintenance prompt instead of one you supply. On each iteration it works through the following, in order:",
+            "continue any unfinished work from the conversation",
+            "tend to the current branch’s pull request: review comments, failed CI runs, merge conflicts",
+            "run cleanup passes such as bug hunts or simplification when nothing else is pending",
+            "Claude does not start new initiatives outside that scope, and irreversible actions such as pushing or deleting only proceed when they continue something the transcript already authorized.",
+            "A bare /loop runs this prompt at a dynamically chosen interval. Add an interval, for example /loop 15m, to run it on a fixed schedule instead. To replace the built-in prompt with your own default, see Customize the default prompt with loop.md.",
+            "On Bedrock, Vertex AI, and Microsoft Foundry, /loop with no prompt prints the usage message instead of starting the maintenance loop."
+          ],
+          "codeBlocks": [
+            "/loop"
+          ]
+        },
+        {
+          "title": "​Customize the default prompt with loop.md",
+          "paragraphs": [
+            "A loop.md file replaces the built-in maintenance prompt with your own instructions. It defines a single default prompt for bare /loop, not a list of separate scheduled tasks, and is ignored whenever you supply a prompt on the command line. To schedule additional prompts alongside it, use /loop <prompt> or ask Claude directly.",
+            "Claude looks for the file in two locations and uses the first one it finds.",
+            "The file is plain Markdown with no required structure. Write it as if you were typing the /loop prompt directly. The following example keeps a release branch healthy:",
+            "Edits to loop.md take effect on the next iteration, so you can refine the instructions while a loop is running. When no loop.md exists in either location, the loop falls back to the built-in maintenance prompt. Keep the file concise: content beyond 25,000 bytes is truncated."
+          ],
+          "codeBlocks": [
+            "Check the `release/next` PR. If CI is red, pull the failing job log,\ndiagnose, and push a minimal fix. If new review comments have arrived,\naddress each one and resolve the thread. If everything is green and\nquiet, say so in one line."
           ]
         },
         {
@@ -12063,7 +12141,7 @@
         "Check whether the native installer and npm versions are present:",
         "If you find multiple installations, keep only one. The native install at ~/.local/bin/claude is recommended. Remove any extra installations:",
         "Uninstall an npm global install:",
-        "Remove a Homebrew install on macOS:",
+        "Remove a Homebrew install on macOS (use claude-code@latest if you installed that cask):",
         "The installer needs write access to ~/.local/bin/ and ~/.claude/. If installation fails with permission errors, check whether these directories are writable:",
         "If either directory isn’t writable, create the install directory and set your user as the owner:",
         "If claude is installed but crashes or hangs on startup, run these checks to narrow down the cause.",
@@ -12101,8 +12179,8 @@
         "Check for proxy or firewall interference: corporate proxies that perform TLS inspection can cause these errors, including unable to get local issuer certificate. Set NODE_EXTRA_CA_CERTS to your corporate CA certificate bundle: export NODE_EXTRA_CA_CERTS=/path/to/corporate-ca.pem Ask your IT team for the certificate file if you don’t have it. You can also try on a direct connection to confirm the proxy is the cause.",
         "Check for proxy or firewall interference: corporate proxies that perform TLS inspection can cause these errors, including unable to get local issuer certificate. Set NODE_EXTRA_CA_CERTS to your corporate CA certificate bundle:",
         "Ask your IT team for the certificate file if you don’t have it. You can also try on a direct connection to confirm the proxy is the cause.",
-        "On Windows, bypass certificate revocation checks if you see CRYPT_E_REVOCATION_OFFLINE (0x80092013). This means curl reached the server but your network blocks the certificate revocation lookup, which is common behind corporate firewalls. Add --ssl-revoke-best-effort to the install command: curl --ssl-revoke-best-effort -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd Alternatively, install with winget install Anthropic.ClaudeCode, which avoids curl entirely.",
-        "On Windows, bypass certificate revocation checks if you see CRYPT_E_REVOCATION_OFFLINE (0x80092013). This means curl reached the server but your network blocks the certificate revocation lookup, which is common behind corporate firewalls. Add --ssl-revoke-best-effort to the install command:",
+        "On Windows, bypass certificate revocation checks if you see CRYPT_E_NO_REVOCATION_CHECK (0x80092012) or CRYPT_E_REVOCATION_OFFLINE (0x80092013). These mean curl reached the server but your network blocks the certificate revocation lookup, which is common behind corporate firewalls. Add --ssl-revoke-best-effort to the install command: curl --ssl-revoke-best-effort -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd Alternatively, install with winget install Anthropic.ClaudeCode, which avoids curl entirely.",
+        "On Windows, bypass certificate revocation checks if you see CRYPT_E_NO_REVOCATION_CHECK (0x80092012) or CRYPT_E_REVOCATION_OFFLINE (0x80092013). These mean curl reached the server but your network blocks the certificate revocation lookup, which is common behind corporate firewalls. Add --ssl-revoke-best-effort to the install command:",
         "Alternatively, install with winget install Anthropic.ClaudeCode, which avoids curl entirely.",
         "The installer couldn’t reach the download server. This typically means storage.googleapis.com is blocked on your network.",
         "Test connectivity directly: curl -sI https://storage.googleapis.com",
@@ -12283,7 +12361,7 @@
             "Check whether the native installer and npm versions are present:",
             "If you find multiple installations, keep only one. The native install at ~/.local/bin/claude is recommended. Remove any extra installations:",
             "Uninstall an npm global install:",
-            "Remove a Homebrew install on macOS:"
+            "Remove a Homebrew install on macOS (use claude-code@latest if you installed that cask):"
           ],
           "codeBlocks": [
             "which -a claude",
@@ -12388,7 +12466,7 @@
             "Check for proxy or firewall interference: corporate proxies that perform TLS inspection can cause these errors, including unable to get local issuer certificate. Set NODE_EXTRA_CA_CERTS to your corporate CA certificate bundle: export NODE_EXTRA_CA_CERTS=/path/to/corporate-ca.pem Ask your IT team for the certificate file if you don’t have it. You can also try on a direct connection to confirm the proxy is the cause.",
             "Check for proxy or firewall interference: corporate proxies that perform TLS inspection can cause these errors, including unable to get local issuer certificate. Set NODE_EXTRA_CA_CERTS to your corporate CA certificate bundle:",
             "Ask your IT team for the certificate file if you don’t have it. You can also try on a direct connection to confirm the proxy is the cause.",
-            "On Windows, bypass certificate revocation checks if you see CRYPT_E_REVOCATION_OFFLINE (0x80092013). This means curl reached the server but your network blocks the certificate revocation lookup, which is common behind corporate firewalls. Add --ssl-revoke-best-effort to the install command: curl --ssl-revoke-best-effort -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd Alternatively, install with winget install Anthropic.ClaudeCode, which avoids curl entirely."
+            "On Windows, bypass certificate revocation checks if you see CRYPT_E_NO_REVOCATION_CHECK (0x80092012) or CRYPT_E_REVOCATION_OFFLINE (0x80092013). These mean curl reached the server but your network blocks the certificate revocation lookup, which is common behind corporate firewalls. Add --ssl-revoke-best-effort to the install command: curl --ssl-revoke-best-effort -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd Alternatively, install with winget install Anthropic.ClaudeCode, which avoids curl entirely."
           ],
           "codeBlocks": [
             "sudo apt-get update && sudo apt-get install ca-certificates",
@@ -13084,7 +13162,7 @@
         "export AWS_BEARER_TOKEN_BEDROCK=your-bedrock-api-key",
         "{\n  \"awsAuthRefresh\": \"aws sso login --profile myprofile\",\n  \"env\": {\n    \"AWS_PROFILE\": \"myprofile\"\n  }\n}",
         "{\n  \"Credentials\": {\n    \"AccessKeyId\": \"value\",\n    \"SecretAccessKey\": \"value\",\n    \"SessionToken\": \"value\"\n  }\n}",
-        "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the region for the small/fast model (Haiku)\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2\n\n# Optional: Override the Bedrock endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_BEDROCK_BASE_URL=https://bedrock-runtime.us-east-1.amazonaws.com",
+        "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the region for the small/fast model (Haiku).\n# Also applies to Bedrock Mantle.\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2\n\n# Optional: Override the Bedrock endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_BEDROCK_BASE_URL=https://bedrock-runtime.us-east-1.amazonaws.com",
         "export ANTHROPIC_DEFAULT_OPUS_MODEL='us.anthropic.claude-opus-4-6-v1'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='us.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'",
         "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1",
         "{\n  \"modelOverrides\": {\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-46-prod\",\n    \"claude-opus-4-5-20251101\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-45-prod\",\n    \"claude-opus-4-1-20250805\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-41-prod\"\n  }\n}",
@@ -13195,7 +13273,7 @@
             "You can use settings files for environment variables like AWS_PROFILE that you don’t want to leak to other processes. See Settings for more information."
           ],
           "codeBlocks": [
-            "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the region for the small/fast model (Haiku)\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2\n\n# Optional: Override the Bedrock endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_BEDROCK_BASE_URL=https://bedrock-runtime.us-east-1.amazonaws.com"
+            "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the region for the small/fast model (Haiku).\n# Also applies to Bedrock Mantle.\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2\n\n# Optional: Override the Bedrock endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_BEDROCK_BASE_URL=https://bedrock-runtime.us-east-1.amazonaws.com"
           ]
         },
         {
@@ -13866,6 +13944,7 @@
         "​Proxy configuration",
         "​Environment variables",
         "​Basic authentication",
+        "​CA certificate store",
         "​Custom CA certificates",
         "​mTLS authentication",
         "​Network access requirements",
@@ -13875,6 +13954,7 @@
         "Proxy configuration",
         "Environment variables",
         "Basic authentication",
+        "CA certificate store",
         "Custom CA certificates",
         "mTLS authentication",
         "Network access requirements",
@@ -13884,6 +13964,7 @@
         "Proxy configuration",
         "Environment variables",
         "Basic authentication",
+        "CA certificate store",
         "Custom CA certificates",
         "mTLS authentication",
         "Network access requirements",
@@ -13896,7 +13977,13 @@
         "If your proxy requires basic authentication, include credentials in the proxy URL:",
         "Avoid hardcoding passwords in scripts. Use environment variables or secure credential storage instead.",
         "For proxies requiring advanced authentication (NTLM, Kerberos, etc.), consider using an LLM Gateway service that supports your authentication method.",
-        "If your enterprise environment uses custom CAs for HTTPS connections (whether through a proxy or direct API access), configure Claude Code to trust them:",
+        "By default, Claude Code trusts both its bundled Mozilla CA certificates and your operating system’s certificate store. Enterprise TLS-inspection proxies such as CrowdStrike Falcon and Zscaler work without additional configuration when their root certificate is installed in the OS trust store.",
+        "System CA store integration requires the native Claude Code binary distribution. When running on the Node.js runtime, the system CA store is not merged automatically. In that case, set NODE_EXTRA_CA_CERTS=/path/to/ca-cert.pem to trust an enterprise root CA.",
+        "CLAUDE_CODE_CERT_STORE accepts a comma-separated list of sources. Recognized values are bundled for the Mozilla CA set shipped with Claude Code and system for the operating system trust store. The default is bundled,system.",
+        "To trust only the bundled Mozilla CA set:",
+        "To trust only the OS certificate store:",
+        "CLAUDE_CODE_CERT_STORE has no dedicated settings.json schema key. Set it via the env block in ~/.claude/settings.json or directly in the process environment.",
+        "If your enterprise environment uses a custom CA, configure Claude Code to trust it directly:",
         "For enterprise environments requiring client certificate authentication:",
         "Claude Code requires access to the following URLs:",
         "api.anthropic.com: Claude API endpoints",
@@ -13916,6 +14003,8 @@
       "codeBlocks": [
         "# HTTPS proxy (recommended)\nexport HTTPS_PROXY=https://proxy.example.com:8080\n\n# HTTP proxy (if HTTPS not available)\nexport HTTP_PROXY=http://proxy.example.com:8080\n\n# Bypass proxy for specific requests - space-separated format\nexport NO_PROXY=\"localhost 192.168.1.1 example.com .example.com\"\n# Bypass proxy for specific requests - comma-separated format\nexport NO_PROXY=\"localhost,192.168.1.1,example.com,.example.com\"\n# Bypass proxy for all requests\nexport NO_PROXY=\"*\"",
         "export HTTPS_PROXY=http://username:password@proxy.example.com:8080",
+        "export CLAUDE_CODE_CERT_STORE=bundled",
+        "export CLAUDE_CODE_CERT_STORE=system",
         "export NODE_EXTRA_CA_CERTS=/path/to/ca-cert.pem",
         "# Client certificate for authentication\nexport CLAUDE_CODE_CLIENT_CERT=/path/to/client-cert.pem\n\n# Client private key\nexport CLAUDE_CODE_CLIENT_KEY=/path/to/client-key.pem\n\n# Optional: Passphrase for encrypted private key\nexport CLAUDE_CODE_CLIENT_KEY_PASSPHRASE=\"your-passphrase\""
       ],
@@ -13926,6 +14015,7 @@
             "Proxy configuration",
             "Environment variables",
             "Basic authentication",
+            "CA certificate store",
             "Custom CA certificates",
             "mTLS authentication",
             "Network access requirements",
@@ -13963,9 +14053,24 @@
           ]
         },
         {
+          "title": "​CA certificate store",
+          "paragraphs": [
+            "By default, Claude Code trusts both its bundled Mozilla CA certificates and your operating system’s certificate store. Enterprise TLS-inspection proxies such as CrowdStrike Falcon and Zscaler work without additional configuration when their root certificate is installed in the OS trust store.",
+            "System CA store integration requires the native Claude Code binary distribution. When running on the Node.js runtime, the system CA store is not merged automatically. In that case, set NODE_EXTRA_CA_CERTS=/path/to/ca-cert.pem to trust an enterprise root CA.",
+            "CLAUDE_CODE_CERT_STORE accepts a comma-separated list of sources. Recognized values are bundled for the Mozilla CA set shipped with Claude Code and system for the operating system trust store. The default is bundled,system.",
+            "To trust only the bundled Mozilla CA set:",
+            "To trust only the OS certificate store:",
+            "CLAUDE_CODE_CERT_STORE has no dedicated settings.json schema key. Set it via the env block in ~/.claude/settings.json or directly in the process environment."
+          ],
+          "codeBlocks": [
+            "export CLAUDE_CODE_CERT_STORE=bundled",
+            "export CLAUDE_CODE_CERT_STORE=system"
+          ]
+        },
+        {
           "title": "​Custom CA certificates",
           "paragraphs": [
-            "If your enterprise environment uses custom CAs for HTTPS connections (whether through a proxy or direct API access), configure Claude Code to trust them:"
+            "If your enterprise environment uses a custom CA, configure Claude Code to trust it directly:"
           ],
           "codeBlocks": [
             "export NODE_EXTRA_CA_CERTS=/path/to/ca-cert.pem"
@@ -14511,7 +14616,8 @@
         "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows PS C:\\ when you’re in PowerShell.",
         "Windows requires Git for Windows. Install it first if you don’t have it.",
         "Native installations automatically update in the background to keep you on the latest version.",
-        "Homebrew installations do not auto-update. Run brew upgrade claude-code periodically to get the latest features and security fixes.",
+        "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship.",
+        "Homebrew installations do not auto-update. Run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed, to get the latest features and security fixes.",
         "WinGet installations do not auto-update. Run winget upgrade Anthropic.ClaudeCode periodically to get the latest features and security fixes.",
         "After installation completes, open a terminal in the project you want to work in and start Claude Code:",
         "If you encounter any issues during installation, see the troubleshooting guide.",
@@ -14531,14 +14637,15 @@
         "After installing, log in by running claude and following the browser prompts. See Authentication for all account types and team setup options.",
         "Native installations automatically update in the background. You can configure the release channel to control whether you receive updates immediately or on a delayed stable schedule, or disable auto-updates entirely. Homebrew and WinGet installations require manual updates.",
         "Claude Code checks for updates on startup and periodically while running. Updates download and install in the background, then take effect the next time you start Claude Code.",
-        "Homebrew and WinGet installations do not auto-update. Use brew upgrade claude-code or winget upgrade Anthropic.ClaudeCode to update manually.",
+        "Homebrew and WinGet installations do not auto-update. For Homebrew, run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed. For WinGet, run winget upgrade Anthropic.ClaudeCode.",
         "Known issue: Claude Code may notify you of updates before the new version is available in these package managers. If an upgrade fails, wait and try again later.",
-        "Homebrew keeps old versions on disk after upgrades. Run brew cleanup claude-code periodically to reclaim disk space.",
+        "Homebrew keeps old versions on disk after upgrades. Run brew cleanup periodically to reclaim disk space.",
         "Control which release channel Claude Code follows for auto-updates and claude update with the autoUpdatesChannel setting:",
         "\"latest\", the default: receive new features as soon as they’re released",
         "\"stable\": use a version that is typically about one week old, skipping releases with major regressions",
         "Configure this via /config → Auto-update channel, or add it to your settings.json file:",
         "For enterprise deployments, you can enforce a consistent release channel across your organization using managed settings.",
+        "Homebrew installations choose a channel by cask name instead of this setting: claude-code tracks stable and claude-code@latest tracks latest.",
         "Set DISABLE_AUTOUPDATER to \"1\" in the env key of your settings.json file:",
         "To apply an update immediately without waiting for the next background check, run:",
         "These options are for version pinning, migrating from npm, and verifying binary integrity.",
@@ -14575,7 +14682,8 @@
         "Linux: use the manifest signature above to verify integrity. Linux binaries are not individually code-signed.",
         "To remove Claude Code, follow the instructions for your installation method.",
         "Remove the Claude Code binary and version files:",
-        "Remove the Homebrew cask:",
+        "Remove the Homebrew cask you installed. If you installed the stable cask:",
+        "If you installed the latest cask:",
         "Remove the WinGet package:",
         "Remove the global npm package:",
         "Removing configuration files will delete all your settings, allowed tools, MCP server configurations, and session history.",
@@ -14673,7 +14781,7 @@
             "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows PS C:\\ when you’re in PowerShell.",
             "Windows requires Git for Windows. Install it first if you don’t have it.",
             "Native installations automatically update in the background to keep you on the latest version.",
-            "Homebrew installations do not auto-update. Run brew upgrade claude-code periodically to get the latest features and security fixes."
+            "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship."
           ],
           "codeBlocks": [
             "curl -fsSL https://claude.ai/install.sh | bash",
@@ -14741,9 +14849,9 @@
           "title": "​Auto-updates",
           "paragraphs": [
             "Claude Code checks for updates on startup and periodically while running. Updates download and install in the background, then take effect the next time you start Claude Code.",
-            "Homebrew and WinGet installations do not auto-update. Use brew upgrade claude-code or winget upgrade Anthropic.ClaudeCode to update manually.",
+            "Homebrew and WinGet installations do not auto-update. For Homebrew, run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed. For WinGet, run winget upgrade Anthropic.ClaudeCode.",
             "Known issue: Claude Code may notify you of updates before the new version is available in these package managers. If an upgrade fails, wait and try again later.",
-            "Homebrew keeps old versions on disk after upgrades. Run brew cleanup claude-code periodically to reclaim disk space."
+            "Homebrew keeps old versions on disk after upgrades. Run brew cleanup periodically to reclaim disk space."
           ],
           "codeBlocks": []
         },
@@ -14754,7 +14862,8 @@
             "\"latest\", the default: receive new features as soon as they’re released",
             "\"stable\": use a version that is typically about one week old, skipping releases with major regressions",
             "Configure this via /config → Auto-update channel, or add it to your settings.json file:",
-            "For enterprise deployments, you can enforce a consistent release channel across your organization using managed settings."
+            "For enterprise deployments, you can enforce a consistent release channel across your organization using managed settings.",
+            "Homebrew installations choose a channel by cask name instead of this setting: claude-code tracks stable and claude-code@latest tracks latest."
           ],
           "codeBlocks": [
             "{\n  \"autoUpdatesChannel\": \"stable\"\n}"
@@ -14866,10 +14975,12 @@
         {
           "title": "​Homebrew installation",
           "paragraphs": [
-            "Remove the Homebrew cask:"
+            "Remove the Homebrew cask you installed. If you installed the stable cask:",
+            "If you installed the latest cask:"
           ],
           "codeBlocks": [
-            "brew uninstall --cask claude-code"
+            "brew uninstall --cask claude-code",
+            "brew uninstall --cask claude-code@latest"
           ]
         },
         {
@@ -15474,7 +15585,7 @@
       "section": "Administration",
       "path": "/docs/en/server-managed-settings",
       "url": "https://code.claude.com/docs/en/server-managed-settings",
-      "title": "Configure server-managed settings (public beta)",
+      "title": "Configure server-managed settings",
       "metaDescription": "Centrally configure Claude Code for your organization through server-delivered settings, without requiring device management infrastructure.",
       "headings": [
         "​Requirements",
@@ -15532,7 +15643,7 @@
         "Centrally configure Claude Code for your organization through server-delivered settings, without requiring device management infrastructure.",
         "Server-managed settings allow administrators to centrally configure Claude Code through a web-based interface on Claude.ai. Claude Code clients automatically receive these settings when users authenticate with their organization credentials.",
         "This approach is designed for organizations that do not have device management infrastructure in place, or need to manage settings for users on unmanaged devices.",
-        "Server-managed settings are in public beta and available for Claude for Teams and Claude for Enterprise customers. Features may evolve before general availability.",
+        "Server-managed settings are available for Claude for Teams and Claude for Enterprise customers.",
         "To use server-managed settings, you need:",
         "Claude for Teams or Claude for Enterprise plan",
         "Claude Code version 2.1.38 or later for Claude for Teams, or version 2.1.30 or later for Claude for Enterprise",
@@ -15555,7 +15666,7 @@
         "Primary Owner",
         "Restrict access to trusted personnel, as settings changes apply to all users in the organization.",
         "Most settings keys work in any scope. A handful of keys are only read from managed settings and have no effect when placed in user or project settings files. See managed-only settings for the full list. Any setting not on that list can still be placed in managed settings and takes the highest precedence.",
-        "Server-managed settings have the following limitations during the beta period:",
+        "Server-managed settings have the following limitations:",
         "Settings apply uniformly to all users in the organization. Per-group configurations are not yet supported.",
         "MCP server configurations cannot be distributed through server-managed settings.",
         "Server-managed settings and endpoint-managed settings both occupy the highest tier in the Claude Code settings hierarchy. No other settings level can override them, including command line arguments.",
@@ -15688,7 +15799,7 @@
         {
           "title": "​Current limitations",
           "paragraphs": [
-            "Server-managed settings have the following limitations during the beta period:",
+            "Server-managed settings have the following limitations:",
             "Settings apply uniformly to all users in the organization. Per-group configurations are not yet supported.",
             "MCP server configurations cannot be distributed through server-managed settings."
           ],
@@ -16216,7 +16327,7 @@
         "Distributed tracing exports spans that link each user prompt to the API requests and tool executions it triggers, so you can view a full request as a single trace in your tracing backend.",
         "Tracing is off by default. To enable it, set both CLAUDE_CODE_ENABLE_TELEMETRY=1 and CLAUDE_CODE_ENHANCED_TELEMETRY_BETA=1, then set OTEL_TRACES_EXPORTER to choose where spans are sent. Traces reuse the common OTLP configuration for endpoint, protocol, and headers.",
         "Spans redact user prompt text and tool content by default. Set OTEL_LOG_USER_PROMPTS=1 and OTEL_LOG_TOOL_CONTENT=1 to include them.",
-        "When tracing is active, Bash subprocesses automatically inherit a TRACEPARENT environment variable containing the W3C trace context of the active tool execution span. This lets any subprocess that reads TRACEPARENT parent its own spans under the same trace, enabling end-to-end distributed tracing through scripts and commands that Claude runs.",
+        "When tracing is active, Bash and PowerShell subprocesses automatically inherit a TRACEPARENT environment variable containing the W3C trace context of the active tool execution span. This lets any subprocess that reads TRACEPARENT parent its own spans under the same trace, enabling end-to-end distributed tracing through scripts and commands that Claude runs.",
         "For enterprise environments that require dynamic authentication, you can configure a script to generate headers dynamically:",
         "Add to your .claude/settings.json:",
         "The script must output valid JSON with string key-value pairs representing HTTP headers:",
@@ -16415,7 +16526,7 @@
             "Distributed tracing exports spans that link each user prompt to the API requests and tool executions it triggers, so you can view a full request as a single trace in your tracing backend.",
             "Tracing is off by default. To enable it, set both CLAUDE_CODE_ENABLE_TELEMETRY=1 and CLAUDE_CODE_ENHANCED_TELEMETRY_BETA=1, then set OTEL_TRACES_EXPORTER to choose where spans are sent. Traces reuse the common OTLP configuration for endpoint, protocol, and headers.",
             "Spans redact user prompt text and tool content by default. Set OTEL_LOG_USER_PROMPTS=1 and OTEL_LOG_TOOL_CONTENT=1 to include them.",
-            "When tracing is active, Bash subprocesses automatically inherit a TRACEPARENT environment variable containing the W3C trace context of the active tool execution span. This lets any subprocess that reads TRACEPARENT parent its own spans under the same trace, enabling end-to-end distributed tracing through scripts and commands that Claude runs."
+            "When tracing is active, Bash and PowerShell subprocesses automatically inherit a TRACEPARENT environment variable containing the W3C trace context of the active tool execution span. This lets any subprocess that reads TRACEPARENT parent its own spans under the same trace, enabling end-to-end distributed tracing through scripts and commands that Claude runs."
           ],
           "codeBlocks": []
         },
@@ -16722,8 +16833,8 @@
         "Background token usage",
         "Understanding changes in Claude Code behavior",
         "Track token usage, set team spend limits, and reduce Claude Code costs with context management, model selection, extended thinking settings, and preprocessing hooks.",
-        "Claude Code consumes tokens for each interaction. Costs vary based on codebase size, query complexity, and conversation length. The average cost is $6 per developer per day, with daily costs remaining below $12 for 90% of users.",
-        "For team usage, Claude Code charges by API token consumption. On average, Claude Code costs ~$100-200/developer per month with Sonnet 4.6 though there is large variance depending on how many instances users are running and whether they’re using it in automation.",
+        "Claude Code charges by API token consumption. Per-developer costs vary widely based on model selection, codebase size, and usage patterns such as running multiple instances or automation.",
+        "Across enterprise deployments, the average cost is around $13 per developer per active day and $150-250 per developer per month, with costs remaining below $30 per active day for 90% of users. To estimate spend for your own team, start with a small pilot group and use the tracking tools below to establish a baseline before wider rollout.",
         "This page covers how to track your costs, manage costs for teams, and reduce token usage.",
         "The /cost command shows API token usage and is intended for API users. Claude Max and Pro subscribers have usage included in their subscription, so /cost data isn’t relevant for billing purposes. Subscribers can use /stats to view usage patterns.",
         "The /cost command provides detailed token usage statistics for your current session:",
@@ -16774,7 +16885,7 @@
         "Conversation summarization: Background jobs that summarize previous conversations for the claude --resume feature",
         "Command processing: Some commands like /cost may generate requests to check status",
         "These background processes consume a small amount of tokens (typically under $0.04 per session) even without active interaction.",
-        "Claude Code regularly receives updates that may change how features work, including cost reporting. Run claude --version to check your current version. For specific billing questions, contact Anthropic support through your Console account. For team deployments, start with a small pilot group to establish usage patterns before wider rollout.",
+        "Claude Code regularly receives updates that may change how features work, including cost reporting. Run claude --version to check your current version. For specific billing questions, contact Anthropic support through your Console account.",
         "Was this page helpful?"
       ],
       "codeBlocks": [
@@ -16968,7 +17079,7 @@
         {
           "title": "​Understanding changes in Claude Code behavior",
           "paragraphs": [
-            "Claude Code regularly receives updates that may change how features work, including cost reporting. Run claude --version to check your current version. For specific billing questions, contact Anthropic support through your Console account. For team deployments, start with a small pilot group to establish usage patterns before wider rollout.",
+            "Claude Code regularly receives updates that may change how features work, including cost reporting. Run claude --version to check your current version. For specific billing questions, contact Anthropic support through your Console account.",
             "Was this page helpful?"
           ],
           "codeBlocks": []
@@ -18097,7 +18208,8 @@
         "These settings control which hooks are allowed to run and what HTTP hooks can access. The allowManagedHooksOnly setting can only be configured in managed settings. The URL and env var allowlists can be set at any settings level and merge across sources.",
         "Behavior when allowManagedHooksOnly is true:",
         "Managed hooks and SDK hooks are loaded",
-        "User hooks, project hooks, and plugin hooks are blocked",
+        "Hooks from plugins force-enabled in managed settings enabledPlugins are loaded. This lets administrators distribute vetted hooks through an organization marketplace while blocking everything else. Trust is granted by full plugin@marketplace ID, so a plugin with the same name from a different marketplace stays blocked",
+        "User hooks, project hooks, and all other plugin hooks are blocked",
         "Restrict HTTP hook URLs:",
         "Limit which URLs HTTP hooks can target. Supports * as a wildcard for matching. When the array is defined, HTTP hooks targeting non-matching URLs are silently blocked.",
         "Restrict HTTP hook environment variables:",
@@ -18161,8 +18273,7 @@
         "Managed settings file locations:",
         "macOS: /Library/Application Support/ClaudeCode/managed-settings.json",
         "Linux and WSL: /etc/claude-code/managed-settings.json",
-        "Windows: C:\\Program Files\\ClaudeCode\\managed-settings.json",
-        "Key characteristics:"
+        "Windows: C:\\Program Files\\ClaudeCode\\managed-settings.json"
       ],
       "codeBlocks": [
         "{\n  \"$schema\": \"https://json.schemastore.org/claude-code-settings.json\",\n  \"permissions\": {\n    \"allow\": [\n      \"Bash(npm run lint)\",\n      \"Bash(npm run test *)\",\n      \"Read(~/.zshrc)\"\n    ],\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ]\n  },\n  \"env\": {\n    \"CLAUDE_CODE_ENABLE_TELEMETRY\": \"1\",\n    \"OTEL_METRICS_EXPORTER\": \"otlp\"\n  },\n  \"companyAnnouncements\": [\n    \"Welcome to Acme Corp! Review our code guidelines at docs.acme.com\",\n    \"Reminder: Code reviews required for all PRs\",\n    \"New security policy in effect\"\n  ]\n}",
@@ -18374,7 +18485,8 @@
             "These settings control which hooks are allowed to run and what HTTP hooks can access. The allowManagedHooksOnly setting can only be configured in managed settings. The URL and env var allowlists can be set at any settings level and merge across sources.",
             "Behavior when allowManagedHooksOnly is true:",
             "Managed hooks and SDK hooks are loaded",
-            "User hooks, project hooks, and plugin hooks are blocked",
+            "Hooks from plugins force-enabled in managed settings enabledPlugins are loaded. This lets administrators distribute vetted hooks through an organization marketplace while blocking everything else. Trust is granted by full plugin@marketplace ID, so a plugin with the same name from a different marketplace stays blocked",
+            "User hooks, project hooks, and all other plugin hooks are blocked",
             "Restrict HTTP hook URLs:",
             "Limit which URLs HTTP hooks can target. Supports * as a wildcard for matching. When the array is defined, HTTP hooks targeting non-matching URLs are silently blocked.",
             "Restrict HTTP hook environment variables:",
@@ -18614,7 +18726,7 @@
         "Bash(*) is equivalent to Bash and matches all Bash commands.",
         "Add a specifier in parentheses to match specific tool uses:",
         "Bash rules support glob patterns with *. Wildcards can appear at any position in the command. This configuration allows npm and git commit commands while blocking git push:",
-        "The space before * matters: Bash(ls *) matches ls -la but not lsof, while Bash(ls*) matches both. The legacy :* suffix syntax is equivalent to * but is deprecated.",
+        "The space before * matters: Bash(ls *) matches ls -la but not lsof, while Bash(ls*) matches both. The :* suffix is an equivalent way to write a trailing wildcard. Bash(ls:*) matches the same commands as Bash(ls *).",
         "Bash permission rules support wildcard matching with *. Wildcards can appear at any position in the command, including at the beginning, middle, or end:",
         "Bash(npm run build) matches the exact Bash command npm run build",
         "Bash(npm run test *) matches Bash commands starting with npm run test",
@@ -18801,7 +18913,7 @@
           "title": "​Wildcard patterns",
           "paragraphs": [
             "Bash rules support glob patterns with *. Wildcards can appear at any position in the command. This configuration allows npm and git commit commands while blocking git push:",
-            "The space before * matters: Bash(ls *) matches ls -la but not lsof, while Bash(ls*) matches both. The legacy :* suffix syntax is equivalent to * but is deprecated."
+            "The space before * matters: Bash(ls *) matches ls -la but not lsof, while Bash(ls*) matches both. The :* suffix is an equivalent way to write a trailing wildcard. Bash(ls:*) matches the same commands as Bash(ls *)."
           ],
           "codeBlocks": [
             "{\n  \"permissions\": {\n    \"allow\": [\n      \"Bash(npm run *)\",\n      \"Bash(git commit *)\",\n      \"Bash(git * main)\",\n      \"Bash(* --version)\",\n      \"Bash(* --help *)\"\n    ],\n    \"deny\": [\n      \"Bash(git push *)\"\n    ]\n  }\n}"
@@ -21145,7 +21257,7 @@
         "If a new update triggers while a slow script is running, the in-flight script is cancelled",
         "Test your script independently with mock input before configuring it",
         "Notifications share the status line row",
-        "System notifications like MCP server errors, auto-updates, and token warnings display on the right side of the same row as your status line",
+        "System notifications like MCP server errors and auto-updates display on the right side of the same row as your status line. Transient notifications such as the context-low warning also cycle through this area.",
         "Enabling verbose mode adds a token counter to this area",
         "On narrow terminals, these notifications may truncate your status line output",
         "Was this page helpful?"
@@ -22080,7 +22192,9 @@
         "To add custom tools, connect an MCP server. To extend Claude with reusable prompt-based workflows, write a skill, which runs through the existing Skill tool rather than adding a new tool entry.",
         "Permission rules can be configured using /permissions or in permission settings. Also see Tool-specific permission rules.",
         "The Bash tool runs each command in a separate process with the following persistence behavior:",
-        "Working directory persists across commands. Set CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR=1 to reset to the project directory after each command.",
+        "When Claude runs cd in the main session, the new working directory carries over to later Bash commands as long as it stays inside the project directory or an additional working directory you added with --add-dir, /add-dir, or additionalDirectories in settings. Subagent sessions never carry over working directory changes. If cd lands outside those directories, Claude Code resets to the project directory and appends Shell cwd was reset to <dir> to the tool result. To disable this carry-over so every Bash command starts in the project directory, set CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR=1.",
+        "If cd lands outside those directories, Claude Code resets to the project directory and appends Shell cwd was reset to <dir> to the tool result.",
+        "To disable this carry-over so every Bash command starts in the project directory, set CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR=1.",
         "Environment variables do not persist. An export in one command will not be available in the next.",
         "Activate your virtualenv or conda environment before launching Claude Code. To make environment variables persist across Bash commands, set CLAUDE_ENV_FILE to a shell script before launching Claude Code, or use a SessionStart hook to populate it dynamically.",
         "The LSP tool gives Claude code intelligence from a running language server. After each file edit, it automatically reports type errors and warnings so Claude can fix issues without a separate build step. Claude can also call it directly to navigate code:",
@@ -22106,6 +22220,7 @@
         "\"defaultShell\": \"powershell\" in settings.json: routes interactive ! commands through PowerShell. Requires the PowerShell tool to be enabled.",
         "\"shell\": \"powershell\" on individual command hooks: runs that hook in PowerShell. Hooks spawn PowerShell directly, so this works regardless of CLAUDE_CODE_USE_POWERSHELL_TOOL.",
         "shell: powershell in skill frontmatter: runs !`command` blocks in PowerShell. Requires the PowerShell tool to be enabled.",
+        "The same main-session working-directory reset behavior described under the Bash tool section applies to PowerShell commands, including the CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR environment variable.",
         "The PowerShell tool has the following known limitations during the preview:",
         "Auto mode does not work with the PowerShell tool yet",
         "PowerShell profiles are not loaded",
@@ -22147,7 +22262,9 @@
           "title": "​Bash tool behavior",
           "paragraphs": [
             "The Bash tool runs each command in a separate process with the following persistence behavior:",
-            "Working directory persists across commands. Set CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR=1 to reset to the project directory after each command.",
+            "When Claude runs cd in the main session, the new working directory carries over to later Bash commands as long as it stays inside the project directory or an additional working directory you added with --add-dir, /add-dir, or additionalDirectories in settings. Subagent sessions never carry over working directory changes. If cd lands outside those directories, Claude Code resets to the project directory and appends Shell cwd was reset to <dir> to the tool result. To disable this carry-over so every Bash command starts in the project directory, set CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR=1.",
+            "If cd lands outside those directories, Claude Code resets to the project directory and appends Shell cwd was reset to <dir> to the tool result.",
+            "To disable this carry-over so every Bash command starts in the project directory, set CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR=1.",
             "Environment variables do not persist. An export in one command will not be available in the next.",
             "Activate your virtualenv or conda environment before launching Claude Code. To make environment variables persist across Bash commands, set CLAUDE_ENV_FILE to a shell script before launching Claude Code, or use a SessionStart hook to populate it dynamically."
           ],
@@ -22204,7 +22321,8 @@
             "Three additional settings control where PowerShell is used:",
             "\"defaultShell\": \"powershell\" in settings.json: routes interactive ! commands through PowerShell. Requires the PowerShell tool to be enabled.",
             "\"shell\": \"powershell\" on individual command hooks: runs that hook in PowerShell. Hooks spawn PowerShell directly, so this works regardless of CLAUDE_CODE_USE_POWERSHELL_TOOL.",
-            "shell: powershell in skill frontmatter: runs !`command` blocks in PowerShell. Requires the PowerShell tool to be enabled."
+            "shell: powershell in skill frontmatter: runs !`command` blocks in PowerShell. Requires the PowerShell tool to be enabled.",
+            "The same main-session working-directory reset behavior described under the Bash tool section applies to PowerShell commands, including the CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR environment variable."
           ],
           "codeBlocks": []
         },
@@ -23046,7 +23164,7 @@
         "See How a hook resolves above for a complete walkthrough with an annotated example.",
         "This page uses specific terms for each level: hook event for the lifecycle point, matcher group for the filter, and hook handler for the shell command, HTTP endpoint, prompt, or agent that runs. “Hook” on its own refers to the general feature.",
         "Where you define a hook determines its scope:",
-        "For details on settings file resolution, see settings. Enterprise administrators can use allowManagedHooksOnly to block user, project, and plugin hooks. See Hook configuration.",
+        "For details on settings file resolution, see settings. Enterprise administrators can use allowManagedHooksOnly to block user, project, and plugin hooks. Hooks from plugins force-enabled in managed settings enabledPlugins are exempt, so administrators can distribute vetted hooks through an organization marketplace. See Hook configuration.",
         "The matcher field filters when hooks fire. How a matcher is evaluated depends on the characters it contains:",
         "The FileChanged event does not follow these rules when building its watch list. See FileChanged.",
         "Each event type matches on a different field:",
@@ -23187,7 +23305,7 @@
           "title": "​Hook locations",
           "paragraphs": [
             "Where you define a hook determines its scope:",
-            "For details on settings file resolution, see settings. Enterprise administrators can use allowManagedHooksOnly to block user, project, and plugin hooks. See Hook configuration."
+            "For details on settings file resolution, see settings. Enterprise administrators can use allowManagedHooksOnly to block user, project, and plugin hooks. Hooks from plugins force-enabled in managed settings enabledPlugins are exempt, so administrators can distribute vetted hooks through an organization marketplace. See Hook configuration."
           ],
           "codeBlocks": []
         },
