@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-13T05:23:42.412Z",
-  "sourceGeneratedAt": "2026-04-13T05:23:42.095Z",
+  "generatedAt": "2026-04-14T05:06:37.003Z",
+  "sourceGeneratedAt": "2026-04-14T05:06:36.676Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -514,7 +514,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.101、2.1.98、2.1.97、2.1.96 这些环节往下讲。",
+            "原文这页大多会按 2.1.105、2.1.101、2.1.98、2.1.97 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -523,7 +523,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.101 -> 2.1.98 -> 2.1.97 -> 2.1.96。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.105 -> 2.1.101 -> 2.1.98 -> 2.1.97。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -8698,20 +8698,20 @@
           ]
         },
         {
-          "title": "Windows: irm or && not recognized",
+          "title": "Windows: wrong install command",
           "paragraphs": [
             "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。"
           ],
           "steps": [
             {
-              "title": "Windows: irm or && not recognized 1",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "title": "Windows: wrong install command 1",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
               "code": "irm https://claude.ai/install.ps1 | iex",
               "kind": "command"
             },
             {
-              "title": "Windows: irm or && not recognized 2",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "title": "Windows: wrong install command 2",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
               "code": "curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd",
               "kind": "command"
             }
@@ -8787,6 +8787,21 @@
           ]
         },
         {
+          "title": "Windows: “Claude Code does not support 32-bit Windows”",
+          "paragraphs": [
+            "这一段主要是在把\"Windows: “Claude Code does not support 32-bit Windows”\"讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Windows: “Claude Code does not support 32-bit Windows”",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "[Environment]::Is64BitOperatingSystem",
+              "kind": "config"
+            }
+          ]
+        },
+        {
           "title": "Linux: wrong binary variant installed (musl/glibc mismatch)",
           "paragraphs": [
             "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。"
@@ -8840,6 +8855,12 @@
             },
             {
               "title": "dyld: cannot load on macOS 2",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "dyld: Symbol not found: _ubrk_clone\n  Referenced from: claude-darwin-x64 (which was built for Mac OS X 13.0)\n  Expected in: /usr/lib/libicucore.A.dylib",
+              "kind": "code"
+            },
+            {
+              "title": "dyld: cannot load on macOS 3",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
               "code": "brew install --cask claude-code",
               "kind": "command"
@@ -8932,21 +8953,6 @@
           "paragraphs": [
             "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "”This organization has been disabled” with an active subscription",
-          "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "”This organization has been disabled” with an active subscription",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "unset ANTHROPIC_API_KEY\nclaude",
-              "kind": "command"
-            }
           ]
         }
       ],
@@ -10484,7 +10490,7 @@
           "title": "Set up on Windows",
           "paragraphs": [
             "看到这里，就当是在做开工前那套准备。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
@@ -13784,6 +13790,12 @@
           ],
           "steps": [
             {
+              "title": "原页关键片段：Line breaks",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "set -s extended-keys on\nset -as terminal-features 'xterm*:extkeys'",
+              "kind": "command"
+            },
+            {
               "title": "原页关键片段：Notification setup",
               "body": "这一段要真抓重点，通常就抓下面这块原文。",
               "code": "set -g allow-passthrough on",
@@ -13802,6 +13814,14 @@
           "paragraphs": [
             "这一段主要是在把\"Line breaks\"讲实，不是只摆个标题给你看。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Line breaks",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "set -s extended-keys on\nset -as terminal-features 'xterm*:extkeys'",
+              "kind": "command"
+            }
           ]
         },
         {
@@ -15064,6 +15084,21 @@
           ]
         },
         {
+          "title": "Subagent status lines",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说\"Subagent status lines\"管到哪儿。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Subagent status lines",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"subagentStatusLine\": {\n    \"type\": \"command\",\n    \"command\": \"~/.claude/subagent-statusline.sh\"\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
           "title": "Tips",
           "paragraphs": [
             "这一段主要是在把\"Tips\"讲实，不是只摆个标题给你看。",
@@ -15149,18 +15184,6 @@
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
               "code": "ctrl+k ctrl+s   Press Ctrl+K, release, then Ctrl+S",
               "kind": "code"
-            },
-            {
-              "title": "原页关键片段：Unbind default shortcuts 1",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"ctrl+s\": null\n      }\n    }\n  ]\n}",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Unbind default shortcuts 2",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"ctrl+x ctrl+k\": null,\n        \"ctrl+x ctrl+e\": null,\n        \"ctrl+x\": \"chat:newline\"\n      }\n    }\n  ]\n}",
-              "kind": "config"
             }
           ]
         },
@@ -15313,6 +15336,12 @@
           ]
         },
         {
+          "title": "Doctor actions",
+          "paragraphs": [
+            "这种内容最怕想当然，老老实实照它列的格式走最稳。"
+          ]
+        },
+        {
           "title": "Voice actions",
           "paragraphs": [
             "这种内容最怕想当然，老老实实照它列的格式走最稳。"
@@ -15360,26 +15389,6 @@
           "title": "Special keys",
           "paragraphs": [
             "这一块主要是在说\"Special keys\"真到手上该怎么用，哪里最容易踩坑。"
-          ]
-        },
-        {
-          "title": "Unbind default shortcuts",
-          "paragraphs": [
-            "这一段主要是在把\"Unbind default shortcuts\"讲实，不是只摆个标题给你看。"
-          ],
-          "steps": [
-            {
-              "title": "Unbind default shortcuts 1",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"ctrl+s\": null\n      }\n    }\n  ]\n}",
-              "kind": "config"
-            },
-            {
-              "title": "Unbind default shortcuts 2",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"ctrl+x ctrl+k\": null,\n        \"ctrl+x ctrl+e\": null,\n        \"ctrl+x\": \"chat:newline\"\n      }\n    }\n  ]\n}",
-              "kind": "config"
-            }
           ]
         }
       ],
@@ -16773,7 +16782,7 @@
             {
               "title": "原页关键片段：Complete schema",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"[email protected]\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\"\n}",
+              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"[email protected]\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\"\n}",
               "kind": "config"
             },
             {
@@ -16917,7 +16926,7 @@
             {
               "title": "Complete schema",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"[email protected]\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\"\n}",
+              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"[email protected]\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\"\n}",
               "kind": "config"
             }
           ]
@@ -17055,7 +17064,7 @@
             {
               "title": "Standard plugin layout",
               "body": "这一段主要是认目录和文件摆放位置。先把地方放对，后面才不容易串。",
-              "code": "enterprise-plugin/\n├── .claude-plugin/           # Metadata directory (optional)\n│   └── plugin.json             # plugin manifest\n├── skills/                   # Skills\n│   ├── code-reviewer/\n│   │   └── SKILL.md\n│   └── pdf-processor/\n│       ├── SKILL.md\n│       └── scripts/\n├── commands/                 # Skills as flat .md files\n│   ├── status.md\n│   └── logs.md\n├── agents/                   # Subagent definitions\n│   ├── security-reviewer.md\n│   ├── performance-tester.md\n│   └── compliance-checker.md\n├── output-styles/            # Output style definitions\n│   └── terse.md\n├── hooks/                    # Hook configurations\n│   ├── hooks.json           # Main hook config\n│   └── security-hooks.json  # Additional hooks\n├── bin/                      # Plugin executables added to PATH\n│   └── my-tool               # Invokable as bare command in Bash tool\n├── settings.json            # Default settings for the plugin\n├── .mcp.json                # MCP server definitions\n├── .lsp.json                # LSP server configurations\n├── scripts/                 # Hook and utility scripts\n│   ├── security-scan.sh\n│   ├── format-code.py\n│   └── deploy.js\n├── LICENSE                  # License file\n└── CHANGELOG.md             # Version history",
+              "code": "enterprise-plugin/\n├── .claude-plugin/           # Metadata directory (optional)\n│   └── plugin.json             # plugin manifest\n├── skills/                   # Skills\n│   ├── code-reviewer/\n│   │   └── SKILL.md\n│   └── pdf-processor/\n│       ├── SKILL.md\n│       └── scripts/\n├── commands/                 # Skills as flat .md files\n│   ├── status.md\n│   └── logs.md\n├── agents/                   # Subagent definitions\n│   ├── security-reviewer.md\n│   ├── performance-tester.md\n│   └── compliance-checker.md\n├── output-styles/            # Output style definitions\n│   └── terse.md\n├── monitors/                 # Background monitor configurations\n│   └── monitors.json\n├── hooks/                    # Hook configurations\n│   ├── hooks.json           # Main hook config\n│   └── security-hooks.json  # Additional hooks\n├── bin/                      # Plugin executables added to PATH\n│   └── my-tool               # Invokable as bare command in Bash tool\n├── settings.json            # Default settings for the plugin\n├── .mcp.json                # MCP server definitions\n├── .lsp.json                # LSP server configurations\n├── scripts/                 # Hook and utility scripts\n│   ├── security-scan.sh\n│   ├── format-code.py\n│   └── deploy.js\n├── LICENSE                  # License file\n└── CHANGELOG.md             # Version history",
               "kind": "structure"
             }
           ]
@@ -24989,6 +24998,79 @@
         "title": "一眼看懂这一页",
         "lines": [
           "What's new",
+          "   |",
+          "   v",
+          "这是 What's New 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "whats-new/2026-w15": {
+      "sourceLabel": "Week 15 · April 6–10, 2026",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Week 15 · Apr 6–10：Ultraplan cloud planning, the Monitor tool with self-pacing /loop, /team-onboarding for packaging your setup, and /autofix-pr from your terminal.",
+            "你可以把它当成\"What's New\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Week 15 · Apr 6–10\"理解成 What's New 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "这页的重点不是空讲概念，而是让你先明白它到底替你省哪种事。放在这整个文档站里，它更像是在教你怎么 把这摊活讲明白。",
+            "翻成人话，大概就是：Ultraplan cloud planning, the Monitor tool with self-pacing /loop, /team-onboarding for packaging your setup, and /autofix-pr from your terminal."
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，这页属于\"What's New\"这一类，最好边做边验，不要攒到最后才一起看结果。"
+          ],
+          "steps": [
+            {
+              "kind": "prompt",
+              "title": "原页里的关键命令/代码 1",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"关键片段 1\"这一段的意思去办。",
+              "code": "> /ultraplan migrate the auth service from sessions to JWTs"
+            },
+            {
+              "kind": "prompt",
+              "title": "原页里的关键命令/代码 2",
+              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
+              "code": "> Tail server.log in the background and tell me the moment a 5xx shows up"
+            },
+            {
+              "kind": "prompt",
+              "title": "原页里的关键命令/代码 3",
+              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
+              "code": "> /loop check CI on my PR"
+            },
+            {
+              "kind": "prompt",
+              "title": "原页里的关键命令/代码 4",
+              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
+              "code": "> /autofix-pr"
+            },
+            {
+              "kind": "prompt",
+              "title": "原页里的关键命令/代码 5",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"关键片段 5\"这一段的意思去办。",
+              "code": "> /team-onboarding"
+            }
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Week 15 · Apr 6–10",
           "   |",
           "   v",
           "这是 What's New 里的一摊要紧活",
