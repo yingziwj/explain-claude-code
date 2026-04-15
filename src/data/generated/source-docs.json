@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-14T05:06:36.676Z",
+  "generatedAt": "2026-04-15T05:07:18.925Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -575,7 +575,7 @@
         "macOS, Linux, WSL:",
         "Windows PowerShell:",
         "Windows CMD:",
-        "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows PS C:\\ when you’re in PowerShell.",
+        "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. If you see 'irm' is not recognized as an internal or external command, you’re in CMD, not PowerShell. Your prompt shows PS C:\\ when you’re in PowerShell and C:\\ without the PS when you’re in CMD.",
         "Native Windows setups require Git for Windows. Install it first if you don’t have it. WSL setups do not need it.",
         "Native installations automatically update in the background to keep you on the latest version.",
         "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship.",
@@ -625,7 +625,7 @@
         "See the CLI reference for the full set of commands and flags.",
         "Schedule recurring tasks",
         "Run Claude on a schedule to automate work that repeats: morning PR reviews, overnight CI failure analysis, weekly dependency audits, or syncing docs after PRs merge.",
-        "Cloud scheduled tasks run on Anthropic-managed infrastructure, so they keep running even when your computer is off. Create them from the web, the Desktop app, or by running /schedule in the CLI.",
+        "Routines run on Anthropic-managed infrastructure, so they keep running even when your computer is off. They can also trigger on API calls or GitHub events. Create them from the web, the Desktop app, or by running /schedule in the CLI.",
         "Desktop scheduled tasks run on your machine, with direct access to your local files and tools",
         "/loop repeats a prompt within a CLI session for quick polling",
         "Work from anywhere",
@@ -684,7 +684,7 @@
             "macOS, Linux, WSL:",
             "Windows PowerShell:",
             "Windows CMD:",
-            "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows PS C:\\ when you’re in PowerShell."
+            "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. If you see 'irm' is not recognized as an internal or external command, you’re in CMD, not PowerShell. Your prompt shows PS C:\\ when you’re in PowerShell and C:\\ without the PS when you’re in CMD."
           ],
           "codeBlocks": [
             "curl -fsSL https://claude.ai/install.sh | bash",
@@ -809,7 +809,7 @@
         "macOS, Linux, WSL:",
         "Windows PowerShell:",
         "Windows CMD:",
-        "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows PS C:\\ when you’re in PowerShell.",
+        "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. If you see 'irm' is not recognized as an internal or external command, you’re in CMD, not PowerShell. Your prompt shows PS C:\\ when you’re in PowerShell and C:\\ without the PS when you’re in CMD.",
         "Native Windows setups require Git for Windows. Install it first if you don’t have it. WSL setups do not need it.",
         "Native installations automatically update in the background to keep you on the latest version.",
         "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship.",
@@ -947,7 +947,7 @@
             "macOS, Linux, WSL:",
             "Windows PowerShell:",
             "Windows CMD:",
-            "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows PS C:\\ when you’re in PowerShell.",
+            "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. If you see 'irm' is not recognized as an internal or external command, you’re in CMD, not PowerShell. Your prompt shows PS C:\\ when you’re in PowerShell and C:\\ without the PS when you’re in CMD.",
             "Native Windows setups require Git for Windows. Install it first if you don’t have it. WSL setups do not need it.",
             "Native installations automatically update in the background to keep you on the latest version.",
             "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship.",
@@ -1153,6 +1153,8 @@
       "metaDescription": "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
       "headings": [],
       "toc": [
+        "2.1.108",
+        "2.1.107",
         "2.1.105",
         "2.1.101",
         "2.1.98",
@@ -1170,14 +1172,37 @@
         "2.1.83",
         "2.1.81",
         "2.1.80",
-        "2.1.79",
-        "2.1.78",
-        "2.1.77"
+        "2.1.79"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Added ENABLE_PROMPT_CACHING_1H env var to opt into 1-hour prompt cache TTL on API key, Bedrock, Vertex, and Foundry (ENABLE_PROMPT_CACHING_1H_BEDROCK is deprecated but still honored), and FORCE_PROMPT_CACHING_5M to force 5-minute TTL",
+        "Added recap feature to provide context when returning to a session, configurable in /config and manually invocable with /recap; force with CLAUDE_CODE_ENABLE_AWAY_SUMMARY if telemetry disabled.",
+        "The model can now discover and invoke built-in slash commands like /init, /review, and /security-review via the Skill tool",
+        "/undo is now an alias for /rewind",
+        "Improved /model to warn before switching models mid-conversation, since the next response re-reads the full history uncached",
+        "Improved /resume picker to default to sessions from the current directory; press Ctrl+A to show all projects",
+        "Improved error messages: server rate limits are now distinguished from plan usage limits; 5xx/529 errors show a link to status.claude.com; unknown slash commands suggest the closest match",
+        "Reduced memory footprint for file reads, edits, and syntax highlighting by loading language grammars on demand",
+        "Added “verbose” indicator when viewing the detailed transcript (Ctrl+O)",
+        "Added a warning at startup when prompt caching is disabled via DISABLE_PROMPT_CACHING* environment variables",
+        "Fixed paste not working in the /login code prompt (regression in 2.1.105)",
+        "Fixed subscribers who set DISABLE_TELEMETRY falling back to 5-minute prompt cache TTL instead of 1 hour",
+        "Fixed Agent tool prompting for permission in auto mode when the safety classifier’s transcript exceeded its context window",
+        "Fixed Bash tool producing no output when CLAUDE_ENV_FILE (e.g. ~/.zprofile) ends with a # comment line",
+        "Fixed claude --resume <session-id> losing the session’s custom name and color set via /rename",
+        "Fixed session titles showing placeholder example text when the first message is a short greeting",
+        "Fixed terminal escape codes appearing as garbage text in the prompt input after --teleport",
+        "Fixed /feedback retry: pressing Enter to resubmit after a failure now works without first editing the description",
+        "Fixed --teleport and --resume <id> precondition errors (e.g. dirty git tree, session not found) exiting silently instead of showing the error message",
+        "Fixed Remote Control session titles set in the web UI being overwritten by auto-generated titles after the third message",
+        "Fixed --resume truncating sessions when the transcript contained a self-referencing message",
+        "Fixed transcript write failures (e.g., disk full) being silently dropped instead of being logged",
+        "Fixed diacritical marks (accents, umlauts, cedillas) being dropped from responses when the language setting is configured",
+        "Fixed policy-managed plugins never auto-updating when running from a different project than where they were first installed",
+        "Show thinking hints sooner during long operations",
         "Added path parameter to the EnterWorktree tool to switch into an existing worktree of the current repository",
         "Added PreCompact hook support: hooks can now block compaction by exiting with code 2 or returning {\"decision\":\"block\"}",
         "Added background monitor support for plugins via a top-level monitors manifest key that auto-arms at session start or on skill invoke",
@@ -1329,32 +1354,7 @@
         "Fixed permissions.additionalDirectories changes in settings not applying mid-session",
         "Fixed removing a directory from settings.permissions.additionalDirectories revoking access to the same directory passed via --add-dir",
         "Fixed MCP HTTP/SSE connections accumulating ~50 MB/hr of unreleased buffers when servers reconnect",
-        "Fixed MCP OAuth oauth.authServerMetadataUrl not being honored on token refresh after restart, fixing ADFS and similar IdPs",
-        "Fixed 429 retries burning all attempts in ~13 seconds when the server returns a small Retry-After — exponential backoff now applies as a minimum",
-        "Fixed rate-limit upgrade options disappearing after context compaction",
-        "Fixed several /resume picker issues: --resume <name> opening uneditable, Ctrl+A reload wiping search, empty list swallowing navigation, task-status text replacing conversation summary, and cross-project staleness",
-        "Fixed file-edit diffs disappearing on --resume when the edited file was larger than 10KB",
-        "Fixed --resume cache misses and lost mid-turn input from attachment messages not being saved to the transcript",
-        "Fixed messages typed while Claude is working not being persisted to the transcript",
-        "Fixed prompt-type Stop/SubagentStop hooks failing on long sessions, and hook evaluator API errors displaying “JSON validation failed” instead of the actual message",
-        "Fixed subagents with worktree isolation or cwd: override leaking their working directory back to the parent session’s Bash tool",
-        "Fixed compaction writing duplicate multi-MB subagent transcript files on prompt-too-long retries",
-        "Fixed claude plugin update reporting “already at the latest version” for git-based marketplace plugins when the remote had newer commits",
-        "Fixed copying wrapped URLs in NO_FLICKER mode inserting spaces at line breaks",
-        "Fixed scroll rendering artifacts in NO_FLICKER mode when running inside zellij",
-        "Fixed a crash in NO_FLICKER mode when hovering over MCP tool results",
-        "Fixed a NO_FLICKER mode memory leak where API retries left stale streaming state",
-        "Fixed slow mouse-wheel scrolling in NO_FLICKER mode on Windows Terminal",
-        "Fixed custom status line not displaying in NO_FLICKER mode on terminals shorter than 24 rows",
-        "Fixed Shift+Enter and Alt/Cmd+arrow shortcuts not working in Warp with NO_FLICKER mode",
-        "Fixed Korean/Japanese/Unicode text becoming garbled when copied in no-flicker mode on Windows",
-        "Fixed Bedrock SigV4 authentication failing when AWS_BEARER_TOKEN_BEDROCK or ANTHROPIC_BEDROCK_BASE_URL are set to empty strings (as GitHub Actions does for unset inputs)",
-        "Improved Accept Edits mode to auto-approve filesystem commands prefixed with safe env vars or process wrappers (e.g. LANG=C rm foo, timeout 5 mkdir out)",
-        "Improved auto mode and bypass-permissions mode to auto-approve sandbox network access prompts",
-        "Improved sandbox: sandbox.network.allowMachLookup now takes effect on macOS",
-        "Improved image handling: pasted and attached images are now compressed to the same token budget as images read via the Read tool",
-        "Improved slash command and @-mention completion to trigger after CJK sentence punctuation, so Japanese/Chinese input no longer requires a space before / or @",
-        "Improved Bridge sessions to show the local git repo, branch, and working directory on the claude.ai session card"
+        "Fixed MCP OAuth oauth.authServerMetadataUrl not being honored on token refresh after restart, fixing ADFS and similar IdPs"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1364,15 +1364,15 @@
             "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Added path parameter to the EnterWorktree tool to switch into an existing worktree of the current repository",
-            "Added PreCompact hook support: hooks can now block compaction by exiting with code 2 or returning {\"decision\":\"block\"}",
-            "Added background monitor support for plugins via a top-level monitors manifest key that auto-arms at session start or on skill invoke",
-            "/proactive is now an alias for /loop",
-            "Improved stalled API stream handling: streams now abort after 5 minutes of no data and retry non-streaming instead of hanging indefinitely",
-            "Improved network error messages: connection errors now show a retry message immediately instead of a silent spinner",
-            "Improved file write display: long single-line writes (e.g. minified JSON) are now truncated in the UI instead of paginating across many screens",
-            "Improved /doctor layout with status icons; press f to have Claude fix reported issues",
-            "Improved /config labels and descriptions for clarity"
+            "Added ENABLE_PROMPT_CACHING_1H env var to opt into 1-hour prompt cache TTL on API key, Bedrock, Vertex, and Foundry (ENABLE_PROMPT_CACHING_1H_BEDROCK is deprecated but still honored), and FORCE_PROMPT_CACHING_5M to force 5-minute TTL",
+            "Added recap feature to provide context when returning to a session, configurable in /config and manually invocable with /recap; force with CLAUDE_CODE_ENABLE_AWAY_SUMMARY if telemetry disabled.",
+            "The model can now discover and invoke built-in slash commands like /init, /review, and /security-review via the Skill tool",
+            "/undo is now an alias for /rewind",
+            "Improved /model to warn before switching models mid-conversation, since the next response re-reads the full history uncached",
+            "Improved /resume picker to default to sessions from the current directory; press Ctrl+A to show all projects",
+            "Improved error messages: server rate limits are now distinguished from plan usage limits; 5xx/529 errors show a link to status.claude.com; unknown slash commands suggest the closest match",
+            "Reduced memory footprint for file reads, edits, and syntax highlighting by loading language grammars on demand",
+            "Added “verbose” indicator when viewing the detailed transcript (Ctrl+O)"
           ],
           "codeBlocks": []
         }
@@ -2178,7 +2178,7 @@
         "shell-snapshots/ holds runtime files removed when the session exits cleanly. Other small cache and lock files appear depending on which features you use and are safe to delete.",
         "Transcripts and history are not encrypted at rest. OS file permissions are the only protection. If a tool reads a .env file or a command prints a credential, that value is written to projects/<project>/<session>.jsonl. To reduce exposure:",
         "Lower cleanupPeriodDays to shorten how long transcripts are kept",
-        "In non-interactive mode, pass --no-session-persistence alongside -p to skip writing transcripts entirely. In the Agent SDK, set persistSession: false. There is no interactive-mode equivalent.",
+        "Set the CLAUDE_CODE_SKIP_PROMPT_HISTORY environment variable to skip writing transcripts and prompt history in any mode. In non-interactive mode, you can instead pass --no-session-persistence alongside -p, or set persistSession: false in the Agent SDK.",
         "Use permission rules to deny reads of credential files",
         "You can delete any of the application-data paths above at any time. New sessions are unaffected. The table below shows what you lose for past sessions.",
         "Don’t delete ~/.claude.json, ~/.claude/settings.json, or ~/.claude/plugins/: those hold your auth, preferences, and installed plugins.",
@@ -2257,7 +2257,7 @@
           "paragraphs": [
             "Transcripts and history are not encrypted at rest. OS file permissions are the only protection. If a tool reads a .env file or a command prints a credential, that value is written to projects/<project>/<session>.jsonl. To reduce exposure:",
             "Lower cleanupPeriodDays to shorten how long transcripts are kept",
-            "In non-interactive mode, pass --no-session-persistence alongside -p to skip writing transcripts entirely. In the Agent SDK, set persistSession: false. There is no interactive-mode equivalent.",
+            "Set the CLAUDE_CODE_SKIP_PROMPT_HISTORY environment variable to skip writing transcripts and prompt history in any mode. In non-interactive mode, you can instead pass --no-session-persistence alongside -p, or set persistSession: false in the Agent SDK.",
             "Use permission rules to deny reads of credential files"
           ],
           "codeBlocks": []
@@ -9708,7 +9708,7 @@
         "Once you’re comfortable with basic plugins, you can create more sophisticated extensions.",
         "Plugins can include Agent Skills to extend Claude’s capabilities. Skills are model-invoked: Claude automatically uses them based on the task context.",
         "Add a skills/ directory at your plugin root with Skill folders containing SKILL.md files:",
-        "Each SKILL.md needs frontmatter with name and description fields, followed by instructions:",
+        "Each SKILL.md contains YAML frontmatter and instructions. Include a description so Claude knows when to use the skill:",
         "After installing the plugin, run /reload-plugins to load the Skills. For complete Skill authoring guidance including progressive disclosure and tool restrictions, see Agent Skills.",
         "For common languages like TypeScript, Python, and Rust, install the pre-built LSP plugins from the official marketplace. Create custom LSP plugins only when you need support for languages not already covered.",
         "LSP (Language Server Protocol) plugins give Claude real-time code intelligence. If you need to support a language that doesn’t have an official LSP plugin, you can create your own by adding an .lsp.json file to your plugin:",
@@ -9775,7 +9775,7 @@
         "---\ndescription: Greet the user with a personalized message\n---\n\n# Hello Skill\n\nGreet the user named \"$ARGUMENTS\" warmly and ask how you can help them today. Make the greeting personal and encouraging.",
         "/my-first-plugin:hello Alex",
         "my-plugin/\n├── .claude-plugin/\n│   └── plugin.json\n└── skills/\n    └── code-review/\n        └── SKILL.md",
-        "---\nname: code-review\ndescription: Reviews code for best practices and potential issues. Use when reviewing code, checking PRs, or analyzing code quality.\n---\n\nWhen reviewing code, check for:\n1. Code organization and structure\n2. Error handling\n3. Security concerns\n4. Test coverage",
+        "---\ndescription: Reviews code for best practices and potential issues. Use when reviewing code, checking PRs, or analyzing code quality.\n---\n\nWhen reviewing code, check for:\n1. Code organization and structure\n2. Error handling\n3. Security concerns\n4. Test coverage",
         "{\n  \"go\": {\n    \"command\": \"gopls\",\n    \"args\": [\"serve\"],\n    \"extensionToLanguage\": {\n      \".go\": \"go\"\n    }\n  }\n}",
         "{\n  \"agent\": \"security-reviewer\"\n}",
         "claude --plugin-dir ./my-plugin",
@@ -9884,12 +9884,12 @@
           "paragraphs": [
             "Plugins can include Agent Skills to extend Claude’s capabilities. Skills are model-invoked: Claude automatically uses them based on the task context.",
             "Add a skills/ directory at your plugin root with Skill folders containing SKILL.md files:",
-            "Each SKILL.md needs frontmatter with name and description fields, followed by instructions:",
+            "Each SKILL.md contains YAML frontmatter and instructions. Include a description so Claude knows when to use the skill:",
             "After installing the plugin, run /reload-plugins to load the Skills. For complete Skill authoring guidance including progressive disclosure and tool restrictions, see Agent Skills."
           ],
           "codeBlocks": [
             "my-plugin/\n├── .claude-plugin/\n│   └── plugin.json\n└── skills/\n    └── code-review/\n        └── SKILL.md",
-            "---\nname: code-review\ndescription: Reviews code for best practices and potential issues. Use when reviewing code, checking PRs, or analyzing code quality.\n---\n\nWhen reviewing code, check for:\n1. Code organization and structure\n2. Error handling\n3. Security concerns\n4. Test coverage"
+            "---\ndescription: Reviews code for best practices and potential issues. Use when reviewing code, checking PRs, or analyzing code quality.\n---\n\nWhen reviewing code, check for:\n1. Code organization and structure\n2. Error handling\n3. Security concerns\n4. Test coverage"
           ]
         },
         {
@@ -11552,7 +11552,7 @@
         "Use /loop and the cron scheduling tools to run prompts repeatedly, poll for status, or set one-time reminders within a Claude Code session.",
         "Scheduled tasks require Claude Code v2.1.72 or later. Check your version with claude --version.",
         "Scheduled tasks let Claude re-run a prompt automatically on an interval. Use them to poll a deployment, babysit a PR, check back on a long-running build, or remind yourself to do something later in the session. To react to events as they happen instead of polling, see Channels: your CI can push the failure into the session directly.",
-        "Tasks are session-scoped: they live in the current Claude Code process and are gone when you exit. For durable scheduling that survives restarts, use Cloud or Desktop scheduled tasks, or GitHub Actions.",
+        "Tasks are session-scoped: they live in the current Claude Code process and are gone when you exit. For durable scheduling that survives restarts, use Routines, Desktop scheduled tasks, or GitHub Actions.",
         "Claude Code offers three ways to schedule recurring work:",
         "Use cloud tasks for work that should run reliably without your machine. Use Desktop tasks when you need access to local files and tools. Use /loop for quick polling during a session.",
         "The /loop bundled skill is the quickest way to run a prompt on repeat while the session stays open. Both the interval and the prompt are optional, and what you provide determines how the loop behaves.",
@@ -11587,7 +11587,7 @@
         "Recurring tasks fire up to 10% of their period late, capped at 15 minutes. An hourly job might fire anywhere from :00 to :06.",
         "One-shot tasks scheduled for the top or bottom of the hour fire up to 90 seconds early.",
         "The offset is derived from the task ID, so the same task always gets the same offset. If exact timing matters, pick a minute that is not :00 or :30, for example 3 9 * * * instead of 0 9 * * *, and the one-shot jitter will not apply.",
-        "Recurring tasks automatically expire 7 days after creation. The task fires one final time, then deletes itself. This bounds how long a forgotten loop can run. If you need a recurring task to last longer, cancel and recreate it before it expires, or use Cloud scheduled tasks or Desktop scheduled tasks for durable scheduling.",
+        "Recurring tasks automatically expire 7 days after creation. The task fires one final time, then deletes itself. This bounds how long a forgotten loop can run. If you need a recurring task to last longer, cancel and recreate it before it expires, or use Routines or Desktop scheduled tasks for durable scheduling.",
         "CronCreate accepts standard 5-field cron expressions: minute hour day-of-month month day-of-week. All fields support wildcards (*), single values (5), steps (*/15), ranges (1-5), and comma-separated lists (1,15,30).",
         "Day-of-week uses 0 or 7 for Sunday through 6 for Saturday. Extended syntax like L, W, ?, and name aliases such as MON or JAN is not supported.",
         "When both day-of-month and day-of-week are constrained, a date matches if either field matches. This follows standard vixie-cron semantics.",
@@ -11597,7 +11597,7 @@
         "No catch-up for missed fires. If a task’s scheduled time passes while Claude is busy on a long-running request, it fires once when Claude becomes idle, not once per missed interval.",
         "No persistence across restarts. Restarting Claude Code clears all session-scoped tasks.",
         "For cron-driven automation that needs to run unattended:",
-        "Cloud scheduled tasks: run on Anthropic-managed infrastructure",
+        "Routines: run on Anthropic-managed infrastructure on a schedule, via API call, or on GitHub events",
         "GitHub Actions: use a schedule trigger in CI",
         "Desktop scheduled tasks: run locally on your machine",
         "Was this page helpful?"
@@ -11742,7 +11742,7 @@
         {
           "title": "​Seven-day expiry",
           "paragraphs": [
-            "Recurring tasks automatically expire 7 days after creation. The task fires one final time, then deletes itself. This bounds how long a forgotten loop can run. If you need a recurring task to last longer, cancel and recreate it before it expires, or use Cloud scheduled tasks or Desktop scheduled tasks for durable scheduling."
+            "Recurring tasks automatically expire 7 days after creation. The task fires one final time, then deletes itself. This bounds how long a forgotten loop can run. If you need a recurring task to last longer, cancel and recreate it before it expires, or use Routines or Desktop scheduled tasks for durable scheduling."
           ],
           "codeBlocks": []
         },
@@ -11770,7 +11770,7 @@
             "No catch-up for missed fires. If a task’s scheduled time passes while Claude is busy on a long-running request, it fires once when Claude becomes idle, not once per missed interval.",
             "No persistence across restarts. Restarting Claude Code clears all session-scoped tasks.",
             "For cron-driven automation that needs to run unattended:",
-            "Cloud scheduled tasks: run on Anthropic-managed infrastructure",
+            "Routines: run on Anthropic-managed infrastructure on a schedule, via API call, or on GitHub events",
             "GitHub Actions: use a schedule trigger in CI",
             "Desktop scheduled tasks: run locally on your machine",
             "Was this page helpful?"
@@ -12046,8 +12046,8 @@
         "​Install killed on low-memory Linux servers",
         "​Install hangs in Docker",
         "​Windows: Claude Desktop overrides claude CLI command",
-        "​Windows: “Claude Code on Windows requires git-bash”",
-        "​Windows: “Claude Code does not support 32-bit Windows”",
+        "​Windows: Claude Code on Windows requires git-bash",
+        "​Windows: Claude Code does not support 32-bit Windows",
         "​Linux: wrong binary variant installed (musl/glibc mismatch)"
       ],
       "toc": [
@@ -12068,8 +12068,8 @@
         "Install killed on low-memory Linux servers",
         "Install hangs in Docker",
         "Windows: Claude Desktop overrides claude CLI command",
-        "Windows: “Claude Code on Windows requires git-bash”",
-        "Windows: “Claude Code does not support 32-bit Windows”",
+        "Windows: Claude Code on Windows requires git-bash",
+        "Windows: Claude Code does not support 32-bit Windows",
         "Linux: wrong binary variant installed (musl/glibc mismatch)"
       ],
       "paragraphs": [
@@ -12090,8 +12090,8 @@
         "Install killed on low-memory Linux servers",
         "Install hangs in Docker",
         "Windows: Claude Desktop overrides claude CLI command",
-        "Windows: “Claude Code on Windows requires git-bash”",
-        "Windows: “Claude Code does not support 32-bit Windows”",
+        "Windows: Claude Code on Windows requires git-bash",
+        "Windows: Claude Code does not support 32-bit Windows",
         "Linux: wrong binary variant installed (musl/glibc mismatch)",
         "Illegal instruction on Linux",
         "dyld: cannot load on macOS",
@@ -12104,9 +12104,9 @@
         "OAuth error: Invalid code",
         "403 Forbidden after login",
         "Model not found or not accessible",
-        "”This organization has been disabled” with an active subscription",
+        "This organization has been disabled with an active subscription",
         "OAuth login fails in WSL2",
-        "”Not logged in” or token expired",
+        "Not logged in or token expired",
         "Configuration file locations",
         "Resetting configuration",
         "Performance and stability",
@@ -12568,7 +12568,7 @@
           "codeBlocks": []
         },
         {
-          "title": "​Windows: “Claude Code on Windows requires git-bash”",
+          "title": "​Windows: Claude Code on Windows requires git-bash",
           "paragraphs": [
             "Claude Code on native Windows needs Git for Windows, which includes Git Bash.",
             "If Git is not installed, download and install it from git-scm.com/downloads/win. During setup, select “Add to PATH.” Restart your terminal after installing.",
@@ -12580,7 +12580,7 @@
           ]
         },
         {
-          "title": "​Windows: “Claude Code does not support 32-bit Windows”",
+          "title": "​Windows: Claude Code does not support 32-bit Windows",
           "paragraphs": [
             "Windows includes two PowerShell entries in the Start menu: Windows PowerShell and Windows PowerShell (x86). The x86 entry runs as a 32-bit process and triggers this error even on a 64-bit machine. To check which case you’re in, run this in the same window that produced the error:",
             "If this prints True, your operating system is fine. Close the window, open Windows PowerShell without the x86 suffix, and run the install command again.",
@@ -14628,7 +14628,7 @@
         "macOS, Linux, WSL:",
         "Windows PowerShell:",
         "Windows CMD:",
-        "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows PS C:\\ when you’re in PowerShell.",
+        "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. If you see 'irm' is not recognized as an internal or external command, you’re in CMD, not PowerShell. Your prompt shows PS C:\\ when you’re in PowerShell and C:\\ without the PS when you’re in CMD.",
         "Native Windows setups require Git for Windows. Install it first if you don’t have it. WSL setups do not need it.",
         "Native installations automatically update in the background to keep you on the latest version.",
         "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship.",
@@ -14794,7 +14794,7 @@
             "macOS, Linux, WSL:",
             "Windows PowerShell:",
             "Windows CMD:",
-            "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows PS C:\\ when you’re in PowerShell.",
+            "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. If you see 'irm' is not recognized as an internal or external command, you’re in CMD, not PowerShell. Your prompt shows PS C:\\ when you’re in PowerShell and C:\\ without the PS when you’re in CMD.",
             "Native Windows setups require Git for Windows. Install it first if you don’t have it. WSL setups do not need it.",
             "Native installations automatically update in the background to keep you on the latest version.",
             "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship."
@@ -16850,7 +16850,7 @@
         "Background token usage",
         "Understanding changes in Claude Code behavior",
         "Track token usage, set team spend limits, and reduce Claude Code costs with context management, model selection, extended thinking settings, and preprocessing hooks.",
-        "Claude Code charges by API token consumption. Per-developer costs vary widely based on model selection, codebase size, and usage patterns such as running multiple instances or automation.",
+        "Claude Code charges by API token consumption. For subscription plan pricing (Pro, Max, Team, Enterprise), see claude.com/pricing. Per-developer costs vary widely based on model selection, codebase size, and usage patterns such as running multiple instances or automation.",
         "Across enterprise deployments, the average cost is around $13 per developer per active day and $150-250 per developer per month, with costs remaining below $30 per active day for 90% of users. To estimate spend for your own team, start with a small pilot group and use the tracking tools below to establish a baseline before wider rollout.",
         "This page covers how to track your costs, manage costs for teams, and reduce token usage.",
         "The /cost command shows API token usage and is intended for API users. Claude Max and Pro subscribers have usage included in their subscription, so /cost data isn’t relevant for billing purposes. Subscribers can use /stats to view usage patterns.",
@@ -23934,6 +23934,7 @@
         "Through a marketplace, installed for future sessions.",
         "For security and verification purposes, Claude Code copies marketplace plugins to the user’s local plugin cache (~/.claude/plugins/cache) rather than using them in-place. Understanding this behavior is important when developing plugins that reference external files.",
         "Each installed version is a separate directory in the cache. When you update or uninstall a plugin, the previous version directory is marked as orphaned and removed automatically 7 days later. The grace period lets concurrent Claude Code sessions that already loaded the old version keep running without errors.",
+        "Claude’s Glob and Grep tools skip orphaned version directories during searches, so file results don’t include outdated plugin code.",
         "Installed plugins cannot reference files outside their directory. Paths that traverse outside the plugin root (such as ../shared-utils) will not work after installation because those external files are not copied to the cache.",
         "If your plugin needs to access files outside its directory, you can create symbolic links to external files within your plugin directory. Symlinks are preserved in the cache rather than dereferenced, and they resolve to their target at runtime. The following command creates a link from inside your plugin directory to a shared utilities location:",
         "This provides flexibility while maintaining the security benefits of the caching system.",
@@ -23987,8 +23988,7 @@
         "Check for connection timeouts in debug output",
         "Symptoms: Plugin loads but components (skills, agents, hooks) are missing.",
         "Correct structure: Components must be at the plugin root, not inside .claude-plugin/. Only plugin.json belongs in .claude-plugin/.",
-        "If your components are inside .claude-plugin/, move them to the plugin root.",
-        "Debug checklist:"
+        "If your components are inside .claude-plugin/, move them to the plugin root."
       ],
       "codeBlocks": [
         "skills/\n├── pdf-processor/\n│   ├── SKILL.md\n│   ├── reference.md (optional)\n│   └── scripts/ (optional)\n└── code-reviewer/\n    └── SKILL.md",
@@ -24234,7 +24234,8 @@
             "Through claude --plugin-dir, for the duration of a session.",
             "Through a marketplace, installed for future sessions.",
             "For security and verification purposes, Claude Code copies marketplace plugins to the user’s local plugin cache (~/.claude/plugins/cache) rather than using them in-place. Understanding this behavior is important when developing plugins that reference external files.",
-            "Each installed version is a separate directory in the cache. When you update or uninstall a plugin, the previous version directory is marked as orphaned and removed automatically 7 days later. The grace period lets concurrent Claude Code sessions that already loaded the old version keep running without errors."
+            "Each installed version is a separate directory in the cache. When you update or uninstall a plugin, the previous version directory is marked as orphaned and removed automatically 7 days later. The grace period lets concurrent Claude Code sessions that already loaded the old version keep running without errors.",
+            "Claude’s Glob and Grep tools skip orphaned version directories during searches, so file results don’t include outdated plugin code."
           ],
           "codeBlocks": []
         },
