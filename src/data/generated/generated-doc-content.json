@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-16T05:13:09.688Z",
-  "sourceGeneratedAt": "2026-04-16T05:13:09.386Z",
+  "generatedAt": "2026-04-17T05:11:12.316Z",
+  "sourceGeneratedAt": "2026-04-17T05:11:11.987Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -514,7 +514,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.110、2.1.109、2.1.108、2.1.107 这些环节往下讲。",
+            "原文这页大多会按 2.1.112、2.1.111、2.1.110、2.1.109 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -523,7 +523,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.110 -> 2.1.109 -> 2.1.108 -> 2.1.107。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.112 -> 2.1.111 -> 2.1.110 -> 2.1.109。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -1584,12 +1584,6 @@
               "kind": "command"
             },
             {
-              "title": "原页关键片段：Eliminate prompts with auto mode",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "claude --enable-auto-mode",
-              "kind": "command"
-            },
-            {
               "title": "原页关键片段：Allow only pre-approved tools with dontAsk mode",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
               "code": "claude --permission-mode dontAsk",
@@ -1672,14 +1666,6 @@
           "paragraphs": [
             "看到这里，就把\"Eliminate prompts with auto mode\"当成一件真要上手的活来看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Eliminate prompts with auto mode",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "claude --enable-auto-mode",
-              "kind": "command"
-            }
           ]
         },
         {
@@ -1687,6 +1673,13 @@
           "paragraphs": [
             "这段看着像个标题，其实是在说\"What the classifier blocks by default\"管到哪儿。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Boundaries you state in conversation",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说\"Boundaries you state in conversation\"管到哪儿。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -2935,6 +2928,13 @@
           "paragraphs": [
             "看到这里，就把\"Remote Control vs Claude Code on the web\"当成一件真要上手的活来看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Mobile push notifications",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -5384,6 +5384,13 @@
           ]
         },
         {
+          "title": "Automatic reconnection",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
           "title": "Push messages with channels",
           "paragraphs": [
             "这一段主要是在把\"Push messages with channels\"讲实，不是只摆个标题给你看。",
@@ -5697,14 +5704,29 @@
         {
           "title": "Override OAuth metadata discovery",
           "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+            "这里不是让你背\"Override OAuth metadata discovery\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
               "title": "Override OAuth metadata discovery",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
               "code": "{\n  \"mcpServers\": {\n    \"my-server\": {\n      \"type\": \"http\",\n      \"url\": \"https://mcp.example.com/mcp\",\n      \"oauth\": {\n        \"authServerMetadataUrl\": \"https://auth.example.com/.well-known/openid-configuration\"\n      }\n    }\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Restrict OAuth scopes",
+          "paragraphs": [
+            "这里不是让你背\"Restrict OAuth scopes\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Restrict OAuth scopes",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"mcpServers\": {\n    \"slack\": {\n      \"type\": \"http\",\n      \"url\": \"https://mcp.slack.com/mcp\",\n      \"oauth\": {\n        \"scopes\": \"channels:read chat:write search:read\"\n      }\n    }\n  }\n}",
               "kind": "config"
             }
           ]
@@ -5822,36 +5844,6 @@
               "title": "Use Claude Code as an MCP server 4",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"mcpServers\": {\n    \"claude-code\": {\n      \"type\": \"stdio\",\n      \"command\": \"/full/path/to/claude\",\n      \"args\": [\"mcp\", \"serve\"],\n      \"env\": {}\n    }\n  }\n}",
-              "kind": "config"
-            }
-          ]
-        },
-        {
-          "title": "MCP output limits and warnings",
-          "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "MCP output limits and warnings",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "export MAX_MCP_OUTPUT_TOKENS=50000\nclaude",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Raise the limit for a specific tool",
-          "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Raise the limit for a specific tool",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"name\": \"get_schema\",\n  \"description\": \"Returns the full database schema\",\n  \"_meta\": {\n    \"anthropic/maxResultSizeChars\": 200000\n  }\n}",
               "kind": "config"
             }
           ]
@@ -6394,6 +6386,12 @@
               "kind": "config"
             },
             {
+              "title": "原页关键片段：Add background monitors to your plugin",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "[\n  {\n    \"name\": \"error-log\",\n    \"command\": \"tail -F ./logs/error.log\",\n    \"description\": \"Application error log\"\n  }\n]",
+              "kind": "config"
+            },
+            {
               "title": "原页关键片段：Ship default settings with your plugin",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"agent\": \"security-reviewer\"\n}",
@@ -6403,12 +6401,6 @@
               "title": "原页关键片段：Test your plugins locally 1",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
               "code": "claude --plugin-dir ./my-plugin",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：Test your plugins locally 2",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two",
               "kind": "command"
             }
           ]
@@ -6528,6 +6520,21 @@
           ]
         },
         {
+          "title": "Add background monitors to your plugin",
+          "paragraphs": [
+            "这一块主要是在说\"Add background monitors to your plugin\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Add background monitors to your plugin",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "[\n  {\n    \"name\": \"error-log\",\n    \"command\": \"tail -F ./logs/error.log\",\n    \"description\": \"Application error log\"\n  }\n]",
+              "kind": "config"
+            }
+          ]
+        },
+        {
           "title": "Ship default settings with your plugin",
           "paragraphs": [
             "这一段主要是在把\"Ship default settings with your plugin\"讲实，不是只摆个标题给你看。",
@@ -6586,7 +6593,8 @@
         {
           "title": "Submit your plugin to the official marketplace",
           "paragraphs": [
-            "这一段主要是在把\"Submit your plugin to the official marketplace\"讲实，不是只摆个标题给你看。"
+            "这一段主要是在把\"Submit your plugin to the official marketplace\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -8204,7 +8212,8 @@
         {
           "title": "Stream responses",
           "paragraphs": [
-            "这一段是在说怎么用 --output-format stream-json with --verbose and --include-partial-messages 去做 receive tokens as they’re generated. Each line is a JSON object representing an event:。看这种内容，光知道名字没用，还是得落到手上。"
+            "这一段是在说怎么用 --output-format stream-json with --verbose and --include-partial-messages 去做 receive tokens as they’re generated. Each line is a JSON object representing an event:。看这种内容，光知道名字没用，还是得落到手上。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
@@ -8970,6 +8979,477 @@
         "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
       }
     },
+    "errors": {
+      "sourceLabel": "Error reference",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Error reference：Look up Claude Code runtime error messages with what each one means and how to fix it.",
+            "你可以把它当成\"Troubleshooting\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Error reference\"理解成 Troubleshooting 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Find your error、Automatic retries、Server errors、API Error: 500 Internal server error 这些环节往下讲。",
+            "翻成人话，大概就是：API Error: 500 Internal server error"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Find your error -> Automatic retries -> Server errors -> API Error: 500 Internal server error。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：API Error: 500 Internal server error",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "API Error: 500 {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"Internal server error\"}} · check status.claude.com",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：API Error: Repeated 529 Overloaded errors",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "API Error: Repeated 529 Overloaded errors · check status.claude.com",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Request timed out",
+              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
+              "code": "Request timed out",
+              "kind": "prompt"
+            },
+            {
+              "title": "原页关键片段：Auto mode cannot determine the safety of an action",
+              "body": "\"Auto mode cannot determine the safety of an action\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "<model> is temporarily unavailable, so auto mode cannot determine the safety of <tool> right now. Wait briefly and then try this action again.",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：You’ve hit your session limit",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "You've hit your session limit · resets 3:45pm\nYou've hit your weekly limit · resets Mon 12:00am\nYou've hit your Opus limit · resets 3:45pm",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Server is temporarily limiting requests",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "API Error: Server is temporarily limiting requests (not your usage limit)",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Request rejected (429)",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "API Error: Request rejected (429) · this may be a temporary capacity issue",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Credit balance is too low",
+              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
+              "code": "Credit balance is too low",
+              "kind": "prompt"
+            },
+            {
+              "title": "原页关键片段：Not logged in",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "Not logged in · Please run /login",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Invalid API key",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "Invalid API key · Fix external API key",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：This organization has been disabled",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "Your ANTHROPIC_API_KEY belongs to a disabled organization · Unset the environment variable to use your other credentials\nAPI Error: 400 ... This organization has been disabled.",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：OAuth token revoked or expired",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "OAuth token revoked · Please run /login\nOAuth token has expired · Please run /login\nAPI Error: 401 ... authentication_error",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Find your error",
+          "paragraphs": [
+            "这里不是让你背\"Find your error\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
+          "title": "Automatic retries",
+          "paragraphs": [
+            "这一块主要是在说\"Automatic retries\"真到手上该怎么用，哪里最容易踩坑。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Server errors",
+          "paragraphs": [
+            "这一段主要是在把\"Server errors\"讲实，不是只摆个标题给你看。"
+          ]
+        },
+        {
+          "title": "API Error: 500 Internal server error",
+          "paragraphs": [
+            "这一块主要是在说\"API Error: 500 Internal server error\"真到手上该怎么用，哪里最容易踩坑。"
+          ],
+          "steps": [
+            {
+              "title": "API Error: 500 Internal server error",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "API Error: 500 {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"Internal server error\"}} · check status.claude.com",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "API Error: Repeated 529 Overloaded errors",
+          "paragraphs": [
+            "这里主要是在交代\"API Error: Repeated 529 Overloaded errors\"这一块会碰到哪些事。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "API Error: Repeated 529 Overloaded errors",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "API Error: Repeated 529 Overloaded errors · check status.claude.com",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Request timed out",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说\"Request timed out\"管到哪儿。"
+          ],
+          "steps": [
+            {
+              "title": "Request timed out",
+              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
+              "code": "Request timed out",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Auto mode cannot determine the safety of an action",
+          "paragraphs": [
+            "这一段不只是挂个标题，它是在说明\"Auto mode cannot determine the safety of an action\"这一块到底负责什么。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Usage limits",
+          "paragraphs": [
+            "看到这里，就把\"Usage limits\"当成一件真要上手的活来看。"
+          ]
+        },
+        {
+          "title": "You’ve hit your session limit",
+          "paragraphs": [
+            "这一段主要是在把\"You’ve hit your session limit\"讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "You’ve hit your session limit",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "You've hit your session limit · resets 3:45pm\nYou've hit your weekly limit · resets Mon 12:00am\nYou've hit your Opus limit · resets 3:45pm",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Server is temporarily limiting requests",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说\"Server is temporarily limiting requests\"管到哪儿。"
+          ],
+          "steps": [
+            {
+              "title": "Server is temporarily limiting requests",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "API Error: Server is temporarily limiting requests (not your usage limit)",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Request rejected (429)",
+          "paragraphs": [
+            "看到这里，就把\"Request rejected (429)\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Request rejected (429)",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "API Error: Request rejected (429) · this may be a temporary capacity issue",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Credit balance is too low",
+          "paragraphs": [
+            "这一块主要是在说\"Credit balance is too low\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Credit balance is too low",
+              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
+              "code": "Credit balance is too low",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Authentication errors",
+          "paragraphs": [
+            "这一块主要是在说\"Authentication errors\"真到手上该怎么用，哪里最容易踩坑。"
+          ]
+        },
+        {
+          "title": "Not logged in",
+          "paragraphs": [
+            "这里不是让你背\"Not logged in\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Not logged in",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "Not logged in · Please run /login",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Invalid API key",
+          "paragraphs": [
+            "这里主要是在交代\"Invalid API key\"这一块会碰到哪些事。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "This organization has been disabled",
+          "paragraphs": [
+            "看到这里，就把\"This organization has been disabled\"当成一件真要上手的活来看。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+          ],
+          "steps": [
+            {
+              "title": "This organization has been disabled",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "Your ANTHROPIC_API_KEY belongs to a disabled organization · Unset the environment variable to use your other credentials\nAPI Error: 400 ... This organization has been disabled.",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "OAuth token revoked or expired",
+          "paragraphs": [
+            "这一段主要是在把\"OAuth token revoked or expired\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "OAuth token revoked or expired",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "OAuth token revoked · Please run /login\nOAuth token has expired · Please run /login\nAPI Error: 401 ... authentication_error",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "OAuth scope requirement",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说\"OAuth scope requirement\"管到哪儿。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Network and connection errors",
+          "paragraphs": [
+            "这里不是让你背\"Network and connection errors\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
+          "title": "Unable to connect to API",
+          "paragraphs": [
+            "这一段不只是挂个标题，它是在说明\"Unable to connect to API\"这一块到底负责什么。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Unable to connect to API",
+              "body": "\"Unable to connect to API\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "Unable to connect to API. Check your internet connection\nUnable to connect to API (ECONNREFUSED)\nUnable to connect to API (ECONNRESET)\nUnable to connect to API (ETIMEDOUT)\nfetch failed\nRequest timed out. Check your internet connection and proxy settings",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "SSL certificate errors",
+          "paragraphs": [
+            "这里不是让你背\"SSL certificate errors\"这个词，而是让你看它真干活时怎么使。"
+          ],
+          "steps": [
+            {
+              "title": "SSL certificate errors",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "Unable to connect to API: SSL certificate verification failed. Check your proxy or corporate SSL certificates\nUnable to connect to API: Self-signed certificate detected",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Request errors",
+          "paragraphs": [
+            "这里不是让你背\"Request errors\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
+          "title": "Prompt is too long",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说\"Prompt is too long\"管到哪儿。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Prompt is too long",
+              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
+              "code": "Prompt is too long",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Error during compaction: Conversation too long",
+          "paragraphs": [
+            "看到这里，就把\"Error during compaction: Conversation too long\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Request too large",
+          "paragraphs": [
+            "这里主要是在交代\"Request too large\"这一块会碰到哪些事。",
+            "它强调的是任务切块要刚刚好：太小了不值当分工，太大了又容易一个人闷头干太久，最后返工更重。"
+          ],
+          "steps": [
+            {
+              "title": "Request too large",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "Request too large (max 30 MB). Double press esc to go back and remove or shrink the attached content.",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Image was too large",
+          "paragraphs": [
+            "看到这里，就把\"Image was too large\"当成一件真要上手的活来看。"
+          ],
+          "steps": [
+            {
+              "title": "Image was too large",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "Image was too large. Double press esc to go back and try again with a smaller image.\nAPI Error: 400 ... image dimensions exceed max allowed size",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "PDF errors",
+          "paragraphs": [
+            "别把这段只当成标题看，它其实是在给\"PDF errors\"划边界。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "PDF errors",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "PDF too large (max 100 pages, 32 MB). Try splitting it or extracting text first.\nPDF is password protected. Try removing protection or extracting text first.\nThe PDF file was not valid. Try converting to a different format first.",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Extra inputs are not permitted",
+          "paragraphs": [
+            "这里不是让你背\"Extra inputs are not permitted\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Extra inputs are not permitted",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "API Error: 400 ... Extra inputs are not permitted ... context_management\nAPI Error: 400 ... Extra inputs are not permitted ... tools.0.custom.input_examples\nAPI Error: 400 ... Unexpected value(s) for the `anthropic-beta` header",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "There’s an issue with the selected model",
+          "paragraphs": [
+            "这段就是排错时拿来照着查的，先一项项看清楚，再动手改。"
+          ],
+          "steps": [
+            {
+              "title": "There’s an issue with the selected model",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "There's an issue with the selected model (claude-...). It may not exist or you may not have access to it. Run /model to select a different one.",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Claude Opus is not available with the Claude Pro plan",
+          "paragraphs": [
+            "这里不是让你背\"Claude Opus is not available with the Claude Pro plan\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Claude Opus is not available with the Claude Pro plan",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "Claude Opus is not available with the Claude Pro plan · Select a different model in /model",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "thinking.type.enabled is not supported for this model",
+          "paragraphs": [
+            "这一段主要是在把\"thinking.type.enabled is not supported for this model\"讲实，不是只摆个标题给你看。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Error reference",
+          "   |",
+          "   v",
+          "这是 Troubleshooting 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
     "third-party-integrations": {
       "sourceLabel": "Enterprise deployment overview",
       "sections": [
@@ -9233,7 +9713,7 @@
             {
               "title": "原页关键片段：4. Pin model versions 1",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='us.anthropic.claude-opus-4-6-v1'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='us.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'",
+              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='us.anthropic.claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='us.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'",
               "kind": "command"
             },
             {
@@ -9245,7 +9725,7 @@
             {
               "title": "原页关键片段：4. Pin model versions 3",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"modelOverrides\": {\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-46-prod\",\n    \"claude-opus-4-5-20251101\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-45-prod\",\n    \"claude-opus-4-1-20250805\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-41-prod\"\n  }\n}",
+              "code": "{\n  \"modelOverrides\": {\n    \"claude-opus-4-7\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-47-prod\",\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-46-prod\",\n    \"claude-opus-4-5-20251101\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-45-prod\",\n    \"claude-opus-4-1-20250805\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-41-prod\"\n  }\n}",
               "kind": "config"
             },
             {
@@ -9366,7 +9846,7 @@
             {
               "title": "4. Pin model versions 1",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='us.anthropic.claude-opus-4-6-v1'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='us.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'",
+              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='us.anthropic.claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='us.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'",
               "kind": "command"
             },
             {
@@ -9378,7 +9858,7 @@
             {
               "title": "4. Pin model versions 3",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"modelOverrides\": {\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-46-prod\",\n    \"claude-opus-4-5-20251101\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-45-prod\",\n    \"claude-opus-4-1-20250805\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-41-prod\"\n  }\n}",
+              "code": "{\n  \"modelOverrides\": {\n    \"claude-opus-4-7\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-47-prod\",\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-46-prod\",\n    \"claude-opus-4-5-20251101\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-45-prod\",\n    \"claude-opus-4-1-20250805\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-41-prod\"\n  }\n}",
               "kind": "config"
             }
           ]
@@ -9591,13 +10071,13 @@
             {
               "title": "原页关键片段：5. Pin model versions 1",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-6'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'",
+              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'",
               "kind": "command"
             },
             {
               "title": "原页关键片段：5. Pin model versions 2",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "export ANTHROPIC_MODEL='claude-opus-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'",
+              "code": "export ANTHROPIC_MODEL='claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'",
               "kind": "command"
             }
           ]
@@ -9682,13 +10162,13 @@
             {
               "title": "5. Pin model versions 1",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-6'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'",
+              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'",
               "kind": "command"
             },
             {
               "title": "5. Pin model versions 2",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "export ANTHROPIC_MODEL='claude-opus-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'",
+              "code": "export ANTHROPIC_MODEL='claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'",
               "kind": "command"
             }
           ]
@@ -9788,7 +10268,7 @@
             {
               "title": "原页关键片段：4. Pin model versions",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-6'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5'",
+              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5'",
               "kind": "command"
             },
             {
@@ -9858,7 +10338,7 @@
             {
               "title": "4. Pin model versions",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-6'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5'",
+              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5'",
               "kind": "command"
             }
           ]
@@ -10571,6 +11051,21 @@
               "title": "Configure release channel",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"autoUpdatesChannel\": \"stable\"\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Pin a minimum version",
+          "paragraphs": [
+            "这里主要是在交代\"Pin a minimum version\"这一块会碰到哪些事。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Pin a minimum version",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"autoUpdatesChannel\": \"stable\",\n  \"minimumVersion\": \"2.1.100\"\n}",
               "kind": "config"
             }
           ]
@@ -12517,7 +13012,7 @@
           "title": "Private repositories",
           "paragraphs": [
             "看到这里，就把\"Private repositories\"当成一件真要上手的活来看。",
-            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ],
           "steps": [
             {
@@ -12741,6 +13236,116 @@
         "title": "一眼看懂这一页",
         "lines": [
           "Create and distribute a plugin marketplace",
+          "   |",
+          "   v",
+          "这是 Administration 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "plugin-dependencies": {
+      "sourceLabel": "Constrain plugin dependency versions",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Plugin dependency versions：Declare version constraints on plugin dependencies so your plugin keeps working when an upstream plugin ships a breaking change.",
+            "你可以把它当成\"Administration\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Plugin dependency versions\"理解成 Administration 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Why constrain dependency versions、Declare a dependency with a version constraint、Tag plugin releases for version resolution、How constraints interact 这些环节往下讲。",
+            "翻成人话，大概就是：Why constrain dependency versions"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Why constrain dependency versions -> Declare a dependency with a version constraint -> Tag plugin releases for version resolution -> How constraints interact。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Declare a dependency with a version constraint",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"name\": \"deploy-kit\",\n  \"version\": \"3.1.0\",\n  \"dependencies\": [\n    \"audit-logger\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Tag plugin releases for version resolution",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "git tag secrets-vault--v2.1.0\ngit push origin secrets-vault--v2.1.0",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Why constrain dependency versions",
+          "paragraphs": [
+            "这一块主要是在说\"Why constrain dependency versions\"真到手上该怎么用，哪里最容易踩坑。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Declare a dependency with a version constraint",
+          "paragraphs": [
+            "这一段主要是在把\"Declare a dependency with a version constraint\"讲实，不是只摆个标题给你看。"
+          ],
+          "steps": [
+            {
+              "title": "Declare a dependency with a version constraint",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"name\": \"deploy-kit\",\n  \"version\": \"3.1.0\",\n  \"dependencies\": [\n    \"audit-logger\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Tag plugin releases for version resolution",
+          "paragraphs": [
+            "这一段主要是在把\"Tag plugin releases for version resolution\"讲实，不是只摆个标题给你看。"
+          ],
+          "steps": [
+            {
+              "title": "Tag plugin releases for version resolution",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "git tag secrets-vault--v2.1.0\ngit push origin secrets-vault--v2.1.0",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "How constraints interact",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。"
+          ]
+        },
+        {
+          "title": "Resolve dependency errors",
+          "paragraphs": [
+            "这一段主要是在把\"Resolve dependency errors\"讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "See also",
+          "paragraphs": [
+            "这一段是在教你把 plugins: build plugins with skills, agents, and hooks 真正建出来。文件放哪儿、字段怎么写、建完怎么验，都得跟着看。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Plugin dependency versions",
           "   |",
           "   v",
           "这是 Administration 里的一摊要紧活",
@@ -13894,20 +14499,14 @@
           ],
           "steps": [
             {
-              "title": "原页关键片段：Enable fullscreen rendering 1",
+              "title": "原页关键片段：Enable fullscreen rendering",
               "body": "这一段要真抓重点，通常就抓下面这块原文。",
               "code": "CLAUDE_CODE_NO_FLICKER=1 claude",
               "kind": "code"
             },
             {
-              "title": "原页关键片段：Enable fullscreen rendering 2",
-              "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "export CLAUDE_CODE_NO_FLICKER=1",
-              "kind": "code"
-            },
-            {
-              "title": "原页关键片段：Adjust wheel scroll speed",
-              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "title": "原页关键片段：Mouse wheel scrolling",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
               "code": "export CLAUDE_CODE_SCROLL_SPEED=3",
               "kind": "code"
             },
@@ -13933,15 +14532,9 @@
           ],
           "steps": [
             {
-              "title": "Enable fullscreen rendering 1",
+              "title": "Enable fullscreen rendering",
               "body": "这一段要真抓重点，通常就抓下面这块原文。",
               "code": "CLAUDE_CODE_NO_FLICKER=1 claude",
-              "kind": "code"
-            },
-            {
-              "title": "Enable fullscreen rendering 2",
-              "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "export CLAUDE_CODE_NO_FLICKER=1",
               "kind": "code"
             }
           ]
@@ -13963,20 +14556,26 @@
         {
           "title": "Scroll the conversation",
           "paragraphs": [
-            "看到这里，就把\"Scroll the conversation\"当成一件真要上手的活来看。",
-            "这一段还会谈显示方式和终端环境，重点是先选一个你当前最稳能用的模式，不必一上来追求花哨。"
+            "看到这里，就把\"Scroll the conversation\"当成一件真要上手的活来看。"
           ]
         },
         {
-          "title": "Adjust wheel scroll speed",
+          "title": "Auto-follow",
           "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这一块主要是在说\"Auto-follow\"真到手上该怎么用，哪里最容易踩坑。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Mouse wheel scrolling",
+          "paragraphs": [
+            "看到这里，就把\"Mouse wheel scrolling\"当成一件真要上手的活来看。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ],
           "steps": [
             {
-              "title": "Adjust wheel scroll speed",
-              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "title": "Mouse wheel scrolling",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
               "code": "export CLAUDE_CODE_SCROLL_SPEED=3",
               "kind": "code"
             }
@@ -14086,31 +14685,31 @@
             {
               "title": "原页关键片段：Extended context",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "# Use the opus[1m] or sonnet[1m] alias\n/model opus[1m]\n/model sonnet[1m]\n\n# Or append [1m] to a full model name\n/model claude-opus-4-6[1m]",
+              "code": "# Use the opus[1m] or sonnet[1m] alias\n/model opus[1m]\n/model sonnet[1m]\n\n# Or append [1m] to a full model name\n/model claude-opus-4-7[1m]",
               "kind": "command"
             },
             {
               "title": "原页关键片段：Add a custom model option",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "export ANTHROPIC_CUSTOM_MODEL_OPTION=\"my-gateway/claude-opus-4-6\"\nexport ANTHROPIC_CUSTOM_MODEL_OPTION_NAME=\"Opus via Gateway\"\nexport ANTHROPIC_CUSTOM_MODEL_OPTION_DESCRIPTION=\"Custom deployment routed through the internal LLM gateway\"",
+              "code": "export ANTHROPIC_CUSTOM_MODEL_OPTION=\"my-gateway/claude-opus-4-7\"\nexport ANTHROPIC_CUSTOM_MODEL_OPTION_NAME=\"Opus via Gateway\"\nexport ANTHROPIC_CUSTOM_MODEL_OPTION_DESCRIPTION=\"Custom deployment routed through the internal LLM gateway\"",
               "kind": "command"
             },
             {
               "title": "原页关键片段：Pin models for third-party deployments",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-6[1m]'",
+              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-7[1m]'",
               "kind": "command"
             },
             {
               "title": "原页关键片段：Customize pinned model display and capabilities",
               "body": "\"Customize pinned model display and capabilities\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='arn:aws:bedrock:us-east-1:123456789012:custom-model/abc'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_NAME='Opus via Bedrock'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_DESCRIPTION='Opus 4.6 routed through a Bedrock custom endpoint'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_SUPPORTED_CAPABILITIES='effort,max_effort,thinking,adaptive_thinking,interleaved_thinking'",
+              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='arn:aws:bedrock:us-east-1:123456789012:custom-model/abc'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_NAME='Opus via Bedrock'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_DESCRIPTION='Opus 4.7 routed through a Bedrock custom endpoint'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_SUPPORTED_CAPABILITIES='effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking'",
               "kind": "code"
             },
             {
               "title": "原页关键片段：Override model IDs per version",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"modelOverrides\": {\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-prod\",\n    \"claude-opus-4-5-20251101\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-45-prod\",\n    \"claude-sonnet-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/sonnet-prod\"\n  }\n}",
+              "code": "{\n  \"modelOverrides\": {\n    \"claude-opus-4-7\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-prod\",\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-46-prod\",\n    \"claude-sonnet-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/sonnet-prod\"\n  }\n}",
               "kind": "config"
             }
           ]
@@ -14208,7 +14807,8 @@
         {
           "title": "default model setting",
           "paragraphs": [
-            "这段看着像个标题，其实是在说\"default model setting\"管到哪儿。"
+            "这段看着像个标题，其实是在说\"default model setting\"管到哪儿。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -14234,7 +14834,7 @@
             {
               "title": "Extended context",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "# Use the opus[1m] or sonnet[1m] alias\n/model opus[1m]\n/model sonnet[1m]\n\n# Or append [1m] to a full model name\n/model claude-opus-4-6[1m]",
+              "code": "# Use the opus[1m] or sonnet[1m] alias\n/model opus[1m]\n/model sonnet[1m]\n\n# Or append [1m] to a full model name\n/model claude-opus-4-7[1m]",
               "kind": "command"
             }
           ]
@@ -14254,7 +14854,7 @@
             {
               "title": "Add a custom model option",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "export ANTHROPIC_CUSTOM_MODEL_OPTION=\"my-gateway/claude-opus-4-6\"\nexport ANTHROPIC_CUSTOM_MODEL_OPTION_NAME=\"Opus via Gateway\"\nexport ANTHROPIC_CUSTOM_MODEL_OPTION_DESCRIPTION=\"Custom deployment routed through the internal LLM gateway\"",
+              "code": "export ANTHROPIC_CUSTOM_MODEL_OPTION=\"my-gateway/claude-opus-4-7\"\nexport ANTHROPIC_CUSTOM_MODEL_OPTION_NAME=\"Opus via Gateway\"\nexport ANTHROPIC_CUSTOM_MODEL_OPTION_DESCRIPTION=\"Custom deployment routed through the internal LLM gateway\"",
               "kind": "command"
             }
           ]
@@ -14276,7 +14876,7 @@
             {
               "title": "Pin models for third-party deployments",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-6[1m]'",
+              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-7[1m]'",
               "kind": "command"
             }
           ]
@@ -14291,7 +14891,7 @@
             {
               "title": "Customize pinned model display and capabilities",
               "body": "\"Customize pinned model display and capabilities\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='arn:aws:bedrock:us-east-1:123456789012:custom-model/abc'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_NAME='Opus via Bedrock'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_DESCRIPTION='Opus 4.6 routed through a Bedrock custom endpoint'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_SUPPORTED_CAPABILITIES='effort,max_effort,thinking,adaptive_thinking,interleaved_thinking'",
+              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='arn:aws:bedrock:us-east-1:123456789012:custom-model/abc'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_NAME='Opus via Bedrock'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_DESCRIPTION='Opus 4.7 routed through a Bedrock custom endpoint'\nexport ANTHROPIC_DEFAULT_OPUS_MODEL_SUPPORTED_CAPABILITIES='effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking'",
               "kind": "code"
             }
           ]
@@ -14306,7 +14906,7 @@
             {
               "title": "Override model IDs per version",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"modelOverrides\": {\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-prod\",\n    \"claude-opus-4-5-20251101\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-45-prod\",\n    \"claude-sonnet-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/sonnet-prod\"\n  }\n}",
+              "code": "{\n  \"modelOverrides\": {\n    \"claude-opus-4-7\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-prod\",\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-46-prod\",\n    \"claude-sonnet-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/sonnet-prod\"\n  }\n}",
               "kind": "config"
             }
           ]
@@ -14816,7 +15416,7 @@
             {
               "title": "原页关键片段：Available data",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-6\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
+              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
               "kind": "config"
             },
             {
@@ -14943,7 +15543,7 @@
             {
               "title": "Available data",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-6\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
+              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
               "kind": "config"
             }
           ]
@@ -15639,7 +16239,8 @@
         {
           "title": "PowerShell tool",
           "paragraphs": [
-            "看到这里，就把\"PowerShell tool\"当成一件真要上手的活来看。"
+            "别把这段只当成标题看，它其实是在给\"PowerShell tool\"划边界。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -15917,6 +16518,13 @@
         },
         {
           "title": "Task list",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Session recap",
           "paragraphs": [
             "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
@@ -16780,9 +17388,15 @@
               "kind": "config"
             },
             {
+              "title": "原页关键片段：Monitors",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "[\n  {\n    \"name\": \"deploy-status\",\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/poll-deploy.sh ${user_config.api_endpoint}\",\n    \"description\": \"Deployment status changes\"\n  },\n  {\n    \"name\": \"error-log\",\n    \"command\": \"tail -F ./logs/error.log\",\n    \"description\": \"Application error log\",\n    \"when\": \"on-skill-invoke:debug\"\n  }\n]",
+              "kind": "config"
+            },
+            {
               "title": "原页关键片段：Complete schema",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\"\n}",
+              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\",\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
               "kind": "config"
             },
             {
@@ -16807,12 +17421,6 @@
               "title": "原页关键片段：Environment variables 1",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
               "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/process.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Environment variables 2",
-              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"hooks\": {\n    \"SessionStart\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"diff -q \\\"${CLAUDE_PLUGIN_ROOT}/package.json\\\" \\\"${CLAUDE_PLUGIN_DATA}/package.json\\\" >/dev/null 2>&1 || (cd \\\"${CLAUDE_PLUGIN_DATA}\\\" && cp \\\"${CLAUDE_PLUGIN_ROOT}/package.json\\\" . && npm install) || rm -f \\\"${CLAUDE_PLUGIN_DATA}/package.json\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             }
           ]
@@ -16905,6 +17513,21 @@
           ]
         },
         {
+          "title": "Monitors",
+          "paragraphs": [
+            "看到这里，就把\"Monitors\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Monitors",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "[\n  {\n    \"name\": \"deploy-status\",\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/poll-deploy.sh ${user_config.api_endpoint}\",\n    \"description\": \"Deployment status changes\"\n  },\n  {\n    \"name\": \"error-log\",\n    \"command\": \"tail -F ./logs/error.log\",\n    \"description\": \"Application error log\",\n    \"when\": \"on-skill-invoke:debug\"\n  }\n]",
+              "kind": "config"
+            }
+          ]
+        },
+        {
           "title": "Plugin installation scopes",
           "paragraphs": [
             "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
@@ -16926,7 +17549,7 @@
             {
               "title": "Complete schema",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\"\n}",
+              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\",\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
               "kind": "config"
             }
           ]
@@ -17160,22 +17783,23 @@
           ]
         },
         {
+          "title": "plugin list",
+          "paragraphs": [
+            "看到这里，就把\"plugin list\"当成一件真要上手的活来看。"
+          ],
+          "steps": [
+            {
+              "title": "plugin list",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude plugin list [options]",
+              "kind": "command"
+            }
+          ]
+        },
+        {
           "title": "Debugging and development tools",
           "paragraphs": [
             "遇到这种内容，别急着大拆大改，先按它给的路子把问题缩小。"
-          ]
-        },
-        {
-          "title": "Debugging commands",
-          "paragraphs": [
-            "遇到这种内容，别急着大拆大改，先按它给的路子把问题缩小。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
-          ]
-        },
-        {
-          "title": "Common issues",
-          "paragraphs": [
-            "这里讲的是怎么找毛病，先查明白哪一步出错，再决定怎么修。"
           ]
         }
       ],
@@ -17718,8 +18342,7 @@
         {
           "title": "Claude Code features",
           "paragraphs": [
-            "这段看着像个标题，其实是在说\"Claude Code features\"管到哪儿。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+            "这段看着像个标题，其实是在说\"Claude Code features\"管到哪儿。"
           ]
         },
         {
@@ -17893,6 +18516,12 @@
               "body": "\"Customize your agent\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
               "code": "options = ClaudeAgentOptions(\n    allowed_tools=[\"Read\", \"Edit\", \"Glob\", \"Bash\"], permission_mode=\"acceptEdits\"\n)",
               "kind": "code"
+            },
+            {
+              "title": "原页关键片段：API error thinking.type.enabled is not supported for this model",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "API Error: 400 {\"type\":\"invalid_request_error\",\"message\":\"\\\"thinking.type.enabled\\\" is not supported for this model. Use \\\"thinking.type.adaptive\\\" and \\\"output_config.effort\\\" to control thinking behavior.\"}",
+              "kind": "code"
             }
           ]
         },
@@ -18025,6 +18654,26 @@
           "paragraphs": [
             "这一段主要是在把\"Key concepts\"讲实，不是只摆个标题给你看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Troubleshooting",
+          "paragraphs": [
+            "这里讲的是怎么找毛病，先查明白哪一步出错，再决定怎么修。"
+          ]
+        },
+        {
+          "title": "API error thinking.type.enabled is not supported for this model",
+          "paragraphs": [
+            "这一段主要是在把\"API error thinking.type.enabled is not supported for this model\"讲实，不是只摆个标题给你看。"
+          ],
+          "steps": [
+            {
+              "title": "API error thinking.type.enabled is not supported for this model",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "API Error: 400 {\"type\":\"invalid_request_error\",\"message\":\"\\\"thinking.type.enabled\\\" is not supported for this model. Use \\\"thinking.type.adaptive\\\" and \\\"output_config.effort\\\" to control thinking behavior.\"}",
+              "kind": "code"
+            }
           ]
         },
         {
@@ -18300,8 +18949,8 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Use Claude Code features\"理解成 Core concepts 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 Enable Claude Code features with settingSources、Project instructions (CLAUDE.md and rules)、CLAUDE.md load locations、Skills 这些环节往下讲。",
-            "翻成人话，大概就是：Enable Claude Code features with settingSources"
+            "原文这页大多会按 Control filesystem settings with settingSources、What settingSources does not control、Project instructions (CLAUDE.md and rules)、CLAUDE.md load locations 这些环节往下讲。",
+            "翻成人话，大概就是：Control filesystem settings with settingSources"
           ]
         },
         {
@@ -18309,11 +18958,11 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：Enable Claude Code features with settingSources -> Project instructions (CLAUDE.md and rules) -> CLAUDE.md load locations -> Skills。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：Control filesystem settings with settingSources -> What settingSources does not control -> Project instructions (CLAUDE.md and rules) -> CLAUDE.md load locations。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ],
           "steps": [
             {
-              "title": "原页关键片段：Enable Claude Code features with settingSources",
+              "title": "原页关键片段：Control filesystem settings with settingSources",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
               "code": "from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ResultMessage\n\nasync for message in query(\n    prompt=\"Help me refactor the auth module\",\n    options=ClaudeAgentOptions(\n        # \"user\" loads from ~/.claude/, \"project\" loads from ./.claude/ in cwd.\n        # Together they give the agent access to CLAUDE.md, skills, hooks, and\n        # permissions from both locations.\n        setting_sources=[\"user\", \"project\"],\n        allowed_tools=[\"Read\", \"Edit\", \"Bash\"],\n    ),\n):\n    if isinstance(message, AssistantMessage):\n        for block in message.content:\n            if hasattr(block, \"text\"):\n                print(block.text)\n    if isinstance(message, ResultMessage) and message.subtype == \"success\":\n        print(f\"\\nResult: {message.result}\")",
               "kind": "command"
@@ -18333,18 +18982,25 @@
           ]
         },
         {
-          "title": "Enable Claude Code features with settingSources",
+          "title": "Control filesystem settings with settingSources",
           "paragraphs": [
-            "这里讲怎么把某个开关拧对。重点不是概念，而是你该在哪儿改、改完怎么确认生效。",
+            "这里讲的是收放和管理，不只是\"能不能用\"，而是\"怎么管住、怎么不乱\"。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
-              "title": "Enable Claude Code features with settingSources",
+              "title": "Control filesystem settings with settingSources",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
               "code": "from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ResultMessage\n\nasync for message in query(\n    prompt=\"Help me refactor the auth module\",\n    options=ClaudeAgentOptions(\n        # \"user\" loads from ~/.claude/, \"project\" loads from ./.claude/ in cwd.\n        # Together they give the agent access to CLAUDE.md, skills, hooks, and\n        # permissions from both locations.\n        setting_sources=[\"user\", \"project\"],\n        allowed_tools=[\"Read\", \"Edit\", \"Bash\"],\n    ),\n):\n    if isinstance(message, AssistantMessage):\n        for block in message.content:\n            if hasattr(block, \"text\"):\n                print(block.text)\n    if isinstance(message, ResultMessage) and message.subtype == \"success\":\n        print(f\"\\nResult: {message.result}\")",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "What settingSources does not control",
+          "paragraphs": [
+            "看到这里，就把\"What settingSources does not control\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -19850,7 +20506,7 @@
         {
           "title": "From a config file",
           "paragraphs": [
-            "这一段是在教你把 a .mcp.json file at your project root. The SDK does not load filesystem settings by default, so set settingSources: [\"project\"] (Python: setting_sources=[\"project\"]) in your options for the file to be picked up: 真正建出来。文件放哪儿、字段怎么写、建完怎么验，都得跟着看。",
+            "这一段是在教你把 a .mcp.json file at your project root. The file is picked up when the project setting source is enabled, which it is for default query() options. If you set settingSources explicitly, include \"project\" for this file to load: 真正建出来。文件放哪儿、字段怎么写、建完怎么验，都得跟着看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
@@ -20572,7 +21228,7 @@
             {
               "title": "原页关键片段：Method 1: CLAUDE.md files (project-level instructions) 2",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// IMPORTANT: You must specify settingSources to load CLAUDE.md\n// The claude_code preset alone does NOT load CLAUDE.md files\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Add a new React component for user profiles\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\" // Use Claude Code's system prompt\n    },\n    settingSources: [\"project\"] // Required to load CLAUDE.md from project\n  }\n})) {\n  messages.push(message);\n}\n\n// Now Claude has access to your project guidelines from CLAUDE.md",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Add a new React component for user profiles\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\" // Use Claude Code's system prompt\n    },\n    settingSources: [\"project\"] // Loads CLAUDE.md from project\n  }\n})) {\n  messages.push(message);\n}\n\n// Now Claude has access to your project guidelines from CLAUDE.md",
               "kind": "command"
             },
             {
@@ -20636,7 +21292,7 @@
             {
               "title": "Method 1: CLAUDE.md files (project-level instructions) 2",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// IMPORTANT: You must specify settingSources to load CLAUDE.md\n// The claude_code preset alone does NOT load CLAUDE.md files\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Add a new React component for user profiles\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\" // Use Claude Code's system prompt\n    },\n    settingSources: [\"project\"] // Required to load CLAUDE.md from project\n  }\n})) {\n  messages.push(message);\n}\n\n// Now Claude has access to your project guidelines from CLAUDE.md",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Add a new React component for user profiles\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\" // Use Claude Code's system prompt\n    },\n    settingSources: [\"project\"] // Loads CLAUDE.md from project\n  }\n})) {\n  messages.push(message);\n}\n\n// Now Claude has access to your project guidelines from CLAUDE.md",
               "kind": "command"
             }
           ]
@@ -20801,7 +21457,7 @@
             {
               "title": "原页关键片段：Discovering Available Slash Commands",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello Claude\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Available slash commands:\", message.slash_commands);\n    // Example output: [\"/compact\", \"/clear\", \"/help\"]\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello Claude\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Available slash commands:\", message.slash_commands);\n    // Example output: [\"/compact\", \"/context\", \"/cost\"]\n  }\n}",
               "kind": "command"
             },
             {
@@ -20817,12 +21473,6 @@
               "kind": "command"
             },
             {
-              "title": "原页关键片段：/clear - Clear Conversation",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Clear conversation and start fresh\nfor await (const message of query({\n  prompt: \"/clear\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Conversation cleared, new session started\");\n    console.log(\"Session ID:\", message.session_id);\n  }\n}",
-              "kind": "command"
-            },
-            {
               "title": "原页关键片段：File Format 1",
               "body": "\"File Format\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
               "code": "Refactor the selected code to improve readability and maintainability.\nFocus on clean code principles and best practices.",
@@ -20831,13 +21481,13 @@
             {
               "title": "原页关键片段：File Format 2",
               "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "---\nallowed-tools: Read, Grep, Glob\ndescription: Run security vulnerability scan\nmodel: claude-opus-4-6\n---\n\nAnalyze the codebase for security vulnerabilities including:\n- SQL injection risks\n- XSS vulnerabilities\n- Exposed credentials\n- Insecure configurations",
+              "code": "---\nallowed-tools: Read, Grep, Glob\ndescription: Run security vulnerability scan\nmodel: claude-opus-4-7\n---\n\nAnalyze the codebase for security vulnerabilities including:\n- SQL injection risks\n- XSS vulnerabilities\n- Exposed credentials\n- Insecure configurations",
               "kind": "config"
             },
             {
               "title": "原页关键片段：Using Custom Commands in the SDK",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use a custom command\nfor await (const message of query({\n  prompt: \"/refactor src/auth/login.ts\",\n  options: { maxTurns: 3 }\n})) {\n  if (message.type === \"assistant\") {\n    console.log(\"Refactoring suggestions:\", message.message);\n  }\n}\n\n// Custom commands appear in the slash_commands list\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Will include both built-in and custom commands\n    console.log(\"Available commands:\", message.slash_commands);\n    // Example: [\"/compact\", \"/clear\", \"/help\", \"/refactor\", \"/security-check\"]\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use a custom command\nfor await (const message of query({\n  prompt: \"/refactor src/auth/login.ts\",\n  options: { maxTurns: 3 }\n})) {\n  if (message.type === \"assistant\") {\n    console.log(\"Refactoring suggestions:\", message.message);\n  }\n}\n\n// Custom commands appear in the slash_commands list\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Will include both built-in and custom commands\n    console.log(\"Available commands:\", message.slash_commands);\n    // Example: [\"/compact\", \"/context\", \"/cost\", \"/refactor\", \"/security-check\"]\n  }\n}",
               "kind": "command"
             },
             {
@@ -20855,7 +21505,7 @@
             {
               "title": "原页关键片段：Advanced Features 3",
               "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "---\nallowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*)\ndescription: Create a git commit\n---\n\n## Context\n\n- Current status: !`git status`\n- Current diff: !`git diff HEAD`\n\n## Task\n\nCreate a git commit with appropriate message based on the changes.",
+              "code": "---\nallowed-tools: Bash(git add *), Bash(git status *), Bash(git commit *)\ndescription: Create a git commit\n---\n\n## Context\n\n- Current status: !`git status`\n- Current diff: !`git diff HEAD`\n\n## Task\n\nCreate a git commit with appropriate message based on the changes.",
               "kind": "config"
             },
             {
@@ -20867,7 +21517,13 @@
             {
               "title": "原页关键片段：Practical Examples 1",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "---\nallowed-tools: Read, Grep, Glob, Bash(git diff:*)\ndescription: Comprehensive code review\n---\n\n## Changed Files\n!`git diff --name-only HEAD~1`\n\n## Detailed Changes\n!`git diff HEAD~1`\n\n## Review Checklist\n\nReview the above changes for:\n1. Code quality and readability\n2. Security vulnerabilities\n3. Performance implications\n4. Test coverage\n5. Documentation completeness\n\nProvide specific, actionable feedback organized by priority.",
+              "code": "---\nallowed-tools: Read, Grep, Glob, Bash(git diff *)\ndescription: Comprehensive code review\n---\n\n## Changed Files\n!`git diff --name-only HEAD~1`\n\n## Detailed Changes\n!`git diff HEAD~1`\n\n## Review Checklist\n\nReview the above changes for:\n1. Code quality and readability\n2. Security vulnerabilities\n3. Performance implications\n4. Test coverage\n5. Documentation completeness\n\nProvide specific, actionable feedback organized by priority.",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Practical Examples 2",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "---\nallowed-tools: Bash, Read, Edit\nargument-hint: [test-pattern]\ndescription: Run tests with optional pattern\n---\n\nRun tests matching pattern: $ARGUMENTS\n\n1. Detect the test framework (Jest, pytest, etc.)\n2. Run tests with the provided pattern\n3. If tests fail, analyze and fix them\n4. Re-run to verify fixes",
               "kind": "config"
             }
           ]
@@ -20882,7 +21538,7 @@
             {
               "title": "Discovering Available Slash Commands",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello Claude\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Available slash commands:\", message.slash_commands);\n    // Example output: [\"/compact\", \"/clear\", \"/help\"]\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello Claude\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Available slash commands:\", message.slash_commands);\n    // Example output: [\"/compact\", \"/context\", \"/cost\"]\n  }\n}",
               "kind": "command"
             }
           ]
@@ -20922,17 +21578,10 @@
           ]
         },
         {
-          "title": "/clear - Clear Conversation",
+          "title": "Clearing the conversation",
           "paragraphs": [
-            "这一段不只是挂个标题，它是在说明\"/clear - Clear Conversation\"这一块到底负责什么。"
-          ],
-          "steps": [
-            {
-              "title": "/clear - Clear Conversation",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Clear conversation and start fresh\nfor await (const message of query({\n  prompt: \"/clear\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Conversation cleared, new session started\");\n    console.log(\"Session ID:\", message.session_id);\n  }\n}",
-              "kind": "command"
-            }
+            "这一段不只是挂个标题，它是在说明\"Clearing the conversation\"这一块到底负责什么。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -20964,7 +21613,7 @@
             {
               "title": "File Format 2",
               "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "---\nallowed-tools: Read, Grep, Glob\ndescription: Run security vulnerability scan\nmodel: claude-opus-4-6\n---\n\nAnalyze the codebase for security vulnerabilities including:\n- SQL injection risks\n- XSS vulnerabilities\n- Exposed credentials\n- Insecure configurations",
+              "code": "---\nallowed-tools: Read, Grep, Glob\ndescription: Run security vulnerability scan\nmodel: claude-opus-4-7\n---\n\nAnalyze the codebase for security vulnerabilities including:\n- SQL injection risks\n- XSS vulnerabilities\n- Exposed credentials\n- Insecure configurations",
               "kind": "config"
             }
           ]
@@ -20978,7 +21627,7 @@
             {
               "title": "Using Custom Commands in the SDK",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use a custom command\nfor await (const message of query({\n  prompt: \"/refactor src/auth/login.ts\",\n  options: { maxTurns: 3 }\n})) {\n  if (message.type === \"assistant\") {\n    console.log(\"Refactoring suggestions:\", message.message);\n  }\n}\n\n// Custom commands appear in the slash_commands list\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Will include both built-in and custom commands\n    console.log(\"Available commands:\", message.slash_commands);\n    // Example: [\"/compact\", \"/clear\", \"/help\", \"/refactor\", \"/security-check\"]\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use a custom command\nfor await (const message of query({\n  prompt: \"/refactor src/auth/login.ts\",\n  options: { maxTurns: 3 }\n})) {\n  if (message.type === \"assistant\") {\n    console.log(\"Refactoring suggestions:\", message.message);\n  }\n}\n\n// Custom commands appear in the slash_commands list\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Will include both built-in and custom commands\n    console.log(\"Available commands:\", message.slash_commands);\n    // Example: [\"/compact\", \"/context\", \"/cost\", \"/refactor\", \"/security-check\"]\n  }\n}",
               "kind": "command"
             }
           ]
@@ -21004,7 +21653,7 @@
             {
               "title": "Advanced Features 3",
               "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "---\nallowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*)\ndescription: Create a git commit\n---\n\n## Context\n\n- Current status: !`git status`\n- Current diff: !`git diff HEAD`\n\n## Task\n\nCreate a git commit with appropriate message based on the changes.",
+              "code": "---\nallowed-tools: Bash(git add *), Bash(git status *), Bash(git commit *)\ndescription: Create a git commit\n---\n\n## Context\n\n- Current status: !`git status`\n- Current diff: !`git diff HEAD`\n\n## Task\n\nCreate a git commit with appropriate message based on the changes.",
               "kind": "config"
             },
             {
@@ -21038,7 +21687,7 @@
             {
               "title": "Practical Examples 1",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "---\nallowed-tools: Read, Grep, Glob, Bash(git diff:*)\ndescription: Comprehensive code review\n---\n\n## Changed Files\n!`git diff --name-only HEAD~1`\n\n## Detailed Changes\n!`git diff HEAD~1`\n\n## Review Checklist\n\nReview the above changes for:\n1. Code quality and readability\n2. Security vulnerabilities\n3. Performance implications\n4. Test coverage\n5. Documentation completeness\n\nProvide specific, actionable feedback organized by priority.",
+              "code": "---\nallowed-tools: Read, Grep, Glob, Bash(git diff *)\ndescription: Comprehensive code review\n---\n\n## Changed Files\n!`git diff --name-only HEAD~1`\n\n## Detailed Changes\n!`git diff HEAD~1`\n\n## Review Checklist\n\nReview the above changes for:\n1. Code quality and readability\n2. Security vulnerabilities\n3. Performance implications\n4. Test coverage\n5. Documentation completeness\n\nProvide specific, actionable feedback organized by priority.",
               "kind": "config"
             },
             {
@@ -21135,13 +21784,13 @@
             {
               "title": "原页关键片段：Skills Not Found 1",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "# Wrong - Skills won't be loaded\noptions = ClaudeAgentOptions(allowed_tools=[\"Skill\"])\n\n# Correct - Skills will be loaded\noptions = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Required to load Skills\n    allowed_tools=[\"Skill\"],\n)",
+              "code": "# Skills not loaded: setting_sources excludes user and project\noptions = ClaudeAgentOptions(setting_sources=[], allowed_tools=[\"Skill\"])\n\n# Skills loaded: user and project sources included\noptions = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],\n    allowed_tools=[\"Skill\"],\n)",
               "kind": "code"
             },
             {
               "title": "原页关键片段：Skills Not Found 2",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "# Ensure your cwd points to the directory containing .claude/skills/\noptions = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",  # Must contain .claude/skills/\n    setting_sources=[\"user\", \"project\"],  # Required to load Skills\n    allowed_tools=[\"Skill\"],\n)",
+              "code": "# Ensure your cwd points to the directory containing .claude/skills/\noptions = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",  # Must contain .claude/skills/\n    setting_sources=[\"user\", \"project\"],  # Loads skills from these sources\n    allowed_tools=[\"Skill\"],\n)",
               "kind": "command"
             },
             {
@@ -21258,19 +21907,19 @@
           "title": "Skills Not Found",
           "paragraphs": [
             "看到这里，就把\"Skills Not Found\"当成一件真要上手的活来看。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
               "title": "Skills Not Found 1",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "# Wrong - Skills won't be loaded\noptions = ClaudeAgentOptions(allowed_tools=[\"Skill\"])\n\n# Correct - Skills will be loaded\noptions = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Required to load Skills\n    allowed_tools=[\"Skill\"],\n)",
+              "code": "# Skills not loaded: setting_sources excludes user and project\noptions = ClaudeAgentOptions(setting_sources=[], allowed_tools=[\"Skill\"])\n\n# Skills loaded: user and project sources included\noptions = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],\n    allowed_tools=[\"Skill\"],\n)",
               "kind": "code"
             },
             {
               "title": "Skills Not Found 2",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "# Ensure your cwd points to the directory containing .claude/skills/\noptions = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",  # Must contain .claude/skills/\n    setting_sources=[\"user\", \"project\"],  # Required to load Skills\n    allowed_tools=[\"Skill\"],\n)",
+              "code": "# Ensure your cwd points to the directory containing .claude/skills/\noptions = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",  # Must contain .claude/skills/\n    setting_sources=[\"user\", \"project\"],  # Loads skills from these sources\n    allowed_tools=[\"Skill\"],\n)",
               "kind": "command"
             },
             {
@@ -23272,6 +23921,18 @@
               "kind": "code"
             },
             {
+              "title": "原页关键片段：startup() 1",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "function startup(params?: {\n  options?: Options;\n  initializeTimeoutMs?: number;\n}): Promise<WarmQuery>;",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：startup() 2",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "import { startup } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Pay startup cost upfront\nconst warm = await startup({ options: { maxTurns: 3 } });\n\n// Later, when a prompt is ready, this is immediate\nfor await (const message of warm.query(\"What files are here?\")) {\n  console.log(message);\n}",
+              "kind": "command"
+            },
+            {
               "title": "原页关键片段：tool() 1",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
               "code": "function tool<Schema extends AnyZodRawShape>(\n  name: string,\n  description: string,\n  inputSchema: Schema,\n  handler: (args: InferShape<Schema>, extra: unknown) => Promise<CallToolResult>,\n  extras?: { annotations?: ToolAnnotations }\n): SdkMcpToolDefinition<Schema>;",
@@ -23318,18 +23979,6 @@
               "body": "\"getSessionInfo()\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
               "code": "function getSessionInfo(\n  sessionId: string,\n  options?: GetSessionInfoOptions\n): Promise<SDKSessionInfo | undefined>;",
               "kind": "code"
-            },
-            {
-              "title": "原页关键片段：renameSession()",
-              "body": "\"renameSession()\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "function renameSession(\n  sessionId: string,\n  title: string,\n  options?: SessionMutationOptions\n): Promise<void>;",
-              "kind": "code"
-            },
-            {
-              "title": "原页关键片段：tagSession()",
-              "body": "\"tagSession()\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "function tagSession(\n  sessionId: string,\n  tag: string | null,\n  options?: SessionMutationOptions\n): Promise<void>;",
-              "kind": "code"
             }
           ]
         },
@@ -23364,6 +24013,27 @@
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
               "code": "function query({\n  prompt,\n  options\n}: {\n  prompt: string | AsyncIterable<SDKUserMessage>;\n  options?: Options;\n}): Query;",
               "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "startup()",
+          "paragraphs": [
+            "这一段主要是在把\"startup()\"讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "startup() 1",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "function startup(params?: {\n  options?: Options;\n  initializeTimeoutMs?: number;\n}): Promise<WarmQuery>;",
+              "kind": "code"
+            },
+            {
+              "title": "startup() 2",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "import { startup } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Pay startup cost upfront\nconst warm = await startup({ options: { maxTurns: 3 } });\n\n// Later, when a prompt is ready, this is immediate\nfor await (const message of warm.query(\"What files are here?\")) {\n  console.log(message);\n}",
+              "kind": "command"
             }
           ]
         },
@@ -23517,6 +24187,21 @@
           ]
         },
         {
+          "title": "WarmQuery",
+          "paragraphs": [
+            "这一块主要是在说\"WarmQuery\"真到手上该怎么用，哪里最容易踩坑。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "WarmQuery",
+              "body": "\"WarmQuery\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "interface WarmQuery extends AsyncDisposable {\n  query(prompt: string | AsyncIterable<SDKUserMessage>): Query;\n  close(): void;\n}",
+              "kind": "code"
+            }
+          ]
+        },
+        {
           "title": "SDKControlInitializeResponse",
           "paragraphs": [
             "这一段主要是在把\"SDKControlInitializeResponse\"讲实，不是只摆个标题给你看。",
@@ -23576,20 +24261,20 @@
             {
               "title": "SettingSource 2",
               "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
-              "code": "// Load all settings like SDK v0.0.x did\nconst result = query({\n  prompt: \"Analyze this code\",\n  options: {\n    settingSources: [\"user\", \"project\", \"local\"] // Load all settings\n  }\n});",
+              "code": "// Do not load user, project, or local settings from disk\nconst result = query({\n  prompt: \"Analyze this code\",\n  options: { settingSources: [] }\n});",
               "kind": "prompt"
             },
             {
               "title": "SettingSource 3",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "// Load only project settings, ignore user and local\nconst result = query({\n  prompt: \"Run CI checks\",\n  options: {\n    settingSources: [\"project\"] // Only .claude/settings.json\n  }\n});",
-              "kind": "config"
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "const result = query({\n  prompt: \"Analyze this code\",\n  options: {\n    settingSources: [\"user\", \"project\", \"local\"] // Load all settings\n  }\n});",
+              "kind": "code"
             },
             {
               "title": "SettingSource 4",
-              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
-              "code": "// Ensure consistent behavior in CI by excluding local settings\nconst result = query({\n  prompt: \"Run tests\",\n  options: {\n    settingSources: [\"project\"], // Only team-shared settings\n    permissionMode: \"bypassPermissions\"\n  }\n});",
-              "kind": "prompt"
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "// Load only project settings, ignore user and local\nconst result = query({\n  prompt: \"Run CI checks\",\n  options: {\n    settingSources: [\"project\"] // Only .claude/settings.json\n  }\n});",
+              "kind": "config"
             }
           ]
         },
@@ -23720,7 +24405,7 @@
             {
               "title": "SDKMessage",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "type SDKMessage =\n  | SDKAssistantMessage\n  | SDKUserMessage\n  | SDKUserMessageReplay\n  | SDKResultMessage\n  | SDKSystemMessage\n  | SDKPartialAssistantMessage\n  | SDKCompactBoundaryMessage\n  | SDKStatusMessage\n  | SDKLocalCommandOutputMessage\n  | SDKHookStartedMessage\n  | SDKHookProgressMessage\n  | SDKHookResponseMessage\n  | SDKToolProgressMessage\n  | SDKAuthStatusMessage\n  | SDKTaskNotificationMessage\n  | SDKTaskStartedMessage\n  | SDKTaskProgressMessage\n  | SDKFilesPersistedEvent\n  | SDKToolUseSummaryMessage\n  | SDKRateLimitEvent\n  | SDKPromptSuggestionMessage;",
+              "code": "type SDKMessage =\n  | SDKAssistantMessage\n  | SDKUserMessage\n  | SDKUserMessageReplay\n  | SDKResultMessage\n  | SDKSystemMessage\n  | SDKPartialAssistantMessage\n  | SDKCompactBoundaryMessage\n  | SDKStatusMessage\n  | SDKLocalCommandOutputMessage\n  | SDKHookStartedMessage\n  | SDKHookProgressMessage\n  | SDKHookResponseMessage\n  | SDKPluginInstallMessage\n  | SDKToolProgressMessage\n  | SDKAuthStatusMessage\n  | SDKTaskNotificationMessage\n  | SDKTaskStartedMessage\n  | SDKTaskProgressMessage\n  | SDKFilesPersistedEvent\n  | SDKToolUseSummaryMessage\n  | SDKRateLimitEvent\n  | SDKPromptSuggestionMessage;",
               "kind": "code"
             }
           ]
@@ -23749,7 +24434,7 @@
             {
               "title": "SDKUserMessage",
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
-              "code": "type SDKUserMessage = {\n  type: \"user\";\n  uuid?: UUID;\n  session_id: string;\n  message: MessageParam; // From Anthropic SDK\n  parent_tool_use_id: string | null;\n  isSynthetic?: boolean;\n  tool_use_result?: unknown;\n};",
+              "code": "type SDKUserMessage = {\n  type: \"user\";\n  uuid?: UUID;\n  session_id: string;\n  message: MessageParam; // From Anthropic SDK\n  parent_tool_use_id: string | null;\n  isSynthetic?: boolean;\n  shouldQuery?: boolean;\n  tool_use_result?: unknown;\n};",
               "kind": "code"
             }
           ]
@@ -23779,34 +24464,6 @@
               "title": "SDKResultMessage",
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
               "code": "type SDKResultMessage =\n  | {\n      type: \"result\";\n      subtype: \"success\";\n      uuid: UUID;\n      session_id: string;\n      duration_ms: number;\n      duration_api_ms: number;\n      is_error: boolean;\n      num_turns: number;\n      result: string;\n      stop_reason: string | null;\n      total_cost_usd: number;\n      usage: NonNullableUsage;\n      modelUsage: { [modelName: string]: ModelUsage };\n      permission_denials: SDKPermissionDenial[];\n      structured_output?: unknown;\n    }\n  | {\n      type: \"result\";\n      subtype:\n        | \"error_max_turns\"\n        | \"error_during_execution\"\n        | \"error_max_budget_usd\"\n        | \"error_max_structured_output_retries\";\n      uuid: UUID;\n      session_id: string;\n      duration_ms: number;\n      duration_api_ms: number;\n      is_error: boolean;\n      num_turns: number;\n      stop_reason: string | null;\n      total_cost_usd: number;\n      usage: NonNullableUsage;\n      modelUsage: { [modelName: string]: ModelUsage };\n      permission_denials: SDKPermissionDenial[];\n      errors: string[];\n    };",
-              "kind": "code"
-            }
-          ]
-        },
-        {
-          "title": "SDKSystemMessage",
-          "paragraphs": [
-            "这一段主要是在把\"SDKSystemMessage\"讲实，不是只摆个标题给你看。"
-          ],
-          "steps": [
-            {
-              "title": "SDKSystemMessage",
-              "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "type SDKSystemMessage = {\n  type: \"system\";\n  subtype: \"init\";\n  uuid: UUID;\n  session_id: string;\n  agents?: string[];\n  apiKeySource: ApiKeySource;\n  betas?: string[];\n  claude_code_version: string;\n  cwd: string;\n  tools: string[];\n  mcp_servers: {\n    name: string;\n    status: string;\n  }[];\n  model: string;\n  permissionMode: PermissionMode;\n  slash_commands: string[];\n  output_style: string;\n  skills: string[];\n  plugins: { name: string; path: string }[];\n};",
-              "kind": "code"
-            }
-          ]
-        },
-        {
-          "title": "SDKPartialAssistantMessage",
-          "paragraphs": [
-            "这里不是让你背\"SDKPartialAssistantMessage\"这个词，而是让你看它真干活时怎么使。"
-          ],
-          "steps": [
-            {
-              "title": "SDKPartialAssistantMessage",
-              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
-              "code": "type SDKPartialAssistantMessage = {\n  type: \"stream_event\";\n  event: BetaRawMessageStreamEvent; // From Anthropic SDK\n  parent_tool_use_id: string | null;\n  uuid: UUID;\n  session_id: string;\n};",
               "kind": "code"
             }
           ]
@@ -23861,37 +24518,37 @@
             {
               "title": "原页关键片段：One-shot prompt",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "import { unstable_v2_prompt } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst result = await unstable_v2_prompt(\"What is 2 + 2?\", {\n  model: \"claude-opus-4-6\"\n});\nif (result.subtype === \"success\") {\n  console.log(result.result);\n}",
+              "code": "import { unstable_v2_prompt } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst result = await unstable_v2_prompt(\"What is 2 + 2?\", {\n  model: \"claude-opus-4-7\"\n});\nif (result.subtype === \"success\") {\n  console.log(result.result);\n}",
               "kind": "command"
             },
             {
               "title": "原页关键片段：Basic session",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "import { unstable_v2_createSession } from \"@anthropic-ai/claude-agent-sdk\";\n\nawait using session = unstable_v2_createSession({\n  model: \"claude-opus-4-6\"\n});\n\nawait session.send(\"Hello!\");\nfor await (const msg of session.stream()) {\n  // Filter for assistant messages to get human-readable output\n  if (msg.type === \"assistant\") {\n    const text = msg.message.content\n      .filter((block) => block.type === \"text\")\n      .map((block) => block.text)\n      .join(\"\");\n    console.log(text);\n  }\n}",
+              "code": "import { unstable_v2_createSession } from \"@anthropic-ai/claude-agent-sdk\";\n\nawait using session = unstable_v2_createSession({\n  model: \"claude-opus-4-7\"\n});\n\nawait session.send(\"Hello!\");\nfor await (const msg of session.stream()) {\n  // Filter for assistant messages to get human-readable output\n  if (msg.type === \"assistant\") {\n    const text = msg.message.content\n      .filter((block) => block.type === \"text\")\n      .map((block) => block.text)\n      .join(\"\");\n    console.log(text);\n  }\n}",
               "kind": "command"
             },
             {
               "title": "原页关键片段：Multi-turn conversation",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "import { unstable_v2_createSession } from \"@anthropic-ai/claude-agent-sdk\";\n\nawait using session = unstable_v2_createSession({\n  model: \"claude-opus-4-6\"\n});\n\n// Turn 1\nawait session.send(\"What is 5 + 3?\");\nfor await (const msg of session.stream()) {\n  // Filter for assistant messages to get human-readable output\n  if (msg.type === \"assistant\") {\n    const text = msg.message.content\n      .filter((block) => block.type === \"text\")\n      .map((block) => block.text)\n      .join(\"\");\n    console.log(text);\n  }\n}\n\n// Turn 2\nawait session.send(\"Multiply that by 2\");\nfor await (const msg of session.stream()) {\n  if (msg.type === \"assistant\") {\n    const text = msg.message.content\n      .filter((block) => block.type === \"text\")\n      .map((block) => block.text)\n      .join(\"\");\n    console.log(text);\n  }\n}",
+              "code": "import { unstable_v2_createSession } from \"@anthropic-ai/claude-agent-sdk\";\n\nawait using session = unstable_v2_createSession({\n  model: \"claude-opus-4-7\"\n});\n\n// Turn 1\nawait session.send(\"What is 5 + 3?\");\nfor await (const msg of session.stream()) {\n  // Filter for assistant messages to get human-readable output\n  if (msg.type === \"assistant\") {\n    const text = msg.message.content\n      .filter((block) => block.type === \"text\")\n      .map((block) => block.text)\n      .join(\"\");\n    console.log(text);\n  }\n}\n\n// Turn 2\nawait session.send(\"Multiply that by 2\");\nfor await (const msg of session.stream()) {\n  if (msg.type === \"assistant\") {\n    const text = msg.message.content\n      .filter((block) => block.type === \"text\")\n      .map((block) => block.text)\n      .join(\"\");\n    console.log(text);\n  }\n}",
               "kind": "command"
             },
             {
               "title": "原页关键片段：Session resume",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "import {\n  unstable_v2_createSession,\n  unstable_v2_resumeSession,\n  type SDKMessage\n} from \"@anthropic-ai/claude-agent-sdk\";\n\n// Helper to extract text from assistant messages\nfunction getAssistantText(msg: SDKMessage): string | null {\n  if (msg.type !== \"assistant\") return null;\n  return msg.message.content\n    .filter((block) => block.type === \"text\")\n    .map((block) => block.text)\n    .join(\"\");\n}\n\n// Create initial session and have a conversation\nconst session = unstable_v2_createSession({\n  model: \"claude-opus-4-6\"\n});\n\nawait session.send(\"Remember this number: 42\");\n\n// Get the session ID from any received message\nlet sessionId: string | undefined;\nfor await (const msg of session.stream()) {\n  sessionId = msg.session_id;\n  const text = getAssistantText(msg);\n  if (text) console.log(\"Initial response:\", text);\n}\n\nconsole.log(\"Session ID:\", sessionId);\nsession.close();\n\n// Later: resume the session using the stored ID\nawait using resumedSession = unstable_v2_resumeSession(sessionId!, {\n  model: \"claude-opus-4-6\"\n});\n\nawait resumedSession.send(\"What number did I ask you to remember?\");\nfor await (const msg of resumedSession.stream()) {\n  const text = getAssistantText(msg);\n  if (text) console.log(\"Resumed response:\", text);\n}",
+              "code": "import {\n  unstable_v2_createSession,\n  unstable_v2_resumeSession,\n  type SDKMessage\n} from \"@anthropic-ai/claude-agent-sdk\";\n\n// Helper to extract text from assistant messages\nfunction getAssistantText(msg: SDKMessage): string | null {\n  if (msg.type !== \"assistant\") return null;\n  return msg.message.content\n    .filter((block) => block.type === \"text\")\n    .map((block) => block.text)\n    .join(\"\");\n}\n\n// Create initial session and have a conversation\nconst session = unstable_v2_createSession({\n  model: \"claude-opus-4-7\"\n});\n\nawait session.send(\"Remember this number: 42\");\n\n// Get the session ID from any received message\nlet sessionId: string | undefined;\nfor await (const msg of session.stream()) {\n  sessionId = msg.session_id;\n  const text = getAssistantText(msg);\n  if (text) console.log(\"Initial response:\", text);\n}\n\nconsole.log(\"Session ID:\", sessionId);\nsession.close();\n\n// Later: resume the session using the stored ID\nawait using resumedSession = unstable_v2_resumeSession(sessionId!, {\n  model: \"claude-opus-4-7\"\n});\n\nawait resumedSession.send(\"What number did I ask you to remember?\");\nfor await (const msg of resumedSession.stream()) {\n  const text = getAssistantText(msg);\n  if (text) console.log(\"Resumed response:\", text);\n}",
               "kind": "command"
             },
             {
               "title": "原页关键片段：Cleanup 1",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "import { unstable_v2_createSession } from \"@anthropic-ai/claude-agent-sdk\";\n\nawait using session = unstable_v2_createSession({\n  model: \"claude-opus-4-6\"\n});\n// Session closes automatically when the block exits",
+              "code": "import { unstable_v2_createSession } from \"@anthropic-ai/claude-agent-sdk\";\n\nawait using session = unstable_v2_createSession({\n  model: \"claude-opus-4-7\"\n});\n// Session closes automatically when the block exits",
               "kind": "command"
             },
             {
               "title": "原页关键片段：Cleanup 2",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "import { unstable_v2_createSession } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst session = unstable_v2_createSession({\n  model: \"claude-opus-4-6\"\n});\n// ... use the session ...\nsession.close();",
+              "code": "import { unstable_v2_createSession } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst session = unstable_v2_createSession({\n  model: \"claude-opus-4-7\"\n});\n// ... use the session ...\nsession.close();",
               "kind": "command"
             },
             {
@@ -23950,7 +24607,7 @@
             {
               "title": "One-shot prompt",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "import { unstable_v2_prompt } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst result = await unstable_v2_prompt(\"What is 2 + 2?\", {\n  model: \"claude-opus-4-6\"\n});\nif (result.subtype === \"success\") {\n  console.log(result.result);\n}",
+              "code": "import { unstable_v2_prompt } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst result = await unstable_v2_prompt(\"What is 2 + 2?\", {\n  model: \"claude-opus-4-7\"\n});\nif (result.subtype === \"success\") {\n  console.log(result.result);\n}",
               "kind": "command"
             }
           ]
@@ -23965,7 +24622,7 @@
             {
               "title": "Basic session",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "import { unstable_v2_createSession } from \"@anthropic-ai/claude-agent-sdk\";\n\nawait using session = unstable_v2_createSession({\n  model: \"claude-opus-4-6\"\n});\n\nawait session.send(\"Hello!\");\nfor await (const msg of session.stream()) {\n  // Filter for assistant messages to get human-readable output\n  if (msg.type === \"assistant\") {\n    const text = msg.message.content\n      .filter((block) => block.type === \"text\")\n      .map((block) => block.text)\n      .join(\"\");\n    console.log(text);\n  }\n}",
+              "code": "import { unstable_v2_createSession } from \"@anthropic-ai/claude-agent-sdk\";\n\nawait using session = unstable_v2_createSession({\n  model: \"claude-opus-4-7\"\n});\n\nawait session.send(\"Hello!\");\nfor await (const msg of session.stream()) {\n  // Filter for assistant messages to get human-readable output\n  if (msg.type === \"assistant\") {\n    const text = msg.message.content\n      .filter((block) => block.type === \"text\")\n      .map((block) => block.text)\n      .join(\"\");\n    console.log(text);\n  }\n}",
               "kind": "command"
             }
           ]
@@ -23980,7 +24637,7 @@
             {
               "title": "Multi-turn conversation",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "import { unstable_v2_createSession } from \"@anthropic-ai/claude-agent-sdk\";\n\nawait using session = unstable_v2_createSession({\n  model: \"claude-opus-4-6\"\n});\n\n// Turn 1\nawait session.send(\"What is 5 + 3?\");\nfor await (const msg of session.stream()) {\n  // Filter for assistant messages to get human-readable output\n  if (msg.type === \"assistant\") {\n    const text = msg.message.content\n      .filter((block) => block.type === \"text\")\n      .map((block) => block.text)\n      .join(\"\");\n    console.log(text);\n  }\n}\n\n// Turn 2\nawait session.send(\"Multiply that by 2\");\nfor await (const msg of session.stream()) {\n  if (msg.type === \"assistant\") {\n    const text = msg.message.content\n      .filter((block) => block.type === \"text\")\n      .map((block) => block.text)\n      .join(\"\");\n    console.log(text);\n  }\n}",
+              "code": "import { unstable_v2_createSession } from \"@anthropic-ai/claude-agent-sdk\";\n\nawait using session = unstable_v2_createSession({\n  model: \"claude-opus-4-7\"\n});\n\n// Turn 1\nawait session.send(\"What is 5 + 3?\");\nfor await (const msg of session.stream()) {\n  // Filter for assistant messages to get human-readable output\n  if (msg.type === \"assistant\") {\n    const text = msg.message.content\n      .filter((block) => block.type === \"text\")\n      .map((block) => block.text)\n      .join(\"\");\n    console.log(text);\n  }\n}\n\n// Turn 2\nawait session.send(\"Multiply that by 2\");\nfor await (const msg of session.stream()) {\n  if (msg.type === \"assistant\") {\n    const text = msg.message.content\n      .filter((block) => block.type === \"text\")\n      .map((block) => block.text)\n      .join(\"\");\n    console.log(text);\n  }\n}",
               "kind": "command"
             }
           ]
@@ -23995,7 +24652,7 @@
             {
               "title": "Session resume",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "import {\n  unstable_v2_createSession,\n  unstable_v2_resumeSession,\n  type SDKMessage\n} from \"@anthropic-ai/claude-agent-sdk\";\n\n// Helper to extract text from assistant messages\nfunction getAssistantText(msg: SDKMessage): string | null {\n  if (msg.type !== \"assistant\") return null;\n  return msg.message.content\n    .filter((block) => block.type === \"text\")\n    .map((block) => block.text)\n    .join(\"\");\n}\n\n// Create initial session and have a conversation\nconst session = unstable_v2_createSession({\n  model: \"claude-opus-4-6\"\n});\n\nawait session.send(\"Remember this number: 42\");\n\n// Get the session ID from any received message\nlet sessionId: string | undefined;\nfor await (const msg of session.stream()) {\n  sessionId = msg.session_id;\n  const text = getAssistantText(msg);\n  if (text) console.log(\"Initial response:\", text);\n}\n\nconsole.log(\"Session ID:\", sessionId);\nsession.close();\n\n// Later: resume the session using the stored ID\nawait using resumedSession = unstable_v2_resumeSession(sessionId!, {\n  model: \"claude-opus-4-6\"\n});\n\nawait resumedSession.send(\"What number did I ask you to remember?\");\nfor await (const msg of resumedSession.stream()) {\n  const text = getAssistantText(msg);\n  if (text) console.log(\"Resumed response:\", text);\n}",
+              "code": "import {\n  unstable_v2_createSession,\n  unstable_v2_resumeSession,\n  type SDKMessage\n} from \"@anthropic-ai/claude-agent-sdk\";\n\n// Helper to extract text from assistant messages\nfunction getAssistantText(msg: SDKMessage): string | null {\n  if (msg.type !== \"assistant\") return null;\n  return msg.message.content\n    .filter((block) => block.type === \"text\")\n    .map((block) => block.text)\n    .join(\"\");\n}\n\n// Create initial session and have a conversation\nconst session = unstable_v2_createSession({\n  model: \"claude-opus-4-7\"\n});\n\nawait session.send(\"Remember this number: 42\");\n\n// Get the session ID from any received message\nlet sessionId: string | undefined;\nfor await (const msg of session.stream()) {\n  sessionId = msg.session_id;\n  const text = getAssistantText(msg);\n  if (text) console.log(\"Initial response:\", text);\n}\n\nconsole.log(\"Session ID:\", sessionId);\nsession.close();\n\n// Later: resume the session using the stored ID\nawait using resumedSession = unstable_v2_resumeSession(sessionId!, {\n  model: \"claude-opus-4-7\"\n});\n\nawait resumedSession.send(\"What number did I ask you to remember?\");\nfor await (const msg of resumedSession.stream()) {\n  const text = getAssistantText(msg);\n  if (text) console.log(\"Resumed response:\", text);\n}",
               "kind": "command"
             }
           ]
@@ -24010,13 +24667,13 @@
             {
               "title": "Cleanup 1",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "import { unstable_v2_createSession } from \"@anthropic-ai/claude-agent-sdk\";\n\nawait using session = unstable_v2_createSession({\n  model: \"claude-opus-4-6\"\n});\n// Session closes automatically when the block exits",
+              "code": "import { unstable_v2_createSession } from \"@anthropic-ai/claude-agent-sdk\";\n\nawait using session = unstable_v2_createSession({\n  model: \"claude-opus-4-7\"\n});\n// Session closes automatically when the block exits",
               "kind": "command"
             },
             {
               "title": "Cleanup 2",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "import { unstable_v2_createSession } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst session = unstable_v2_createSession({\n  model: \"claude-opus-4-6\"\n});\n// ... use the session ...\nsession.close();",
+              "code": "import { unstable_v2_createSession } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst session = unstable_v2_createSession({\n  model: \"claude-opus-4-7\"\n});\n// ... use the session ...\nsession.close();",
               "kind": "command"
             }
           ]
@@ -24528,7 +25185,7 @@
             {
               "title": "ClaudeAgentOptions",
               "body": "\"ClaudeAgentOptions\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "@dataclass\nclass ClaudeAgentOptions:\n    tools: list[str] | ToolsPreset | None = None\n    allowed_tools: list[str] = field(default_factory=list)\n    system_prompt: str | SystemPromptPreset | None = None\n    mcp_servers: dict[str, McpServerConfig] | str | Path = field(default_factory=dict)\n    permission_mode: PermissionMode | None = None\n    continue_conversation: bool = False\n    resume: str | None = None\n    max_turns: int | None = None\n    max_budget_usd: float | None = None\n    disallowed_tools: list[str] = field(default_factory=list)\n    model: str | None = None\n    fallback_model: str | None = None\n    betas: list[SdkBeta] = field(default_factory=list)\n    output_format: dict[str, Any] | None = None\n    permission_prompt_tool_name: str | None = None\n    cwd: str | Path | None = None\n    cli_path: str | Path | None = None\n    settings: str | None = None\n    add_dirs: list[str | Path] = field(default_factory=list)\n    env: dict[str, str] = field(default_factory=dict)\n    extra_args: dict[str, str | None] = field(default_factory=dict)\n    max_buffer_size: int | None = None\n    debug_stderr: Any = sys.stderr  # Deprecated\n    stderr: Callable[[str], None] | None = None\n    can_use_tool: CanUseTool | None = None\n    hooks: dict[HookEvent, list[HookMatcher]] | None = None\n    user: str | None = None\n    include_partial_messages: bool = False\n    fork_session: bool = False\n    agents: dict[str, AgentDefinition] | None = None\n    setting_sources: list[SettingSource] | None = None\n    sandbox: SandboxSettings | None = None\n    plugins: list[SdkPluginConfig] = field(default_factory=list)\n    max_thinking_tokens: int | None = None  # Deprecated: use thinking instead\n    thinking: ThinkingConfig | None = None\n    effort: Literal[\"low\", \"medium\", \"high\", \"max\"] | None = None\n    enable_file_checkpointing: bool = False",
+              "code": "@dataclass\nclass ClaudeAgentOptions:\n    tools: list[str] | ToolsPreset | None = None\n    allowed_tools: list[str] = field(default_factory=list)\n    system_prompt: str | SystemPromptPreset | None = None\n    mcp_servers: dict[str, McpServerConfig] | str | Path = field(default_factory=dict)\n    permission_mode: PermissionMode | None = None\n    continue_conversation: bool = False\n    resume: str | None = None\n    max_turns: int | None = None\n    max_budget_usd: float | None = None\n    disallowed_tools: list[str] = field(default_factory=list)\n    model: str | None = None\n    fallback_model: str | None = None\n    betas: list[SdkBeta] = field(default_factory=list)\n    output_format: dict[str, Any] | None = None\n    permission_prompt_tool_name: str | None = None\n    cwd: str | Path | None = None\n    cli_path: str | Path | None = None\n    settings: str | None = None\n    add_dirs: list[str | Path] = field(default_factory=list)\n    env: dict[str, str] = field(default_factory=dict)\n    extra_args: dict[str, str | None] = field(default_factory=dict)\n    max_buffer_size: int | None = None\n    debug_stderr: Any = sys.stderr  # Deprecated\n    stderr: Callable[[str], None] | None = None\n    can_use_tool: CanUseTool | None = None\n    hooks: dict[HookEvent, list[HookMatcher]] | None = None\n    user: str | None = None\n    include_partial_messages: bool = False\n    fork_session: bool = False\n    agents: dict[str, AgentDefinition] | None = None\n    setting_sources: list[SettingSource] | None = None\n    sandbox: SandboxSettings | None = None\n    plugins: list[SdkPluginConfig] = field(default_factory=list)\n    max_thinking_tokens: int | None = None  # Deprecated: use thinking instead\n    thinking: ThinkingConfig | None = None\n    effort: Literal[\"low\", \"medium\", \"high\", \"xhigh\", \"max\"] | None = None\n    enable_file_checkpointing: bool = False",
               "kind": "code"
             }
           ]
@@ -24577,20 +25234,20 @@
             {
               "title": "SettingSource 2",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "# Load all settings like SDK v0.0.x did\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\nasync for message in query(\n    prompt=\"Analyze this code\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"user\", \"project\", \"local\"]  # Load all settings\n    ),\n):\n    print(message)",
+              "code": "# Do not load user, project, or local settings from disk\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\nasync for message in query(\n    prompt=\"Analyze this code\",\n    options=ClaudeAgentOptions(\n        setting_sources=[]\n    ),\n):\n    print(message)",
               "kind": "code"
             },
             {
               "title": "SettingSource 3",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "# Load only project settings, ignore user and local\nasync for message in query(\n    prompt=\"Run CI checks\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"project\"]  # Only .claude/settings.json\n    ),\n):\n    print(message)",
-              "kind": "config"
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "from claude_agent_sdk import query, ClaudeAgentOptions\n\nasync for message in query(\n    prompt=\"Analyze this code\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"user\", \"project\", \"local\"]\n    ),\n):\n    print(message)",
+              "kind": "code"
             },
             {
               "title": "SettingSource 4",
-              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "# Ensure consistent behavior in CI by excluding local settings\nasync for message in query(\n    prompt=\"Run tests\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"project\"],  # Only team-shared settings\n        permission_mode=\"bypassPermissions\",\n    ),\n):\n    print(message)",
-              "kind": "code"
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "# Load only project settings, ignore user and local\nasync for message in query(\n    prompt=\"Run CI checks\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"project\"]  # Only .claude/settings.json\n    ),\n):\n    print(message)",
+              "kind": "config"
             }
           ]
         },
@@ -24793,7 +25450,7 @@
             {
               "title": "原页关键片段：Python: ClaudeCodeOptions renamed to ClaudeAgentOptions",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# BEFORE (claude-code-sdk)\nfrom claude_code_sdk import query, ClaudeCodeOptions\n\noptions = ClaudeCodeOptions(model=\"claude-opus-4-6\", permission_mode=\"acceptEdits\")\n\n# AFTER (claude-agent-sdk)\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\noptions = ClaudeAgentOptions(model=\"claude-opus-4-6\", permission_mode=\"acceptEdits\")",
+              "code": "# BEFORE (claude-code-sdk)\nfrom claude_code_sdk import query, ClaudeCodeOptions\n\noptions = ClaudeCodeOptions(model=\"claude-opus-4-7\", permission_mode=\"acceptEdits\")\n\n# AFTER (claude-agent-sdk)\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\noptions = ClaudeAgentOptions(model=\"claude-opus-4-7\", permission_mode=\"acceptEdits\")",
               "kind": "command"
             },
             {
@@ -24889,7 +25546,7 @@
             {
               "title": "For Python Projects 4",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "# Before\nfrom claude_code_sdk import query, ClaudeCodeOptions\n\noptions = ClaudeCodeOptions(model=\"claude-opus-4-6\")\n\n# After\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\noptions = ClaudeAgentOptions(model=\"claude-opus-4-6\")",
+              "code": "# Before\nfrom claude_code_sdk import query, ClaudeCodeOptions\n\noptions = ClaudeCodeOptions(model=\"claude-opus-4-7\")\n\n# After\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\noptions = ClaudeAgentOptions(model=\"claude-opus-4-7\")",
               "kind": "command"
             }
           ]
@@ -24910,7 +25567,7 @@
             {
               "title": "Python: ClaudeCodeOptions renamed to ClaudeAgentOptions",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# BEFORE (claude-code-sdk)\nfrom claude_code_sdk import query, ClaudeCodeOptions\n\noptions = ClaudeCodeOptions(model=\"claude-opus-4-6\", permission_mode=\"acceptEdits\")\n\n# AFTER (claude-agent-sdk)\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\noptions = ClaudeAgentOptions(model=\"claude-opus-4-6\", permission_mode=\"acceptEdits\")",
+              "code": "# BEFORE (claude-code-sdk)\nfrom claude_code_sdk import query, ClaudeCodeOptions\n\noptions = ClaudeCodeOptions(model=\"claude-opus-4-7\", permission_mode=\"acceptEdits\")\n\n# AFTER (claude-agent-sdk)\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\noptions = ClaudeAgentOptions(model=\"claude-opus-4-7\", permission_mode=\"acceptEdits\")",
               "kind": "command"
             }
           ]
