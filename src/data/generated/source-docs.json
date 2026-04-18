@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-17T05:11:11.987Z",
+  "generatedAt": "2026-04-18T04:41:46.364Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -1161,6 +1161,7 @@
       "metaDescription": "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
       "headings": [],
       "toc": [
+        "2.1.113",
         "2.1.112",
         "2.1.111",
         "2.1.110",
@@ -1179,13 +1180,50 @@
         "2.1.89",
         "2.1.87",
         "2.1.86",
-        "2.1.85",
-        "2.1.84"
+        "2.1.85"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Changed the CLI to spawn a native Claude Code binary (via a per-platform optional dependency) instead of bundled JavaScript",
+        "Added sandbox.network.deniedDomains setting to block specific domains even when a broader allowedDomains wildcard would otherwise permit them",
+        "Fullscreen mode: Shift+↑/↓ now scrolls the viewport when extending a selection past the visible edge",
+        "Ctrl+A and Ctrl+E now move to the start/end of the current logical line in multiline input, matching readline behavior",
+        "Windows: Ctrl+Backspace now deletes the previous word",
+        "Long URLs in responses and bash output stay clickable when they wrap across lines (in terminals with OSC 8 hyperlinks)",
+        "Improved /loop: pressing Esc now cancels pending wakeups, and wakeups display as “Claude resuming /loop wakeup” for clarity",
+        "/extra-usage now works from Remote Control (mobile/web) clients",
+        "Remote Control clients can now query @-file autocomplete suggestions",
+        "Improved /ultrareview: faster launch with parallelized checks, diffstat in the launch dialog, and animated launching state",
+        "Subagents that stall mid-stream now fail with a clear error after 10 minutes instead of hanging silently",
+        "Bash tool: multi-line commands whose first line is a comment now show the full command in the transcript, closing a UI-spoofing vector",
+        "Running cd <current-directory> && git … no longer triggers a permission prompt when the cd is a no-op",
+        "Security: on macOS, /private/{etc,var,tmp,home} paths are now treated as dangerous removal targets under Bash(rm:*) allow rules",
+        "Security: Bash deny rules now match commands wrapped in env/sudo/watch/ionice/setsid and similar exec wrappers",
+        "Security: Bash(find:*) allow rules no longer auto-approve find -exec/-delete",
+        "Fixed MCP concurrent-call timeout handling where a message for one tool call could silently disarm another call’s watchdog",
+        "Fixed Cmd-backspace / Ctrl+U to once again delete from the cursor to the start of the line",
+        "Fixed markdown tables breaking when a cell contains an inline code span with a pipe character",
+        "Fixed session recap auto-firing while composing unsent text in the prompt",
+        "Fixed /copy “Full response” not aligning markdown table columns for pasting into GitHub, Notion, or Slack",
+        "Fixed messages typed while viewing a running subagent being hidden from its transcript and misattributed to the parent AI",
+        "Fixed Bash dangerouslyDisableSandbox running commands outside the sandbox without a permission prompt",
+        "Fixed /effort auto confirmation — now says “Effort level set to max” to match the status bar label",
+        "Fixed the “copied N chars” toast overcounting emoji and other multi-code-unit characters",
+        "Fixed /insights crashing with EBUSY on Windows",
+        "Fixed exit confirmation dialog mislabeling one-shot scheduled tasks as recurring — now shows a countdown",
+        "Fixed slash/@ completion menu not sitting flush against the prompt border in fullscreen mode",
+        "Fixed CLAUDE_CODE_EXTRA_BODY output_config.effort causing 400 errors on subagent calls to models that don’t support effort and on Vertex AI",
+        "Fixed prompt cursor disappearing when NO_COLOR is set",
+        "Fixed ToolSearch ranking so pasted MCP tool names surface the actual tool instead of description-matching siblings",
+        "Fixed compacting a resumed long-context session failing with “Extra usage is required for long context requests”",
+        "Fixed plugin install succeeding when a dependency version conflicts with an already-installed plugin — now reports range-conflict",
+        "Fixed “Refine with Ultraplan” not showing the remote session URL in the transcript",
+        "Fixed SDK image content blocks that fail to process crashing the session — now degrade to a text placeholder",
+        "Fixed Remote Control sessions not streaming subagent transcripts",
+        "Fixed Remote Control sessions not being archived when Claude Code exits",
+        "Fixed thinking.type.enabled is not supported 400 error when using Opus 4.7 via a Bedrock Application Inference Profile ARN",
         "Fixed “claude-opus-4-7 is temporarily unavailable” for auto mode",
         "Claude Opus 4.7 xhigh is now available! Use /effort to tune speed vs. intelligence",
         "Auto mode is now available for Max subscribers when using Opus 4.7",
@@ -1324,45 +1362,7 @@
         "Improved brief mode to retry once when Claude responds with plain text instead of a structured message",
         "Improved focus mode: Claude now writes more self-contained summaries since it knows you only see its final message",
         "Improved tool-not-available errors to explain why and how to proceed when the model calls a tool that exists but isn’t available in the current context",
-        "Improved rate-limit retry messages to show which limit was hit and when it resets instead of an opaque seconds countdown",
-        "Improved refusal error messages to include the API-provided explanation when available",
-        "Improved claude -p --resume <name> to accept session titles set via /rename or --name",
-        "Improved settings resilience: an unrecognized hook event name in settings.json no longer causes the entire file to be ignored",
-        "Improved plugin hooks from plugins force-enabled by managed settings to run when allowManagedHooksOnly is set",
-        "Improved /plugin and claude plugin update to show a warning when the marketplace could not be refreshed, instead of silently reporting a stale version",
-        "Improved plan mode to hide the “Refine with Ultraplan” option when the user’s org or auth setup can’t reach Claude Code on the web",
-        "Improved beta tracing to honor OTEL_LOG_USER_PROMPTS, OTEL_LOG_TOOL_DETAILS, and OTEL_LOG_TOOL_CONTENT; sensitive span attributes are no longer emitted unless opted in",
-        "Improved SDK query() to clean up subprocess and temp files when consumers break from for await or use await using",
-        "Fixed a command injection vulnerability in the POSIX which fallback used by LSP binary detection",
-        "Fixed a memory leak where long sessions retained dozens of historical copies of the message list in the virtual scroller",
-        "Fixed --resume/--continue losing conversation context on large sessions when the loader anchored on a dead-end branch instead of the live conversation",
-        "Fixed --resume chain recovery bridging into an unrelated subagent conversation when a subagent message landed near a main-chain write gap",
-        "Fixed a crash on --resume when a persisted Edit/Write tool result was missing its file_path",
-        "Fixed a hardcoded 5-minute request timeout that aborted slow backends (local LLMs, extended thinking, slow gateways) regardless of API_TIMEOUT_MS",
-        "Fixed permissions.deny rules not overriding a PreToolUse hook’s permissionDecision: \"ask\" — previously the hook could downgrade a deny into a prompt",
-        "Fixed --setting-sources without user causing background cleanup to ignore cleanupPeriodDays and delete conversation history older than 30 days",
-        "Fixed Bedrock SigV4 authentication failing with 403 when ANTHROPIC_AUTH_TOKEN, apiKeyHelper, or ANTHROPIC_CUSTOM_HEADERS set an Authorization header",
-        "Fixed claude -w <name> failing with “already exists” after a previous session’s worktree cleanup left a stale directory",
-        "Fixed subagents not inheriting MCP tools from dynamically-injected servers",
-        "Fixed sub-agents running in isolated worktrees being denied Read/Edit access to files inside their own worktree",
-        "Fixed sandboxed Bash commands failing with mktemp: No such file or directory after a fresh boot",
-        "Fixed claude mcp serve tool calls failing with “Tool execution failed” in MCP clients that validate outputSchema",
-        "Fixed RemoteTrigger tool’s run action sending an empty body and being rejected by the server",
-        "Fixed several /resume picker issues: narrow default view hiding sessions from other projects, unreachable preview on Windows Terminal, incorrect cwd in worktrees, session-not-found errors not surfacing in stderr, terminal title not being set, and resume hint overlapping the prompt input",
-        "Fixed Grep tool ENOENT when the embedded ripgrep binary path becomes stale (VS Code extension auto-update, macOS App Translocation); now falls back to system rg and self-heals mid-session",
-        "Fixed /btw writing a copy of the entire conversation to disk on every use",
-        "Fixed /context Free space and Messages breakdown disagreeing with the header percentage",
-        "Fixed several plugin issues: slash commands resolving to the wrong plugin with duplicate name: frontmatter, /plugin update failing with ENAMETOOLONG, Discover showing already-installed plugins, directory-source plugins loading from a stale version cache, and skills not honoring context: fork and agent frontmatter fields",
-        "Fixed the /mcp menu offering OAuth-specific actions for MCP servers configured with headersHelper; Reconnect is now offered instead to re-invoke the helper script",
-        "Fixed ctrl+], ctrl+\\, and ctrl+^ keybindings not firing in terminals that send raw C0 control bytes (Terminal.app, default iTerm2, xterm)",
-        "Fixed /login OAuth URL rendering with padding that prevented clean mouse selection",
-        "Fixed rendering issues: flicker in non-fullscreen mode when content above the visible area changed, terminal scrollback being wiped during long sessions in non-fullscreen mode, and mouse-scroll escape sequences occasionally leaking into the prompt as text",
-        "Fixed crash when settings.json env values are numbers instead of strings",
-        "Fixed in-app settings writes (e.g. /add-dir --remember, /config) not refreshing the in-memory snapshot, preventing removed directories from being revoked mid-session",
-        "Fixed custom keybindings (~/.claude/keybindings.json) not loading on Bedrock, Vertex, and other third-party providers",
-        "Fixed claude --continue -p not correctly continuing sessions created by -p or the SDK",
-        "Fixed several Remote Control issues: worktrees removed on session crash, connection failures not persisting in the transcript, spurious “Disconnected” indicator in brief mode for local sessions, and /remote-control failing over SSH when only CLAUDE_CODE_ORGANIZATION_UUID is set",
-        "Fixed /insights sometimes omitting the report file link from its response"
+        "Improved rate-limit retry messages to show which limit was hit and when it resets instead of an opaque seconds countdown"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1372,15 +1372,15 @@
             "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Fixed “claude-opus-4-7 is temporarily unavailable” for auto mode",
-            "Claude Opus 4.7 xhigh is now available! Use /effort to tune speed vs. intelligence",
-            "Auto mode is now available for Max subscribers when using Opus 4.7",
-            "Added xhigh effort level for Opus 4.7, sitting between high and max. Available via /effort, --effort, and the model picker; other models fall back to high",
-            "/effort now opens an interactive slider when called without arguments, with arrow-key navigation between levels and Enter to confirm",
-            "Added “Auto (match terminal)” theme option that matches your terminal’s dark/light mode — select it from /theme",
-            "Added /less-permission-prompts skill — scans transcripts for common read-only Bash and MCP tool calls and proposes a prioritized allowlist for .claude/settings.json",
-            "Added /ultrareview for running comprehensive code review in the cloud using parallel multi-agent analysis and critique — invoke with no arguments to review your current branch, or /ultrareview <PR#> to fetch and review a specific GitHub PR",
-            "Auto mode no longer requires --enable-auto-mode"
+            "Changed the CLI to spawn a native Claude Code binary (via a per-platform optional dependency) instead of bundled JavaScript",
+            "Added sandbox.network.deniedDomains setting to block specific domains even when a broader allowedDomains wildcard would otherwise permit them",
+            "Fullscreen mode: Shift+↑/↓ now scrolls the viewport when extending a selection past the visible edge",
+            "Ctrl+A and Ctrl+E now move to the start/end of the current logical line in multiline input, matching readline behavior",
+            "Windows: Ctrl+Backspace now deletes the previous word",
+            "Long URLs in responses and bash output stay clickable when they wrap across lines (in terminals with OSC 8 hyperlinks)",
+            "Improved /loop: pressing Esc now cancels pending wakeups, and wakeups display as “Claude resuming /loop wakeup” for clarity",
+            "/extra-usage now works from Remote Control (mobile/web) clients",
+            "Remote Control clients can now query @-file autocomplete suggestions"
           ],
           "codeBlocks": []
         }
@@ -12177,6 +12177,7 @@
         "Windows installation issues: errors in WSL",
         "WSL2 sandbox setup",
         "Permission errors during installation",
+        "Native binary not found after npm install",
         "Permissions and authentication",
         "Repeated permission prompts",
         "Authentication issues",
@@ -12330,8 +12331,7 @@
         "Update macOS if you’re on an older version. The binary uses load commands that older macOS versions don’t support.",
         "Try Homebrew as an alternative install method: brew install --cask claude-code",
         "Try Homebrew as an alternative install method:",
-        "You might encounter the following issues in WSL:",
-        "OS/platform detection issues: if you receive an error during installation, WSL may be using Windows npm. Try:"
+        "You might encounter the following issues in WSL:"
       ],
       "codeBlocks": [
         "curl -sI https://storage.googleapis.com",
@@ -12768,6 +12768,17 @@
           ]
         },
         {
+          "title": "​Native binary not found after npm install",
+          "paragraphs": [
+            "The @anthropic-ai/claude-code npm package pulls in the native binary through a per-platform optional dependency such as @anthropic-ai/claude-code-darwin-arm64. If running claude after install prints Could not find native binary package \"@anthropic-ai/claude-code-<platform>\", check the following causes:",
+            "Optional dependencies are disabled. Remove --omit=optional from your npm install command, --no-optional from pnpm, or --ignore-optional from yarn, and check that .npmrc does not set optional=false. Then reinstall. The native binary is delivered only as an optional dependency, so there is no JavaScript fallback if it is skipped.",
+            "Unsupported platform. Prebuilt binaries are published for darwin-arm64, darwin-x64, linux-x64, linux-arm64, linux-x64-musl, linux-arm64-musl, win32-x64, and win32-arm64. Claude Code does not ship a binary for other platforms; see the system requirements.",
+            "Corporate npm mirror is missing the platform packages. Ensure your registry mirrors all eight @anthropic-ai/claude-code-* platform packages in addition to the meta package.",
+            "Installing with --ignore-scripts does not trigger this error. The postinstall step that links the binary into place is skipped, so Claude Code falls back to a wrapper that locates and spawns the platform binary on each launch. This works but starts more slowly; reinstall with scripts enabled for direct execution."
+          ],
+          "codeBlocks": []
+        },
+        {
           "title": "​Permissions and authentication",
           "paragraphs": [
             "These sections address login failures, token issues, and permission prompt behavior."
@@ -12810,24 +12821,6 @@
             "Claude Pro/Max users: verify your subscription is active at claude.ai/settings",
             "Console users: confirm your account has the “Claude Code” or “Developer” role assigned by your admin",
             "Behind a proxy: corporate proxies can interfere with API requests. See network configuration for proxy setup."
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Model not found or not accessible",
-          "paragraphs": [
-            "If you see There's an issue with the selected model (...). It may not exist or you may not have access to it, the API rejected the configured model name.",
-            "Common causes:",
-            "A typo in the model name passed to --model",
-            "A stale or deprecated model ID saved in your settings",
-            "An API key without access to that model on your current usage tier",
-            "Check where the model is set, in priority order:",
-            "The --model flag",
-            "The ANTHROPIC_MODEL environment variable",
-            "The model field in .claude/settings.local.json",
-            "The model field in your project’s .claude/settings.json",
-            "The model field in ~/.claude/settings.json",
-            "To clear a stale value, remove the model field from your settings or unset ANTHROPIC_MODEL, and Claude Code will fall back to the default model for your account."
           ],
           "codeBlocks": []
         }
@@ -15305,7 +15298,7 @@
         "​Update manually",
         "​Advanced installation options",
         "​Install a specific version",
-        "​Deprecated npm installation",
+        "​Install with npm",
         "​Binary integrity and code signing",
         "​Uninstall Claude Code",
         "​Native installation",
@@ -15327,11 +15320,11 @@
         "Update manually",
         "Advanced installation options",
         "Install a specific version",
-        "Deprecated npm installation",
-        "Migrate from npm to native",
         "Install with npm",
         "Binary integrity and code signing",
-        "Verify the manifest signature"
+        "Verify the manifest signature",
+        "Platform code signatures",
+        "Uninstall Claude Code"
       ],
       "paragraphs": [
         "System requirements",
@@ -15349,8 +15342,6 @@
         "Update manually",
         "Advanced installation options",
         "Install a specific version",
-        "Deprecated npm installation",
-        "Migrate from npm to native",
         "Install with npm",
         "Binary integrity and code signing",
         "Verify the manifest signature",
@@ -15430,10 +15421,9 @@
         "Windows CMD",
         "To install the stable version:",
         "To install a specific version number:",
-        "npm installation is deprecated. The native installer is faster, requires no dependencies, and auto-updates in the background. Use the native installation method when possible.",
-        "If you previously installed Claude Code with npm, switch to the native installer:",
-        "You can also run claude install from an existing npm installation to install the native binary alongside it, then remove the npm version.",
-        "If you need npm installation for compatibility reasons, you must have Node.js 18+ installed. Install the package globally:",
+        "You can also install Claude Code as a global npm package. The package requires Node.js 18 or later.",
+        "The npm package installs the same native binary as the standalone installer. npm pulls the binary in through a per-platform optional dependency such as @anthropic-ai/claude-code-darwin-arm64, and a postinstall step links it into place. The installed claude binary does not itself invoke Node.",
+        "Supported npm install platforms are darwin-arm64, darwin-x64, linux-x64, linux-arm64, linux-x64-musl, linux-arm64-musl, win32-x64, and win32-arm64. Your package manager must allow optional dependencies. See troubleshooting if the binary is missing after install.",
         "Do NOT use sudo npm install -g as this can lead to permission issues and security risks. If you encounter permission errors, see troubleshooting permission errors.",
         "Each release publishes a manifest.json containing SHA256 checksums for every platform binary. The manifest is signed with an Anthropic GPG key, so verifying the signature on the manifest transitively verifies every binary it lists.",
         "Steps 1-3 require a POSIX shell with gpg and curl. On Windows, run them in Git Bash or WSL. Step 4 includes a PowerShell option.",
@@ -15487,7 +15477,6 @@
         "curl -fsSL https://claude.ai/install.sh | bash -s 2.1.89",
         "& ([scriptblock]::Create((irm https://claude.ai/install.ps1))) 2.1.89",
         "curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd 2.1.89 && del install.cmd",
-        "# Install the native binary\ncurl -fsSL https://claude.ai/install.sh | bash\n\n# Remove the old npm installation\nnpm uninstall -g @anthropic-ai/claude-code",
         "npm install -g @anthropic-ai/claude-code",
         "curl -fsSL https://downloads.claude.ai/keys/claude-code.asc | gpg --import",
         "gpg --fingerprint security@anthropic.com",
@@ -15497,7 +15486,8 @@
         "sha256sum claude",
         "shasum -a 256 claude",
         "(Get-FileHash claude.exe -Algorithm SHA256).Hash.ToLower()",
-        "rm -f ~/.local/bin/claude\nrm -rf ~/.local/share/claude"
+        "rm -f ~/.local/bin/claude\nrm -rf ~/.local/share/claude",
+        "Remove-Item -Path \"$env:USERPROFILE\\.local\\bin\\claude.exe\" -Force\nRemove-Item -Path \"$env:USERPROFILE\\.local\\share\\claude\" -Recurse -Force"
       ],
       "sectionBlocks": [
         {
@@ -15703,16 +15693,14 @@
           ]
         },
         {
-          "title": "​Deprecated npm installation",
+          "title": "​Install with npm",
           "paragraphs": [
-            "npm installation is deprecated. The native installer is faster, requires no dependencies, and auto-updates in the background. Use the native installation method when possible.",
-            "If you previously installed Claude Code with npm, switch to the native installer:",
-            "You can also run claude install from an existing npm installation to install the native binary alongside it, then remove the npm version.",
-            "If you need npm installation for compatibility reasons, you must have Node.js 18+ installed. Install the package globally:",
+            "You can also install Claude Code as a global npm package. The package requires Node.js 18 or later.",
+            "The npm package installs the same native binary as the standalone installer. npm pulls the binary in through a per-platform optional dependency such as @anthropic-ai/claude-code-darwin-arm64, and a postinstall step links it into place. The installed claude binary does not itself invoke Node.",
+            "Supported npm install platforms are darwin-arm64, darwin-x64, linux-x64, linux-arm64, linux-x64-musl, linux-arm64-musl, win32-x64, and win32-arm64. Your package manager must allow optional dependencies. See troubleshooting if the binary is missing after install.",
             "Do NOT use sudo npm install -g as this can lead to permission issues and security risks. If you encounter permission errors, see troubleshooting permission errors."
           ],
           "codeBlocks": [
-            "# Install the native binary\ncurl -fsSL https://claude.ai/install.sh | bash\n\n# Remove the old npm installation\nnpm uninstall -g @anthropic-ai/claude-code",
             "npm install -g @anthropic-ai/claude-code"
           ]
         },
@@ -21137,6 +21125,7 @@
         "In plan mode - Uses opus for complex reasoning and architecture decisions",
         "In execution mode - Automatically switches to sonnet for code generation and implementation",
         "This gives you the best of both worlds: Opus’s superior reasoning for planning, and Sonnet’s efficiency for execution.",
+        "The plan-mode Opus phase runs with the standard 200K context window. The automatic 1M upgrade described in Extended context applies to the opus model setting and does not extend to opusplan.",
         "Effort levels control adaptive reasoning, which lets the model decide whether and how much to think on each step based on task complexity. Lower effort is faster and cheaper for straightforward tasks, while higher effort provides deeper reasoning for complex problems.",
         "Effort is supported on Opus 4.7, Opus 4.6, and Sonnet 4.6. The available levels depend on the model:",
         "If you set a level the active model does not support, Claude Code falls back to the highest supported level at or below the one you set. For example, xhigh runs as high on Opus 4.6.",
@@ -21337,7 +21326,8 @@
             "The opusplan model alias provides an automated hybrid approach:",
             "In plan mode - Uses opus for complex reasoning and architecture decisions",
             "In execution mode - Automatically switches to sonnet for code generation and implementation",
-            "This gives you the best of both worlds: Opus’s superior reasoning for planning, and Sonnet’s efficiency for execution."
+            "This gives you the best of both worlds: Opus’s superior reasoning for planning, and Sonnet’s efficiency for execution.",
+            "The plan-mode Opus phase runs with the standard 200K context window. The automatic 1M upgrade described in Extended context applies to the opus model setting and does not extend to opusplan."
           ],
           "codeBlocks": []
         },
@@ -25839,6 +25829,7 @@
         "Email assistant, research agent, and more",
         "Install the SDK",
         "TypeScript",
+        "The TypeScript SDK bundles a native Claude Code binary for your platform as an optional dependency, so you don’t need to install Claude Code separately.",
         "Set your API key",
         "Get an API key from the Console, then set it as an environment variable:",
         "The SDK also supports authentication via third-party API providers:",
@@ -25958,6 +25949,7 @@
           "paragraphs": [
             "Install the SDK",
             "TypeScript",
+            "The TypeScript SDK bundles a native Claude Code binary for your platform as an optional dependency, so you don’t need to install Claude Code separately.",
             "Set your API key",
             "Get an API key from the Console, then set it as an environment variable:",
             "The SDK also supports authentication via third-party API providers:",
@@ -25966,8 +25958,7 @@
             "Microsoft Azure: set CLAUDE_CODE_USE_FOUNDRY=1 environment variable and configure Azure credentials",
             "See the setup guides for Bedrock, Vertex AI, or Azure AI Foundry for details.",
             "Unless previously approved, Anthropic does not allow third party developers to offer claude.ai login or rate limits for their products, including agents built on the Claude Agent SDK. Please use the API key authentication methods described in this document instead.",
-            "Run your first agent",
-            "This example creates an agent that lists files in your current directory using built-in tools."
+            "Run your first agent"
           ],
           "codeBlocks": [
             "npm install @anthropic-ai/claude-agent-sdk",
@@ -26160,6 +26151,7 @@
         "Python (pip)",
         "uv Python package manager is a fast Python package manager that handles virtual environments automatically:",
         "Create a virtual environment first, then install:",
+        "The TypeScript SDK bundles a native Claude Code binary for your platform as an optional dependency, so you don’t need to install Claude Code separately.",
         "Set your API key",
         "Get an API key from the Claude Console, then create a .env file in your project directory:",
         "The SDK also supports authentication via third-party API providers:",
@@ -26265,8 +26257,8 @@
             "Python (pip)",
             "uv Python package manager is a fast Python package manager that handles virtual environments automatically:",
             "Create a virtual environment first, then install:",
-            "Set your API key",
-            "Get an API key from the Claude Console, then create a .env file in your project directory:"
+            "The TypeScript SDK bundles a native Claude Code binary for your platform as an optional dependency, so you don’t need to install Claude Code separately.",
+            "Set your API key"
           ],
           "codeBlocks": [
             "mkdir my-agent && cd my-agent",
@@ -32065,10 +32057,10 @@
         "For security and isolation, the SDK should run inside a sandboxed container environment. This provides process isolation, resource limits, network control, and ephemeral filesystems.",
         "The SDK also supports programmatic sandbox configuration for command execution.",
         "Each SDK instance requires:",
-        "Runtime dependencies Python 3.10+ (for Python SDK) or Node.js 18+ (for TypeScript SDK) Node.js (required by the bundled Claude Code CLI that the SDK spawns; both SDK packages include it, so no separate install is needed)",
+        "Runtime dependencies Python 3.10+ for the Python SDK, or Node.js 18+ for the TypeScript SDK Both SDK packages bundle a native Claude Code binary for the host platform, so no separate Claude Code or Node.js install is needed for the spawned CLI",
         "Runtime dependencies",
-        "Python 3.10+ (for Python SDK) or Node.js 18+ (for TypeScript SDK)",
-        "Node.js (required by the bundled Claude Code CLI that the SDK spawns; both SDK packages include it, so no separate install is needed)",
+        "Python 3.10+ for the Python SDK, or Node.js 18+ for the TypeScript SDK",
+        "Both SDK packages bundle a native Claude Code binary for the host platform, so no separate Claude Code or Node.js install is needed for the spawned CLI",
         "Resource allocation Recommended: 1GiB RAM, 5GiB of disk, and 1 CPU (vary this based on your task as needed)",
         "Resource allocation",
         "Recommended: 1GiB RAM, 5GiB of disk, and 1 CPU (vary this based on your task as needed)",
@@ -32157,10 +32149,10 @@
           "title": "​System Requirements",
           "paragraphs": [
             "Each SDK instance requires:",
-            "Runtime dependencies Python 3.10+ (for Python SDK) or Node.js 18+ (for TypeScript SDK) Node.js (required by the bundled Claude Code CLI that the SDK spawns; both SDK packages include it, so no separate install is needed)",
+            "Runtime dependencies Python 3.10+ for the Python SDK, or Node.js 18+ for the TypeScript SDK Both SDK packages bundle a native Claude Code binary for the host platform, so no separate Claude Code or Node.js install is needed for the spawned CLI",
             "Runtime dependencies",
-            "Python 3.10+ (for Python SDK) or Node.js 18+ (for TypeScript SDK)",
-            "Node.js (required by the bundled Claude Code CLI that the SDK spawns; both SDK packages include it, so no separate install is needed)",
+            "Python 3.10+ for the Python SDK, or Node.js 18+ for the TypeScript SDK",
+            "Both SDK packages bundle a native Claude Code binary for the host platform, so no separate Claude Code or Node.js install is needed for the spawned CLI",
             "Resource allocation Recommended: 1GiB RAM, 5GiB of disk, and 1 CPU (vary this based on your task as needed)",
             "Resource allocation",
             "Recommended: 1GiB RAM, 5GiB of disk, and 1 CPU (vary this based on your task as needed)",
@@ -32938,6 +32930,7 @@
         "See also",
         "Complete API reference for the TypeScript Agent SDK, including all functions, types, and interfaces.",
         "Try the new V2 interface (preview): A simplified interface with send() and stream() patterns is now available, making multi-turn conversations easier. Learn more about the TypeScript V2 preview",
+        "The SDK bundles a native Claude Code binary for your platform as an optional dependency such as @anthropic-ai/claude-agent-sdk-darwin-arm64. You don’t need to install Claude Code separately. If your package manager skips optional dependencies, the SDK throws Native CLI binary for <platform> not found; set pathToClaudeCodeExecutable to a separately installed claude binary instead.",
         "The primary function for interacting with Claude Code. Creates an async generator that streams messages as they arrive.",
         "Returns a Query object that extends AsyncGenerator<SDKMessage, void> with additional methods.",
         "Pre-warms the CLI subprocess by spawning it and completing the initialize handshake before a prompt is available. The returned WarmQuery handle accepts a prompt later and writes it to an already-ready process, so the first query() call resolves without paying subprocess spawn and initialization cost inline.",
@@ -32984,8 +32977,7 @@
         "Union type of all possible messages returned by the query.",
         "Assistant response message.",
         "The message field is a BetaMessage from the Anthropic SDK. It includes fields like id, content, model, stop_reason, and usage.",
-        "SDKAssistantMessageError is one of: 'authentication_failed', 'billing_error', 'rate_limit', 'invalid_request', 'server_error', 'max_output_tokens', or 'unknown'.",
-        "User input message."
+        "SDKAssistantMessageError is one of: 'authentication_failed', 'billing_error', 'rate_limit', 'invalid_request', 'server_error', 'max_output_tokens', or 'unknown'."
       ],
       "codeBlocks": [
         "npm install @anthropic-ai/claude-agent-sdk",
@@ -33042,7 +33034,9 @@
         },
         {
           "title": "​Installation",
-          "paragraphs": [],
+          "paragraphs": [
+            "The SDK bundles a native Claude Code binary for your platform as an optional dependency such as @anthropic-ai/claude-agent-sdk-darwin-arm64. You don’t need to install Claude Code separately. If your package manager skips optional dependencies, the SDK throws Native CLI binary for <platform> not found; set pathToClaudeCodeExecutable to a separately installed claude binary instead."
+          ],
           "codeBlocks": [
             "npm install @anthropic-ai/claude-agent-sdk"
           ]
@@ -33404,6 +33398,7 @@
         "session.send(): Send a message",
         "session.stream(): Get the response",
         "The V2 interface is included in the existing SDK package:",
+        "The SDK bundles a native Claude Code binary for your platform as an optional dependency, so you don’t need to install Claude Code separately.",
         "For simple single-turn queries where you don’t need to maintain a session, use unstable_v2_prompt(). This example sends a math question and logs the answer:",
         "For interactions beyond a single prompt, create a session. V2 separates sending and streaming into distinct steps:",
         "send() dispatches your message",
@@ -33464,7 +33459,8 @@
         {
           "title": "​Installation",
           "paragraphs": [
-            "The V2 interface is included in the existing SDK package:"
+            "The V2 interface is included in the existing SDK package:",
+            "The SDK bundles a native Claude Code binary for your platform as an optional dependency, so you don’t need to install Claude Code separately."
           ],
           "codeBlocks": [
             "npm install @anthropic-ai/claude-agent-sdk"

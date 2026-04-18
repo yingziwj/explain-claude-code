@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-17T05:11:12.316Z",
-  "sourceGeneratedAt": "2026-04-17T05:11:11.987Z",
+  "generatedAt": "2026-04-18T04:41:46.693Z",
+  "sourceGeneratedAt": "2026-04-18T04:41:46.364Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -514,7 +514,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.112、2.1.111、2.1.110、2.1.109 这些环节往下讲。",
+            "原文这页大多会按 2.1.113、2.1.112、2.1.111、2.1.110 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -523,7 +523,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.112 -> 2.1.111 -> 2.1.110 -> 2.1.109。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.113 -> 2.1.112 -> 2.1.111 -> 2.1.110。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -8924,6 +8924,12 @@
           ]
         },
         {
+          "title": "Native binary not found after npm install",
+          "paragraphs": [
+            "这一段不只是挂个标题，它是在说明\"Native binary not found after npm install\"这一块到底负责什么。"
+          ]
+        },
+        {
           "title": "Permissions and authentication",
           "paragraphs": [
             "看到这里，就把\"Permissions and authentication\"当成一件真要上手的活来看。",
@@ -8952,13 +8958,6 @@
         },
         {
           "title": "403 Forbidden after login",
-          "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Model not found or not accessible",
           "paragraphs": [
             "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
@@ -11150,20 +11149,14 @@
           ]
         },
         {
-          "title": "Deprecated npm installation",
+          "title": "Install with npm",
           "paragraphs": [
-            "这里不是让你背\"Deprecated npm installation\"这个词，而是让你看它真干活时怎么使。",
+            "看到这儿别跳步，按它给的顺序往下走。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ],
           "steps": [
             {
-              "title": "Deprecated npm installation 1",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "# Install the native binary\ncurl -fsSL https://claude.ai/install.sh | bash\n\n# Remove the old npm installation\nnpm uninstall -g @anthropic-ai/claude-code",
-              "kind": "command"
-            },
-            {
-              "title": "Deprecated npm installation 2",
+              "title": "Install with npm",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
               "code": "npm install -g @anthropic-ai/claude-code",
               "kind": "command"
@@ -18277,7 +18270,7 @@
           "title": "Get started",
           "paragraphs": [
             "这一段就是安装 the SDK。这种地方最怕跳步骤，最好老老实实按顺序来。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
           ],
           "steps": [
             {
@@ -23985,7 +23978,7 @@
         {
           "title": "Installation",
           "paragraphs": [
-            "这里不是让你背\"Installation\"这个词，而是让你看它真干活时怎么使。"
+            "这里主要是在交代\"Installation\"这一块会碰到哪些事。"
           ],
           "steps": [
             {
