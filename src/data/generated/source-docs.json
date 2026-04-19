@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-18T04:41:46.364Z",
+  "generatedAt": "2026-04-19T05:11:40.967Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -1161,6 +1161,7 @@
       "metaDescription": "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
       "headings": [],
       "toc": [
+        "2.1.114",
         "2.1.113",
         "2.1.112",
         "2.1.111",
@@ -1179,13 +1180,13 @@
         "2.1.90",
         "2.1.89",
         "2.1.87",
-        "2.1.86",
-        "2.1.85"
+        "2.1.86"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Fixed a crash in the permission dialog when an agent teams teammate requested tool permission",
         "Changed the CLI to spawn a native Claude Code binary (via a per-platform optional dependency) instead of bundled JavaScript",
         "Added sandbox.network.deniedDomains setting to block specific domains even when a broader allowedDomains wildcard would otherwise permit them",
         "Fullscreen mode: Shift+↑/↓ now scrolls the viewport when extending a selection past the visible edge",
@@ -1361,8 +1362,7 @@
         "/ultraplan and other remote-session features now auto-create a default cloud environment instead of requiring web setup first",
         "Improved brief mode to retry once when Claude responds with plain text instead of a structured message",
         "Improved focus mode: Claude now writes more self-contained summaries since it knows you only see its final message",
-        "Improved tool-not-available errors to explain why and how to proceed when the model calls a tool that exists but isn’t available in the current context",
-        "Improved rate-limit retry messages to show which limit was hit and when it resets instead of an opaque seconds countdown"
+        "Improved tool-not-available errors to explain why and how to proceed when the model calls a tool that exists but isn’t available in the current context"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1372,6 +1372,7 @@
             "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
+            "Fixed a crash in the permission dialog when an agent teams teammate requested tool permission",
             "Changed the CLI to spawn a native Claude Code binary (via a per-platform optional dependency) instead of bundled JavaScript",
             "Added sandbox.network.deniedDomains setting to block specific domains even when a broader allowedDomains wildcard would otherwise permit them",
             "Fullscreen mode: Shift+↑/↓ now scrolls the viewport when extending a selection past the visible edge",
@@ -1379,8 +1380,7 @@
             "Windows: Ctrl+Backspace now deletes the previous word",
             "Long URLs in responses and bash output stay clickable when they wrap across lines (in terminals with OSC 8 hyperlinks)",
             "Improved /loop: pressing Esc now cancels pending wakeups, and wakeups display as “Claude resuming /loop wakeup” for clarity",
-            "/extra-usage now works from Remote Control (mobile/web) clients",
-            "Remote Control clients can now query @-file autocomplete suggestions"
+            "/extra-usage now works from Remote Control (mobile/web) clients"
           ],
           "codeBlocks": []
         }
@@ -4785,7 +4785,7 @@
         "Remote Control is available on all plans. On Team and Enterprise, it is off by default until an admin enables the Remote Control toggle in Claude Code admin settings.",
         "Remote Control connects claude.ai/code or the Claude app for iOS and Android to a Claude Code session running on your machine. Start a task at your desk, then pick it up from your phone on the couch or a browser on another computer.",
         "When you start a Remote Control session on your machine, Claude keeps running locally the entire time, so nothing moves to the cloud. With Remote Control you can:",
-        "Use your full local environment remotely: your filesystem, MCP servers, tools, and project configuration all stay available",
+        "Use your full local environment remotely: your filesystem, MCP servers, tools, and project configuration all stay available, and typing @ autocompletes file paths from your local project",
         "Work from both surfaces at once: the conversation stays in sync across all connected devices, so you can send messages from your terminal, browser, and phone interchangeably",
         "Survive interruptions: if your laptop sleeps or your network drops, the session reconnects automatically when your machine comes back online",
         "Unlike Claude Code on the web, which runs on cloud infrastructure, Remote Control sessions run directly on your machine and interact with your local filesystem. The web and mobile interfaces are just a window into that local session.",
@@ -4850,7 +4850,7 @@
         "Local process must keep running: Remote Control runs as a local process. If you close the terminal, quit VS Code, or otherwise stop the claude process, the session ends.",
         "Extended network outage: if your machine is awake but unable to reach the network for more than roughly 10 minutes, the session times out and the process exits. Run claude remote-control again to start a new session.",
         "Ultraplan disconnects Remote Control: starting an ultraplan session disconnects any active Remote Control session because both features occupy the claude.ai/code interface and only one can be connected at a time.",
-        "Some commands are local-only: commands that open an interactive picker in the terminal, such as /mcp, /plugin, or /resume, work only from the local CLI. Commands that produce text output, including /compact, /clear, /context, /cost, /exit, /recap, and /reload-plugins, work from mobile and web.",
+        "Some commands are local-only: commands that open an interactive picker in the terminal, such as /mcp, /plugin, or /resume, work only from the local CLI. Commands that produce text output, including /compact, /clear, /context, /cost, /exit, /extra-usage, /recap, and /reload-plugins, work from mobile and web.",
         "You’re not authenticated with a claude.ai account. Run claude auth login and choose the claude.ai option. If ANTHROPIC_API_KEY is set in your environment, unset it first.",
         "You’re authenticated with a long-lived token from claude setup-token or the CLAUDE_CODE_OAUTH_TOKEN environment variable. These tokens are limited to inference-only and cannot establish Remote Control sessions. Run claude auth login to authenticate with a full-scope session token instead.",
         "Your cached account information is stale or incomplete. Run claude auth login to refresh it.",
@@ -5006,7 +5006,7 @@
             "Local process must keep running: Remote Control runs as a local process. If you close the terminal, quit VS Code, or otherwise stop the claude process, the session ends.",
             "Extended network outage: if your machine is awake but unable to reach the network for more than roughly 10 minutes, the session times out and the process exits. Run claude remote-control again to start a new session.",
             "Ultraplan disconnects Remote Control: starting an ultraplan session disconnects any active Remote Control session because both features occupy the claude.ai/code interface and only one can be connected at a time.",
-            "Some commands are local-only: commands that open an interactive picker in the terminal, such as /mcp, /plugin, or /resume, work only from the local CLI. Commands that produce text output, including /compact, /clear, /context, /cost, /exit, /recap, and /reload-plugins, work from mobile and web."
+            "Some commands are local-only: commands that open an interactive picker in the terminal, such as /mcp, /plugin, or /resume, work only from the local CLI. Commands that produce text output, including /compact, /clear, /context, /cost, /exit, /extra-usage, /recap, and /reload-plugins, work from mobile and web."
           ],
           "codeBlocks": []
         },
@@ -11585,6 +11585,7 @@
         "​Let Claude choose the interval",
         "​Run the built-in maintenance prompt",
         "​Customize the default prompt with loop.md",
+        "​Stop a loop",
         "​Set a one-time reminder",
         "​Manage scheduled tasks",
         "​How scheduled tasks run",
@@ -11601,6 +11602,7 @@
         "Let Claude choose the interval",
         "Run the built-in maintenance prompt",
         "Customize the default prompt with loop.md",
+        "Stop a loop",
         "Set a one-time reminder",
         "Manage scheduled tasks",
         "How scheduled tasks run",
@@ -11617,6 +11619,7 @@
         "Let Claude choose the interval",
         "Run the built-in maintenance prompt",
         "Customize the default prompt with loop.md",
+        "Stop a loop",
         "Set a one-time reminder",
         "Manage scheduled tasks",
         "How scheduled tasks run",
@@ -11651,6 +11654,7 @@
         "Claude looks for the file in two locations and uses the first one it finds.",
         "The file is plain Markdown with no required structure. Write it as if you were typing the /loop prompt directly. The following example keeps a release branch healthy:",
         "Edits to loop.md take effect on the next iteration, so you can refine the instructions while a loop is running. When no loop.md exists in either location, the loop falls back to the built-in maintenance prompt. Keep the file concise: content beyond 25,000 bytes is truncated.",
+        "To stop a /loop while it is waiting for the next iteration, press Esc. This clears the pending wakeup so the loop does not fire again. Tasks you scheduled by asking Claude directly are not affected by Esc and stay in place until you delete them.",
         "For one-shot reminders, describe what you want in natural language instead of using /loop. Claude schedules a single-fire task that deletes itself after running.",
         "Claude pins the fire time to a specific minute and hour using a cron expression and confirms when it will fire.",
         "Ask Claude in natural language to list or cancel tasks, or reference the underlying tools directly.",
@@ -11697,12 +11701,12 @@
             "Let Claude choose the interval",
             "Run the built-in maintenance prompt",
             "Customize the default prompt with loop.md",
+            "Stop a loop",
             "Set a one-time reminder",
             "Manage scheduled tasks",
             "How scheduled tasks run",
             "Seven-day expiry",
-            "Cron expression reference",
-            "Disable scheduled tasks"
+            "Cron expression reference"
           ],
           "codeBlocks": []
         },
@@ -11772,6 +11776,13 @@
           "codeBlocks": [
             "Check the `release/next` PR. If CI is red, pull the failing job log,\ndiagnose, and push a minimal fix. If new review comments have arrived,\naddress each one and resolve the thread. If everything is green and\nquiet, say so in one line."
           ]
+        },
+        {
+          "title": "​Stop a loop",
+          "paragraphs": [
+            "To stop a /loop while it is waiting for the next iteration, press Esc. This clears the pending wakeup so the loop does not fire again. Tasks you scheduled by asking Claude directly are not affected by Esc and stay in place until you delete them."
+          ],
+          "codeBlocks": []
         },
         {
           "title": "​Set a one-time reminder",
@@ -19199,7 +19210,7 @@
       ],
       "codeBlocks": [
         "{\n  \"$schema\": \"https://json.schemastore.org/claude-code-settings.json\",\n  \"permissions\": {\n    \"allow\": [\n      \"Bash(npm run lint)\",\n      \"Bash(npm run test *)\",\n      \"Read(~/.zshrc)\"\n    ],\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ]\n  },\n  \"env\": {\n    \"CLAUDE_CODE_ENABLE_TELEMETRY\": \"1\",\n    \"OTEL_METRICS_EXPORTER\": \"otlp\"\n  },\n  \"companyAnnouncements\": [\n    \"Welcome to Acme Corp! Review our code guidelines at docs.acme.com\",\n    \"Reminder: Code reviews required for all PRs\",\n    \"New security policy in effect\"\n  ]\n}",
-        "{\n  \"sandbox\": {\n    \"enabled\": true,\n    \"autoAllowBashIfSandboxed\": true,\n    \"excludedCommands\": [\"docker *\"],\n    \"filesystem\": {\n      \"allowWrite\": [\"/tmp/build\", \"~/.kube\"],\n      \"denyRead\": [\"~/.aws/credentials\"]\n    },\n    \"network\": {\n      \"allowedDomains\": [\"github.com\", \"*.npmjs.org\", \"registry.yarnpkg.com\"],\n      \"allowUnixSockets\": [\n        \"/var/run/docker.sock\"\n      ],\n      \"allowLocalBinding\": true\n    }\n  }\n}",
+        "{\n  \"sandbox\": {\n    \"enabled\": true,\n    \"autoAllowBashIfSandboxed\": true,\n    \"excludedCommands\": [\"docker *\"],\n    \"filesystem\": {\n      \"allowWrite\": [\"/tmp/build\", \"~/.kube\"],\n      \"denyRead\": [\"~/.aws/credentials\"]\n    },\n    \"network\": {\n      \"allowedDomains\": [\"github.com\", \"*.npmjs.org\", \"registry.yarnpkg.com\"],\n      \"deniedDomains\": [\"uploads.github.com\"],\n      \"allowUnixSockets\": [\n        \"/var/run/docker.sock\"\n      ],\n      \"allowLocalBinding\": true\n    }\n  }\n}",
         "🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\n   Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>",
         "🤖 Generated with [Claude Code](https://claude.com/claude-code)",
         "{\n  \"attribution\": {\n    \"commit\": \"Generated with AI\\n\\nCo-Authored-By: AI <ai@example.com>\",\n    \"pr\": \"\"\n  }\n}",
@@ -19366,7 +19377,7 @@
             "Permission rules: Use Edit allow/deny rules to control Claude’s file tool access, Read deny rules to block reads, and WebFetch allow/deny rules to control network domains. Paths from these rules are also merged into the sandbox configuration."
           ],
           "codeBlocks": [
-            "{\n  \"sandbox\": {\n    \"enabled\": true,\n    \"autoAllowBashIfSandboxed\": true,\n    \"excludedCommands\": [\"docker *\"],\n    \"filesystem\": {\n      \"allowWrite\": [\"/tmp/build\", \"~/.kube\"],\n      \"denyRead\": [\"~/.aws/credentials\"]\n    },\n    \"network\": {\n      \"allowedDomains\": [\"github.com\", \"*.npmjs.org\", \"registry.yarnpkg.com\"],\n      \"allowUnixSockets\": [\n        \"/var/run/docker.sock\"\n      ],\n      \"allowLocalBinding\": true\n    }\n  }\n}"
+            "{\n  \"sandbox\": {\n    \"enabled\": true,\n    \"autoAllowBashIfSandboxed\": true,\n    \"excludedCommands\": [\"docker *\"],\n    \"filesystem\": {\n      \"allowWrite\": [\"/tmp/build\", \"~/.kube\"],\n      \"denyRead\": [\"~/.aws/credentials\"]\n    },\n    \"network\": {\n      \"allowedDomains\": [\"github.com\", \"*.npmjs.org\", \"registry.yarnpkg.com\"],\n      \"deniedDomains\": [\"uploads.github.com\"],\n      \"allowUnixSockets\": [\n        \"/var/run/docker.sock\"\n      ],\n      \"allowLocalBinding\": true\n    }\n  }\n}"
           ]
         },
         {
@@ -19659,13 +19670,14 @@
         "Bash(npm *) matches any command starting with npm",
         "Bash(* install) matches any command ending with install",
         "Bash(git * main) matches commands like git checkout main and git log --oneline main",
-        "A single * matches any sequence of characters including spaces, so one wildcard can span multiple arguments. Bash(git:*) matches git log --oneline --all, and Bash(git * main) matches git push origin main as well as git merge main.",
+        "A single * matches any sequence of characters including spaces, so one wildcard can span multiple arguments. Bash(git *) matches git log --oneline --all, and Bash(git * main) matches git push origin main as well as git merge main.",
         "When * appears at the end with a space before it (like Bash(ls *)), it enforces a word boundary, requiring the prefix to be followed by a space or end-of-string. For example, Bash(ls *) matches ls -la but not lsof. In contrast, Bash(ls*) without a space matches both ls -la and lsof because there’s no word boundary constraint.",
         "Claude Code is aware of shell operators, so a rule like Bash(safe-cmd *) won’t give it permission to run the command safe-cmd && other-cmd. The recognized command separators are &&, ||, ;, |, |&, &, and newlines. A rule must match each subcommand independently.",
         "When you approve a compound command with “Yes, don’t ask again”, Claude Code saves a separate rule for each subcommand that requires approval, rather than a single rule for the full compound string. For example, approving git status && npm test saves a rule for npm test, so future npm test invocations are recognized regardless of what precedes the &&. Subcommands like cd into a subdirectory generate their own Read rule for that path. Up to 5 rules may be saved for a single compound command.",
         "Before matching Bash rules, Claude Code strips a fixed set of process wrappers so a rule like Bash(npm test *) also matches timeout 30 npm test. The recognized wrappers are timeout, time, nice, nohup, and stdbuf.",
         "Bare xargs is also stripped, so Bash(grep *) matches xargs grep pattern. Stripping applies only when xargs has no flags: an invocation like xargs -n1 grep pattern is matched as an xargs command, so rules written for the inner command do not cover it.",
         "This wrapper list is built in and is not configurable. Development environment runners such as direnv exec, devbox run, mise exec, npx, and docker exec are not in the list. Because these tools execute their arguments as a command, a rule like Bash(devbox run *) matches whatever comes after run, including devbox run rm -rf .. To approve work inside an environment runner, write a specific rule that includes both the runner and the inner command, such as Bash(devbox run npm test). Add one rule per inner command you want to allow.",
+        "Exec wrappers such as watch, setsid, ionice, and flock always prompt and cannot be auto-approved by a prefix rule like Bash(watch *). The same applies to find with -exec or -delete: a Bash(find *) rule does not cover these forms. To approve a specific invocation, write an exact-match rule for the full command string.",
         "Claude Code recognizes a built-in set of Bash commands as read-only and runs them without a permission prompt in every mode. These include ls, cat, head, tail, grep, find, wc, diff, stat, du, cd, and read-only forms of git. The set is not configurable; to require a prompt for one of these commands, add an ask or deny rule for it.",
         "Unquoted glob patterns are permitted for commands whose every flag is read-only, so ls *.ts and wc -l src/*.py run without a prompt. Commands with write-capable or exec-capable flags, such as find, sort, sed, and git, still prompt when an unquoted glob is present because the glob could expand to a flag like -delete.",
         "A cd into a path inside your working directory or an additional directory is also read-only. A compound command like cd packages/api && ls runs without a prompt when each part qualifies on its own. Combining cd with git in one compound command always prompts, regardless of the target directory.",
@@ -19725,7 +19737,7 @@
         "Permission deny rules block Claude from even attempting to access restricted resources",
         "Sandbox restrictions prevent Bash commands from reaching resources outside defined boundaries, even if a prompt injection bypasses Claude’s decision-making",
         "Filesystem restrictions in the sandbox use Read and Edit deny rules, not separate sandbox configuration",
-        "Network restrictions combine WebFetch permission rules with the sandbox’s allowedDomains list",
+        "Network restrictions combine WebFetch permission rules with the sandbox’s allowedDomains and deniedDomains lists",
         "When sandboxing is enabled with autoAllowBashIfSandboxed: true, which is the default, sandboxed Bash commands run without prompting even if your permissions include ask: Bash(*). The sandbox boundary substitutes for the per-command prompt. See sandbox modes to change this behavior.",
         "For organizations that need centralized control over Claude Code configuration, administrators can deploy managed settings that cannot be overridden by user or project settings. These policy settings follow the same format as regular settings files and can be delivered through MDM/OS-level policies, managed settings files, or server-managed settings. See settings files for delivery mechanisms and file locations.",
         "The following settings are only read from managed settings. Placing them in user or project settings files has no effect.",
@@ -19871,7 +19883,7 @@
             "Bash(npm *) matches any command starting with npm",
             "Bash(* install) matches any command ending with install",
             "Bash(git * main) matches commands like git checkout main and git log --oneline main",
-            "A single * matches any sequence of characters including spaces, so one wildcard can span multiple arguments. Bash(git:*) matches git log --oneline --all, and Bash(git * main) matches git push origin main as well as git merge main.",
+            "A single * matches any sequence of characters including spaces, so one wildcard can span multiple arguments. Bash(git *) matches git log --oneline --all, and Bash(git * main) matches git push origin main as well as git merge main.",
             "When * appears at the end with a space before it (like Bash(ls *)), it enforces a word boundary, requiring the prefix to be followed by a space or end-of-string. For example, Bash(ls *) matches ls -la but not lsof. In contrast, Bash(ls*) without a space matches both ls -la and lsof because there’s no word boundary constraint.",
             "Claude Code is aware of shell operators, so a rule like Bash(safe-cmd *) won’t give it permission to run the command safe-cmd && other-cmd. The recognized command separators are &&, ||, ;, |, |&, &, and newlines. A rule must match each subcommand independently.",
             "When you approve a compound command with “Yes, don’t ask again”, Claude Code saves a separate rule for each subcommand that requires approval, rather than a single rule for the full compound string. For example, approving git status && npm test saves a rule for npm test, so future npm test invocations are recognized regardless of what precedes the &&. Subcommands like cd into a subdirectory generate their own Read rule for that path. Up to 5 rules may be saved for a single compound command.",
@@ -19969,7 +19981,7 @@
             "Permission deny rules block Claude from even attempting to access restricted resources",
             "Sandbox restrictions prevent Bash commands from reaching resources outside defined boundaries, even if a prompt injection bypasses Claude’s decision-making",
             "Filesystem restrictions in the sandbox use Read and Edit deny rules, not separate sandbox configuration",
-            "Network restrictions combine WebFetch permission rules with the sandbox’s allowedDomains list",
+            "Network restrictions combine WebFetch permission rules with the sandbox’s allowedDomains and deniedDomains lists",
             "When sandboxing is enabled with autoAllowBashIfSandboxed: true, which is the default, sandboxed Bash commands run without prompting even if your permissions include ask: Bash(*). The sandbox boundary substitutes for the per-command prompt. See sandbox modes to change this behavior."
           ],
           "codeBlocks": []
@@ -20259,6 +20271,7 @@
         "Use Read and Edit deny rules to block access to specific files or directories",
         "Use WebFetch allow/deny rules to control domain access",
         "Use sandbox allowedDomains to control which domains Bash commands can reach",
+        "Use sandbox deniedDomains to block specific domains even when a broader allowedDomains wildcard would otherwise permit them",
         "Paths from both sandbox.filesystem settings and permission rules are merged together into the final sandbox configuration.",
         "This repository includes starter settings configurations for common deployment scenarios, including sandbox-specific examples. Use these as starting points and adjust them to fit your needs.",
         "For organizations requiring advanced network security, you can implement a custom proxy to:",
@@ -20512,8 +20525,8 @@
             "Use Read and Edit deny rules to block access to specific files or directories",
             "Use WebFetch allow/deny rules to control domain access",
             "Use sandbox allowedDomains to control which domains Bash commands can reach",
-            "Paths from both sandbox.filesystem settings and permission rules are merged together into the final sandbox configuration.",
-            "This repository includes starter settings configurations for common deployment scenarios, including sandbox-specific examples. Use these as starting points and adjust them to fit your needs."
+            "Use sandbox deniedDomains to block specific domains even when a broader allowedDomains wildcard would otherwise permit them",
+            "Paths from both sandbox.filesystem settings and permission rules are merged together into the final sandbox configuration."
           ],
           "codeBlocks": []
         },
@@ -20846,6 +20859,7 @@
         "Click and drag to select text anywhere in the conversation. Double-click selects a word, matching iTerm2’s word boundaries so a file path selects as one unit. Triple-click selects the line.",
         "Scroll with the mouse wheel to move through the conversation.",
         "Selected text copies to your clipboard automatically on mouse release. To turn this off, toggle Copy on select in /config. With it off, press Ctrl+Shift+c to copy manually. On terminals that support the kitty keyboard protocol, such as kitty, WezTerm, Ghostty, and iTerm2, Cmd+c also works. If you have a selection active, Ctrl+c copies instead of cancelling.",
+        "With a selection active, hold Shift and press the arrow keys to extend it from the keyboard. Shift+↑ and Shift+↓ scroll the viewport when the selection reaches the top or bottom edge. Shift+Home and Shift+End extend to the start or end of the current line.",
         "Fullscreen rendering handles scrolling inside the app. Use these shortcuts to navigate:",
         "On keyboards without dedicated PgUp, PgDn, Home, or End keys, like MacBook keyboards, hold Fn with the arrow keys: Fn+↑ sends PgUp, Fn+↓ sends PgDn, Fn+← sends Home, and Fn+→ sends End. That makes Ctrl+Fn+→ the jump-to-bottom shortcut. If that feels awkward, scroll to the bottom with the mouse wheel to resume following, or rebind scroll:bottom to something reachable.",
         "These actions are rebindable. See Scroll actions for the full list of action names, including half-page and full-page variants that have no default binding.",
@@ -20928,7 +20942,8 @@
             "Click a URL or file path to open it. File paths in tool output, like the ones printed after an Edit or Write, open in your default application. Plain http:// and https:// URLs open in your browser. In most terminals this replaces native Cmd-click or Ctrl-click, which mouse capture intercepts. In the VS Code integrated terminal and similar xterm.js-based terminals, keep using Cmd-click. Claude Code defers to the terminal’s own link handler there to avoid opening links twice.",
             "Click and drag to select text anywhere in the conversation. Double-click selects a word, matching iTerm2’s word boundaries so a file path selects as one unit. Triple-click selects the line.",
             "Scroll with the mouse wheel to move through the conversation.",
-            "Selected text copies to your clipboard automatically on mouse release. To turn this off, toggle Copy on select in /config. With it off, press Ctrl+Shift+c to copy manually. On terminals that support the kitty keyboard protocol, such as kitty, WezTerm, Ghostty, and iTerm2, Cmd+c also works. If you have a selection active, Ctrl+c copies instead of cancelling."
+            "Selected text copies to your clipboard automatically on mouse release. To turn this off, toggle Copy on select in /config. With it off, press Ctrl+Shift+c to copy manually. On terminals that support the kitty keyboard protocol, such as kitty, WezTerm, Ghostty, and iTerm2, Cmd+c also works. If you have a selection active, Ctrl+c copies instead of cancelling.",
+            "With a selection active, hold Shift and press the arrow keys to extend it from the keyboard. Shift+↑ and Shift+↓ scroll the viewport when the selection reaches the top or bottom edge. Shift+Home and Shift+End extend to the start or end of the current line."
           ],
           "codeBlocks": []
         },

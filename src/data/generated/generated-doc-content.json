@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-18T04:41:46.693Z",
-  "sourceGeneratedAt": "2026-04-18T04:41:46.364Z",
+  "generatedAt": "2026-04-19T05:11:41.265Z",
+  "sourceGeneratedAt": "2026-04-19T05:11:40.967Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -514,7 +514,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.113、2.1.112、2.1.111、2.1.110 这些环节往下讲。",
+            "原文这页大多会按 2.1.114、2.1.113、2.1.112、2.1.111 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -523,7 +523,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.113 -> 2.1.112 -> 2.1.111 -> 2.1.110。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.114 -> 2.1.113 -> 2.1.112 -> 2.1.111。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -7972,6 +7972,12 @@
           ]
         },
         {
+          "title": "Stop a loop",
+          "paragraphs": [
+            "这一块主要是在说\"Stop a loop\"真到手上该怎么用，哪里最容易踩坑。"
+          ]
+        },
+        {
           "title": "Set a one-time reminder",
           "paragraphs": [
             "这一块主要是在说\"Set a one-time reminder\"真到手上该怎么用，哪里最容易踩坑。"
@@ -13384,7 +13390,7 @@
             {
               "title": "原页关键片段：Sandbox settings",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"sandbox\": {\n    \"enabled\": true,\n    \"autoAllowBashIfSandboxed\": true,\n    \"excludedCommands\": [\"docker *\"],\n    \"filesystem\": {\n      \"allowWrite\": [\"/tmp/build\", \"~/.kube\"],\n      \"denyRead\": [\"~/.aws/credentials\"]\n    },\n    \"network\": {\n      \"allowedDomains\": [\"github.com\", \"*.npmjs.org\", \"registry.yarnpkg.com\"],\n      \"allowUnixSockets\": [\n        \"/var/run/docker.sock\"\n      ],\n      \"allowLocalBinding\": true\n    }\n  }\n}",
+              "code": "{\n  \"sandbox\": {\n    \"enabled\": true,\n    \"autoAllowBashIfSandboxed\": true,\n    \"excludedCommands\": [\"docker *\"],\n    \"filesystem\": {\n      \"allowWrite\": [\"/tmp/build\", \"~/.kube\"],\n      \"denyRead\": [\"~/.aws/credentials\"]\n    },\n    \"network\": {\n      \"allowedDomains\": [\"github.com\", \"*.npmjs.org\", \"registry.yarnpkg.com\"],\n      \"deniedDomains\": [\"uploads.github.com\"],\n      \"allowUnixSockets\": [\n        \"/var/run/docker.sock\"\n      ],\n      \"allowLocalBinding\": true\n    }\n  }\n}",
               "kind": "config"
             },
             {
@@ -13542,7 +13548,7 @@
             {
               "title": "Sandbox settings",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"sandbox\": {\n    \"enabled\": true,\n    \"autoAllowBashIfSandboxed\": true,\n    \"excludedCommands\": [\"docker *\"],\n    \"filesystem\": {\n      \"allowWrite\": [\"/tmp/build\", \"~/.kube\"],\n      \"denyRead\": [\"~/.aws/credentials\"]\n    },\n    \"network\": {\n      \"allowedDomains\": [\"github.com\", \"*.npmjs.org\", \"registry.yarnpkg.com\"],\n      \"allowUnixSockets\": [\n        \"/var/run/docker.sock\"\n      ],\n      \"allowLocalBinding\": true\n    }\n  }\n}",
+              "code": "{\n  \"sandbox\": {\n    \"enabled\": true,\n    \"autoAllowBashIfSandboxed\": true,\n    \"excludedCommands\": [\"docker *\"],\n    \"filesystem\": {\n      \"allowWrite\": [\"/tmp/build\", \"~/.kube\"],\n      \"denyRead\": [\"~/.aws/credentials\"]\n    },\n    \"network\": {\n      \"allowedDomains\": [\"github.com\", \"*.npmjs.org\", \"registry.yarnpkg.com\"],\n      \"deniedDomains\": [\"uploads.github.com\"],\n      \"allowUnixSockets\": [\n        \"/var/run/docker.sock\"\n      ],\n      \"allowLocalBinding\": true\n    }\n  }\n}",
               "kind": "config"
             }
           ]
