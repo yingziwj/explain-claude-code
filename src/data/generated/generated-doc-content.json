@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-20T05:22:29.773Z",
-  "sourceGeneratedAt": "2026-04-20T05:22:29.461Z",
+  "generatedAt": "2026-04-21T05:10:08.026Z",
+  "sourceGeneratedAt": "2026-04-21T05:10:07.723Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -514,7 +514,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.114、2.1.113、2.1.112、2.1.111 这些环节往下讲。",
+            "原文这页大多会按 2.1.116、2.1.114、2.1.113、2.1.112 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -523,7 +523,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.114 -> 2.1.113 -> 2.1.112 -> 2.1.111。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.116 -> 2.1.114 -> 2.1.113 -> 2.1.112。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -1014,7 +1014,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Explore the .claude directory\"理解成 Core concepts 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 What’s not shown、File reference、Check what loaded 这些环节往下讲。",
+            "原文这页大多会按 Explore the directory、What’s not shown、Choose the right file 这些环节往下讲。",
             "翻成人话，大概就是：Where Claude Code reads CLAUDE.md, settings.json, hooks, skills, commands, subagents, rules, and auto memory. Explore the .claude directory in your project and ~/.claude in your home directory."
           ]
         },
@@ -1023,7 +1023,13 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：What’s not shown -> File reference -> Check what loaded。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：Explore the directory -> What’s not shown -> Choose the right file。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ]
+        },
+        {
+          "title": "Explore the directory",
+          "paragraphs": [
+            "这一块主要是在说\"Explore the directory\"真到手上该怎么用，哪里最容易踩坑。"
           ]
         },
         {
@@ -1034,10 +1040,23 @@
           ]
         },
         {
+          "title": "Choose the right file",
+          "paragraphs": [
+            "这里是在帮你做选择题，不是只告诉你\"有这个选项\"。先看取舍，再决定怎么选。"
+          ]
+        },
+        {
           "title": "File reference",
           "paragraphs": [
             "这种内容最怕想当然，老老实实照它列的格式走最稳。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Troubleshoot configuration",
+          "paragraphs": [
+            "这段就是排错时拿来照着查的，先一项项看清楚，再动手改。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
           ]
         },
         {
@@ -2033,6 +2052,13 @@
           ]
         },
         {
+          "title": "Work in notes and non-code folders",
+          "paragraphs": [
+            "这一段主要是在把\"Work in notes and non-code folders\"讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Work with images",
           "paragraphs": [
             "这一块主要是在说\"Work with images\"真到手上该怎么用，哪里最容易踩坑。"
@@ -2259,21 +2285,6 @@
           "title": "Use Claude as a unix-style utility",
           "paragraphs": [
             "这里不是让你背\"Use Claude as a unix-style utility\"这个词，而是让你看它真干活时怎么使。"
-          ]
-        },
-        {
-          "title": "Add Claude to your verification process",
-          "paragraphs": [
-            "看到这里，就把\"Add Claude to your verification process\"当成一件真要上手的活来看。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Add Claude to your verification process",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "// package.json\n{\n    ...\n    \"scripts\": {\n        ...\n        \"lint:claude\": \"claude -p 'you are a linter. please look at the changes vs. main and report any issues related to typos. report the filename and line number on one line, and a description of the issue on the second line. do not return any other text.'\"\n    }\n}",
-              "kind": "config"
-            }
           ]
         }
       ],
@@ -7213,7 +7224,7 @@
             {
               "title": "原页关键片段：Reload environment when directory or files change 1",
               "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"hooks\": {\n    \"CwdChanged\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash >> \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "code": "{\n  \"hooks\": {\n    \"SessionStart\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash > \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ],\n    \"CwdChanged\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash > \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             }
           ]
@@ -7355,13 +7366,13 @@
             {
               "title": "Reload environment when directory or files change 1",
               "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"hooks\": {\n    \"CwdChanged\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash >> \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "code": "{\n  \"hooks\": {\n    \"SessionStart\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash > \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ],\n    \"CwdChanged\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash > \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             },
             {
               "title": "Reload environment when directory or files change 2",
               "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"hooks\": {\n    \"FileChanged\": [\n      {\n        \"matcher\": \".envrc|.env\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash >> \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "code": "{\n  \"hooks\": {\n    \"FileChanged\": [\n      {\n        \"matcher\": \".envrc|.env\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash > \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             }
           ]
@@ -7479,7 +7490,7 @@
         {
           "title": "Agent-based hooks",
           "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "看到这里，就把\"Agent-based hooks\"当成一件真要上手的活来看。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ],
           "steps": [
@@ -14368,7 +14379,7 @@
       }
     },
     "terminal-config": {
-      "sourceLabel": "Optimize your terminal setup",
+      "sourceLabel": "Configure your terminal for Claude Code",
       "sections": [
         {
           "title": "简要总结",
@@ -14394,66 +14405,116 @@
           ],
           "steps": [
             {
-              "title": "原页关键片段：Line breaks",
+              "title": "原页关键片段：Play a sound with a Notification hook",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"hooks\": [{ \"type\": \"command\", \"command\": \"afplay /System/Library/Sounds/Glass.aiff\" }]\n      }\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Configure tmux",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "set -s extended-keys on\nset -as terminal-features 'xterm*:extkeys'",
+              "code": "set -g allow-passthrough on\nset -s extended-keys on\nset -as terminal-features 'xterm*:extkeys'",
               "kind": "command"
             },
             {
-              "title": "原页关键片段：Notification setup",
-              "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "set -g allow-passthrough on",
+              "title": "原页关键片段：Switch to fullscreen rendering",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "CLAUDE_CODE_NO_FLICKER=1 claude",
               "kind": "code"
             }
           ]
         },
         {
-          "title": "Themes and appearance",
+          "title": "Enter multiline prompts",
           "paragraphs": [
-            "这一块主要是在说\"Themes and appearance\"真到手上该怎么用，哪里最容易踩坑。"
-          ]
-        },
-        {
-          "title": "Line breaks",
-          "paragraphs": [
-            "这一段主要是在把\"Line breaks\"讲实，不是只摆个标题给你看。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ],
-          "steps": [
-            {
-              "title": "Line breaks",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "set -s extended-keys on\nset -as terminal-features 'xterm*:extkeys'",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Notification setup",
-          "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里不是让你背\"Enter multiline prompts\"这个词，而是让你看它真干活时怎么使。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
-          "title": "Reduce flicker and memory usage",
+          "title": "Enable Option key shortcuts on macOS",
+          "paragraphs": [
+            "这里讲怎么把某个开关拧对。重点不是概念，而是你该在哪儿改、改完怎么确认生效。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Get a terminal bell or notification",
           "paragraphs": [
             "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
-          "title": "Handling large inputs",
+          "title": "Play a sound with a Notification hook",
+          "paragraphs": [
+            "这一块主要是在说\"Play a sound with a Notification hook\"真到手上该怎么用，哪里最容易踩坑。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ],
+          "steps": [
+            {
+              "title": "Play a sound with a Notification hook",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"hooks\": [{ \"type\": \"command\", \"command\": \"afplay /System/Library/Sounds/Glass.aiff\" }]\n      }\n    ]\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Configure tmux",
+          "paragraphs": [
+            "这一段主要是在拧开关，地方和顺序都别搞错。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Configure tmux",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "set -g allow-passthrough on\nset -s extended-keys on\nset -as terminal-features 'xterm*:extkeys'",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Match the color theme",
+          "paragraphs": [
+            "这一段是在说怎么用 the /theme command, or the theme picker in /config, 去做 choose a Claude Code theme that matches your terminal. Selecting the auto option detects your terminal’s light or dark background, so the theme follows OS appearance changes whenever your terminal does. The available themes are built in; there is no custom theme file. Claude Code does not control the terminal’s own color scheme, which is set by the terminal application.。看这种内容，光知道名字没用，还是得落到手上。"
+          ]
+        },
+        {
+          "title": "Switch to fullscreen rendering",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Switch to fullscreen rendering",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "CLAUDE_CODE_NO_FLICKER=1 claude",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Paste large content",
           "paragraphs": [
             "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
-          "title": "Vim Mode",
+          "title": "Edit prompts with Vim keybindings",
           "paragraphs": [
-            "这一块主要是在说\"Vim Mode\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里不是让你背\"Edit prompts with Vim keybindings\"这个词，而是让你看它真干活时怎么使。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Related resources",
+          "paragraphs": [
+            "这一段主要是在把\"Related resources\"讲实，不是只摆个标题给你看。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
           ]
         }
       ],
@@ -24404,7 +24465,7 @@
             {
               "title": "SDKMessage",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "type SDKMessage =\n  | SDKAssistantMessage\n  | SDKUserMessage\n  | SDKUserMessageReplay\n  | SDKResultMessage\n  | SDKSystemMessage\n  | SDKPartialAssistantMessage\n  | SDKCompactBoundaryMessage\n  | SDKStatusMessage\n  | SDKLocalCommandOutputMessage\n  | SDKHookStartedMessage\n  | SDKHookProgressMessage\n  | SDKHookResponseMessage\n  | SDKPluginInstallMessage\n  | SDKToolProgressMessage\n  | SDKAuthStatusMessage\n  | SDKTaskNotificationMessage\n  | SDKTaskStartedMessage\n  | SDKTaskProgressMessage\n  | SDKFilesPersistedEvent\n  | SDKToolUseSummaryMessage\n  | SDKRateLimitEvent\n  | SDKPromptSuggestionMessage;",
+              "code": "type SDKMessage =\n  | SDKAssistantMessage\n  | SDKUserMessage\n  | SDKUserMessageReplay\n  | SDKResultMessage\n  | SDKSystemMessage\n  | SDKPartialAssistantMessage\n  | SDKCompactBoundaryMessage\n  | SDKStatusMessage\n  | SDKLocalCommandOutputMessage\n  | SDKHookStartedMessage\n  | SDKHookProgressMessage\n  | SDKHookResponseMessage\n  | SDKPluginInstallMessage\n  | SDKToolProgressMessage\n  | SDKAuthStatusMessage\n  | SDKTaskNotificationMessage\n  | SDKTaskStartedMessage\n  | SDKTaskProgressMessage\n  | SDKTaskUpdatedMessage\n  | SDKFilesPersistedEvent\n  | SDKToolUseSummaryMessage\n  | SDKRateLimitEvent\n  | SDKPromptSuggestionMessage;",
               "kind": "code"
             }
           ]

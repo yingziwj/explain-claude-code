@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-20T05:22:29.461Z",
+  "generatedAt": "2026-04-21T05:10:07.723Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -1161,6 +1161,7 @@
       "metaDescription": "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
       "headings": [],
       "toc": [
+        "2.1.116",
         "2.1.114",
         "2.1.113",
         "2.1.112",
@@ -1179,13 +1180,36 @@
         "2.1.91",
         "2.1.90",
         "2.1.89",
-        "2.1.87",
-        "2.1.86"
+        "2.1.87"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "/resume on large sessions is significantly faster (up to 67% on 40MB+ sessions) and handles sessions with many dead-fork entries more efficiently",
+        "Faster MCP startup when multiple stdio servers are configured; resources/templates/list is now deferred to first @-mention",
+        "Smoother fullscreen scrolling in VS Code, Cursor, and Windsurf terminals — /terminal-setup now configures the editor’s scroll sensitivity",
+        "Thinking spinner now shows progress inline (“still thinking”, “thinking more”, “almost done thinking”), replacing the separate hint row",
+        "/config search now matches option values (e.g. searching “vim” finds the Editor mode setting)",
+        "/doctor can now be opened while Claude is responding, without waiting for the current turn to finish",
+        "/reload-plugins and background plugin auto-update now auto-install missing plugin dependencies from marketplaces you’ve already added",
+        "Bash tool now surfaces a hint when gh commands hit GitHub’s API rate limit, so agents can back off instead of retrying",
+        "The Usage tab in Settings now shows your 5-hour and weekly usage immediately and no longer fails when the usage endpoint is rate-limited",
+        "Agent frontmatter hooks: now fire when running as a main-thread agent via --agent",
+        "Slash command menu now shows “No commands match” when your filter has zero results, instead of disappearing",
+        "Security: sandbox auto-allow no longer bypasses the dangerous-path safety check for rm/rmdir targeting /, $HOME, or other critical system directories",
+        "Fixed Devanagari and other Indic scripts rendering with broken column alignment in the terminal UI",
+        "Fixed Ctrl+- not triggering undo in terminals using the Kitty keyboard protocol (iTerm2, Ghostty, kitty, WezTerm, Windows Terminal)",
+        "Fixed Cmd+Left/Right not jumping to line start/end in terminals that use the Kitty keyboard protocol (Warp fullscreen, kitty, Ghostty, WezTerm)",
+        "Fixed Ctrl+Z hanging the terminal when Claude Code is launched via a wrapper process (e.g. npx, bun run)",
+        "Fixed scrollback duplication in inline mode where resizing the terminal or large output bursts would repeat earlier conversation history",
+        "Fixed modal search dialogs overflowing the screen at short terminal heights, hiding the search box and keyboard hints",
+        "Fixed scattered blank cells and disappearing composer chrome in the VS Code integrated terminal during scrolling",
+        "Fixed an intermittent API 400 error related to cache control TTL ordering that could occur when a parallel request completed during request setup",
+        "Fixed /branch rejecting conversations with transcripts larger than 50MB",
+        "Fixed /resume silently showing an empty conversation on large session files instead of reporting the load error",
+        "Fixed /plugin Installed tab showing the same item twice when it appears under Needs attention or Favorites",
+        "Fixed /update and /tui not working after entering a worktree mid-session",
         "Fixed a crash in the permission dialog when an agent teams teammate requested tool permission",
         "Changed the CLI to spawn a native Claude Code binary (via a per-platform optional dependency) instead of bundled JavaScript",
         "Added sandbox.network.deniedDomains setting to block specific domains even when a broader allowedDomains wildcard would otherwise permit them",
@@ -1338,31 +1362,7 @@
         "Fixed leading whitespace getting copied when selecting multi-line assistant responses in fullscreen mode",
         "Fixed leading whitespace being trimmed from assistant messages, breaking ASCII art and indented diagrams",
         "Fixed garbled bash output when commands print clickable file links (e.g. Python rich/loguru logging)",
-        "Fixed alt+enter not inserting a newline in terminals using ESC-prefix alt encoding, and Ctrl+J not inserting a newline (regression in 2.1.100)",
-        "Fixed duplicate “Creating worktree” text in EnterWorktree/ExitWorktree tool display",
-        "Fixed queued user prompts disappearing from focus mode",
-        "Fixed one-shot scheduled tasks re-firing repeatedly when the file watcher missed the post-fire cleanup",
-        "Fixed inbound channel notifications being silently dropped after the first message for Team/Enterprise users",
-        "Fixed marketplace plugins with package.json and lockfile not having dependencies installed automatically after install/update",
-        "Fixed marketplace auto-update leaving the official marketplace in a broken state when a plugin process holds files open during the update",
-        "Fixed “Resume this session with…” hint not printing on exit after /resume, --worktree, or /branch",
-        "Fixed feedback survey shortcut keys firing when typed at the end of a longer prompt",
-        "Fixed stdio MCP server emitting malformed (non-JSON) output hanging the session instead of failing fast with “Connection closed”",
-        "Fixed MCP tools missing on the first turn of headless/remote-trigger sessions when MCP servers connect asynchronously",
-        "Fixed /model picker on AWS Bedrock in non-US regions persisting invalid us.* model IDs to settings.json when inference profile discovery is still in-flight",
-        "Fixed 429 rate-limit errors showing a raw JSON dump instead of a clean message for API-key, Bedrock, and Vertex users",
-        "Fixed crash on resume when session contains malformed text blocks",
-        "Fixed /help dropping the tab bar, Shortcuts heading, and footer at short terminal heights",
-        "Fixed malformed keybinding entry values in keybindings.json being silently loaded instead of rejected with a clear error",
-        "Fixed CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC in one project’s settings permanently disabling usage metrics for all projects on the machine",
-        "Fixed washed-out 16-color palette when using Ghostty, Kitty, Alacritty, WezTerm, foot, rio, or Contour over SSH/mosh",
-        "Fixed Bash tool suggesting acceptEdits permission mode when exiting plan mode would downgrade from a higher permission level",
-        "Added /team-onboarding command to generate a teammate ramp-up guide from your local Claude Code usage",
-        "Added OS CA certificate store trust by default, so enterprise TLS proxies work without extra setup (set CLAUDE_CODE_CERT_STORE=bundled to use only bundled CAs)",
-        "/ultraplan and other remote-session features now auto-create a default cloud environment instead of requiring web setup first",
-        "Improved brief mode to retry once when Claude responds with plain text instead of a structured message",
-        "Improved focus mode: Claude now writes more self-contained summaries since it knows you only see its final message",
-        "Improved tool-not-available errors to explain why and how to proceed when the model calls a tool that exists but isn’t available in the current context"
+        "Fixed alt+enter not inserting a newline in terminals using ESC-prefix alt encoding, and Ctrl+J not inserting a newline (regression in 2.1.100)"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1372,15 +1372,15 @@
             "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Fixed a crash in the permission dialog when an agent teams teammate requested tool permission",
-            "Changed the CLI to spawn a native Claude Code binary (via a per-platform optional dependency) instead of bundled JavaScript",
-            "Added sandbox.network.deniedDomains setting to block specific domains even when a broader allowedDomains wildcard would otherwise permit them",
-            "Fullscreen mode: Shift+↑/↓ now scrolls the viewport when extending a selection past the visible edge",
-            "Ctrl+A and Ctrl+E now move to the start/end of the current logical line in multiline input, matching readline behavior",
-            "Windows: Ctrl+Backspace now deletes the previous word",
-            "Long URLs in responses and bash output stay clickable when they wrap across lines (in terminals with OSC 8 hyperlinks)",
-            "Improved /loop: pressing Esc now cancels pending wakeups, and wakeups display as “Claude resuming /loop wakeup” for clarity",
-            "/extra-usage now works from Remote Control (mobile/web) clients"
+            "/resume on large sessions is significantly faster (up to 67% on 40MB+ sessions) and handles sessions with many dead-fork entries more efficiently",
+            "Faster MCP startup when multiple stdio servers are configured; resources/templates/list is now deferred to first @-mention",
+            "Smoother fullscreen scrolling in VS Code, Cursor, and Windsurf terminals — /terminal-setup now configures the editor’s scroll sensitivity",
+            "Thinking spinner now shows progress inline (“still thinking”, “thinking more”, “almost done thinking”), replacing the separate hint row",
+            "/config search now matches option values (e.g. searching “vim” finds the Editor mode setting)",
+            "/doctor can now be opened while Claude is responding, without waiting for the current turn to finish",
+            "/reload-plugins and background plugin auto-update now auto-install missing plugin dependencies from marketplaces you’ve already added",
+            "Bash tool now surfaces a hint when gh commands hit GitHub’s API rate limit, so agents can back off instead of retrying",
+            "The Usage tab in Settings now shows your 5-hour and weekly usage immediately and no longer fails when the usage endpoint is rate-limited"
           ],
           "codeBlocks": []
         }
@@ -2152,8 +2152,11 @@
       "title": "Explore the .claude directory",
       "metaDescription": "Where Claude Code reads CLAUDE.md, settings.json, hooks, skills, commands, subagents, rules, and auto memory. Explore the .claude directory in your project and ~/.claude in your home directory.",
       "headings": [
+        "​Explore the directory",
         "​What’s not shown",
+        "​Choose the right file",
         "​File reference",
+        "​Troubleshoot configuration",
         "​Check what loaded",
         "​Application data",
         "​Cleaned up automatically",
@@ -2166,11 +2169,12 @@
       "paragraphs": [
         "Where Claude Code reads CLAUDE.md, settings.json, hooks, skills, commands, subagents, rules, and auto memory. Explore the .claude directory in your project and ~/.claude in your home directory.",
         "Claude Code reads instructions, settings, skills, subagents, and memory from your project directory and from ~/.claude in your home directory. Commit project files to git to share them with your team; files in ~/.claude are personal configuration that applies across all your projects.",
-        "If you set CLAUDE_CONFIG_DIR, every ~/.claude path on this page lives under that directory instead.",
+        "On Windows, ~/.claude resolves to %USERPROFILE%\\.claude. If you set CLAUDE_CONFIG_DIR, every ~/.claude path on this page lives under that directory instead.",
         "Most users only edit CLAUDE.md and settings.json. The rest of the directory is optional: add skills, rules, or subagents as you need them.",
-        "This page is an interactive explorer: click files in the tree to see what each one does, when it loads, and an example. For a quick reference, see the file reference table below.",
+        "Click files in the tree to see what each one does, when it loads, and an example.",
         "The explorer covers files you author and edit. A few related files live elsewhere:",
         "~/.claude also holds data Claude Code writes as you work: transcripts, prompt history, file snapshots, caches, and logs. See application data below.",
+        "Different kinds of customization live in different files. Use this table to find where a change belongs.",
         "This table lists every file the explorer covers. Project-scope files live in your repo under .claude/ (or at the root for CLAUDE.md, .mcp.json, and .worktreeinclude). Global-scope files live in ~/.claude/ and apply across all projects.",
         "Several things can override what you put in these files:",
         "Managed settings deployed by your organization take precedence over everything",
@@ -2178,6 +2182,7 @@
         "Some environment variables take precedence over their equivalent setting, but this varies: check the environment variables reference for each one",
         "See settings precedence for the full order.",
         "Click a filename to open that node in the explorer above.",
+        "If a setting, hook, or file isn’t taking effect, scan the symptoms below.",
         "The explorer shows what files can exist. To see what actually loaded in your current session, use these commands:",
         "Run /context first for the overview, then the specific command for the area you want to investigate.",
         "Beyond the config you author, ~/.claude holds data Claude Code writes during sessions. These files are plaintext. Anything that passes through a tool lands in a transcript on disk: file contents, command output, pasted text.",
@@ -2203,9 +2208,15 @@
           "paragraphs": [
             "Where Claude Code reads CLAUDE.md, settings.json, hooks, skills, commands, subagents, rules, and auto memory. Explore the .claude directory in your project and ~/.claude in your home directory.",
             "Claude Code reads instructions, settings, skills, subagents, and memory from your project directory and from ~/.claude in your home directory. Commit project files to git to share them with your team; files in ~/.claude are personal configuration that applies across all your projects.",
-            "If you set CLAUDE_CONFIG_DIR, every ~/.claude path on this page lives under that directory instead.",
-            "Most users only edit CLAUDE.md and settings.json. The rest of the directory is optional: add skills, rules, or subagents as you need them.",
-            "This page is an interactive explorer: click files in the tree to see what each one does, when it loads, and an example. For a quick reference, see the file reference table below."
+            "On Windows, ~/.claude resolves to %USERPROFILE%\\.claude. If you set CLAUDE_CONFIG_DIR, every ~/.claude path on this page lives under that directory instead.",
+            "Most users only edit CLAUDE.md and settings.json. The rest of the directory is optional: add skills, rules, or subagents as you need them."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Explore the directory",
+          "paragraphs": [
+            "Click files in the tree to see what each one does, when it loads, and an example."
           ],
           "codeBlocks": []
         },
@@ -2214,6 +2225,13 @@
           "paragraphs": [
             "The explorer covers files you author and edit. A few related files live elsewhere:",
             "~/.claude also holds data Claude Code writes as you work: transcripts, prompt history, file snapshots, caches, and logs. See application data below."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Choose the right file",
+          "paragraphs": [
+            "Different kinds of customization live in different files. Use this table to find where a change belongs."
           ],
           "codeBlocks": []
         },
@@ -2227,6 +2245,13 @@
             "Some environment variables take precedence over their equivalent setting, but this varies: check the environment variables reference for each one",
             "See settings precedence for the full order.",
             "Click a filename to open that node in the explorer above."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Troubleshoot configuration",
+          "paragraphs": [
+            "If a setting, hook, or file isn’t taking effect, scan the symptoms below."
           ],
           "codeBlocks": []
         },
@@ -3241,12 +3266,12 @@
         "​Work with tests",
         "​Create pull requests",
         "​Handle documentation",
+        "​Work in notes and non-code folders",
         "​Work with images",
         "​Reference files and directories",
         "​Use extended thinking (thinking mode)",
         "​Configure thinking mode",
-        "​How extended thinking works",
-        "​Resume previous conversations"
+        "​How extended thinking works"
       ],
       "toc": [
         "Understand new codebases",
@@ -3263,12 +3288,12 @@
         "Work with tests",
         "Create pull requests",
         "Handle documentation",
+        "Work in notes and non-code folders",
         "Work with images",
         "Reference files and directories",
         "Use extended thinking (thinking mode)",
         "Configure thinking mode",
-        "How extended thinking works",
-        "Resume previous conversations"
+        "How extended thinking works"
       ],
       "paragraphs": [
         "Understand new codebases",
@@ -3285,6 +3310,7 @@
         "Work with tests",
         "Create pull requests",
         "Handle documentation",
+        "Work in notes and non-code folders",
         "Work with images",
         "Reference files and directories",
         "Use extended thinking (thinking mode)",
@@ -3391,6 +3417,8 @@
         "Specify the documentation style you want (JSDoc, docstrings, etc.)",
         "Ask for examples in the documentation",
         "Request documentation for public APIs, interfaces, and complex logic",
+        "Claude Code works in any directory. Run it inside a notes vault, a documentation folder, or any collection of markdown files to search, edit, and reorganize content the same way you would code.",
+        "The .claude/ directory and CLAUDE.md sit alongside other tools’ config directories without conflict. Claude reads files fresh on each tool call, so it sees edits you make in another application the next time it reads that file.",
         "Suppose you need to work with images in your codebase, and you want Claude’s help analyzing image content.",
         "Add an image to the conversation",
         "You can use any of these methods:",
@@ -3447,10 +3475,7 @@
         "Or from inside an active session:",
         "The /resume command (or claude --resume without arguments) opens an interactive session picker with these features:",
         "Keyboard shortcuts in the picker:",
-        "Session organization:",
-        "The picker displays sessions with helpful metadata:",
-        "Session name if set, otherwise the conversation summary or first user prompt",
-        "Time elapsed since last activity"
+        "Session organization:"
       ],
       "codeBlocks": [
         "cd /path/to/project",
@@ -3716,6 +3741,14 @@
           ]
         },
         {
+          "title": "​Work in notes and non-code folders",
+          "paragraphs": [
+            "Claude Code works in any directory. Run it inside a notes vault, a documentation folder, or any collection of markdown files to search, edit, and reorganize content the same way you would code.",
+            "The .claude/ directory and CLAUDE.md sit alongside other tools’ config directories without conflict. Claude reads files fresh on each tool call, so it sees edits you make in another application the next time it reads that file."
+          ],
+          "codeBlocks": []
+        },
+        {
           "title": "​Work with images",
           "paragraphs": [
             "Suppose you need to work with images in your codebase, and you want Claude’s help analyzing image content.",
@@ -3933,19 +3966,6 @@
           "title": "​Use Claude as a unix-style utility",
           "paragraphs": [],
           "codeBlocks": []
-        },
-        {
-          "title": "​Add Claude to your verification process",
-          "paragraphs": [
-            "Suppose you want to use Claude Code as a linter or code reviewer.",
-            "Add Claude to your build script:",
-            "Use Claude for automated code review in your CI/CD pipeline",
-            "Customize the prompt to check for specific issues relevant to your project",
-            "Consider creating multiple scripts for different types of verification"
-          ],
-          "codeBlocks": [
-            "// package.json\n{\n    ...\n    \"scripts\": {\n        ...\n        \"lint:claude\": \"claude -p 'you are a linter. please look at the changes vs. main and report any issues related to typos. report the filename and line number on one line, and a description of the issue on the second line. do not return any other text.'\"\n    }\n}"
-          ]
         }
       ]
     },
@@ -5969,7 +5989,7 @@
         "Permission modes: click the mode indicator at the bottom of the prompt box to switch modes. In normal mode, Claude asks permission before each action. In Plan mode, Claude describes what it will do and waits for approval before making changes. VS Code automatically opens the plan as a full markdown document where you can add inline comments to give feedback before Claude begins. In auto-accept mode, Claude makes edits without asking. Set the default in VS Code settings under claudeCode.initialPermissionMode.",
         "Command menu: click / or type / to open the command menu. Options include attaching files, switching models, toggling extended thinking, viewing plan usage (/usage), and starting a Remote Control session (/remote-control). The Customize section provides access to MCP servers, hooks, memory, permissions, and plugins. Items with a terminal icon open in the integrated terminal.",
         "Context indicator: the prompt box shows how much of Claude’s context window you’re using. Claude automatically compacts when needed, or you can run /compact manually.",
-        "Extended thinking: lets Claude spend more time reasoning through complex problems. Toggle it on via the command menu (/). See Extended thinking for details.",
+        "Extended thinking: lets Claude spend more time reasoning through complex problems. Toggle it on via the command menu (/). Claude’s reasoning appears in the conversation as collapsed blocks: click a block to read it, or press Ctrl+O to expand or collapse every thinking block in the session. See Extended thinking for details.",
         "Multi-line input: press Shift+Enter to add a new line without sending. This also works in the “Other” free-text input of question dialogs.",
         "Use @-mentions to give Claude context about specific files or folders. When you type @ followed by a file or folder name, Claude reads that content and can answer questions about it or make changes to it. Claude Code supports fuzzy matching, so you can type partial names to find what you need:",
         "For large PDFs, you can ask Claude to read specific pages instead of the whole file: a single page, a range like pages 1-10, or an open-ended range like page 3 onward.",
@@ -6151,7 +6171,7 @@
             "Permission modes: click the mode indicator at the bottom of the prompt box to switch modes. In normal mode, Claude asks permission before each action. In Plan mode, Claude describes what it will do and waits for approval before making changes. VS Code automatically opens the plan as a full markdown document where you can add inline comments to give feedback before Claude begins. In auto-accept mode, Claude makes edits without asking. Set the default in VS Code settings under claudeCode.initialPermissionMode.",
             "Command menu: click / or type / to open the command menu. Options include attaching files, switching models, toggling extended thinking, viewing plan usage (/usage), and starting a Remote Control session (/remote-control). The Customize section provides access to MCP servers, hooks, memory, permissions, and plugins. Items with a terminal icon open in the integrated terminal.",
             "Context indicator: the prompt box shows how much of Claude’s context window you’re using. Claude automatically compacts when needed, or you can run /compact manually.",
-            "Extended thinking: lets Claude spend more time reasoning through complex problems. Toggle it on via the command menu (/). See Extended thinking for details.",
+            "Extended thinking: lets Claude spend more time reasoning through complex problems. Toggle it on via the command menu (/). Claude’s reasoning appears in the conversation as collapsed blocks: click a block to read it, or press Ctrl+O to expand or collapse every thinking block in the session. See Extended thinking for details.",
             "Multi-line input: press Shift+Enter to add a new line without sending. This also works in the “Other” free-text input of question dialogs."
           ],
           "codeBlocks": []
@@ -10763,7 +10783,8 @@
         "This example appends each change to an audit log. Add this to ~/.claude/settings.json:",
         "The matcher filters by configuration type: user_settings, project_settings, local_settings, policy_settings, or skills. To block a change from taking effect, exit with code 2 or return {\"decision\": \"block\"}. See the ConfigChange reference for the full input schema.",
         "Some projects set different environment variables depending on which directory you are in. Tools like direnv do this automatically in your shell, but Claude’s Bash tool does not pick up those changes on its own.",
-        "A CwdChanged hook fixes this: it runs each time Claude changes directory, so you can reload the correct variables for the new location. The hook writes the updated values to CLAUDE_ENV_FILE, which Claude Code applies before each Bash command. Add this to ~/.claude/settings.json:",
+        "Pairing a SessionStart hook with a CwdChanged hook fixes this. SessionStart loads the variables for the directory you launch in, and CwdChanged reloads them each time Claude changes directory. Both write to CLAUDE_ENV_FILE, which Claude Code runs as a script preamble before each Bash command. Add this to ~/.claude/settings.json:",
+        "Run direnv allow once in each directory that has an .envrc so direnv is permitted to load it. If you use devbox or nix instead of direnv, the same pattern works with devbox shellenv or devbox global shellenv in place of direnv export bash.",
         "To react to specific files instead of every directory change, use FileChanged with a matcher listing the filenames to watch, separated by |. To build the watch list, this value is split into literal filenames rather than evaluated as a regex. See FileChanged for how the same value also filters which hook groups run when a file changes. This example watches .envrc and .env in the working directory:",
         "See the CwdChanged and FileChanged reference entries for input schemas, watchPaths output, and CLAUDE_ENV_FILE details.",
         "Skip the approval dialog for tool calls you always allow. This example auto-approves ExitPlanMode, the tool Claude calls when it finishes presenting a plan and asks to proceed, so you aren’t prompted every time a plan is ready.",
@@ -10779,7 +10800,7 @@
         "Each hook has a type that determines how it runs. Most hooks use \"type\": \"command\", which runs a shell command. Three other types are available:",
         "\"type\": \"http\": POST event data to a URL. See HTTP hooks.",
         "\"type\": \"prompt\": single-turn LLM evaluation. See Prompt-based hooks.",
-        "\"type\": \"agent\": multi-turn verification with tool access. See Agent-based hooks.",
+        "\"type\": \"agent\": multi-turn verification with tool access. Agent hooks are experimental and may change. See Agent-based hooks.",
         "Hooks communicate with Claude Code through stdin, stdout, stderr, and exit codes. When an event fires, Claude Code passes event-specific data as JSON to your script’s stdin. Your script reads that data, does its work, and tells Claude Code what to do next via the exit code.",
         "Every event includes common fields like session_id and cwd, but each event type adds different data. For example, when Claude runs a Bash command, a PreToolUse hook receives something like this on stdin:",
         "Your script can parse that JSON and act on any of those fields. UserPromptSubmit hooks get the prompt text instead, SessionStart hooks get the source (startup, resume, clear, compact), and so on. See Common input fields in the reference for shared fields, and each event’s section for event-specific schemas.",
@@ -10812,10 +10833,10 @@
         "The SessionEnd event supports matchers on the reason the session ended. This hook only fires on clear (when you run /clear), not on normal exits:",
         "For full matcher syntax, see the Hooks reference.",
         "The if field requires Claude Code v2.1.85 or later. Earlier versions ignore it and run the hook on every matched call.",
-        "The if field uses permission rule syntax to filter hooks by tool name and arguments together, so the hook process only spawns when the tool call matches. This goes beyond matcher, which filters at the group level by tool name only.",
+        "The if field uses permission rule syntax to filter hooks by tool name and arguments together, so the hook process only spawns when the tool call matches, or when a Bash command is too complex to parse. This goes beyond matcher, which filters at the group level by tool name only.",
         "For example, to run a hook only when Claude uses git commands rather than all Bash commands:",
-        "The hook process only spawns when the Bash command starts with git. Other Bash commands skip this handler entirely. The if field accepts the same patterns as permission rules: \"Bash(git *)\", \"Edit(*.ts)\", and so on. To match multiple tool names, use separate handlers each with its own if value, or match at the matcher level where pipe alternation is supported.",
-        "if only works on tool events: PreToolUse, PostToolUse, PostToolUseFailure, PermissionRequest, and PermissionDenied. Adding it to any other event prevents the hook from running.",
+        "The hook process only spawns when a subcommand of the Bash command matches git *, or when the command is too complex to parse into subcommands. For compound commands like npm test && git push, Claude Code evaluates each subcommand and fires the hook because git push matches. The if field accepts the same patterns as permission rules: \"Bash(git *)\", \"Edit(*.ts)\", and so on. To match multiple tool names, use separate handlers each with its own if value, or match at the matcher level where pipe alternation is supported.",
+        "if only works on tool events: PreToolUse, PostToolUse, PostToolUseFailure, and PermissionRequest. Adding it to any other event prevents the hook from running.",
         "Where you add a hook determines its scope:",
         "Run /hooks in Claude Code to browse all configured hooks grouped by event. To disable all hooks at once, set \"disableAllHooks\": true in your settings file.",
         "If you edit settings files directly while Claude Code is running, the file watcher normally picks up hook changes automatically.",
@@ -10825,6 +10846,7 @@
         "\"ok\": false: the action is blocked. The model’s \"reason\" is fed back to Claude so it can adjust.",
         "This example uses a Stop hook to ask the model whether all requested tasks are complete. If the model returns \"ok\": false, Claude keeps working and uses the reason as its next instruction:",
         "For full configuration options, see Prompt-based hooks in the reference.",
+        "Agent hooks are experimental. Behavior and configuration may change in future releases. For production workflows, prefer command hooks.",
         "When verification requires inspecting files or running commands, use type: \"agent\" hooks. Unlike prompt hooks which make a single LLM call, agent hooks spawn a subagent that can read files, search code, and use other tools to verify conditions before returning a decision.",
         "Agent hooks use the same \"ok\" / \"reason\" response format as prompt hooks, but with a longer default timeout of 60 seconds and up to 50 tool-use turns.",
         "This example verifies that tests pass before allowing Claude to stop:",
@@ -10883,8 +10905,8 @@
         "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Edit|Write\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"\\\"$CLAUDE_PROJECT_DIR\\\"/.claude/hooks/protect-files.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
         "{\n  \"hooks\": {\n    \"SessionStart\": [\n      {\n        \"matcher\": \"compact\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo 'Reminder: use Bun, not npm. Run bun test before committing. Current sprint: auth refactor.'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
         "{\n  \"hooks\": {\n    \"ConfigChange\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"jq -c '{timestamp: now | todate, source: .source, file: .file_path}' >> ~/claude-config-audit.log\"\n          }\n        ]\n      }\n    ]\n  }\n}",
-        "{\n  \"hooks\": {\n    \"CwdChanged\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash >> \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
-        "{\n  \"hooks\": {\n    \"FileChanged\": [\n      {\n        \"matcher\": \".envrc|.env\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash >> \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+        "{\n  \"hooks\": {\n    \"SessionStart\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash > \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ],\n    \"CwdChanged\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash > \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+        "{\n  \"hooks\": {\n    \"FileChanged\": [\n      {\n        \"matcher\": \".envrc|.env\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash > \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
         "{\n  \"hooks\": {\n    \"PermissionRequest\": [\n      {\n        \"matcher\": \"ExitPlanMode\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo '{\\\"hookSpecificOutput\\\": {\\\"hookEventName\\\": \\\"PermissionRequest\\\", \\\"decision\\\": {\\\"behavior\\\": \\\"allow\\\"}}}'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
         "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PermissionRequest\",\n    \"decision\": {\n      \"behavior\": \"allow\",\n      \"updatedPermissions\": [\n        { \"type\": \"setMode\", \"mode\": \"acceptEdits\", \"destination\": \"session\" }\n      ]\n    }\n  }\n}",
         "{\n  \"session_id\": \"abc123\",          // unique ID for this session\n  \"cwd\": \"/Users/sarah/myproject\", // working directory when the event fired\n  \"hook_event_name\": \"PreToolUse\", // which event triggered this hook\n  \"tool_name\": \"Bash\",             // the tool Claude is about to use\n  \"tool_input\": {                  // the arguments Claude passed to the tool\n    \"command\": \"npm test\"          // for Bash, this is the shell command\n  }\n}",
@@ -11028,13 +11050,14 @@
           "title": "​Reload environment when directory or files change",
           "paragraphs": [
             "Some projects set different environment variables depending on which directory you are in. Tools like direnv do this automatically in your shell, but Claude’s Bash tool does not pick up those changes on its own.",
-            "A CwdChanged hook fixes this: it runs each time Claude changes directory, so you can reload the correct variables for the new location. The hook writes the updated values to CLAUDE_ENV_FILE, which Claude Code applies before each Bash command. Add this to ~/.claude/settings.json:",
+            "Pairing a SessionStart hook with a CwdChanged hook fixes this. SessionStart loads the variables for the directory you launch in, and CwdChanged reloads them each time Claude changes directory. Both write to CLAUDE_ENV_FILE, which Claude Code runs as a script preamble before each Bash command. Add this to ~/.claude/settings.json:",
+            "Run direnv allow once in each directory that has an .envrc so direnv is permitted to load it. If you use devbox or nix instead of direnv, the same pattern works with devbox shellenv or devbox global shellenv in place of direnv export bash.",
             "To react to specific files instead of every directory change, use FileChanged with a matcher listing the filenames to watch, separated by |. To build the watch list, this value is split into literal filenames rather than evaluated as a regex. See FileChanged for how the same value also filters which hook groups run when a file changes. This example watches .envrc and .env in the working directory:",
             "See the CwdChanged and FileChanged reference entries for input schemas, watchPaths output, and CLAUDE_ENV_FILE details."
           ],
           "codeBlocks": [
-            "{\n  \"hooks\": {\n    \"CwdChanged\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash >> \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
-            "{\n  \"hooks\": {\n    \"FileChanged\": [\n      {\n        \"matcher\": \".envrc|.env\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash >> \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}"
+            "{\n  \"hooks\": {\n    \"SessionStart\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash > \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ],\n    \"CwdChanged\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash > \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+            "{\n  \"hooks\": {\n    \"FileChanged\": [\n      {\n        \"matcher\": \".envrc|.env\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash > \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}"
           ]
         },
         {
@@ -11062,7 +11085,7 @@
             "Each hook has a type that determines how it runs. Most hooks use \"type\": \"command\", which runs a shell command. Three other types are available:",
             "\"type\": \"http\": POST event data to a URL. See HTTP hooks.",
             "\"type\": \"prompt\": single-turn LLM evaluation. See Prompt-based hooks.",
-            "\"type\": \"agent\": multi-turn verification with tool access. See Agent-based hooks."
+            "\"type\": \"agent\": multi-turn verification with tool access. Agent hooks are experimental and may change. See Agent-based hooks."
           ],
           "codeBlocks": []
         },
@@ -11138,6 +11161,7 @@
         {
           "title": "​Agent-based hooks",
           "paragraphs": [
+            "Agent hooks are experimental. Behavior and configuration may change in future releases. For production workflows, prefer command hooks.",
             "When verification requires inspecting files or running commands, use type: \"agent\" hooks. Unlike prompt hooks which make a single LLM call, agent hooks spawn a subagent that can read files, search code, and use other tools to verify conditions before returning a decision.",
             "Agent hooks use the same \"ok\" / \"reason\" response format as prompt hooks, but with a longer default timeout of 60 seconds and up to 50 tool-use turns.",
             "This example verifies that tests pass before allowing Claude to stop:",
@@ -16935,7 +16959,7 @@
         "These features are blocked in the backend regardless of client-side display. If you see a disabled feature in the Claude Code terminal during startup, attempting to use it returns an error indicating the organization’s policies do not allow that action.",
         "Future features may also be disabled if they require storing prompts or completions.",
         "Even with ZDR enabled, Anthropic may retain data where required by law or to address Usage Policy violations. If a session is flagged for a policy violation, Anthropic may retain the associated inputs and outputs for up to 2 years, consistent with Anthropic’s standard ZDR policy.",
-        "To request ZDR for Claude Code on Claude for Enterprise, contact your Anthropic account team. Your account team will submit the request internally, and Anthropic will review and enable ZDR on your organization after confirming eligibility. All enablement actions are audit-logged.",
+        "To request ZDR for Claude Code on Claude for Enterprise, contact sales or your Anthropic account team. Your account team will submit the request internally, and Anthropic will review and enable ZDR on your organization after confirming eligibility. All enablement actions are audit-logged.",
         "If you are currently using ZDR for Claude Code via pay-as-you-go API keys, you can transition to Claude for Enterprise to gain access to administrative features while maintaining ZDR for Claude Code. Contact your account team to coordinate the migration.",
         "Was this page helpful?"
       ],
@@ -17000,7 +17024,7 @@
         {
           "title": "​Request ZDR",
           "paragraphs": [
-            "To request ZDR for Claude Code on Claude for Enterprise, contact your Anthropic account team. Your account team will submit the request internally, and Anthropic will review and enable ZDR on your organization after confirming eligibility. All enablement actions are audit-logged.",
+            "To request ZDR for Claude Code on Claude for Enterprise, contact sales or your Anthropic account team. Your account team will submit the request internally, and Anthropic will review and enable ZDR on your organization after confirming eligibility. All enablement actions are audit-logged.",
             "If you are currently using ZDR for Claude Code via pay-as-you-go API keys, you can transition to Claude for Enterprise to gain access to administrative features while maintaining ZDR for Claude Code. Contact your account team to coordinate the migration.",
             "Was this page helpful?"
           ],
@@ -20614,186 +20638,215 @@
       "section": "Configuration",
       "path": "/docs/en/terminal-config",
       "url": "https://code.claude.com/docs/en/terminal-config",
-      "title": "Optimize your terminal setup",
-      "metaDescription": "Claude Code works best when your terminal is properly configured. Follow these guidelines to optimize your experience.",
+      "title": "Configure your terminal for Claude Code",
+      "metaDescription": "Fix Shift+Enter for newlines, get a terminal bell when Claude finishes, configure tmux, match the color theme, and enable Vim mode in the Claude Code CLI.",
       "headings": [
-        "​Themes and appearance",
-        "​Line breaks",
-        "​Notification setup",
-        "​Reduce flicker and memory usage",
-        "​Handling large inputs",
-        "​Vim Mode"
+        "​Enter multiline prompts",
+        "​Enable Option key shortcuts on macOS",
+        "​Get a terminal bell or notification",
+        "​Play a sound with a Notification hook",
+        "​Configure tmux",
+        "​Match the color theme",
+        "​Switch to fullscreen rendering",
+        "​Paste large content",
+        "​Edit prompts with Vim keybindings",
+        "​Related resources"
       ],
       "toc": [
-        "Themes and appearance",
-        "Line breaks",
-        "Set up Shift+Enter with /terminal-setup",
-        "Set up Shift+Enter in tmux",
-        "Set up Option+Enter on macOS",
-        "Notification setup",
-        "Terminal notifications",
-        "Notification hooks",
-        "Reduce flicker and memory usage",
-        "Handling large inputs",
-        "Vim Mode"
+        "Enter multiline prompts",
+        "Enable Option key shortcuts on macOS",
+        "Get a terminal bell or notification",
+        "Play a sound with a Notification hook",
+        "Configure tmux",
+        "Match the color theme",
+        "Switch to fullscreen rendering",
+        "Paste large content",
+        "Edit prompts with Vim keybindings",
+        "Related resources"
       ],
       "paragraphs": [
-        "Themes and appearance",
-        "Line breaks",
-        "Set up Shift+Enter with /terminal-setup",
-        "Set up Shift+Enter in tmux",
-        "Set up Option+Enter on macOS",
-        "Notification setup",
-        "Terminal notifications",
-        "Notification hooks",
-        "Reduce flicker and memory usage",
-        "Handling large inputs",
-        "Vim Mode",
-        "Claude Code works best when your terminal is properly configured. Follow these guidelines to optimize your experience.",
-        "Claude cannot control the theme of your terminal. That’s handled by your terminal application. You can match Claude Code’s theme to your terminal via the /theme command. Select auto in the theme picker to have Claude Code follow your terminal’s dark or light mode automatically.",
-        "For additional customization of the Claude Code interface itself, you can configure a custom status line to display contextual information like the current model, working directory, or git branch at the bottom of your terminal.",
-        "You have several options for entering line breaks into Claude Code:",
-        "Quick escape: Type \\ followed by Enter to create a newline",
-        "Ctrl+J: Sends a line feed character, which works as a newline in any terminal without configuration",
-        "Shift+Enter: Works out of the box in iTerm2, WezTerm, Ghostty, and Kitty",
-        "Keyboard shortcut: Set up a keybinding to insert a newline in other terminals",
-        "Run /terminal-setup within Claude Code to automatically configure Shift+Enter for VS Code, Alacritty, Zed, and Warp.",
-        "The /terminal-setup command is only visible in terminals that require manual configuration. If you’re using iTerm2, WezTerm, Ghostty, or Kitty, you won’t see this command because Shift+Enter already works natively.",
-        "Inside tmux, Shift+Enter submits instead of inserting a newline unless extended key reporting is enabled. Add these lines to ~/.tmux.conf, then run tmux source-file ~/.tmux.conf to reload your configuration:",
-        "Claude Code requests extended keys at startup, but tmux ignores the request unless extended-keys is set to on. The terminal-features line tells tmux that your outer terminal can send these sequences.",
-        "On macOS, you can use Option+Enter as the newline keybinding in Terminal.app, iTerm2, and the VS Code terminal after enabling the Option-as-Meta setting.",
-        "Terminal.app",
-        "Open Settings → Profiles → Keyboard",
-        "Check “Use Option as Meta Key”",
-        "Open Settings → Profiles → Keys",
-        "Under General, set Left/Right Option key to “Esc+”",
-        "Set \"terminal.integrated.macOptionIsMeta\": true in VS Code settings.",
-        "When Claude finishes working and is waiting for your input, it fires a notification event. You can surface this event as a desktop notification through your terminal or run custom logic with notification hooks.",
-        "Kitty and Ghostty support desktop notifications without additional configuration. iTerm 2 requires setup:",
-        "Open iTerm 2 Settings → Profiles → Terminal",
-        "Enable “Notification Center Alerts”",
-        "Click “Filter Alerts” and check “Send escape sequence-generated alerts”",
-        "If notifications aren’t appearing, verify that your terminal app has notification permissions in your OS settings.",
-        "When running Claude Code inside tmux, notifications and the terminal progress bar only reach the outer terminal, such as iTerm2, Kitty, or Ghostty, if you enable passthrough in your tmux configuration:",
-        "Without this setting, tmux intercepts the escape sequences and they do not reach the terminal application.",
-        "Other terminals, including the default macOS Terminal, do not support native notifications. Use notification hooks instead.",
-        "To add custom behavior when notifications fire, such as playing a sound or sending a message, configure a notification hook. Hooks run alongside terminal notifications, not as a replacement.",
-        "If you see flicker during long sessions, or your terminal scroll position jumps to the top while Claude is working, try fullscreen rendering. It uses an alternate rendering path that keeps memory flat and adds mouse support. Run /tui fullscreen to switch in your current conversation.",
-        "When working with extensive code or long instructions:",
-        "Avoid direct pasting: Claude Code may struggle with very long pasted content",
-        "Use file-based workflows: Write content to a file and ask Claude to read it",
-        "Be aware of VS Code limitations: The VS Code terminal is particularly prone to truncating long pastes",
-        "Claude Code supports a subset of Vim keybindings that can be enabled via /config → Editor mode. To set the mode directly in your config file, set the editorMode global config key to \"vim\" in ~/.claude.json.",
-        "The supported subset includes:",
-        "Mode switching: Esc (to NORMAL), i/I, a/A, o/O (to INSERT)",
-        "Navigation: h/j/k/l, w/e/b, 0/$/^, gg/G, f/F/t/T with ;/, repeat",
-        "Editing: x, dw/de/db/dd/D, cw/ce/cb/cc/C, . (repeat)",
-        "Yank/paste: yy/Y, yw/ye/yb, p/P",
-        "Text objects: iw/aw, iW/aW, i\"/a\", i'/a', i(/a(, i[/a[, i{/a{",
-        "Indentation: >>/<<",
-        "Line operations: J (join lines)",
-        "See Interactive mode for the complete reference.",
+        "Enter multiline prompts",
+        "Enable Option key shortcuts on macOS",
+        "Get a terminal bell or notification",
+        "Play a sound with a Notification hook",
+        "Configure tmux",
+        "Match the color theme",
+        "Switch to fullscreen rendering",
+        "Paste large content",
+        "Edit prompts with Vim keybindings",
+        "Related resources",
+        "Fix Shift+Enter for newlines, get a terminal bell when Claude finishes, configure tmux, match the color theme, and enable Vim mode in the Claude Code CLI.",
+        "Claude Code works in any terminal without configuration. This page is for when something specific is not behaving the way you expect. Find your symptom below. If everything already feels right, you do not need this page.",
+        "Shift+Enter submits instead of inserting a newline",
+        "Option-key shortcuts do nothing on macOS",
+        "No sound or alert when Claude finishes",
+        "You run Claude Code inside tmux",
+        "Display flickers or scrollback jumps",
+        "You want Vim keys in the prompt",
+        "This page is about getting your terminal to send the right signals to Claude Code. To change which keys Claude Code itself responds to, see keybindings instead.",
+        "Pressing Enter submits your message. To add a line break without submitting, press Ctrl+J, or type \\ and then press Enter. Both work in every terminal with no setup.",
+        "In most terminals you can also press Shift+Enter, but support varies by terminal emulator:",
+        "For VS Code, Cursor, Windsurf, Alacritty, and Zed, /terminal-setup writes Shift+Enter and other keybindings into the terminal’s configuration file. If it reports a conflict such as Found existing VSCode terminal Shift+Enter key binding, remove that entry from the terminal’s own keybindings file, for example VS Code’s keybindings.json, and run the command again. Run /terminal-setup directly in the host terminal rather than inside tmux or screen, since it needs to write to the host terminal’s configuration.",
+        "If you are running inside tmux, Shift+Enter also requires the tmux configuration below even when the outer terminal supports it.",
+        "To bind newline to a different key, or to swap behavior so Enter inserts a newline and Shift+Enter submits, map the chat:newline and chat:submit actions in your keybindings file.",
+        "Some Claude Code shortcuts use the Option key, such as Option+Enter for a newline or Option+P to switch models. On macOS, most terminals do not send Option as a modifier by default, so these shortcuts do nothing until you enable it. The terminal setting for this is usually labeled “Use Option as Meta Key”; Meta is the historical Unix name for the key now labeled Option or Alt.",
+        "Apple Terminal",
+        "Open Settings → Profiles → Keyboard and check “Use Option as Meta Key”.",
+        "If you accepted Claude Code’s first-run prompt that offered “Option+Enter for newlines and visual bell”, this is already done. That prompt runs /terminal-setup for you, which enables Option as Meta and switches the audio bell to a visual screen flash in your Apple Terminal profile.",
+        "Open Settings → Profiles → Keys → General and set Left Option key and Right Option key to “Esc+”.",
+        "Add \"terminal.integrated.macOptionIsMeta\": true to your VS Code settings.",
+        "For Ghostty, Kitty, and other terminals, look for an Option-as-Alt or Option-as-Meta setting in the terminal’s configuration file.",
+        "When Claude finishes a task or pauses for a permission prompt, it fires a notification event. Surfacing this as a terminal bell or desktop notification lets you switch to other work while a long task runs.",
+        "Claude Code sends a desktop notification only in Ghostty, Kitty, and iTerm2; every other terminal needs a Notification hook instead. The notification also reaches your local machine over SSH, so a remote session can still alert you. Ghostty and Kitty forward it to your OS notification center without further setup. iTerm2 requires you to enable forwarding:",
+        "Open iTerm2 notification settings",
+        "Go to Settings → Profiles → Terminal.",
+        "Enable alerts",
+        "Check “Notification Center Alerts”, then click “Filter Alerts” and enable “Send escape sequence-generated alerts”.",
+        "If notifications still do not appear, confirm that your terminal application has notification permission in your OS settings, and if you are running inside tmux, enable passthrough.",
+        "In any terminal you can configure a Notification hook to play a sound or run a custom command when Claude needs your attention. Hooks run alongside the desktop notification rather than replacing it. Terminals such as Warp or Apple Terminal rely on a hook alone since Claude Code does not send them a desktop notification.",
+        "The example below plays a system sound on macOS. The linked guide has desktop notification commands for macOS, Linux, and Windows.",
+        "When Claude Code runs inside tmux, two things break by default: Shift+Enter submits instead of inserting a newline, and desktop notifications and the progress bar never reach the outer terminal. Add these lines to ~/.tmux.conf, then run tmux source-file ~/.tmux.conf to apply them to the running server:",
+        "The allow-passthrough line lets notifications and progress updates reach iTerm2, Ghostty, or Kitty instead of being swallowed by tmux. The extended-keys lines let tmux distinguish Shift+Enter from plain Enter so the newline shortcut works.",
+        "Use the /theme command, or the theme picker in /config, to choose a Claude Code theme that matches your terminal. Selecting the auto option detects your terminal’s light or dark background, so the theme follows OS appearance changes whenever your terminal does. The available themes are built in; there is no custom theme file. Claude Code does not control the terminal’s own color scheme, which is set by the terminal application.",
+        "To customize what appears at the bottom of the interface, configure a custom status line that shows the current model, working directory, git branch, or other context.",
+        "If the display flickers or the scroll position jumps while Claude is working, switch to fullscreen rendering mode. It draws to a separate screen the terminal reserves for full-screen apps instead of appending to your normal scrollback, which keeps memory usage flat and adds mouse support for scrolling and selection. In this mode you scroll with the mouse or PageUp inside Claude Code rather than with your terminal’s native scrollback; see the fullscreen page for how to search and copy.",
+        "Run /tui fullscreen to switch in the current session with your conversation intact. To make it the default, set the CLAUDE_CODE_NO_FLICKER environment variable before starting Claude Code:",
+        "When you paste more than 10,000 characters into the prompt, Claude Code collapses the input to a [Pasted text] placeholder so the input box stays usable. The full content is still sent to Claude when you submit.",
+        "The VS Code integrated terminal can drop characters from very large pastes before they reach Claude Code, so prefer file-based workflows there. For very large inputs such as entire files or long logs, write the content to a file and ask Claude to read it instead of pasting. This keeps the conversation transcript readable and lets Claude reference the file by path in later turns.",
+        "Claude Code includes a Vim-style editing mode for the prompt input. Enable it through /config → Editor mode, or by setting the editorMode global config key to \"vim\" in ~/.claude.json. Set Editor mode back to normal to turn it off.",
+        "Vim mode supports a subset of NORMAL-mode motions and operators, such as hjkl navigation and d/c/y with text objects. See the Vim editor mode reference for the full key table. Vim motions are not remappable through the keybindings file.",
+        "Pressing Enter still submits your prompt in INSERT mode, unlike standard Vim. Use o or O in NORMAL mode, or Ctrl+J, to insert a newline instead.",
+        "Interactive mode: full keyboard shortcut reference and the Vim key table",
+        "Keybindings: remap any Claude Code shortcut, including Enter and Shift+Enter",
+        "Fullscreen rendering: details on scrolling, search, and copy in fullscreen mode",
+        "Hooks guide: more Notification hook examples for Linux and Windows",
+        "Troubleshooting: fixes for issues outside terminal configuration",
         "Was this page helpful?"
       ],
       "codeBlocks": [
-        "set -s extended-keys on\nset -as terminal-features 'xterm*:extkeys'",
-        "set -g allow-passthrough on"
+        "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"hooks\": [{ \"type\": \"command\", \"command\": \"afplay /System/Library/Sounds/Glass.aiff\" }]\n      }\n    ]\n  }\n}",
+        "set -g allow-passthrough on\nset -s extended-keys on\nset -as terminal-features 'xterm*:extkeys'",
+        "CLAUDE_CODE_NO_FLICKER=1 claude"
       ],
       "sectionBlocks": [
         {
           "title": "",
           "paragraphs": [
-            "Themes and appearance",
-            "Line breaks",
-            "Set up Shift+Enter with /terminal-setup",
-            "Set up Shift+Enter in tmux",
-            "Set up Option+Enter on macOS",
-            "Notification setup",
-            "Terminal notifications",
-            "Notification hooks",
-            "Reduce flicker and memory usage",
-            "Handling large inputs",
-            "Vim Mode",
-            "Claude Code works best when your terminal is properly configured. Follow these guidelines to optimize your experience."
+            "Enter multiline prompts",
+            "Enable Option key shortcuts on macOS",
+            "Get a terminal bell or notification",
+            "Play a sound with a Notification hook",
+            "Configure tmux",
+            "Match the color theme",
+            "Switch to fullscreen rendering",
+            "Paste large content",
+            "Edit prompts with Vim keybindings",
+            "Related resources",
+            "Fix Shift+Enter for newlines, get a terminal bell when Claude finishes, configure tmux, match the color theme, and enable Vim mode in the Claude Code CLI.",
+            "Claude Code works in any terminal without configuration. This page is for when something specific is not behaving the way you expect. Find your symptom below. If everything already feels right, you do not need this page."
           ],
           "codeBlocks": []
         },
         {
-          "title": "​Themes and appearance",
+          "title": "​Enter multiline prompts",
           "paragraphs": [
-            "Claude cannot control the theme of your terminal. That’s handled by your terminal application. You can match Claude Code’s theme to your terminal via the /theme command. Select auto in the theme picker to have Claude Code follow your terminal’s dark or light mode automatically.",
-            "For additional customization of the Claude Code interface itself, you can configure a custom status line to display contextual information like the current model, working directory, or git branch at the bottom of your terminal."
+            "Pressing Enter submits your message. To add a line break without submitting, press Ctrl+J, or type \\ and then press Enter. Both work in every terminal with no setup.",
+            "In most terminals you can also press Shift+Enter, but support varies by terminal emulator:",
+            "For VS Code, Cursor, Windsurf, Alacritty, and Zed, /terminal-setup writes Shift+Enter and other keybindings into the terminal’s configuration file. If it reports a conflict such as Found existing VSCode terminal Shift+Enter key binding, remove that entry from the terminal’s own keybindings file, for example VS Code’s keybindings.json, and run the command again. Run /terminal-setup directly in the host terminal rather than inside tmux or screen, since it needs to write to the host terminal’s configuration.",
+            "If you are running inside tmux, Shift+Enter also requires the tmux configuration below even when the outer terminal supports it.",
+            "To bind newline to a different key, or to swap behavior so Enter inserts a newline and Shift+Enter submits, map the chat:newline and chat:submit actions in your keybindings file."
           ],
           "codeBlocks": []
         },
         {
-          "title": "​Line breaks",
+          "title": "​Enable Option key shortcuts on macOS",
           "paragraphs": [
-            "You have several options for entering line breaks into Claude Code:",
-            "Quick escape: Type \\ followed by Enter to create a newline",
-            "Ctrl+J: Sends a line feed character, which works as a newline in any terminal without configuration",
-            "Shift+Enter: Works out of the box in iTerm2, WezTerm, Ghostty, and Kitty",
-            "Keyboard shortcut: Set up a keybinding to insert a newline in other terminals",
-            "Run /terminal-setup within Claude Code to automatically configure Shift+Enter for VS Code, Alacritty, Zed, and Warp.",
-            "The /terminal-setup command is only visible in terminals that require manual configuration. If you’re using iTerm2, WezTerm, Ghostty, or Kitty, you won’t see this command because Shift+Enter already works natively.",
-            "Inside tmux, Shift+Enter submits instead of inserting a newline unless extended key reporting is enabled. Add these lines to ~/.tmux.conf, then run tmux source-file ~/.tmux.conf to reload your configuration:",
-            "Claude Code requests extended keys at startup, but tmux ignores the request unless extended-keys is set to on. The terminal-features line tells tmux that your outer terminal can send these sequences.",
-            "On macOS, you can use Option+Enter as the newline keybinding in Terminal.app, iTerm2, and the VS Code terminal after enabling the Option-as-Meta setting.",
-            "Terminal.app",
-            "Open Settings → Profiles → Keyboard"
+            "Some Claude Code shortcuts use the Option key, such as Option+Enter for a newline or Option+P to switch models. On macOS, most terminals do not send Option as a modifier by default, so these shortcuts do nothing until you enable it. The terminal setting for this is usually labeled “Use Option as Meta Key”; Meta is the historical Unix name for the key now labeled Option or Alt.",
+            "Apple Terminal",
+            "Open Settings → Profiles → Keyboard and check “Use Option as Meta Key”.",
+            "If you accepted Claude Code’s first-run prompt that offered “Option+Enter for newlines and visual bell”, this is already done. That prompt runs /terminal-setup for you, which enables Option as Meta and switches the audio bell to a visual screen flash in your Apple Terminal profile.",
+            "Open Settings → Profiles → Keys → General and set Left Option key and Right Option key to “Esc+”.",
+            "Add \"terminal.integrated.macOptionIsMeta\": true to your VS Code settings.",
+            "For Ghostty, Kitty, and other terminals, look for an Option-as-Alt or Option-as-Meta setting in the terminal’s configuration file."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Get a terminal bell or notification",
+          "paragraphs": [
+            "When Claude finishes a task or pauses for a permission prompt, it fires a notification event. Surfacing this as a terminal bell or desktop notification lets you switch to other work while a long task runs.",
+            "Claude Code sends a desktop notification only in Ghostty, Kitty, and iTerm2; every other terminal needs a Notification hook instead. The notification also reaches your local machine over SSH, so a remote session can still alert you. Ghostty and Kitty forward it to your OS notification center without further setup. iTerm2 requires you to enable forwarding:",
+            "Open iTerm2 notification settings",
+            "Go to Settings → Profiles → Terminal.",
+            "Enable alerts",
+            "Check “Notification Center Alerts”, then click “Filter Alerts” and enable “Send escape sequence-generated alerts”.",
+            "If notifications still do not appear, confirm that your terminal application has notification permission in your OS settings, and if you are running inside tmux, enable passthrough."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Play a sound with a Notification hook",
+          "paragraphs": [
+            "In any terminal you can configure a Notification hook to play a sound or run a custom command when Claude needs your attention. Hooks run alongside the desktop notification rather than replacing it. Terminals such as Warp or Apple Terminal rely on a hook alone since Claude Code does not send them a desktop notification.",
+            "The example below plays a system sound on macOS. The linked guide has desktop notification commands for macOS, Linux, and Windows."
           ],
           "codeBlocks": [
-            "set -s extended-keys on\nset -as terminal-features 'xterm*:extkeys'"
+            "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"hooks\": [{ \"type\": \"command\", \"command\": \"afplay /System/Library/Sounds/Glass.aiff\" }]\n      }\n    ]\n  }\n}"
           ]
         },
         {
-          "title": "​Notification setup",
+          "title": "​Configure tmux",
           "paragraphs": [
-            "When Claude finishes working and is waiting for your input, it fires a notification event. You can surface this event as a desktop notification through your terminal or run custom logic with notification hooks.",
-            "Kitty and Ghostty support desktop notifications without additional configuration. iTerm 2 requires setup:",
-            "Open iTerm 2 Settings → Profiles → Terminal",
-            "Enable “Notification Center Alerts”",
-            "Click “Filter Alerts” and check “Send escape sequence-generated alerts”",
-            "If notifications aren’t appearing, verify that your terminal app has notification permissions in your OS settings.",
-            "When running Claude Code inside tmux, notifications and the terminal progress bar only reach the outer terminal, such as iTerm2, Kitty, or Ghostty, if you enable passthrough in your tmux configuration:",
-            "Without this setting, tmux intercepts the escape sequences and they do not reach the terminal application.",
-            "Other terminals, including the default macOS Terminal, do not support native notifications. Use notification hooks instead.",
-            "To add custom behavior when notifications fire, such as playing a sound or sending a message, configure a notification hook. Hooks run alongside terminal notifications, not as a replacement."
+            "When Claude Code runs inside tmux, two things break by default: Shift+Enter submits instead of inserting a newline, and desktop notifications and the progress bar never reach the outer terminal. Add these lines to ~/.tmux.conf, then run tmux source-file ~/.tmux.conf to apply them to the running server:",
+            "The allow-passthrough line lets notifications and progress updates reach iTerm2, Ghostty, or Kitty instead of being swallowed by tmux. The extended-keys lines let tmux distinguish Shift+Enter from plain Enter so the newline shortcut works."
           ],
           "codeBlocks": [
-            "set -g allow-passthrough on"
+            "set -g allow-passthrough on\nset -s extended-keys on\nset -as terminal-features 'xterm*:extkeys'"
           ]
         },
         {
-          "title": "​Reduce flicker and memory usage",
+          "title": "​Match the color theme",
           "paragraphs": [
-            "If you see flicker during long sessions, or your terminal scroll position jumps to the top while Claude is working, try fullscreen rendering. It uses an alternate rendering path that keeps memory flat and adds mouse support. Run /tui fullscreen to switch in your current conversation."
+            "Use the /theme command, or the theme picker in /config, to choose a Claude Code theme that matches your terminal. Selecting the auto option detects your terminal’s light or dark background, so the theme follows OS appearance changes whenever your terminal does. The available themes are built in; there is no custom theme file. Claude Code does not control the terminal’s own color scheme, which is set by the terminal application.",
+            "To customize what appears at the bottom of the interface, configure a custom status line that shows the current model, working directory, git branch, or other context."
           ],
           "codeBlocks": []
         },
         {
-          "title": "​Handling large inputs",
+          "title": "​Switch to fullscreen rendering",
           "paragraphs": [
-            "When working with extensive code or long instructions:",
-            "Avoid direct pasting: Claude Code may struggle with very long pasted content",
-            "Use file-based workflows: Write content to a file and ask Claude to read it",
-            "Be aware of VS Code limitations: The VS Code terminal is particularly prone to truncating long pastes"
+            "If the display flickers or the scroll position jumps while Claude is working, switch to fullscreen rendering mode. It draws to a separate screen the terminal reserves for full-screen apps instead of appending to your normal scrollback, which keeps memory usage flat and adds mouse support for scrolling and selection. In this mode you scroll with the mouse or PageUp inside Claude Code rather than with your terminal’s native scrollback; see the fullscreen page for how to search and copy.",
+            "Run /tui fullscreen to switch in the current session with your conversation intact. To make it the default, set the CLAUDE_CODE_NO_FLICKER environment variable before starting Claude Code:"
+          ],
+          "codeBlocks": [
+            "CLAUDE_CODE_NO_FLICKER=1 claude"
+          ]
+        },
+        {
+          "title": "​Paste large content",
+          "paragraphs": [
+            "When you paste more than 10,000 characters into the prompt, Claude Code collapses the input to a [Pasted text] placeholder so the input box stays usable. The full content is still sent to Claude when you submit.",
+            "The VS Code integrated terminal can drop characters from very large pastes before they reach Claude Code, so prefer file-based workflows there. For very large inputs such as entire files or long logs, write the content to a file and ask Claude to read it instead of pasting. This keeps the conversation transcript readable and lets Claude reference the file by path in later turns."
           ],
           "codeBlocks": []
         },
         {
-          "title": "​Vim Mode",
+          "title": "​Edit prompts with Vim keybindings",
           "paragraphs": [
-            "Claude Code supports a subset of Vim keybindings that can be enabled via /config → Editor mode. To set the mode directly in your config file, set the editorMode global config key to \"vim\" in ~/.claude.json.",
-            "The supported subset includes:",
-            "Mode switching: Esc (to NORMAL), i/I, a/A, o/O (to INSERT)",
-            "Navigation: h/j/k/l, w/e/b, 0/$/^, gg/G, f/F/t/T with ;/, repeat",
-            "Editing: x, dw/de/db/dd/D, cw/ce/cb/cc/C, . (repeat)",
-            "Yank/paste: yy/Y, yw/ye/yb, p/P",
-            "Text objects: iw/aw, iW/aW, i\"/a\", i'/a', i(/a(, i[/a[, i{/a{",
-            "Indentation: >>/<<",
-            "Line operations: J (join lines)",
-            "See Interactive mode for the complete reference.",
+            "Claude Code includes a Vim-style editing mode for the prompt input. Enable it through /config → Editor mode, or by setting the editorMode global config key to \"vim\" in ~/.claude.json. Set Editor mode back to normal to turn it off.",
+            "Vim mode supports a subset of NORMAL-mode motions and operators, such as hjkl navigation and d/c/y with text objects. See the Vim editor mode reference for the full key table. Vim motions are not remappable through the keybindings file.",
+            "Pressing Enter still submits your prompt in INSERT mode, unlike standard Vim. Use o or O in NORMAL mode, or Ctrl+J, to insert a newline instead."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Related resources",
+          "paragraphs": [
+            "Interactive mode: full keyboard shortcut reference and the Vim key table",
+            "Keybindings: remap any Claude Code shortcut, including Enter and Shift+Enter",
+            "Fullscreen rendering: details on scrolling, search, and copy in fullscreen mode",
+            "Hooks guide: more Notification hook examples for Linux and Windows",
+            "Troubleshooting: fixes for issues outside terminal configuration",
             "Was this page helpful?"
           ],
           "codeBlocks": []
@@ -23454,11 +23507,11 @@
         "Complete reference for keyboard shortcuts, input modes, and interactive features in Claude Code sessions.",
         "Keyboard shortcuts may vary by platform and terminal. Press ? to see available shortcuts for your environment.",
         "macOS users: Option/Alt key shortcuts (Alt+B, Alt+F, Alt+Y, Alt+M, Alt+P, Alt+T) require configuring Option as Meta in your terminal:",
-        "iTerm2: settings → Profiles → Keys → set Left/Right Option key to “Esc+”",
-        "Terminal.app: settings → Profiles → Keyboard → check “Use Option as Meta Key”",
+        "iTerm2: Settings → Profiles → Keys → General → set Left/Right Option key to “Esc+”",
+        "Apple Terminal: Settings → Profiles → Keyboard → check “Use Option as Meta Key”",
         "VS Code: set \"terminal.integrated.macOptionIsMeta\": true in VS Code settings",
         "See Terminal configuration for details.",
-        "Shift+Enter works without configuration in iTerm2, WezTerm, Ghostty, and Kitty. For other terminals (VS Code, Alacritty, Zed, Warp), run /terminal-setup to install the binding.",
+        "Shift+Enter works without configuration in iTerm2, WezTerm, Ghostty, Kitty, Warp, and Apple Terminal. For VS Code, Cursor, Windsurf, Alacritty, and Zed, run /terminal-setup to install the binding.",
         "When the transcript viewer is open (toggled with Ctrl+O), these shortcuts are available. Ctrl+E can be rebound via transcript:toggleShowAll.",
         "Type / in Claude Code to see all available commands, or type / followed by any letters to filter. The / menu shows everything you can invoke: built-in commands, bundled and user-authored skills, and commands contributed by plugins and MCP servers. Not all built-in commands are visible to every user since some depend on your platform or plan.",
         "See the commands reference for the full list of commands included in Claude Code.",
@@ -23575,8 +23628,8 @@
           "paragraphs": [
             "Keyboard shortcuts may vary by platform and terminal. Press ? to see available shortcuts for your environment.",
             "macOS users: Option/Alt key shortcuts (Alt+B, Alt+F, Alt+Y, Alt+M, Alt+P, Alt+T) require configuring Option as Meta in your terminal:",
-            "iTerm2: settings → Profiles → Keys → set Left/Right Option key to “Esc+”",
-            "Terminal.app: settings → Profiles → Keyboard → check “Use Option as Meta Key”",
+            "iTerm2: Settings → Profiles → Keys → General → set Left/Right Option key to “Esc+”",
+            "Apple Terminal: Settings → Profiles → Keyboard → check “Use Option as Meta Key”",
             "VS Code: set \"terminal.integrated.macOptionIsMeta\": true in VS Code settings",
             "See Terminal configuration for details."
           ],
@@ -23600,7 +23653,7 @@
         {
           "title": "​Multiline input",
           "paragraphs": [
-            "Shift+Enter works without configuration in iTerm2, WezTerm, Ghostty, and Kitty. For other terminals (VS Code, Alacritty, Zed, Warp), run /terminal-setup to install the binding."
+            "Shift+Enter works without configuration in iTerm2, WezTerm, Ghostty, Kitty, Warp, and Apple Terminal. For VS Code, Cursor, Windsurf, Alacritty, and Zed, run /terminal-setup to install the binding."
           ],
           "codeBlocks": []
         },
@@ -24169,7 +24222,7 @@
         "Hooks are user-defined shell commands, HTTP endpoints, or LLM prompts that execute automatically at specific points in Claude Code’s lifecycle. Use this reference to look up event schemas, configuration options, JSON input/output formats, and advanced features like async hooks, HTTP hooks, and MCP tool hooks. If you’re setting up hooks for the first time, start with the guide instead.",
         "Hooks fire at specific points during a Claude Code session. When an event fires and a matcher matches, Claude Code passes JSON context about the event to your hook handler. For command hooks, input arrives on stdin. For HTTP hooks, it arrives as the POST request body. Your handler can then inspect the input, take action, and optionally return a decision. Events fall into three cadences: once per session (SessionStart, SessionEnd), once per turn (UserPromptSubmit, Stop, StopFailure), and on every tool call inside the agentic loop (PreToolUse, PostToolUse):",
         "The table below summarizes when each event fires. The Hook events section documents the full input schema and decision control options for each one.",
-        "To see how these pieces fit together, consider this PreToolUse hook that blocks destructive shell commands. The matcher narrows to Bash tool calls and the if condition narrows further to commands starting with rm, so block-rm.sh only spawns when both filters match:",
+        "To see how these pieces fit together, consider this PreToolUse hook that blocks destructive shell commands. The matcher narrows to Bash tool calls and the if condition narrows further to Bash subcommands matching rm *, so block-rm.sh only spawns when both filters match:",
         "The script reads the JSON input from stdin, extracts the command, and returns a permissionDecision of \"deny\" if it contains rm -rf:",
         "Now suppose Claude Code decides to run Bash \"rm -rf /tmp/build\". Here’s what happens:",
         "Event fires",
@@ -24177,7 +24230,7 @@
         "Matcher checks",
         "The matcher \"Bash\" matches the tool name, so this hook group activates. If you omit the matcher or use \"*\", the group activates on every occurrence of the event.",
         "If condition checks",
-        "The if condition \"Bash(rm *)\" matches because the command starts with rm, so this handler spawns. If the command had been npm test, the if check would fail and block-rm.sh would never run, avoiding the process spawn overhead. The if field is optional; without it, every handler in the matched group runs.",
+        "The if condition \"Bash(rm *)\" matches because rm -rf /tmp/build is a subcommand matching rm *, so this handler spawns. If the command had been npm test, the if check would fail and block-rm.sh would never run, avoiding the process spawn overhead. The if field is optional; without it, every handler in the matched group runs.",
         "Hook handler runs",
         "The script inspects the full command and finds rm -rf, so it prints a decision to stdout:",
         "If the command had been a safer rm variant like rm file.txt, the script would hit exit 0 instead, which tells Claude Code to allow the tool call with no further action.",
@@ -24198,7 +24251,7 @@
         "The matcher runs against a field from the JSON input that Claude Code sends to your hook on stdin. For tool events, that field is tool_name. Each hook event section lists the full set of matcher values and the input schema for that event.",
         "This example runs a linting script only when Claude writes or edits a file:",
         "UserPromptSubmit, Stop, TeammateIdle, TaskCreated, TaskCompleted, WorktreeCreate, WorktreeRemove, and CwdChanged don’t support matchers and always fire on every occurrence. If you add a matcher field to these events, it is silently ignored.",
-        "For tool events, you can filter more narrowly by setting the if field on individual hook handlers. if uses permission rule syntax to match against the tool name and arguments together, so \"Bash(git *)\" runs only for git commands and \"Edit(*.ts)\" runs only for TypeScript files.",
+        "For tool events, you can filter more narrowly by setting the if field on individual hook handlers. if uses permission rule syntax to match against the tool name and arguments together, so \"Bash(git *)\" runs when any subcommand of the Bash input matches git * and \"Edit(*.ts)\" runs only for TypeScript files.",
         "MCP server tools appear as regular tools in tool events (PreToolUse, PostToolUse, PostToolUseFailure, PermissionRequest, PermissionDenied), so you can match them the same way you match any other tool name.",
         "MCP tools follow the naming pattern mcp__<server>__<tool>, for example:",
         "mcp__memory__create_entities: Memory server’s create entities tool",
@@ -24212,8 +24265,9 @@
         "Command hooks (type: \"command\"): run a shell command. Your script receives the event’s JSON input on stdin and communicates results back through exit codes and stdout.",
         "HTTP hooks (type: \"http\"): send the event’s JSON input as an HTTP POST request to a URL. The endpoint communicates results back through the response body using the same JSON output format as command hooks.",
         "Prompt hooks (type: \"prompt\"): send a prompt to a Claude model for single-turn evaluation. The model returns a yes/no decision as JSON. See Prompt-based hooks.",
-        "Agent hooks (type: \"agent\"): spawn a subagent that can use tools like Read, Grep, and Glob to verify conditions before returning a decision. See Agent-based hooks.",
+        "Agent hooks (type: \"agent\"): spawn a subagent that can use tools like Read, Grep, and Glob to verify conditions before returning a decision. Agent hooks are experimental and may change. See Agent-based hooks.",
         "These fields apply to all hook types:",
+        "The if field holds exactly one permission rule. There is no &&, ||, or list syntax for combining rules; to apply multiple conditions, define a separate hook handler for each. For Bash, the rule is matched against each subcommand of the tool input after leading VAR=value assignments are stripped, so if: \"Bash(git push *)\" matches both FOO=bar git push and npm test && git push. The hook runs if any subcommand matches, and always runs when the command is too complex to parse.",
         "In addition to the common fields, command hooks accept these fields:",
         "In addition to the common fields, HTTP hooks accept these fields:",
         "Claude Code sends the hook’s JSON input as the POST request body with Content-Type: application/json. The response body uses the same JSON output format as command hooks.",
@@ -24229,8 +24283,7 @@
         "Plugin scripts",
         "This example uses $CLAUDE_PROJECT_DIR to run a style checker from the project’s .claude/hooks/ directory after any Write or Edit tool call:",
         "Define plugin hooks in hooks/hooks.json with an optional top-level description field. When a plugin is enabled, its hooks merge with your user and project hooks.",
-        "This example runs a formatting script bundled with the plugin:",
-        "See the plugin components reference for details on creating plugin hooks."
+        "This example runs a formatting script bundled with the plugin:"
       ],
       "codeBlocks": [
         "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"if\": \"Bash(rm *)\",\n            \"command\": \"\\\"$CLAUDE_PROJECT_DIR\\\"/.claude/hooks/block-rm.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
@@ -24296,7 +24349,7 @@
         {
           "title": "​How a hook resolves",
           "paragraphs": [
-            "To see how these pieces fit together, consider this PreToolUse hook that blocks destructive shell commands. The matcher narrows to Bash tool calls and the if condition narrows further to commands starting with rm, so block-rm.sh only spawns when both filters match:",
+            "To see how these pieces fit together, consider this PreToolUse hook that blocks destructive shell commands. The matcher narrows to Bash tool calls and the if condition narrows further to Bash subcommands matching rm *, so block-rm.sh only spawns when both filters match:",
             "The script reads the JSON input from stdin, extracts the command, and returns a permissionDecision of \"deny\" if it contains rm -rf:",
             "Now suppose Claude Code decides to run Bash \"rm -rf /tmp/build\". Here’s what happens:",
             "Event fires",
@@ -24304,7 +24357,7 @@
             "Matcher checks",
             "The matcher \"Bash\" matches the tool name, so this hook group activates. If you omit the matcher or use \"*\", the group activates on every occurrence of the event.",
             "If condition checks",
-            "The if condition \"Bash(rm *)\" matches because the command starts with rm, so this handler spawns. If the command had been npm test, the if check would fail and block-rm.sh would never run, avoiding the process spawn overhead. The if field is optional; without it, every handler in the matched group runs.",
+            "The if condition \"Bash(rm *)\" matches because rm -rf /tmp/build is a subcommand matching rm *, so this handler spawns. If the command had been npm test, the if check would fail and block-rm.sh would never run, avoiding the process spawn overhead. The if field is optional; without it, every handler in the matched group runs.",
             "Hook handler runs",
             "The script inspects the full command and finds rm -rf, so it prints a decision to stdout:",
             "If the command had been a safer rm variant like rm file.txt, the script would hit exit 0 instead, which tells Claude Code to allow the tool call with no further action."
@@ -24345,7 +24398,7 @@
             "The matcher runs against a field from the JSON input that Claude Code sends to your hook on stdin. For tool events, that field is tool_name. Each hook event section lists the full set of matcher values and the input schema for that event.",
             "This example runs a linting script only when Claude writes or edits a file:",
             "UserPromptSubmit, Stop, TeammateIdle, TaskCreated, TaskCompleted, WorktreeCreate, WorktreeRemove, and CwdChanged don’t support matchers and always fire on every occurrence. If you add a matcher field to these events, it is silently ignored.",
-            "For tool events, you can filter more narrowly by setting the if field on individual hook handlers. if uses permission rule syntax to match against the tool name and arguments together, so \"Bash(git *)\" runs only for git commands and \"Edit(*.ts)\" runs only for TypeScript files.",
+            "For tool events, you can filter more narrowly by setting the if field on individual hook handlers. if uses permission rule syntax to match against the tool name and arguments together, so \"Bash(git *)\" runs when any subcommand of the Bash input matches git * and \"Edit(*.ts)\" runs only for TypeScript files.",
             "MCP server tools appear as regular tools in tool events (PreToolUse, PostToolUse, PostToolUseFailure, PermissionRequest, PermissionDenied), so you can match them the same way you match any other tool name.",
             "MCP tools follow the naming pattern mcp__<server>__<tool>, for example:",
             "mcp__memory__create_entities: Memory server’s create entities tool",
@@ -24364,14 +24417,14 @@
             "Command hooks (type: \"command\"): run a shell command. Your script receives the event’s JSON input on stdin and communicates results back through exit codes and stdout.",
             "HTTP hooks (type: \"http\"): send the event’s JSON input as an HTTP POST request to a URL. The endpoint communicates results back through the response body using the same JSON output format as command hooks.",
             "Prompt hooks (type: \"prompt\"): send a prompt to a Claude model for single-turn evaluation. The model returns a yes/no decision as JSON. See Prompt-based hooks.",
-            "Agent hooks (type: \"agent\"): spawn a subagent that can use tools like Read, Grep, and Glob to verify conditions before returning a decision. See Agent-based hooks.",
+            "Agent hooks (type: \"agent\"): spawn a subagent that can use tools like Read, Grep, and Glob to verify conditions before returning a decision. Agent hooks are experimental and may change. See Agent-based hooks.",
             "These fields apply to all hook types:",
+            "The if field holds exactly one permission rule. There is no &&, ||, or list syntax for combining rules; to apply multiple conditions, define a separate hook handler for each. For Bash, the rule is matched against each subcommand of the tool input after leading VAR=value assignments are stripped, so if: \"Bash(git push *)\" matches both FOO=bar git push and npm test && git push. The hook runs if any subcommand matches, and always runs when the command is too complex to parse.",
             "In addition to the common fields, command hooks accept these fields:",
             "In addition to the common fields, HTTP hooks accept these fields:",
             "Claude Code sends the hook’s JSON input as the POST request body with Content-Type: application/json. The response body uses the same JSON output format as command hooks.",
             "Error handling differs from command hooks: non-2xx responses, connection failures, and timeouts all produce non-blocking errors that allow execution to continue. To block a tool call or deny a permission, return a 2xx response with a JSON body containing decision: \"block\" or a hookSpecificOutput with permissionDecision: \"deny\".",
-            "This example sends PreToolUse events to a local validation service, authenticating with a token from the MY_TOKEN environment variable:",
-            "In addition to the common fields, prompt and agent hooks accept these fields:"
+            "This example sends PreToolUse events to a local validation service, authenticating with a token from the MY_TOKEN environment variable:"
           ],
           "codeBlocks": [
             "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"http\",\n            \"url\": \"http://localhost:8080/hooks/pre-tool-use\",\n            \"timeout\": 30,\n            \"headers\": {\n              \"Authorization\": \"Bearer $MY_TOKEN\"\n            },\n            \"allowedEnvVars\": [\"MY_TOKEN\"]\n          }\n        ]\n      }\n    ]\n  }\n}"
@@ -32931,6 +32984,7 @@
         "SDKAuthStatusMessage",
         "SDKTaskStartedMessage",
         "SDKTaskProgressMessage",
+        "SDKTaskUpdatedMessage",
         "SDKFilesPersistedEvent",
         "SDKRateLimitEvent",
         "SDKLocalCommandOutputMessage",
@@ -32991,8 +33045,7 @@
         "For complete information on creating and using plugins, see Plugins.",
         "Union type of all possible messages returned by the query.",
         "Assistant response message.",
-        "The message field is a BetaMessage from the Anthropic SDK. It includes fields like id, content, model, stop_reason, and usage.",
-        "SDKAssistantMessageError is one of: 'authentication_failed', 'billing_error', 'rate_limit', 'invalid_request', 'server_error', 'max_output_tokens', or 'unknown'."
+        "The message field is a BetaMessage from the Anthropic SDK. It includes fields like id, content, model, stop_reason, and usage."
       ],
       "codeBlocks": [
         "npm install @anthropic-ai/claude-agent-sdk",
@@ -33307,7 +33360,7 @@
             "Union type of all possible messages returned by the query."
           ],
           "codeBlocks": [
-            "type SDKMessage =\n  | SDKAssistantMessage\n  | SDKUserMessage\n  | SDKUserMessageReplay\n  | SDKResultMessage\n  | SDKSystemMessage\n  | SDKPartialAssistantMessage\n  | SDKCompactBoundaryMessage\n  | SDKStatusMessage\n  | SDKLocalCommandOutputMessage\n  | SDKHookStartedMessage\n  | SDKHookProgressMessage\n  | SDKHookResponseMessage\n  | SDKPluginInstallMessage\n  | SDKToolProgressMessage\n  | SDKAuthStatusMessage\n  | SDKTaskNotificationMessage\n  | SDKTaskStartedMessage\n  | SDKTaskProgressMessage\n  | SDKFilesPersistedEvent\n  | SDKToolUseSummaryMessage\n  | SDKRateLimitEvent\n  | SDKPromptSuggestionMessage;"
+            "type SDKMessage =\n  | SDKAssistantMessage\n  | SDKUserMessage\n  | SDKUserMessageReplay\n  | SDKResultMessage\n  | SDKSystemMessage\n  | SDKPartialAssistantMessage\n  | SDKCompactBoundaryMessage\n  | SDKStatusMessage\n  | SDKLocalCommandOutputMessage\n  | SDKHookStartedMessage\n  | SDKHookProgressMessage\n  | SDKHookResponseMessage\n  | SDKPluginInstallMessage\n  | SDKToolProgressMessage\n  | SDKAuthStatusMessage\n  | SDKTaskNotificationMessage\n  | SDKTaskStartedMessage\n  | SDKTaskProgressMessage\n  | SDKTaskUpdatedMessage\n  | SDKFilesPersistedEvent\n  | SDKToolUseSummaryMessage\n  | SDKRateLimitEvent\n  | SDKPromptSuggestionMessage;"
           ]
         },
         {
