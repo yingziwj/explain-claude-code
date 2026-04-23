@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-22T05:08:23.655Z",
+  "generatedAt": "2026-04-23T05:11:48.727Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -247,6 +247,10 @@
         {
           "title": "Server-managed settings",
           "path": "/docs/en/server-managed-settings"
+        },
+        {
+          "title": "Auto mode",
+          "path": "/docs/en/auto-mode-config"
         }
       ]
     },
@@ -618,6 +622,7 @@
         "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship.",
         "Homebrew installations do not auto-update. Run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed, to get the latest features and security fixes.",
         "WinGet installations do not auto-update. Run winget upgrade Anthropic.ClaudeCode periodically to get the latest features and security fixes.",
+        "You can also install with apt, dnf, or apk on Debian, Fedora, RHEL, and Alpine.",
         "Then start Claude Code in any project:",
         "You’ll be prompted to log in on first use. That’s it! Continue with the Quickstart →",
         "See advanced setup for installation options, manual updates, or uninstallation instructions. Visit troubleshooting if you hit issues.",
@@ -852,6 +857,7 @@
         "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship.",
         "Homebrew installations do not auto-update. Run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed, to get the latest features and security fixes.",
         "WinGet installations do not auto-update. Run winget upgrade Anthropic.ClaudeCode periodically to get the latest features and security fixes.",
+        "You can also install with apt, dnf, or apk on Debian, Fedora, RHEL, and Alpine.",
         "Claude Code requires an account to use. When you start an interactive session with the claude command, you’ll need to log in:",
         "You can log in using any of these account types:",
         "Claude Pro, Max, Team, or Enterprise (recommended)",
@@ -1190,6 +1196,7 @@
       "metaDescription": "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
       "headings": [],
       "toc": [
+        "2.1.118",
         "2.1.117",
         "2.1.116",
         "2.1.114",
@@ -1208,13 +1215,46 @@
         "2.1.94",
         "2.1.92",
         "2.1.91",
-        "2.1.90",
-        "2.1.89"
+        "2.1.90"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Added vim visual mode (v) and visual-line mode (V) with selection, operators, and visual feedback",
+        "Merged /cost and /stats into /usage — both remain as typing shortcuts that open the relevant tab",
+        "Create and switch between named custom themes from /theme, or hand-edit JSON files in ~/.claude/themes/; plugins can also ship themes via a themes/ directory",
+        "Hooks can now invoke MCP tools directly via type: \"mcp_tool\"",
+        "Added DISABLE_UPDATES env var to completely block all update paths including manual claude update — stricter than DISABLE_AUTOUPDATER",
+        "WSL on Windows can now inherit Windows-side managed settings via the wslInheritsWindowsSettings policy key",
+        "Auto mode: include \"$defaults\" in autoMode.allow, autoMode.soft_deny, or autoMode.environment to add custom rules alongside the built-in list instead of replacing it",
+        "Added a “Don’t ask again” option to the auto mode opt-in prompt",
+        "Added claude plugin tag to create release git tags for plugins with version validation",
+        "--continue/--resume now find sessions that added the current directory via /add-dir",
+        "/color now syncs the session accent color to claude.ai/code when Remote Control is connected",
+        "The /model picker now honors ANTHROPIC_DEFAULT_*_MODEL_NAME/_DESCRIPTION overrides when using a custom ANTHROPIC_BASE_URL gateway",
+        "When auto-update skips a plugin due to another plugin’s version constraint, the skip now appears in /doctor and the /plugin Errors tab",
+        "Fixed /mcp menu hiding OAuth Authenticate/Re-authenticate actions for servers configured with headersHelper, and HTTP/SSE MCP servers with custom headers being stuck in “needs authentication” after a transient 401",
+        "Fixed MCP servers whose OAuth token response omits expires_in requiring re-authentication every hour",
+        "Fixed MCP step-up authorization silently refreshing instead of prompting for re-consent when the server’s insufficient_scope 403 names a scope the current token already has",
+        "Fixed an unhandled promise rejection when an MCP server’s OAuth flow times out or is cancelled",
+        "Fixed MCP OAuth refresh proceeding without its cross-process lock under contention",
+        "Fixed macOS keychain race where a concurrent MCP token refresh could overwrite a freshly-refreshed OAuth token, causing unexpected “Please run /login” prompts",
+        "Fixed OAuth token refresh failing when the server revokes a token before its local expiry time",
+        "Fixed credential save crash on Linux/Windows corrupting ~/.claude/.credentials.json",
+        "Fixed /login having no effect in a session launched with CLAUDE_CODE_OAUTH_TOKEN — the env token is now cleared so disk credentials take effect",
+        "Fixed unreadable text in the “new messages” scroll pill and /plugin badges",
+        "Fixed plan acceptance dialog offering “auto mode” instead of “bypass permissions” when running with --dangerously-skip-permissions",
+        "Fixed agent-type hooks failing with “Messages are required for agent hooks” when configured for events other than Stop or SubagentStop",
+        "Fixed prompt hooks re-firing on tool calls made by an agent-hook verifier subagent",
+        "Fixed /fork writing the full parent conversation to disk per fork — now writes a pointer and hydrates on read",
+        "Fixed Alt+K / Alt+X / Alt+^ / Alt+_ freezing keyboard input",
+        "Fixed connecting to a remote session overwriting your local model setting in ~/.claude/settings.json",
+        "Fixed typeahead showing “No commands match” error when pasting file paths that start with /",
+        "Fixed plugin install on an already-installed plugin not re-resolving a dependency installed at the wrong version",
+        "Fixed unhandled errors from file watcher on invalid paths or fd exhaustion",
+        "Fixed Remote Control sessions getting archived on transient CCR initialization blips during JWT refresh",
+        "Fixed subagents resumed via SendMessage not restoring the explicit cwd they were spawned with",
         "Forked subagents can now be enabled on external builds by setting CLAUDE_CODE_FORK_SUBAGENT=1",
         "Agent frontmatter mcpServers are now loaded for main-thread agent sessions via --agent",
         "Improved /model: selections now persist across restarts even when the project pins a different model, and the startup header shows when the active model comes from a project or managed-settings pin",
@@ -1255,6 +1295,7 @@
         "Agent frontmatter hooks: now fire when running as a main-thread agent via --agent",
         "Slash command menu now shows “No commands match” when your filter has zero results, instead of disappearing",
         "Security: sandbox auto-allow no longer bypasses the dangerous-path safety check for rm/rmdir targeting /, $HOME, or other critical system directories",
+        "Claude Code and installer now use https://downloads.claude.ai/claude-code-releases instead of https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases",
         "Fixed Devanagari and other Indic scripts rendering with broken column alignment in the terminal UI",
         "Fixed Ctrl+- not triggering undo in terminals using the Kitty keyboard protocol (iTerm2, Ghostty, kitty, WezTerm, Windows Terminal)",
         "Fixed Cmd+Left/Right not jumping to line start/end in terminals that use the Kitty keyboard protocol (Warp fullscreen, kitty, Ghostty, WezTerm)",
@@ -1356,42 +1397,7 @@
         "SDK/headless sessions now read TRACEPARENT/TRACESTATE from the environment for distributed trace linking",
         "Session recap is now enabled for users with telemetry disabled (Bedrock, Vertex, Foundry, DISABLE_TELEMETRY). Opt out via /config or CLAUDE_CODE_ENABLE_AWAY_SUMMARY=0.",
         "Fixed MCP tool calls hanging indefinitely when the server connection drops mid-response on SSE/HTTP transports",
-        "Fixed non-streaming fallback retries causing multi-minute hangs when the API is unreachable",
-        "Fixed session recap, local slash-command output, and other system status lines not appearing in focus mode",
-        "Fixed high CPU usage in fullscreen when text is selected while a tool is running",
-        "Fixed plugin install not honoring dependencies declared in plugin.json when the marketplace entry omits them; /plugin install now lists auto-installed dependencies",
-        "Fixed skills with disable-model-invocation: true failing when invoked via /<skill> mid-message",
-        "Fixed --resume sometimes showing the first prompt instead of the /rename name for sessions still running or exited uncleanly",
-        "Fixed queued messages briefly appearing twice during multi-tool-call turns",
-        "Fixed session cleanup not removing the full session directory including subagent transcripts",
-        "Fixed dropped keystrokes after the CLI relaunches (e.g. /tui, provider setup wizards)",
-        "Fixed garbled startup rendering in macOS Terminal.app and other terminals that don’t support synchronized output",
-        "Hardened “Open in editor” actions against command injection from untrusted filenames",
-        "Fixed PermissionRequest hooks returning updatedInput not being re-checked against permissions.deny rules; setMode:'bypassPermissions' updates now respect disableBypassPermissionsMode",
-        "Fixed PreToolUse hook additionalContext being dropped when the tool call fails",
-        "Fixed stdio MCP servers that print stray non-JSON lines to stdout being disconnected on the first stray line (regression in 2.1.105)",
-        "Fixed headless/SDK session auto-title firing an extra Haiku request when CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC or CLAUDE_CODE_DISABLE_TERMINAL_TITLE is set",
-        "Fixed potential excessive memory allocation when piped (non-TTY) Ink output contains a single very wide line",
-        "Fixed /skills menu not scrolling when the list overflows the modal in fullscreen mode",
-        "Fixed Remote Control sessions showing a generic error instead of prompting for re-login when the session is too old",
-        "Fixed Remote Control session renames from claude.ai not persisting the title to the local CLI session",
-        "Improved the extended-thinking indicator with a rotating progress hint",
-        "Added ENABLE_PROMPT_CACHING_1H env var to opt into 1-hour prompt cache TTL on API key, Bedrock, Vertex, and Foundry (ENABLE_PROMPT_CACHING_1H_BEDROCK is deprecated but still honored), and FORCE_PROMPT_CACHING_5M to force 5-minute TTL",
-        "Added recap feature to provide context when returning to a session, configurable in /config and manually invocable with /recap; force with CLAUDE_CODE_ENABLE_AWAY_SUMMARY if telemetry disabled.",
-        "The model can now discover and invoke built-in slash commands like /init, /review, and /security-review via the Skill tool",
-        "/undo is now an alias for /rewind",
-        "Improved /model to warn before switching models mid-conversation, since the next response re-reads the full history uncached",
-        "Improved /resume picker to default to sessions from the current directory; press Ctrl+A to show all projects",
-        "Improved error messages: server rate limits are now distinguished from plan usage limits; 5xx/529 errors show a link to status.claude.com; unknown slash commands suggest the closest match",
-        "Reduced memory footprint for file reads, edits, and syntax highlighting by loading language grammars on demand",
-        "Added “verbose” indicator when viewing the detailed transcript (Ctrl+O)",
-        "Added a warning at startup when prompt caching is disabled via DISABLE_PROMPT_CACHING* environment variables",
-        "Fixed paste not working in the /login code prompt (regression in 2.1.105)",
-        "Fixed subscribers who set DISABLE_TELEMETRY falling back to 5-minute prompt cache TTL instead of 1 hour",
-        "Fixed Agent tool prompting for permission in auto mode when the safety classifier’s transcript exceeded its context window",
-        "Fixed Bash tool producing no output when CLAUDE_ENV_FILE (e.g. ~/.zprofile) ends with a # comment line",
-        "Fixed claude --resume <session-id> losing the session’s custom name and color set via /rename",
-        "Fixed session titles showing placeholder example text when the first message is a short greeting"
+        "Fixed non-streaming fallback retries causing multi-minute hangs when the API is unreachable"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1401,15 +1407,15 @@
             "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Forked subagents can now be enabled on external builds by setting CLAUDE_CODE_FORK_SUBAGENT=1",
-            "Agent frontmatter mcpServers are now loaded for main-thread agent sessions via --agent",
-            "Improved /model: selections now persist across restarts even when the project pins a different model, and the startup header shows when the active model comes from a project or managed-settings pin",
-            "The /resume command now offers to summarize stale, large sessions before re-reading them, matching the existing --resume behavior",
-            "Faster startup when both local and claude.ai MCP servers are configured (concurrent connect now default)",
-            "plugin install on an already-installed plugin now installs any missing dependencies instead of stopping at “already installed”",
-            "Plugin dependency errors now say “not installed” with an install hint, and claude plugin marketplace add now auto-resolves missing dependencies from configured marketplaces",
-            "Managed-settings blockedMarketplaces and strictKnownMarketplaces are now enforced on plugin install, update, refresh, and autoupdate",
-            "Advisor Tool (experimental): dialog now carries an “experimental” label, learn-more link, and startup notification when enabled; sessions no longer get stuck with “Advisor tool result content could not be processed” errors on every prompt and /compact"
+            "Added vim visual mode (v) and visual-line mode (V) with selection, operators, and visual feedback",
+            "Merged /cost and /stats into /usage — both remain as typing shortcuts that open the relevant tab",
+            "Create and switch between named custom themes from /theme, or hand-edit JSON files in ~/.claude/themes/; plugins can also ship themes via a themes/ directory",
+            "Hooks can now invoke MCP tools directly via type: \"mcp_tool\"",
+            "Added DISABLE_UPDATES env var to completely block all update paths including manual claude update — stricter than DISABLE_AUTOUPDATER",
+            "WSL on Windows can now inherit Windows-side managed settings via the wslInheritsWindowsSettings policy key",
+            "Auto mode: include \"$defaults\" in autoMode.allow, autoMode.soft_deny, or autoMode.environment to add custom rules alongside the built-in list instead of replacing it",
+            "Added a “Don’t ask again” option to the auto mode opt-in prompt",
+            "Added claude plugin tag to create release git tags for plugins with version validation"
           ],
           "codeBlocks": []
         }
@@ -2214,7 +2220,7 @@
         "Beyond the config you author, ~/.claude holds data Claude Code writes during sessions. These files are plaintext. Anything that passes through a tool lands in a transcript on disk: file contents, command output, pasted text.",
         "Files in the paths below are deleted on startup once they’re older than cleanupPeriodDays. The default is 30 days.",
         "The following paths are not covered by automatic cleanup and persist indefinitely.",
-        "shell-snapshots/ holds runtime files removed when the session exits cleanly. Other small cache and lock files appear depending on which features you use and are safe to delete.",
+        "Other small cache and lock files appear depending on which features you use and are safe to delete.",
         "Transcripts and history are not encrypted at rest. OS file permissions are the only protection. If a tool reads a .env file or a command prints a credential, that value is written to projects/<project>/<session>.jsonl. To reduce exposure:",
         "Lower cleanupPeriodDays to shorten how long transcripts are kept",
         "Set the CLAUDE_CODE_SKIP_PROMPT_HISTORY environment variable to skip writing transcripts and prompt history in any mode. In non-interactive mode, you can instead pass --no-session-persistence alongside -p, or set persistSession: false in the Agent SDK.",
@@ -2299,7 +2305,7 @@
           "title": "​Kept until you delete them",
           "paragraphs": [
             "The following paths are not covered by automatic cleanup and persist indefinitely.",
-            "shell-snapshots/ holds runtime files removed when the session exits cleanly. Other small cache and lock files appear depending on which features you use and are safe to delete."
+            "Other small cache and lock files appear depending on which features you use and are safe to delete."
           ],
           "codeBlocks": []
         },
@@ -2526,7 +2532,7 @@
         "Run /init to generate a starting CLAUDE.md automatically. Claude analyzes your codebase and creates a file with build commands, test instructions, and project conventions it discovers. If a CLAUDE.md already exists, /init suggests improvements rather than overwriting it. Refine from there with instructions Claude wouldn’t discover on its own.",
         "Set CLAUDE_CODE_NEW_INIT=1 to enable an interactive multi-phase flow. /init asks which artifacts to set up: CLAUDE.md files, skills, and hooks. It then explores your codebase with a subagent, fills in gaps via follow-up questions, and presents a reviewable proposal before writing any files.",
         "CLAUDE.md files are loaded into the context window at the start of every session, consuming tokens alongside your conversation. The context window visualization shows where CLAUDE.md loads relative to the rest of the startup context. Because they’re context rather than enforced configuration, how you write instructions affects how reliably Claude follows them. Specific, concise, well-structured instructions work best.",
-        "Size: target under 200 lines per CLAUDE.md file. Longer files consume more context and reduce adherence. If your instructions are growing large, split them using imports or .claude/rules/ files.",
+        "Size: target under 200 lines per CLAUDE.md file. Longer files consume more context and reduce adherence. If your instructions are growing large, use path-scoped rules so instructions load only when Claude works with matching files. You can also split content into imports for organization, though imported files still load and enter the context window at launch.",
         "Structure: use markdown headers and bullets to group related instructions. Claude scans structure the same way readers do: organized sections are easier to follow than dense paragraphs.",
         "Specificity: write instructions that are concrete enough to verify. For example:",
         "“Use 2-space indentation” instead of “Format code properly”",
@@ -2602,7 +2608,7 @@
         "For instructions you want at the system prompt level, use --append-system-prompt. This must be passed every invocation, so it’s better suited to scripts and automation than interactive use.",
         "Use the InstructionsLoaded hook to log exactly which instruction files are loaded, when they load, and why. This is useful for debugging path-specific rules or lazy-loaded files in subdirectories.",
         "Run /memory and select the auto memory folder to browse what Claude has saved. Everything is plain markdown you can read, edit, or delete.",
-        "Files over 200 lines consume more context and may reduce adherence. Move detailed content into separate files referenced with @path imports (see Import additional files), or split your instructions across .claude/rules/ files.",
+        "Files over 200 lines consume more context and may reduce adherence. Use path-scoped rules to load instructions only when Claude works with matching files, or trim content that isn’t needed in every session. Splitting into @path imports helps organization but does not reduce context, since imported files load at launch.",
         "Project-root CLAUDE.md survives compaction: after /compact, Claude re-reads it from disk and re-injects it into the session. Nested CLAUDE.md files in subdirectories are not re-injected automatically; they reload the next time Claude reads a file in that subdirectory.",
         "If an instruction disappeared after compaction, it was either given only in conversation or lives in a nested CLAUDE.md that hasn’t reloaded yet. Add conversation-only instructions to CLAUDE.md to make them persist. See What survives compaction for the full breakdown.",
         "See Write effective instructions for guidance on size, structure, and specificity.",
@@ -2696,7 +2702,7 @@
           "title": "​Write effective instructions",
           "paragraphs": [
             "CLAUDE.md files are loaded into the context window at the start of every session, consuming tokens alongside your conversation. The context window visualization shows where CLAUDE.md loads relative to the rest of the startup context. Because they’re context rather than enforced configuration, how you write instructions affects how reliably Claude follows them. Specific, concise, well-structured instructions work best.",
-            "Size: target under 200 lines per CLAUDE.md file. Longer files consume more context and reduce adherence. If your instructions are growing large, split them using imports or .claude/rules/ files.",
+            "Size: target under 200 lines per CLAUDE.md file. Longer files consume more context and reduce adherence. If your instructions are growing large, use path-scoped rules so instructions load only when Claude works with matching files. You can also split content into imports for organization, though imported files still load and enter the context window at launch.",
             "Structure: use markdown headers and bullets to group related instructions. Claude scans structure the same way readers do: organized sections are easier to follow than dense paragraphs.",
             "Specificity: write instructions that are concrete enough to verify. For example:",
             "“Use 2-space indentation” instead of “Format code properly”",
@@ -2880,7 +2886,7 @@
         {
           "title": "​My CLAUDE.md is too large",
           "paragraphs": [
-            "Files over 200 lines consume more context and may reduce adherence. Move detailed content into separate files referenced with @path imports (see Import additional files), or split your instructions across .claude/rules/ files."
+            "Files over 200 lines consume more context and may reduce adherence. Use path-scoped rules to load instructions only when Claude works with matching files, or trim content that isn’t needed in every session. Splitting into @path imports helps organization but does not reduce context, since imported files load at launch."
           ],
           "codeBlocks": []
         },
@@ -3019,7 +3025,7 @@
         "Reading .env and sending credentials to their matching API",
         "Read-only HTTP requests",
         "Pushing to the branch you started on or one Claude created",
-        "Sandbox network access requests are routed through the classifier rather than allowed by default. Run claude auto-mode defaults to see the full rule lists. If routine actions get blocked, an administrator can add trusted repos, buckets, and services via the autoMode.environment setting: see Configure the auto mode classifier.",
+        "Sandbox network access requests are routed through the classifier rather than allowed by default. Run claude auto-mode defaults to see the full rule lists. If routine actions get blocked, an administrator can add trusted repos, buckets, and services via the autoMode.environment setting: see Configure auto mode.",
         "The classifier treats boundaries you state in the conversation as a block signal. If you tell Claude “don’t push” or “wait until I review before deploying”, the classifier blocks matching actions even when the default rules would allow them. A boundary stays in force until you lift it in a later message. Claude’s own judgment that a condition was met does not lift it.",
         "Boundaries are not stored as rules. The classifier re-reads them from the transcript on each check, so a boundary can be lost if context compaction removes the message that stated it. For a hard guarantee, add a deny rule instead.",
         "Each denied action shows a notification and appears in /permissions under the Recently denied tab, where you can press r to retry it with a manual approval.",
@@ -3060,7 +3066,8 @@
         ".bashrc, .bash_profile, .zshrc, .zprofile, .profile",
         ".ripgreprc",
         ".mcp.json, .claude.json",
-        "Permissions: allow, ask, and deny rules; auto mode classifier configuration; managed policies",
+        "Permissions: allow, ask, and deny rules; managed policies",
+        "Configure auto mode: tell the classifier which infrastructure your organization trusts",
         "Hooks: custom permission logic via PreToolUse and PermissionRequest hooks",
         "Ultraplan: run plan mode in a Claude Code on the web session with browser-based review",
         "Security: safeguards and best practices",
@@ -3253,7 +3260,8 @@
         {
           "title": "​See also",
           "paragraphs": [
-            "Permissions: allow, ask, and deny rules; auto mode classifier configuration; managed policies",
+            "Permissions: allow, ask, and deny rules; managed policies",
+            "Configure auto mode: tell the classifier which infrastructure your organization trusts",
             "Hooks: custom permission logic via PreToolUse and PermissionRequest hooks",
             "Ultraplan: run plan mode in a Claude Code on the web session with browser-based review",
             "Security: safeguards and best practices",
@@ -3480,6 +3488,7 @@
         "claude --resume opens a conversation picker or resumes by name",
         "claude --from-pr 123 resumes sessions linked to a specific pull request",
         "From inside an active session, use /resume to switch to a different conversation.",
+        "When the selected session is old and large enough that re-reading it would consume a substantial share of your usage limits, --resume, --continue, and /resume offer to resume from a summary instead of loading the full transcript. This prompt is not available on Amazon Bedrock, Google Cloud Vertex AI, or Microsoft Foundry.",
         "Sessions are stored per project directory. By default, the /resume picker shows interactive sessions from the current worktree, with keyboard shortcuts to widen the list to other worktrees or projects, search, preview, and rename. See Use the session picker below for the full shortcut reference.",
         "When you select a session from another worktree of the same repository, Claude Code resumes it directly without requiring you to switch directories first. Selecting a session from an unrelated project copies a cd and resume command to your clipboard instead.",
         "Resuming by name resolves across the current repository and its worktrees. Both claude --resume <name> and /resume <name> look for an exact match and resume it directly, even if the session lives in a different worktree.",
@@ -3494,8 +3503,7 @@
         "From the command line:",
         "Or from inside an active session:",
         "The /resume command (or claude --resume without arguments) opens an interactive session picker with these features:",
-        "Keyboard shortcuts in the picker:",
-        "Session organization:"
+        "Keyboard shortcuts in the picker:"
       ],
       "codeBlocks": [
         "cd /path/to/project",
@@ -3851,6 +3859,7 @@
             "claude --resume opens a conversation picker or resumes by name",
             "claude --from-pr 123 resumes sessions linked to a specific pull request",
             "From inside an active session, use /resume to switch to a different conversation.",
+            "When the selected session is old and large enough that re-reading it would consume a substantial share of your usage limits, --resume, --continue, and /resume offer to resume from a summary instead of loading the full transcript. This prompt is not available on Amazon Bedrock, Google Cloud Vertex AI, or Microsoft Foundry.",
             "Sessions are stored per project directory. By default, the /resume picker shows interactive sessions from the current worktree, with keyboard shortcuts to widen the list to other worktrees or projects, search, preview, and rename. See Use the session picker below for the full shortcut reference.",
             "When you select a session from another worktree of the same repository, Claude Code resumes it directly without requiring you to switch directories first. Selecting a session from an unrelated project copies a cd and resume command to your clipboard instead.",
             "Resuming by name resolves across the current repository and its worktrees. Both claude --resume <name> and /resume <name> look for an exact match and resume it directly, even if the session lives in a different worktree.",
@@ -4822,7 +4831,7 @@
         "Choose the right approach",
         "Related resources",
         "Continue a local Claude Code session from your phone, tablet, or any browser using Remote Control. Works with claude.ai/code and the Claude mobile app.",
-        "Remote Control is available on all plans. On Team and Enterprise, it is off by default until an admin enables the Remote Control toggle in Claude Code admin settings.",
+        "Remote Control is in research preview and available on all plans. On Team and Enterprise, it is off by default until an admin enables the Remote Control toggle in Claude Code admin settings.",
         "Remote Control connects claude.ai/code or the Claude app for iOS and Android to a Claude Code session running on your machine. Start a task at your desk, then pick it up from your phone on the couch or a browser on another computer.",
         "When you start a Remote Control session on your machine, Claude keeps running locally the entire time, so nothing moves to the cloud. With Remote Control you can:",
         "Use your full local environment remotely: your filesystem, MCP servers, tools, and project configuration all stay available, and typing @ autocompletes file paths from your local project",
@@ -6081,7 +6090,7 @@
         "Reference terminal output in your prompts using @terminal:name where name is the terminal’s title. This lets Claude see command output, error messages, or logs without copy-pasting.",
         "When Claude runs long-running commands, the extension shows progress in the status bar. However, visibility for background tasks is limited compared to the CLI. For better visibility, have Claude output the command so you can run it in VS Code’s integrated terminal.",
         "MCP (Model Context Protocol) servers give Claude access to external tools, databases, and APIs.",
-        "To add an MCP server, open the integrated terminal (Ctrl+` or Cmd+`) and run:",
+        "To add an MCP server, open the integrated terminal (Ctrl+` or Cmd+`) and run claude mcp add. The example below adds GitHub’s remote MCP server, which authenticates with a personal access token passed as a header:",
         "Once configured, ask Claude to use the tools (e.g., “Review PR #456”).",
         "To manage MCP servers without leaving VS Code, type /mcp in the chat panel. The MCP management dialog lets you enable or disable servers, reconnect to a server, and manage OAuth authentication. See the MCP documentation for available servers.",
         "Claude Code integrates with git to help with version control workflows directly in VS Code. Ask Claude to commit changes, create pull requests, or work across branches.",
@@ -6122,7 +6131,7 @@
         "@browser go to localhost:3000 and check the console for errors",
         "open \"vscode://anthropic.claude-code/open\"",
         "vscode://anthropic.claude-code/open?prompt=review%20my%20changes",
-        "claude mcp add --transport http github https://api.githubcopilot.com/mcp/",
+        "claude mcp add --transport http github https://api.githubcopilot.com/mcp/ \\\n  --header \"Authorization: Bearer YOUR_GITHUB_PAT\"",
         "> commit my changes with a descriptive message\n> create a pr for this feature\n> summarize the changes I've made to the auth module",
         "claude --worktree feature-auth",
         "rm -rf ~/.vscode/globalStorage/anthropic.claude-code"
@@ -6401,12 +6410,12 @@
           "title": "​Connect to external tools with MCP",
           "paragraphs": [
             "MCP (Model Context Protocol) servers give Claude access to external tools, databases, and APIs.",
-            "To add an MCP server, open the integrated terminal (Ctrl+` or Cmd+`) and run:",
+            "To add an MCP server, open the integrated terminal (Ctrl+` or Cmd+`) and run claude mcp add. The example below adds GitHub’s remote MCP server, which authenticates with a personal access token passed as a header:",
             "Once configured, ask Claude to use the tools (e.g., “Review PR #456”).",
             "To manage MCP servers without leaving VS Code, type /mcp in the chat panel. The MCP management dialog lets you enable or disable servers, reconnect to a server, and manage OAuth authentication. See the MCP documentation for available servers."
           ],
           "codeBlocks": [
-            "claude mcp add --transport http github https://api.githubcopilot.com/mcp/"
+            "claude mcp add --transport http github https://api.githubcopilot.com/mcp/ \\\n  --header \"Authorization: Bearer YOUR_GITHUB_PAT\""
           ]
         },
         {
@@ -7321,7 +7330,10 @@
         "Specialize behavior with focused system prompts for specific domains",
         "Control costs by routing tasks to faster, cheaper models like Haiku",
         "Claude uses each subagent’s description to decide when to delegate tasks. When you create a subagent, write a clear description so Claude knows when to use it.",
-        "Claude Code includes several built-in subagents like Explore, Plan, and general-purpose. You can also create custom subagents to handle specific tasks. This page covers the built-in subagents, how to create your own, full configuration options, patterns for working with subagents, and example subagents.",
+        "Claude Code includes several built-in subagents like Explore, Plan, and general-purpose. You can also create custom subagents to handle specific tasks. This page covers:",
+        "How to create your own",
+        "Full configuration options",
+        "Patterns for working with subagents",
         "Claude Code includes built-in subagents that Claude automatically uses when appropriate. Each inherits the parent conversation’s permissions with additional tool restrictions.",
         "General-purpose",
         "A fast, read-only agent optimized for searching and analyzing codebases.",
@@ -7405,6 +7417,10 @@
         "To allow spawning any subagent without restrictions, use Agent without parentheses:",
         "If Agent is omitted from the tools list entirely, the agent cannot spawn any subagents. This restriction only applies to agents running as the main thread with claude --agent. Subagents cannot spawn other subagents, so Agent(agent_type) has no effect in subagent definitions.",
         "Use the mcpServers field to give a subagent access to MCP servers that aren’t available in the main conversation. Inline servers defined here are connected when the subagent starts and disconnected when it finishes. String references share the parent session’s connection.",
+        "The mcpServers field applies in both contexts where an agent file can run:",
+        "As a subagent, spawned through the Agent tool or an @-mention",
+        "As the main session, launched with --agent or the agent setting",
+        "When the agent is the main session, inline server definitions connect at startup alongside servers from .mcp.json and settings files.",
         "Each entry in the list is either an inline server definition or a string referencing an MCP server already configured in your session:",
         "Inline definitions use the same schema as .mcp.json server entries (stdio, http, sse, ws), keyed by the server name.",
         "To keep an MCP server out of the main conversation entirely and avoid its tool descriptions consuming context there, define it inline here rather than in .mcp.json. The subagent gets the tools; the parent conversation does not.",
@@ -7444,14 +7460,7 @@
         "Configure hooks in settings.json that respond to subagent lifecycle events in the main session.",
         "Both events support matchers to target specific agent types by name. This example runs a setup script only when the db-agent subagent starts, and a cleanup script when any subagent stops:",
         "See Hooks for the complete hook configuration format.",
-        "Claude automatically delegates tasks based on the task description in your request, the description field in subagent configurations, and current context. To encourage proactive delegation, include phrases like “use proactively” in your subagent’s description field.",
-        "When automatic delegation isn’t enough, you can request a subagent yourself. Three patterns escalate from a one-off suggestion to a session-wide default:",
-        "Natural language: name the subagent in your prompt; Claude decides whether to delegate",
-        "@-mention: guarantees the subagent runs for one task",
-        "Session-wide: the whole session uses that subagent’s system prompt, tool restrictions, and model via the --agent flag or the agent setting",
-        "For natural language, there’s no special syntax. Name the subagent and Claude typically delegates:",
-        "@-mention the subagent. Type @ and pick the subagent from the typeahead, the same way you @-mention files. This ensures that specific subagent runs rather than leaving the choice to Claude:",
-        "Your full message still goes to Claude, which writes the subagent’s task prompt based on what you asked. The @-mention controls which subagent Claude invokes, not what prompt it receives."
+        "Claude automatically delegates tasks based on the task description in your request, the description field in subagent configurations, and current context. To encourage proactive delegation, include phrases like “use proactively” in your subagent’s description field."
       ],
       "codeBlocks": [
         "/agents",
@@ -7625,8 +7634,8 @@
             "To allow spawning any subagent without restrictions, use Agent without parentheses:",
             "If Agent is omitted from the tools list entirely, the agent cannot spawn any subagents. This restriction only applies to agents running as the main thread with claude --agent. Subagents cannot spawn other subagents, so Agent(agent_type) has no effect in subagent definitions.",
             "Use the mcpServers field to give a subagent access to MCP servers that aren’t available in the main conversation. Inline servers defined here are connected when the subagent starts and disconnected when it finishes. String references share the parent session’s connection.",
-            "Each entry in the list is either an inline server definition or a string referencing an MCP server already configured in your session:",
-            "Inline definitions use the same schema as .mcp.json server entries (stdio, http, sse, ws), keyed by the server name."
+            "The mcpServers field applies in both contexts where an agent file can run:",
+            "As a subagent, spawned through the Agent tool or an @-mention"
           ],
           "codeBlocks": [
             "---\nname: safe-researcher\ndescription: Research agent with restricted capabilities\ntools: Read, Grep, Glob, Bash\n---",
@@ -8584,7 +8593,7 @@
         "If a required environment variable is not set and has no default value, Claude Code will fail to parse the config.",
         "Authenticate with your Sentry account:",
         "Then debug production issues:",
-        "Authenticate if needed by selecting “Authenticate” for GitHub:",
+        "GitHub’s remote MCP server authenticates with a GitHub personal access token passed as a header. To get one, open your GitHub token settings, generate a new fine-grained token with access to the repositories you want Claude to work with, then add the server:",
         "Then work with GitHub:",
         "Then query your database naturally:",
         "Many cloud-based MCP servers require authentication. Claude Code supports OAuth 2.0 for secure connections.",
@@ -8649,7 +8658,7 @@
         "What are the most common errors in the last 24 hours?",
         "Show me the stack trace for error ID abc123",
         "Which deployment introduced these new errors?",
-        "claude mcp add --transport http github https://api.githubcopilot.com/mcp/",
+        "claude mcp add --transport http github https://api.githubcopilot.com/mcp/ \\\n  --header \"Authorization: Bearer YOUR_GITHUB_PAT\"",
         "Review PR #456 and suggest improvements",
         "Create a new issue for the bug we just found",
         "Show me all open PRs assigned to me",
@@ -8903,12 +8912,11 @@
         {
           "title": "​Example: Connect to GitHub for code reviews",
           "paragraphs": [
-            "Authenticate if needed by selecting “Authenticate” for GitHub:",
+            "GitHub’s remote MCP server authenticates with a GitHub personal access token passed as a header. To get one, open your GitHub token settings, generate a new fine-grained token with access to the repositories you want Claude to work with, then add the server:",
             "Then work with GitHub:"
           ],
           "codeBlocks": [
-            "claude mcp add --transport http github https://api.githubcopilot.com/mcp/",
-            "/mcp",
+            "claude mcp add --transport http github https://api.githubcopilot.com/mcp/ \\\n  --header \"Authorization: Bearer YOUR_GITHUB_PAT\"",
             "Review PR #456 and suggest improvements",
             "Create a new issue for the bug we just found",
             "Show me all open PRs assigned to me"
@@ -13204,7 +13212,7 @@
         "Run /compact to summarize earlier turns and free space, or /clear to start fresh",
         "Run /context to see a breakdown of what is consuming the window: system prompt, tools, memory files, and messages",
         "Disable MCP servers you are not using with /mcp disable <name> to remove their tool definitions from context",
-        "Trim large CLAUDE.md memory files or split them into imports",
+        "Trim large CLAUDE.md memory files, or move instructions into path-scoped rules that load only when relevant",
         "Subagents inherit every MCP tool definition from the parent session, which can fill their context window before the first turn. Disable MCP servers you are not using before spawning subagents.",
         "Auto-compact is on by default and normally prevents this error. If you have set DISABLE_AUTO_COMPACT, re-enable it or run /compact manually before the window fills.",
         "See Explore the context window for an interactive view of how context fills up.",
@@ -13251,7 +13259,7 @@
         "If Claude’s answers seem less capable than you expect but no error is shown, the cause is usually conversation state rather than the model itself. Claude Code does not silently change model versions. It can switch to a fallback model in specific cases such as an Opus quota being reached or a Bedrock or Vertex AI region lacking your model; the Model selection check below catches both, and Model configuration explains when fallback applies.",
         "Check these first:",
         "Model selection: run /model to confirm you are on the model you expect. A previous /model choice or an ANTHROPIC_MODEL environment variable may have you on a smaller model than you intended.",
-        "Effort level: run /effort to check the current reasoning level and raise it for hard debugging or design work. Defaults vary by model and plan, so check before assuming you are below the maximum. See Adjust effort level for per-model defaults and the ultrathink shortcut."
+        "Effort level: run /effort to check the current reasoning level and raise it for hard debugging or design work. Defaults vary by model, so check before assuming you are below the maximum. See Adjust effort level for per-model defaults and the ultrathink shortcut."
       ],
       "codeBlocks": [
         "API Error: 500 {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"Internal server error\"}} · check status.claude.com",
@@ -13573,7 +13581,7 @@
             "Run /compact to summarize earlier turns and free space, or /clear to start fresh",
             "Run /context to see a breakdown of what is consuming the window: system prompt, tools, memory files, and messages",
             "Disable MCP servers you are not using with /mcp disable <name> to remove their tool definitions from context",
-            "Trim large CLAUDE.md memory files or split them into imports",
+            "Trim large CLAUDE.md memory files, or move instructions into path-scoped rules that load only when relevant",
             "Subagents inherit every MCP tool definition from the parent session, which can fill their context window before the first turn. Disable MCP servers you are not using before spawning subagents.",
             "Auto-compact is on by default and normally prevents this error. If you have set DISABLE_AUTO_COMPACT, re-enable it or run /compact manually before the window fills.",
             "See Explore the context window for an interactive view of how context fills up."
@@ -14461,8 +14469,8 @@
         "Follow the wizard prompts",
         "Choose how you authenticate to Google Cloud: Application Default Credentials from gcloud, a service account key file, or credentials already in your environment. The wizard detects your project and region, verifies which Claude models your project can invoke, and lets you pin them. It saves the result to the env block of your user settings file, so you don’t need to export environment variables yourself.",
         "After you’ve signed in, run /setup-vertex any time to reopen the wizard and change your credentials, project, region, or model pins.",
-        "Claude Code can be used with both Vertex AI global and regional endpoints.",
-        "Vertex AI may not support the Claude Code default models in all regions or on global endpoints. You may need to switch to a supported region, use a regional endpoint, or specify a supported model.",
+        "Claude Code supports Vertex AI global, multi-region, and regional endpoints. Set CLOUD_ML_REGION to global, a multi-region location such as eu or us, or a specific region such as us-east5. Claude Code selects the correct Vertex AI hostname for each form, including the aiplatform.eu.rep.googleapis.com and aiplatform.us.rep.googleapis.com hosts for multi-region locations.",
+        "Vertex AI may not support the Claude Code default models on every endpoint type. Model availability varies across specific regions, multi-region locations, and global endpoints. You may need to switch to a supported location or specify a supported model.",
         "To configure Vertex AI through environment variables instead of the wizard, for example in CI or a scripted enterprise rollout, follow the steps below.",
         "Enable the Vertex AI API in your GCP project:",
         "Request access to Claude models in Vertex AI:",
@@ -14497,10 +14505,10 @@
         "Check current quotas or request quota increase through Cloud Console",
         "If you encounter “model not found” 404 errors:",
         "Confirm model is Enabled in Model Garden",
-        "Verify you have access to the specified region",
-        "If using CLOUD_ML_REGION=global, check that your models support global endpoints in Model Garden under “Supported features”. For models that don’t support global endpoints, either: Specify a supported model via ANTHROPIC_MODEL or ANTHROPIC_DEFAULT_HAIKU_MODEL, or Set a regional endpoint using VERTEX_REGION_<MODEL_NAME> environment variables",
+        "Verify the model is available in the location you specified. Some models are offered only on global or multi-region locations such as eu and us, not in specific regions",
+        "If using CLOUD_ML_REGION=global, check that your models support global endpoints in Model Garden under “Supported features”. For models that don’t support global endpoints, either: Specify a supported model via ANTHROPIC_MODEL or ANTHROPIC_DEFAULT_HAIKU_MODEL, or Set a region or multi-region location using VERTEX_REGION_<MODEL_NAME> environment variables",
         "Specify a supported model via ANTHROPIC_MODEL or ANTHROPIC_DEFAULT_HAIKU_MODEL, or",
-        "Set a regional endpoint using VERTEX_REGION_<MODEL_NAME> environment variables",
+        "Set a region or multi-region location using VERTEX_REGION_<MODEL_NAME> environment variables",
         "If you encounter 429 errors:",
         "For regional endpoints, ensure the primary model and small/fast model are supported in your selected region",
         "Consider switching to CLOUD_ML_REGION=global for better availability",
@@ -14565,8 +14573,8 @@
         {
           "title": "​Region configuration",
           "paragraphs": [
-            "Claude Code can be used with both Vertex AI global and regional endpoints.",
-            "Vertex AI may not support the Claude Code default models in all regions or on global endpoints. You may need to switch to a supported region, use a regional endpoint, or specify a supported model."
+            "Claude Code supports Vertex AI global, multi-region, and regional endpoints. Set CLOUD_ML_REGION to global, a multi-region location such as eu or us, or a specific region such as us-east5. Claude Code selects the correct Vertex AI hostname for each form, including the aiplatform.eu.rep.googleapis.com and aiplatform.us.rep.googleapis.com hosts for multi-region locations.",
+            "Vertex AI may not support the Claude Code default models on every endpoint type. Model availability varies across specific regions, multi-region locations, and global endpoints. You may need to switch to a supported location or specify a supported model."
           ],
           "codeBlocks": []
         },
@@ -14668,10 +14676,10 @@
             "Check current quotas or request quota increase through Cloud Console",
             "If you encounter “model not found” 404 errors:",
             "Confirm model is Enabled in Model Garden",
-            "Verify you have access to the specified region",
-            "If using CLOUD_ML_REGION=global, check that your models support global endpoints in Model Garden under “Supported features”. For models that don’t support global endpoints, either: Specify a supported model via ANTHROPIC_MODEL or ANTHROPIC_DEFAULT_HAIKU_MODEL, or Set a regional endpoint using VERTEX_REGION_<MODEL_NAME> environment variables",
+            "Verify the model is available in the location you specified. Some models are offered only on global or multi-region locations such as eu and us, not in specific regions",
+            "If using CLOUD_ML_REGION=global, check that your models support global endpoints in Model Garden under “Supported features”. For models that don’t support global endpoints, either: Specify a supported model via ANTHROPIC_MODEL or ANTHROPIC_DEFAULT_HAIKU_MODEL, or Set a region or multi-region location using VERTEX_REGION_<MODEL_NAME> environment variables",
             "Specify a supported model via ANTHROPIC_MODEL or ANTHROPIC_DEFAULT_HAIKU_MODEL, or",
-            "Set a regional endpoint using VERTEX_REGION_<MODEL_NAME> environment variables",
+            "Set a region or multi-region location using VERTEX_REGION_<MODEL_NAME> environment variables",
             "If you encounter 429 errors:",
             "For regional endpoints, ensure the primary model and small/fast model are supported in your selected region",
             "Consider switching to CLOUD_ML_REGION=global for better availability"
@@ -14939,16 +14947,9 @@
         "CLAUDE_CODE_CERT_STORE has no dedicated settings.json schema key. Set it via the env block in ~/.claude/settings.json or directly in the process environment.",
         "If your enterprise environment uses a custom CA, configure Claude Code to trust it directly:",
         "For enterprise environments requiring client certificate authentication:",
-        "Claude Code requires access to the following URLs:",
-        "api.anthropic.com: Claude API endpoints",
-        "claude.ai: authentication for claude.ai accounts",
-        "platform.claude.com: authentication for Anthropic Console accounts",
-        "Ensure these URLs are allowlisted in your proxy configuration and firewall rules. This is especially important when using Claude Code in containerized or restricted network environments.",
-        "When using Bedrock, Vertex AI, or Foundry, model traffic goes to your provider instead of api.anthropic.com. The WebFetch tool still calls api.anthropic.com for its domain safety check unless you set skipWebFetchPreflight: true in settings.",
-        "The native installer and update checks also require the following URLs. Allowlist both, since clients running older Claude Code versions fetch from storage.googleapis.com. If you install Claude Code through npm or manage your own binary distribution, end users may not need access:",
-        "downloads.claude.ai: download host for the Claude Code binary, auto-updater, version pointers, manifests, install script, signing keys, and plugin executables",
-        "storage.googleapis.com: legacy download host used by older clients",
-        "The Chrome integration connects to the browser extension over a WebSocket bridge. If you use Claude in Chrome, allowlist bridge.claudeusercontent.com for outbound WebSocket connections.",
+        "Claude Code requires access to the following URLs. Allowlist these in your proxy configuration and firewall rules, especially in containerized or restricted network environments.",
+        "If you install Claude Code through npm or manage your own binary distribution, end users may not need access to downloads.claude.ai or storage.googleapis.com.",
+        "When using Amazon Bedrock, Google Vertex AI, or Microsoft Foundry, model traffic and authentication go to your provider instead of api.anthropic.com, claude.ai, or platform.claude.com. The WebFetch tool still calls api.anthropic.com for its domain safety check unless you set skipWebFetchPreflight: true in settings.",
         "Claude Code on the web and Code Review connect to your repositories from Anthropic-managed infrastructure. If your GitHub Enterprise Cloud organization restricts access by IP address, enable IP allow list inheritance for installed GitHub Apps. The Claude GitHub App registers its IP ranges, so enabling this setting allows access without manual configuration. To add the ranges to your allow list manually instead, or to configure other firewalls, see the Anthropic API IP addresses.",
         "For self-hosted GitHub Enterprise Server instances behind a firewall, allowlist the same Anthropic API IP addresses so Anthropic infrastructure can reach your GHES host to clone repositories and post review comments.",
         "Claude Code settings",
@@ -15044,16 +15045,9 @@
         {
           "title": "​Network access requirements",
           "paragraphs": [
-            "Claude Code requires access to the following URLs:",
-            "api.anthropic.com: Claude API endpoints",
-            "claude.ai: authentication for claude.ai accounts",
-            "platform.claude.com: authentication for Anthropic Console accounts",
-            "Ensure these URLs are allowlisted in your proxy configuration and firewall rules. This is especially important when using Claude Code in containerized or restricted network environments.",
-            "When using Bedrock, Vertex AI, or Foundry, model traffic goes to your provider instead of api.anthropic.com. The WebFetch tool still calls api.anthropic.com for its domain safety check unless you set skipWebFetchPreflight: true in settings.",
-            "The native installer and update checks also require the following URLs. Allowlist both, since clients running older Claude Code versions fetch from storage.googleapis.com. If you install Claude Code through npm or manage your own binary distribution, end users may not need access:",
-            "downloads.claude.ai: download host for the Claude Code binary, auto-updater, version pointers, manifests, install script, signing keys, and plugin executables",
-            "storage.googleapis.com: legacy download host used by older clients",
-            "The Chrome integration connects to the browser extension over a WebSocket bridge. If you use Claude in Chrome, allowlist bridge.claudeusercontent.com for outbound WebSocket connections.",
+            "Claude Code requires access to the following URLs. Allowlist these in your proxy configuration and firewall rules, especially in containerized or restricted network environments.",
+            "If you install Claude Code through npm or manage your own binary distribution, end users may not need access to downloads.claude.ai or storage.googleapis.com.",
+            "When using Amazon Bedrock, Google Vertex AI, or Microsoft Foundry, model traffic and authentication go to your provider instead of api.anthropic.com, claude.ai, or platform.claude.com. The WebFetch tool still calls api.anthropic.com for its domain safety check unless you set skipWebFetchPreflight: true in settings.",
             "Claude Code on the web and Code Review connect to your repositories from Anthropic-managed infrastructure. If your GitHub Enterprise Cloud organization restricts access by IP address, enable IP allow list inheritance for installed GitHub Apps. The Claude GitHub App registers its IP ranges, so enabling this setting allows access without manual configuration. To add the ranges to your allow list manually instead, or to configure other firewalls, see the Anthropic API IP addresses.",
             "For self-hosted GitHub Enterprise Server instances behind a firewall, allowlist the same Anthropic API IP addresses so Anthropic infrastructure can reach your GHES host to clone repositories and post review comments."
           ],
@@ -15495,11 +15489,11 @@
         "​Update manually",
         "​Advanced installation options",
         "​Install a specific version",
+        "​Install with Linux package managers",
         "​Install with npm",
         "​Binary integrity and code signing",
         "​Uninstall Claude Code",
-        "​Native installation",
-        "​Homebrew installation"
+        "​Native installation"
       ],
       "toc": [
         "System requirements",
@@ -15517,11 +15511,11 @@
         "Update manually",
         "Advanced installation options",
         "Install a specific version",
+        "Install with Linux package managers",
         "Install with npm",
         "Binary integrity and code signing",
         "Verify the manifest signature",
-        "Platform code signatures",
-        "Uninstall Claude Code"
+        "Platform code signatures"
       ],
       "paragraphs": [
         "System requirements",
@@ -15539,6 +15533,7 @@
         "Update manually",
         "Advanced installation options",
         "Install a specific version",
+        "Install with Linux package managers",
         "Install with npm",
         "Binary integrity and code signing",
         "Verify the manifest signature",
@@ -15547,6 +15542,7 @@
         "Native installation",
         "Homebrew installation",
         "WinGet installation",
+        "apt / dnf / apk",
         "Remove configuration files",
         "System requirements, platform-specific installation, version management, and uninstallation for Claude Code.",
         "This page covers system requirements, platform-specific installation details, updates, and uninstallation. For a guided walkthrough of your first session, see the quickstart. If you’ve never used a terminal before, see the terminal guide.",
@@ -15576,6 +15572,7 @@
         "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship.",
         "Homebrew installations do not auto-update. Run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed, to get the latest features and security fixes.",
         "WinGet installations do not auto-update. Run winget upgrade Anthropic.ClaudeCode periodically to get the latest features and security fixes.",
+        "You can also install with apt, dnf, or apk on Debian, Fedora, RHEL, and Alpine.",
         "After installation completes, open a terminal in the project you want to work in and start Claude Code:",
         "If you encounter any issues during installation, see the troubleshooting guide.",
         "You can run Claude Code natively on Windows or inside WSL. Pick based on where your projects are located and which features you need:",
@@ -15593,9 +15590,9 @@
         "For a more detailed check of your installation and configuration, run claude doctor:",
         "Claude Code requires a Pro, Max, Team, Enterprise, or Console account. The free Claude.ai plan does not include Claude Code access. You can also use Claude Code with a third-party API provider like Amazon Bedrock, Google Vertex AI, or Microsoft Foundry.",
         "After installing, log in by running claude and following the browser prompts. See Authentication for all account types and team setup options.",
-        "Native installations automatically update in the background. You can configure the release channel to control whether you receive updates immediately or on a delayed stable schedule, or disable auto-updates entirely. Homebrew and WinGet installations require manual updates.",
+        "Native installations automatically update in the background. You can configure the release channel to control whether you receive updates immediately or on a delayed stable schedule, or disable auto-updates entirely. Homebrew, WinGet, and Linux package manager installations require manual updates.",
         "Claude Code checks for updates on startup and periodically while running. Updates download and install in the background, then take effect the next time you start Claude Code.",
-        "Homebrew and WinGet installations do not auto-update. For Homebrew, run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed. For WinGet, run winget upgrade Anthropic.ClaudeCode.",
+        "Homebrew, WinGet, apt, dnf, and apk installations do not auto-update. For Homebrew, run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed. For WinGet, run winget upgrade Anthropic.ClaudeCode. For Linux package managers, see the upgrade commands in Install with Linux package managers.",
         "Known issue: Claude Code may notify you of updates before the new version is available in these package managers. If an upgrade fails, wait and try again later.",
         "Homebrew keeps old versions on disk after upgrades. Run brew cleanup periodically to reclaim disk space.",
         "Control which release channel Claude Code follows for auto-updates and claude update with the autoUpdatesChannel setting:",
@@ -15610,7 +15607,7 @@
         "In managed settings, this enforces an organization-wide minimum that user and project settings cannot override.",
         "Set DISABLE_AUTOUPDATER to \"1\" in the env key of your settings.json file:",
         "To apply an update immediately without waiting for the next background check, run:",
-        "These options are for version pinning, migrating from npm, and verifying binary integrity.",
+        "These options are for version pinning, Linux package managers, npm, and verifying binary integrity.",
         "The native installer accepts either a specific version number or a release channel (latest or stable). The channel you choose at install time becomes your default for auto-updates. See configure release channel for more information.",
         "To install the latest version (default):",
         "macOS, Linux, WSL",
@@ -15618,6 +15615,17 @@
         "Windows CMD",
         "To install the stable version:",
         "To install a specific version number:",
+        "Claude Code publishes signed apt, dnf, and apk repositories. Replace stable with latest for the rolling channel. Package manager installations do not auto-update through Claude Code; updates arrive through your normal system upgrade workflow.",
+        "All repositories are signed with the Claude Code release signing key. Before trusting the key, verify it as described in each tab.",
+        "For Debian and Ubuntu. To use the rolling channel, change both stable occurrences in the deb line: the URL path and the suite name.",
+        "Verify the GPG key fingerprint before trusting it: gpg --show-keys /etc/apt/keyrings/claude-code.asc should report 31DD DE24 DDFA B679 F42D 7BD2 BAA9 29FF 1A7E CACE.",
+        "To upgrade later, run sudo apt update && sudo apt upgrade claude-code.",
+        "For Fedora and RHEL:",
+        "dnf downloads the key on first install and prompts you to confirm the fingerprint. Verify it matches 31DD DE24 DDFA B679 F42D 7BD2 BAA9 29FF 1A7E CACE before accepting.",
+        "To upgrade later, run sudo dnf upgrade claude-code.",
+        "For Alpine Linux:",
+        "Verify the downloaded key with sha256sum /etc/apk/keys/claude-code.rsa.pub, which should report 395759c1f7449ef4cdef305a42e820f3c766d6090d142634ebdb049f113168b6.",
+        "To upgrade later, run apk update && apk upgrade claude-code.",
         "You can also install Claude Code as a global npm package. The package requires Node.js 18 or later.",
         "The npm package installs the same native binary as the standalone installer. npm pulls the binary in through a per-platform optional dependency such as @anthropic-ai/claude-code-darwin-arm64, and a postinstall step links it into place. The installed claude binary does not itself invoke Node.",
         "Supported npm install platforms are darwin-arm64, darwin-x64, linux-x64, linux-arm64, linux-x64-musl, linux-arm64-musl, win32-x64, and win32-arm64. Your package manager must allow optional dependencies. See troubleshooting if the binary is missing after install.",
@@ -15640,12 +15648,13 @@
         "In addition to the signed manifest, individual binaries carry platform-native code signatures where supported.",
         "macOS: signed by “Anthropic PBC” and notarized by Apple. Verify with codesign --verify --verbose ./claude.",
         "Windows: signed by “Anthropic, PBC”. Verify with Get-AuthenticodeSignature .\\claude.exe.",
-        "Linux: use the manifest signature above to verify integrity. Linux binaries are not individually code-signed.",
+        "Linux: binaries are not individually code-signed. If you download directly from the claude-code-releases bucket or use the native installer, verify integrity with the manifest signature above. If you install with apt, dnf, or apk, your package manager verifies signatures automatically using the repository signing key.",
         "To remove Claude Code, follow the instructions for your installation method.",
         "Remove the Claude Code binary and version files:",
         "Remove the Homebrew cask you installed. If you installed the stable cask:",
         "If you installed the latest cask:",
         "Remove the WinGet package:",
+        "Remove the package and the repository configuration:",
         "Remove the global npm package:",
         "Removing configuration files will delete all your settings, allowed tools, MCP server configurations, and session history.",
         "The VS Code extension, the JetBrains plugin, and the Desktop app also write to ~/.claude/. If any of them is still installed, the directory is recreated the next time it runs. To remove Claude Code completely, uninstall the VS Code extension, the JetBrains plugin, and the Desktop app before deleting these files.",
@@ -15674,6 +15683,9 @@
         "curl -fsSL https://claude.ai/install.sh | bash -s 2.1.89",
         "& ([scriptblock]::Create((irm https://claude.ai/install.ps1))) 2.1.89",
         "curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd 2.1.89 && del install.cmd",
+        "sudo install -d -m 0755 /etc/apt/keyrings\nsudo curl -fsSL https://downloads.claude.ai/keys/claude-code.asc \\\n  -o /etc/apt/keyrings/claude-code.asc\necho \"deb [signed-by=/etc/apt/keyrings/claude-code.asc] https://downloads.claude.ai/claude-code/apt/stable stable main\" \\\n  | sudo tee /etc/apt/sources.list.d/claude-code.list\nsudo apt update\nsudo apt install claude-code",
+        "sudo tee /etc/yum.repos.d/claude-code.repo <<'EOF'\n[claude-code]\nname=Claude Code\nbaseurl=https://downloads.claude.ai/claude-code/rpm/stable\nenabled=1\ngpgcheck=1\ngpgkey=https://downloads.claude.ai/keys/claude-code.asc\nEOF\nsudo dnf install claude-code",
+        "wget -O /etc/apk/keys/claude-code.rsa.pub \\\n  https://downloads.claude.ai/keys/claude-code.rsa.pub\necho \"https://downloads.claude.ai/claude-code/apk/stable\" >> /etc/apk/repositories\napk add claude-code",
         "npm install -g @anthropic-ai/claude-code",
         "curl -fsSL https://downloads.claude.ai/keys/claude-code.asc | gpg --import",
         "gpg --fingerprint security@anthropic.com",
@@ -15681,10 +15693,7 @@
         "REPO=https://downloads.claude.ai/claude-code-releases\nVERSION=2.1.89\ncurl -fsSLO \"$REPO/$VERSION/manifest.json\"\ncurl -fsSLO \"$REPO/$VERSION/manifest.json.sig\"",
         "gpg --verify manifest.json.sig manifest.json",
         "sha256sum claude",
-        "shasum -a 256 claude",
-        "(Get-FileHash claude.exe -Algorithm SHA256).Hash.ToLower()",
-        "rm -f ~/.local/bin/claude\nrm -rf ~/.local/share/claude",
-        "Remove-Item -Path \"$env:USERPROFILE\\.local\\bin\\claude.exe\" -Force\nRemove-Item -Path \"$env:USERPROFILE\\.local\\share\\claude\" -Recurse -Force"
+        "shasum -a 256 claude"
       ],
       "sectionBlocks": [
         {
@@ -15804,7 +15813,7 @@
         {
           "title": "​Update Claude Code",
           "paragraphs": [
-            "Native installations automatically update in the background. You can configure the release channel to control whether you receive updates immediately or on a delayed stable schedule, or disable auto-updates entirely. Homebrew and WinGet installations require manual updates."
+            "Native installations automatically update in the background. You can configure the release channel to control whether you receive updates immediately or on a delayed stable schedule, or disable auto-updates entirely. Homebrew, WinGet, and Linux package manager installations require manual updates."
           ],
           "codeBlocks": []
         },
@@ -15812,7 +15821,7 @@
           "title": "​Auto-updates",
           "paragraphs": [
             "Claude Code checks for updates on startup and periodically while running. Updates download and install in the background, then take effect the next time you start Claude Code.",
-            "Homebrew and WinGet installations do not auto-update. For Homebrew, run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed. For WinGet, run winget upgrade Anthropic.ClaudeCode.",
+            "Homebrew, WinGet, apt, dnf, and apk installations do not auto-update. For Homebrew, run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed. For WinGet, run winget upgrade Anthropic.ClaudeCode. For Linux package managers, see the upgrade commands in Install with Linux package managers.",
             "Known issue: Claude Code may notify you of updates before the new version is available in these package managers. If an upgrade fails, wait and try again later.",
             "Homebrew keeps old versions on disk after upgrades. Run brew cleanup periodically to reclaim disk space."
           ],
@@ -15865,7 +15874,7 @@
         {
           "title": "​Advanced installation options",
           "paragraphs": [
-            "These options are for version pinning, migrating from npm, and verifying binary integrity."
+            "These options are for version pinning, Linux package managers, npm, and verifying binary integrity."
           ],
           "codeBlocks": []
         },
@@ -15887,6 +15896,27 @@
             "curl -fsSL https://claude.ai/install.sh | bash -s stable",
             "& ([scriptblock]::Create((irm https://claude.ai/install.ps1))) stable",
             "curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd stable && del install.cmd"
+          ]
+        },
+        {
+          "title": "​Install with Linux package managers",
+          "paragraphs": [
+            "Claude Code publishes signed apt, dnf, and apk repositories. Replace stable with latest for the rolling channel. Package manager installations do not auto-update through Claude Code; updates arrive through your normal system upgrade workflow.",
+            "All repositories are signed with the Claude Code release signing key. Before trusting the key, verify it as described in each tab.",
+            "For Debian and Ubuntu. To use the rolling channel, change both stable occurrences in the deb line: the URL path and the suite name.",
+            "Verify the GPG key fingerprint before trusting it: gpg --show-keys /etc/apt/keyrings/claude-code.asc should report 31DD DE24 DDFA B679 F42D 7BD2 BAA9 29FF 1A7E CACE.",
+            "To upgrade later, run sudo apt update && sudo apt upgrade claude-code.",
+            "For Fedora and RHEL:",
+            "dnf downloads the key on first install and prompts you to confirm the fingerprint. Verify it matches 31DD DE24 DDFA B679 F42D 7BD2 BAA9 29FF 1A7E CACE before accepting.",
+            "To upgrade later, run sudo dnf upgrade claude-code.",
+            "For Alpine Linux:",
+            "Verify the downloaded key with sha256sum /etc/apk/keys/claude-code.rsa.pub, which should report 395759c1f7449ef4cdef305a42e820f3c766d6090d142634ebdb049f113168b6.",
+            "To upgrade later, run apk update && apk upgrade claude-code."
+          ],
+          "codeBlocks": [
+            "sudo install -d -m 0755 /etc/apt/keyrings\nsudo curl -fsSL https://downloads.claude.ai/keys/claude-code.asc \\\n  -o /etc/apt/keyrings/claude-code.asc\necho \"deb [signed-by=/etc/apt/keyrings/claude-code.asc] https://downloads.claude.ai/claude-code/apt/stable stable main\" \\\n  | sudo tee /etc/apt/sources.list.d/claude-code.list\nsudo apt update\nsudo apt install claude-code",
+            "sudo tee /etc/yum.repos.d/claude-code.repo <<'EOF'\n[claude-code]\nname=Claude Code\nbaseurl=https://downloads.claude.ai/claude-code/rpm/stable\nenabled=1\ngpgcheck=1\ngpgkey=https://downloads.claude.ai/keys/claude-code.asc\nEOF\nsudo dnf install claude-code",
+            "wget -O /etc/apk/keys/claude-code.rsa.pub \\\n  https://downloads.claude.ai/keys/claude-code.rsa.pub\necho \"https://downloads.claude.ai/claude-code/apk/stable\" >> /etc/apk/repositories\napk add claude-code"
           ]
         },
         {
@@ -15963,6 +15993,17 @@
           ],
           "codeBlocks": [
             "winget uninstall Anthropic.ClaudeCode"
+          ]
+        },
+        {
+          "title": "​apt / dnf / apk",
+          "paragraphs": [
+            "Remove the package and the repository configuration:"
+          ],
+          "codeBlocks": [
+            "sudo apt remove claude-code\nsudo rm /etc/apt/sources.list.d/claude-code.list /etc/apt/keyrings/claude-code.asc",
+            "sudo dnf remove claude-code\nsudo rm /etc/yum.repos.d/claude-code.repo",
+            "apk del claude-code\nsed -i '\\|downloads.claude.ai/claude-code/apk|d' /etc/apk/repositories\nrm /etc/apk/keys/claude-code.rsa.pub"
           ]
         },
         {
@@ -16314,7 +16355,7 @@
         "Hooks use the same format as in settings.json.",
         "This example runs an audit script after every file edit across the organization:",
         "To configure the auto mode classifier so it knows which repos, buckets, and domains your organization trusts:",
-        "Because hooks execute shell commands, users see a security approval dialog before they’re applied. See Configure the auto mode classifier for how the autoMode entries affect what the classifier blocks and important warnings about the allow and soft_deny fields.",
+        "Because hooks execute shell commands, users see a security approval dialog before they’re applied. See Configure auto mode for how the autoMode entries affect what the classifier blocks and important warnings about the allow and soft_deny fields.",
         "Save and deploy",
         "Save your changes. Claude Code clients receive the updated settings on their next startup or hourly polling cycle.",
         "To confirm that settings are being applied, ask a user to restart Claude Code. If the configuration includes settings that trigger the security approval dialog, the user sees a prompt describing the managed settings on startup. You can also verify that managed permission rules are active by having a user run /permissions to view their effective permission rules.",
@@ -16419,7 +16460,7 @@
             "Hooks use the same format as in settings.json.",
             "This example runs an audit script after every file edit across the organization:",
             "To configure the auto mode classifier so it knows which repos, buckets, and domains your organization trusts:",
-            "Because hooks execute shell commands, users see a security approval dialog before they’re applied. See Configure the auto mode classifier for how the autoMode entries affect what the classifier blocks and important warnings about the allow and soft_deny fields.",
+            "Because hooks execute shell commands, users see a security approval dialog before they’re applied. See Configure auto mode for how the autoMode entries affect what the classifier blocks and important warnings about the allow and soft_deny fields.",
             "Save and deploy",
             "Save your changes. Claude Code clients receive the updated settings on their next startup or hourly polling cycle."
           ],
@@ -16551,6 +16592,198 @@
             "Endpoint-managed settings: managed settings deployed to devices by IT",
             "Authentication: set up user access to Claude Code",
             "Security: security safeguards and best practices",
+            "Was this page helpful?"
+          ],
+          "codeBlocks": []
+        }
+      ]
+    },
+    {
+      "section": "Setup and access",
+      "path": "/docs/en/auto-mode-config",
+      "url": "https://code.claude.com/docs/en/auto-mode-config",
+      "title": "Configure auto mode",
+      "metaDescription": "Tell the auto mode classifier which repos, buckets, and domains your organization trusts. Set environment context, override the default block and allow rules, and inspect your effective config with the auto-mode CLI subcommands.",
+      "headings": [
+        "​Where the classifier reads configuration",
+        "​Define trusted infrastructure",
+        "​Override the block and allow rules",
+        "​Inspect the defaults and your effective config",
+        "​Review denials",
+        "​See also"
+      ],
+      "toc": [
+        "Where the classifier reads configuration",
+        "Define trusted infrastructure",
+        "Override the block and allow rules",
+        "Inspect the defaults and your effective config",
+        "Review denials",
+        "See also"
+      ],
+      "paragraphs": [
+        "Where the classifier reads configuration",
+        "Define trusted infrastructure",
+        "Override the block and allow rules",
+        "Inspect the defaults and your effective config",
+        "Review denials",
+        "See also",
+        "Tell the auto mode classifier which repos, buckets, and domains your organization trusts. Set environment context, override the default block and allow rules, and inspect your effective config with the auto-mode CLI subcommands.",
+        "Auto mode lets Claude Code run without permission prompts by routing each tool call through a classifier that blocks anything irreversible, destructive, or aimed outside your environment. Use the autoMode settings block to tell that classifier which repos, buckets, and domains your organization trusts, so it stops blocking routine internal operations.",
+        "Out of the box, the classifier trusts only the working directory and the current repo’s configured remotes. Actions like pushing to your company’s source-control org or writing to a team cloud bucket are blocked until you add them to autoMode.environment.",
+        "For how to enable auto mode and what it blocks by default, see Permission modes. This page is the configuration reference.",
+        "This page covers how to:",
+        "Choose where to set rules across CLAUDE.md, user settings, and managed settings",
+        "Define trusted infrastructure with autoMode.environment",
+        "Override the block and allow rules when the defaults don’t fit your pipeline",
+        "Inspect your effective config with the claude auto-mode subcommands",
+        "Review denials so you know what to add next",
+        "The classifier reads the same CLAUDE.md content Claude itself loads, so an instruction like “never force push” in your project’s CLAUDE.md steers both Claude and the classifier at the same time. Start there for project conventions and behavioral rules.",
+        "For rules that apply across projects, such as trusted infrastructure or organization-wide deny rules, use the autoMode settings block. The classifier reads autoMode from the following scopes:",
+        "The classifier does not read autoMode from shared project settings in .claude/settings.json, so a checked-in repo cannot inject its own allow rules.",
+        "Entries from each scope are combined. A developer can extend environment, allow, and soft_deny with personal entries but cannot remove entries that managed settings provide. Because allow rules act as exceptions to block rules inside the classifier, a developer-added allow entry can override an organization soft_deny entry: the combination is additive, not a hard policy boundary.",
+        "The classifier is a second gate that runs after the permissions system. For actions that must never run regardless of user intent or classifier configuration, use permissions.deny in managed settings, which blocks the action before the classifier is consulted and cannot be overridden.",
+        "For most organizations, autoMode.environment is the only field you need to set. It tells the classifier which repos, buckets, and domains are trusted: the classifier uses it to decide what “external” means, so any destination not listed is a potential exfiltration target.",
+        "Setting environment replaces the default environment list, which includes the entry that trusts the working repo and its remotes. Run claude auto-mode defaults to print the defaults, then include them alongside your own entries so you extend the list rather than narrow it.",
+        "Entries are prose, not regex or tool patterns. The classifier reads them as natural-language rules. Write them the way you would describe your infrastructure to a new engineer. A thorough environment section covers:",
+        "Organization: your company name and what Claude Code is primarily used for, like software development, infrastructure automation, or data engineering",
+        "Source control: every GitHub, GitLab, or Bitbucket org your developers push to",
+        "Cloud providers and trusted buckets: bucket names or prefixes that Claude should be able to read from and write to",
+        "Trusted internal domains: hostnames for APIs, dashboards, and services inside your network, like *.internal.example.com",
+        "Key internal services: CI, artifact registries, internal package indexes, incident tooling",
+        "Additional context: regulated-industry constraints, multi-tenant infrastructure, or compliance requirements that affect what the classifier should treat as risky",
+        "A useful starting template: fill in the bracketed fields and remove any lines that don’t apply.",
+        "The more specific context you give, the better the classifier can distinguish routine internal operations from exfiltration attempts.",
+        "You don’t need to fill everything in at once. A reasonable rollout: start with the defaults and add your source control org and key internal services, which resolves the most common false positives like pushing to your own repos. Add trusted domains and cloud buckets next. Fill the rest as blocks come up.",
+        "Two additional fields let you replace the classifier’s built-in rule lists: autoMode.soft_deny controls what gets blocked, and autoMode.allow controls which exceptions apply. Each is an array of prose descriptions, read as natural-language rules. There is no autoMode.deny field; to hard-block an action regardless of intent, use permissions.deny, which runs before the classifier.",
+        "Inside the classifier, precedence works in three tiers:",
+        "soft_deny rules block first",
+        "allow rules then override matching blocks as exceptions",
+        "Explicit user intent overrides both: if the user’s message directly and specifically describes the exact action Claude is about to take, the classifier allows it even when a soft_deny rule matches",
+        "General requests don’t count as explicit intent. Asking Claude to “clean up the repo” does not authorize force-pushing, but asking Claude to “force-push this branch” does.",
+        "Setting any of environment, allow, or soft_deny replaces the entire default list for that section. If you set soft_deny with a single entry, every built-in block rule is discarded: force push, data exfiltration, curl | bash, production deploys, and all other default block rules become allowed. To customize safely, run claude auto-mode defaults to print the built-in rules, copy them into your settings file, then review each rule against your own pipeline and risk tolerance. Only remove rules for risks your infrastructure already mitigates.",
+        "To loosen: remove rules from soft_deny when the defaults block something your pipeline already guards against with PR review, CI, or staging environments, or add to allow when the classifier repeatedly flags a routine pattern the default exceptions don’t cover. To tighten: add to soft_deny for risks specific to your environment that the defaults miss, or remove from allow to hold a default exception to the block rules. In all cases, run claude auto-mode defaults to get the full default lists, then copy and edit: never start from an empty list.",
+        "Each section replaces only its own default, so setting environment alone leaves the default allow and soft_deny lists intact.",
+        "Because setting any of the three arrays replaces its defaults, start any customization by copying the full default lists. Three CLI subcommands help you inspect and validate.",
+        "Print the built-in environment, allow, and soft_deny rules as JSON:",
+        "Print what the classifier actually uses as JSON, with your settings applied where set and defaults otherwise:",
+        "Get AI feedback on your custom allow and soft_deny rules:",
+        "Save the output of claude auto-mode defaults to a file, edit the lists to match your policy, and paste the result into your settings file. After saving, run claude auto-mode config to confirm the effective rules are what you expect. If you’ve written custom rules, claude auto-mode critique reviews them and flags entries that are ambiguous, redundant, or likely to cause false positives.",
+        "When auto mode denies a tool call, the denial is recorded in /permissions under the Recently denied tab. Press r on a denied action to mark it for retry: when you exit the dialog, Claude Code sends a message telling the model it may retry that tool call and resumes the conversation.",
+        "Repeated denials for the same destination usually mean the classifier is missing context. Add that destination to autoMode.environment, then run claude auto-mode config to confirm it took effect.",
+        "To react to denials programmatically, use the PermissionDenied hook.",
+        "Permission modes: what auto mode is, what it blocks by default, and how to enable it",
+        "Managed settings: deploy autoMode configuration across your organization",
+        "Permissions: allow, ask, and deny rules that apply before the classifier runs",
+        "Settings: the full settings reference, including the autoMode key",
+        "Was this page helpful?"
+      ],
+      "codeBlocks": [
+        "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com, api.internal.example.com\",\n      \"Key internal services: Jenkins at ci.example.com, Artifactory at artifacts.example.com\"\n    ]\n  }\n}",
+        "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Organization: {COMPANY_NAME}. Primary use: {PRIMARY_USE_CASE, e.g. software development, infrastructure automation}\",\n      \"Source control: {SOURCE_CONTROL, e.g. GitHub org github.example.com/acme-corp}\",\n      \"Cloud provider(s): {CLOUD_PROVIDERS, e.g. AWS, GCP, Azure}\",\n      \"Trusted cloud buckets: {TRUSTED_BUCKETS, e.g. s3://acme-builds, gs://acme-datasets}\",\n      \"Trusted internal domains: {TRUSTED_DOMAINS, e.g. *.internal.example.com, api.example.com}\",\n      \"Key internal services: {SERVICES, e.g. Jenkins at ci.example.com, Artifactory at artifacts.example.com}\",\n      \"Additional context: {EXTRA, e.g. regulated industry, multi-tenant infrastructure, compliance requirements}\"\n    ]\n  }\n}",
+        "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\",\n      \"...copy full default soft_deny list here first, then add your rules...\"\n    ]\n  }\n}",
+        "claude auto-mode defaults",
+        "claude auto-mode config",
+        "claude auto-mode critique"
+      ],
+      "sectionBlocks": [
+        {
+          "title": "",
+          "paragraphs": [
+            "Where the classifier reads configuration",
+            "Define trusted infrastructure",
+            "Override the block and allow rules",
+            "Inspect the defaults and your effective config",
+            "Review denials",
+            "See also",
+            "Tell the auto mode classifier which repos, buckets, and domains your organization trusts. Set environment context, override the default block and allow rules, and inspect your effective config with the auto-mode CLI subcommands.",
+            "Auto mode lets Claude Code run without permission prompts by routing each tool call through a classifier that blocks anything irreversible, destructive, or aimed outside your environment. Use the autoMode settings block to tell that classifier which repos, buckets, and domains your organization trusts, so it stops blocking routine internal operations.",
+            "Out of the box, the classifier trusts only the working directory and the current repo’s configured remotes. Actions like pushing to your company’s source-control org or writing to a team cloud bucket are blocked until you add them to autoMode.environment.",
+            "For how to enable auto mode and what it blocks by default, see Permission modes. This page is the configuration reference.",
+            "This page covers how to:",
+            "Choose where to set rules across CLAUDE.md, user settings, and managed settings"
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Where the classifier reads configuration",
+          "paragraphs": [
+            "The classifier reads the same CLAUDE.md content Claude itself loads, so an instruction like “never force push” in your project’s CLAUDE.md steers both Claude and the classifier at the same time. Start there for project conventions and behavioral rules.",
+            "For rules that apply across projects, such as trusted infrastructure or organization-wide deny rules, use the autoMode settings block. The classifier reads autoMode from the following scopes:",
+            "The classifier does not read autoMode from shared project settings in .claude/settings.json, so a checked-in repo cannot inject its own allow rules.",
+            "Entries from each scope are combined. A developer can extend environment, allow, and soft_deny with personal entries but cannot remove entries that managed settings provide. Because allow rules act as exceptions to block rules inside the classifier, a developer-added allow entry can override an organization soft_deny entry: the combination is additive, not a hard policy boundary.",
+            "The classifier is a second gate that runs after the permissions system. For actions that must never run regardless of user intent or classifier configuration, use permissions.deny in managed settings, which blocks the action before the classifier is consulted and cannot be overridden."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Define trusted infrastructure",
+          "paragraphs": [
+            "For most organizations, autoMode.environment is the only field you need to set. It tells the classifier which repos, buckets, and domains are trusted: the classifier uses it to decide what “external” means, so any destination not listed is a potential exfiltration target.",
+            "Setting environment replaces the default environment list, which includes the entry that trusts the working repo and its remotes. Run claude auto-mode defaults to print the defaults, then include them alongside your own entries so you extend the list rather than narrow it.",
+            "Entries are prose, not regex or tool patterns. The classifier reads them as natural-language rules. Write them the way you would describe your infrastructure to a new engineer. A thorough environment section covers:",
+            "Organization: your company name and what Claude Code is primarily used for, like software development, infrastructure automation, or data engineering",
+            "Source control: every GitHub, GitLab, or Bitbucket org your developers push to",
+            "Cloud providers and trusted buckets: bucket names or prefixes that Claude should be able to read from and write to",
+            "Trusted internal domains: hostnames for APIs, dashboards, and services inside your network, like *.internal.example.com",
+            "Key internal services: CI, artifact registries, internal package indexes, incident tooling",
+            "Additional context: regulated-industry constraints, multi-tenant infrastructure, or compliance requirements that affect what the classifier should treat as risky",
+            "A useful starting template: fill in the bracketed fields and remove any lines that don’t apply.",
+            "The more specific context you give, the better the classifier can distinguish routine internal operations from exfiltration attempts.",
+            "You don’t need to fill everything in at once. A reasonable rollout: start with the defaults and add your source control org and key internal services, which resolves the most common false positives like pushing to your own repos. Add trusted domains and cloud buckets next. Fill the rest as blocks come up."
+          ],
+          "codeBlocks": [
+            "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com, api.internal.example.com\",\n      \"Key internal services: Jenkins at ci.example.com, Artifactory at artifacts.example.com\"\n    ]\n  }\n}",
+            "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Organization: {COMPANY_NAME}. Primary use: {PRIMARY_USE_CASE, e.g. software development, infrastructure automation}\",\n      \"Source control: {SOURCE_CONTROL, e.g. GitHub org github.example.com/acme-corp}\",\n      \"Cloud provider(s): {CLOUD_PROVIDERS, e.g. AWS, GCP, Azure}\",\n      \"Trusted cloud buckets: {TRUSTED_BUCKETS, e.g. s3://acme-builds, gs://acme-datasets}\",\n      \"Trusted internal domains: {TRUSTED_DOMAINS, e.g. *.internal.example.com, api.example.com}\",\n      \"Key internal services: {SERVICES, e.g. Jenkins at ci.example.com, Artifactory at artifacts.example.com}\",\n      \"Additional context: {EXTRA, e.g. regulated industry, multi-tenant infrastructure, compliance requirements}\"\n    ]\n  }\n}"
+          ]
+        },
+        {
+          "title": "​Override the block and allow rules",
+          "paragraphs": [
+            "Two additional fields let you replace the classifier’s built-in rule lists: autoMode.soft_deny controls what gets blocked, and autoMode.allow controls which exceptions apply. Each is an array of prose descriptions, read as natural-language rules. There is no autoMode.deny field; to hard-block an action regardless of intent, use permissions.deny, which runs before the classifier.",
+            "Inside the classifier, precedence works in three tiers:",
+            "soft_deny rules block first",
+            "allow rules then override matching blocks as exceptions",
+            "Explicit user intent overrides both: if the user’s message directly and specifically describes the exact action Claude is about to take, the classifier allows it even when a soft_deny rule matches",
+            "General requests don’t count as explicit intent. Asking Claude to “clean up the repo” does not authorize force-pushing, but asking Claude to “force-push this branch” does.",
+            "Setting any of environment, allow, or soft_deny replaces the entire default list for that section. If you set soft_deny with a single entry, every built-in block rule is discarded: force push, data exfiltration, curl | bash, production deploys, and all other default block rules become allowed. To customize safely, run claude auto-mode defaults to print the built-in rules, copy them into your settings file, then review each rule against your own pipeline and risk tolerance. Only remove rules for risks your infrastructure already mitigates.",
+            "To loosen: remove rules from soft_deny when the defaults block something your pipeline already guards against with PR review, CI, or staging environments, or add to allow when the classifier repeatedly flags a routine pattern the default exceptions don’t cover. To tighten: add to soft_deny for risks specific to your environment that the defaults miss, or remove from allow to hold a default exception to the block rules. In all cases, run claude auto-mode defaults to get the full default lists, then copy and edit: never start from an empty list.",
+            "Each section replaces only its own default, so setting environment alone leaves the default allow and soft_deny lists intact."
+          ],
+          "codeBlocks": [
+            "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\",\n      \"...copy full default soft_deny list here first, then add your rules...\"\n    ]\n  }\n}"
+          ]
+        },
+        {
+          "title": "​Inspect the defaults and your effective config",
+          "paragraphs": [
+            "Because setting any of the three arrays replaces its defaults, start any customization by copying the full default lists. Three CLI subcommands help you inspect and validate.",
+            "Print the built-in environment, allow, and soft_deny rules as JSON:",
+            "Print what the classifier actually uses as JSON, with your settings applied where set and defaults otherwise:",
+            "Get AI feedback on your custom allow and soft_deny rules:",
+            "Save the output of claude auto-mode defaults to a file, edit the lists to match your policy, and paste the result into your settings file. After saving, run claude auto-mode config to confirm the effective rules are what you expect. If you’ve written custom rules, claude auto-mode critique reviews them and flags entries that are ambiguous, redundant, or likely to cause false positives."
+          ],
+          "codeBlocks": [
+            "claude auto-mode defaults",
+            "claude auto-mode config",
+            "claude auto-mode critique"
+          ]
+        },
+        {
+          "title": "​Review denials",
+          "paragraphs": [
+            "When auto mode denies a tool call, the denial is recorded in /permissions under the Recently denied tab. Press r on a denied action to mark it for retry: when you exit the dialog, Claude Code sends a message telling the model it may retry that tool call and resumes the conversation.",
+            "Repeated denials for the same destination usually mean the classifier is missing context. Add that destination to autoMode.environment, then run claude auto-mode config to confirm it took effect.",
+            "To react to denials programmatically, use the PermissionDenied hook."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​See also",
+          "paragraphs": [
+            "Permission modes: what auto mode is, what it blocks by default, and how to enable it",
+            "Managed settings: deploy autoMode configuration across your organization",
+            "Permissions: allow, ask, and deny rules that apply before the classifier runs",
+            "Settings: the full settings reference, including the autoMode key",
             "Was this page helpful?"
           ],
           "codeBlocks": []
@@ -16730,7 +16963,9 @@
         "model: Model identifier (for example, “claude-sonnet-4-6”)",
         "query_source: Category of the subsystem that issued the request. One of \"main\", \"subagent\", or \"auxiliary\"",
         "speed: \"fast\" when the request used fast mode. Absent otherwise",
+        "effort: Effort level applied to the request: \"low\", \"medium\", \"high\", \"xhigh\", or \"max\". Absent when the model does not support effort.",
         "type: (\"input\", \"output\", \"cacheRead\", \"cacheCreation\")",
+        "effort: Effort level applied to the request. See Cost counter for details.",
         "Incremented when user accepts or rejects Edit, Write, or NotebookEdit tool usage.",
         "tool_name: Tool name (\"Edit\", \"Write\", \"NotebookEdit\")",
         "decision: User decision (\"accept\", \"reject\")",
@@ -16749,6 +16984,8 @@
         "event.sequence: monotonically increasing counter for ordering events within a session",
         "prompt_length: Length of the prompt",
         "prompt: Prompt content (redacted by default, enable with OTEL_LOG_USER_PROMPTS=1)",
+        "command_name: Command name when the prompt invokes one. Built-in and bundled command names such as compact or debug are emitted as-is; aliases such as reset emit as typed rather than the canonical name. Custom, plugin, and MCP command names collapse to custom or mcp unless OTEL_LOG_TOOL_DETAILS=1 is set",
+        "command_source: Origin of the command when present: builtin, custom, or mcp. Plugin-provided commands report as custom",
         "Logged when a tool completes execution.",
         "Event Name: claude_code.tool_result",
         "event.name: \"tool_result\"",
@@ -16783,11 +17020,7 @@
         "Logged when an API request to Claude fails.",
         "Event Name: claude_code.api_error",
         "event.name: \"api_error\"",
-        "error: Error message",
-        "status_code: HTTP status code as a string, or \"undefined\" for non-HTTP errors",
-        "attempt: Total number of attempts made, including the initial request (1 means no retries occurred)",
-        "Logged for each API request attempt when OTEL_LOG_RAW_API_BODIES is set. One event is emitted per attempt, so retries with adjusted parameters each produce their own event.",
-        "Event Name: claude_code.api_request_body"
+        "error: Error message"
       ],
       "codeBlocks": [
         "# 1. Enable telemetry\nexport CLAUDE_CODE_ENABLE_TELEMETRY=1\n\n# 2. Choose exporters (both are optional - configure only what you need)\nexport OTEL_METRICS_EXPORTER=otlp       # Options: otlp, prometheus, console, none\nexport OTEL_LOGS_EXPORTER=otlp          # Options: otlp, console, none\n\n# 3. Configure OTLP endpoint (for OTLP exporter)\nexport OTEL_EXPORTER_OTLP_PROTOCOL=grpc\nexport OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317\n\n# 4. Set authentication (if required)\nexport OTEL_EXPORTER_OTLP_HEADERS=\"Authorization=Bearer your-token\"\n\n# 5. For debugging: reduce export intervals\nexport OTEL_METRIC_EXPORT_INTERVAL=10000  # 10 seconds (default: 60000ms)\nexport OTEL_LOGS_EXPORT_INTERVAL=5000     # 5 seconds (default: 5000ms)\n\n# 6. Run Claude Code\nclaude",
@@ -17097,7 +17330,7 @@
             "Raw file contents and code snippets are not included in metrics or events. Trace spans are a separate data path: see the OTEL_LOG_TOOL_CONTENT bullet below",
             "When authenticated via OAuth, user.email is included in telemetry attributes. If this is a concern for your organization, work with your telemetry backend to filter or redact this field",
             "User prompt content is not collected by default. Only prompt length is recorded. To include prompt content, set OTEL_LOG_USER_PROMPTS=1",
-            "Tool input arguments and parameters are not logged by default. To include them, set OTEL_LOG_TOOL_DETAILS=1. When enabled, tool_result events include a tool_parameters attribute with Bash commands, MCP server and tool names, and skill names, plus a tool_input attribute with file paths, URLs, search patterns, and other arguments. Trace spans include the same tool_input attribute and input-derived attributes such as file_path. Individual values over 512 characters are truncated and the total is bounded to ~4 K characters, but the arguments may still contain sensitive values. Configure your telemetry backend to filter or redact these attributes as needed",
+            "Tool input arguments and parameters are not logged by default. To include them, set OTEL_LOG_TOOL_DETAILS=1. When enabled, tool_result events include a tool_parameters attribute with Bash commands, MCP server and tool names, and skill names, plus a tool_input attribute with file paths, URLs, search patterns, and other arguments. user_prompt events include the verbatim command_name for custom, plugin, and MCP commands. Trace spans include the same tool_input attribute and input-derived attributes such as file_path. Individual values over 512 characters are truncated and the total is bounded to ~4 K characters, but the arguments may still contain sensitive values. Configure your telemetry backend to filter or redact these attributes as needed",
             "Tool input and output content is not logged in trace spans by default. To include it, set OTEL_LOG_TOOL_CONTENT=1. When enabled, span events include full tool input and output content truncated at 60 KB per span. This can include raw file contents from Read tool results and Bash command output. Configure your telemetry backend to filter or redact these attributes as needed",
             "Raw Anthropic Messages API request and response bodies are not logged by default. To include them, set OTEL_LOG_RAW_API_BODIES. With =1, each API call emits api_request_body and api_response_body log events whose body attribute is the JSON-serialized payload, truncated at 60 KB. With =file:<dir>, untruncated bodies are written to .request.json and .response.json files under that directory and the events carry a body_ref path instead of the inline body. Ship the directory with a log collector or sidecar rather than through the telemetry stream. In both modes, bodies contain the full conversation history (system prompt, every prior user and assistant turn, tool results), so enabling this implies consent to everything the other OTEL_LOG_* content flags would reveal. Claude’s extended-thinking content is always redacted from these bodies regardless of other settings"
           ],
@@ -17932,7 +18165,7 @@
         "Allow filesystem-based marketplaces from a specific directory using regex pattern matching on the path:",
         "Use \".*\" as the pathPattern to allow any filesystem path while still controlling network sources with hostPattern.",
         "strictKnownMarketplaces restricts what users can add, but does not register marketplaces on its own. To make allowed marketplaces available automatically without users running /plugin marketplace add, pair it with extraKnownMarketplaces in the same managed-settings.json. See Using both together.",
-        "Restrictions are validated early in the plugin installation process, before any network requests or filesystem operations occur. This prevents unauthorized marketplace access attempts.",
+        "Restrictions are checked before any network or filesystem operation. The check runs on marketplace add and on plugin install, update, refresh, and auto-update. If a marketplace was added before the policy was configured and its source no longer matches the allowlist, Claude Code refuses to install or update plugins from it. The same enforcement applies to blockedMarketplaces.",
         "The allowlist uses exact matching for most source types. For a marketplace to be allowed, all specified fields must match exactly:",
         "For GitHub sources: repo is required, and ref or path must also match if specified in the allowlist",
         "For URL sources: the full URL must match exactly",
@@ -18303,7 +18536,7 @@
             "Allow filesystem-based marketplaces from a specific directory using regex pattern matching on the path:",
             "Use \".*\" as the pathPattern to allow any filesystem path while still controlling network sources with hostPattern.",
             "strictKnownMarketplaces restricts what users can add, but does not register marketplaces on its own. To make allowed marketplaces available automatically without users running /plugin marketplace add, pair it with extraKnownMarketplaces in the same managed-settings.json. See Using both together.",
-            "Restrictions are validated early in the plugin installation process, before any network requests or filesystem operations occur. This prevents unauthorized marketplace access attempts.",
+            "Restrictions are checked before any network or filesystem operation. The check runs on marketplace add and on plugin install, update, refresh, and auto-update. If a marketplace was added before the policy was configured and its source no longer matches the allowlist, Claude Code refuses to install or update plugins from it. The same enforcement applies to blockedMarketplaces.",
             "The allowlist uses exact matching for most source types. For a marketplace to be allowed, all specified fields must match exactly:",
             "For GitHub sources: repo is required, and ref or path must also match if specified in the allowlist",
             "For URL sources: the full URL must match exactly"
@@ -18426,7 +18659,7 @@
         "See also",
         "Declare version constraints on plugin dependencies so your plugin keeps working when an upstream plugin ships a breaking change.",
         "A plugin can depend on other plugins by listing them in plugin.json or in its marketplace entry. By default, a dependency tracks the latest available version, so an upstream release can change the dependency under your plugin without warning. Version constraints let you hold a dependency at a tested version range until you choose to move.",
-        "When you install a plugin that declares dependencies, Claude Code resolves and installs them automatically and lists which dependencies were added at the end of the install output. If a dependency later goes missing, /reload-plugins and the background plugin auto-update install it automatically, provided its marketplace is already in your configured marketplaces. Dependencies from a marketplace you have not added are left unresolved.",
+        "When you install a plugin that declares dependencies, Claude Code resolves and installs them automatically and lists which dependencies were added at the end of the install output. If a dependency later goes missing, /reload-plugins and the background plugin auto-update reinstall it, provided its marketplace is already in your configured marketplaces. Re-running claude plugin install on the dependent plugin, or adding a marketplace with claude plugin marketplace add, also resolves any outstanding missing dependencies. Dependencies from a marketplace you have not added are left unresolved.",
         "This guide is for plugin authors who declare dependencies in plugin.json and for marketplace maintainers who tag releases. To install plugins that have dependencies, see Discover and install plugins. For the full manifest schema, see the Plugins reference.",
         "Dependency version constraints require Claude Code v2.1.110 or later.",
         "Consider an internal marketplace where two teams publish plugins. The platform team maintains secrets-vault, an MCP server that wraps a secrets backend. The deploy team maintains deploy-kit, which calls secrets-vault to fetch credentials during deploys.",
@@ -18474,7 +18707,7 @@
             "See also",
             "Declare version constraints on plugin dependencies so your plugin keeps working when an upstream plugin ships a breaking change.",
             "A plugin can depend on other plugins by listing them in plugin.json or in its marketplace entry. By default, a dependency tracks the latest available version, so an upstream release can change the dependency under your plugin without warning. Version constraints let you hold a dependency at a tested version range until you choose to move.",
-            "When you install a plugin that declares dependencies, Claude Code resolves and installs them automatically and lists which dependencies were added at the end of the install output. If a dependency later goes missing, /reload-plugins and the background plugin auto-update install it automatically, provided its marketplace is already in your configured marketplaces. Dependencies from a marketplace you have not added are left unresolved.",
+            "When you install a plugin that declares dependencies, Claude Code resolves and installs them automatically and lists which dependencies were added at the end of the install output. If a dependency later goes missing, /reload-plugins and the background plugin auto-update reinstall it, provided its marketplace is already in your configured marketplaces. Re-running claude plugin install on the dependent plugin, or adding a marketplace with claude plugin marketplace add, also resolves any outstanding missing dependencies. Dependencies from a marketplace you have not added are left unresolved.",
             "This guide is for plugin authors who declare dependencies in plugin.json and for marketplace maintainers who tag releases. To install plugins that have dependencies, see Discover and install plugins. For the full manifest schema, see the Plugins reference.",
             "Dependency version constraints require Claude Code v2.1.110 or later."
           ],
@@ -19433,7 +19666,7 @@
         "hostPattern: regex pattern to match marketplace hosts (uses hostPattern)",
         "settings: inline marketplace declared directly in settings.json without a separate hosted repository (uses name and plugins)",
         "Use source: 'settings' to declare a small set of plugins inline without setting up a hosted marketplace repository. Plugins listed here must reference external sources such as GitHub or npm. You still need to enable each plugin separately in enabledPlugins.",
-        "Managed settings only: Controls which plugin marketplaces users are allowed to add. This setting can only be configured in managed settings and provides administrators with strict control over marketplace sources.",
+        "Managed settings only: Controls which plugin marketplaces users are allowed to add and install plugins from. This setting can only be configured in managed settings and provides administrators with strict control over marketplace sources.",
         "Managed settings file locations:",
         "macOS: /Library/Application Support/ClaudeCode/managed-settings.json",
         "Linux and WSL: /etc/claude-code/managed-settings.json"
@@ -19824,7 +20057,7 @@
         "​How permissions interact with sandboxing",
         "​Managed settings",
         "​Managed-only settings",
-        "​Review auto mode denials"
+        "​Settings precedence"
       ],
       "toc": [
         "Permission system",
@@ -19869,11 +20102,6 @@
         "How permissions interact with sandboxing",
         "Managed settings",
         "Managed-only settings",
-        "Review auto mode denials",
-        "Configure the auto mode classifier",
-        "Define trusted infrastructure",
-        "Override the block and allow rules",
-        "Inspect the defaults and your effective config",
         "Settings precedence",
         "Example configurations",
         "See also",
@@ -19974,30 +20202,6 @@
         "The following settings are only read from managed settings. Placing them in user or project settings files has no effect.",
         "disableBypassPermissionsMode is typically placed in managed settings to enforce organizational policy, but it works from any scope. A user can set it in their own settings to lock themselves out of bypass mode.",
         "Access to Remote Control and web sessions is not controlled by a managed settings key. On Team and Enterprise plans, an admin enables or disables these features in Claude Code admin settings.",
-        "When auto mode denies a tool call, a notification appears and the denied action is recorded in /permissions under the Recently denied tab. Press r on a denied action to mark it for retry: when you exit the dialog, Claude Code sends a message telling the model it may retry that tool call and resumes the conversation.",
-        "To react to denials programmatically, use the PermissionDenied hook.",
-        "Auto mode uses a classifier model to decide whether each action is safe to run without prompting. Out of the box it trusts only the working directory and, if present, the current repo’s remotes. Actions like pushing to your company’s source control org or writing to a team cloud bucket will be blocked as potential data exfiltration.",
-        "To adjust what the classifier allows or blocks, add instructions to your CLAUDE.md file. The classifier reads CLAUDE.md from trusted directories alongside the conversation, so an instruction like “never force push” steers both Claude and the classifier at the same time. Start here for project conventions and behavioral rules.",
-        "For rules that apply across projects, such as trusted infrastructure or organization-wide deny rules, use the autoMode settings block. The classifier reads autoMode from user settings, .claude/settings.local.json, and managed settings. It does not read from shared project settings in .claude/settings.json, because a checked-in repo could otherwise inject its own allow rules.",
-        "Entries from each scope are combined. A developer can extend environment, allow, and soft_deny with personal entries but cannot remove entries that managed settings provide. Because allow rules act as exceptions to block rules inside the classifier, a developer-added allow entry can override an organization soft_deny entry: the combination is additive, not a hard policy boundary. If you need a rule that developers cannot work around, use permissions.deny in managed settings instead, which blocks actions before the classifier is consulted.",
-        "For most organizations, autoMode.environment is the only field you need to set. It tells the classifier which repos, buckets, and domains are trusted, without touching the built-in block and allow rules. The classifier uses environment to decide what “external” means: any destination not listed is a potential exfiltration target.",
-        "Entries are prose, not regex or tool patterns. The classifier reads them as natural-language rules. Write them the way you would describe your infrastructure to a new engineer. A thorough environment section covers:",
-        "Organization: your company name and what Claude Code is primarily used for, like software development, infrastructure automation, or data engineering",
-        "Source control: every GitHub, GitLab, or Bitbucket org your developers push to",
-        "Cloud providers and trusted buckets: bucket names or prefixes that Claude should be able to read from and write to",
-        "Trusted internal domains: hostnames for APIs, dashboards, and services inside your network, like *.internal.example.com",
-        "Key internal services: CI, artifact registries, internal package indexes, incident tooling",
-        "Additional context: regulated-industry constraints, multi-tenant infrastructure, or compliance requirements that affect what the classifier should treat as risky",
-        "A useful starting template: fill in the bracketed fields and remove any lines that don’t apply:",
-        "The more specific context you give, the better the classifier can distinguish routine internal operations from exfiltration attempts.",
-        "You don’t need to fill everything in at once. A reasonable rollout: start with the defaults and add your source control org and key internal services, which resolves the most common false positives like pushing to your own repos. Add trusted domains and cloud buckets next. Fill the rest as blocks come up.",
-        "Two additional fields let you replace the classifier’s built-in rule lists: autoMode.soft_deny controls what gets blocked, and autoMode.allow controls which exceptions apply. Each is an array of prose descriptions, read as natural-language rules.",
-        "Inside the classifier, the precedence is: soft_deny rules block first, then allow rules override as exceptions, then explicit user intent overrides both. If the user’s message directly and specifically describes the exact action Claude is about to take, the classifier allows it even if a soft_deny rule matches. General requests don’t count: asking Claude to “clean up the repo” does not authorize force-pushing, but asking Claude to “force-push this branch” does.",
-        "To loosen: remove rules from soft_deny when the defaults block something your pipeline already guards against with PR review, CI, or staging environments, or add to allow when the classifier repeatedly flags a routine pattern the default exceptions don’t cover. To tighten: add to soft_deny for risks specific to your environment that the defaults miss, or remove from allow to hold a default exception to the block rules. In all cases, run claude auto-mode defaults to get the full default lists, then copy and edit: never start from an empty list.",
-        "Setting allow or soft_deny replaces the entire default list for that section. If you set soft_deny with a single entry, every built-in block rule is discarded: force push, data exfiltration, curl | bash, production deploys, and all other default block rules become allowed. To customize safely, run claude auto-mode defaults to print the built-in rules, copy them into your settings file, then review each rule against your own pipeline and risk tolerance. Only remove rules for risks your infrastructure already mitigates.",
-        "The three sections are evaluated independently, so setting environment alone leaves the default allow and soft_deny lists intact.",
-        "Because setting allow or soft_deny replaces the defaults, start any customization by copying the full default lists. Three CLI subcommands help you inspect and validate:",
-        "Save the output of claude auto-mode defaults to a file, edit the lists to match your policy, and paste the result into your settings file. After saving, run claude auto-mode config to confirm the effective rules are what you expect. If you’ve written custom rules, claude auto-mode critique reviews them and flags entries that are ambiguous, redundant, or likely to cause false positives.",
         "Permission rules follow the same settings precedence as all other Claude Code settings:",
         "Managed settings: cannot be overridden by any other level, including command line arguments",
         "Command line arguments: temporary session overrides",
@@ -20008,6 +20212,7 @@
         "If a permission is allowed in user settings but denied in project settings, the project setting takes precedence and the permission is blocked.",
         "This repository includes starter settings configurations for common deployment scenarios. Use these as starting points and adjust them to fit your needs.",
         "Settings: complete configuration reference including the permission settings table",
+        "Configure auto mode: tell the auto mode classifier which infrastructure your organization trusts",
         "Sandboxing: OS-level filesystem and network isolation for Bash commands",
         "Authentication: set up user access to Claude Code",
         "Security: security safeguards and best practices",
@@ -20016,11 +20221,7 @@
       ],
       "codeBlocks": [
         "{\n  \"permissions\": {\n    \"allow\": [\n      \"Bash(npm run *)\",\n      \"Bash(git commit *)\",\n      \"Bash(git * main)\",\n      \"Bash(* --version)\",\n      \"Bash(* --help *)\"\n    ],\n    \"deny\": [\n      \"Bash(git push *)\"\n    ]\n  }\n}",
-        "{\n  \"permissions\": {\n    \"deny\": [\"Agent(Explore)\"]\n  }\n}",
-        "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com, api.internal.example.com\",\n      \"Key internal services: Jenkins at ci.example.com, Artifactory at artifacts.example.com\"\n    ]\n  }\n}",
-        "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Organization: {COMPANY_NAME}. Primary use: {PRIMARY_USE_CASE, e.g. software development, infrastructure automation}\",\n      \"Source control: {SOURCE_CONTROL, e.g. GitHub org github.example.com/acme-corp}\",\n      \"Cloud provider(s): {CLOUD_PROVIDERS, e.g. AWS, GCP, Azure}\",\n      \"Trusted cloud buckets: {TRUSTED_BUCKETS, e.g. s3://acme-builds, gs://acme-datasets}\",\n      \"Trusted internal domains: {TRUSTED_DOMAINS, e.g. *.internal.example.com, api.example.com}\",\n      \"Key internal services: {SERVICES, e.g. Jenkins at ci.example.com, Artifactory at artifacts.example.com}\",\n      \"Additional context: {EXTRA, e.g. regulated industry, multi-tenant infrastructure, compliance requirements}\"\n    ]\n  }\n}",
-        "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\",\n      \"...copy full default soft_deny list here first, then add your rules...\"\n    ]\n  }\n}",
-        "claude auto-mode defaults  # the built-in environment, allow, and soft_deny rules\nclaude auto-mode config    # what the classifier actually uses: your settings where set, defaults otherwise\nclaude auto-mode critique  # get AI feedback on your custom allow and soft_deny rules"
+        "{\n  \"permissions\": {\n    \"deny\": [\"Agent(Explore)\"]\n  }\n}"
       ],
       "sectionBlocks": [
         {
@@ -20235,67 +20436,6 @@
           "codeBlocks": []
         },
         {
-          "title": "​Review auto mode denials",
-          "paragraphs": [
-            "When auto mode denies a tool call, a notification appears and the denied action is recorded in /permissions under the Recently denied tab. Press r on a denied action to mark it for retry: when you exit the dialog, Claude Code sends a message telling the model it may retry that tool call and resumes the conversation.",
-            "To react to denials programmatically, use the PermissionDenied hook."
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Configure the auto mode classifier",
-          "paragraphs": [
-            "Auto mode uses a classifier model to decide whether each action is safe to run without prompting. Out of the box it trusts only the working directory and, if present, the current repo’s remotes. Actions like pushing to your company’s source control org or writing to a team cloud bucket will be blocked as potential data exfiltration.",
-            "To adjust what the classifier allows or blocks, add instructions to your CLAUDE.md file. The classifier reads CLAUDE.md from trusted directories alongside the conversation, so an instruction like “never force push” steers both Claude and the classifier at the same time. Start here for project conventions and behavioral rules.",
-            "For rules that apply across projects, such as trusted infrastructure or organization-wide deny rules, use the autoMode settings block. The classifier reads autoMode from user settings, .claude/settings.local.json, and managed settings. It does not read from shared project settings in .claude/settings.json, because a checked-in repo could otherwise inject its own allow rules.",
-            "Entries from each scope are combined. A developer can extend environment, allow, and soft_deny with personal entries but cannot remove entries that managed settings provide. Because allow rules act as exceptions to block rules inside the classifier, a developer-added allow entry can override an organization soft_deny entry: the combination is additive, not a hard policy boundary. If you need a rule that developers cannot work around, use permissions.deny in managed settings instead, which blocks actions before the classifier is consulted."
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Define trusted infrastructure",
-          "paragraphs": [
-            "For most organizations, autoMode.environment is the only field you need to set. It tells the classifier which repos, buckets, and domains are trusted, without touching the built-in block and allow rules. The classifier uses environment to decide what “external” means: any destination not listed is a potential exfiltration target.",
-            "Entries are prose, not regex or tool patterns. The classifier reads them as natural-language rules. Write them the way you would describe your infrastructure to a new engineer. A thorough environment section covers:",
-            "Organization: your company name and what Claude Code is primarily used for, like software development, infrastructure automation, or data engineering",
-            "Source control: every GitHub, GitLab, or Bitbucket org your developers push to",
-            "Cloud providers and trusted buckets: bucket names or prefixes that Claude should be able to read from and write to",
-            "Trusted internal domains: hostnames for APIs, dashboards, and services inside your network, like *.internal.example.com",
-            "Key internal services: CI, artifact registries, internal package indexes, incident tooling",
-            "Additional context: regulated-industry constraints, multi-tenant infrastructure, or compliance requirements that affect what the classifier should treat as risky",
-            "A useful starting template: fill in the bracketed fields and remove any lines that don’t apply:",
-            "The more specific context you give, the better the classifier can distinguish routine internal operations from exfiltration attempts.",
-            "You don’t need to fill everything in at once. A reasonable rollout: start with the defaults and add your source control org and key internal services, which resolves the most common false positives like pushing to your own repos. Add trusted domains and cloud buckets next. Fill the rest as blocks come up."
-          ],
-          "codeBlocks": [
-            "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com, api.internal.example.com\",\n      \"Key internal services: Jenkins at ci.example.com, Artifactory at artifacts.example.com\"\n    ]\n  }\n}",
-            "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Organization: {COMPANY_NAME}. Primary use: {PRIMARY_USE_CASE, e.g. software development, infrastructure automation}\",\n      \"Source control: {SOURCE_CONTROL, e.g. GitHub org github.example.com/acme-corp}\",\n      \"Cloud provider(s): {CLOUD_PROVIDERS, e.g. AWS, GCP, Azure}\",\n      \"Trusted cloud buckets: {TRUSTED_BUCKETS, e.g. s3://acme-builds, gs://acme-datasets}\",\n      \"Trusted internal domains: {TRUSTED_DOMAINS, e.g. *.internal.example.com, api.example.com}\",\n      \"Key internal services: {SERVICES, e.g. Jenkins at ci.example.com, Artifactory at artifacts.example.com}\",\n      \"Additional context: {EXTRA, e.g. regulated industry, multi-tenant infrastructure, compliance requirements}\"\n    ]\n  }\n}"
-          ]
-        },
-        {
-          "title": "​Override the block and allow rules",
-          "paragraphs": [
-            "Two additional fields let you replace the classifier’s built-in rule lists: autoMode.soft_deny controls what gets blocked, and autoMode.allow controls which exceptions apply. Each is an array of prose descriptions, read as natural-language rules.",
-            "Inside the classifier, the precedence is: soft_deny rules block first, then allow rules override as exceptions, then explicit user intent overrides both. If the user’s message directly and specifically describes the exact action Claude is about to take, the classifier allows it even if a soft_deny rule matches. General requests don’t count: asking Claude to “clean up the repo” does not authorize force-pushing, but asking Claude to “force-push this branch” does.",
-            "To loosen: remove rules from soft_deny when the defaults block something your pipeline already guards against with PR review, CI, or staging environments, or add to allow when the classifier repeatedly flags a routine pattern the default exceptions don’t cover. To tighten: add to soft_deny for risks specific to your environment that the defaults miss, or remove from allow to hold a default exception to the block rules. In all cases, run claude auto-mode defaults to get the full default lists, then copy and edit: never start from an empty list.",
-            "Setting allow or soft_deny replaces the entire default list for that section. If you set soft_deny with a single entry, every built-in block rule is discarded: force push, data exfiltration, curl | bash, production deploys, and all other default block rules become allowed. To customize safely, run claude auto-mode defaults to print the built-in rules, copy them into your settings file, then review each rule against your own pipeline and risk tolerance. Only remove rules for risks your infrastructure already mitigates.",
-            "The three sections are evaluated independently, so setting environment alone leaves the default allow and soft_deny lists intact."
-          ],
-          "codeBlocks": [
-            "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\",\n      \"...copy full default soft_deny list here first, then add your rules...\"\n    ]\n  }\n}"
-          ]
-        },
-        {
-          "title": "​Inspect the defaults and your effective config",
-          "paragraphs": [
-            "Because setting allow or soft_deny replaces the defaults, start any customization by copying the full default lists. Three CLI subcommands help you inspect and validate:",
-            "Save the output of claude auto-mode defaults to a file, edit the lists to match your policy, and paste the result into your settings file. After saving, run claude auto-mode config to confirm the effective rules are what you expect. If you’ve written custom rules, claude auto-mode critique reviews them and flags entries that are ambiguous, redundant, or likely to cause false positives."
-          ],
-          "codeBlocks": [
-            "claude auto-mode defaults  # the built-in environment, allow, and soft_deny rules\nclaude auto-mode config    # what the classifier actually uses: your settings where set, defaults otherwise\nclaude auto-mode critique  # get AI feedback on your custom allow and soft_deny rules"
-          ]
-        },
-        {
           "title": "​Settings precedence",
           "paragraphs": [
             "Permission rules follow the same settings precedence as all other Claude Code settings:",
@@ -20320,6 +20460,7 @@
           "title": "​See also",
           "paragraphs": [
             "Settings: complete configuration reference including the permission settings table",
+            "Configure auto mode: tell the auto mode classifier which infrastructure your organization trusts",
             "Sandboxing: OS-level filesystem and network isolation for Bash commands",
             "Authentication: set up user access to Claude Code",
             "Security: security safeguards and best practices",
@@ -20934,6 +21075,8 @@
         "At startup - Launch with claude --model <alias|name>",
         "Environment variable - Set ANTHROPIC_MODEL=<alias|name>",
         "Settings - Configure permanently in your settings file using the model field.",
+        "Your /model selection is saved to user settings and persists across restarts. As of v2.1.117, if the project’s .claude/settings.json pins a different model, Claude Code also writes your choice to .claude/settings.local.json so it continues to apply in that project after a restart. Managed settings take precedence and reapply on the next launch.",
+        "When the active model at startup comes from project or managed settings rather than your own selection, the startup header shows which settings file set it. Run /model to override for the current session.",
         "Example usage:",
         "Example settings file:",
         "Enterprise administrators can use availableModels in managed or policy settings to restrict which models users can select.",
@@ -20963,7 +21106,7 @@
         "Effort levels control adaptive reasoning, which lets the model decide whether and how much to think on each step based on task complexity. Lower effort is faster and cheaper for straightforward tasks, while higher effort provides deeper reasoning for complex problems.",
         "Effort is supported on Opus 4.7, Opus 4.6, and Sonnet 4.6. The available levels depend on the model:",
         "If you set a level the active model does not support, Claude Code falls back to the highest supported level at or below the one you set. For example, xhigh runs as high on Opus 4.6.",
-        "On Opus 4.7, the default effort is xhigh for all plans and providers. On Opus 4.6 and Sonnet 4.6, the default is high, or medium on Pro and Max.",
+        "As of v2.1.117, the default effort is xhigh on Opus 4.7 and high on Opus 4.6 and Sonnet 4.6.",
         "When you first run Opus 4.7, Claude Code applies xhigh even if you previously set a different effort level for Opus 4.6 or Sonnet 4.6. Run /effort again to choose a different level after switching.",
         "low, medium, high, and xhigh persist across sessions. max provides the deepest reasoning with no constraint on token spending and applies to the current session only, except when set through the CLAUDE_CODE_EFFORT_LEVEL environment variable.",
         "Each level trades token spend against capability. The default suits most coding tasks; adjust when you want a different balance.",
@@ -21082,6 +21225,8 @@
             "At startup - Launch with claude --model <alias|name>",
             "Environment variable - Set ANTHROPIC_MODEL=<alias|name>",
             "Settings - Configure permanently in your settings file using the model field.",
+            "Your /model selection is saved to user settings and persists across restarts. As of v2.1.117, if the project’s .claude/settings.json pins a different model, Claude Code also writes your choice to .claude/settings.local.json so it continues to apply in that project after a restart. Managed settings take precedence and reapply on the next launch.",
+            "When the active model at startup comes from project or managed settings rather than your own selection, the startup header shows which settings file set it. Run /model to override for the current session.",
             "Example usage:",
             "Example settings file:"
           ],
@@ -21171,7 +21316,7 @@
             "Effort levels control adaptive reasoning, which lets the model decide whether and how much to think on each step based on task complexity. Lower effort is faster and cheaper for straightforward tasks, while higher effort provides deeper reasoning for complex problems.",
             "Effort is supported on Opus 4.7, Opus 4.6, and Sonnet 4.6. The available levels depend on the model:",
             "If you set a level the active model does not support, Claude Code falls back to the highest supported level at or below the one you set. For example, xhigh runs as high on Opus 4.6.",
-            "On Opus 4.7, the default effort is xhigh for all plans and providers. On Opus 4.6 and Sonnet 4.6, the default is high, or medium on Pro and Max.",
+            "As of v2.1.117, the default effort is xhigh on Opus 4.7 and high on Opus 4.6 and Sonnet 4.6.",
             "When you first run Opus 4.7, Claude Code applies xhigh even if you previously set a different effort level for Opus 4.6 or Sonnet 4.6. Run /effort again to choose a different level after switching.",
             "low, medium, high, and xhigh persist across sessions. max provides the deepest reasoning with no constraint on token spending and applies to the current session only, except when set through the CLAUDE_CODE_EFFORT_LEVEL environment variable.",
             "Each level trades token spend against capability. The default suits most coding tasks; adjust when you want a different balance.",
@@ -22133,13 +22278,14 @@
       "path": "/docs/en/voice-dictation",
       "url": "https://code.claude.com/docs/en/voice-dictation",
       "title": "Voice dictation",
-      "metaDescription": "Use push-to-talk voice dictation to speak your prompts instead of typing them in the Claude Code CLI.",
+      "metaDescription": "Speak your prompts in the Claude Code CLI with hold-to-record or tap-to-record voice dictation.",
       "headings": [
         "​Requirements",
         "​Enable voice dictation",
-        "​Record a prompt",
+        "​Hold to record",
+        "​Tap to record and send",
         "​Change the dictation language",
-        "​Rebind the push-to-talk key",
+        "​Rebind the dictation key",
         "​Troubleshooting",
         "​Terminal not listed in macOS Microphone settings",
         "​See also"
@@ -22147,9 +22293,10 @@
       "toc": [
         "Requirements",
         "Enable voice dictation",
-        "Record a prompt",
+        "Hold to record",
+        "Tap to record and send",
         "Change the dictation language",
-        "Rebind the push-to-talk key",
+        "Rebind the dictation key",
         "Troubleshooting",
         "Terminal not listed in macOS Microphone settings",
         "See also"
@@ -22157,38 +22304,49 @@
       "paragraphs": [
         "Requirements",
         "Enable voice dictation",
-        "Record a prompt",
+        "Hold to record",
+        "Tap to record and send",
         "Change the dictation language",
-        "Rebind the push-to-talk key",
+        "Rebind the dictation key",
         "Troubleshooting",
         "Terminal not listed in macOS Microphone settings",
         "See also",
-        "Use push-to-talk voice dictation to speak your prompts instead of typing them in the Claude Code CLI.",
-        "Hold a key and speak to dictate your prompts. Your speech is transcribed live into the prompt input, so you can mix voice and typing in the same message. Enable dictation with /voice. The default push-to-talk key is Space; rebind to a modifier combination to activate on the first keypress rather than after a brief hold.",
-        "Voice dictation requires Claude Code v2.1.69 or later. Check your version with claude --version.",
-        "Voice dictation streams your recorded audio to Anthropic’s servers for transcription. Audio is not processed locally. The speech-to-text service is only available when you authenticate with a Claude.ai account, and is not available when Claude Code is configured to use an Anthropic API key directly, Amazon Bedrock, Google Vertex AI, or Microsoft Foundry. See data usage for how Anthropic handles your data.",
+        "Speak your prompts in the Claude Code CLI with hold-to-record or tap-to-record voice dictation.",
+        "Speak your prompts instead of typing them in the Claude Code CLI. Your speech is transcribed live into the prompt input, so you can mix voice and typing in the same message. Enable dictation with /voice, then either hold a key while you speak or tap once to start and again to send.",
+        "Voice dictation requires Claude Code v2.1.69 or later. Tap mode requires v2.1.116 or later. Check your version with claude --version.",
+        "Voice dictation streams your recorded audio to Anthropic’s servers for transcription. Audio is not processed locally. The speech-to-text service is only available when you authenticate with a Claude.ai account, and is not available when Claude Code is configured to use an Anthropic API key directly, Amazon Bedrock, Google Vertex AI, or Microsoft Foundry. Transcription does not consume Claude messages or tokens and does not count toward the limits shown in /usage. See data usage for how Anthropic handles your data.",
         "Voice dictation also needs local microphone access, so it does not work in remote environments such as Claude Code on the web or SSH sessions. In WSL, voice dictation requires WSLg for audio access, which is included with WSL2 on Windows 11. On Windows 10 or WSL1, run Claude Code in native Windows instead.",
         "Audio recording uses a built-in native module on macOS, Linux, and Windows. On Linux, if the native module cannot load, Claude Code falls back to arecord from ALSA utils or rec from SoX. If neither is available, /voice prints an install command for your package manager.",
-        "Run /voice to toggle voice dictation on. The first time you enable it, Claude Code runs a microphone check. On macOS, this triggers the system microphone permission prompt for your terminal if it has never been granted.",
-        "Voice dictation persists across sessions. Run /voice again to turn it off, or set it directly in your user settings file:",
-        "While voice dictation is enabled, the input footer shows a hold Space to speak hint when the prompt is empty. The hint does not appear if you have a custom status line configured.",
+        "The Claude Code VS Code extension also supports voice dictation with the same Claude.ai account requirement. It is not available in VS Code Remote sessions, including SSH, Dev Containers, and Codespaces, because the microphone is on your local machine and the extension runs on the remote host.",
+        "Run /voice to enable dictation. The first time you enable it, Claude Code runs a microphone check. On macOS, this triggers the system microphone permission prompt for your terminal if it has never been granted.",
+        "/voice accepts an optional mode argument:",
+        "Voice dictation persists across sessions. Set it directly in your user settings file instead of running /voice:",
+        "While voice dictation is enabled, the input footer shows a hold Space to speak hint when the prompt is empty. The hint text is the same in both modes, and it does not appear if you have a custom status line configured.",
+        "Transcription is tuned for coding vocabulary in both modes. Common development terms like regex, OAuth, JSON, and localhost are recognized correctly, and your current project name and git branch name are added as recognition hints automatically.",
+        "Hold mode is push-to-talk: recording runs while you hold the key and stops when you release it. This is the default mode.",
         "Hold Space to start recording. Claude Code detects a held key by watching for rapid key-repeat events from your terminal, so there is a brief warmup before recording begins. The footer shows keep holding… during warmup, then switches to a live waveform once recording is active.",
         "The first couple of key-repeat characters type into the input during warmup and are removed automatically when recording activates. A single Space tap still types a space, since hold detection only triggers on rapid repeat.",
-        "To skip the warmup, rebind to a modifier combination like meta+k. Modifier combos start recording on the first keypress.",
+        "To skip the warmup, switch to tap mode with /voice tap, or rebind to a modifier combination like meta+k. Modifier combos start recording on the first keypress.",
         "Your speech appears in the prompt as you speak, dimmed until the transcript is finalized. Release Space to stop recording and finalize the text. The transcript is inserted at your cursor position and the cursor stays at the end of the inserted text, so you can mix typing and dictation in any order. Hold Space again to append another recording, or move the cursor first to insert speech elsewhere in the prompt:",
-        "Transcription is tuned for coding vocabulary. Common development terms like regex, OAuth, JSON, and localhost are recognized correctly, and your current project name and git branch name are added as recognition hints automatically.",
+        "By default, releasing the key inserts the transcript and waits for you to press Enter. Set \"autoSubmit\": true in the voice settings object to send the prompt automatically when you release the key, as long as the transcript is at least three words long.",
+        "Tap mode toggles recording with a single keypress: tap once to start, speak, then tap again to send the prompt. There is no warmup, and you do not need to keep the key held.",
+        "Enable tap mode with /voice tap. With the prompt input empty, tap Space to start recording. The footer shows a live waveform while recording. Tap Space again to stop. Claude Code inserts the transcript and submits the prompt automatically when the transcript is at least three words long. Shorter transcripts are inserted but not submitted, so an accidental tap does not send a stray word.",
+        "The first tap only starts recording when the prompt input is empty, so you can still type spaces normally while composing a message. The second tap stops recording regardless of input contents. Recording also stops automatically after 15 seconds of silence or two minutes total.",
         "Voice dictation uses the same language setting that controls Claude’s response language. If that setting is empty, dictation defaults to English.",
         "Supported dictation languages",
         "Set the language in /config or directly in settings. You can use either the BCP 47 language code or the language name:",
         "If your language setting is not in the supported list, /voice warns you on enable and falls back to English for dictation. Claude’s text responses are not affected by this fallback.",
-        "The push-to-talk key is bound to voice:pushToTalk in the Chat context and defaults to Space. Rebind it in ~/.claude/keybindings.json:",
+        "The dictation key is bound to voice:pushToTalk in the Chat context and defaults to Space. The same binding controls both hold and tap modes. Rebind it in ~/.claude/keybindings.json:",
         "Setting \"space\": null removes the default binding. Omit it if you want both keys active.",
-        "Because hold detection relies on key-repeat, avoid binding a bare letter key like v since it types into the prompt during warmup. Use Space, or use a modifier combination like meta+k to start recording on the first keypress with no warmup. See customize keyboard shortcuts for the full keybinding syntax.",
+        "In hold mode, avoid binding a bare letter key like v since hold detection relies on key-repeat and the letter types into the prompt during warmup. Use Space, or use a modifier combination like meta+k to start recording on the first keypress with no warmup. Tap mode has no warmup, so any key works. See customize keyboard shortcuts for the full keybinding syntax.",
         "Common issues when voice dictation does not activate or record:",
         "Voice mode requires a Claude.ai account: you are authenticated with an API key or a third-party provider. Run /login to sign in with a Claude.ai account.",
         "Microphone access is denied: grant microphone permission to your terminal in system settings. On macOS, go to System Settings → Privacy & Security → Microphone and enable your terminal app, then run /voice again. On Windows, go to Settings → Privacy & security → Microphone and turn on microphone access for desktop apps, then run /voice again. If your terminal isn’t listed in the macOS settings, see Terminal not listed in macOS Microphone settings.",
         "No audio recording tool found on Linux: the native audio module could not load and no fallback is installed. Install SoX with the command shown in the error message, for example sudo apt-get install sox.",
-        "Nothing happens when holding Space: watch the prompt input while you hold. If spaces keep accumulating, voice dictation is off; run /voice to enable it. If only one or two spaces appear and then nothing, voice dictation is on but hold detection is not triggering. Hold detection requires your terminal to send key-repeat events, so it cannot detect a held key if key-repeat is disabled at the OS level.",
+        "Nothing happens when holding Space in hold mode: watch the prompt input while you hold. If spaces keep accumulating, voice dictation is likely off; run /voice hold to enable it. If only one or two spaces appear and then nothing, voice dictation is on but hold detection is not triggering. Hold detection requires your terminal to send key-repeat events, so it cannot detect a held key if key-repeat is disabled at the OS level. Switch to tap mode with /voice tap to avoid the key-repeat requirement.",
+        "Tapping Space types a space instead of recording in tap mode: the first tap only starts recording when the prompt input is empty. Clear the input first, or check that you are in tap mode by running /voice tap.",
+        "No audio detected from microphone: recording started but captured silence. Confirm the correct input device is set as the system default and that its input level is not muted or near zero. On Windows, open Settings → System → Sound → Input and select your microphone. On macOS, open System Settings → Sound → Input.",
+        "No speech detected: audio reached the transcription service but no words were recognized. Speak closer to the microphone, reduce background noise, and confirm your dictation language matches the language you are speaking.",
         "Transcription is garbled or in the wrong language: dictation defaults to English. If you are dictating in another language, set it in /config first. See Change the dictation language.",
         "If your terminal app does not appear under System Settings → Privacy & Security → Microphone, there is no toggle you can enable. Reset the permission state for your terminal so the next /voice run triggers a fresh macOS permission prompt.",
         "Reset the microphone permission for your terminal",
@@ -22199,14 +22357,14 @@
         "Trigger a fresh prompt",
         "Start Claude Code and run /voice. macOS prompts for microphone access; allow it.",
         "Customize keyboard shortcuts: rebind voice:pushToTalk and other CLI keyboard actions",
-        "Configure settings: full reference for voiceEnabled, language, and other settings keys",
+        "Configure settings: full reference for voice, language, and other settings keys",
         "Interactive mode: keyboard shortcuts, input modes, and session controls",
         "Commands: reference for /voice, /config, and all other commands",
         "Was this page helpful?"
       ],
       "codeBlocks": [
-        "/voice\nVoice mode enabled. Hold Space to record. Dictation language: en (/config to change).",
-        "{\n  \"voiceEnabled\": true\n}",
+        "/voice\nVoice mode enabled (hold). Hold Space to record. Dictation language: en (/config to change).",
+        "{\n  \"voice\": {\n    \"enabled\": true,\n    \"mode\": \"tap\"\n  }\n}",
         "> refactor the auth middleware to ▮\n  # hold Space, speak \"use the new token validation helper\"\n> refactor the auth middleware to use the new token validation helper▮",
         "{\n  \"language\": \"japanese\"\n}",
         "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"meta+k\": \"voice:pushToTalk\",\n        \"space\": null\n      }\n    }\n  ]\n}"
@@ -22217,51 +22375,65 @@
           "paragraphs": [
             "Requirements",
             "Enable voice dictation",
-            "Record a prompt",
+            "Hold to record",
+            "Tap to record and send",
             "Change the dictation language",
-            "Rebind the push-to-talk key",
+            "Rebind the dictation key",
             "Troubleshooting",
             "Terminal not listed in macOS Microphone settings",
             "See also",
-            "Use push-to-talk voice dictation to speak your prompts instead of typing them in the Claude Code CLI.",
-            "Hold a key and speak to dictate your prompts. Your speech is transcribed live into the prompt input, so you can mix voice and typing in the same message. Enable dictation with /voice. The default push-to-talk key is Space; rebind to a modifier combination to activate on the first keypress rather than after a brief hold.",
-            "Voice dictation requires Claude Code v2.1.69 or later. Check your version with claude --version."
+            "Speak your prompts in the Claude Code CLI with hold-to-record or tap-to-record voice dictation.",
+            "Speak your prompts instead of typing them in the Claude Code CLI. Your speech is transcribed live into the prompt input, so you can mix voice and typing in the same message. Enable dictation with /voice, then either hold a key while you speak or tap once to start and again to send.",
+            "Voice dictation requires Claude Code v2.1.69 or later. Tap mode requires v2.1.116 or later. Check your version with claude --version."
           ],
           "codeBlocks": []
         },
         {
           "title": "​Requirements",
           "paragraphs": [
-            "Voice dictation streams your recorded audio to Anthropic’s servers for transcription. Audio is not processed locally. The speech-to-text service is only available when you authenticate with a Claude.ai account, and is not available when Claude Code is configured to use an Anthropic API key directly, Amazon Bedrock, Google Vertex AI, or Microsoft Foundry. See data usage for how Anthropic handles your data.",
+            "Voice dictation streams your recorded audio to Anthropic’s servers for transcription. Audio is not processed locally. The speech-to-text service is only available when you authenticate with a Claude.ai account, and is not available when Claude Code is configured to use an Anthropic API key directly, Amazon Bedrock, Google Vertex AI, or Microsoft Foundry. Transcription does not consume Claude messages or tokens and does not count toward the limits shown in /usage. See data usage for how Anthropic handles your data.",
             "Voice dictation also needs local microphone access, so it does not work in remote environments such as Claude Code on the web or SSH sessions. In WSL, voice dictation requires WSLg for audio access, which is included with WSL2 on Windows 11. On Windows 10 or WSL1, run Claude Code in native Windows instead.",
-            "Audio recording uses a built-in native module on macOS, Linux, and Windows. On Linux, if the native module cannot load, Claude Code falls back to arecord from ALSA utils or rec from SoX. If neither is available, /voice prints an install command for your package manager."
+            "Audio recording uses a built-in native module on macOS, Linux, and Windows. On Linux, if the native module cannot load, Claude Code falls back to arecord from ALSA utils or rec from SoX. If neither is available, /voice prints an install command for your package manager.",
+            "The Claude Code VS Code extension also supports voice dictation with the same Claude.ai account requirement. It is not available in VS Code Remote sessions, including SSH, Dev Containers, and Codespaces, because the microphone is on your local machine and the extension runs on the remote host."
           ],
           "codeBlocks": []
         },
         {
           "title": "​Enable voice dictation",
           "paragraphs": [
-            "Run /voice to toggle voice dictation on. The first time you enable it, Claude Code runs a microphone check. On macOS, this triggers the system microphone permission prompt for your terminal if it has never been granted.",
-            "Voice dictation persists across sessions. Run /voice again to turn it off, or set it directly in your user settings file:",
-            "While voice dictation is enabled, the input footer shows a hold Space to speak hint when the prompt is empty. The hint does not appear if you have a custom status line configured."
+            "Run /voice to enable dictation. The first time you enable it, Claude Code runs a microphone check. On macOS, this triggers the system microphone permission prompt for your terminal if it has never been granted.",
+            "/voice accepts an optional mode argument:",
+            "Voice dictation persists across sessions. Set it directly in your user settings file instead of running /voice:",
+            "While voice dictation is enabled, the input footer shows a hold Space to speak hint when the prompt is empty. The hint text is the same in both modes, and it does not appear if you have a custom status line configured.",
+            "Transcription is tuned for coding vocabulary in both modes. Common development terms like regex, OAuth, JSON, and localhost are recognized correctly, and your current project name and git branch name are added as recognition hints automatically."
           ],
           "codeBlocks": [
-            "/voice\nVoice mode enabled. Hold Space to record. Dictation language: en (/config to change).",
-            "{\n  \"voiceEnabled\": true\n}"
+            "/voice\nVoice mode enabled (hold). Hold Space to record. Dictation language: en (/config to change).",
+            "{\n  \"voice\": {\n    \"enabled\": true,\n    \"mode\": \"tap\"\n  }\n}"
           ]
         },
         {
-          "title": "​Record a prompt",
+          "title": "​Hold to record",
           "paragraphs": [
+            "Hold mode is push-to-talk: recording runs while you hold the key and stops when you release it. This is the default mode.",
             "Hold Space to start recording. Claude Code detects a held key by watching for rapid key-repeat events from your terminal, so there is a brief warmup before recording begins. The footer shows keep holding… during warmup, then switches to a live waveform once recording is active.",
             "The first couple of key-repeat characters type into the input during warmup and are removed automatically when recording activates. A single Space tap still types a space, since hold detection only triggers on rapid repeat.",
-            "To skip the warmup, rebind to a modifier combination like meta+k. Modifier combos start recording on the first keypress.",
+            "To skip the warmup, switch to tap mode with /voice tap, or rebind to a modifier combination like meta+k. Modifier combos start recording on the first keypress.",
             "Your speech appears in the prompt as you speak, dimmed until the transcript is finalized. Release Space to stop recording and finalize the text. The transcript is inserted at your cursor position and the cursor stays at the end of the inserted text, so you can mix typing and dictation in any order. Hold Space again to append another recording, or move the cursor first to insert speech elsewhere in the prompt:",
-            "Transcription is tuned for coding vocabulary. Common development terms like regex, OAuth, JSON, and localhost are recognized correctly, and your current project name and git branch name are added as recognition hints automatically."
+            "By default, releasing the key inserts the transcript and waits for you to press Enter. Set \"autoSubmit\": true in the voice settings object to send the prompt automatically when you release the key, as long as the transcript is at least three words long."
           ],
           "codeBlocks": [
             "> refactor the auth middleware to ▮\n  # hold Space, speak \"use the new token validation helper\"\n> refactor the auth middleware to use the new token validation helper▮"
           ]
+        },
+        {
+          "title": "​Tap to record and send",
+          "paragraphs": [
+            "Tap mode toggles recording with a single keypress: tap once to start, speak, then tap again to send the prompt. There is no warmup, and you do not need to keep the key held.",
+            "Enable tap mode with /voice tap. With the prompt input empty, tap Space to start recording. The footer shows a live waveform while recording. Tap Space again to stop. Claude Code inserts the transcript and submits the prompt automatically when the transcript is at least three words long. Shorter transcripts are inserted but not submitted, so an accidental tap does not send a stray word.",
+            "The first tap only starts recording when the prompt input is empty, so you can still type spaces normally while composing a message. The second tap stops recording regardless of input contents. Recording also stops automatically after 15 seconds of silence or two minutes total."
+          ],
+          "codeBlocks": []
         },
         {
           "title": "​Change the dictation language",
@@ -22276,11 +22448,11 @@
           ]
         },
         {
-          "title": "​Rebind the push-to-talk key",
+          "title": "​Rebind the dictation key",
           "paragraphs": [
-            "The push-to-talk key is bound to voice:pushToTalk in the Chat context and defaults to Space. Rebind it in ~/.claude/keybindings.json:",
+            "The dictation key is bound to voice:pushToTalk in the Chat context and defaults to Space. The same binding controls both hold and tap modes. Rebind it in ~/.claude/keybindings.json:",
             "Setting \"space\": null removes the default binding. Omit it if you want both keys active.",
-            "Because hold detection relies on key-repeat, avoid binding a bare letter key like v since it types into the prompt during warmup. Use Space, or use a modifier combination like meta+k to start recording on the first keypress with no warmup. See customize keyboard shortcuts for the full keybinding syntax."
+            "In hold mode, avoid binding a bare letter key like v since hold detection relies on key-repeat and the letter types into the prompt during warmup. Use Space, or use a modifier combination like meta+k to start recording on the first keypress with no warmup. Tap mode has no warmup, so any key works. See customize keyboard shortcuts for the full keybinding syntax."
           ],
           "codeBlocks": [
             "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"meta+k\": \"voice:pushToTalk\",\n        \"space\": null\n      }\n    }\n  ]\n}"
@@ -22293,7 +22465,10 @@
             "Voice mode requires a Claude.ai account: you are authenticated with an API key or a third-party provider. Run /login to sign in with a Claude.ai account.",
             "Microphone access is denied: grant microphone permission to your terminal in system settings. On macOS, go to System Settings → Privacy & Security → Microphone and enable your terminal app, then run /voice again. On Windows, go to Settings → Privacy & security → Microphone and turn on microphone access for desktop apps, then run /voice again. If your terminal isn’t listed in the macOS settings, see Terminal not listed in macOS Microphone settings.",
             "No audio recording tool found on Linux: the native audio module could not load and no fallback is installed. Install SoX with the command shown in the error message, for example sudo apt-get install sox.",
-            "Nothing happens when holding Space: watch the prompt input while you hold. If spaces keep accumulating, voice dictation is off; run /voice to enable it. If only one or two spaces appear and then nothing, voice dictation is on but hold detection is not triggering. Hold detection requires your terminal to send key-repeat events, so it cannot detect a held key if key-repeat is disabled at the OS level.",
+            "Nothing happens when holding Space in hold mode: watch the prompt input while you hold. If spaces keep accumulating, voice dictation is likely off; run /voice hold to enable it. If only one or two spaces appear and then nothing, voice dictation is on but hold detection is not triggering. Hold detection requires your terminal to send key-repeat events, so it cannot detect a held key if key-repeat is disabled at the OS level. Switch to tap mode with /voice tap to avoid the key-repeat requirement.",
+            "Tapping Space types a space instead of recording in tap mode: the first tap only starts recording when the prompt input is empty. Clear the input first, or check that you are in tap mode by running /voice tap.",
+            "No audio detected from microphone: recording started but captured silence. Confirm the correct input device is set as the system default and that its input level is not muted or near zero. On Windows, open Settings → System → Sound → Input and select your microphone. On macOS, open System Settings → Sound → Input.",
+            "No speech detected: audio reached the transcription service but no words were recognized. Speak closer to the microphone, reduce background noise, and confirm your dictation language matches the language you are speaking.",
             "Transcription is garbled or in the wrong language: dictation defaults to English. If you are dictating in another language, set it in /config first. See Change the dictation language."
           ],
           "codeBlocks": []
@@ -22316,7 +22491,7 @@
           "title": "​See also",
           "paragraphs": [
             "Customize keyboard shortcuts: rebind voice:pushToTalk and other CLI keyboard actions",
-            "Configure settings: full reference for voiceEnabled, language, and other settings keys",
+            "Configure settings: full reference for voice, language, and other settings keys",
             "Interactive mode: keyboard shortcuts, input modes, and session controls",
             "Commands: reference for /voice, /config, and all other commands",
             "Was this page helpful?"
@@ -27750,6 +27925,7 @@
         "While working on a task, Claude sometimes needs to check in with users. It might need permission before deleting files, or need to ask which database to use for a new project. Your application needs to surface these requests to users so Claude can continue with their input.",
         "Claude requests user input in two situations: when it needs permission to use a tool (like deleting files or running commands), and when it has clarifying questions (via the AskUserQuestion tool). Both trigger your canUseTool callback, which pauses execution until you return a response. This is different from normal conversation turns where Claude finishes and waits for your next message.",
         "For clarifying questions, Claude generates the questions and options. Your role is to present them to users and return their selections. You can’t add your own questions to this flow; if you need to ask users something yourself, do that separately in your application logic.",
+        "The callback can stay pending indefinitely. Execution remains paused until your callback returns, and the SDK only cancels the wait when the query itself is cancelled. If a user might take longer to respond than your process can reasonably stay running, the TypeScript SDK supports the defer hook decision, which lets the process exit and resume later from the persisted session; this option is not available in the Python SDK.",
         "This guide shows you how to detect each type of request and respond appropriately.",
         "Pass a canUseTool callback in your query options. The callback fires whenever Claude needs user input, receiving the tool name and input as arguments:",
         "The callback fires in two cases:",
@@ -31119,9 +31295,9 @@
         "Context: in TypeScript, contains a signal property (AbortSignal) for cancellation. In Python, this argument is reserved for future use.",
         "Your callback returns an object with two categories of fields:",
         "Top-level fields control the conversation: systemMessage injects a message into the conversation visible to the model, and continue (continue_ in Python) determines whether the agent keeps running after this hook.",
-        "hookSpecificOutput controls the current operation. The fields inside depend on the hook event type. For PreToolUse hooks, this is where you set permissionDecision (\"allow\", \"deny\", or \"ask\"), permissionDecisionReason, and updatedInput. For PostToolUse hooks, you can set additionalContext to append information to the tool result.",
+        "hookSpecificOutput controls the current operation. The fields inside depend on the hook event type. For PreToolUse hooks, this is where you set permissionDecision (\"allow\", \"deny\", or \"ask\"), permissionDecisionReason, and updatedInput. In the TypeScript SDK, permissionDecision also accepts \"defer\" to end the query and resume later; this value is not available in the Python SDK. For PostToolUse hooks, you can set additionalContext to append information to the tool result.",
         "Return {} to allow the operation without changes. SDK callback hooks use the same JSON output format as Claude Code shell command hooks, which documents every field and event-specific option. For the SDK type definitions, see the TypeScript and Python SDK references.",
-        "When multiple hooks or permission rules apply, deny takes priority over ask, which takes priority over allow. If any hook returns deny, the operation is blocked regardless of other hooks.",
+        "When multiple hooks or permission rules apply, deny takes priority over defer, which takes priority over ask, which takes priority over allow. If any hook returns deny, the operation is blocked regardless of other hooks.",
         "By default, the agent waits for your hook to return before proceeding. If your hook performs a side effect (logging, sending a webhook) and doesn’t need to influence the agent’s behavior, you can return an async output instead. This tells the agent to continue immediately without waiting for the hook to finish:",
         "Async outputs cannot block, modify, or inject context into the operation since the agent has already moved on. Use them only for side effects like logging, metrics, or notifications.",
         "This example intercepts Write tool calls and rewrites the file_path argument to prepend /sandbox, redirecting all file writes to a sandboxed directory. The callback returns updatedInput with the modified path and permissionDecision: 'allow' to auto-approve the rewritten operation:",
@@ -31260,9 +31436,9 @@
             "Context: in TypeScript, contains a signal property (AbortSignal) for cancellation. In Python, this argument is reserved for future use.",
             "Your callback returns an object with two categories of fields:",
             "Top-level fields control the conversation: systemMessage injects a message into the conversation visible to the model, and continue (continue_ in Python) determines whether the agent keeps running after this hook.",
-            "hookSpecificOutput controls the current operation. The fields inside depend on the hook event type. For PreToolUse hooks, this is where you set permissionDecision (\"allow\", \"deny\", or \"ask\"), permissionDecisionReason, and updatedInput. For PostToolUse hooks, you can set additionalContext to append information to the tool result.",
+            "hookSpecificOutput controls the current operation. The fields inside depend on the hook event type. For PreToolUse hooks, this is where you set permissionDecision (\"allow\", \"deny\", or \"ask\"), permissionDecisionReason, and updatedInput. In the TypeScript SDK, permissionDecision also accepts \"defer\" to end the query and resume later; this value is not available in the Python SDK. For PostToolUse hooks, you can set additionalContext to append information to the tool result.",
             "Return {} to allow the operation without changes. SDK callback hooks use the same JSON output format as Claude Code shell command hooks, which documents every field and event-specific option. For the SDK type definitions, see the TypeScript and Python SDK references.",
-            "When multiple hooks or permission rules apply, deny takes priority over ask, which takes priority over allow. If any hook returns deny, the operation is blocked regardless of other hooks.",
+            "When multiple hooks or permission rules apply, deny takes priority over defer, which takes priority over ask, which takes priority over allow. If any hook returns deny, the operation is blocked regardless of other hooks.",
             "By default, the agent waits for your hook to return before proceeding. If your hook performs a side effect (logging, sending a webhook) and doesn’t need to influence the agent’s behavior, you can return an async output instead. This tells the agent to continue immediately without waiting for the hook to finish:"
           ],
           "codeBlocks": [
@@ -33630,10 +33806,11 @@
         {
           "title": "​SDKResultMessage",
           "paragraphs": [
-            "Final result message."
+            "Final result message.",
+            "When a PreToolUse hook returns permissionDecision: \"defer\", the result has stop_reason: \"tool_deferred\" and deferred_tool_use carries the pending tool’s id, name, and input. Read this field to surface the request in your own UI, then resume with the same session_id to continue. See Defer a tool call for later for the full round trip."
           ],
           "codeBlocks": [
-            "type SDKResultMessage =\n  | {\n      type: \"result\";\n      subtype: \"success\";\n      uuid: UUID;\n      session_id: string;\n      duration_ms: number;\n      duration_api_ms: number;\n      is_error: boolean;\n      num_turns: number;\n      result: string;\n      stop_reason: string | null;\n      total_cost_usd: number;\n      usage: NonNullableUsage;\n      modelUsage: { [modelName: string]: ModelUsage };\n      permission_denials: SDKPermissionDenial[];\n      structured_output?: unknown;\n    }\n  | {\n      type: \"result\";\n      subtype:\n        | \"error_max_turns\"\n        | \"error_during_execution\"\n        | \"error_max_budget_usd\"\n        | \"error_max_structured_output_retries\";\n      uuid: UUID;\n      session_id: string;\n      duration_ms: number;\n      duration_api_ms: number;\n      is_error: boolean;\n      num_turns: number;\n      stop_reason: string | null;\n      total_cost_usd: number;\n      usage: NonNullableUsage;\n      modelUsage: { [modelName: string]: ModelUsage };\n      permission_denials: SDKPermissionDenial[];\n      errors: string[];\n    };"
+            "type SDKResultMessage =\n  | {\n      type: \"result\";\n      subtype: \"success\";\n      uuid: UUID;\n      session_id: string;\n      duration_ms: number;\n      duration_api_ms: number;\n      is_error: boolean;\n      num_turns: number;\n      result: string;\n      stop_reason: string | null;\n      total_cost_usd: number;\n      usage: NonNullableUsage;\n      modelUsage: { [modelName: string]: ModelUsage };\n      permission_denials: SDKPermissionDenial[];\n      structured_output?: unknown;\n      deferred_tool_use?: { id: string; name: string; input: Record<string, unknown> };\n    }\n  | {\n      type: \"result\";\n      subtype:\n        | \"error_max_turns\"\n        | \"error_during_execution\"\n        | \"error_max_budget_usd\"\n        | \"error_max_structured_output_retries\";\n      uuid: UUID;\n      session_id: string;\n      duration_ms: number;\n      duration_api_ms: number;\n      is_error: boolean;\n      num_turns: number;\n      stop_reason: string | null;\n      total_cost_usd: number;\n      usage: NonNullableUsage;\n      modelUsage: { [modelName: string]: ModelUsage };\n      permission_denials: SDKPermissionDenial[];\n      errors: string[];\n    };"
           ]
         }
       ]

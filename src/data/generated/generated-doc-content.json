@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-22T05:08:23.991Z",
-  "sourceGeneratedAt": "2026-04-22T05:08:23.655Z",
+  "generatedAt": "2026-04-23T05:11:49.056Z",
+  "sourceGeneratedAt": "2026-04-23T05:11:48.727Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -514,7 +514,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.117、2.1.116、2.1.114、2.1.113 这些环节往下讲。",
+            "原文这页大多会按 2.1.118、2.1.117、2.1.116、2.1.114 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -523,7 +523,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.117 -> 2.1.116 -> 2.1.114 -> 2.1.113。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.118 -> 2.1.117 -> 2.1.116 -> 2.1.114。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -1075,8 +1075,7 @@
         {
           "title": "Kept until you delete them",
           "paragraphs": [
-            "这里主要是在交代\"Kept until you delete them\"这一块会碰到哪些事。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+            "这里主要是在交代\"Kept until you delete them\"这一块会碰到哪些事。"
           ]
         },
         {
@@ -1507,7 +1506,8 @@
         {
           "title": "My CLAUDE.md is too large",
           "paragraphs": [
-            "这一段主要是在把\"My CLAUDE.md is too large\"讲实，不是只摆个标题给你看。"
+            "这一段主要是在把\"My CLAUDE.md is too large\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -3626,7 +3626,7 @@
             {
               "title": "原页关键片段：Connect to external tools with MCP",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude mcp add --transport http github https://api.githubcopilot.com/mcp/",
+              "code": "claude mcp add --transport http github https://api.githubcopilot.com/mcp/ \\\n  --header \"Authorization: Bearer YOUR_GITHUB_PAT\"",
               "kind": "command"
             },
             {
@@ -3839,7 +3839,7 @@
             {
               "title": "Connect to external tools with MCP",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude mcp add --transport http github https://api.githubcopilot.com/mcp/",
+              "code": "claude mcp add --transport http github https://api.githubcopilot.com/mcp/ \\\n  --header \"Authorization: Bearer YOUR_GITHUB_PAT\"",
               "kind": "command"
             }
           ]
@@ -5569,35 +5569,30 @@
         {
           "title": "Example: Connect to GitHub for code reviews",
           "paragraphs": [
-            "这一块主要是在说\"Example: Connect to GitHub for code reviews\"真到手上该怎么用，哪里最容易踩坑。"
+            "这一块主要是在说\"Example: Connect to GitHub for code reviews\"真到手上该怎么用，哪里最容易踩坑。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
           ],
           "steps": [
             {
               "title": "Example: Connect to GitHub for code reviews 1",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude mcp add --transport http github https://api.githubcopilot.com/mcp/",
+              "code": "claude mcp add --transport http github https://api.githubcopilot.com/mcp/ \\\n  --header \"Authorization: Bearer YOUR_GITHUB_PAT\"",
               "kind": "command"
             },
             {
               "title": "Example: Connect to GitHub for code reviews 2",
-              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
-              "code": "/mcp",
-              "kind": "prompt"
-            },
-            {
-              "title": "Example: Connect to GitHub for code reviews 3",
               "body": "\"Example: Connect to GitHub for code reviews\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
               "code": "Review PR #456 and suggest improvements",
               "kind": "code"
             },
             {
-              "title": "Example: Connect to GitHub for code reviews 4",
+              "title": "Example: Connect to GitHub for code reviews 3",
               "body": "到这里其实就剩一句话，把下面这句发出去就行。",
               "code": "Create a new issue for the bug we just found",
               "kind": "prompt"
             },
             {
-              "title": "Example: Connect to GitHub for code reviews 5",
+              "title": "Example: Connect to GitHub for code reviews 4",
               "body": "到这里其实就剩一句话，把下面这句发出去就行。",
               "code": "Show me all open PRs assigned to me",
               "kind": "prompt"
@@ -11241,6 +11236,32 @@
           ]
         },
         {
+          "title": "Install with Linux package managers",
+          "paragraphs": [
+            "这段就是手把手操作，照顺序来最稳。"
+          ],
+          "steps": [
+            {
+              "title": "Install with Linux package managers 1",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "sudo install -d -m 0755 /etc/apt/keyrings\nsudo curl -fsSL https://downloads.claude.ai/keys/claude-code.asc \\\n  -o /etc/apt/keyrings/claude-code.asc\necho \"deb [signed-by=/etc/apt/keyrings/claude-code.asc] https://downloads.claude.ai/claude-code/apt/stable stable main\" \\\n  | sudo tee /etc/apt/sources.list.d/claude-code.list\nsudo apt update\nsudo apt install claude-code",
+              "kind": "command"
+            },
+            {
+              "title": "Install with Linux package managers 2",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "sudo tee /etc/yum.repos.d/claude-code.repo <<'EOF'\n[claude-code]\nname=Claude Code\nbaseurl=https://downloads.claude.ai/claude-code/rpm/stable\nenabled=1\ngpgcheck=1\ngpgkey=https://downloads.claude.ai/keys/claude-code.asc\nEOF\nsudo dnf install claude-code",
+              "kind": "command"
+            },
+            {
+              "title": "Install with Linux package managers 3",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "wget -O /etc/apk/keys/claude-code.rsa.pub \\\n  https://downloads.claude.ai/keys/claude-code.rsa.pub\necho \"https://downloads.claude.ai/claude-code/apk/stable\" >> /etc/apk/repositories\napk add claude-code",
+              "kind": "command"
+            }
+          ]
+        },
+        {
           "title": "Install with npm",
           "paragraphs": [
             "看到这儿别跳步，按它给的顺序往下走。",
@@ -11343,6 +11364,32 @@
               "title": "WinGet installation",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
               "code": "winget uninstall Anthropic.ClaudeCode",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "apt / dnf / apk",
+          "paragraphs": [
+            "看到这里，就把\"apt / dnf / apk\"当成一件真要上手的活来看。"
+          ],
+          "steps": [
+            {
+              "title": "apt / dnf / apk 1",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "sudo apt remove claude-code\nsudo rm /etc/apt/sources.list.d/claude-code.list /etc/apt/keyrings/claude-code.asc",
+              "kind": "command"
+            },
+            {
+              "title": "apt / dnf / apk 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "sudo dnf remove claude-code\nsudo rm /etc/yum.repos.d/claude-code.repo",
+              "kind": "command"
+            },
+            {
+              "title": "apt / dnf / apk 3",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "apk del claude-code\nsed -i '\\|downloads.claude.ai/claude-code/apk|d' /etc/apk/repositories\nrm /etc/apk/keys/claude-code.rsa.pub",
               "kind": "command"
             }
           ]
@@ -11713,6 +11760,169 @@
         "title": "一眼看懂这一页",
         "lines": [
           "Server-managed settings",
+          "   |",
+          "   v",
+          "这是 Setup and access 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "auto-mode-config": {
+      "sourceLabel": "Configure auto mode",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Auto mode：Tell the auto mode classifier which repos, buckets, and domains your organization trusts. Set environment context, override the default block and allow rules, and inspect your effective config with the auto-mode CLI subcommands.",
+            "你可以把它当成\"Setup and access\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Auto mode\"理解成 Setup and access 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Where the classifier reads configuration、Define trusted infrastructure、Override the block and allow rules、Inspect the defaults and your effective config 这些环节往下讲。",
+            "翻成人话，大概就是：Where the classifier reads configuration"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Where the classifier reads configuration -> Define trusted infrastructure -> Override the block and allow rules -> Inspect the defaults and your effective config。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Define trusted infrastructure 1",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com, api.internal.example.com\",\n      \"Key internal services: Jenkins at ci.example.com, Artifactory at artifacts.example.com\"\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Define trusted infrastructure 2",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Organization: {COMPANY_NAME}. Primary use: {PRIMARY_USE_CASE, e.g. software development, infrastructure automation}\",\n      \"Source control: {SOURCE_CONTROL, e.g. GitHub org github.example.com/acme-corp}\",\n      \"Cloud provider(s): {CLOUD_PROVIDERS, e.g. AWS, GCP, Azure}\",\n      \"Trusted cloud buckets: {TRUSTED_BUCKETS, e.g. s3://acme-builds, gs://acme-datasets}\",\n      \"Trusted internal domains: {TRUSTED_DOMAINS, e.g. *.internal.example.com, api.example.com}\",\n      \"Key internal services: {SERVICES, e.g. Jenkins at ci.example.com, Artifactory at artifacts.example.com}\",\n      \"Additional context: {EXTRA, e.g. regulated industry, multi-tenant infrastructure, compliance requirements}\"\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Override the block and allow rules",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\",\n      \"...copy full default soft_deny list here first, then add your rules...\"\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Inspect the defaults and your effective config 1",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude auto-mode defaults",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Inspect the defaults and your effective config 2",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude auto-mode config",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Inspect the defaults and your effective config 3",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude auto-mode critique",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Where the classifier reads configuration",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说\"Where the classifier reads configuration\"管到哪儿。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Define trusted infrastructure",
+          "paragraphs": [
+            "看到这里，就把\"Define trusted infrastructure\"当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Define trusted infrastructure 1",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com, api.internal.example.com\",\n      \"Key internal services: Jenkins at ci.example.com, Artifactory at artifacts.example.com\"\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Define trusted infrastructure 2",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Organization: {COMPANY_NAME}. Primary use: {PRIMARY_USE_CASE, e.g. software development, infrastructure automation}\",\n      \"Source control: {SOURCE_CONTROL, e.g. GitHub org github.example.com/acme-corp}\",\n      \"Cloud provider(s): {CLOUD_PROVIDERS, e.g. AWS, GCP, Azure}\",\n      \"Trusted cloud buckets: {TRUSTED_BUCKETS, e.g. s3://acme-builds, gs://acme-datasets}\",\n      \"Trusted internal domains: {TRUSTED_DOMAINS, e.g. *.internal.example.com, api.example.com}\",\n      \"Key internal services: {SERVICES, e.g. Jenkins at ci.example.com, Artifactory at artifacts.example.com}\",\n      \"Additional context: {EXTRA, e.g. regulated industry, multi-tenant infrastructure, compliance requirements}\"\n    ]\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Override the block and allow rules",
+          "paragraphs": [
+            "这一块主要是在说\"Override the block and allow rules\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Override the block and allow rules",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\",\n      \"...copy full default soft_deny list here first, then add your rules...\"\n    ]\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Inspect the defaults and your effective config",
+          "paragraphs": [
+            "这一段主要是在把\"Inspect the defaults and your effective config\"讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Inspect the defaults and your effective config 1",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude auto-mode defaults",
+              "kind": "command"
+            },
+            {
+              "title": "Inspect the defaults and your effective config 2",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude auto-mode config",
+              "kind": "command"
+            },
+            {
+              "title": "Inspect the defaults and your effective config 3",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude auto-mode critique",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Review denials",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "See also",
+          "paragraphs": [
+            "这一段主要是在把\"See also\"讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Auto mode",
           "   |",
           "   v",
           "这是 Setup and access 里的一摊要紧活",
@@ -13930,30 +14140,6 @@
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"permissions\": {\n    \"deny\": [\"Agent(Explore)\"]\n  }\n}",
               "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Define trusted infrastructure 1",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com, api.internal.example.com\",\n      \"Key internal services: Jenkins at ci.example.com, Artifactory at artifacts.example.com\"\n    ]\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Define trusted infrastructure 2",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Organization: {COMPANY_NAME}. Primary use: {PRIMARY_USE_CASE, e.g. software development, infrastructure automation}\",\n      \"Source control: {SOURCE_CONTROL, e.g. GitHub org github.example.com/acme-corp}\",\n      \"Cloud provider(s): {CLOUD_PROVIDERS, e.g. AWS, GCP, Azure}\",\n      \"Trusted cloud buckets: {TRUSTED_BUCKETS, e.g. s3://acme-builds, gs://acme-datasets}\",\n      \"Trusted internal domains: {TRUSTED_DOMAINS, e.g. *.internal.example.com, api.example.com}\",\n      \"Key internal services: {SERVICES, e.g. Jenkins at ci.example.com, Artifactory at artifacts.example.com}\",\n      \"Additional context: {EXTRA, e.g. regulated industry, multi-tenant infrastructure, compliance requirements}\"\n    ]\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Override the block and allow rules",
-              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\",\n      \"...copy full default soft_deny list here first, then add your rules...\"\n    ]\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Inspect the defaults and your effective config",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "claude auto-mode defaults  # the built-in environment, allow, and soft_deny rules\nclaude auto-mode config    # what the classifier actually uses: your settings where set, defaults otherwise\nclaude auto-mode critique  # get AI feedback on your custom allow and soft_deny rules",
-              "kind": "command"
             }
           ]
         },
@@ -14102,71 +14288,6 @@
           "paragraphs": [
             "这一段不只是挂个标题，它是在说明\"Managed-only settings\"这一块到底负责什么。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Review auto mode denials",
-          "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ]
-        },
-        {
-          "title": "Configure the auto mode classifier",
-          "paragraphs": [
-            "这一段主要是在拧开关，地方和顺序都别搞错。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Define trusted infrastructure",
-          "paragraphs": [
-            "看到这里，就把\"Define trusted infrastructure\"当成一件真要上手的活来看。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ],
-          "steps": [
-            {
-              "title": "Define trusted infrastructure 1",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com, api.internal.example.com\",\n      \"Key internal services: Jenkins at ci.example.com, Artifactory at artifacts.example.com\"\n    ]\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "Define trusted infrastructure 2",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Organization: {COMPANY_NAME}. Primary use: {PRIMARY_USE_CASE, e.g. software development, infrastructure automation}\",\n      \"Source control: {SOURCE_CONTROL, e.g. GitHub org github.example.com/acme-corp}\",\n      \"Cloud provider(s): {CLOUD_PROVIDERS, e.g. AWS, GCP, Azure}\",\n      \"Trusted cloud buckets: {TRUSTED_BUCKETS, e.g. s3://acme-builds, gs://acme-datasets}\",\n      \"Trusted internal domains: {TRUSTED_DOMAINS, e.g. *.internal.example.com, api.example.com}\",\n      \"Key internal services: {SERVICES, e.g. Jenkins at ci.example.com, Artifactory at artifacts.example.com}\",\n      \"Additional context: {EXTRA, e.g. regulated industry, multi-tenant infrastructure, compliance requirements}\"\n    ]\n  }\n}",
-              "kind": "config"
-            }
-          ]
-        },
-        {
-          "title": "Override the block and allow rules",
-          "paragraphs": [
-            "这一块主要是在说\"Override the block and allow rules\"真到手上该怎么用，哪里最容易踩坑。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Override the block and allow rules",
-              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\",\n      \"...copy full default soft_deny list here first, then add your rules...\"\n    ]\n  }\n}",
-              "kind": "config"
-            }
-          ]
-        },
-        {
-          "title": "Inspect the defaults and your effective config",
-          "paragraphs": [
-            "这一段主要是在把\"Inspect the defaults and your effective config\"讲实，不是只摆个标题给你看。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ],
-          "steps": [
-            {
-              "title": "Inspect the defaults and your effective config",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "claude auto-mode defaults  # the built-in environment, allow, and soft_deny rules\nclaude auto-mode config    # what the classifier actually uses: your settings where set, defaults otherwise\nclaude auto-mode critique  # get AI feedback on your custom allow and soft_deny rules",
-              "kind": "command"
-            }
           ]
         },
         {
@@ -15369,7 +15490,7 @@
         {
           "title": "简要总结",
           "paragraphs": [
-            "这页主要讲 Voice dictation：Use push-to-talk voice dictation to speak your prompts instead of typing them in the Claude Code CLI.",
+            "这页主要讲 Voice dictation：Speak your prompts in the Claude Code CLI with hold-to-record or tap-to-record voice dictation.",
             "你可以把它当成\"Interface\"这块里专门管这一摊事的说明书。"
           ]
         },
@@ -15377,7 +15498,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Voice dictation\"理解成 Interface 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 Requirements、Enable voice dictation、Record a prompt、Change the dictation language 这些环节往下讲。",
+            "原文这页大多会按 Requirements、Enable voice dictation、Hold to record、Tap to record and send 这些环节往下讲。",
             "翻成人话，大概就是：Enable voice dictation"
           ]
         },
@@ -15386,24 +15507,24 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：Requirements -> Enable voice dictation -> Record a prompt -> Change the dictation language。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：Requirements -> Enable voice dictation -> Hold to record -> Tap to record and send。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ],
           "steps": [
             {
               "title": "原页关键片段：Enable voice dictation 1",
               "body": "最省事的做法，就是把下面这句原样说给 Claude。",
-              "code": "/voice\nVoice mode enabled. Hold Space to record. Dictation language: en (/config to change).",
+              "code": "/voice\nVoice mode enabled (hold). Hold Space to record. Dictation language: en (/config to change).",
               "kind": "prompt"
             },
             {
               "title": "原页关键片段：Enable voice dictation 2",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"voiceEnabled\": true\n}",
+              "code": "{\n  \"voice\": {\n    \"enabled\": true,\n    \"mode\": \"tap\"\n  }\n}",
               "kind": "config"
             },
             {
-              "title": "原页关键片段：Record a prompt",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Record a prompt\"这一段的意思去办。",
+              "title": "原页关键片段：Hold to record",
+              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
               "code": "> refactor the auth middleware to ▮\n  # hold Space, speak \"use the new token validation helper\"\n> refactor the auth middleware to use the new token validation helper▮",
               "kind": "prompt"
             },
@@ -15414,8 +15535,8 @@
               "kind": "config"
             },
             {
-              "title": "原页关键片段：Rebind the push-to-talk key",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "title": "原页关键片段：Rebind the dictation key",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
               "code": "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"meta+k\": \"voice:pushToTalk\",\n        \"space\": null\n      }\n    }\n  ]\n}",
               "kind": "config"
             }
@@ -15438,30 +15559,35 @@
             {
               "title": "Enable voice dictation 1",
               "body": "最省事的做法，就是把下面这句原样说给 Claude。",
-              "code": "/voice\nVoice mode enabled. Hold Space to record. Dictation language: en (/config to change).",
+              "code": "/voice\nVoice mode enabled (hold). Hold Space to record. Dictation language: en (/config to change).",
               "kind": "prompt"
             },
             {
               "title": "Enable voice dictation 2",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"voiceEnabled\": true\n}",
+              "code": "{\n  \"voice\": {\n    \"enabled\": true,\n    \"mode\": \"tap\"\n  }\n}",
               "kind": "config"
             }
           ]
         },
         {
-          "title": "Record a prompt",
+          "title": "Hold to record",
           "paragraphs": [
-            "这里不是让你背\"Record a prompt\"这个词，而是让你看它真干活时怎么使。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+            "这一块主要是在说\"Hold to record\"真到手上该怎么用，哪里最容易踩坑。"
           ],
           "steps": [
             {
-              "title": "Record a prompt",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Record a prompt\"这一段的意思去办。",
+              "title": "Hold to record",
+              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
               "code": "> refactor the auth middleware to ▮\n  # hold Space, speak \"use the new token validation helper\"\n> refactor the auth middleware to use the new token validation helper▮",
               "kind": "prompt"
             }
+          ]
+        },
+        {
+          "title": "Tap to record and send",
+          "paragraphs": [
+            "这一段主要是在把\"Tap to record and send\"讲实，不是只摆个标题给你看。"
           ]
         },
         {
@@ -15479,14 +15605,14 @@
           ]
         },
         {
-          "title": "Rebind the push-to-talk key",
+          "title": "Rebind the dictation key",
           "paragraphs": [
-            "别把这段只当成标题看，它其实是在给\"Rebind the push-to-talk key\"划边界。"
+            "这一段不只是挂个标题，它是在说明\"Rebind the dictation key\"这一块到底负责什么。"
           ],
           "steps": [
             {
-              "title": "Rebind the push-to-talk key",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "title": "Rebind the dictation key",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
               "code": "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"meta+k\": \"voice:pushToTalk\",\n        \"space\": null\n      }\n    }\n  ]\n}",
               "kind": "config"
             }
@@ -24647,13 +24773,14 @@
         {
           "title": "SDKResultMessage",
           "paragraphs": [
-            "这里不是让你背\"SDKResultMessage\"这个词，而是让你看它真干活时怎么使。"
+            "这里不是让你背\"SDKResultMessage\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
               "title": "SDKResultMessage",
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
-              "code": "type SDKResultMessage =\n  | {\n      type: \"result\";\n      subtype: \"success\";\n      uuid: UUID;\n      session_id: string;\n      duration_ms: number;\n      duration_api_ms: number;\n      is_error: boolean;\n      num_turns: number;\n      result: string;\n      stop_reason: string | null;\n      total_cost_usd: number;\n      usage: NonNullableUsage;\n      modelUsage: { [modelName: string]: ModelUsage };\n      permission_denials: SDKPermissionDenial[];\n      structured_output?: unknown;\n    }\n  | {\n      type: \"result\";\n      subtype:\n        | \"error_max_turns\"\n        | \"error_during_execution\"\n        | \"error_max_budget_usd\"\n        | \"error_max_structured_output_retries\";\n      uuid: UUID;\n      session_id: string;\n      duration_ms: number;\n      duration_api_ms: number;\n      is_error: boolean;\n      num_turns: number;\n      stop_reason: string | null;\n      total_cost_usd: number;\n      usage: NonNullableUsage;\n      modelUsage: { [modelName: string]: ModelUsage };\n      permission_denials: SDKPermissionDenial[];\n      errors: string[];\n    };",
+              "code": "type SDKResultMessage =\n  | {\n      type: \"result\";\n      subtype: \"success\";\n      uuid: UUID;\n      session_id: string;\n      duration_ms: number;\n      duration_api_ms: number;\n      is_error: boolean;\n      num_turns: number;\n      result: string;\n      stop_reason: string | null;\n      total_cost_usd: number;\n      usage: NonNullableUsage;\n      modelUsage: { [modelName: string]: ModelUsage };\n      permission_denials: SDKPermissionDenial[];\n      structured_output?: unknown;\n      deferred_tool_use?: { id: string; name: string; input: Record<string, unknown> };\n    }\n  | {\n      type: \"result\";\n      subtype:\n        | \"error_max_turns\"\n        | \"error_during_execution\"\n        | \"error_max_budget_usd\"\n        | \"error_max_structured_output_retries\";\n      uuid: UUID;\n      session_id: string;\n      duration_ms: number;\n      duration_api_ms: number;\n      is_error: boolean;\n      num_turns: number;\n      stop_reason: string | null;\n      total_cost_usd: number;\n      usage: NonNullableUsage;\n      modelUsage: { [modelName: string]: ModelUsage };\n      permission_denials: SDKPermissionDenial[];\n      errors: string[];\n    };",
               "kind": "code"
             }
           ]
