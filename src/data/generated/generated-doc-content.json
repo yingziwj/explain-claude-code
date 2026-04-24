@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-23T05:11:49.056Z",
-  "sourceGeneratedAt": "2026-04-23T05:11:48.727Z",
+  "generatedAt": "2026-04-24T05:17:29.527Z",
+  "sourceGeneratedAt": "2026-04-24T05:17:29.242Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -514,7 +514,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.118、2.1.117、2.1.116、2.1.114 这些环节往下讲。",
+            "原文这页大多会按 2.1.119、2.1.118、2.1.117、2.1.116 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -523,7 +523,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.118 -> 2.1.117 -> 2.1.116 -> 2.1.114。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.119 -> 2.1.118 -> 2.1.117 -> 2.1.116。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -890,7 +890,7 @@
           "title": "Compare similar features",
           "paragraphs": [
             "这里就是把两条像样的路摆一块，让你别走岔。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
           ]
         },
         {
@@ -4675,6 +4675,42 @@
               "code": "{\n  \"type\": \"system\",\n  \"subtype\": \"compact_boundary\",\n  \"compactMetadata\": {\n    \"trigger\": \"auto\",\n    \"preTokens\": 167189\n  }\n}",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "Fork the current conversation",
+          "paragraphs": [
+            "这一块主要是在说\"Fork the current conversation\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Fork the current conversation",
+              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
+              "code": "/fork draft unit tests for the parser changes so far",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Observe and steer running forks",
+          "paragraphs": [
+            "这里不是让你背\"Observe and steer running forks\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "How forks differ from named subagents",
+          "paragraphs": [
+            "这一段主要是在把\"How forks differ from named subagents\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Limitations",
+          "paragraphs": [
+            "这一块主要是在说\"Limitations\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -9805,7 +9841,7 @@
             {
               "title": "原页关键片段：4. Pin model versions 2",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1",
+              "code": "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1",
               "kind": "command"
             },
             {
@@ -9938,7 +9974,7 @@
             {
               "title": "4. Pin model versions 2",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1",
+              "code": "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1",
               "kind": "command"
             },
             {
@@ -10151,7 +10187,7 @@
             {
               "title": "原页关键片段：4. Configure Claude Code",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Enable Vertex AI integration\nexport CLAUDE_CODE_USE_VERTEX=1\nexport CLOUD_ML_REGION=global\nexport ANTHROPIC_VERTEX_PROJECT_ID=YOUR-PROJECT-ID\n\n# Optional: Override the Vertex endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_VERTEX_BASE_URL=https://aiplatform.googleapis.com\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# When CLOUD_ML_REGION=global, override region for models that don't support global endpoints\nexport VERTEX_REGION_CLAUDE_HAIKU_4_5=us-east5\nexport VERTEX_REGION_CLAUDE_4_6_SONNET=europe-west1",
+              "code": "# Enable Vertex AI integration\nexport CLAUDE_CODE_USE_VERTEX=1\nexport CLOUD_ML_REGION=global\nexport ANTHROPIC_VERTEX_PROJECT_ID=YOUR-PROJECT-ID\n\n# Optional: Override the Vertex endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_VERTEX_BASE_URL=https://aiplatform.googleapis.com\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1\n\n# When CLOUD_ML_REGION=global, override region for models that don't support global endpoints\nexport VERTEX_REGION_CLAUDE_HAIKU_4_5=us-east5\nexport VERTEX_REGION_CLAUDE_4_6_SONNET=europe-west1",
               "kind": "command"
             },
             {
@@ -10227,13 +10263,13 @@
           "title": "4. Configure Claude Code",
           "paragraphs": [
             "这一块主要是在说\"4. Configure Claude Code\"真到手上该怎么用，哪里最容易踩坑。",
-            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ],
           "steps": [
             {
               "title": "4. Configure Claude Code",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Enable Vertex AI integration\nexport CLAUDE_CODE_USE_VERTEX=1\nexport CLOUD_ML_REGION=global\nexport ANTHROPIC_VERTEX_PROJECT_ID=YOUR-PROJECT-ID\n\n# Optional: Override the Vertex endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_VERTEX_BASE_URL=https://aiplatform.googleapis.com\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# When CLOUD_ML_REGION=global, override region for models that don't support global endpoints\nexport VERTEX_REGION_CLAUDE_HAIKU_4_5=us-east5\nexport VERTEX_REGION_CLAUDE_4_6_SONNET=europe-west1",
+              "code": "# Enable Vertex AI integration\nexport CLAUDE_CODE_USE_VERTEX=1\nexport CLOUD_ML_REGION=global\nexport ANTHROPIC_VERTEX_PROJECT_ID=YOUR-PROJECT-ID\n\n# Optional: Override the Vertex endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_VERTEX_BASE_URL=https://aiplatform.googleapis.com\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1\n\n# When CLOUD_ML_REGION=global, override region for models that don't support global endpoints\nexport VERTEX_REGION_CLAUDE_HAIKU_4_5=us-east5\nexport VERTEX_REGION_CLAUDE_4_6_SONNET=europe-west1",
               "kind": "command"
             }
           ]
@@ -10352,10 +10388,16 @@
               "kind": "code"
             },
             {
-              "title": "原页关键片段：4. Pin model versions",
+              "title": "原页关键片段：4. Pin model versions 1",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5'",
               "kind": "command"
+            },
+            {
+              "title": "原页关键片段：4. Pin model versions 2",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "export ENABLE_PROMPT_CACHING_1H=1",
+              "kind": "code"
             },
             {
               "title": "原页关键片段：Azure RBAC configuration",
@@ -10422,10 +10464,16 @@
           ],
           "steps": [
             {
-              "title": "4. Pin model versions",
+              "title": "4. Pin model versions 1",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5'",
               "kind": "command"
+            },
+            {
+              "title": "4. Pin model versions 2",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "export ENABLE_PROMPT_CACHING_1H=1",
+              "kind": "code"
             }
           ]
         },
@@ -10902,6 +10950,92 @@
         "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
       }
     },
+    "admin-setup": {
+      "sourceLabel": "Set up Claude Code for your organization",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Administration overview：A decision map for administrators deploying Claude Code, covering API providers, managed settings, policy enforcement, usage monitoring, and data handling.",
+            "你可以把它当成\"Setup and access\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Administration overview\"理解成 Setup and access 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Choose your API provider、Decide how settings reach devices、Decide what to enforce、Set up usage visibility 这些环节往下讲。",
+            "翻成人话，大概就是：Choose your API provider"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Choose your API provider -> Decide how settings reach devices -> Decide what to enforce -> Set up usage visibility。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ]
+        },
+        {
+          "title": "Choose your API provider",
+          "paragraphs": [
+            "这段主要是让你挑，不是让你全要。"
+          ]
+        },
+        {
+          "title": "Decide how settings reach devices",
+          "paragraphs": [
+            "看到这里，就把\"Decide how settings reach devices\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Decide what to enforce",
+          "paragraphs": [
+            "看到这里，就把\"Decide what to enforce\"当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Set up usage visibility",
+          "paragraphs": [
+            "这里是上手准备活，通常会告诉你前提条件、落地点和最稳的起步顺序。"
+          ]
+        },
+        {
+          "title": "Review data handling",
+          "paragraphs": [
+            "这一块主要是在说\"Review data handling\"真到手上该怎么用，哪里最容易踩坑。"
+          ]
+        },
+        {
+          "title": "Verify and onboard",
+          "paragraphs": [
+            "这里讲的是\"别只装完就算了\"，而是要确认它真能用、真认主、真跑通。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Next steps",
+          "paragraphs": [
+            "这里不是让你背\"Next steps\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Administration overview",
+          "   |",
+          "   v",
+          "这是 Setup and access 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
     "setup": {
       "sourceLabel": "Advanced setup",
       "sections": [
@@ -11160,7 +11294,7 @@
           "title": "Disable auto-updates",
           "paragraphs": [
             "看到这类标题，就当是在调一个具体开关。",
-            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
@@ -11799,19 +11933,19 @@
             {
               "title": "原页关键片段：Define trusted infrastructure 1",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com, api.internal.example.com\",\n      \"Key internal services: Jenkins at ci.example.com, Artifactory at artifacts.example.com\"\n    ]\n  }\n}",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"$defaults\",\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com, api.internal.example.com\",\n      \"Key internal services: Jenkins at ci.example.com, Artifactory at artifacts.example.com\"\n    ]\n  }\n}",
               "kind": "config"
             },
             {
               "title": "原页关键片段：Define trusted infrastructure 2",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Organization: {COMPANY_NAME}. Primary use: {PRIMARY_USE_CASE, e.g. software development, infrastructure automation}\",\n      \"Source control: {SOURCE_CONTROL, e.g. GitHub org github.example.com/acme-corp}\",\n      \"Cloud provider(s): {CLOUD_PROVIDERS, e.g. AWS, GCP, Azure}\",\n      \"Trusted cloud buckets: {TRUSTED_BUCKETS, e.g. s3://acme-builds, gs://acme-datasets}\",\n      \"Trusted internal domains: {TRUSTED_DOMAINS, e.g. *.internal.example.com, api.example.com}\",\n      \"Key internal services: {SERVICES, e.g. Jenkins at ci.example.com, Artifactory at artifacts.example.com}\",\n      \"Additional context: {EXTRA, e.g. regulated industry, multi-tenant infrastructure, compliance requirements}\"\n    ]\n  }\n}",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"$defaults\",\n      \"Organization: {COMPANY_NAME}. Primary use: {PRIMARY_USE_CASE, e.g. software development, infrastructure automation}\",\n      \"Source control: {SOURCE_CONTROL, e.g. GitHub org github.example.com/acme-corp}\",\n      \"Cloud provider(s): {CLOUD_PROVIDERS, e.g. AWS, GCP, Azure}\",\n      \"Trusted cloud buckets: {TRUSTED_BUCKETS, e.g. s3://acme-builds, gs://acme-datasets}\",\n      \"Trusted internal domains: {TRUSTED_DOMAINS, e.g. *.internal.example.com, api.example.com}\",\n      \"Key internal services: {SERVICES, e.g. Jenkins at ci.example.com, Artifactory at artifacts.example.com}\",\n      \"Additional context: {EXTRA, e.g. regulated industry, multi-tenant infrastructure, compliance requirements}\"\n    ]\n  }\n}",
               "kind": "config"
             },
             {
               "title": "原页关键片段：Override the block and allow rules",
               "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\",\n      \"...copy full default soft_deny list here first, then add your rules...\"\n    ]\n  }\n}",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"$defaults\",\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"$defaults\",\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"$defaults\",\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\"\n    ]\n  }\n}",
               "kind": "config"
             },
             {
@@ -11851,13 +11985,13 @@
             {
               "title": "Define trusted infrastructure 1",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com, api.internal.example.com\",\n      \"Key internal services: Jenkins at ci.example.com, Artifactory at artifacts.example.com\"\n    ]\n  }\n}",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"$defaults\",\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com, api.internal.example.com\",\n      \"Key internal services: Jenkins at ci.example.com, Artifactory at artifacts.example.com\"\n    ]\n  }\n}",
               "kind": "config"
             },
             {
               "title": "Define trusted infrastructure 2",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Organization: {COMPANY_NAME}. Primary use: {PRIMARY_USE_CASE, e.g. software development, infrastructure automation}\",\n      \"Source control: {SOURCE_CONTROL, e.g. GitHub org github.example.com/acme-corp}\",\n      \"Cloud provider(s): {CLOUD_PROVIDERS, e.g. AWS, GCP, Azure}\",\n      \"Trusted cloud buckets: {TRUSTED_BUCKETS, e.g. s3://acme-builds, gs://acme-datasets}\",\n      \"Trusted internal domains: {TRUSTED_DOMAINS, e.g. *.internal.example.com, api.example.com}\",\n      \"Key internal services: {SERVICES, e.g. Jenkins at ci.example.com, Artifactory at artifacts.example.com}\",\n      \"Additional context: {EXTRA, e.g. regulated industry, multi-tenant infrastructure, compliance requirements}\"\n    ]\n  }\n}",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"$defaults\",\n      \"Organization: {COMPANY_NAME}. Primary use: {PRIMARY_USE_CASE, e.g. software development, infrastructure automation}\",\n      \"Source control: {SOURCE_CONTROL, e.g. GitHub org github.example.com/acme-corp}\",\n      \"Cloud provider(s): {CLOUD_PROVIDERS, e.g. AWS, GCP, Azure}\",\n      \"Trusted cloud buckets: {TRUSTED_BUCKETS, e.g. s3://acme-builds, gs://acme-datasets}\",\n      \"Trusted internal domains: {TRUSTED_DOMAINS, e.g. *.internal.example.com, api.example.com}\",\n      \"Key internal services: {SERVICES, e.g. Jenkins at ci.example.com, Artifactory at artifacts.example.com}\",\n      \"Additional context: {EXTRA, e.g. regulated industry, multi-tenant infrastructure, compliance requirements}\"\n    ]\n  }\n}",
               "kind": "config"
             }
           ]
@@ -11872,7 +12006,7 @@
             {
               "title": "Override the block and allow rules",
               "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\",\n      \"...copy full default soft_deny list here first, then add your rules...\"\n    ]\n  }\n}",
+              "code": "{\n  \"autoMode\": {\n    \"environment\": [\n      \"$defaults\",\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"$defaults\",\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"$defaults\",\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\"\n    ]\n  }\n}",
               "kind": "config"
             }
           ]
@@ -12297,7 +12431,7 @@
           ],
           "steps": [
             {
-              "title": "原页关键片段：Using the /cost command",
+              "title": "原页关键片段：Using the /usage command",
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
               "code": "Total cost:            $0.55\nTotal duration (API):  6m 19.7s\nTotal duration (wall): 6h 33m 10.2s\nTotal code changes:    0 lines added, 0 lines removed",
               "kind": "code"
@@ -12329,14 +12463,14 @@
           ]
         },
         {
-          "title": "Using the /cost command",
+          "title": "Using the /usage command",
           "paragraphs": [
-            "这里主要是在交代\"Using the /cost command\"这一块会碰到哪些事。",
+            "这里主要是在交代\"Using the /usage command\"这一块会碰到哪些事。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
-              "title": "Using the /cost command",
+              "title": "Using the /usage command",
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
               "code": "Total cost:            $0.55\nTotal duration (API):  6m 19.7s\nTotal duration (wall): 6h 33m 10.2s\nTotal code changes:    0 lines added, 0 lines removed",
               "kind": "code"
@@ -12710,7 +12844,7 @@
           "title": "Walkthrough: create a local marketplace",
           "paragraphs": [
             "别把这段只当成标题看，它其实是在给\"Walkthrough: create a local marketplace\"划边界。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
@@ -13245,9 +13379,9 @@
             },
             {
               "title": "原页关键片段：Tag plugin releases for version resolution",
-              "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "git tag secrets-vault--v2.1.0\ngit push origin secrets-vault--v2.1.0",
-              "kind": "code"
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude plugin tag --push",
+              "kind": "command"
             }
           ]
         },
@@ -13290,14 +13424,15 @@
         {
           "title": "Tag plugin releases for version resolution",
           "paragraphs": [
-            "这一段主要是在把\"Tag plugin releases for version resolution\"讲实，不是只摆个标题给你看。"
+            "这一段主要是在把\"Tag plugin releases for version resolution\"讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ],
           "steps": [
             {
               "title": "Tag plugin releases for version resolution",
-              "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "git tag secrets-vault--v2.1.0\ngit push origin secrets-vault--v2.1.0",
-              "kind": "code"
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude plugin tag --push",
+              "kind": "command"
             }
           ]
         },
@@ -15209,6 +15344,12 @@
               "kind": "command"
             },
             {
+              "title": "原页关键片段：Create a custom theme",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"name\": \"Dracula\",\n  \"base\": \"dark\",\n  \"overrides\": {\n    \"claude\": \"#bd93f9\",\n    \"error\": \"#ff5555\",\n    \"success\": \"#50fa7b\"\n  }\n}",
+              "kind": "config"
+            },
+            {
               "title": "原页关键片段：Switch to fullscreen rendering",
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
               "code": "CLAUDE_CODE_NO_FLICKER=1 claude",
@@ -15270,7 +15411,22 @@
         {
           "title": "Match the color theme",
           "paragraphs": [
-            "这一段是在说怎么用 the /theme command, or the theme picker in /config, 去做 choose a Claude Code theme that matches your terminal. Selecting the auto option detects your terminal’s light or dark background, so the theme follows OS appearance changes whenever your terminal does. The available themes are built in; there is no custom theme file. Claude Code does not control the terminal’s own color scheme, which is set by the terminal application.。看这种内容，光知道名字没用，还是得落到手上。"
+            "这一段是在说怎么用 the /theme command, or the theme picker in /config, 去做 choose a Claude Code theme that matches your terminal. Selecting the auto option detects your terminal’s light or dark background, so the theme follows OS appearance changes whenever your terminal does. Claude Code does not control the terminal’s own color scheme, which is set by the terminal application.。看这种内容，光知道名字没用，还是得落到手上。"
+          ]
+        },
+        {
+          "title": "Create a custom theme",
+          "paragraphs": [
+            "看到这里，就把\"Create a custom theme\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Create a custom theme",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"name\": \"Dracula\",\n  \"base\": \"dark\",\n  \"overrides\": {\n    \"claude\": \"#bd93f9\",\n    \"error\": \"#ff5555\",\n    \"success\": \"#50fa7b\"\n  }\n}",
+              "kind": "config"
+            }
           ]
         },
         {
@@ -16079,7 +16235,7 @@
             {
               "title": "原页关键片段：Modifiers",
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
-              "code": "ctrl+k          Single key with modifier\nshift+tab       Shift + Tab\nmeta+p          Command/Meta + P\nctrl+shift+c    Multiple modifiers",
+              "code": "ctrl+k          Ctrl + K\nshift+tab       Shift + Tab\nmeta+p          Option + P on macOS, Alt + P elsewhere\nctrl+shift+c    Multiple modifiers",
               "kind": "code"
             },
             {
@@ -16271,7 +16427,7 @@
             {
               "title": "Modifiers",
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
-              "code": "ctrl+k          Single key with modifier\nshift+tab       Shift + Tab\nmeta+p          Command/Meta + P\nctrl+shift+c    Multiple modifiers",
+              "code": "ctrl+k          Ctrl + K\nshift+tab       Shift + Tab\nmeta+p          Option + P on macOS, Alt + P elsewhere\nctrl+shift+c    Multiple modifiers",
               "kind": "code"
             }
           ]
@@ -16747,6 +16903,12 @@
           ]
         },
         {
+          "title": "Visual mode",
+          "paragraphs": [
+            "这一块主要是在说\"Visual mode\"真到手上该怎么用，哪里最容易踩坑。"
+          ]
+        },
+        {
           "title": "Command history",
           "paragraphs": [
             "这一块主要是在说\"Command history\"真到手上该怎么用，哪里最容易踩坑。",
@@ -17037,9 +17199,15 @@
               "kind": "config"
             },
             {
-              "title": "原页关键片段：Hook handler fields",
+              "title": "原页关键片段：Hook handler fields 1",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
               "code": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"http\",\n            \"url\": \"http://localhost:8080/hooks/pre-tool-use\",\n            \"timeout\": 30,\n            \"headers\": {\n              \"Authorization\": \"Bearer $MY_TOKEN\"\n            },\n            \"allowedEnvVars\": [\"MY_TOKEN\"]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Hook handler fields 2",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"mcp_tool\",\n            \"server\": \"my_server\",\n            \"tool\": \"security_scan\",\n            \"input\": { \"file_path\": \"${tool_input.file_path}\" }\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             },
             {
@@ -17071,12 +17239,6 @@
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
               "code": "#!/bin/bash\n# Reads JSON input from stdin, checks the command\ncommand=$(jq -r '.tool_input.command' < /dev/stdin)\n\nif [[ \"$command\" == rm* ]]; then\n  echo \"Blocked: rm commands are not allowed\" >&2\n  exit 2  # Blocking error: tool call is prevented\nfi\n\nexit 0  # Success: tool call proceeds",
               "kind": "command"
-            },
-            {
-              "title": "原页关键片段：JSON output 1",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{ \"continue\": false, \"stopReason\": \"Build failed, fix errors before continuing\" }",
-              "kind": "config"
             }
           ]
         },
@@ -17163,9 +17325,15 @@
           ],
           "steps": [
             {
-              "title": "Hook handler fields",
+              "title": "Hook handler fields 1",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
               "code": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"http\",\n            \"url\": \"http://localhost:8080/hooks/pre-tool-use\",\n            \"timeout\": 30,\n            \"headers\": {\n              \"Authorization\": \"Bearer $MY_TOKEN\"\n            },\n            \"allowedEnvVars\": [\"MY_TOKEN\"]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Hook handler fields 2",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"mcp_tool\",\n            \"server\": \"my_server\",\n            \"tool\": \"security_scan\",\n            \"input\": { \"file_path\": \"${tool_input.file_path}\" }\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             }
           ]
@@ -17479,6 +17647,27 @@
           ]
         },
         {
+          "title": "PostToolBatch",
+          "paragraphs": [
+            "这里不是让你背\"PostToolBatch\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "PostToolBatch 1",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolBatch\",\n  \"tool_calls\": [\n    {\n      \"tool_name\": \"Read\",\n      \"tool_input\": {\"file_path\": \"/.../ledger/accounts.py\"},\n      \"tool_use_id\": \"toolu_01...\",\n      \"tool_response\": \"     1\\tfrom __future__ import annotations\\n     2\\t...\"\n    },\n    {\n      \"tool_name\": \"Read\",\n      \"tool_input\": {\"file_path\": \"/.../ledger/transactions.py\"},\n      \"tool_use_id\": \"toolu_02...\",\n      \"tool_response\": \"     1\\tfrom __future__ import annotations\\n     2\\t...\"\n    }\n  ]\n}",
+              "kind": "config"
+            },
+            {
+              "title": "PostToolBatch 2",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolBatch\",\n    \"additionalContext\": \"These files are part of the ledger module. Run pytest before marking the task complete.\"\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
           "title": "PermissionDenied",
           "paragraphs": [
             "这里不是让你背\"PermissionDenied\"这个词，而是让你看它真干活时怎么使。",
@@ -17597,27 +17786,6 @@
               "kind": "command"
             }
           ]
-        },
-        {
-          "title": "Stop",
-          "paragraphs": [
-            "这里不是让你背\"Stop\"这个词，而是让你看它真干活时怎么使。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Stop 1",
-              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"~/.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"Stop\",\n  \"stop_hook_active\": true,\n  \"last_assistant_message\": \"I've completed the refactoring. Here's a summary...\"\n}",
-              "kind": "config"
-            },
-            {
-              "title": "Stop 2",
-              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"decision\": \"block\",\n  \"reason\": \"Must be provided when Claude is blocked from stopping\"\n}",
-              "kind": "config"
-            }
-          ]
         }
       ],
       "illustration": {
@@ -17703,9 +17871,15 @@
               "kind": "config"
             },
             {
+              "title": "原页关键片段：Themes",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"name\": \"Dracula\",\n  \"base\": \"dark\",\n  \"overrides\": {\n    \"claude\": \"#bd93f9\",\n    \"error\": \"#ff5555\",\n    \"success\": \"#50fa7b\"\n  }\n}",
+              "kind": "config"
+            },
+            {
               "title": "原页关键片段：Complete schema",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\",\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
+              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"themes\": \"./themes/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\",\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
               "kind": "config"
             },
             {
@@ -17724,12 +17898,6 @@
               "title": "原页关键片段：Path behavior rules",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"commands\": [\n    \"./specialized/deploy.md\",\n    \"./utilities/batch-process.md\"\n  ],\n  \"agents\": [\n    \"./custom-agents/reviewer.md\",\n    \"./custom-agents/tester.md\"\n  ]\n}",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Environment variables 1",
-              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/process.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             }
           ]
@@ -17837,6 +18005,21 @@
           ]
         },
         {
+          "title": "Themes",
+          "paragraphs": [
+            "这里不是让你背\"Themes\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Themes",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"name\": \"Dracula\",\n  \"base\": \"dark\",\n  \"overrides\": {\n    \"claude\": \"#bd93f9\",\n    \"error\": \"#ff5555\",\n    \"success\": \"#50fa7b\"\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
           "title": "Plugin installation scopes",
           "paragraphs": [
             "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
@@ -17858,7 +18041,7 @@
             {
               "title": "Complete schema",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\",\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
+              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"themes\": \"./themes/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\",\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
               "kind": "config"
             }
           ]
@@ -17996,7 +18179,7 @@
             {
               "title": "Standard plugin layout",
               "body": "这一段主要是认目录和文件摆放位置。先把地方放对，后面才不容易串。",
-              "code": "enterprise-plugin/\n├── .claude-plugin/           # Metadata directory (optional)\n│   └── plugin.json             # plugin manifest\n├── skills/                   # Skills\n│   ├── code-reviewer/\n│   │   └── SKILL.md\n│   └── pdf-processor/\n│       ├── SKILL.md\n│       └── scripts/\n├── commands/                 # Skills as flat .md files\n│   ├── status.md\n│   └── logs.md\n├── agents/                   # Subagent definitions\n│   ├── security-reviewer.md\n│   ├── performance-tester.md\n│   └── compliance-checker.md\n├── output-styles/            # Output style definitions\n│   └── terse.md\n├── monitors/                 # Background monitor configurations\n│   └── monitors.json\n├── hooks/                    # Hook configurations\n│   ├── hooks.json           # Main hook config\n│   └── security-hooks.json  # Additional hooks\n├── bin/                      # Plugin executables added to PATH\n│   └── my-tool               # Invokable as bare command in Bash tool\n├── settings.json            # Default settings for the plugin\n├── .mcp.json                # MCP server definitions\n├── .lsp.json                # LSP server configurations\n├── scripts/                 # Hook and utility scripts\n│   ├── security-scan.sh\n│   ├── format-code.py\n│   └── deploy.js\n├── LICENSE                  # License file\n└── CHANGELOG.md             # Version history",
+              "code": "enterprise-plugin/\n├── .claude-plugin/           # Metadata directory (optional)\n│   └── plugin.json             # plugin manifest\n├── skills/                   # Skills\n│   ├── code-reviewer/\n│   │   └── SKILL.md\n│   └── pdf-processor/\n│       ├── SKILL.md\n│       └── scripts/\n├── commands/                 # Skills as flat .md files\n│   ├── status.md\n│   └── logs.md\n├── agents/                   # Subagent definitions\n│   ├── security-reviewer.md\n│   ├── performance-tester.md\n│   └── compliance-checker.md\n├── output-styles/            # Output style definitions\n│   └── terse.md\n├── themes/                   # Color theme definitions\n│   └── dracula.json\n├── monitors/                 # Background monitor configurations\n│   └── monitors.json\n├── hooks/                    # Hook configurations\n│   ├── hooks.json           # Main hook config\n│   └── security-hooks.json  # Additional hooks\n├── bin/                      # Plugin executables added to PATH\n│   └── my-tool               # Invokable as bare command in Bash tool\n├── settings.json            # Default settings for the plugin\n├── .mcp.json                # MCP server definitions\n├── .lsp.json                # LSP server configurations\n├── scripts/                 # Hook and utility scripts\n│   ├── security-scan.sh\n│   ├── format-code.py\n│   └── deploy.js\n├── LICENSE                  # License file\n└── CHANGELOG.md             # Version history",
               "kind": "structure"
             }
           ]
@@ -18103,12 +18286,6 @@
               "code": "claude plugin list [options]",
               "kind": "command"
             }
-          ]
-        },
-        {
-          "title": "Debugging and development tools",
-          "paragraphs": [
-            "遇到这种内容，别急着大拆大改，先按它给的路子把问题缩小。"
           ]
         }
       ],
@@ -21766,7 +21943,7 @@
             {
               "title": "原页关键片段：Discovering Available Slash Commands",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello Claude\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Available slash commands:\", message.slash_commands);\n    // Example output: [\"/compact\", \"/context\", \"/cost\"]\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello Claude\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Available slash commands:\", message.slash_commands);\n    // Example output: [\"/compact\", \"/context\", \"/usage\"]\n  }\n}",
               "kind": "command"
             },
             {
@@ -21796,7 +21973,7 @@
             {
               "title": "原页关键片段：Using Custom Commands in the SDK",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use a custom command\nfor await (const message of query({\n  prompt: \"/refactor src/auth/login.ts\",\n  options: { maxTurns: 3 }\n})) {\n  if (message.type === \"assistant\") {\n    console.log(\"Refactoring suggestions:\", message.message);\n  }\n}\n\n// Custom commands appear in the slash_commands list\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Will include both built-in and custom commands\n    console.log(\"Available commands:\", message.slash_commands);\n    // Example: [\"/compact\", \"/context\", \"/cost\", \"/refactor\", \"/security-check\"]\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use a custom command\nfor await (const message of query({\n  prompt: \"/refactor src/auth/login.ts\",\n  options: { maxTurns: 3 }\n})) {\n  if (message.type === \"assistant\") {\n    console.log(\"Refactoring suggestions:\", message.message);\n  }\n}\n\n// Custom commands appear in the slash_commands list\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Will include both built-in and custom commands\n    console.log(\"Available commands:\", message.slash_commands);\n    // Example: [\"/compact\", \"/context\", \"/usage\", \"/refactor\", \"/security-check\"]\n  }\n}",
               "kind": "command"
             },
             {
@@ -21847,7 +22024,7 @@
             {
               "title": "Discovering Available Slash Commands",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello Claude\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Available slash commands:\", message.slash_commands);\n    // Example output: [\"/compact\", \"/context\", \"/cost\"]\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello Claude\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Available slash commands:\", message.slash_commands);\n    // Example output: [\"/compact\", \"/context\", \"/usage\"]\n  }\n}",
               "kind": "command"
             }
           ]
@@ -21936,7 +22113,7 @@
             {
               "title": "Using Custom Commands in the SDK",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use a custom command\nfor await (const message of query({\n  prompt: \"/refactor src/auth/login.ts\",\n  options: { maxTurns: 3 }\n})) {\n  if (message.type === \"assistant\") {\n    console.log(\"Refactoring suggestions:\", message.message);\n  }\n}\n\n// Custom commands appear in the slash_commands list\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Will include both built-in and custom commands\n    console.log(\"Available commands:\", message.slash_commands);\n    // Example: [\"/compact\", \"/context\", \"/cost\", \"/refactor\", \"/security-check\"]\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use a custom command\nfor await (const message of query({\n  prompt: \"/refactor src/auth/login.ts\",\n  options: { maxTurns: 3 }\n})) {\n  if (message.type === \"assistant\") {\n    console.log(\"Refactoring suggestions:\", message.message);\n  }\n}\n\n// Custom commands appear in the slash_commands list\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Will include both built-in and custom commands\n    console.log(\"Available commands:\", message.slash_commands);\n    // Example: [\"/compact\", \"/context\", \"/usage\", \"/refactor\", \"/security-check\"]\n  }\n}",
               "kind": "command"
             }
           ]
@@ -23337,7 +23514,7 @@
         {
           "title": "简要总结",
           "paragraphs": [
-            "这页主要讲 Track cost and usage：Learn how to track token usage, deduplicate parallel tool calls, and estimate costs with the Claude Agent SDK.",
+            "这页主要讲 Track cost and usage：Learn how to track token usage, estimate costs, and configure prompt caching with the Claude Agent SDK.",
             "你可以把它当成\"Control and observability\"这块里专门管这一摊事的说明书。"
           ]
         },
@@ -23380,6 +23557,12 @@
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
               "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Track cumulative cost across multiple query() calls\nlet totalSpend = 0;\n\nconst prompts = [\n  \"Read the files in src/ and summarize the architecture\",\n  \"List all exported functions in src/auth.ts\"\n];\n\nfor (const prompt of prompts) {\n  for await (const message of query({ prompt })) {\n    if (message.type === \"result\") {\n      totalSpend += message.total_cost_usd;\n      console.log(`This call: $${message.total_cost_usd}`);\n    }\n  }\n}\n\nconsole.log(`Total spend: $${totalSpend.toFixed(4)}`);",
               "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Extend the prompt cache TTL to one hour",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "options = ClaudeAgentOptions(\n    env={\n        \"CLAUDE_CODE_USE_BEDROCK\": \"1\",\n        \"ENABLE_PROMPT_CACHING_1H\": \"1\",\n    },\n)",
+              "kind": "code"
             }
           ]
         },
@@ -23479,6 +23662,21 @@
           "paragraphs": [
             "这一段不只是挂个标题，它是在说明\"Track cache tokens\"这一块到底负责什么。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Extend the prompt cache TTL to one hour",
+          "paragraphs": [
+            "这里不是让你背\"Extend the prompt cache TTL to one hour\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Extend the prompt cache TTL to one hour",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "options = ClaudeAgentOptions(\n    env={\n        \"CLAUDE_CODE_USE_BEDROCK\": \"1\",\n        \"ENABLE_PROMPT_CACHING_1H\": \"1\",\n    },\n)",
+              "kind": "code"
+            }
           ]
         },
         {
