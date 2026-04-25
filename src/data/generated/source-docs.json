@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-24T05:17:29.242Z",
+  "generatedAt": "2026-04-25T04:44:44.569Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -3049,7 +3049,7 @@
         "Everything else goes to the classifier",
         "If the classifier blocks, Claude receives the reason and tries an alternative",
         "On entering auto mode, broad allow rules that grant arbitrary code execution are dropped:",
-        "Blanket Bash(*)",
+        "Blanket Bash(*) or PowerShell(*)",
         "Wildcarded interpreters like Bash(python*)",
         "Package-manager run commands",
         "Agent allow rules",
@@ -3227,7 +3227,7 @@
             "Everything else goes to the classifier",
             "If the classifier blocks, Claude receives the reason and tries an alternative",
             "On entering auto mode, broad allow rules that grant arbitrary code execution are dropped:",
-            "Blanket Bash(*)"
+            "Blanket Bash(*) or PowerShell(*)"
           ],
           "codeBlocks": []
         },
@@ -8006,7 +8006,7 @@
         "In-process: all teammates run inside your main terminal. Use Shift+Down to cycle through teammates and type to message them directly. Works in any terminal, no extra setup required.",
         "Split panes: each teammate gets its own pane. You can see everyone’s output at once and click into a pane to interact directly. Requires tmux, or iTerm2.",
         "tmux has known limitations on certain operating systems and traditionally works best on macOS. Using tmux -CC in iTerm2 is the suggested entrypoint into tmux.",
-        "The default is \"auto\", which uses split panes if you’re already running inside a tmux session, and in-process otherwise. The \"tmux\" setting enables split-pane mode and auto-detects whether to use tmux or iTerm2 based on your terminal. To override, set teammateMode in your global config at ~/.claude.json:",
+        "The default is \"auto\", which uses split panes if you’re already running inside a tmux session, and in-process otherwise. The \"tmux\" setting enables split-pane mode and auto-detects whether to use tmux or iTerm2 based on your terminal. To override, set teammateMode in ~/.claude/settings.json:",
         "To force in-process mode for a single session, pass it as a flag:",
         "Split-pane mode requires either tmux or iTerm2 with the it2 CLI. To install manually:",
         "tmux: install through your system’s package manager. See the tmux wiki for platform-specific instructions.",
@@ -8201,7 +8201,7 @@
             "In-process: all teammates run inside your main terminal. Use Shift+Down to cycle through teammates and type to message them directly. Works in any terminal, no extra setup required.",
             "Split panes: each teammate gets its own pane. You can see everyone’s output at once and click into a pane to interact directly. Requires tmux, or iTerm2.",
             "tmux has known limitations on certain operating systems and traditionally works best on macOS. Using tmux -CC in iTerm2 is the suggested entrypoint into tmux.",
-            "The default is \"auto\", which uses split panes if you’re already running inside a tmux session, and in-process otherwise. The \"tmux\" setting enables split-pane mode and auto-detects whether to use tmux or iTerm2 based on your terminal. To override, set teammateMode in your global config at ~/.claude.json:",
+            "The default is \"auto\", which uses split panes if you’re already running inside a tmux session, and in-process otherwise. The \"tmux\" setting enables split-pane mode and auto-detects whether to use tmux or iTerm2 based on your terminal. To override, set teammateMode in ~/.claude/settings.json:",
             "To force in-process mode for a single session, pass it as a flag:",
             "Split-pane mode requires either tmux or iTerm2 with the it2 CLI. To install manually:",
             "tmux: install through your system’s package manager. See the tmux wiki for platform-specific instructions.",
@@ -8590,8 +8590,6 @@
         "Configure MCP server startup timeout using the MCP_TIMEOUT environment variable (for example, MCP_TIMEOUT=10000 claude sets a 10-second timeout)",
         "Claude Code will display a warning when MCP tool output exceeds 10,000 tokens. To increase this limit, set the MAX_MCP_OUTPUT_TOKENS environment variable (for example, MAX_MCP_OUTPUT_TOKENS=50000)",
         "Use /mcp to authenticate with remote servers that require OAuth 2.0 authentication",
-        "Windows Users: On native Windows (not WSL), local MCP servers that use npx require the cmd /c wrapper to ensure proper execution.",
-        "Without the cmd /c wrapper, you’ll encounter “Connection closed” errors because Windows cannot directly execute npx. (See the note above for an explanation of the -- parameter.)",
         "Plugins can bundle MCP servers, automatically providing tools and integrations when the plugin is enabled. Plugin MCP servers work identically to user-configured servers.",
         "How plugin MCP servers work:",
         "Plugins define MCP servers in .mcp.json at the plugin root or inline in plugin.json",
@@ -8682,14 +8680,15 @@
         "oauth.scopes takes precedence over both authServerMetadataUrl and the scopes the server discovers at /.well-known. Leave it unset to let the MCP server determine the requested scope set.",
         "If the authorization server advertises offline_access in scopes_supported, Claude Code appends it to the pinned scopes so the access token can be refreshed without a new browser sign-in.",
         "If the server later returns a 403 insufficient_scope for a tool call, Claude Code re-authenticates with the same pinned scopes. Widen oauth.scopes when a tool you need requires a scope outside the pin.",
-        "If your MCP server uses an authentication scheme other than OAuth (such as Kerberos, short-lived tokens, or an internal SSO), use headersHelper to generate request headers at connection time. Claude Code runs the command and merges its output into the connection headers."
+        "If your MCP server uses an authentication scheme other than OAuth (such as Kerberos, short-lived tokens, or an internal SSO), use headersHelper to generate request headers at connection time. Claude Code runs the command and merges its output into the connection headers.",
+        "The command can also be inline:",
+        "Requirements:"
       ],
       "codeBlocks": [
         "# Basic syntax\nclaude mcp add --transport http <name> <url>\n\n# Real example: Connect to Notion\nclaude mcp add --transport http notion https://mcp.notion.com/mcp\n\n# Example with Bearer token\nclaude mcp add --transport http secure-api https://api.example.com/mcp \\\n  --header \"Authorization: Bearer your-token\"",
         "# Basic syntax\nclaude mcp add --transport sse <name> <url>\n\n# Real example: Connect to Asana\nclaude mcp add --transport sse asana https://mcp.asana.com/sse\n\n# Example with authentication header\nclaude mcp add --transport sse private-api https://api.company.com/sse \\\n  --header \"X-API-Key: your-key-here\"",
         "# Basic syntax\nclaude mcp add [options] <name> -- <command> [args...]\n\n# Real example: Add Airtable server\nclaude mcp add --transport stdio --env AIRTABLE_API_KEY=YOUR_KEY airtable \\\n  -- npx -y airtable-mcp-server",
         "# List all configured servers\nclaude mcp list\n\n# Get details for a specific server\nclaude mcp get github\n\n# Remove a server\nclaude mcp remove github\n\n# (within Claude Code) Check server status\n/mcp",
-        "# This creates command=\"cmd\" which Windows can execute\nclaude mcp add --transport stdio my-server -- cmd /c npx -y @some/package",
         "{\n  \"mcpServers\": {\n    \"database-tools\": {\n      \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n      \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/config.json\"],\n      \"env\": {\n        \"DB_URL\": \"${DB_URL}\"\n      }\n    }\n  }\n}",
         "{\n  \"name\": \"my-plugin\",\n  \"mcpServers\": {\n    \"plugin-api\": {\n      \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/api-server\",\n      \"args\": [\"--port\", \"8080\"]\n    }\n  }\n}",
         "# Within Claude Code, see all MCP servers including plugin ones\n/mcp",
@@ -8716,7 +8715,8 @@
         "claude mcp add --transport http \\\n  --client-id your-client-id --client-secret --callback-port 8080 \\\n  my-server https://mcp.example.com/mcp",
         "claude mcp add-json my-server \\\n  '{\"type\":\"http\",\"url\":\"https://mcp.example.com/mcp\",\"oauth\":{\"clientId\":\"your-client-id\",\"callbackPort\":8080}}' \\\n  --client-secret",
         "claude mcp add-json my-server \\\n  '{\"type\":\"http\",\"url\":\"https://mcp.example.com/mcp\",\"oauth\":{\"callbackPort\":8080}}'",
-        "MCP_CLIENT_SECRET=your-secret claude mcp add --transport http \\\n  --client-id your-client-id --client-secret --callback-port 8080 \\\n  my-server https://mcp.example.com/mcp"
+        "MCP_CLIENT_SECRET=your-secret claude mcp add --transport http \\\n  --client-id your-client-id --client-secret --callback-port 8080 \\\n  my-server https://mcp.example.com/mcp",
+        "{\n  \"mcpServers\": {\n    \"my-server\": {\n      \"type\": \"http\",\n      \"url\": \"https://mcp.example.com/mcp\",\n      \"oauth\": {\n        \"authServerMetadataUrl\": \"https://auth.example.com/.well-known/openid-configuration\"\n      }\n    }\n  }\n}"
       ],
       "sectionBlocks": [
         {
@@ -8833,13 +8833,9 @@
             "Set environment variables with --env flags (for example, --env KEY=value)",
             "Configure MCP server startup timeout using the MCP_TIMEOUT environment variable (for example, MCP_TIMEOUT=10000 claude sets a 10-second timeout)",
             "Claude Code will display a warning when MCP tool output exceeds 10,000 tokens. To increase this limit, set the MAX_MCP_OUTPUT_TOKENS environment variable (for example, MAX_MCP_OUTPUT_TOKENS=50000)",
-            "Use /mcp to authenticate with remote servers that require OAuth 2.0 authentication",
-            "Windows Users: On native Windows (not WSL), local MCP servers that use npx require the cmd /c wrapper to ensure proper execution.",
-            "Without the cmd /c wrapper, you’ll encounter “Connection closed” errors because Windows cannot directly execute npx. (See the note above for an explanation of the -- parameter.)"
+            "Use /mcp to authenticate with remote servers that require OAuth 2.0 authentication"
           ],
-          "codeBlocks": [
-            "# This creates command=\"cmd\" which Windows can execute\nclaude mcp add --transport stdio my-server -- cmd /c npx -y @some/package"
-          ]
+          "codeBlocks": []
         },
         {
           "title": "​Plugin-provided MCP servers",
@@ -14531,6 +14527,7 @@
         "Set the following environment variables:",
         "Most model versions have a corresponding VERTEX_REGION_CLAUDE_* variable. See the Environment variables reference for the full list. Check Vertex Model Garden to determine which models support global endpoints versus regional only.",
         "Prompt caching is enabled automatically. To disable it, set DISABLE_PROMPT_CACHING=1. To request a 1-hour cache TTL instead of the 5-minute default, set ENABLE_PROMPT_CACHING_1H=1; cache writes with a 1-hour TTL are billed at a higher rate. For heightened rate limits, contact Google Cloud support. When using Vertex AI, the /login and /logout commands are disabled since authentication is handled through Google Cloud credentials.",
+        "MCP tool search is disabled by default on Vertex AI because the endpoint does not accept the required beta header. All MCP tool definitions load upfront instead. To opt in, set ENABLE_TOOL_SEARCH=true.",
         "Pin specific model versions when deploying to multiple users. Without pinning, model aliases such as sonnet and opus resolve to the latest version, which may not yet be enabled in your Vertex AI project when Anthropic releases an update. Claude Code falls back to the previous version at startup when the latest is unavailable, but pinning lets you control when your users move to a new model.",
         "Set these environment variables to specific Vertex AI model IDs.",
         "Without ANTHROPIC_DEFAULT_OPUS_MODEL, the opus alias on Vertex resolves to Opus 4.6. Set it to the Opus 4.7 ID to use the latest model:",
@@ -14666,7 +14663,8 @@
           "paragraphs": [
             "Set the following environment variables:",
             "Most model versions have a corresponding VERTEX_REGION_CLAUDE_* variable. See the Environment variables reference for the full list. Check Vertex Model Garden to determine which models support global endpoints versus regional only.",
-            "Prompt caching is enabled automatically. To disable it, set DISABLE_PROMPT_CACHING=1. To request a 1-hour cache TTL instead of the 5-minute default, set ENABLE_PROMPT_CACHING_1H=1; cache writes with a 1-hour TTL are billed at a higher rate. For heightened rate limits, contact Google Cloud support. When using Vertex AI, the /login and /logout commands are disabled since authentication is handled through Google Cloud credentials."
+            "Prompt caching is enabled automatically. To disable it, set DISABLE_PROMPT_CACHING=1. To request a 1-hour cache TTL instead of the 5-minute default, set ENABLE_PROMPT_CACHING_1H=1; cache writes with a 1-hour TTL are billed at a higher rate. For heightened rate limits, contact Google Cloud support. When using Vertex AI, the /login and /logout commands are disabled since authentication is handled through Google Cloud credentials.",
+            "MCP tool search is disabled by default on Vertex AI because the endpoint does not accept the required beta header. All MCP tool definitions load upfront instead. To opt in, set ENABLE_TOOL_SEARCH=true."
           ],
           "codeBlocks": [
             "# Enable Vertex AI integration\nexport CLAUDE_CODE_USE_VERTEX=1\nexport CLOUD_ML_REGION=global\nexport ANTHROPIC_VERTEX_PROJECT_ID=YOUR-PROJECT-ID\n\n# Optional: Override the Vertex endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_VERTEX_BASE_URL=https://aiplatform.googleapis.com\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1\n\n# When CLOUD_ML_REGION=global, override region for models that don't support global endpoints\nexport VERTEX_REGION_CLAUDE_HAIKU_4_5=us-east5\nexport VERTEX_REGION_CLAUDE_4_6_SONNET=europe-west1"
@@ -17209,12 +17207,14 @@
         "Event Name: claude_code.tool_result",
         "event.name: \"tool_result\"",
         "tool_name: Name of the tool",
+        "tool_use_id: Unique identifier for this tool invocation. Matches the tool_use_id passed to hooks, allowing correlation between OTel events and hook-captured data.",
         "success: \"true\" or \"false\"",
         "duration_ms: Execution time in milliseconds",
         "error_type: Error category string when the tool failed, such as \"Error:ENOENT\" or \"ShellError\"",
         "error (when OTEL_LOG_TOOL_DETAILS=1): Full error message when the tool failed",
         "decision_type: Either \"accept\" or \"reject\"",
         "decision_source: Decision source - \"config\", \"hook\", \"user_permanent\", \"user_temporary\", \"user_abort\", or \"user_reject\"",
+        "tool_input_size_bytes: Size of the JSON-serialized tool input in bytes",
         "tool_result_size_bytes: Size of the tool result in bytes",
         "mcp_server_scope: MCP server scope identifier (for MCP tools)",
         "tool_parameters (when OTEL_LOG_TOOL_DETAILS=1): JSON string containing tool-specific parameters: For Bash tool: includes bash_command, full_command, timeout, description, dangerouslyDisableSandbox, and git_commit_id (the commit SHA, when a git commit command succeeds) For MCP tools: includes mcp_server_name, mcp_tool_name For Skill tool: includes skill_name For Task tool: includes subagent_type",
@@ -17237,9 +17237,7 @@
         "speed: \"fast\" or \"normal\", indicating whether fast mode was active",
         "query_source: Subsystem that issued the request, such as \"repl_main_thread\", \"compact\", or a subagent name",
         "Logged when an API request to Claude fails.",
-        "Event Name: claude_code.api_error",
-        "event.name: \"api_error\"",
-        "error: Error message"
+        "Event Name: claude_code.api_error"
       ],
       "codeBlocks": [
         "# 1. Enable telemetry\nexport CLAUDE_CODE_ENABLE_TELEMETRY=1\n\n# 2. Choose exporters (both are optional - configure only what you need)\nexport OTEL_METRICS_EXPORTER=otlp       # Options: otlp, prometheus, console, none\nexport OTEL_LOGS_EXPORTER=otlp          # Options: otlp, console, none\n\n# 3. Configure OTLP endpoint (for OTLP exporter)\nexport OTEL_EXPORTER_OTLP_PROTOCOL=grpc\nexport OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317\n\n# 4. Set authentication (if required)\nexport OTEL_EXPORTER_OTLP_HEADERS=\"Authorization=Bearer your-token\"\n\n# 5. For debugging: reduce export intervals\nexport OTEL_METRIC_EXPORT_INTERVAL=10000  # 10 seconds (default: 60000ms)\nexport OTEL_LOGS_EXPORT_INTERVAL=5000     # 5 seconds (default: 5000ms)\n\n# 6. Run Claude Code\nclaude",
@@ -18906,7 +18904,7 @@
         "The resolved tag’s semver is recorded separately from plugin.json’s version, so constraint checks use the tag that was actually fetched even if plugin.json at that commit has a stale value. The cache directory name for a tag-resolved install includes a 12-character commit-SHA suffix, so if a maintainer force-moves a tag to a different commit, the next install gets a fresh cache directory instead of reusing stale content.",
         "For npm marketplace sources, the constraint does not control which version is fetched, since tag-based resolution applies only to git-backed sources. The constraint is still checked at load time, and the dependent plugin is disabled with dependency-version-unsatisfied if the installed version does not satisfy it.",
         "When several installed plugins constrain the same dependency, Claude Code intersects their ranges and resolves the dependency to the highest version that satisfies all of them. The table below shows how common combinations resolve.",
-        "Auto-update checks each constrained dependency against every installed plugin’s range before applying an update. If the marketplace moves a dependency to a version outside any range, the update is skipped and the skip appears in /doctor and the /plugin Errors tab, naming the constraining plugin.",
+        "Auto-update fetches a constrained dependency at the highest git tag that satisfies every installed plugin’s range, rather than at the marketplace’s latest version, so the dependency continues to receive updates within its allowed range. If no tag satisfies all ranges, the update is skipped and the skip appears in /doctor and the /plugin Errors tab, naming the constraining plugin.",
         "When you uninstall the last plugin that constrains a dependency, the dependency is no longer held and resumes tracking its marketplace entry on the next update.",
         "Dependency problems surface in claude plugin list, in the /plugin interface, and in /doctor. The affected plugin is disabled until you resolve the error. The most common errors and their fixes are listed below.",
         "To check for these errors programmatically, run claude plugin list --json and read the errors field on each plugin.",
@@ -18992,7 +18990,7 @@
           "title": "​How constraints interact",
           "paragraphs": [
             "When several installed plugins constrain the same dependency, Claude Code intersects their ranges and resolves the dependency to the highest version that satisfies all of them. The table below shows how common combinations resolve.",
-            "Auto-update checks each constrained dependency against every installed plugin’s range before applying an update. If the marketplace moves a dependency to a version outside any range, the update is skipped and the skip appears in /doctor and the /plugin Errors tab, naming the constraining plugin.",
+            "Auto-update fetches a constrained dependency at the highest git tag that satisfies every installed plugin’s range, rather than at the marketplace’s latest version, so the dependency continues to receive updates within its allowed range. If no tag satisfies all ranges, the update is skipped and the skip appears in /doctor and the /plugin Errors tab, naming the constraining plugin.",
             "When you uninstall the last plugin that constrains a dependency, the dependency is no longer held and resumes tracking its marketplace entry on the next update."
           ],
           "codeBlocks": []
@@ -19805,12 +19803,13 @@
         "See managed settings and Managed MCP configuration for details.",
         "This repository includes starter deployment templates for Jamf, Iru (Kandji), Intune, and Group Policy. Use these as starting points and adjust them to fit your needs.",
         "Managed deployments can also restrict plugin marketplace additions using strictKnownMarketplaces. For more information, see Managed marketplace restrictions.",
-        "Other configuration is stored in ~/.claude.json. This file contains your preferences (theme, notification settings, editor mode), OAuth session, MCP server configurations for user and local scopes, per-project state (allowed tools, trust settings), and various caches. Project-scoped MCP servers are stored separately in .mcp.json.",
+        "Other configuration is stored in ~/.claude.json. This file contains your OAuth session, MCP server configurations for user and local scopes, per-project state (allowed tools, trust settings), and various caches. Project-scoped MCP servers are stored separately in .mcp.json.",
         "Claude Code automatically creates timestamped backups of configuration files and retains the five most recent backups to prevent data loss.",
         "The $schema line in the example above points to the official JSON schema for Claude Code settings. Adding it to your settings.json enables autocomplete and inline validation in VS Code, Cursor, and any other editor that supports JSON schema validation.",
         "The published schema is updated periodically and may not include settings added in the most recent CLI releases, so a validation warning on a recently documented field does not necessarily mean your configuration is invalid.",
         "settings.json supports a number of options:",
         "These settings are stored in ~/.claude.json rather than settings.json. Adding them to settings.json will trigger a schema validation error.",
+        "Versions before v2.1.119 also store autoScrollEnabled, editorMode, showTurnDuration, teammateMode, and terminalProgressBarEnabled here instead of in settings.json.",
         "Configure how --worktree creates and manages git worktrees. Use these settings to reduce disk usage and startup time in large monorepos.",
         "To copy gitignored files like .env into new worktrees, use a .worktreeinclude file in your project root instead of a setting.",
         "Permission rules follow the format Tool or Tool(specifier). Rules are evaluated in order: deny rules first, then ask, then allow. The first matching rule wins.",
@@ -19899,8 +19898,7 @@
         "Use source: 'settings' to declare a small set of plugins inline without setting up a hosted marketplace repository. Plugins listed here must reference external sources such as GitHub or npm. You still need to enable each plugin separately in enabledPlugins.",
         "Managed settings only: Controls which plugin marketplaces users are allowed to add and install plugins from. This setting can only be configured in managed settings and provides administrators with strict control over marketplace sources.",
         "Managed settings file locations:",
-        "macOS: /Library/Application Support/ClaudeCode/managed-settings.json",
-        "Linux and WSL: /etc/claude-code/managed-settings.json"
+        "macOS: /Library/Application Support/ClaudeCode/managed-settings.json"
       ],
       "codeBlocks": [
         "{\n  \"$schema\": \"https://json.schemastore.org/claude-code-settings.json\",\n  \"permissions\": {\n    \"allow\": [\n      \"Bash(npm run lint)\",\n      \"Bash(npm run test *)\",\n      \"Read(~/.zshrc)\"\n    ],\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ]\n  },\n  \"env\": {\n    \"CLAUDE_CODE_ENABLE_TELEMETRY\": \"1\",\n    \"OTEL_METRICS_EXPORTER\": \"otlp\"\n  },\n  \"companyAnnouncements\": [\n    \"Welcome to Acme Corp! Review our code guidelines at docs.acme.com\",\n    \"Reminder: Code reviews required for all PRs\",\n    \"New security policy in effect\"\n  ]\n}",
@@ -20033,7 +20031,8 @@
         {
           "title": "​Global config settings",
           "paragraphs": [
-            "These settings are stored in ~/.claude.json rather than settings.json. Adding them to settings.json will trigger a schema validation error."
+            "These settings are stored in ~/.claude.json rather than settings.json. Adding them to settings.json will trigger a schema validation error.",
+            "Versions before v2.1.119 also store autoScrollEnabled, editorMode, showTurnDuration, teammateMode, and terminalProgressBarEnabled here instead of in settings.json."
           ],
           "codeBlocks": []
         },
@@ -22149,7 +22148,7 @@
         "Run /tui fullscreen to switch in the current session with your conversation intact. To make it the default, set the CLAUDE_CODE_NO_FLICKER environment variable before starting Claude Code:",
         "When you paste more than 10,000 characters into the prompt, Claude Code collapses the input to a [Pasted text] placeholder so the input box stays usable. The full content is still sent to Claude when you submit.",
         "The VS Code integrated terminal can drop characters from very large pastes before they reach Claude Code, so prefer file-based workflows there. For very large inputs such as entire files or long logs, write the content to a file and ask Claude to read it instead of pasting. This keeps the conversation transcript readable and lets Claude reference the file by path in later turns.",
-        "Claude Code includes a Vim-style editing mode for the prompt input. Enable it through /config → Editor mode, or by setting the editorMode global config key to \"vim\" in ~/.claude.json. Set Editor mode back to normal to turn it off.",
+        "Claude Code includes a Vim-style editing mode for the prompt input. Enable it through /config → Editor mode, or by setting editorMode to \"vim\" in ~/.claude/settings.json. Set Editor mode back to normal to turn it off.",
         "Vim mode supports a subset of NORMAL- and VISUAL-mode motions and operators, such as hjkl navigation, v/V selection, and d/c/y with text objects. See the Vim editor mode reference for the full key table. Vim motions are not remappable through the keybindings file.",
         "Pressing Enter still submits your prompt in INSERT mode, unlike standard Vim. Use o or O in NORMAL mode, or Ctrl+J, to insert a newline instead.",
         "Interactive mode: full keyboard shortcut reference and the Vim key table",
@@ -22284,7 +22283,7 @@
         {
           "title": "​Edit prompts with Vim keybindings",
           "paragraphs": [
-            "Claude Code includes a Vim-style editing mode for the prompt input. Enable it through /config → Editor mode, or by setting the editorMode global config key to \"vim\" in ~/.claude.json. Set Editor mode back to normal to turn it off.",
+            "Claude Code includes a Vim-style editing mode for the prompt input. Enable it through /config → Editor mode, or by setting editorMode to \"vim\" in ~/.claude/settings.json. Set Editor mode back to normal to turn it off.",
             "Vim mode supports a subset of NORMAL- and VISUAL-mode motions and operators, such as hjkl navigation, v/V selection, and d/c/y with text objects. See the Vim editor mode reference for the full key table. Vim motions are not remappable through the keybindings file.",
             "Pressing Enter still submits your prompt in INSERT mode, unlike standard Vim. Use o or O in NORMAL mode, or Ctrl+J, to insert a newline instead."
           ],
@@ -22865,6 +22864,7 @@
         "Fields that may be absent (not present in JSON):",
         "session_name: appears only when a custom name has been set with --name or /rename",
         "workspace.git_worktree: appears only when the current directory is inside a linked git worktree",
+        "effort: appears only when the current model supports the reasoning effort parameter",
         "vim: appears only when vim mode is enabled",
         "agent: appears only when running with the --agent flag or agent settings configured",
         "worktree: appears only during --worktree sessions. When present, branch and original_branch may also be absent for hook-based worktrees",
@@ -22961,7 +22961,7 @@
         "#!/bin/bash\n# Read JSON data that Claude Code sends to stdin\ninput=$(cat)\n\n# Extract fields using jq\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nDIR=$(echo \"$input\" | jq -r '.workspace.current_dir')\n# The \"// 0\" provides a fallback if the field is null\nPCT=$(echo \"$input\" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)\n\n# Output the status line - ${DIR##*/} extracts just the folder name\necho \"[$MODEL] 📁 ${DIR##*/} | ${PCT}% context\"",
         "chmod +x ~/.claude/statusline.sh",
         "{\n  \"statusLine\": {\n    \"type\": \"command\",\n    \"command\": \"~/.claude/statusline.sh\"\n  }\n}",
-        "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
+        "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"effort\": {\n    \"level\": \"high\"\n  },\n  \"thinking\": {\n    \"enabled\": true\n  },\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
         "#!/bin/bash\n# Read all of stdin into a variable\ninput=$(cat)\n\n# Extract fields with jq, \"// 0\" provides fallback for null\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nPCT=$(echo \"$input\" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)\n\n# Build progress bar: printf -v creates a run of spaces, then\n# ${var// /▓} replaces each space with a block character\nBAR_WIDTH=10\nFILLED=$((PCT * BAR_WIDTH / 100))\nEMPTY=$((BAR_WIDTH - FILLED))\nBAR=\"\"\n[ \"$FILLED\" -gt 0 ] && printf -v FILL \"%${FILLED}s\" && BAR=\"${FILL// /▓}\"\n[ \"$EMPTY\" -gt 0 ] && printf -v PAD \"%${EMPTY}s\" && BAR=\"${BAR}${PAD// /░}\"\n\necho \"[$MODEL] $BAR $PCT%\"",
         "#!/bin/bash\ninput=$(cat)\n\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nDIR=$(echo \"$input\" | jq -r '.workspace.current_dir')\n\nGREEN='\\033[32m'\nYELLOW='\\033[33m'\nRESET='\\033[0m'\n\nif git rev-parse --git-dir > /dev/null 2>&1; then\n    BRANCH=$(git branch --show-current 2>/dev/null)\n    STAGED=$(git diff --cached --numstat 2>/dev/null | wc -l | tr -d ' ')\n    MODIFIED=$(git diff --numstat 2>/dev/null | wc -l | tr -d ' ')\n\n    GIT_STATUS=\"\"\n    [ \"$STAGED\" -gt 0 ] && GIT_STATUS=\"${GREEN}+${STAGED}${RESET}\"\n    [ \"$MODIFIED\" -gt 0 ] && GIT_STATUS=\"${GIT_STATUS}${YELLOW}~${MODIFIED}${RESET}\"\n\n    echo -e \"[$MODEL] 📁 ${DIR##*/} | 🌿 $BRANCH $GIT_STATUS\"\nelse\n    echo \"[$MODEL] 📁 ${DIR##*/}\"\nfi",
         "#!/bin/bash\ninput=$(cat)\n\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nCOST=$(echo \"$input\" | jq -r '.cost.total_cost_usd // 0')\nDURATION_MS=$(echo \"$input\" | jq -r '.cost.total_duration_ms // 0')\n\nCOST_FMT=$(printf '$%.2f' \"$COST\")\nDURATION_SEC=$((DURATION_MS / 1000))\nMINS=$((DURATION_SEC / 60))\nSECS=$((DURATION_SEC % 60))\n\necho \"[$MODEL] 💰 $COST_FMT | ⏱️ ${MINS}m ${SECS}s\"",
@@ -23072,15 +23072,15 @@
             "Fields that may be absent (not present in JSON):",
             "session_name: appears only when a custom name has been set with --name or /rename",
             "workspace.git_worktree: appears only when the current directory is inside a linked git worktree",
+            "effort: appears only when the current model supports the reasoning effort parameter",
             "vim: appears only when vim mode is enabled",
             "agent: appears only when running with the --agent flag or agent settings configured",
             "worktree: appears only during --worktree sessions. When present, branch and original_branch may also be absent for hook-based worktrees",
             "rate_limits: appears only for Claude.ai subscribers (Pro/Max) after the first API response in the session. Each window (five_hour, seven_day) may be independently absent. Use jq -r '.rate_limits.five_hour.used_percentage // empty' to handle absence gracefully.",
-            "Fields that may be null:",
-            "context_window.current_usage: null before the first API call in a session"
+            "Fields that may be null:"
           ],
           "codeBlocks": [
-            "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}"
+            "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"effort\": {\n    \"level\": \"high\"\n  },\n  \"thinking\": {\n    \"enabled\": true\n  },\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}"
           ]
         },
         {
@@ -23930,7 +23930,6 @@
         "shell: powershell in skill frontmatter: runs !`command` blocks in PowerShell. Requires the PowerShell tool to be enabled.",
         "The same main-session working-directory reset behavior described under the Bash tool section applies to PowerShell commands, including the CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR environment variable.",
         "The PowerShell tool has the following known limitations during the preview:",
-        "Auto mode does not work with the PowerShell tool yet",
         "PowerShell profiles are not loaded",
         "On Windows, sandboxing is not supported",
         "On Windows, Git Bash is still required to start Claude Code",
@@ -24039,7 +24038,6 @@
           "title": "​Preview limitations",
           "paragraphs": [
             "The PowerShell tool has the following known limitations during the preview:",
-            "Auto mode does not work with the PowerShell tool yet",
             "PowerShell profiles are not loaded",
             "On Windows, sandboxing is not supported",
             "On Windows, Git Bash is still required to start Claude Code"
@@ -24967,9 +24965,9 @@
         "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PreToolUse\",\n    \"permissionDecision\": \"allow\",\n    \"permissionDecisionReason\": \"My reason here\",\n    \"updatedInput\": {\n      \"field_to_modify\": \"new value\"\n    },\n    \"additionalContext\": \"Current environment: production. Proceed with caution.\"\n  }\n}",
         "{\n  \"type\": \"result\",\n  \"subtype\": \"success\",\n  \"stop_reason\": \"tool_deferred\",\n  \"session_id\": \"abc123\",\n  \"deferred_tool_use\": {\n    \"id\": \"toolu_01abc\",\n    \"name\": \"AskUserQuestion\",\n    \"input\": { \"questions\": [{ \"question\": \"Which framework?\", \"header\": \"Framework\", \"options\": [{\"label\": \"React\"}, {\"label\": \"Vue\"}], \"multiSelect\": false }] }\n  }\n}",
         "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PermissionRequest\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"rm -rf node_modules\",\n    \"description\": \"Remove node_modules directory\"\n  },\n  \"permission_suggestions\": [\n    {\n      \"type\": \"addRules\",\n      \"rules\": [{ \"toolName\": \"Bash\", \"ruleContent\": \"rm -rf node_modules\" }],\n      \"behavior\": \"allow\",\n      \"destination\": \"localSettings\"\n    }\n  ]\n}",
-        "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUse\",\n  \"tool_name\": \"Write\",\n  \"tool_input\": {\n    \"file_path\": \"/path/to/file.txt\",\n    \"content\": \"file content\"\n  },\n  \"tool_response\": {\n    \"filePath\": \"/path/to/file.txt\",\n    \"success\": true\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\"\n}",
+        "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUse\",\n  \"tool_name\": \"Write\",\n  \"tool_input\": {\n    \"file_path\": \"/path/to/file.txt\",\n    \"content\": \"file content\"\n  },\n  \"tool_response\": {\n    \"filePath\": \"/path/to/file.txt\",\n    \"success\": true\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"duration_ms\": 12\n}",
         "{\n  \"decision\": \"block\",\n  \"reason\": \"Explanation for decision\",\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolUse\",\n    \"additionalContext\": \"Additional information for Claude\"\n  }\n}",
-        "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUseFailure\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"npm test\",\n    \"description\": \"Run test suite\"\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"error\": \"Command exited with non-zero status code 1\",\n  \"is_interrupt\": false\n}"
+        "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUseFailure\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"npm test\",\n    \"description\": \"Run test suite\"\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"error\": \"Command exited with non-zero status code 1\",\n  \"is_interrupt\": false,\n  \"duration_ms\": 4187\n}"
       ],
       "sectionBlocks": [
         {
@@ -25329,7 +25327,7 @@
             "PostToolUse hooks can provide feedback to Claude after tool execution. In addition to the JSON output fields available to all hooks, your hook script can return these event-specific fields:"
           ],
           "codeBlocks": [
-            "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUse\",\n  \"tool_name\": \"Write\",\n  \"tool_input\": {\n    \"file_path\": \"/path/to/file.txt\",\n    \"content\": \"file content\"\n  },\n  \"tool_response\": {\n    \"filePath\": \"/path/to/file.txt\",\n    \"success\": true\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\"\n}",
+            "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUse\",\n  \"tool_name\": \"Write\",\n  \"tool_input\": {\n    \"file_path\": \"/path/to/file.txt\",\n    \"content\": \"file content\"\n  },\n  \"tool_response\": {\n    \"filePath\": \"/path/to/file.txt\",\n    \"success\": true\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"duration_ms\": 12\n}",
             "{\n  \"decision\": \"block\",\n  \"reason\": \"Explanation for decision\",\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolUse\",\n    \"additionalContext\": \"Additional information for Claude\"\n  }\n}"
           ]
         },
@@ -25342,7 +25340,7 @@
             "PostToolUseFailure hooks can provide context to Claude after a tool failure. In addition to the JSON output fields available to all hooks, your hook script can return these event-specific fields:"
           ],
           "codeBlocks": [
-            "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUseFailure\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"npm test\",\n    \"description\": \"Run test suite\"\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"error\": \"Command exited with non-zero status code 1\",\n  \"is_interrupt\": false\n}",
+            "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUseFailure\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"npm test\",\n    \"description\": \"Run test suite\"\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"error\": \"Command exited with non-zero status code 1\",\n  \"is_interrupt\": false,\n  \"duration_ms\": 4187\n}",
             "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolUseFailure\",\n    \"additionalContext\": \"Additional information about the failure for Claude\"\n  }\n}"
           ]
         },

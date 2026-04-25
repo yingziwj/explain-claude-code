@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-24T05:17:29.527Z",
-  "sourceGeneratedAt": "2026-04-24T05:17:29.242Z",
+  "generatedAt": "2026-04-25T04:44:44.875Z",
+  "sourceGeneratedAt": "2026-04-25T04:44:44.569Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -5287,12 +5287,6 @@
               "kind": "command"
             },
             {
-              "title": "原页关键片段：Push messages with channels",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "# This creates command=\"cmd\" which Windows can execute\nclaude mcp add --transport stdio my-server -- cmd /c npx -y @some/package",
-              "kind": "command"
-            },
-            {
               "title": "原页关键片段：Plugin-provided MCP servers 1",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
               "code": "{\n  \"mcpServers\": {\n    \"database-tools\": {\n      \"command\": \"${CLAUDE_PLUGIN_ROOT}/servers/db-server\",\n      \"args\": [\"--config\", \"${CLAUDE_PLUGIN_ROOT}/config.json\"],\n      \"env\": {\n        \"DB_URL\": \"${DB_URL}\"\n      }\n    }\n  }\n}",
@@ -5333,6 +5327,12 @@
               "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
               "code": "{\n  \"mcpServers\": {\n    \"shared-server\": {\n      \"command\": \"/path/to/server\",\n      \"args\": [],\n      \"env\": {}\n    }\n  }\n}",
               "kind": "config"
+            },
+            {
+              "title": "原页关键片段：User scope",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "# Add a user server\nclaude mcp add --transport http hubspot --scope user https://mcp.hubspot.com/anthropic",
+              "kind": "command"
             }
           ]
         },
@@ -5435,14 +5435,6 @@
           "paragraphs": [
             "这一段主要是在把\"Push messages with channels\"讲实，不是只摆个标题给你看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Push messages with channels",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "# This creates command=\"cmd\" which Windows can execute\nclaude mcp add --transport stdio my-server -- cmd /c npx -y @some/package",
-              "kind": "command"
-            }
           ]
         },
         {
@@ -13439,7 +13431,8 @@
         {
           "title": "How constraints interact",
           "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。"
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -13988,7 +13981,7 @@
           "title": "Global config settings",
           "paragraphs": [
             "这一段主要是在把\"Global config settings\"讲实，不是只摆个标题给你看。",
-            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -15875,7 +15868,7 @@
             {
               "title": "原页关键片段：Available data",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
+              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"effort\": {\n    \"level\": \"high\"\n  },\n  \"thinking\": {\n    \"enabled\": true\n  },\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
               "kind": "config"
             },
             {
@@ -16002,7 +15995,7 @@
             {
               "title": "Available data",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
+              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"effort\": {\n    \"level\": \"high\"\n  },\n  \"thinking\": {\n    \"enabled\": true\n  },\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
               "kind": "config"
             }
           ]
@@ -17614,7 +17607,7 @@
             {
               "title": "PostToolUse 1",
               "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUse\",\n  \"tool_name\": \"Write\",\n  \"tool_input\": {\n    \"file_path\": \"/path/to/file.txt\",\n    \"content\": \"file content\"\n  },\n  \"tool_response\": {\n    \"filePath\": \"/path/to/file.txt\",\n    \"success\": true\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\"\n}",
+              "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUse\",\n  \"tool_name\": \"Write\",\n  \"tool_input\": {\n    \"file_path\": \"/path/to/file.txt\",\n    \"content\": \"file content\"\n  },\n  \"tool_response\": {\n    \"filePath\": \"/path/to/file.txt\",\n    \"success\": true\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"duration_ms\": 12\n}",
               "kind": "config"
             },
             {
@@ -17635,7 +17628,7 @@
             {
               "title": "PostToolUseFailure 1",
               "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUseFailure\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"npm test\",\n    \"description\": \"Run test suite\"\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"error\": \"Command exited with non-zero status code 1\",\n  \"is_interrupt\": false\n}",
+              "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUseFailure\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"npm test\",\n    \"description\": \"Run test suite\"\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"error\": \"Command exited with non-zero status code 1\",\n  \"is_interrupt\": false,\n  \"duration_ms\": 4187\n}",
               "kind": "config"
             },
             {
