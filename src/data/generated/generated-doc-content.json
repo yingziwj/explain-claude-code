@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-25T04:44:44.875Z",
-  "sourceGeneratedAt": "2026-04-25T04:44:44.569Z",
+  "generatedAt": "2026-04-26T05:21:31.963Z",
+  "sourceGeneratedAt": "2026-04-26T05:21:31.657Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -15337,9 +15337,15 @@
               "kind": "command"
             },
             {
-              "title": "原页关键片段：Create a custom theme",
+              "title": "原页关键片段：Create a custom theme 1",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
               "code": "{\n  \"name\": \"Dracula\",\n  \"base\": \"dark\",\n  \"overrides\": {\n    \"claude\": \"#bd93f9\",\n    \"error\": \"#ff5555\",\n    \"success\": \"#50fa7b\"\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Create a custom theme 2",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"name\": \"Midnight\",\n  \"base\": \"dark\",\n  \"overrides\": {\n    \"claude\": \"#a78bfa\",\n    \"planMode\": \"#38bdf8\",\n    \"diffAdded\": \"#14532d\",\n    \"diffRemoved\": \"#7f1d1d\",\n    \"userMessageBackground\": \"#1e1b4b\"\n  }\n}",
               "kind": "config"
             },
             {
@@ -15415,9 +15421,15 @@
           ],
           "steps": [
             {
-              "title": "Create a custom theme",
+              "title": "Create a custom theme 1",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
               "code": "{\n  \"name\": \"Dracula\",\n  \"base\": \"dark\",\n  \"overrides\": {\n    \"claude\": \"#bd93f9\",\n    \"error\": \"#ff5555\",\n    \"success\": \"#50fa7b\"\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Create a custom theme 2",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"name\": \"Midnight\",\n  \"base\": \"dark\",\n  \"overrides\": {\n    \"claude\": \"#a78bfa\",\n    \"planMode\": \"#38bdf8\",\n    \"diffAdded\": \"#14532d\",\n    \"diffRemoved\": \"#7f1d1d\",\n    \"userMessageBackground\": \"#1e1b4b\"\n  }\n}",
               "kind": "config"
             }
           ]
