@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-27T05:33:38.449Z",
-  "sourceGeneratedAt": "2026-04-27T05:33:38.119Z",
+  "generatedAt": "2026-04-28T05:40:50.304Z",
+  "sourceGeneratedAt": "2026-04-28T05:40:49.975Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -265,7 +265,8 @@
         {
           "title": "Step 1: Install Claude Code",
           "paragraphs": [
-            "看到这里，就把\"Step 1: Install Claude Code\"当成一件真要上手的活来看。"
+            "看到这里，就把\"Step 1: Install Claude Code\"当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ],
           "steps": [
             {
@@ -514,7 +515,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.119、2.1.118、2.1.117、2.1.116 这些环节往下讲。",
+            "原文这页大多会按 2.1.121、2.1.120、2.1.119、2.1.118 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -523,7 +524,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.119 -> 2.1.118 -> 2.1.117 -> 2.1.116。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.121 -> 2.1.120 -> 2.1.119 -> 2.1.118。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         }
       ],
@@ -8814,15 +8815,15 @@
           ]
         },
         {
-          "title": "Windows: Claude Code on Windows requires git-bash",
+          "title": "Windows: “Claude Code on Windows requires either Git for Windows (for bash) or PowerShell”",
           "paragraphs": [
-            "这一块主要是在说\"Windows: Claude Code on Windows requires git-bash\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里不是让你背\"Windows: “Claude Code on Windows requires either Git for Windows (for bash) or PowerShell”\"这个词，而是让你看它真干活时怎么使。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ],
           "steps": [
             {
-              "title": "Windows: Claude Code on Windows requires git-bash",
-              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "title": "Windows: “Claude Code on Windows requires either Git for Windows (for bash) or PowerShell”",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
               "code": "{\n  \"env\": {\n    \"CLAUDE_CODE_GIT_BASH_PATH\": \"C:\\\\Program Files\\\\Git\\\\bin\\\\bash.exe\"\n  }\n}",
               "kind": "config"
             }
@@ -8870,16 +8871,10 @@
           ],
           "steps": [
             {
-              "title": "Illegal instruction on Linux 1",
+              "title": "Illegal instruction on Linux",
               "body": "\"Illegal instruction on Linux\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
               "code": "bash: line 142: 2238232 Illegal instruction    \"$binary_path\" install ${TARGET:+\"$TARGET\"}",
               "kind": "code"
-            },
-            {
-              "title": "Illegal instruction on Linux 2",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "brew install --cask claude-code",
-              "kind": "command"
             }
           ]
         },
@@ -8900,12 +8895,6 @@
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
               "code": "dyld: Symbol not found: _ubrk_clone\n  Referenced from: claude-darwin-x64 (which was built for Mac OS X 13.0)\n  Expected in: /usr/lib/libicucore.A.dylib",
               "kind": "code"
-            },
-            {
-              "title": "dyld: cannot load on macOS 3",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "brew install --cask claude-code",
-              "kind": "command"
             }
           ]
         },
@@ -9845,7 +9834,7 @@
             {
               "title": "原页关键片段：IAM configuration",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"AllowModelAndInferenceProfileAccess\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"bedrock:InvokeModel\",\n        \"bedrock:InvokeModelWithResponseStream\",\n        \"bedrock:ListInferenceProfiles\"\n      ],\n      \"Resource\": [\n        \"arn:aws:bedrock:*:*:inference-profile/*\",\n        \"arn:aws:bedrock:*:*:application-inference-profile/*\",\n        \"arn:aws:bedrock:*:*:foundation-model/*\"\n      ]\n    },\n    {\n      \"Sid\": \"AllowMarketplaceSubscription\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"aws-marketplace:ViewSubscriptions\",\n        \"aws-marketplace:Subscribe\"\n      ],\n      \"Resource\": \"*\",\n      \"Condition\": {\n        \"StringEquals\": {\n          \"aws:CalledViaLast\": \"bedrock.amazonaws.com\"\n        }\n      }\n    }\n  ]\n}",
+              "code": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"AllowModelAndInferenceProfileAccess\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"bedrock:InvokeModel\",\n        \"bedrock:InvokeModelWithResponseStream\",\n        \"bedrock:ListInferenceProfiles\",\n        \"bedrock:GetInferenceProfile\"\n      ],\n      \"Resource\": [\n        \"arn:aws:bedrock:*:*:inference-profile/*\",\n        \"arn:aws:bedrock:*:*:application-inference-profile/*\",\n        \"arn:aws:bedrock:*:*:foundation-model/*\"\n      ]\n    },\n    {\n      \"Sid\": \"AllowMarketplaceSubscription\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"aws-marketplace:ViewSubscriptions\",\n        \"aws-marketplace:Subscribe\"\n      ],\n      \"Resource\": \"*\",\n      \"Condition\": {\n        \"StringEquals\": {\n          \"aws:CalledViaLast\": \"bedrock.amazonaws.com\"\n        }\n      }\n    }\n  ]\n}",
               "kind": "config"
             },
             {
@@ -9994,7 +9983,7 @@
             {
               "title": "IAM configuration",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"AllowModelAndInferenceProfileAccess\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"bedrock:InvokeModel\",\n        \"bedrock:InvokeModelWithResponseStream\",\n        \"bedrock:ListInferenceProfiles\"\n      ],\n      \"Resource\": [\n        \"arn:aws:bedrock:*:*:inference-profile/*\",\n        \"arn:aws:bedrock:*:*:application-inference-profile/*\",\n        \"arn:aws:bedrock:*:*:foundation-model/*\"\n      ]\n    },\n    {\n      \"Sid\": \"AllowMarketplaceSubscription\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"aws-marketplace:ViewSubscriptions\",\n        \"aws-marketplace:Subscribe\"\n      ],\n      \"Resource\": \"*\",\n      \"Condition\": {\n        \"StringEquals\": {\n          \"aws:CalledViaLast\": \"bedrock.amazonaws.com\"\n        }\n      }\n    }\n  ]\n}",
+              "code": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"AllowModelAndInferenceProfileAccess\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"bedrock:InvokeModel\",\n        \"bedrock:InvokeModelWithResponseStream\",\n        \"bedrock:ListInferenceProfiles\",\n        \"bedrock:GetInferenceProfile\"\n      ],\n      \"Resource\": [\n        \"arn:aws:bedrock:*:*:inference-profile/*\",\n        \"arn:aws:bedrock:*:*:application-inference-profile/*\",\n        \"arn:aws:bedrock:*:*:foundation-model/*\"\n      ]\n    },\n    {\n      \"Sid\": \"AllowMarketplaceSubscription\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"aws-marketplace:ViewSubscriptions\",\n        \"aws-marketplace:Subscribe\"\n      ],\n      \"Resource\": \"*\",\n      \"Condition\": {\n        \"StringEquals\": {\n          \"aws:CalledViaLast\": \"bedrock.amazonaws.com\"\n        }\n      }\n    }\n  ]\n}",
               "kind": "config"
             }
           ]
@@ -10858,73 +10847,111 @@
             "先按最小 devcontainer 方案跑通，再逐步加团队自己的东西。",
             "重点不只是能启动，还要看权限、挂载和工具链是不是都准备对了。",
             "容器这条路适合想把环境差异压到最低的团队。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Add Claude Code to your dev container",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"image\": \"mcr.microsoft.com/devcontainers/base:ubuntu\",\n  \"features\": {\n    \"ghcr.io/anthropics/devcontainer-features/claude-code:1.0\": {}\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Persist authentication and settings across rebuilds",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "\"mounts\": [\n  \"source=claude-code-config,target=/home/node/.claude,type=volume\"\n]",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Enforce organization policy 1",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "RUN mkdir -p /etc/claude-code\nCOPY managed-settings.json /etc/claude-code/managed-settings.json",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Enforce organization policy 2",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "\"containerEnv\": {\n  \"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\": \"1\",\n  \"DISABLE_AUTOUPDATER\": \"1\"\n}",
+              "kind": "code"
+            }
           ]
         },
         {
-          "title": "Key features",
+          "title": "Add Claude Code to your dev container",
           "paragraphs": [
-            "这一段主要是在把\"Key features\"讲实，不是只摆个标题给你看。",
+            "这里不是让你背\"Add Claude Code to your dev container\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Add Claude Code to your dev container",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"image\": \"mcr.microsoft.com/devcontainers/base:ubuntu\",\n  \"features\": {\n    \"ghcr.io/anthropics/devcontainer-features/claude-code:1.0\": {}\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Persist authentication and settings across rebuilds",
+          "paragraphs": [
+            "看到这里，就把\"Persist authentication and settings across rebuilds\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Persist authentication and settings across rebuilds",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "\"mounts\": [\n  \"source=claude-code-config,target=/home/node/.claude,type=volume\"\n]",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Enforce organization policy",
+          "paragraphs": [
+            "看到这里，就把\"Enforce organization policy\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Enforce organization policy 1",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "RUN mkdir -p /etc/claude-code\nCOPY managed-settings.json /etc/claude-code/managed-settings.json",
+              "kind": "config"
+            },
+            {
+              "title": "Enforce organization policy 2",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "\"containerEnv\": {\n  \"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\": \"1\",\n  \"DISABLE_AUTOUPDATER\": \"1\"\n}",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Restrict network egress",
+          "paragraphs": [
+            "看到这里，就把\"Restrict network egress\"当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Run without permission prompts",
+          "paragraphs": [
+            "看到这里，就把\"Run without permission prompts\"当成一件真要上手的活来看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
-          "title": "Getting started in 4 steps",
+          "title": "Try the reference container",
           "paragraphs": [
-            "这一段就是安装 VS Code and the Dev Containers extension。这种地方最怕跳步骤，最好老老实实按顺序来。",
+            "这一段就是给你查规矩的，像看说明书那样一项项对着来。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
-          "title": "Configuration breakdown",
+          "title": "Next steps",
           "paragraphs": [
-            "这一段不只是挂个标题，它是在说明\"Configuration breakdown\"这一块到底负责什么。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ]
-        },
-        {
-          "title": "Security features",
-          "paragraphs": [
-            "别把这段只当成标题看，它其实是在给\"Security features\"划边界。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ]
-        },
-        {
-          "title": "Customization options",
-          "paragraphs": [
-            "这一段不只是挂个标题，它是在说明\"Customization options\"这一块到底负责什么。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ]
-        },
-        {
-          "title": "Example use cases",
-          "paragraphs": [
-            "这一段主要是拿例子给你看路数，不是让你一字不差照搬。"
-          ]
-        },
-        {
-          "title": "Secure client work",
-          "paragraphs": [
-            "这一段是在说怎么用 devcontainers 去做 isolate different client projects, ensuring code and credentials never mix between environments.。看这种内容，光知道名字没用，还是得落到手上。",
+            "这里不是让你背\"Next steps\"这个词，而是让你看它真干活时怎么使。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Team onboarding",
-          "paragraphs": [
-            "这里不是让你背\"Team onboarding\"这个词，而是让你看它真干活时怎么使。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ]
-        },
-        {
-          "title": "Consistent CI/CD environments",
-          "paragraphs": [
-            "这一段主要是在把\"Consistent CI/CD environments\"讲实，不是只摆个标题给你看。"
-          ]
-        },
-        {
-          "title": "Related resources",
-          "paragraphs": [
-            "这一段主要是在把\"Related resources\"讲实，不是只摆个标题给你看。"
           ]
         }
       ],
@@ -11143,7 +11170,8 @@
         {
           "title": "Install Claude Code",
           "paragraphs": [
-            "这段就是手把手操作，照顺序来最稳。"
+            "这段就是手把手操作，照顺序来最稳。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ],
           "steps": [
             {
@@ -13374,6 +13402,18 @@
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
               "code": "claude plugin tag --push",
               "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Remove orphaned auto-installed dependencies 1",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude plugin prune",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Remove orphaned auto-installed dependencies 2",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude plugin uninstall deploy-kit --prune",
+              "kind": "command"
             }
           ]
         },
@@ -13433,6 +13473,27 @@
           "paragraphs": [
             "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Remove orphaned auto-installed dependencies",
+          "paragraphs": [
+            "这一段主要是在把\"Remove orphaned auto-installed dependencies\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Remove orphaned auto-installed dependencies 1",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude plugin prune",
+              "kind": "command"
+            },
+            {
+              "title": "Remove orphaned auto-installed dependencies 2",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude plugin uninstall deploy-kit --prune",
+              "kind": "command"
+            }
           ]
         },
         {
@@ -16800,8 +16861,8 @@
           ],
           "steps": [
             {
-              "title": "原页关键片段：Bash mode with ! prefix",
-              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "title": "原页关键片段：Shell mode with ! prefix",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
               "code": "! npm test\n! git status\n! ls -la",
               "kind": "code"
             },
@@ -16942,15 +17003,15 @@
           ]
         },
         {
-          "title": "Bash mode with ! prefix",
+          "title": "Shell mode with ! prefix",
           "paragraphs": [
-            "这一段是在把 bash commands directly without going through Claude by prefixing your input with !: 真跑起来。别只看命令长什么样，还得看跑完该出现什么。",
+            "这一段是在把 shell commands directly without going through Claude by prefixing your input with !: 真跑起来。别只看命令长什么样，还得看跑完该出现什么。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
-              "title": "Bash mode with ! prefix",
-              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "title": "Shell mode with ! prefix",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
               "code": "! npm test\n! git status\n! ls -la",
               "kind": "code"
             }
@@ -17625,7 +17686,7 @@
             {
               "title": "PostToolUse 2",
               "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"decision\": \"block\",\n  \"reason\": \"Explanation for decision\",\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolUse\",\n    \"additionalContext\": \"Additional information for Claude\"\n  }\n}",
+              "code": "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolUse\",\n    \"additionalContext\": \"Additional information for Claude\",\n    \"updatedToolOutput\": {\n      \"stdout\": \"[redacted]\",\n      \"stderr\": \"\",\n      \"interrupted\": false,\n      \"isImage\": false\n    }\n  }\n}",
               "kind": "config"
             }
           ]
@@ -18238,6 +18299,20 @@
           ]
         },
         {
+          "title": "plugin prune",
+          "paragraphs": [
+            "这一块主要是在说\"plugin prune\"真到手上该怎么用，哪里最容易踩坑。"
+          ],
+          "steps": [
+            {
+              "title": "plugin prune",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude plugin prune [options]",
+              "kind": "command"
+            }
+          ]
+        },
+        {
           "title": "plugin enable",
           "paragraphs": [
             "这里不是让你背\"plugin enable\"这个词，而是让你看它真干活时怎么使。"
@@ -18275,20 +18350,6 @@
               "title": "plugin update",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
               "code": "claude plugin update <plugin> [options]",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "plugin list",
-          "paragraphs": [
-            "看到这里，就把\"plugin list\"当成一件真要上手的活来看。"
-          ],
-          "steps": [
-            {
-              "title": "plugin list",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "claude plugin list [options]",
               "kind": "command"
             }
           ]
@@ -26189,6 +26250,152 @@
         "title": "一眼看懂这一页",
         "lines": [
           "What's new",
+          "   |",
+          "   v",
+          "这是 What's New 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "whats-new/2026-w17": {
+      "sourceLabel": "Week 17 · April 20–24, 2026",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Week 17 · Apr 20–24：/ultrareview opens as a research preview, automatic session recaps when you return to a terminal, custom color themes you can build and ship in plugins, and a redesigned Claude Code on the web.",
+            "你可以把它当成\"What's New\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Week 17 · Apr 20–24\"理解成 What's New 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "这页的重点不是空讲概念，而是让你先明白它到底替你省哪种事。放在这整个文档站里，它更像是在教你怎么 把这摊活讲明白。",
+            "翻成人话，大概就是：/ultrareview opens as a research preview, automatic session recaps when you return to a terminal, custom color themes you can build and ship in plugins, and a redesigned Claude Code on the web."
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，这页属于\"What's New\"这一类，最好边做边验，不要攒到最后才一起看结果。"
+          ],
+          "steps": [
+            {
+              "kind": "prompt",
+              "title": "原页里的关键命令/代码 1",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"关键片段 1\"这一段的意思去办。",
+              "code": "> /ultrareview"
+            },
+            {
+              "kind": "prompt",
+              "title": "原页里的关键命令/代码 2",
+              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
+              "code": "> /ultrareview 1234"
+            },
+            {
+              "kind": "prompt",
+              "title": "原页里的关键命令/代码 3",
+              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
+              "code": "> /recap"
+            },
+            {
+              "kind": "prompt",
+              "title": "原页里的关键命令/代码 4",
+              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
+              "code": "> /theme"
+            }
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Week 17 · Apr 20–24",
+          "   |",
+          "   v",
+          "这是 What's New 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "whats-new/2026-w16": {
+      "sourceLabel": "Week 16 · April 13–17, 2026",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Week 16 · Apr 13–17：Claude Opus 4.7 with the new xhigh effort level, Routines on Claude Code on the web, /ultrareview cloud code review, a /usage breakdown that shows what's driving your limits, and native binaries replacing the bundled JavaScript.",
+            "你可以把它当成\"What's New\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Week 16 · Apr 13–17\"理解成 What's New 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "这页的重点不是空讲概念，而是让你先明白它到底替你省哪种事。放在这整个文档站里，它更像是在教你怎么 把这摊活讲明白。",
+            "翻成人话，大概就是：Claude Opus 4.7 with the new xhigh effort level, Routines on Claude Code on the web, /ultrareview cloud code review, a /usage breakdown that shows what’s driving your limits, and native binaries replacing the bundled JavaScript."
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，这页属于\"What's New\"这一类，最好边做边验，不要攒到最后才一起看结果。"
+          ],
+          "steps": [
+            {
+              "kind": "prompt",
+              "title": "原页里的关键命令/代码 1",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"关键片段 1\"这一段的意思去办。",
+              "code": "> /model opus\n> /effort xhigh"
+            },
+            {
+              "kind": "prompt",
+              "title": "原页里的关键命令/代码 2",
+              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
+              "code": "> /schedule daily PR review at 9am"
+            },
+            {
+              "kind": "prompt",
+              "title": "原页里的关键命令/代码 3",
+              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
+              "code": "> /usage"
+            },
+            {
+              "kind": "prompt",
+              "title": "原页里的关键命令/代码 4",
+              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
+              "code": "> /ultrareview"
+            },
+            {
+              "kind": "prompt",
+              "title": "原页里的关键命令/代码 5",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"关键片段 5\"这一段的意思去办。",
+              "code": "> /ultrareview 1234"
+            },
+            {
+              "kind": "command",
+              "title": "原页里的关键命令/代码 6",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude update\nclaude --version"
+            }
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Week 16 · Apr 13–17",
           "   |",
           "   v",
           "这是 What's New 里的一摊要紧活",

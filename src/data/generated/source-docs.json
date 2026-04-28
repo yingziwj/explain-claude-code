@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-27T05:33:38.119Z",
+  "generatedAt": "2026-04-28T05:40:49.975Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -569,6 +569,14 @@
           "path": "/docs/en/whats-new"
         },
         {
+          "title": "Week 17 · Apr 20–24",
+          "path": "/docs/en/whats-new/2026-w17"
+        },
+        {
+          "title": "Week 16 · Apr 13–17",
+          "path": "/docs/en/whats-new/2026-w16"
+        },
+        {
           "title": "Week 15 · Apr 6–10",
           "path": "/docs/en/whats-new/2026-w15"
         },
@@ -621,7 +629,7 @@
         "Windows PowerShell:",
         "Windows CMD:",
         "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. If you see 'irm' is not recognized as an internal or external command, you’re in CMD, not PowerShell. Your prompt shows PS C:\\ when you’re in PowerShell and C:\\ without the PS when you’re in CMD.",
-        "Native Windows setups require Git for Windows. Install it first if you don’t have it. WSL setups do not need it.",
+        "Git for Windows is recommended on native Windows so Claude Code can use the Bash tool. If Git for Windows is not installed, Claude Code uses PowerShell as the shell tool instead. WSL setups do not need Git for Windows.",
         "Native installations automatically update in the background to keep you on the latest version.",
         "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship.",
         "Homebrew installations do not auto-update. Run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed, to get the latest features and security fixes.",
@@ -856,7 +864,7 @@
         "Windows PowerShell:",
         "Windows CMD:",
         "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. If you see 'irm' is not recognized as an internal or external command, you’re in CMD, not PowerShell. Your prompt shows PS C:\\ when you’re in PowerShell and C:\\ without the PS when you’re in CMD.",
-        "Native Windows setups require Git for Windows. Install it first if you don’t have it. WSL setups do not need it.",
+        "Git for Windows is recommended on native Windows so Claude Code can use the Bash tool. If Git for Windows is not installed, Claude Code uses PowerShell as the shell tool instead. WSL setups do not need Git for Windows.",
         "Native installations automatically update in the background to keep you on the latest version.",
         "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship.",
         "Homebrew installations do not auto-update. Run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed, to get the latest features and security fixes.",
@@ -995,7 +1003,7 @@
             "Windows PowerShell:",
             "Windows CMD:",
             "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. If you see 'irm' is not recognized as an internal or external command, you’re in CMD, not PowerShell. Your prompt shows PS C:\\ when you’re in PowerShell and C:\\ without the PS when you’re in CMD.",
-            "Native Windows setups require Git for Windows. Install it first if you don’t have it. WSL setups do not need it.",
+            "Git for Windows is recommended on native Windows so Claude Code can use the Bash tool. If Git for Windows is not installed, Claude Code uses PowerShell as the shell tool instead. WSL setups do not need Git for Windows.",
             "Native installations automatically update in the background to keep you on the latest version.",
             "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship.",
             "Homebrew installations do not auto-update. Run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed, to get the latest features and security fixes.",
@@ -1200,6 +1208,8 @@
       "metaDescription": "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
       "headings": [],
       "toc": [
+        "2.1.121",
+        "2.1.120",
         "2.1.119",
         "2.1.118",
         "2.1.117",
@@ -1217,14 +1227,73 @@
         "2.1.98",
         "2.1.97",
         "2.1.96",
-        "2.1.94",
-        "2.1.92",
-        "2.1.91"
+        "2.1.94"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Added alwaysLoad option to MCP server config — when true, all tools from that server skip tool-search deferral and are always available",
+        "Added claude plugin prune to remove orphaned auto-installed plugin dependencies; plugin uninstall --prune cascades",
+        "Added a type-to-filter search box to /skills so you can find a skill in long lists without scrolling",
+        "PostToolUse hooks can now replace tool output for all tools via hookSpecificOutput.updatedToolOutput (previously MCP-only)",
+        "Fullscreen mode: typing into the prompt no longer jumps scroll back to the bottom after you’ve scrolled up to read earlier output",
+        "Dialogs that overflow the terminal are now scrollable with arrow keys, PgUp/PgDn, home/end, and mouse wheel in both fullscreen and non-fullscreen modes",
+        "Clicking any line of a long URL that wraps across rows in fullscreen mode now opens the full URL",
+        "SDK and claude -p: CLAUDE_CODE_FORK_SUBAGENT=1 now works in non-interactive sessions",
+        "--dangerously-skip-permissions no longer prompts for writes to .claude/skills/, .claude/agents/, and .claude/commands/",
+        "/terminal-setup now enables iTerm2’s “Applications in terminal may access clipboard” setting so /copy works, including from tmux",
+        "MCP servers that hit a transient error during startup now auto-retry up to 3 times instead of staying disconnected",
+        "The terminal tab session title is now generated in your configured language setting",
+        "Claude.ai connectors with the same upstream URL are now deduplicated instead of appearing as duplicates",
+        "Vertex AI: support X.509 certificate-based Workload Identity Federation (mTLS ADC)",
+        "Faster startup after upgrading: removed the Recent Activity panel from the release-notes splash",
+        "LSP diagnostic summaries now expand on click/ctrl+o and show the expand hint",
+        "SDK: mcp_authenticate now supports redirectUri for custom scheme completion and claude.ai connectors",
+        "OpenTelemetry: added stop_reason, gen_ai.response.finish_reasons, and user_system_prompt (gated behind OTEL_LOG_USER_PROMPTS) to LLM request spans",
+        "[VSCode] Voice dictation now respects the accessibility.voice.speechLanguage setting when no Claude Code language is configured",
+        "[VSCode] /context now opens a native token usage dialog",
+        "Fixed unbounded memory growth (multi-GB RSS) when processing many images in a session",
+        "Fixed /usage leaking up to ~2GB of memory on machines with large transcript histories",
+        "Fixed memory leak when long-running tools fail to emit a clear progress event",
+        "Fixed Bash tool becoming permanently unusable when the directory Claude was started in is deleted or moved mid-session",
+        "Fixed --resume crashing on startup in external builds",
+        "Fixed --resume failing on large sessions when a transcript line was corrupted by an unclean shutdown — the corrupt line is now skipped",
+        "Fixed thinking.type.enabled is not supported error when using Bedrock application inference profile ARNs",
+        "Fixed Microsoft 365 MCP OAuth failing with duplicate or unsupported prompt parameter",
+        "Fixed scrollback duplication when pressing Ctrl+L or triggering a redraw in non-fullscreen mode on tmux, GNOME Terminal, Windows Terminal, and Konsole",
+        "Fixed claude.ai MCP connectors silently disappearing when the connector-list fetch hits a transient auth error at startup",
+        "Fixed “Always allow” rules for built-in tools in remote sessions not surviving worker restarts",
+        "Fixed NO_PROXY not being respected for all HTTP clients when set via managed-settings.json under the native build",
+        "Fixed managed settings approval prompt exiting the session even when accepted — now applies settings and continues",
+        "Fixed /usage returning “rate limited” after a stale OAuth token — now refreshes automatically",
+        "Fixed invalid legacy enum values in settings.json invalidating the entire settings file",
+        "Fixed /usage dialog content being clipped when no-flicker mode is off",
+        "Fixed /focus showing “Unknown command” when the fullscreen renderer is off — now explains how to enable it",
+        "Fixed embedded grep/find/rg shell wrappers failing when the running binary is deleted mid-session — now falls back to installed tools",
+        "Reduced peak file descriptor usage during find in the Bash tool on large directory trees",
+        "Windows: Git for Windows (Git Bash) is no longer required — when absent, Claude Code uses PowerShell as the shell tool",
+        "Added claude ultrareview [target] subcommand to run /ultrareview non-interactively from CI or scripts — prints findings to stdout (--json for raw output) and exits 0 on completion or 1 on failure",
+        "Skills can now reference the current effort level with ${CLAUDE_EFFORT} in their content",
+        "Set AI_AGENT environment variable for subprocesses so gh can attribute traffic to Claude Code",
+        "Spinner tips that recommend installing the desktop app or creating skills/agents are now hidden when you already have them",
+        "Show a “use PgUp/PgDn to scroll” hint when the terminal sends arrow keys instead of scroll events",
+        "Faster session start when you have many claude.ai connectors configured but not authorized",
+        "The auto mode denial message now links to the configuration docs",
+        "claude plugin validate now accepts $schema, version, and description at the top level of marketplace.json and $schema in plugin.json",
+        "Auto-compact in auto mode now displays auto (lowercase, no token count) instead of a misleading token value",
+        "Fixed pressing Esc during a stdio MCP tool call closing the entire server connection (regression in 2.1.105)",
+        "Fixed /rewind and other interactive overlays not responding to keyboard input after launching with claude --resume",
+        "Fixed terminal scrollback duplication in non-fullscreen mode (resize, dialog dismiss, long sessions)",
+        "Fixed DISABLE_TELEMETRY / CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC not suppressing usage metrics telemetry for API and enterprise users",
+        "Fixed false-positive “Dangerous rm operation” permission prompts in auto mode for multi-line bash commands containing both a pipe and a redirect",
+        "Fixed long selection menus clipping below the terminal in fullscreen mode — the focused option now stays on screen as you scroll",
+        "Fixed Write tool output collapsing instead of expanding when clicking “+N lines” in fullscreen",
+        "Fixed slash command picker jumping while typing, and improved highlight to only match contiguous substrings in blue",
+        "Fixed /plugin marketplace failing to load when one entry uses an unrecognized source format — that entry is shown but installing it prompts you to update",
+        "[VSCode] /usage now opens the native Account & Usage dialog instead of returning plain-text session cost",
+        "[VSCode] Voice dictation now respects the language setting in ~/.claude/settings.json",
+        "Fixed find in the Bash tool exhausting open file descriptors on large directory trees, causing host-wide crashes (macOS/Linux native builds)",
         "/config settings (theme, editor mode, verbose, etc.) now persist to ~/.claude/settings.json and participate in project/local/policy override precedence",
         "Added prUrlTemplate setting to point the footer PR badge at a custom code-review URL instead of github.com",
         "Added CLAUDE_CODE_HIDE_CWD environment variable to hide the working directory in the startup logo",
@@ -1340,68 +1409,7 @@
         "Fixed Opus 4.7 sessions showing inflated /context percentages and autocompacting too early — Claude Code was computing against a 200K context window instead of Opus 4.7’s native 1M",
         "/resume on large sessions is significantly faster (up to 67% on 40MB+ sessions) and handles sessions with many dead-fork entries more efficiently",
         "Faster MCP startup when multiple stdio servers are configured; resources/templates/list is now deferred to first @-mention",
-        "Smoother fullscreen scrolling in VS Code, Cursor, and Windsurf terminals — /terminal-setup now configures the editor’s scroll sensitivity",
-        "Thinking spinner now shows progress inline (“still thinking”, “thinking more”, “almost done thinking”), replacing the separate hint row",
-        "/config search now matches option values (e.g. searching “vim” finds the Editor mode setting)",
-        "/doctor can now be opened while Claude is responding, without waiting for the current turn to finish",
-        "/reload-plugins and background plugin auto-update now auto-install missing plugin dependencies from marketplaces you’ve already added",
-        "Bash tool now surfaces a hint when gh commands hit GitHub’s API rate limit, so agents can back off instead of retrying",
-        "The Usage tab in Settings now shows your 5-hour and weekly usage immediately and no longer fails when the usage endpoint is rate-limited",
-        "Agent frontmatter hooks: now fire when running as a main-thread agent via --agent",
-        "Slash command menu now shows “No commands match” when your filter has zero results, instead of disappearing",
-        "Security: sandbox auto-allow no longer bypasses the dangerous-path safety check for rm/rmdir targeting /, $HOME, or other critical system directories",
-        "Claude Code and installer now use https://downloads.claude.ai/claude-code-releases instead of https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases",
-        "Fixed Devanagari and other Indic scripts rendering with broken column alignment in the terminal UI",
-        "Fixed Ctrl+- not triggering undo in terminals using the Kitty keyboard protocol (iTerm2, Ghostty, kitty, WezTerm, Windows Terminal)",
-        "Fixed Cmd+Left/Right not jumping to line start/end in terminals that use the Kitty keyboard protocol (Warp fullscreen, kitty, Ghostty, WezTerm)",
-        "Fixed Ctrl+Z hanging the terminal when Claude Code is launched via a wrapper process (e.g. npx, bun run)",
-        "Fixed scrollback duplication in inline mode where resizing the terminal or large output bursts would repeat earlier conversation history",
-        "Fixed modal search dialogs overflowing the screen at short terminal heights, hiding the search box and keyboard hints",
-        "Fixed scattered blank cells and disappearing composer chrome in the VS Code integrated terminal during scrolling",
-        "Fixed an intermittent API 400 error related to cache control TTL ordering that could occur when a parallel request completed during request setup",
-        "Fixed /branch rejecting conversations with transcripts larger than 50MB",
-        "Fixed /resume silently showing an empty conversation on large session files instead of reporting the load error",
-        "Fixed /plugin Installed tab showing the same item twice when it appears under Needs attention or Favorites",
-        "Fixed /update and /tui not working after entering a worktree mid-session",
-        "Fixed a crash in the permission dialog when an agent teams teammate requested tool permission",
-        "Changed the CLI to spawn a native Claude Code binary (via a per-platform optional dependency) instead of bundled JavaScript",
-        "Added sandbox.network.deniedDomains setting to block specific domains even when a broader allowedDomains wildcard would otherwise permit them",
-        "Fullscreen mode: Shift+↑/↓ now scrolls the viewport when extending a selection past the visible edge",
-        "Ctrl+A and Ctrl+E now move to the start/end of the current logical line in multiline input, matching readline behavior",
-        "Windows: Ctrl+Backspace now deletes the previous word",
-        "Long URLs in responses and bash output stay clickable when they wrap across lines (in terminals with OSC 8 hyperlinks)",
-        "Improved /loop: pressing Esc now cancels pending wakeups, and wakeups display as “Claude resuming /loop wakeup” for clarity",
-        "/extra-usage now works from Remote Control (mobile/web) clients",
-        "Remote Control clients can now query @-file autocomplete suggestions",
-        "Improved /ultrareview: faster launch with parallelized checks, diffstat in the launch dialog, and animated launching state",
-        "Subagents that stall mid-stream now fail with a clear error after 10 minutes instead of hanging silently",
-        "Bash tool: multi-line commands whose first line is a comment now show the full command in the transcript, closing a UI-spoofing vector",
-        "Running cd <current-directory> && git … no longer triggers a permission prompt when the cd is a no-op",
-        "Security: on macOS, /private/{etc,var,tmp,home} paths are now treated as dangerous removal targets under Bash(rm:*) allow rules",
-        "Security: Bash deny rules now match commands wrapped in env/sudo/watch/ionice/setsid and similar exec wrappers",
-        "Security: Bash(find:*) allow rules no longer auto-approve find -exec/-delete",
-        "Fixed MCP concurrent-call timeout handling where a message for one tool call could silently disarm another call’s watchdog",
-        "Fixed Cmd-backspace / Ctrl+U to once again delete from the cursor to the start of the line",
-        "Fixed markdown tables breaking when a cell contains an inline code span with a pipe character",
-        "Fixed session recap auto-firing while composing unsent text in the prompt",
-        "Fixed /copy “Full response” not aligning markdown table columns for pasting into GitHub, Notion, or Slack",
-        "Fixed messages typed while viewing a running subagent being hidden from its transcript and misattributed to the parent AI",
-        "Fixed Bash dangerouslyDisableSandbox running commands outside the sandbox without a permission prompt",
-        "Fixed /effort auto confirmation — now says “Effort level set to max” to match the status bar label",
-        "Fixed the “copied N chars” toast overcounting emoji and other multi-code-unit characters",
-        "Fixed /insights crashing with EBUSY on Windows",
-        "Fixed exit confirmation dialog mislabeling one-shot scheduled tasks as recurring — now shows a countdown",
-        "Fixed slash/@ completion menu not sitting flush against the prompt border in fullscreen mode",
-        "Fixed CLAUDE_CODE_EXTRA_BODY output_config.effort causing 400 errors on subagent calls to models that don’t support effort and on Vertex AI",
-        "Fixed prompt cursor disappearing when NO_COLOR is set",
-        "Fixed ToolSearch ranking so pasted MCP tool names surface the actual tool instead of description-matching siblings",
-        "Fixed compacting a resumed long-context session failing with “Extra usage is required for long context requests”",
-        "Fixed plugin install succeeding when a dependency version conflicts with an already-installed plugin — now reports range-conflict",
-        "Fixed “Refine with Ultraplan” not showing the remote session URL in the transcript",
-        "Fixed SDK image content blocks that fail to process crashing the session — now degrade to a text placeholder",
-        "Fixed Remote Control sessions not streaming subagent transcripts",
-        "Fixed Remote Control sessions not being archived when Claude Code exits",
-        "Fixed thinking.type.enabled is not supported 400 error when using Opus 4.7 via a Bedrock Application Inference Profile ARN"
+        "Smoother fullscreen scrolling in VS Code, Cursor, and Windsurf terminals — /terminal-setup now configures the editor’s scroll sensitivity"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1411,15 +1419,15 @@
             "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "/config settings (theme, editor mode, verbose, etc.) now persist to ~/.claude/settings.json and participate in project/local/policy override precedence",
-            "Added prUrlTemplate setting to point the footer PR badge at a custom code-review URL instead of github.com",
-            "Added CLAUDE_CODE_HIDE_CWD environment variable to hide the working directory in the startup logo",
-            "--from-pr now accepts GitLab merge-request, Bitbucket pull-request, and GitHub Enterprise PR URLs",
-            "--print mode now honors the agent’s tools: and disallowedTools: frontmatter, matching interactive-mode behavior",
-            "--agent <name> now honors the agent definition’s permissionMode for built-in agents",
-            "PowerShell tool commands can now be auto-approved in permission mode, matching Bash behavior",
-            "Hooks: PostToolUse and PostToolUseFailure hook inputs now include duration_ms (tool execution time, excluding permission prompts and PreToolUse hooks)",
-            "Subagent and SDK MCP server reconfiguration now connects servers in parallel instead of serially"
+            "Added alwaysLoad option to MCP server config — when true, all tools from that server skip tool-search deferral and are always available",
+            "Added claude plugin prune to remove orphaned auto-installed plugin dependencies; plugin uninstall --prune cascades",
+            "Added a type-to-filter search box to /skills so you can find a skill in long lists without scrolling",
+            "PostToolUse hooks can now replace tool output for all tools via hookSpecificOutput.updatedToolOutput (previously MCP-only)",
+            "Fullscreen mode: typing into the prompt no longer jumps scroll back to the bottom after you’ve scrolled up to read earlier output",
+            "Dialogs that overflow the terminal are now scrollable with arrow keys, PgUp/PgDn, home/end, and mouse wheel in both fullscreen and non-fullscreen modes",
+            "Clicking any line of a long URL that wraps across rows in fullscreen mode now opens the full URL",
+            "SDK and claude -p: CLAUDE_CODE_FORK_SUBAGENT=1 now works in non-interactive sessions",
+            "--dangerously-skip-permissions no longer prompts for writes to .claude/skills/, .claude/agents/, and .claude/commands/"
           ],
           "codeBlocks": []
         }
@@ -3064,7 +3072,7 @@
         "The classifier runs on a server-configured model that is independent of your /model selection, so switching models does not change classifier availability. Classifier calls count toward your token usage. Each check sends a portion of the transcript plus the pending action, adding a round-trip before execution. Reads and working-directory edits outside protected paths skip the classifier, so the overhead comes mainly from shell commands and network operations.",
         "dontAsk mode auto-denies every tool call that would otherwise prompt. Only actions matching your permissions.allow rules and read-only Bash commands can execute; explicit ask rules are denied rather than prompting. This makes the mode fully non-interactive for CI pipelines or restricted environments where you pre-define exactly what Claude may do.",
         "Set it at startup with the flag:",
-        "bypassPermissions mode disables permission prompts and safety checks so tool calls execute immediately. Writes to protected paths are the only actions that still prompt. Only use this mode in isolated environments like containers, VMs, or devcontainers without internet access, where Claude Code cannot damage your host system.",
+        "bypassPermissions mode disables permission prompts and safety checks so tool calls execute immediately. Writes to protected paths are the only actions that still prompt. Only use this mode in isolated environments like containers, VMs, or dev containers without internet access, where Claude Code cannot damage your host system.",
         "You cannot enter bypassPermissions from a session that was started without one of the enabling flags; restart with one to enable it:",
         "The --dangerously-skip-permissions flag is equivalent.",
         "bypassPermissions offers no protection against prompt injection or unintended actions. For background safety checks without prompts, use auto mode instead. Administrators can block this mode by setting permissions.disableBypassPermissionsMode to \"disable\" in managed settings.",
@@ -3244,7 +3252,7 @@
         {
           "title": "​Skip all checks with bypassPermissions mode",
           "paragraphs": [
-            "bypassPermissions mode disables permission prompts and safety checks so tool calls execute immediately. Writes to protected paths are the only actions that still prompt. Only use this mode in isolated environments like containers, VMs, or devcontainers without internet access, where Claude Code cannot damage your host system.",
+            "bypassPermissions mode disables permission prompts and safety checks so tool calls execute immediately. Writes to protected paths are the only actions that still prompt. Only use this mode in isolated environments like containers, VMs, or dev containers without internet access, where Claude Code cannot damage your host system.",
             "You cannot enter bypassPermissions from a session that was started without one of the enabling flags; restart with one to enable it:",
             "The --dangerously-skip-permissions flag is equivalent.",
             "bypassPermissions offers no protection against prompt injection or unintended actions. For background safety checks without prompts, use auto mode instead. Administrators can block this mode by setting permissions.disableBypassPermissionsMode to \"disable\" in managed settings."
@@ -7784,7 +7792,7 @@
         {
           "title": "​Fork the current conversation",
           "paragraphs": [
-            "Forked subagents are experimental and require Claude Code v2.1.117 or later. Behavior and configuration may change in future releases. Enable them by setting the CLAUDE_CODE_FORK_SUBAGENT environment variable to 1.",
+            "Forked subagents are experimental and require Claude Code v2.1.117 or later. Behavior and configuration may change in future releases. Enable them by setting the CLAUDE_CODE_FORK_SUBAGENT environment variable to 1. The variable is honored in interactive mode and via the SDK or claude -p.",
             "A fork is a subagent that inherits the entire conversation so far instead of starting fresh. This drops the input isolation that subagents otherwise provide: a fork sees the same system prompt, tools, model, and message history as the main session, so you can hand it a side task without re-explaining the situation. The fork’s own tool calls still stay out of your conversation and only its final result comes back, so your main context window stays clean. Use a fork when a named subagent would need too much background to be useful, or when you want to try several approaches in parallel from the same starting point.",
             "Enabling fork mode changes Claude Code in three ways:",
             "Claude spawns a fork whenever it would otherwise use the general-purpose subagent. Named subagents such as Explore still spawn as before.",
@@ -7816,7 +7824,7 @@
         {
           "title": "​Limitations",
           "paragraphs": [
-            "Fork mode works only in interactive sessions. It is disabled in non-interactive mode, which includes the Agent SDK. A fork cannot spawn further forks."
+            "Setting CLAUDE_CODE_FORK_SUBAGENT=1 enables fork mode in interactive sessions, non-interactive mode, and the Agent SDK. A fork cannot spawn further forks."
           ],
           "codeBlocks": []
         },
@@ -8543,6 +8551,7 @@
         "How it works",
         "For MCP server authors",
         "Configure tool search",
+        "Exempt a server from deferral",
         "Use MCP prompts as commands",
         "Execute MCP prompts",
         "Managed MCP configuration",
@@ -8581,6 +8590,7 @@
         "Once configured, you can manage your MCP servers with these commands:",
         "Claude Code supports MCP list_changed notifications, allowing MCP servers to dynamically update their available tools, prompts, and resources without requiring you to disconnect and reconnect. When an MCP server sends a list_changed notification, Claude Code automatically refreshes the available capabilities from that server.",
         "If an HTTP or SSE server disconnects mid-session, Claude Code automatically reconnects with exponential backoff: up to five attempts, starting at a one-second delay and doubling each time. The server appears as pending in /mcp while reconnection is in progress. After five failed attempts the server is marked as failed and you can retry manually from /mcp. Stdio servers are local processes and are not reconnected automatically.",
+        "The same backoff applies when an HTTP or SSE server fails its initial connection at startup. As of v2.1.121, Claude Code retries the initial connection up to three times on transient errors such as a 5xx response, a connection refused, or a timeout, then marks the server as failed if it still cannot connect. Authentication and not-found errors are not retried because they require a configuration change to resolve.",
         "An MCP server can also push messages directly into your session so Claude can react to external events like CI results, monitoring alerts, or chat messages. To enable this, your server declares the claude/channel capability and you opt it in with the --channels flag at startup. See Channels to use an officially supported channel, or Channels reference to build your own.",
         "Use the --scope flag to specify where the configuration is stored: local (default): Available only to you in the current project (was called project in older versions) project: Shared with everyone in the project via .mcp.json file user: Available to you across all projects (was called global in older versions)",
         "local (default): Available only to you in the current project (was called project in older versions)",
@@ -8680,9 +8690,7 @@
         "oauth.scopes takes precedence over both authServerMetadataUrl and the scopes the server discovers at /.well-known. Leave it unset to let the MCP server determine the requested scope set.",
         "If the authorization server advertises offline_access in scopes_supported, Claude Code appends it to the pinned scopes so the access token can be refreshed without a new browser sign-in.",
         "If the server later returns a 403 insufficient_scope for a tool call, Claude Code re-authenticates with the same pinned scopes. Widen oauth.scopes when a tool you need requires a scope outside the pin.",
-        "If your MCP server uses an authentication scheme other than OAuth (such as Kerberos, short-lived tokens, or an internal SSO), use headersHelper to generate request headers at connection time. Claude Code runs the command and merges its output into the connection headers.",
-        "The command can also be inline:",
-        "Requirements:"
+        "If your MCP server uses an authentication scheme other than OAuth (such as Kerberos, short-lived tokens, or an internal SSO), use headersHelper to generate request headers at connection time. Claude Code runs the command and merges its output into the connection headers."
       ],
       "codeBlocks": [
         "# Basic syntax\nclaude mcp add --transport http <name> <url>\n\n# Real example: Connect to Notion\nclaude mcp add --transport http notion https://mcp.notion.com/mcp\n\n# Example with Bearer token\nclaude mcp add --transport http secure-api https://api.example.com/mcp \\\n  --header \"Authorization: Bearer your-token\"",
@@ -8818,7 +8826,8 @@
         {
           "title": "​Automatic reconnection",
           "paragraphs": [
-            "If an HTTP or SSE server disconnects mid-session, Claude Code automatically reconnects with exponential backoff: up to five attempts, starting at a one-second delay and doubling each time. The server appears as pending in /mcp while reconnection is in progress. After five failed attempts the server is marked as failed and you can retry manually from /mcp. Stdio servers are local processes and are not reconnected automatically."
+            "If an HTTP or SSE server disconnects mid-session, Claude Code automatically reconnects with exponential backoff: up to five attempts, starting at a one-second delay and doubling each time. The server appears as pending in /mcp while reconnection is in progress. After five failed attempts the server is marked as failed and you can retry manually from /mcp. Stdio servers are local processes and are not reconnected automatically.",
+            "The same backoff applies when an HTTP or SSE server fails its initial connection at startup. As of v2.1.121, Claude Code retries the initial connection up to three times on transient errors such as a 5xx response, a connection refused, or a timeout, then marks the server as failed if it still cannot connect. Authentication and not-found errors are not retried because they require a configuration change to resolve."
           ],
           "codeBlocks": []
         },
@@ -12233,7 +12242,7 @@
         "​Install killed on low-memory Linux servers",
         "​Install hangs in Docker",
         "​Windows: Claude Desktop overrides claude CLI command",
-        "​Windows: Claude Code on Windows requires git-bash",
+        "​Windows: “Claude Code on Windows requires either Git for Windows (for bash) or PowerShell”",
         "​Windows: Claude Code does not support 32-bit Windows",
         "​Linux: wrong binary variant installed (musl/glibc mismatch)"
       ],
@@ -12255,7 +12264,7 @@
         "Install killed on low-memory Linux servers",
         "Install hangs in Docker",
         "Windows: Claude Desktop overrides claude CLI command",
-        "Windows: Claude Code on Windows requires git-bash",
+        "Windows: “Claude Code on Windows requires either Git for Windows (for bash) or PowerShell”",
         "Windows: Claude Code does not support 32-bit Windows",
         "Linux: wrong binary variant installed (musl/glibc mismatch)"
       ],
@@ -12277,7 +12286,7 @@
         "Install killed on low-memory Linux servers",
         "Install hangs in Docker",
         "Windows: Claude Desktop overrides claude CLI command",
-        "Windows: Claude Code on Windows requires git-bash",
+        "Windows: “Claude Code on Windows requires either Git for Windows (for bash) or PowerShell”",
         "Windows: Claude Code does not support 32-bit Windows",
         "Linux: wrong binary variant installed (musl/glibc mismatch)",
         "Illegal instruction on Linux",
@@ -12412,9 +12421,11 @@
         "Increase Docker memory limits if using Docker Desktop:",
         "If you installed an older version of Claude Desktop, it may register a Claude.exe in the WindowsApps directory that takes PATH priority over Claude Code CLI. Running claude opens the Desktop app instead of the CLI.",
         "Update Claude Desktop to the latest version to fix this issue.",
-        "Claude Code on native Windows needs Git for Windows, which includes Git Bash.",
-        "If Git is not installed, download and install it from git-scm.com/downloads/win. During setup, select “Add to PATH.” Restart your terminal after installing.",
-        "If Git is already installed but Claude Code still can’t find it, set the path in your settings.json file:",
+        "Claude Code on native Windows needs at least one shell: either Git for Windows for Bash, or PowerShell. When neither is found, this error appears at startup. If only PowerShell is found, Claude Code uses the PowerShell tool instead of Bash.",
+        "If neither is installed, install one:",
+        "Git for Windows: download from git-scm.com/downloads/win. During setup, select “Add to PATH.” Restart your terminal after installing.",
+        "PowerShell 7: download from aka.ms/powershell.",
+        "If Git is already installed but Claude Code can’t find it, set the path in your settings.json file:",
         "If your Git is installed somewhere else, find the path by running where.exe git in PowerShell and use the bin\\bash.exe path from that directory.",
         "Windows includes two PowerShell entries in the Start menu: Windows PowerShell and Windows PowerShell (x86). The x86 entry runs as a 32-bit process and triggers this error even on a 64-bit machine. To check which case you’re in, run this in the same window that produced the error:",
         "If this prints True, your operating system is fine. Close the window, open Windows PowerShell without the x86 suffix, and run the install command again.",
@@ -12428,18 +12439,16 @@
         "If you’re actually on musl (Alpine Linux), install the required packages: apk add libgcc libstdc++ ripgrep",
         "If you’re actually on musl (Alpine Linux), install the required packages:",
         "If the installer prints Illegal instruction instead of the OOM Killed message, the downloaded binary doesn’t match your CPU architecture. This commonly happens on ARM servers that receive an x86 binary, or on older CPUs that lack required instruction sets.",
-        "Verify your architecture: uname -m x86_64 means 64-bit Intel/AMD, aarch64 means ARM64. If the binary doesn’t match, file a GitHub issue with the output.",
         "Verify your architecture:",
-        "x86_64 means 64-bit Intel/AMD, aarch64 means ARM64. If the binary doesn’t match, file a GitHub issue with the output.",
-        "Try an alternative install method while the architecture issue is resolved: brew install --cask claude-code",
-        "Try an alternative install method while the architecture issue is resolved:",
+        "x86_64 means 64-bit Intel/AMD, aarch64 means ARM64. If the binary doesn’t match, file a GitHub issue with the output. Alternative install methods download the same architecture-specific binary and won’t resolve this error.",
         "If you see dyld: cannot load, dyld: Symbol not found, or Abort trap: 6 during installation, the binary is incompatible with your macOS version or hardware.",
         "A Symbol not found error that references libicucore also indicates your macOS version is older than the binary supports:",
         "Check your macOS version: Claude Code requires macOS 13.0 or later. Open the Apple menu and select About This Mac to check your version.",
-        "Update macOS if you’re on an older version. The binary uses load commands that older macOS versions don’t support.",
-        "Try Homebrew as an alternative install method: brew install --cask claude-code",
-        "Try Homebrew as an alternative install method:",
-        "You might encounter the following issues in WSL:"
+        "Update macOS if you’re on an older version. The binary uses load commands and system libraries that older macOS versions don’t support. Alternative install methods like Homebrew download the same binary and won’t resolve this error.",
+        "You might encounter the following issues in WSL:",
+        "OS/platform detection issues: if you receive an error during installation, WSL may be using Windows npm. Try:",
+        "Run npm config set os linux before installation",
+        "Install with npm install -g @anthropic-ai/claude-code --force --no-os-check. Do not use sudo."
       ],
       "codeBlocks": [
         "curl -sI https://downloads.claude.ai",
@@ -12755,11 +12764,13 @@
           "codeBlocks": []
         },
         {
-          "title": "​Windows: Claude Code on Windows requires git-bash",
+          "title": "​Windows: “Claude Code on Windows requires either Git for Windows (for bash) or PowerShell”",
           "paragraphs": [
-            "Claude Code on native Windows needs Git for Windows, which includes Git Bash.",
-            "If Git is not installed, download and install it from git-scm.com/downloads/win. During setup, select “Add to PATH.” Restart your terminal after installing.",
-            "If Git is already installed but Claude Code still can’t find it, set the path in your settings.json file:",
+            "Claude Code on native Windows needs at least one shell: either Git for Windows for Bash, or PowerShell. When neither is found, this error appears at startup. If only PowerShell is found, Claude Code uses the PowerShell tool instead of Bash.",
+            "If neither is installed, install one:",
+            "Git for Windows: download from git-scm.com/downloads/win. During setup, select “Add to PATH.” Restart your terminal after installing.",
+            "PowerShell 7: download from aka.ms/powershell.",
+            "If Git is already installed but Claude Code can’t find it, set the path in your settings.json file:",
             "If your Git is installed somewhere else, find the path by running where.exe git in PowerShell and use the bin\\bash.exe path from that directory."
           ],
           "codeBlocks": [
@@ -12800,17 +12811,12 @@
           "title": "​Illegal instruction on Linux",
           "paragraphs": [
             "If the installer prints Illegal instruction instead of the OOM Killed message, the downloaded binary doesn’t match your CPU architecture. This commonly happens on ARM servers that receive an x86 binary, or on older CPUs that lack required instruction sets.",
-            "Solutions:",
-            "Verify your architecture: uname -m x86_64 means 64-bit Intel/AMD, aarch64 means ARM64. If the binary doesn’t match, file a GitHub issue with the output.",
             "Verify your architecture:",
-            "x86_64 means 64-bit Intel/AMD, aarch64 means ARM64. If the binary doesn’t match, file a GitHub issue with the output.",
-            "Try an alternative install method while the architecture issue is resolved: brew install --cask claude-code",
-            "Try an alternative install method while the architecture issue is resolved:"
+            "x86_64 means 64-bit Intel/AMD, aarch64 means ARM64. If the binary doesn’t match, file a GitHub issue with the output. Alternative install methods download the same architecture-specific binary and won’t resolve this error."
           ],
           "codeBlocks": [
             "bash: line 142: 2238232 Illegal instruction    \"$binary_path\" install ${TARGET:+\"$TARGET\"}",
-            "uname -m",
-            "brew install --cask claude-code"
+            "uname -m"
           ]
         },
         {
@@ -12820,14 +12826,11 @@
             "A Symbol not found error that references libicucore also indicates your macOS version is older than the binary supports:",
             "Solutions:",
             "Check your macOS version: Claude Code requires macOS 13.0 or later. Open the Apple menu and select About This Mac to check your version.",
-            "Update macOS if you’re on an older version. The binary uses load commands that older macOS versions don’t support.",
-            "Try Homebrew as an alternative install method: brew install --cask claude-code",
-            "Try Homebrew as an alternative install method:"
+            "Update macOS if you’re on an older version. The binary uses load commands and system libraries that older macOS versions don’t support. Alternative install methods like Homebrew download the same binary and won’t resolve this error."
           ],
           "codeBlocks": [
             "dyld: cannot load 'claude-2.1.42-darwin-x64' (load command 0x80000034 is unknown)\nAbort trap: 6",
-            "dyld: Symbol not found: _ubrk_clone\n  Referenced from: claude-darwin-x64 (which was built for Mac OS X 13.0)\n  Expected in: /usr/lib/libicucore.A.dylib",
-            "brew install --cask claude-code"
+            "dyld: Symbol not found: _ubrk_clone\n  Referenced from: claude-darwin-x64 (which was built for Mac OS X 13.0)\n  Expected in: /usr/lib/libicucore.A.dylib"
           ]
         },
         {
@@ -14115,6 +14118,8 @@
         "If you have not pinned a model and the current default is unavailable in your account, Claude Code falls back to the previous version for the current session and shows a notice. The fallback is not persisted. Enable the newer model in your Bedrock account or pin a version to make the choice permanent.",
         "Create an IAM policy with the required permissions for Claude Code:",
         "For more restrictive permissions, you can limit the Resource to specific inference profile ARNs.",
+        "bedrock:GetInferenceProfile lets Claude Code resolve an application inference profile ARN to its backing foundation model, which is used to select the correct request shape for that model.",
+        "If the token is missing this permission, Claude Code recovers automatically by retrying once with the alternate shape, so requests still succeed but each new model adds an extra round-trip. Granting the permission avoids the retry. This applies most often to AWS_BEARER_TOKEN_BEDROCK deployments, where the token’s policy is typically narrower than a full IAM role.",
         "For details, see Bedrock IAM documentation.",
         "Create a dedicated AWS account for Claude Code to simplify cost tracking and access control.",
         "Claude Opus 4.7, Opus 4.6, and Sonnet 4.6 support the 1M token context window on Amazon Bedrock. Claude Code automatically enables the extended context window when you select a 1M model variant.",
@@ -14166,7 +14171,7 @@
         "export ANTHROPIC_DEFAULT_OPUS_MODEL='us.anthropic.claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='us.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'",
         "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1",
         "{\n  \"modelOverrides\": {\n    \"claude-opus-4-7\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-47-prod\",\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-46-prod\",\n    \"claude-opus-4-5-20251101\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-45-prod\",\n    \"claude-opus-4-1-20250805\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-41-prod\"\n  }\n}",
-        "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"AllowModelAndInferenceProfileAccess\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"bedrock:InvokeModel\",\n        \"bedrock:InvokeModelWithResponseStream\",\n        \"bedrock:ListInferenceProfiles\"\n      ],\n      \"Resource\": [\n        \"arn:aws:bedrock:*:*:inference-profile/*\",\n        \"arn:aws:bedrock:*:*:application-inference-profile/*\",\n        \"arn:aws:bedrock:*:*:foundation-model/*\"\n      ]\n    },\n    {\n      \"Sid\": \"AllowMarketplaceSubscription\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"aws-marketplace:ViewSubscriptions\",\n        \"aws-marketplace:Subscribe\"\n      ],\n      \"Resource\": \"*\",\n      \"Condition\": {\n        \"StringEquals\": {\n          \"aws:CalledViaLast\": \"bedrock.amazonaws.com\"\n        }\n      }\n    }\n  ]\n}",
+        "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"AllowModelAndInferenceProfileAccess\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"bedrock:InvokeModel\",\n        \"bedrock:InvokeModelWithResponseStream\",\n        \"bedrock:ListInferenceProfiles\",\n        \"bedrock:GetInferenceProfile\"\n      ],\n      \"Resource\": [\n        \"arn:aws:bedrock:*:*:inference-profile/*\",\n        \"arn:aws:bedrock:*:*:application-inference-profile/*\",\n        \"arn:aws:bedrock:*:*:foundation-model/*\"\n      ]\n    },\n    {\n      \"Sid\": \"AllowMarketplaceSubscription\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"aws-marketplace:ViewSubscriptions\",\n        \"aws-marketplace:Subscribe\"\n      ],\n      \"Resource\": \"*\",\n      \"Condition\": {\n        \"StringEquals\": {\n          \"aws:CalledViaLast\": \"bedrock.amazonaws.com\"\n        }\n      }\n    }\n  ]\n}",
         "{\n  \"env\": {\n    \"ANTHROPIC_CUSTOM_HEADERS\": \"X-Amzn-Bedrock-GuardrailIdentifier: your-guardrail-id\\nX-Amzn-Bedrock-GuardrailVersion: 1\"\n  }\n}",
         "export CLAUDE_CODE_USE_MANTLE=1\nexport AWS_REGION=us-east-1",
         "claude --model anthropic.claude-haiku-4-5",
@@ -14309,11 +14314,13 @@
           "paragraphs": [
             "Create an IAM policy with the required permissions for Claude Code:",
             "For more restrictive permissions, you can limit the Resource to specific inference profile ARNs.",
+            "bedrock:GetInferenceProfile lets Claude Code resolve an application inference profile ARN to its backing foundation model, which is used to select the correct request shape for that model.",
+            "If the token is missing this permission, Claude Code recovers automatically by retrying once with the alternate shape, so requests still succeed but each new model adds an extra round-trip. Granting the permission avoids the retry. This applies most often to AWS_BEARER_TOKEN_BEDROCK deployments, where the token’s policy is typically narrower than a full IAM role.",
             "For details, see Bedrock IAM documentation.",
             "Create a dedicated AWS account for Claude Code to simplify cost tracking and access control."
           ],
           "codeBlocks": [
-            "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"AllowModelAndInferenceProfileAccess\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"bedrock:InvokeModel\",\n        \"bedrock:InvokeModelWithResponseStream\",\n        \"bedrock:ListInferenceProfiles\"\n      ],\n      \"Resource\": [\n        \"arn:aws:bedrock:*:*:inference-profile/*\",\n        \"arn:aws:bedrock:*:*:application-inference-profile/*\",\n        \"arn:aws:bedrock:*:*:foundation-model/*\"\n      ]\n    },\n    {\n      \"Sid\": \"AllowMarketplaceSubscription\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"aws-marketplace:ViewSubscriptions\",\n        \"aws-marketplace:Subscribe\"\n      ],\n      \"Resource\": \"*\",\n      \"Condition\": {\n        \"StringEquals\": {\n          \"aws:CalledViaLast\": \"bedrock.amazonaws.com\"\n        }\n      }\n    }\n  ]\n}"
+            "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"AllowModelAndInferenceProfileAccess\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"bedrock:InvokeModel\",\n        \"bedrock:InvokeModelWithResponseStream\",\n        \"bedrock:ListInferenceProfiles\",\n        \"bedrock:GetInferenceProfile\"\n      ],\n      \"Resource\": [\n        \"arn:aws:bedrock:*:*:inference-profile/*\",\n        \"arn:aws:bedrock:*:*:application-inference-profile/*\",\n        \"arn:aws:bedrock:*:*:foundation-model/*\"\n      ]\n    },\n    {\n      \"Sid\": \"AllowMarketplaceSubscription\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"aws-marketplace:ViewSubscriptions\",\n        \"aws-marketplace:Subscribe\"\n      ],\n      \"Resource\": \"*\",\n      \"Condition\": {\n        \"StringEquals\": {\n          \"aws:CalledViaLast\": \"bedrock.amazonaws.com\"\n        }\n      }\n    }\n  ]\n}"
           ]
         },
         {
@@ -14523,6 +14530,7 @@
         "Wait for approval (may take 24-48 hours)",
         "Claude Code uses standard Google Cloud authentication.",
         "For more information, see Google Cloud authentication documentation.",
+        "Claude Code v2.1.121 or later supports X.509 certificate-based Workload Identity Federation through the same Application Default Credentials chain. Set GOOGLE_APPLICATION_CREDENTIALS to the path of your credential configuration file.",
         "When authenticating, Claude Code will automatically use the project ID from the ANTHROPIC_VERTEX_PROJECT_ID environment variable. To override this, set one of these environment variables: GCLOUD_PROJECT, GOOGLE_CLOUD_PROJECT, or GOOGLE_APPLICATION_CREDENTIALS.",
         "Set the following environment variables:",
         "Most model versions have a corresponding VERTEX_REGION_CLAUDE_* variable. See the Environment variables reference for the full list. Check Vertex Model Garden to determine which models support global endpoints versus regional only.",
@@ -14654,6 +14662,7 @@
           "paragraphs": [
             "Claude Code uses standard Google Cloud authentication.",
             "For more information, see Google Cloud authentication documentation.",
+            "Claude Code v2.1.121 or later supports X.509 certificate-based Workload Identity Federation through the same Application Default Credentials chain. Set GOOGLE_APPLICATION_CREDENTIALS to the path of your credential configuration file.",
             "When authenticating, Claude Code will automatically use the project ID from the ANTHROPIC_VERTEX_PROJECT_ID environment variable. To override this, set one of these environment variables: GCLOUD_PROJECT, GOOGLE_CLOUD_PROJECT, or GOOGLE_APPLICATION_CREDENTIALS."
           ],
           "codeBlocks": []
@@ -14998,6 +15007,7 @@
         "For enterprise environments requiring client certificate authentication:",
         "Claude Code requires access to the following URLs. Allowlist these in your proxy configuration and firewall rules, especially in containerized or restricted network environments.",
         "If you install Claude Code through npm or manage your own binary distribution, end users may not need access to downloads.claude.ai or storage.googleapis.com.",
+        "Claude Code also sends optional operational telemetry by default, which you can disable with environment variables. See Telemetry services for how to disable it before finalizing your allowlist.",
         "When using Amazon Bedrock, Google Vertex AI, or Microsoft Foundry, model traffic and authentication go to your provider instead of api.anthropic.com, claude.ai, or platform.claude.com. The WebFetch tool still calls api.anthropic.com for its domain safety check unless you set skipWebFetchPreflight: true in settings.",
         "Claude Code on the web and Code Review connect to your repositories from Anthropic-managed infrastructure. If your GitHub Enterprise Cloud organization restricts access by IP address, enable IP allow list inheritance for installed GitHub Apps. The Claude GitHub App registers its IP ranges, so enabling this setting allows access without manual configuration. To add the ranges to your allow list manually instead, or to configure other firewalls, see the Anthropic API IP addresses.",
         "For self-hosted GitHub Enterprise Server instances behind a firewall, allowlist the same Anthropic API IP addresses so Anthropic infrastructure can reach your GHES host to clone repositories and post review comments.",
@@ -15096,6 +15106,7 @@
           "paragraphs": [
             "Claude Code requires access to the following URLs. Allowlist these in your proxy configuration and firewall rules, especially in containerized or restricted network environments.",
             "If you install Claude Code through npm or manage your own binary distribution, end users may not need access to downloads.claude.ai or storage.googleapis.com.",
+            "Claude Code also sends optional operational telemetry by default, which you can disable with environment variables. See Telemetry services for how to disable it before finalizing your allowlist.",
             "When using Amazon Bedrock, Google Vertex AI, or Microsoft Foundry, model traffic and authentication go to your provider instead of api.anthropic.com, claude.ai, or platform.claude.com. The WebFetch tool still calls api.anthropic.com for its domain safety check unless you set skipWebFetchPreflight: true in settings.",
             "Claude Code on the web and Code Review connect to your repositories from Anthropic-managed infrastructure. If your GitHub Enterprise Cloud organization restricts access by IP address, enable IP allow list inheritance for installed GitHub Apps. The Claude GitHub App registers its IP ranges, so enabling this setting allows access without manual configuration. To add the ranges to your allow list manually instead, or to configure other firewalls, see the Anthropic API IP addresses.",
             "For self-hosted GitHub Enterprise Server instances behind a firewall, allowlist the same Anthropic API IP addresses so Anthropic infrastructure can reach your GHES host to clone repositories and post review comments."
@@ -15328,188 +15339,219 @@
       "path": "/docs/en/devcontainer",
       "url": "https://code.claude.com/docs/en/devcontainer",
       "title": "Development containers",
-      "metaDescription": "Learn about the Claude Code development container for teams that need consistent, secure environments.",
+      "metaDescription": "Run Claude Code inside a dev container for consistent, isolated environments across your team.",
       "headings": [
-        "​Key features",
-        "​Getting started in 4 steps",
-        "​Configuration breakdown",
-        "​Security features",
-        "​Customization options",
-        "​Example use cases",
-        "​Secure client work",
-        "​Team onboarding",
-        "​Consistent CI/CD environments",
-        "​Related resources"
+        "​Add Claude Code to your dev container",
+        "​Persist authentication and settings across rebuilds",
+        "​Enforce organization policy",
+        "​Restrict network egress",
+        "​Run without permission prompts",
+        "​Try the reference container",
+        "​Next steps"
       ],
       "toc": [
-        "Key features",
-        "Getting started in 4 steps",
-        "Configuration breakdown",
-        "Security features",
-        "Customization options",
-        "Example use cases",
-        "Secure client work",
-        "Team onboarding",
-        "Consistent CI/CD environments",
-        "Related resources"
+        "Add Claude Code to your dev container",
+        "Persist authentication and settings across rebuilds",
+        "Enforce organization policy",
+        "Restrict network egress",
+        "Run without permission prompts",
+        "Try the reference container",
+        "Next steps"
       ],
       "paragraphs": [
-        "Key features",
-        "Getting started in 4 steps",
-        "Configuration breakdown",
-        "Security features",
-        "Customization options",
-        "Example use cases",
-        "Secure client work",
-        "Team onboarding",
-        "Consistent CI/CD environments",
-        "Related resources",
-        "Learn about the Claude Code development container for teams that need consistent, secure environments.",
-        "The reference devcontainer setup and associated Dockerfile offer a preconfigured development container that you can use as is, or customize for your needs. This devcontainer works with the Visual Studio Code Dev Containers extension and similar tools.",
-        "The container’s enhanced security measures (isolation and firewall rules) allow you to run claude --dangerously-skip-permissions to bypass permission prompts for unattended operation.",
-        "While the devcontainer provides substantial protections, no system is completely immune to all attacks. When executed with --dangerously-skip-permissions, devcontainers don’t prevent a malicious project from exfiltrating anything accessible in the devcontainer including Claude Code credentials. We recommend only using devcontainers when developing with trusted repositories. Always maintain good security practices and monitor Claude’s activities.",
-        "Production-ready Node.js: Built on Node.js 20 with essential development dependencies",
-        "Security by design: Custom firewall restricting network access to only necessary services",
-        "Developer-friendly tools: Includes git, ZSH with productivity enhancements, fzf, and more",
-        "Seamless VS Code integration: Pre-configured extensions and optimized settings",
-        "Session persistence: Preserves command history and configurations between container restarts",
-        "Works everywhere: Compatible with macOS, Windows, and Linux development environments",
-        "Install VS Code and the Dev Containers extension",
-        "Clone the Claude Code reference implementation repository",
-        "Open the repository in VS Code",
-        "When prompted, click “Reopen in Container” (or use Command Palette: Cmd+Shift+P → “Dev Containers: Reopen in Container”)",
-        "Once the container finishes building, open a terminal in VS Code with Ctrl+` and run claude to authenticate and start your first session. The container has Claude Code preinstalled, so you can begin working immediately. Your project files are mounted into the container, and any code Claude writes appears in your local repository.",
-        "The devcontainer setup consists of three primary components:",
-        "devcontainer.json: Controls container settings, extensions, and volume mounts",
-        "Dockerfile: Defines the container image and installed tools",
-        "init-firewall.sh: Establishes network security rules",
-        "The container implements a multi-layered security approach with its firewall configuration:",
-        "Precise access control: Restricts outbound connections to whitelisted domains only (npm registry, GitHub, Claude API, etc.)",
-        "Allowed outbound connections: The firewall permits outbound DNS and SSH connections",
-        "Default-deny policy: Blocks all other external network access",
-        "Startup verification: Validates firewall rules when the container initializes",
-        "Isolation: Creates a secure development environment separated from your main system",
-        "The devcontainer configuration is designed to be adaptable to your needs:",
-        "Add or remove VS Code extensions based on your workflow",
-        "Modify resource allocations for different hardware environments",
-        "Adjust network access permissions",
-        "Customize shell configurations and developer tooling",
-        "Use devcontainers to isolate different client projects, ensuring code and credentials never mix between environments.",
-        "New team members can get a fully configured development environment in minutes, with all necessary tools and settings pre-installed.",
-        "Mirror your devcontainer configuration in CI/CD pipelines to ensure development and production environments match.",
-        "VS Code devcontainers documentation",
-        "Claude Code security best practices",
-        "Enterprise network configuration",
+        "Add Claude Code to your dev container",
+        "Persist authentication and settings across rebuilds",
+        "Enforce organization policy",
+        "Restrict network egress",
+        "Run without permission prompts",
+        "Try the reference container",
+        "Next steps",
+        "Run Claude Code inside a dev container for consistent, isolated environments across your team.",
+        "A development container, or dev container, lets you define an identical, isolated environment that every engineer on your team can run. With Claude Code installed in that container, commands Claude runs execute inside it rather than on the host machine, while edits to your project files appear in your local repository as you work.",
+        "This page covers installing Claude Code in a dev container and the configuration topics that follow. Each topic is self-contained, so jump to the ones that match what you need to set up:",
+        "While the dev container provides substantial protections, no system is completely immune to all attacks. When executed with --dangerously-skip-permissions, dev containers do not prevent a malicious project from exfiltrating anything accessible inside the container, including the Claude Code credentials stored in ~/.claude. Only use dev containers when developing with trusted repositories, and monitor Claude’s activities. Avoid mounting host secrets such as ~/.ssh or cloud credential files into the container; prefer repository-scoped or short-lived tokens.",
+        "How dev containers work with your editor",
+        "A dev container runs as a Docker container, either on your machine or on a cloud host such as GitHub Codespaces. An editor that supports the Dev Containers spec, such as VS Code, GitHub Codespaces, a JetBrains IDE, or Cursor, connects to that container: you browse and edit files in the editor as usual, but the integrated terminal, language servers, and build tools all run inside the container rather than on your host. Editors without dev container support, such as plain Vim, are not part of this workflow.",
+        "Claude Code runs inside the container, so it sees the same files, dependencies, and tools as the rest of your project’s toolchain. In VS Code you can use either the Claude Code extension panel or run claude in the integrated terminal; both run inside the container and share the same ~/.claude configuration.",
+        "Claude Code installs into any dev container through the Claude Code Dev Container Feature.",
+        "The settings work with any tool that supports the Dev Containers spec, such as VS Code, GitHub Codespaces, or JetBrains IDEs. The steps below use VS Code as an example.",
+        "When you open the container in VS Code or Codespaces, the feature also adds the Claude Code VS Code extension; other editors ignore that part.",
+        "New to dev containers? The VS Code Dev Containers tutorial walks through installing Docker, the extension, and opening your first container. For a fuller hardened example with a firewall and persistent volumes, see Try the reference container.",
+        "Create or update devcontainer.json",
+        "Save the following as .devcontainer/devcontainer.json in your repository, or add the features block to your existing file.",
+        "The version tag at the end, such as :1.0, pins the feature’s install script, not the Claude Code release. The feature installs the latest Claude Code, and Claude Code auto-updates itself inside the container by default.",
+        "To pin the CLI version or disable auto-update, see Enforce organization policy.",
+        "Replace the image line with your project’s base image or remove it if your existing file uses a Dockerfile.",
+        "Rebuild the container",
+        "Open the VS Code Command Palette with Cmd+Shift+P on Mac or Ctrl+Shift+P on Windows and Linux, and run Dev Containers: Rebuild Container.",
+        "For other tools, follow that tool’s rebuild action: see rebuilding in GitHub Codespaces, the Dev Containers CLI, or your IDE’s dev container documentation.",
+        "Sign in to Claude Code",
+        "Open a terminal in the rebuilt container and run claude, then follow the authentication prompt.",
+        "What you see at the authentication prompt depends on your provider:",
+        "Anthropic: sign in through a browser with your Claude or Anthropic Console account",
+        "Amazon Bedrock, Google Vertex AI, or Microsoft Foundry: Claude Code uses your cloud provider credentials, with no browser prompt",
+        "For cloud providers, pass credentials into the container as environment variables through containerEnv, a Codespaces secret, or your cloud’s workload identity rather than mounting credential files from the host. See Amazon Bedrock, Google Vertex AI, or Microsoft Foundry for the credential chain Claude Code reads.",
+        "See Choose your API provider to decide which path fits your organization.",
+        "If the browser sign-in completes but the callback never reaches the container, copy the code shown in the browser and paste it at the Paste code here if prompted prompt in the terminal. This can happen when the editor’s port forwarding doesn’t route the localhost callback.",
+        "By default, the container’s home directory is discarded on rebuild, so engineers must sign in again each time. Claude Code stores its authentication token, user settings, and session history under ~/.claude. Mount a named volume at that path to keep this state across rebuilds.",
+        "The following example mounts a volume at the home directory of the node user:",
+        "Replace /home/node with the home directory of your container’s remoteUser. If you mount the volume somewhere other than ~/.claude, set CLAUDE_CONFIG_DIR to the mount path so Claude Code reads and writes there.",
+        "To isolate state per project rather than sharing one volume across all repositories, include the ${devcontainerId} variable in the source name. The reference configuration uses source=claude-code-config-${devcontainerId} for this purpose.",
+        "In GitHub Codespaces, ~/.claude persists across stopping and starting a codespace, but is still cleared when you rebuild the container, so the volume mount above applies there too. To carry authentication across codespaces, store ANTHROPIC_API_KEY or a CLAUDE_CODE_OAUTH_TOKEN from claude setup-token as a Codespaces secret; Codespaces makes secrets available as environment variables inside the container automatically.",
+        "A dev container is a convenient place to apply organization policy, because the same image and configuration run on every engineer’s machine.",
+        "Claude Code reads /etc/claude-code/managed-settings.json on Linux and applies it at the highest precedence in the settings hierarchy, so values there override anything an engineer sets in ~/.claude or the project’s .claude/ directory. Copy the file into place from your Dockerfile:",
+        "Because the Dockerfile lives in the repository, anyone with write access can change or remove this step. For policy that engineers cannot bypass by editing repository files, deliver managed settings through server-managed settings or your MDM instead. See managed settings files for the available keys and the other delivery paths.",
+        "To set environment variables that apply to every Claude Code session in the container, add them to containerEnv in your devcontainer.json. The following example opts out of telemetry and error reporting and prevents Claude Code from auto-updating after install:",
+        "The Dev Container Feature always installs the latest Claude Code release. To pin a specific Claude Code version for reproducible builds, install it from your Dockerfile with npm install -g @anthropic-ai/claude-code@X.Y.Z instead of using the feature, and set DISABLE_AUTOUPDATER as shown above.",
+        "For the full list of policy controls including permission rules, tool restrictions, and MCP server allowlists, see Set up Claude Code for your organization.",
+        "To make MCP servers available inside the container, define them at project scope in a .mcp.json file at the repository root so they are checked in alongside your dev container configuration. Install any binaries that local stdio servers depend on in your Dockerfile, and add remote server domains to your network allowlist.",
+        "You can limit the container’s outbound traffic to only the domains Claude Code needs. See Network access requirements for the inference and authentication domains, and Telemetry services for the optional telemetry and error reporting connections and how to disable them.",
+        "The reference container includes an init-firewall.sh script that blocks all outbound traffic except the domains Claude Code and your development tools need. Running a firewall inside a container requires extra permissions, so the reference adds the NET_ADMIN and NET_RAW capabilities through runArgs. The firewall script and these capabilities are not required for Claude Code itself: you can leave them out and rely on your own network controls instead.",
+        "Because the container runs Claude Code as a non-root user and confines command execution to the container, you can pass --dangerously-skip-permissions for unattended operation. The CLI rejects this flag when launched as root, so confirm remoteUser is set to a non-root account.",
+        "Skipping permission prompts removes your opportunity to review tool calls before they run. Claude can still modify any file in the bind-mounted workspace, which appears directly on your host, and reach anything the container’s network policy allows. Pair this flag with the network egress restrictions above to limit what a bypassed session can reach.",
+        "If you want fewer prompts without disabling safety checks, consider auto mode instead, which has a classifier review actions before they run. To prevent engineers from using --dangerously-skip-permissions at all, set permissions.disableBypassPermissionsMode to \"disable\" in managed settings.",
+        "The anthropics/claude-code repository includes an example dev container that combines the CLI, the egress firewall, persistent volumes, and a Zsh-based shell. It is provided as a working example rather than a maintained base image; use it to see how the pieces fit together before applying them to your own configuration.",
+        "Install prerequisites",
+        "Install VS Code and the Dev Containers extension.",
+        "Clone the reference",
+        "Clone the Claude Code repository and open it in VS Code.",
+        "Reopen in container",
+        "When prompted, click Reopen in Container, or run Dev Containers: Reopen in Container from the Command Palette.",
+        "Start Claude Code",
+        "Once the container finishes building, open a terminal with Ctrl+` and run claude to sign in and start your first session.",
+        "To use this configuration with your own project, copy the .devcontainer/ directory into your repository and adjust the Dockerfile for your toolchain, or return to Add Claude Code to your dev container to add only the feature to a setup you already have.",
+        "The reference configuration consists of three files. None of them are required when you add Claude Code to your own dev container through the feature, but they show one way to combine the pieces.",
+        "Once Claude Code is running in your dev container, the pages below cover the rest of an organization rollout: choosing an authentication path, delivering managed policy outside the repository, monitoring usage, and understanding what Claude Code stores and sends.",
+        "Set up Claude Code for your organization: choose an authentication provider, decide how policy reaches devices, and plan the rollout",
+        "Server-managed settings: deliver managed policy from the Claude.ai admin console so engineers cannot bypass it by editing repository files",
+        "Monitor usage and audit activity: export OpenTelemetry metrics and review what your team is running",
+        "Network access requirements: the full domain allowlist for proxies and firewalls",
+        "Telemetry services and opt-out: what Claude Code sends by default and the environment variables that disable it",
+        "Explore the .claude directory: what the volume mount holds, including credentials, settings, and session history",
+        "Security model: how Claude Code’s permission system, sandboxing, and prompt-injection protections fit together",
+        "Permission modes: the full range from plan mode to auto mode to bypass, and when to use each",
         "Was this page helpful?"
       ],
-      "codeBlocks": [],
+      "codeBlocks": [
+        "{\n  \"image\": \"mcr.microsoft.com/devcontainers/base:ubuntu\",\n  \"features\": {\n    \"ghcr.io/anthropics/devcontainer-features/claude-code:1.0\": {}\n  }\n}",
+        "\"mounts\": [\n  \"source=claude-code-config,target=/home/node/.claude,type=volume\"\n]",
+        "RUN mkdir -p /etc/claude-code\nCOPY managed-settings.json /etc/claude-code/managed-settings.json",
+        "\"containerEnv\": {\n  \"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\": \"1\",\n  \"DISABLE_AUTOUPDATER\": \"1\"\n}"
+      ],
       "sectionBlocks": [
         {
           "title": "",
           "paragraphs": [
-            "Key features",
-            "Getting started in 4 steps",
-            "Configuration breakdown",
-            "Security features",
-            "Customization options",
-            "Example use cases",
-            "Secure client work",
-            "Team onboarding",
-            "Consistent CI/CD environments",
-            "Related resources",
-            "Learn about the Claude Code development container for teams that need consistent, secure environments.",
-            "The reference devcontainer setup and associated Dockerfile offer a preconfigured development container that you can use as is, or customize for your needs. This devcontainer works with the Visual Studio Code Dev Containers extension and similar tools."
+            "Add Claude Code to your dev container",
+            "Persist authentication and settings across rebuilds",
+            "Enforce organization policy",
+            "Restrict network egress",
+            "Run without permission prompts",
+            "Try the reference container",
+            "Next steps",
+            "Run Claude Code inside a dev container for consistent, isolated environments across your team.",
+            "A development container, or dev container, lets you define an identical, isolated environment that every engineer on your team can run. With Claude Code installed in that container, commands Claude runs execute inside it rather than on the host machine, while edits to your project files appear in your local repository as you work.",
+            "This page covers installing Claude Code in a dev container and the configuration topics that follow. Each topic is self-contained, so jump to the ones that match what you need to set up:",
+            "While the dev container provides substantial protections, no system is completely immune to all attacks. When executed with --dangerously-skip-permissions, dev containers do not prevent a malicious project from exfiltrating anything accessible inside the container, including the Claude Code credentials stored in ~/.claude. Only use dev containers when developing with trusted repositories, and monitor Claude’s activities. Avoid mounting host secrets such as ~/.ssh or cloud credential files into the container; prefer repository-scoped or short-lived tokens.",
+            "How dev containers work with your editor"
           ],
           "codeBlocks": []
         },
         {
-          "title": "​Key features",
+          "title": "​Add Claude Code to your dev container",
           "paragraphs": [
-            "Production-ready Node.js: Built on Node.js 20 with essential development dependencies",
-            "Security by design: Custom firewall restricting network access to only necessary services",
-            "Developer-friendly tools: Includes git, ZSH with productivity enhancements, fzf, and more",
-            "Seamless VS Code integration: Pre-configured extensions and optimized settings",
-            "Session persistence: Preserves command history and configurations between container restarts",
-            "Works everywhere: Compatible with macOS, Windows, and Linux development environments"
+            "Claude Code installs into any dev container through the Claude Code Dev Container Feature.",
+            "The settings work with any tool that supports the Dev Containers spec, such as VS Code, GitHub Codespaces, or JetBrains IDEs. The steps below use VS Code as an example.",
+            "When you open the container in VS Code or Codespaces, the feature also adds the Claude Code VS Code extension; other editors ignore that part.",
+            "New to dev containers? The VS Code Dev Containers tutorial walks through installing Docker, the extension, and opening your first container. For a fuller hardened example with a firewall and persistent volumes, see Try the reference container.",
+            "Create or update devcontainer.json",
+            "Save the following as .devcontainer/devcontainer.json in your repository, or add the features block to your existing file.",
+            "The version tag at the end, such as :1.0, pins the feature’s install script, not the Claude Code release. The feature installs the latest Claude Code, and Claude Code auto-updates itself inside the container by default.",
+            "To pin the CLI version or disable auto-update, see Enforce organization policy.",
+            "Replace the image line with your project’s base image or remove it if your existing file uses a Dockerfile.",
+            "Rebuild the container",
+            "Open the VS Code Command Palette with Cmd+Shift+P on Mac or Ctrl+Shift+P on Windows and Linux, and run Dev Containers: Rebuild Container.",
+            "For other tools, follow that tool’s rebuild action: see rebuilding in GitHub Codespaces, the Dev Containers CLI, or your IDE’s dev container documentation."
+          ],
+          "codeBlocks": [
+            "{\n  \"image\": \"mcr.microsoft.com/devcontainers/base:ubuntu\",\n  \"features\": {\n    \"ghcr.io/anthropics/devcontainer-features/claude-code:1.0\": {}\n  }\n}"
+          ]
+        },
+        {
+          "title": "​Persist authentication and settings across rebuilds",
+          "paragraphs": [
+            "By default, the container’s home directory is discarded on rebuild, so engineers must sign in again each time. Claude Code stores its authentication token, user settings, and session history under ~/.claude. Mount a named volume at that path to keep this state across rebuilds.",
+            "The following example mounts a volume at the home directory of the node user:",
+            "Replace /home/node with the home directory of your container’s remoteUser. If you mount the volume somewhere other than ~/.claude, set CLAUDE_CONFIG_DIR to the mount path so Claude Code reads and writes there.",
+            "To isolate state per project rather than sharing one volume across all repositories, include the ${devcontainerId} variable in the source name. The reference configuration uses source=claude-code-config-${devcontainerId} for this purpose.",
+            "In GitHub Codespaces, ~/.claude persists across stopping and starting a codespace, but is still cleared when you rebuild the container, so the volume mount above applies there too. To carry authentication across codespaces, store ANTHROPIC_API_KEY or a CLAUDE_CODE_OAUTH_TOKEN from claude setup-token as a Codespaces secret; Codespaces makes secrets available as environment variables inside the container automatically."
+          ],
+          "codeBlocks": [
+            "\"mounts\": [\n  \"source=claude-code-config,target=/home/node/.claude,type=volume\"\n]"
+          ]
+        },
+        {
+          "title": "​Enforce organization policy",
+          "paragraphs": [
+            "A dev container is a convenient place to apply organization policy, because the same image and configuration run on every engineer’s machine.",
+            "Claude Code reads /etc/claude-code/managed-settings.json on Linux and applies it at the highest precedence in the settings hierarchy, so values there override anything an engineer sets in ~/.claude or the project’s .claude/ directory. Copy the file into place from your Dockerfile:",
+            "Because the Dockerfile lives in the repository, anyone with write access can change or remove this step. For policy that engineers cannot bypass by editing repository files, deliver managed settings through server-managed settings or your MDM instead. See managed settings files for the available keys and the other delivery paths.",
+            "To set environment variables that apply to every Claude Code session in the container, add them to containerEnv in your devcontainer.json. The following example opts out of telemetry and error reporting and prevents Claude Code from auto-updating after install:",
+            "The Dev Container Feature always installs the latest Claude Code release. To pin a specific Claude Code version for reproducible builds, install it from your Dockerfile with npm install -g @anthropic-ai/claude-code@X.Y.Z instead of using the feature, and set DISABLE_AUTOUPDATER as shown above.",
+            "For the full list of policy controls including permission rules, tool restrictions, and MCP server allowlists, see Set up Claude Code for your organization.",
+            "To make MCP servers available inside the container, define them at project scope in a .mcp.json file at the repository root so they are checked in alongside your dev container configuration. Install any binaries that local stdio servers depend on in your Dockerfile, and add remote server domains to your network allowlist."
+          ],
+          "codeBlocks": [
+            "RUN mkdir -p /etc/claude-code\nCOPY managed-settings.json /etc/claude-code/managed-settings.json",
+            "\"containerEnv\": {\n  \"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\": \"1\",\n  \"DISABLE_AUTOUPDATER\": \"1\"\n}"
+          ]
+        },
+        {
+          "title": "​Restrict network egress",
+          "paragraphs": [
+            "You can limit the container’s outbound traffic to only the domains Claude Code needs. See Network access requirements for the inference and authentication domains, and Telemetry services for the optional telemetry and error reporting connections and how to disable them.",
+            "The reference container includes an init-firewall.sh script that blocks all outbound traffic except the domains Claude Code and your development tools need. Running a firewall inside a container requires extra permissions, so the reference adds the NET_ADMIN and NET_RAW capabilities through runArgs. The firewall script and these capabilities are not required for Claude Code itself: you can leave them out and rely on your own network controls instead."
           ],
           "codeBlocks": []
         },
         {
-          "title": "​Getting started in 4 steps",
+          "title": "​Run without permission prompts",
           "paragraphs": [
-            "Install VS Code and the Dev Containers extension",
-            "Clone the Claude Code reference implementation repository",
-            "Open the repository in VS Code",
-            "When prompted, click “Reopen in Container” (or use Command Palette: Cmd+Shift+P → “Dev Containers: Reopen in Container”)",
-            "Once the container finishes building, open a terminal in VS Code with Ctrl+` and run claude to authenticate and start your first session. The container has Claude Code preinstalled, so you can begin working immediately. Your project files are mounted into the container, and any code Claude writes appears in your local repository."
+            "Because the container runs Claude Code as a non-root user and confines command execution to the container, you can pass --dangerously-skip-permissions for unattended operation. The CLI rejects this flag when launched as root, so confirm remoteUser is set to a non-root account.",
+            "Skipping permission prompts removes your opportunity to review tool calls before they run. Claude can still modify any file in the bind-mounted workspace, which appears directly on your host, and reach anything the container’s network policy allows. Pair this flag with the network egress restrictions above to limit what a bypassed session can reach.",
+            "If you want fewer prompts without disabling safety checks, consider auto mode instead, which has a classifier review actions before they run. To prevent engineers from using --dangerously-skip-permissions at all, set permissions.disableBypassPermissionsMode to \"disable\" in managed settings."
           ],
           "codeBlocks": []
         },
         {
-          "title": "​Configuration breakdown",
+          "title": "​Try the reference container",
           "paragraphs": [
-            "The devcontainer setup consists of three primary components:",
-            "devcontainer.json: Controls container settings, extensions, and volume mounts",
-            "Dockerfile: Defines the container image and installed tools",
-            "init-firewall.sh: Establishes network security rules"
+            "The anthropics/claude-code repository includes an example dev container that combines the CLI, the egress firewall, persistent volumes, and a Zsh-based shell. It is provided as a working example rather than a maintained base image; use it to see how the pieces fit together before applying them to your own configuration.",
+            "Install prerequisites",
+            "Install VS Code and the Dev Containers extension.",
+            "Clone the reference",
+            "Clone the Claude Code repository and open it in VS Code.",
+            "Reopen in container",
+            "When prompted, click Reopen in Container, or run Dev Containers: Reopen in Container from the Command Palette.",
+            "Start Claude Code",
+            "Once the container finishes building, open a terminal with Ctrl+` and run claude to sign in and start your first session.",
+            "To use this configuration with your own project, copy the .devcontainer/ directory into your repository and adjust the Dockerfile for your toolchain, or return to Add Claude Code to your dev container to add only the feature to a setup you already have.",
+            "The reference configuration consists of three files. None of them are required when you add Claude Code to your own dev container through the feature, but they show one way to combine the pieces."
           ],
           "codeBlocks": []
         },
         {
-          "title": "​Security features",
+          "title": "​Next steps",
           "paragraphs": [
-            "The container implements a multi-layered security approach with its firewall configuration:",
-            "Precise access control: Restricts outbound connections to whitelisted domains only (npm registry, GitHub, Claude API, etc.)",
-            "Allowed outbound connections: The firewall permits outbound DNS and SSH connections",
-            "Default-deny policy: Blocks all other external network access",
-            "Startup verification: Validates firewall rules when the container initializes",
-            "Isolation: Creates a secure development environment separated from your main system"
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Customization options",
-          "paragraphs": [
-            "The devcontainer configuration is designed to be adaptable to your needs:",
-            "Add or remove VS Code extensions based on your workflow",
-            "Modify resource allocations for different hardware environments",
-            "Adjust network access permissions",
-            "Customize shell configurations and developer tooling"
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Example use cases",
-          "paragraphs": [],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Secure client work",
-          "paragraphs": [
-            "Use devcontainers to isolate different client projects, ensuring code and credentials never mix between environments."
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Team onboarding",
-          "paragraphs": [
-            "New team members can get a fully configured development environment in minutes, with all necessary tools and settings pre-installed."
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Consistent CI/CD environments",
-          "paragraphs": [
-            "Mirror your devcontainer configuration in CI/CD pipelines to ensure development and production environments match."
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Related resources",
-          "paragraphs": [
-            "VS Code devcontainers documentation",
-            "Claude Code security best practices",
-            "Enterprise network configuration",
+            "Once Claude Code is running in your dev container, the pages below cover the rest of an organization rollout: choosing an authentication path, delivering managed policy outside the repository, monitoring usage, and understanding what Claude Code stores and sends.",
+            "Set up Claude Code for your organization: choose an authentication provider, decide how policy reaches devices, and plan the rollout",
+            "Server-managed settings: deliver managed policy from the Claude.ai admin console so engineers cannot bypass it by editing repository files",
+            "Monitor usage and audit activity: export OpenTelemetry metrics and review what your team is running",
+            "Network access requirements: the full domain allowlist for proxies and firewalls",
+            "Telemetry services and opt-out: what Claude Code sends by default and the environment variables that disable it",
+            "Explore the .claude directory: what the volume mount holds, including credentials, settings, and session history",
+            "Security model: how Claude Code’s permission system, sandboxing, and prompt-injection protections fit together",
+            "Permission modes: the full range from plan mode to auto mode to bypass, and when to use each",
             "Was this page helpful?"
           ],
           "codeBlocks": []
@@ -15770,7 +15812,7 @@
         "Alpine Linux 3.19+",
         "Hardware: 4 GB+ RAM, x64 or ARM64 processor",
         "Network: internet connection required. See network configuration.",
-        "Shell: Bash, Zsh, PowerShell, or CMD. Native Windows setups require Git for Windows. WSL setups do not.",
+        "Shell: Bash, Zsh, PowerShell, or CMD. Native Windows setups recommend Git for Windows; PowerShell is used as a fallback when Git Bash is absent. WSL setups do not require Git for Windows.",
         "Location: Anthropic supported countries",
         "ripgrep: usually included with Claude Code. If search fails, see search troubleshooting.",
         "Prefer a graphical interface? The Desktop app lets you use Claude Code without the terminal. Download it for macOS or Windows.",
@@ -15782,7 +15824,7 @@
         "Windows PowerShell:",
         "Windows CMD:",
         "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. If you see 'irm' is not recognized as an internal or external command, you’re in CMD, not PowerShell. Your prompt shows PS C:\\ when you’re in PowerShell and C:\\ without the PS when you’re in CMD.",
-        "Native Windows setups require Git for Windows. Install it first if you don’t have it. WSL setups do not need it.",
+        "Git for Windows is recommended on native Windows so Claude Code can use the Bash tool. If Git for Windows is not installed, Claude Code uses PowerShell as the shell tool instead. WSL setups do not need Git for Windows.",
         "Native installations automatically update in the background to keep you on the latest version.",
         "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship.",
         "Homebrew installations do not auto-update. Run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed, to get the latest features and security fixes.",
@@ -15794,7 +15836,7 @@
         "Option 1: Native Windows with Git Bash",
         "Install Git for Windows, then run the install command from PowerShell or CMD. You do not need to run as Administrator.",
         "Whether you install from PowerShell or CMD only affects which install command you run. Your prompt shows PS C:\\Users\\YourName> in PowerShell and C:\\Users\\YourName> without the PS in CMD. If you’re new to the terminal, the terminal guide walks through each step.",
-        "After installation, launch claude from PowerShell, CMD, or Git Bash. Claude Code uses Git Bash internally to execute commands regardless of where you launched it. If Claude Code can’t find your Git Bash installation, set the path in your settings.json file:",
+        "After installation, launch claude from PowerShell, CMD, or Git Bash. When Git Bash is installed, Claude Code uses it internally to execute commands regardless of where you launched it. If Claude Code can’t find your Git Bash installation, set the path in your settings.json file:",
         "Claude Code can also run PowerShell natively on Windows. The PowerShell tool is rolling out progressively; set CLAUDE_CODE_USE_POWERSHELL_TOOL=1 to opt in or 0 to opt out. See PowerShell tool for setup and limitations.",
         "Option 2: WSL",
         "Open your WSL distribution and run the Linux installer from the install instructions above. You install and launch claude inside the WSL terminal, not from PowerShell or CMD.",
@@ -15942,7 +15984,7 @@
             "Alpine Linux 3.19+",
             "Hardware: 4 GB+ RAM, x64 or ARM64 processor",
             "Network: internet connection required. See network configuration.",
-            "Shell: Bash, Zsh, PowerShell, or CMD. Native Windows setups require Git for Windows. WSL setups do not.",
+            "Shell: Bash, Zsh, PowerShell, or CMD. Native Windows setups recommend Git for Windows; PowerShell is used as a fallback when Git Bash is absent. WSL setups do not require Git for Windows.",
             "Location: Anthropic supported countries"
           ],
           "codeBlocks": []
@@ -15966,7 +16008,7 @@
             "Windows PowerShell:",
             "Windows CMD:",
             "If you see The token '&&' is not a valid statement separator, you’re in PowerShell, not CMD. If you see 'irm' is not recognized as an internal or external command, you’re in CMD, not PowerShell. Your prompt shows PS C:\\ when you’re in PowerShell and C:\\ without the PS when you’re in CMD.",
-            "Native Windows setups require Git for Windows. Install it first if you don’t have it. WSL setups do not need it.",
+            "Git for Windows is recommended on native Windows so Claude Code can use the Bash tool. If Git for Windows is not installed, Claude Code uses PowerShell as the shell tool instead. WSL setups do not need Git for Windows.",
             "Native installations automatically update in the background to keep you on the latest version.",
             "Homebrew offers two casks. claude-code tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. claude-code@latest tracks the latest channel and receives new versions as soon as they ship."
           ],
@@ -15986,7 +16028,7 @@
             "Option 1: Native Windows with Git Bash",
             "Install Git for Windows, then run the install command from PowerShell or CMD. You do not need to run as Administrator.",
             "Whether you install from PowerShell or CMD only affects which install command you run. Your prompt shows PS C:\\Users\\YourName> in PowerShell and C:\\Users\\YourName> without the PS in CMD. If you’re new to the terminal, the terminal guide walks through each step.",
-            "After installation, launch claude from PowerShell, CMD, or Git Bash. Claude Code uses Git Bash internally to execute commands regardless of where you launched it. If Claude Code can’t find your Git Bash installation, set the path in your settings.json file:",
+            "After installation, launch claude from PowerShell, CMD, or Git Bash. When Git Bash is installed, Claude Code uses it internally to execute commands regardless of where you launched it. If Claude Code can’t find your Git Bash installation, set the path in your settings.json file:",
             "Claude Code can also run PowerShell natively on Windows. The PowerShell tool is rolling out progressively; set CLAUDE_CODE_USE_POWERSHELL_TOOL=1 to opt in or 0 to opt out. See PowerShell tool for setup and limitations.",
             "Option 2: WSL",
             "Open your WSL distribution and run the Linux installer from the install instructions above. You install and launch claude inside the WSL terminal, not from PowerShell or CMD."
@@ -17142,7 +17184,7 @@
         "claude_code.tool.execution",
         "claude_code.hook",
         "This span is emitted only when detailed beta tracing is active, which requires ENABLE_BETA_TRACING_DETAILED=1 and BETA_TRACING_ENDPOINT in addition to the trace exporter configuration above. In interactive CLI sessions, this also requires your organization to be allowlisted for the feature. Agent SDK and non-interactive -p sessions are not gated. It is not emitted when only CLAUDE_CODE_ENHANCED_TELEMETRY_BETA is set.",
-        "Additional content-bearing attributes such as new_context, system_prompt_preview, tool_input, and response.model_output are emitted only when detailed beta tracing is active. They are not part of the stable span schema.",
+        "Additional content-bearing attributes such as new_context, system_prompt_preview, user_system_prompt, tool_input, and response.model_output are emitted only when detailed beta tracing is active. They are not part of the stable span schema. user_system_prompt additionally requires OTEL_LOG_USER_PROMPTS=1. It carries only the system prompt text you provide via the systemPrompt SDK option or --system-prompt and --append-system-prompt flags, truncated at 60 KB, and is emitted once per session rather than per request.",
         "For enterprise environments that require dynamic authentication, you can configure a script to generate headers dynamically:",
         "Add to your .claude/settings.json:",
         "The script must output valid JSON with string key-value pairs representing HTTP headers:",
@@ -18320,6 +18362,7 @@
         "Create .claude-plugin/marketplace.json in your repository root. This file defines your marketplace’s name, owner information, and a list of plugins with their sources.",
         "Each plugin entry needs at minimum a name and source (where to fetch it from). See the full schema below for all available fields.",
         "Reserved names: The following marketplace names are reserved for official Anthropic use and cannot be used by third-party marketplaces: claude-code-marketplace, claude-code-plugins, claude-plugins-official, anthropic-marketplace, anthropic-plugins, agent-skills, knowledge-work-plugins, life-sciences. Names that impersonate official marketplaces (like official-claude-plugins or anthropic-tools-v2) are also blocked.",
+        "description and version are also accepted under metadata for backward compatibility.",
         "Each plugin entry in the plugins array describes a plugin and where to find it. You can include any field from the plugin manifest schema (like description, version, author, commands, hooks, etc.), plus these marketplace-specific fields: source, category, tags, and strict.",
         "Standard metadata fields:",
         "Component configuration fields:",
@@ -18425,8 +18468,7 @@
         "For a monorepo, limit the checkout to the directories that contain plugin content:",
         "List all configured marketplaces.",
         "Remove a configured marketplace. The alias rm is also accepted.",
-        "<name>: marketplace name to remove, as shown by claude plugin marketplace list. This is the name from marketplace.json, not the source you passed to add",
-        "Removing a marketplace also uninstalls any plugins you installed from it. To refresh a marketplace without losing installed plugins, use claude plugin marketplace update instead."
+        "<name>: marketplace name to remove, as shown by claude plugin marketplace list. This is the name from marketplace.json, not the source you passed to add"
       ],
       "codeBlocks": [
         "mkdir -p my-marketplace/.claude-plugin\nmkdir -p my-marketplace/plugins/quality-review-plugin/.claude-plugin\nmkdir -p my-marketplace/plugins/quality-review-plugin/skills/quality-review",
@@ -18547,7 +18589,9 @@
         },
         {
           "title": "​Optional fields",
-          "paragraphs": [],
+          "paragraphs": [
+            "description and version are also accepted under metadata for backward compatibility."
+          ],
           "codeBlocks": []
         },
         {
@@ -18860,6 +18904,7 @@
         "​Depend on a plugin from another marketplace",
         "​Tag plugin releases for version resolution",
         "​How constraints interact",
+        "​Remove orphaned auto-installed dependencies",
         "​Resolve dependency errors",
         "​See also"
       ],
@@ -18869,6 +18914,7 @@
         "Depend on a plugin from another marketplace",
         "Tag plugin releases for version resolution",
         "How constraints interact",
+        "Remove orphaned auto-installed dependencies",
         "Resolve dependency errors",
         "See also"
       ],
@@ -18878,6 +18924,7 @@
         "Depend on a plugin from another marketplace",
         "Tag plugin releases for version resolution",
         "How constraints interact",
+        "Remove orphaned auto-installed dependencies",
         "Resolve dependency errors",
         "See also",
         "Declare version constraints on plugin dependencies so your plugin keeps working when an upstream plugin ships a breaking change.",
@@ -18906,6 +18953,10 @@
         "When several installed plugins constrain the same dependency, Claude Code intersects their ranges and resolves the dependency to the highest version that satisfies all of them. The table below shows how common combinations resolve.",
         "Auto-update fetches a constrained dependency at the highest git tag that satisfies every installed plugin’s range, rather than at the marketplace’s latest version, so the dependency continues to receive updates within its allowed range. If no tag satisfies all ranges, the update is skipped and the skip appears in /doctor and the /plugin Errors tab, naming the constraining plugin.",
         "When you uninstall the last plugin that constrains a dependency, the dependency is no longer held and resumes tracking its marketplace entry on the next update.",
+        "Auto-installed dependencies stay on disk after the plugins that installed them are uninstalled, in case you reinstall a dependent plugin or want to keep using the dependency directly. To clean them up, run claude plugin prune to list the auto-installed dependencies that no longer have any installed plugin requiring them and remove them after a confirmation prompt. This requires Claude Code v2.1.121 or later.",
+        "By default, prune operates at user scope. Use --scope project or --scope local to target a different scope. Pass --dry-run to list what would be removed without changing anything. Pass -y to skip the confirmation prompt. When stdin or stdout is not a terminal, prune lists the orphans and exits without removing them unless -y is passed.",
+        "To prune as part of an uninstall, pass --prune to claude plugin uninstall. After removing the named plugin, Claude Code scans for and removes any auto-installed dependencies that are now orphaned. Plugins you installed yourself are never pruned, only those installed automatically through another plugin’s dependencies array.",
+        "For example, to uninstall deploy-kit and clean up the dependencies it leaves behind:",
         "Dependency problems surface in claude plugin list, in the /plugin interface, and in /doctor. The affected plugin is disabled until you resolve the error. The most common errors and their fixes are listed below.",
         "To check for these errors programmatically, run claude plugin list --json and read the errors field on each plugin.",
         "Create plugins: build plugins with skills, agents, and hooks",
@@ -18917,7 +18968,9 @@
       "codeBlocks": [
         "{\n  \"name\": \"deploy-kit\",\n  \"version\": \"3.1.0\",\n  \"dependencies\": [\n    \"audit-logger\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
         "{\n  \"name\": \"acme-tools\",\n  \"owner\": { \"name\": \"Acme\" },\n  \"allowCrossMarketplaceDependenciesOn\": [\"acme-shared\"],\n  \"plugins\": [\n    {\n      \"name\": \"deploy-kit\",\n      \"source\": \"./deploy-kit\",\n      \"dependencies\": [\n        { \"name\": \"audit-logger\", \"marketplace\": \"acme-shared\" }\n      ]\n    }\n  ]\n}",
-        "claude plugin tag --push"
+        "claude plugin tag --push",
+        "claude plugin prune",
+        "claude plugin uninstall deploy-kit --prune"
       ],
       "sectionBlocks": [
         {
@@ -18928,13 +18981,13 @@
             "Depend on a plugin from another marketplace",
             "Tag plugin releases for version resolution",
             "How constraints interact",
+            "Remove orphaned auto-installed dependencies",
             "Resolve dependency errors",
             "See also",
             "Declare version constraints on plugin dependencies so your plugin keeps working when an upstream plugin ships a breaking change.",
             "A plugin can depend on other plugins by listing them in plugin.json or in its marketplace entry. By default, a dependency tracks the latest available version, so an upstream release can change the dependency under your plugin without warning. Version constraints let you hold a dependency at a tested version range until you choose to move.",
             "When you install a plugin that declares dependencies, Claude Code resolves and installs them automatically and lists which dependencies were added at the end of the install output. If a dependency later goes missing, /reload-plugins and the background plugin auto-update reinstall it, provided its marketplace is already in your configured marketplaces. Re-running claude plugin install on the dependent plugin, or adding a marketplace with claude plugin marketplace add, also resolves any outstanding missing dependencies. Dependencies from a marketplace you have not added are left unresolved.",
-            "This guide is for plugin authors who declare dependencies in plugin.json and for marketplace maintainers who tag releases. To install plugins that have dependencies, see Discover and install plugins. For the full manifest schema, see the Plugins reference.",
-            "Dependency version constraints require Claude Code v2.1.110 or later."
+            "This guide is for plugin authors who declare dependencies in plugin.json and for marketplace maintainers who tag releases. To install plugins that have dependencies, see Discover and install plugins. For the full manifest schema, see the Plugins reference."
           ],
           "codeBlocks": []
         },
@@ -18994,6 +19047,19 @@
             "When you uninstall the last plugin that constrains a dependency, the dependency is no longer held and resumes tracking its marketplace entry on the next update."
           ],
           "codeBlocks": []
+        },
+        {
+          "title": "​Remove orphaned auto-installed dependencies",
+          "paragraphs": [
+            "Auto-installed dependencies stay on disk after the plugins that installed them are uninstalled, in case you reinstall a dependent plugin or want to keep using the dependency directly. To clean them up, run claude plugin prune to list the auto-installed dependencies that no longer have any installed plugin requiring them and remove them after a confirmation prompt. This requires Claude Code v2.1.121 or later.",
+            "By default, prune operates at user scope. Use --scope project or --scope local to target a different scope. Pass --dry-run to list what would be removed without changing anything. Pass -y to skip the confirmation prompt. When stdin or stdout is not a terminal, prune lists the orphans and exits without removing them unless -y is passed.",
+            "To prune as part of an uninstall, pass --prune to claude plugin uninstall. After removing the named plugin, Claude Code scans for and removes any auto-installed dependencies that are now orphaned. Plugins you installed yourself are never pruned, only those installed automatically through another plugin’s dependencies array.",
+            "For example, to uninstall deploy-kit and clean up the dependencies it leaves behind:"
+          ],
+          "codeBlocks": [
+            "claude plugin prune",
+            "claude plugin uninstall deploy-kit --prune"
+          ]
         },
         {
           "title": "​Resolve dependency errors",
@@ -19129,7 +19195,7 @@
         "Remote Control sessions work differently: the web interface connects to a Claude Code process running on your local machine. All code execution and file access stays local, and the same data that flows during any local Claude Code session travels through the Anthropic API over TLS. No cloud VMs or sandboxing are involved. The connection uses multiple short-lived, narrowly scoped credentials, each limited to a specific purpose and expiring independently, to limit the blast radius of any single compromised credential.",
         "Review all suggested changes before approval",
         "Use project-specific permission settings for sensitive repositories",
-        "Consider using devcontainers for additional isolation",
+        "Consider using dev containers for additional isolation",
         "Regularly audit your permission settings with /permissions",
         "Use managed settings to enforce organizational standards",
         "Share approved permission configurations through version control",
@@ -19293,7 +19359,7 @@
           "paragraphs": [
             "Review all suggested changes before approval",
             "Use project-specific permission settings for sensitive repositories",
-            "Consider using devcontainers for additional isolation",
+            "Consider using dev containers for additional isolation",
             "Regularly audit your permission settings with /permissions"
           ],
           "codeBlocks": []
@@ -19386,7 +19452,12 @@
         "Commercial users: (Team and Enterprise plans, API, 3rd-party platforms, and Claude Gov) maintain existing policies: Anthropic does not train generative models using code or prompts sent to Claude Code under commercial terms, unless the customer has chosen to provide their data to us for model improvement (for example, the Developer Partner Program).",
         "If you explicitly opt in to methods to provide us with materials to train on, such as via the Development Partner Program, we may use those materials provided to train our models. An organization admin can expressly opt-in to the Development Partner Program for their organization. Note that this program is available only for Anthropic first-party API, and not for Bedrock or Vertex users.",
         "If you choose to send us feedback about Claude Code using the /feedback command, we may use your feedback to improve our products and services. Transcripts shared via /feedback are retained for 5 years.",
-        "When you see the “How is Claude doing this session?” prompt in Claude Code, responding to this survey (including selecting “Dismiss”), only your numeric rating (1, 2, 3, or dismiss) is recorded. We do not collect or store any conversation transcripts, inputs, outputs, or other session data as part of this survey. Unlike thumbs up/down feedback or /feedback reports, this session quality survey is a simple product satisfaction metric. Your responses to this survey do not impact your data training preferences and cannot be used to train our AI models.",
+        "When you see the “How is Claude doing this session?” prompt in Claude Code, responding to this survey, including selecting “Dismiss”, records only your rating. We do not collect or store any conversation transcripts, inputs, outputs, or other session data as part of the rating prompt itself. Unlike thumbs up/down feedback or /feedback reports, this session quality survey is a simple product satisfaction metric.",
+        "After the rating prompt, you may see a separate follow-up asking “Can Anthropic look at your session transcript to help us improve Claude Code?”. This is an optional second step distinct from the rating:",
+        "Yes: uploads your conversation transcript, any subagent transcripts, and the raw session log file from disk to Anthropic. Known API key and token patterns are redacted before upload. Source code, file contents, and other conversation content are uploaded as-is. Shared transcripts are retained for up to 6 months.",
+        "No: declines without sending anything",
+        "Don’t ask again: declines and stops this follow-up from appearing in future sessions",
+        "Nothing is uploaded unless you explicitly select Yes. Organizations with zero data retention, or where product feedback is disabled by organization policy, never see this follow-up. Your responses to this survey, including session transcripts submitted after the rating prompt, do not impact your data training preferences and cannot be used to train our AI models.",
         "To disable these surveys, set CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1. The survey is also disabled when DISABLE_TELEMETRY or CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC is set. To control frequency instead of disabling, set feedbackSurveyRate in your settings file to a probability between 0 and 1.",
         "Anthropic retains Claude Code data based on your account type and preferences.",
         "Consumer users (Free, Pro, and Max plans):",
@@ -19470,7 +19541,12 @@
         {
           "title": "​Session quality surveys",
           "paragraphs": [
-            "When you see the “How is Claude doing this session?” prompt in Claude Code, responding to this survey (including selecting “Dismiss”), only your numeric rating (1, 2, 3, or dismiss) is recorded. We do not collect or store any conversation transcripts, inputs, outputs, or other session data as part of this survey. Unlike thumbs up/down feedback or /feedback reports, this session quality survey is a simple product satisfaction metric. Your responses to this survey do not impact your data training preferences and cannot be used to train our AI models.",
+            "When you see the “How is Claude doing this session?” prompt in Claude Code, responding to this survey, including selecting “Dismiss”, records only your rating. We do not collect or store any conversation transcripts, inputs, outputs, or other session data as part of the rating prompt itself. Unlike thumbs up/down feedback or /feedback reports, this session quality survey is a simple product satisfaction metric.",
+            "After the rating prompt, you may see a separate follow-up asking “Can Anthropic look at your session transcript to help us improve Claude Code?”. This is an optional second step distinct from the rating:",
+            "Yes: uploads your conversation transcript, any subagent transcripts, and the raw session log file from disk to Anthropic. Known API key and token patterns are redacted before upload. Source code, file contents, and other conversation content are uploaded as-is. Shared transcripts are retained for up to 6 months.",
+            "No: declines without sending anything",
+            "Don’t ask again: declines and stops this follow-up from appearing in future sessions",
+            "Nothing is uploaded unless you explicitly select Yes. Organizations with zero data retention, or where product feedback is disabled by organization policy, never see this follow-up. Your responses to this survey, including session transcripts submitted after the rating prompt, do not impact your data training preferences and cannot be used to train our AI models.",
             "To disable these surveys, set CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1. The survey is also disabled when DISABLE_TELEMETRY or CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC is set. To control frequency instead of disabling, set feedbackSurveyRate in your settings file to a probability between 0 and 1."
           ],
           "codeBlocks": []
@@ -20885,7 +20961,7 @@
         "Integrate with existing security infrastructure",
         "The sandboxed bash tool works alongside:",
         "Permission rules: Combine with permission settings for defense-in-depth",
-        "Development containers: Use with devcontainers for additional isolation",
+        "Development containers: Use with dev containers for additional isolation",
         "Enterprise policies: Enforce sandbox configurations through managed settings",
         "Start restrictive: Begin with minimal permissions and expand as needed",
         "Monitor logs: Review sandbox violation attempts to understand Claude Code’s needs",
@@ -21157,7 +21233,7 @@
           "paragraphs": [
             "The sandboxed bash tool works alongside:",
             "Permission rules: Combine with permission settings for defense-in-depth",
-            "Development containers: Use with devcontainers for additional isolation",
+            "Development containers: Use with dev containers for additional isolation",
             "Enterprise policies: Enforce sandbox configurations through managed settings"
           ],
           "codeBlocks": []
@@ -22123,6 +22199,7 @@
         "Open Settings → Profiles → Keyboard and check “Use Option as Meta Key”.",
         "If you accepted Claude Code’s first-run prompt that offered “Option+Enter for newlines and visual bell”, this is already done. That prompt runs /terminal-setup for you, which enables Option as Meta and switches the audio bell to a visual screen flash in your Apple Terminal profile.",
         "Open Settings → Profiles → Keys → General and set Left Option key and Right Option key to “Esc+”.",
+        "Running /terminal-setup in iTerm2 enables “Applications in terminal may access clipboard” under Settings → General → Selection so the /copy command can write to your system clipboard. The command detects iTerm2 even when run from inside tmux. Restart iTerm2 for the change to take effect.",
         "Add \"terminal.integrated.macOptionIsMeta\": true to your VS Code settings.",
         "For Ghostty, Kitty, and other terminals, look for an Option-as-Alt or Option-as-Meta setting in the terminal’s configuration file.",
         "When Claude finishes a task or pauses for a permission prompt, it fires a notification event. Surfacing this as a terminal bell or desktop notification lets you switch to other work while a long task runs.",
@@ -22213,6 +22290,7 @@
             "Open Settings → Profiles → Keyboard and check “Use Option as Meta Key”.",
             "If you accepted Claude Code’s first-run prompt that offered “Option+Enter for newlines and visual bell”, this is already done. That prompt runs /terminal-setup for you, which enables Option as Meta and switches the audio bell to a visual screen flash in your Apple Terminal profile.",
             "Open Settings → Profiles → Keys → General and set Left Option key and Right Option key to “Esc+”.",
+            "Running /terminal-setup in iTerm2 enables “Applications in terminal may access clipboard” under Settings → General → Selection so the /copy command can write to your system clipboard. The command detects iTerm2 even when run from inside tmux. Restart iTerm2 for the change to take effect.",
             "Add \"terminal.integrated.macOptionIsMeta\": true to your VS Code settings.",
             "For Ghostty, Kitty, and other terminals, look for an Option-as-Alt or Option-as-Meta setting in the terminal’s configuration file."
           ],
@@ -22401,8 +22479,9 @@
         "Without mouse mode, wheel events go to tmux instead of Claude Code. Keyboard scrolling with PgUp and PgDn works either way. Claude Code prints a one-time hint at startup if it detects tmux with mouse mode off.",
         "Fullscreen rendering is incompatible with iTerm2’s tmux integration mode, which is the mode you enter with tmux -CC. In integration mode, iTerm2 renders each tmux pane as a native split rather than letting tmux draw to the terminal. The alternate screen buffer and mouse tracking do not work correctly there: the mouse wheel does nothing, and double-click can corrupt the terminal state. Don’t enable fullscreen rendering in tmux -CC sessions. Regular tmux inside iTerm2, without -CC, works fine.",
         "Mouse capture is the most common friction point, especially over SSH or inside tmux. When Claude Code captures mouse events, your terminal’s native copy-on-select stops working. The selection you make with click-and-drag exists inside Claude Code, not in your terminal’s selection buffer, so tmux copy mode, Kitty hints, and similar tools don’t see it.",
-        "Claude Code tries to write the selection to your clipboard, but the path it uses depends on your setup. Inside tmux it writes to the tmux paste buffer. Over SSH it falls back to OSC 52 escape sequences, which some terminals block by default. Claude Code prints a toast after each copy telling you which path it used.",
-        "If you rely on your terminal’s native selection, set CLAUDE_CODE_DISABLE_MOUSE=1 to opt out of mouse capture while keeping the flicker-free rendering and flat memory:",
+        "Claude Code tries to write the selection to your clipboard, but the path it uses depends on your setup. Inside tmux it writes to the tmux paste buffer. Over SSH it falls back to OSC 52 escape sequences, which some terminals block by default. iTerm2 blocks them until you turn on Settings → General → Selection → Applications in terminal may access clipboard. Claude Code prints a toast after each copy telling you which path it used.",
+        "For a one-off native selection, hold your terminal’s bypass modifier while you click and drag: Option in iTerm2, or Shift in most Linux and Windows terminals. The modifier tells your terminal to handle the selection itself instead of forwarding mouse events to Claude Code, so Cmd+C and your terminal’s other copy shortcuts work on it.",
+        "If you rely on native selection all the time, set CLAUDE_CODE_DISABLE_MOUSE=1 to opt out of mouse capture while keeping the flicker-free rendering and flat memory:",
         "With mouse capture disabled, keyboard scrolling with PgUp, PgDn, Ctrl+Home, and Ctrl+End still works, and your terminal handles selection natively. You lose click-to-position-cursor, click-to-expand tool output, URL clicking, and wheel scrolling inside Claude Code.",
         "Fullscreen rendering is a research preview feature. It has been tested on common terminal emulators, but you may encounter rendering issues on less common terminals or unusual configurations.",
         "If you encounter a problem, run /feedback inside Claude Code to report it, or open an issue on the claude-code GitHub repo. Include your terminal emulator name and version.",
@@ -22525,8 +22604,9 @@
           "title": "​Keep native text selection",
           "paragraphs": [
             "Mouse capture is the most common friction point, especially over SSH or inside tmux. When Claude Code captures mouse events, your terminal’s native copy-on-select stops working. The selection you make with click-and-drag exists inside Claude Code, not in your terminal’s selection buffer, so tmux copy mode, Kitty hints, and similar tools don’t see it.",
-            "Claude Code tries to write the selection to your clipboard, but the path it uses depends on your setup. Inside tmux it writes to the tmux paste buffer. Over SSH it falls back to OSC 52 escape sequences, which some terminals block by default. Claude Code prints a toast after each copy telling you which path it used.",
-            "If you rely on your terminal’s native selection, set CLAUDE_CODE_DISABLE_MOUSE=1 to opt out of mouse capture while keeping the flicker-free rendering and flat memory:",
+            "Claude Code tries to write the selection to your clipboard, but the path it uses depends on your setup. Inside tmux it writes to the tmux paste buffer. Over SSH it falls back to OSC 52 escape sequences, which some terminals block by default. iTerm2 blocks them until you turn on Settings → General → Selection → Applications in terminal may access clipboard. Claude Code prints a toast after each copy telling you which path it used.",
+            "For a one-off native selection, hold your terminal’s bypass modifier while you click and drag: Option in iTerm2, or Shift in most Linux and Windows terminals. The modifier tells your terminal to handle the selection itself instead of forwarding mouse events to Claude Code, so Cmd+C and your terminal’s other copy shortcuts work on it.",
+            "If you rely on native selection all the time, set CLAUDE_CODE_DISABLE_MOUSE=1 to opt out of mouse capture while keeping the flicker-free rendering and flat memory:",
             "With mouse capture disabled, keyboard scrolling with PgUp, PgDn, Ctrl+Home, and Ctrl+End still works, and your terminal handles selection natively. You lose click-to-position-cursor, click-to-expand tool output, URL clicking, and wheel scrolling inside Claude Code."
           ],
           "codeBlocks": [
@@ -22604,7 +22684,7 @@
         "Tap mode toggles recording with a single keypress: tap once to start, speak, then tap again to send the prompt. There is no warmup, and you do not need to keep the key held.",
         "Enable tap mode with /voice tap. With the prompt input empty, tap Space to start recording. The footer shows a live waveform while recording. Tap Space again to stop. Claude Code inserts the transcript and submits the prompt automatically when the transcript is at least three words long. Shorter transcripts are inserted but not submitted, so an accidental tap does not send a stray word.",
         "The first tap only starts recording when the prompt input is empty, so you can still type spaces normally while composing a message. The second tap stops recording regardless of input contents. Recording also stops automatically after 15 seconds of silence or two minutes total.",
-        "Voice dictation uses the same language setting that controls Claude’s response language. If that setting is empty, dictation defaults to English.",
+        "Voice dictation uses the same language setting that controls Claude’s response language. If that setting is empty, dictation defaults to English. In the VS Code extension, if language is empty, dictation uses VS Code’s accessibility.voice.speechLanguage setting before defaulting to English.",
         "Supported dictation languages",
         "Set the language in /config or directly in settings. You can use either the BCP 47 language code or the language name:",
         "If your language setting is not in the supported list, /voice warns you on enable and falls back to English for dictation. Claude’s text responses are not affected by this fallback.",
@@ -22710,7 +22790,7 @@
         {
           "title": "​Change the dictation language",
           "paragraphs": [
-            "Voice dictation uses the same language setting that controls Claude’s response language. If that setting is empty, dictation defaults to English.",
+            "Voice dictation uses the same language setting that controls Claude’s response language. If that setting is empty, dictation defaults to English. In the VS Code extension, if language is empty, dictation uses VS Code’s accessibility.voice.speechLanguage setting before defaulting to English.",
             "Supported dictation languages",
             "Set the language in /config or directly in settings. You can use either the BCP 47 language code or the language name:",
             "If your language setting is not in the supported list, /voice warns you on enable and falls back to English for dictation. Claude’s text responses are not affected by this fallback."
@@ -22857,6 +22937,7 @@
         "The command field runs in a shell, so you can also use inline commands instead of a script file. This example uses jq to parse the JSON input and display the model name and context percentage:",
         "The optional padding field adds extra horizontal spacing (in characters) to the status line content. Defaults to 0. This padding is in addition to the interface’s built-in spacing, so it controls relative indentation rather than absolute distance from the terminal edge.",
         "The optional refreshInterval field re-runs your command every N seconds in addition to the event-driven updates. The minimum is 1. Set this when your status line shows time-based data such as a clock, or when background subagents change git state while the main session is idle. Leave it unset to run only on events.",
+        "The optional hideVimModeIndicator field suppresses the built-in -- INSERT -- text below the prompt. Set this to true when your script renders vim.mode itself, so the mode is not shown twice.",
         "Run /statusline and ask it to remove or clear your status line (e.g., /statusline delete, /statusline clear, /statusline remove it). You can also manually delete the statusLine field from your settings.json.",
         "This walkthrough shows what’s happening under the hood by manually creating a status line that displays the current model, working directory, and context window usage percentage.",
         "These examples use Bash scripts, which work on macOS and Linux. On Windows, see Windows configuration for PowerShell and Git Bash examples.",
@@ -23033,7 +23114,8 @@
             "Add a statusLine field to your user settings (~/.claude/settings.json, where ~ is your home directory) or project settings. Set type to \"command\" and point command to a script path or an inline shell command. For a full walkthrough of creating a script, see Build a status line step by step.",
             "The command field runs in a shell, so you can also use inline commands instead of a script file. This example uses jq to parse the JSON input and display the model name and context percentage:",
             "The optional padding field adds extra horizontal spacing (in characters) to the status line content. Defaults to 0. This padding is in addition to the interface’s built-in spacing, so it controls relative indentation rather than absolute distance from the terminal edge.",
-            "The optional refreshInterval field re-runs your command every N seconds in addition to the event-driven updates. The minimum is 1. Set this when your status line shows time-based data such as a clock, or when background subagents change git state while the main session is idle. Leave it unset to run only on events."
+            "The optional refreshInterval field re-runs your command every N seconds in addition to the event-driven updates. The minimum is 1. Set this when your status line shows time-based data such as a clock, or when background subagents change git state while the main session is idle. Leave it unset to run only on events.",
+            "The optional hideVimModeIndicator field suppresses the built-in -- INSERT -- text below the prompt. Set this to true when your script renders vim.mode itself, so the mode is not shown twice."
           ],
           "codeBlocks": [
             "{\n  \"statusLine\": {\n    \"type\": \"command\",\n    \"command\": \"~/.claude/statusline.sh\",\n    \"padding\": 2\n  }\n}",
@@ -23950,7 +24032,6 @@
         "The PowerShell tool has the following known limitations during the preview:",
         "PowerShell profiles are not loaded",
         "On Windows, sandboxing is not supported",
-        "On Windows, Git Bash is still required to start Claude Code",
         "Your exact tool set depends on your provider, platform, and settings. To check what’s loaded in a running session, ask Claude directly:",
         "Claude gives a conversational summary. For exact MCP tool names, run /mcp.",
         "MCP servers: add custom tools by connecting external servers",
@@ -24057,8 +24138,7 @@
           "paragraphs": [
             "The PowerShell tool has the following known limitations during the preview:",
             "PowerShell profiles are not loaded",
-            "On Windows, sandboxing is not supported",
-            "On Windows, Git Bash is still required to start Claude Code"
+            "On Windows, sandboxing is not supported"
           ],
           "codeBlocks": []
         },
@@ -24111,7 +24191,7 @@
         "​Reverse search with Ctrl+R",
         "​Background bash commands",
         "​How backgrounding works",
-        "​Bash mode with ! prefix"
+        "​Shell mode with ! prefix"
       ],
       "toc": [
         "Keyboard shortcuts",
@@ -24133,7 +24213,7 @@
         "Reverse search with Ctrl+R",
         "Background bash commands",
         "How backgrounding works",
-        "Bash mode with ! prefix"
+        "Shell mode with ! prefix"
       ],
       "paragraphs": [
         "Keyboard shortcuts",
@@ -24155,7 +24235,7 @@
         "Reverse search with Ctrl+R",
         "Background bash commands",
         "How backgrounding works",
-        "Bash mode with ! prefix",
+        "Shell mode with ! prefix",
         "Prompt suggestions",
         "Side questions with /btw",
         "Task list",
@@ -24211,15 +24291,15 @@
         "Test runners (jest, pytest)",
         "Development servers",
         "Long-running processes (docker, terraform)",
-        "Run bash commands directly without going through Claude by prefixing your input with !:",
-        "Bash mode:",
+        "Run shell commands directly without going through Claude by prefixing your input with !:",
+        "Shell mode:",
         "Adds the command and its output to the conversation context",
         "Shows real-time progress and output",
         "Supports the same Ctrl+B backgrounding for long-running commands",
         "Does not require Claude to interpret or approve the command",
         "Supports history-based autocomplete: type a partial command and press Tab to complete from previous ! commands in the current project",
         "Exit with Escape, Backspace, or Ctrl+U on an empty prompt",
-        "Pasting text that starts with ! into an empty prompt enters bash mode automatically, matching typed ! behavior",
+        "Pasting text that starts with ! into an empty prompt enters shell mode automatically, matching typed ! behavior",
         "This is useful for quick shell operations while maintaining conversation context.",
         "When you first open a session, a grayed-out example command appears in the prompt input to help you get started. Claude Code picks this from your project’s git history, so it reflects files you’ve been working on recently.",
         "After Claude responds, suggestions continue to appear based on your conversation history, such as a follow-up step from a multi-part request or a natural continuation of your workflow.",
@@ -24435,17 +24515,17 @@
           "codeBlocks": []
         },
         {
-          "title": "​Bash mode with ! prefix",
+          "title": "​Shell mode with ! prefix",
           "paragraphs": [
-            "Run bash commands directly without going through Claude by prefixing your input with !:",
-            "Bash mode:",
+            "Run shell commands directly without going through Claude by prefixing your input with !:",
+            "Shell mode:",
             "Adds the command and its output to the conversation context",
             "Shows real-time progress and output",
             "Supports the same Ctrl+B backgrounding for long-running commands",
             "Does not require Claude to interpret or approve the command",
             "Supports history-based autocomplete: type a partial command and press Tab to complete from previous ! commands in the current project",
             "Exit with Escape, Backspace, or Ctrl+U on an empty prompt",
-            "Pasting text that starts with ! into an empty prompt enters bash mode automatically, matching typed ! behavior",
+            "Pasting text that starts with ! into an empty prompt enters shell mode automatically, matching typed ! behavior",
             "This is useful for quick shell operations while maintaining conversation context."
           ],
           "codeBlocks": [
@@ -24984,7 +25064,7 @@
         "{\n  \"type\": \"result\",\n  \"subtype\": \"success\",\n  \"stop_reason\": \"tool_deferred\",\n  \"session_id\": \"abc123\",\n  \"deferred_tool_use\": {\n    \"id\": \"toolu_01abc\",\n    \"name\": \"AskUserQuestion\",\n    \"input\": { \"questions\": [{ \"question\": \"Which framework?\", \"header\": \"Framework\", \"options\": [{\"label\": \"React\"}, {\"label\": \"Vue\"}], \"multiSelect\": false }] }\n  }\n}",
         "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PermissionRequest\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"rm -rf node_modules\",\n    \"description\": \"Remove node_modules directory\"\n  },\n  \"permission_suggestions\": [\n    {\n      \"type\": \"addRules\",\n      \"rules\": [{ \"toolName\": \"Bash\", \"ruleContent\": \"rm -rf node_modules\" }],\n      \"behavior\": \"allow\",\n      \"destination\": \"localSettings\"\n    }\n  ]\n}",
         "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUse\",\n  \"tool_name\": \"Write\",\n  \"tool_input\": {\n    \"file_path\": \"/path/to/file.txt\",\n    \"content\": \"file content\"\n  },\n  \"tool_response\": {\n    \"filePath\": \"/path/to/file.txt\",\n    \"success\": true\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"duration_ms\": 12\n}",
-        "{\n  \"decision\": \"block\",\n  \"reason\": \"Explanation for decision\",\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolUse\",\n    \"additionalContext\": \"Additional information for Claude\"\n  }\n}",
+        "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolUse\",\n    \"additionalContext\": \"Additional information for Claude\",\n    \"updatedToolOutput\": {\n      \"stdout\": \"[redacted]\",\n      \"stderr\": \"\",\n      \"interrupted\": false,\n      \"isImage\": false\n    }\n  }\n}",
         "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUseFailure\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"npm test\",\n    \"description\": \"Run test suite\"\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"error\": \"Command exited with non-zero status code 1\",\n  \"is_interrupt\": false,\n  \"duration_ms\": 4187\n}"
       ],
       "sectionBlocks": [
@@ -25342,11 +25422,14 @@
             "Runs immediately after a tool completes successfully.",
             "Matches on tool name, same values as PreToolUse.",
             "PostToolUse hooks fire after a tool has already executed successfully. The input includes both tool_input, the arguments sent to the tool, and tool_response, the result it returned. The exact schema for both depends on the tool.",
-            "PostToolUse hooks can provide feedback to Claude after tool execution. In addition to the JSON output fields available to all hooks, your hook script can return these event-specific fields:"
+            "PostToolUse hooks can provide feedback to Claude after tool execution. In addition to the JSON output fields available to all hooks, your hook script can return these event-specific fields:",
+            "The example below replaces the output of a Bash call. The replacement value matches the Bash tool’s output shape:",
+            "updatedToolOutput only changes what Claude sees. The tool has already run by the time the hook fires, so any files written, commands executed, or network requests sent have already taken effect. Telemetry such as OpenTelemetry tool spans and analytics events also captures the original output before the hook runs. To prevent or modify a tool call before it runs, use a PreToolUse hook instead.",
+            "The replacement value must match the tool’s output shape. Built-in tools return structured objects rather than plain strings. For example, Bash returns an object with stdout, stderr, interrupted, and isImage fields. For built-in tools, a value that does not match the tool’s output schema is ignored and the original output is used. MCP tool output is passed through without schema validation. Stripping error details that Claude needs can cause it to proceed on a false assumption."
           ],
           "codeBlocks": [
             "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PostToolUse\",\n  \"tool_name\": \"Write\",\n  \"tool_input\": {\n    \"file_path\": \"/path/to/file.txt\",\n    \"content\": \"file content\"\n  },\n  \"tool_response\": {\n    \"filePath\": \"/path/to/file.txt\",\n    \"success\": true\n  },\n  \"tool_use_id\": \"toolu_01ABC123...\",\n  \"duration_ms\": 12\n}",
-            "{\n  \"decision\": \"block\",\n  \"reason\": \"Explanation for decision\",\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolUse\",\n    \"additionalContext\": \"Additional information for Claude\"\n  }\n}"
+            "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolUse\",\n    \"additionalContext\": \"Additional information for Claude\",\n    \"updatedToolOutput\": {\n      \"stdout\": \"[redacted]\",\n      \"stderr\": \"\",\n      \"interrupted\": false,\n      \"isImage\": false\n    }\n  }\n}"
           ]
         },
         {
@@ -25538,6 +25621,7 @@
         "CLI commands reference",
         "plugin install",
         "plugin uninstall",
+        "plugin prune",
         "plugin enable",
         "plugin disable",
         "plugin update",
@@ -25672,6 +25756,10 @@
         "<plugin>: Plugin name or plugin-name@marketplace-name",
         "Aliases: remove, rm",
         "By default, uninstalling from the last remaining scope also deletes the plugin’s ${CLAUDE_PLUGIN_DATA} directory. Use --keep-data to preserve it, for example when reinstalling after testing a new version.",
+        "Remove auto-installed plugin dependencies that are no longer required by any installed plugin. Dependencies that Claude Code pulled in to satisfy another plugin’s dependencies field are removed; plugins you installed directly are never touched.",
+        "Aliases: autoremove",
+        "The command lists orphaned dependencies and asks for confirmation before removing them. To remove a plugin and clean up its dependencies in one step, run claude plugin uninstall <plugin> --prune.",
+        "claude plugin prune requires Claude Code v2.1.121 or later.",
         "Enable a disabled plugin.",
         "Disable a plugin without uninstalling it.",
         "Update a plugin to the latest version.",
@@ -25688,12 +25776,7 @@
         "Plugin has an invalid manifest file at .claude-plugin/plugin.json. Validation errors: name: Required: a required field is missing",
         "Plugin has a corrupt manifest file at .claude-plugin/plugin.json. JSON parse error: ...: JSON syntax error",
         "Plugin loading errors:",
-        "Warning: No commands found in plugin my-plugin custom directory: ./cmds. Expected .md files or SKILL.md in subdirectories.: command path exists but contains no valid command files",
-        "Plugin directory not found at path: ./plugins/my-plugin. Check that the marketplace entry has the correct path.: the source path in marketplace.json points to a non-existent directory",
-        "Plugin my-plugin has conflicting manifests: both plugin.json and marketplace entry specify components.: remove duplicate component definitions or remove strict: false in marketplace entry",
-        "Hook script not executing:",
-        "Check the script is executable: chmod +x ./scripts/your-script.sh",
-        "Verify the shebang line: First line should be #!/bin/bash or #!/usr/bin/env bash"
+        "Warning: No commands found in plugin my-plugin custom directory: ./cmds. Expected .md files or SKILL.md in subdirectories.: command path exists but contains no valid command files"
       ],
       "codeBlocks": [
         "skills/\n├── pdf-processor/\n│   ├── SKILL.md\n│   ├── reference.md (optional)\n│   └── scripts/ (optional)\n└── code-reviewer/\n    └── SKILL.md",
@@ -25716,6 +25799,7 @@
         "claude plugin install <plugin> [options]",
         "# Install to user scope (default)\nclaude plugin install formatter@my-marketplace\n\n# Install to project scope (shared with team)\nclaude plugin install formatter@my-marketplace --scope project\n\n# Install to local scope (gitignored)\nclaude plugin install formatter@my-marketplace --scope local",
         "claude plugin uninstall <plugin> [options]",
+        "claude plugin prune [options]",
         "claude plugin enable <plugin> [options]",
         "claude plugin disable <plugin> [options]",
         "claude plugin update <plugin> [options]",
@@ -26052,6 +26136,19 @@
           ]
         },
         {
+          "title": "​plugin prune",
+          "paragraphs": [
+            "Remove auto-installed plugin dependencies that are no longer required by any installed plugin. Dependencies that Claude Code pulled in to satisfy another plugin’s dependencies field are removed; plugins you installed directly are never touched.",
+            "Options:",
+            "Aliases: autoremove",
+            "The command lists orphaned dependencies and asks for confirmation before removing them. To remove a plugin and clean up its dependencies in one step, run claude plugin uninstall <plugin> --prune.",
+            "claude plugin prune requires Claude Code v2.1.121 or later."
+          ],
+          "codeBlocks": [
+            "claude plugin prune [options]"
+          ]
+        },
+        {
           "title": "​plugin enable",
           "paragraphs": [
             "Enable a disabled plugin.",
@@ -26085,16 +26182,6 @@
           ],
           "codeBlocks": [
             "claude plugin update <plugin> [options]"
-          ]
-        },
-        {
-          "title": "​plugin list",
-          "paragraphs": [
-            "List installed plugins with their version, source marketplace, and enable status.",
-            "Options:"
-          ],
-          "codeBlocks": [
-            "claude plugin list [options]"
           ]
         }
       ]
@@ -35283,6 +35370,12 @@
       "paragraphs": [
         "A weekly digest of notable Claude Code features, with code snippets, demos, and context on why they matter.",
         "The weekly dev digest highlights the features most likely to change how you work. Each entry includes runnable code, a short demo, and a link to the full docs. For every bug fix and minor improvement, see the changelog.",
+        "/ultrareview opens as a public research preview: a fleet of bug-hunting agents runs in the cloud and findings land back in your CLI or Desktop automatically.",
+        "Also this week: session recap shows you what happened while a terminal was unfocused; custom themes let you build and ship color palettes from /theme or a plugin; and Claude Code on the web gets a redesign with a new sessions sidebar and drag-and-drop layout.",
+        "Read the Week 17 digest →",
+        "Claude Opus 4.7 lands as the new default on Max and Team Premium, with a new xhigh effort level that’s the recommended setting for most coding work and an interactive /effort slider to dial it in.",
+        "Also this week: Routines on Claude Code on the web fire templated cloud agents from a schedule, GitHub event, or API call; /ultrareview runs parallel multi-agent code review in the cloud; /usage shows what’s driving your limits; and the CLI moves to native binaries.",
+        "Read the Week 16 digest →",
         "Ultraplan enters early preview: draft a plan in the cloud from your CLI, review and comment on it in a web editor, then run it remotely or pull it back local. The first run now auto-creates a cloud environment for you.",
         "Also this week: the Monitor tool streams background events into the conversation so Claude can tail logs and react live, /loop self-paces when you omit the interval, /team-onboarding packages your setup into a replayable guide, and /autofix-pr turns on PR auto-fix from your terminal.",
         "Read the Week 15 digest →",
@@ -35301,18 +35394,133 @@
           "paragraphs": [
             "A weekly digest of notable Claude Code features, with code snippets, demos, and context on why they matter.",
             "The weekly dev digest highlights the features most likely to change how you work. Each entry includes runnable code, a short demo, and a link to the full docs. For every bug fix and minor improvement, see the changelog.",
+            "/ultrareview opens as a public research preview: a fleet of bug-hunting agents runs in the cloud and findings land back in your CLI or Desktop automatically.",
+            "Also this week: session recap shows you what happened while a terminal was unfocused; custom themes let you build and ship color palettes from /theme or a plugin; and Claude Code on the web gets a redesign with a new sessions sidebar and drag-and-drop layout.",
+            "Read the Week 17 digest →",
+            "Claude Opus 4.7 lands as the new default on Max and Team Premium, with a new xhigh effort level that’s the recommended setting for most coding work and an interactive /effort slider to dial it in.",
+            "Also this week: Routines on Claude Code on the web fire templated cloud agents from a schedule, GitHub event, or API call; /ultrareview runs parallel multi-agent code review in the cloud; /usage shows what’s driving your limits; and the CLI moves to native binaries.",
+            "Read the Week 16 digest →",
             "Ultraplan enters early preview: draft a plan in the cloud from your CLI, review and comment on it in a web editor, then run it remotely or pull it back local. The first run now auto-creates a cloud environment for you.",
             "Also this week: the Monitor tool streams background events into the conversation so Claude can tail logs and react live, /loop self-paces when you omit the interval, /team-onboarding packages your setup into a replayable guide, and /autofix-pr turns on PR auto-fix from your terminal.",
             "Read the Week 15 digest →",
-            "Computer use comes to the CLI in research preview: Claude can open native apps, click through UI, and verify changes from your terminal. Best for closing the loop on things only a GUI can verify.",
-            "Also this week: /powerup interactive lessons, flicker-free alt-screen rendering, a per-tool MCP result-size override up to 500K, and plugin executables on the Bash tool’s PATH.",
-            "Read the Week 14 digest →",
-            "Auto mode lands in research preview: a classifier handles your permission prompts so safe actions run without interruption and risky ones get blocked. The middle ground between approving everything and --dangerously-skip-permissions.",
-            "Also this week: computer use in the Desktop app, PR auto-fix on Web, transcript search with /, a native PowerShell tool for Windows, and conditional if hooks.",
-            "Read the Week 13 digest →",
-            "Was this page helpful?"
+            "Computer use comes to the CLI in research preview: Claude can open native apps, click through UI, and verify changes from your terminal. Best for closing the loop on things only a GUI can verify."
           ],
           "codeBlocks": []
+        }
+      ]
+    },
+    {
+      "section": "What's New",
+      "path": "/docs/en/whats-new/2026-w17",
+      "url": "https://code.claude.com/docs/en/whats-new/2026-w17",
+      "title": "Week 17 · April 20–24, 2026",
+      "metaDescription": "/ultrareview opens as a research preview, automatic session recaps when you return to a terminal, custom color themes you can build and ship in plugins, and a redesigned Claude Code on the web.",
+      "headings": [],
+      "toc": [],
+      "paragraphs": [
+        "/ultrareview opens as a research preview, automatic session recaps when you return to a terminal, custom color themes you can build and ship in plugins, and a redesigned Claude Code on the web.",
+        "Now in public research preview. Ultrareview runs a fleet of bug-hunting agents in the cloud against your branch or a PR, and findings land back in the CLI or Desktop automatically. Run it before merging critical changes such as auth or data migrations.",
+        "Review the branch you’re on:",
+        "Or point it at a PR:",
+        "Switch focus away from a session and come back to a one-line recap of what happened while you were gone. Helpful for staying in flow while running several Claude sessions at once.",
+        "Generate a recap on demand, or turn the automatic one off from /config:",
+        "Build and switch between named color themes from /theme, or hand-edit JSON files in ~/.claude/themes/. Each theme picks a base preset and overrides only the tokens you care about. Plugins can ship themes too.",
+        "Open the theme picker and create a new one:",
+        "A new look for claude.ai/code that matches the redesigned desktop app: sessions sidebar, drag-and-drop layout, and a refreshed routines view. Key parts were rebuilt for quicker responses and a more reliable experience.",
+        "Other wins",
+        "Full changelog for v2.1.114–v2.1.119 →",
+        "Was this page helpful?"
+      ],
+      "codeBlocks": [
+        "> /ultrareview",
+        "> /ultrareview 1234",
+        "> /recap",
+        "> /theme"
+      ],
+      "sectionBlocks": [
+        {
+          "title": "",
+          "paragraphs": [
+            "/ultrareview opens as a research preview, automatic session recaps when you return to a terminal, custom color themes you can build and ship in plugins, and a redesigned Claude Code on the web.",
+            "Now in public research preview. Ultrareview runs a fleet of bug-hunting agents in the cloud against your branch or a PR, and findings land back in the CLI or Desktop automatically. Run it before merging critical changes such as auth or data migrations.",
+            "Review the branch you’re on:",
+            "Or point it at a PR:",
+            "Switch focus away from a session and come back to a one-line recap of what happened while you were gone. Helpful for staying in flow while running several Claude sessions at once.",
+            "Generate a recap on demand, or turn the automatic one off from /config:",
+            "Build and switch between named color themes from /theme, or hand-edit JSON files in ~/.claude/themes/. Each theme picks a base preset and overrides only the tokens you care about. Plugins can ship themes too.",
+            "Open the theme picker and create a new one:",
+            "A new look for claude.ai/code that matches the redesigned desktop app: sessions sidebar, drag-and-drop layout, and a refreshed routines view. Key parts were rebuilt for quicker responses and a more reliable experience.",
+            "Other wins",
+            "Full changelog for v2.1.114–v2.1.119 →",
+            "Was this page helpful?"
+          ],
+          "codeBlocks": [
+            "> /ultrareview",
+            "> /ultrareview 1234",
+            "> /recap",
+            "> /theme"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "What's New",
+      "path": "/docs/en/whats-new/2026-w16",
+      "url": "https://code.claude.com/docs/en/whats-new/2026-w16",
+      "title": "Week 16 · April 13–17, 2026",
+      "metaDescription": "Claude Opus 4.7 with the new xhigh effort level, Routines on Claude Code on the web, /ultrareview cloud code review, a /usage breakdown that shows what's driving your limits, and native binaries replacing the bundled JavaScript.",
+      "headings": [],
+      "toc": [],
+      "paragraphs": [
+        "Claude Opus 4.7 with the new xhigh effort level, Routines on Claude Code on the web, /ultrareview cloud code review, a /usage breakdown that shows what’s driving your limits, and native binaries replacing the bundled JavaScript.",
+        "Anthropic’s strongest coding model yet is now the default on Max and Team Premium, and available everywhere else from /model. It adds a new xhigh effort level that sits between high and max: best results for most coding and agentic tasks, applied as the default the first time you switch to 4.7. /effort now opens an interactive arrow-key slider when you call it without arguments, so you can dial intelligence against speed without remembering the level names.",
+        "Switch model and effort in one go:",
+        "Templated cloud agents that fire on a schedule, a GitHub event, or an API call. Define a routine once on Claude Code on the web with a prompt, the repos it can touch, and the connectors it needs, then let PR-opened, release-published, or your own webhook trigger it without your machine running. The trigger picker now covers GitHub events with optional filters and gives every routine a tokened /fire endpoint for external systems.",
+        "Create one from the web UI, or scaffold from your terminal:",
+        "More visibility into where your Claude Code usage goes. /usage now shows what’s driving your limits: parallel sessions, subagents, cache misses, and long context, each with a percentage of your last 24 hours and a tip to optimize it. Press d or w to switch between day and week views.",
+        "Run it any time:",
+        "Comprehensive code review in the cloud. Ultrareview fans your branch out across parallel reviewers on Claude Code on the web, runs an adversarial critique pass over each finding, and returns a verified findings report while your terminal stays free. Call it with no arguments to review your current branch, or pass a PR number to fetch and review that PR. The launch dialog now shows a diffstat so you know what’s going up before you confirm.",
+        "Review the branch you’re on:",
+        "Or point it at a PR:",
+        "The claude CLI now spawns a native per-platform binary instead of bundled JavaScript, so the installed claude command no longer invokes Node. The npm package pulls the right binary in through an optional dependency such as @anthropic-ai/claude-code-darwin-arm64, so your install command doesn’t change. The standalone installer already shipped this binary; npm now matches it.",
+        "Upgrade and check what you’re running:",
+        "Other wins",
+        "Full changelog for v2.1.105–v2.1.113 →",
+        "Was this page helpful?"
+      ],
+      "codeBlocks": [
+        "> /model opus\n> /effort xhigh",
+        "> /schedule daily PR review at 9am",
+        "> /usage",
+        "> /ultrareview",
+        "> /ultrareview 1234",
+        "claude update\nclaude --version"
+      ],
+      "sectionBlocks": [
+        {
+          "title": "",
+          "paragraphs": [
+            "Claude Opus 4.7 with the new xhigh effort level, Routines on Claude Code on the web, /ultrareview cloud code review, a /usage breakdown that shows what’s driving your limits, and native binaries replacing the bundled JavaScript.",
+            "Anthropic’s strongest coding model yet is now the default on Max and Team Premium, and available everywhere else from /model. It adds a new xhigh effort level that sits between high and max: best results for most coding and agentic tasks, applied as the default the first time you switch to 4.7. /effort now opens an interactive arrow-key slider when you call it without arguments, so you can dial intelligence against speed without remembering the level names.",
+            "Switch model and effort in one go:",
+            "Templated cloud agents that fire on a schedule, a GitHub event, or an API call. Define a routine once on Claude Code on the web with a prompt, the repos it can touch, and the connectors it needs, then let PR-opened, release-published, or your own webhook trigger it without your machine running. The trigger picker now covers GitHub events with optional filters and gives every routine a tokened /fire endpoint for external systems.",
+            "Create one from the web UI, or scaffold from your terminal:",
+            "More visibility into where your Claude Code usage goes. /usage now shows what’s driving your limits: parallel sessions, subagents, cache misses, and long context, each with a percentage of your last 24 hours and a tip to optimize it. Press d or w to switch between day and week views.",
+            "Run it any time:",
+            "Comprehensive code review in the cloud. Ultrareview fans your branch out across parallel reviewers on Claude Code on the web, runs an adversarial critique pass over each finding, and returns a verified findings report while your terminal stays free. Call it with no arguments to review your current branch, or pass a PR number to fetch and review that PR. The launch dialog now shows a diffstat so you know what’s going up before you confirm.",
+            "Review the branch you’re on:",
+            "Or point it at a PR:",
+            "The claude CLI now spawns a native per-platform binary instead of bundled JavaScript, so the installed claude command no longer invokes Node. The npm package pulls the right binary in through an optional dependency such as @anthropic-ai/claude-code-darwin-arm64, so your install command doesn’t change. The standalone installer already shipped this binary; npm now matches it.",
+            "Upgrade and check what you’re running:"
+          ],
+          "codeBlocks": [
+            "> /model opus\n> /effort xhigh",
+            "> /schedule daily PR review at 9am",
+            "> /usage",
+            "> /ultrareview",
+            "> /ultrareview 1234",
+            "claude update\nclaude --version"
+          ]
         }
       ]
     },
