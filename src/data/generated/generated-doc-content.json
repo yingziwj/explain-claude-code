@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-29T05:35:10.772Z",
-  "sourceGeneratedAt": "2026-04-29T05:35:10.470Z",
+  "generatedAt": "2026-04-30T05:40:20.161Z",
+  "sourceGeneratedAt": "2026-04-30T05:40:19.905Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -6872,7 +6872,7 @@
             {
               "title": "原页关键片段：Create your first skill 2",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "---\nname: explain-code\ndescription: Explains code with visual diagrams and analogies. Use when explaining how code works, teaching about a codebase, or when the user asks \"how does this work?\"\n---\n\nWhen explaining code, always include:\n\n1. **Start with an analogy**: Compare the code to something from everyday life\n2. **Draw a diagram**: Use ASCII art to show the flow, structure, or relationships\n3. **Walk through the code**: Explain step-by-step what happens\n4. **Highlight a gotcha**: What's a common mistake or misconception?\n\nKeep explanations conversational. For complex concepts, use multiple analogies.",
+              "code": "---\ndescription: Explains code with visual diagrams and analogies. Use when explaining how code works, teaching about a codebase, or when the user asks \"how does this work?\"\n---\n\nWhen explaining code, always include:\n\n1. **Start with an analogy**: Compare the code to something from everyday life\n2. **Draw a diagram**: Use ASCII art to show the flow, structure, or relationships\n3. **Walk through the code**: Explain step-by-step what happens\n4. **Highlight a gotcha**: What's a common mistake or misconception?\n\nKeep explanations conversational. For complex concepts, use multiple analogies.",
               "kind": "config"
             },
             {
@@ -6973,7 +6973,7 @@
             {
               "title": "Create your first skill 2",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "---\nname: explain-code\ndescription: Explains code with visual diagrams and analogies. Use when explaining how code works, teaching about a codebase, or when the user asks \"how does this work?\"\n---\n\nWhen explaining code, always include:\n\n1. **Start with an analogy**: Compare the code to something from everyday life\n2. **Draw a diagram**: Use ASCII art to show the flow, structure, or relationships\n3. **Walk through the code**: Explain step-by-step what happens\n4. **Highlight a gotcha**: What's a common mistake or misconception?\n\nKeep explanations conversational. For complex concepts, use multiple analogies.",
+              "code": "---\ndescription: Explains code with visual diagrams and analogies. Use when explaining how code works, teaching about a codebase, or when the user asks \"how does this work?\"\n---\n\nWhen explaining code, always include:\n\n1. **Start with an analogy**: Compare the code to something from everyday life\n2. **Draw a diagram**: Use ASCII art to show the flow, structure, or relationships\n3. **Walk through the code**: Explain step-by-step what happens\n4. **Highlight a gotcha**: What's a common mistake or misconception?\n\nKeep explanations conversational. For complex concepts, use multiple analogies.",
               "kind": "config"
             },
             {
@@ -8956,6 +8956,21 @@
           ]
         },
         {
+          "title": "The process cannot access the file during Windows install",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "The process cannot access the file during Windows install",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "Remove-Item -Recurse -Force \"$env:USERPROFILE\\.claude\\downloads\"\nirm https://claude.ai/install.ps1 | iex",
+              "kind": "command"
+            }
+          ]
+        },
+        {
           "title": "Install killed on low-memory Linux servers",
           "paragraphs": [
             "这段就是手把手操作，照顺序来最稳。",
@@ -9155,13 +9170,6 @@
         },
         {
           "title": "OAuth error: Invalid code",
-          "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "403 Forbidden after login",
           "paragraphs": [
             "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
