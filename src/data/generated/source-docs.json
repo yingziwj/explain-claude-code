@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-30T05:40:19.905Z",
+  "generatedAt": "2026-05-01T05:50:08.359Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -1255,6 +1255,7 @@
         "Documentation Index"
       ],
       "toc": [
+        "2.1.126",
         "2.1.123",
         "2.1.122",
         "2.1.121",
@@ -1273,8 +1274,7 @@
         "2.1.107",
         "2.1.105",
         "2.1.101",
-        "2.1.98",
-        "2.1.97"
+        "2.1.98"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
@@ -1282,6 +1282,39 @@
         "Use this file to discover all available pages before exploring further.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "The /model picker now lists models from your gateway’s /v1/models endpoint when ANTHROPIC_BASE_URL points at an Anthropic-compatible gateway",
+        "Added claude project purge [path] to delete all Claude Code state for a project (transcripts, tasks, file history, config entry) — supports --dry-run, -y/--yes, -i/--interactive, and --all",
+        "--dangerously-skip-permissions now bypasses prompts for writes to .claude/, .git/, .vscode/, shell config files, and other previously-protected paths (catastrophic removal commands still prompt as a safety net)",
+        "claude auth login now accepts the OAuth code pasted into the terminal when the browser callback can’t reach localhost (WSL2, SSH, containers)",
+        "claude_code.skill_activated OpenTelemetry event now fires for user-typed slash commands and carries a new invocation_trigger attribute (\"user-slash\", \"claude-proactive\", or \"nested-skill\")",
+        "Auto mode: the spinner now turns red when a permission check stalls, instead of looking like the tool is running",
+        "Host-managed deployments (CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST) no longer auto-disable analytics on Bedrock/Vertex/Foundry",
+        "Windows: PowerShell 7 installed via the Microsoft Store, MSI without PATH, or .NET global tool is now detected",
+        "Windows: when the PowerShell tool is enabled, Claude now treats PowerShell as the primary shell instead of defaulting to Bash",
+        "Read tool: removed the per-file malware-assessment reminder that could cause spurious refusals and “this is not malware” commentary on legacy models",
+        "Security: Fixed allowManagedDomainsOnly / allowManagedReadPathsOnly being ignored when a higher-priority managed-settings source lacked a sandbox block",
+        "Fixed pasting an image larger than 2000px breaking the session — images are now downscaled on paste, and oversized images in history are automatically removed and the request retried",
+        "Fixed showing the login screen for “OAuth not allowed for organization” errors — now shows guidance to contact your admin",
+        "Fixed OAuth login failing with timeout on slow or proxied connections, in IPv6-only devcontainers, and when the browser callback can’t reach localhost",
+        "Fixed a rare race where a concurrent credential write could clear a valid OAuth refresh token",
+        "Fixed API retry countdown sticking at “0s” instead of counting down between attempts",
+        "Fixed “Stream idle timeout” error after waking Mac from sleep mid-request",
+        "Fixed background and remote sessions falsely aborting with “Stream idle timeout” during long model thinking pauses",
+        "Fixed a hang where the assistant could finish thinking but show no output after a run of empty turns",
+        "Fixed overly fast trackpad scrolling in Cursor and VS Code 1.92–1.104 integrated terminals",
+        "Fixed claude.ai MCP connectors being suppressed by manual servers stuck in needs-auth state",
+        "Fixed Japanese/Korean/Chinese text rendering as garbled characters on Windows in no-flicker mode",
+        "Fixed Ctrl+L clearing the prompt input — it now only forces a screen redraw, matching readline behavior",
+        "Fixed deferred tools (WebSearch, WebFetch, etc.) not being available to skills with context: fork and other subagents on their first turn",
+        "Fixed plan-mode tools being unavailable in interactive sessions launched with --channels",
+        "Fixed blank remote-session transcript when certain messaging tools are unavailable",
+        "Fixed /plugin Uninstall reporting “Enabled” instead of “Uninstalled”",
+        "Bounded total size of file-modified reminders when a linter touches many files at once",
+        "Fixed /remote-control retries appearing stuck on “connecting…” — each retry now shows its result, and unenrolled trusted-device failures are caught up-front",
+        "Fixed Remote Control failure notification not showing the error reason for initial connection failures",
+        "Windows: clipboard writes no longer expose copied content in process command-line arguments visible to EDR/SIEM telemetry; also fixes >22KB selections not reaching the clipboard",
+        "PowerShell tool: bare -- (e.g. git diff -- file) is no longer mis-flagged as the --% stop-parsing token",
+        "Fixed Agent SDK hang when the model emits a malformed tool name in a parallel tool call batch",
         "Fixed OAuth authentication failing with a 401 retry loop when CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1 is set",
         "Added ANTHROPIC_BEDROCK_SERVICE_TIER environment variable to select a Bedrock service tier (default, flex, or priority), sent as the X-Amzn-Bedrock-Service-Tier header",
         "Pasting a PR URL into the /resume search box now finds the session that created that PR (GitHub, GitHub Enterprise, GitLab, and Bitbucket)",
@@ -1423,40 +1456,7 @@
         "Added a “Don’t ask again” option to the auto mode opt-in prompt",
         "Added claude plugin tag to create release git tags for plugins with version validation",
         "--continue/--resume now find sessions that added the current directory via /add-dir",
-        "/color now syncs the session accent color to claude.ai/code when Remote Control is connected",
-        "The /model picker now honors ANTHROPIC_DEFAULT_*_MODEL_NAME/_DESCRIPTION overrides when using a custom ANTHROPIC_BASE_URL gateway",
-        "When auto-update skips a plugin due to another plugin’s version constraint, the skip now appears in /doctor and the /plugin Errors tab",
-        "Fixed /mcp menu hiding OAuth Authenticate/Re-authenticate actions for servers configured with headersHelper, and HTTP/SSE MCP servers with custom headers being stuck in “needs authentication” after a transient 401",
-        "Fixed MCP servers whose OAuth token response omits expires_in requiring re-authentication every hour",
-        "Fixed MCP step-up authorization silently refreshing instead of prompting for re-consent when the server’s insufficient_scope 403 names a scope the current token already has",
-        "Fixed an unhandled promise rejection when an MCP server’s OAuth flow times out or is cancelled",
-        "Fixed MCP OAuth refresh proceeding without its cross-process lock under contention",
-        "Fixed macOS keychain race where a concurrent MCP token refresh could overwrite a freshly-refreshed OAuth token, causing unexpected “Please run /login” prompts",
-        "Fixed OAuth token refresh failing when the server revokes a token before its local expiry time",
-        "Fixed credential save crash on Linux/Windows corrupting ~/.claude/.credentials.json",
-        "Fixed /login having no effect in a session launched with CLAUDE_CODE_OAUTH_TOKEN — the env token is now cleared so disk credentials take effect",
-        "Fixed unreadable text in the “new messages” scroll pill and /plugin badges",
-        "Fixed plan acceptance dialog offering “auto mode” instead of “bypass permissions” when running with --dangerously-skip-permissions",
-        "Fixed agent-type hooks failing with “Messages are required for agent hooks” when configured for events other than Stop or SubagentStop",
-        "Fixed prompt hooks re-firing on tool calls made by an agent-hook verifier subagent",
-        "Fixed /fork writing the full parent conversation to disk per fork — now writes a pointer and hydrates on read",
-        "Fixed Alt+K / Alt+X / Alt+^ / Alt+_ freezing keyboard input",
-        "Fixed connecting to a remote session overwriting your local model setting in ~/.claude/settings.json",
-        "Fixed typeahead showing “No commands match” error when pasting file paths that start with /",
-        "Fixed plugin install on an already-installed plugin not re-resolving a dependency installed at the wrong version",
-        "Fixed unhandled errors from file watcher on invalid paths or fd exhaustion",
-        "Fixed Remote Control sessions getting archived on transient CCR initialization blips during JWT refresh",
-        "Fixed subagents resumed via SendMessage not restoring the explicit cwd they were spawned with",
-        "Forked subagents can now be enabled on external builds by setting CLAUDE_CODE_FORK_SUBAGENT=1",
-        "Agent frontmatter mcpServers are now loaded for main-thread agent sessions via --agent",
-        "Improved /model: selections now persist across restarts even when the project pins a different model, and the startup header shows when the active model comes from a project or managed-settings pin",
-        "The /resume command now offers to summarize stale, large sessions before re-reading them, matching the existing --resume behavior",
-        "Faster startup when both local and claude.ai MCP servers are configured (concurrent connect now default)",
-        "plugin install on an already-installed plugin now installs any missing dependencies instead of stopping at “already installed”",
-        "Plugin dependency errors now say “not installed” with an install hint, and claude plugin marketplace add now auto-resolves missing dependencies from configured marketplaces",
-        "Managed-settings blockedMarketplaces and strictKnownMarketplaces are now enforced on plugin install, update, refresh, and autoupdate",
-        "Advisor Tool (experimental): dialog now carries an “experimental” label, learn-more link, and startup notification when enabled; sessions no longer get stuck with “Advisor tool result content could not be processed” errors on every prompt and /compact",
-        "The cleanupPeriodDays retention sweep now also covers ~/.claude/tasks/, ~/.claude/shell-snapshots/, and ~/.claude/backups/"
+        "/color now syncs the session accent color to claude.ai/code when Remote Control is connected"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1474,14 +1474,14 @@
             "Use this file to discover all available pages before exploring further.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Fixed OAuth authentication failing with a 401 retry loop when CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1 is set",
-            "Added ANTHROPIC_BEDROCK_SERVICE_TIER environment variable to select a Bedrock service tier (default, flex, or priority), sent as the X-Amzn-Bedrock-Service-Tier header",
-            "Pasting a PR URL into the /resume search box now finds the session that created that PR (GitHub, GitHub Enterprise, GitLab, and Bitbucket)",
-            "/mcp now shows claude.ai connectors hidden by a manually-added server with the same URL, with a hint to remove the duplicate",
-            "Clarified the /mcp message shown when an MCP server is still unauthorized after the browser sign-in flow",
-            "OpenTelemetry: numeric attributes on api_request/api_error log events are now emitted as numbers, not strings",
-            "OpenTelemetry: added claude_code.at_mention log event for @-mention resolution",
-            "Fixed /branch producing forks that fail with “tool_use ids were found without tool_result blocks” when the source session contained entries from rewound timelines"
+            "The /model picker now lists models from your gateway’s /v1/models endpoint when ANTHROPIC_BASE_URL points at an Anthropic-compatible gateway",
+            "Added claude project purge [path] to delete all Claude Code state for a project (transcripts, tasks, file history, config entry) — supports --dry-run, -y/--yes, -i/--interactive, and --all",
+            "--dangerously-skip-permissions now bypasses prompts for writes to .claude/, .git/, .vscode/, shell config files, and other previously-protected paths (catastrophic removal commands still prompt as a safety net)",
+            "claude auth login now accepts the OAuth code pasted into the terminal when the browser callback can’t reach localhost (WSL2, SSH, containers)",
+            "claude_code.skill_activated OpenTelemetry event now fires for user-typed slash commands and carries a new invocation_trigger attribute (\"user-slash\", \"claude-proactive\", or \"nested-skill\")",
+            "Auto mode: the spinner now turns red when a permission check stalls, instead of looking like the tool is running",
+            "Host-managed deployments (CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST) no longer auto-disable analytics on Bedrock/Vertex/Foundry",
+            "Windows: PowerShell 7 installed via the Microsoft Store, MSI without PATH, or .NET global tool is now detected"
           ],
           "codeBlocks": []
         }
@@ -2325,7 +2325,19 @@
         "Lower cleanupPeriodDays to shorten how long transcripts are kept",
         "Set the CLAUDE_CODE_SKIP_PROMPT_HISTORY environment variable to skip writing transcripts and prompt history in any mode. In non-interactive mode, you can instead pass --no-session-persistence alongside -p, or set persistSession: false in the Agent SDK.",
         "Use permission rules to deny reads of credential files",
-        "You can delete any of the application-data paths above at any time. New sessions are unaffected. The table below shows what you lose for past sessions.",
+        "Run claude project purge to delete the state Claude Code holds for one project:",
+        "Transcripts and auto memory under projects/",
+        "Per-session tasks/, debug/, and file-history/ entries",
+        "Matching prompt lines in history.jsonl",
+        "The project’s entry in ~/.claude.json",
+        "The command prints the full deletion plan and asks for confirmation before removing anything.",
+        "Preview the plan without deleting anything:",
+        "Delete with a single confirmation prompt:",
+        "Omit the path to pick a project from an interactive list.",
+        "Skip the confirmation prompt for use in scripts:",
+        "Pass --all instead of a path to purge state for every project at once, which deletes history.jsonl outright rather than filtering it. Pass -i to step through the deletion plan one item at a time.",
+        "The command leaves shell-snapshots/ and backups/ alone because those are not project-scoped, and warns about them in the plan output. It exits with status 1 if no state matches the given path.",
+        "You can also delete any of the application-data paths above by hand. New sessions are unaffected. The table below shows what you lose for past sessions.",
         "Don’t delete ~/.claude.json, ~/.claude/settings.json, or ~/.claude/plugins/: those hold your auth, preferences, and installed plugins.",
         "Manage Claude’s memory: write and organize CLAUDE.md, rules, and auto memory",
         "Configure settings: set permissions, hooks, environment variables, and model defaults",
@@ -2333,7 +2345,11 @@
         "Configure subagents: define specialized agents with their own context",
         "Was this page helpful?"
       ],
-      "codeBlocks": [],
+      "codeBlocks": [
+        "claude project purge ~/work/my-repo --dry-run",
+        "claude project purge ~/work/my-repo",
+        "claude project purge ~/work/my-repo --yes"
+      ],
       "sectionBlocks": [
         {
           "title": "",
@@ -2430,10 +2446,24 @@
         {
           "title": "​Clear local data",
           "paragraphs": [
-            "You can delete any of the application-data paths above at any time. New sessions are unaffected. The table below shows what you lose for past sessions.",
-            "Don’t delete ~/.claude.json, ~/.claude/settings.json, or ~/.claude/plugins/: those hold your auth, preferences, and installed plugins."
+            "Run claude project purge to delete the state Claude Code holds for one project:",
+            "Transcripts and auto memory under projects/",
+            "Per-session tasks/, debug/, and file-history/ entries",
+            "Matching prompt lines in history.jsonl",
+            "The project’s entry in ~/.claude.json",
+            "The command prints the full deletion plan and asks for confirmation before removing anything.",
+            "Preview the plan without deleting anything:",
+            "Delete with a single confirmation prompt:",
+            "Omit the path to pick a project from an interactive list.",
+            "Skip the confirmation prompt for use in scripts:",
+            "Pass --all instead of a path to purge state for every project at once, which deletes history.jsonl outright rather than filtering it. Pass -i to step through the deletion plan one item at a time.",
+            "The command leaves shell-snapshots/ and backups/ alone because those are not project-scoped, and warns about them in the plan output. It exits with status 1 if no state matches the given path."
           ],
-          "codeBlocks": []
+          "codeBlocks": [
+            "claude project purge ~/work/my-repo --dry-run",
+            "claude project purge ~/work/my-repo",
+            "claude project purge ~/work/my-repo --yes"
+          ]
         },
         {
           "title": "​Related resources",
@@ -2669,7 +2699,7 @@
         "For a more structured approach to organizing instructions, see .claude/rules/.",
         "Claude Code reads CLAUDE.md, not AGENTS.md. If your repository already uses AGENTS.md for other coding agents, create a CLAUDE.md that imports it so both tools read the same instructions without duplicating them. You can also add Claude-specific instructions below the import. Claude loads the imported file at session start, then appends the rest:",
         "Claude Code reads CLAUDE.md files by walking up the directory tree from your current working directory, checking each directory along the way for CLAUDE.md and CLAUDE.local.md files. This means if you run Claude Code in foo/bar/, it loads instructions from foo/bar/CLAUDE.md, foo/CLAUDE.md, and any CLAUDE.local.md files alongside them.",
-        "All discovered files are concatenated into context rather than overriding each other. Within each directory, CLAUDE.local.md is appended after CLAUDE.md, so when instructions conflict, your personal notes are the last thing Claude reads at that level.",
+        "All discovered files are concatenated into context rather than overriding each other. Across the directory tree, content is ordered from the filesystem root down to your working directory. For the foo/bar/ example, foo/CLAUDE.md appears in context before foo/bar/CLAUDE.md, so instructions closer to where you launched Claude are read last. Within each directory, CLAUDE.local.md is appended after CLAUDE.md, so your personal notes are the last thing Claude reads at that level.",
         "Claude also discovers CLAUDE.md and CLAUDE.local.md files in subdirectories under your current working directory. Instead of loading them at launch, they are included when Claude reads files in those subdirectories.",
         "If you work in a large monorepo where other teams’ CLAUDE.md files get picked up, use claudeMdExcludes to skip them.",
         "Block-level HTML comments (<!-- maintainer notes -->) in CLAUDE.md files are stripped before the content is injected into Claude’s context. Use them to leave notes for human maintainers without spending context tokens on them. Comments inside code blocks are preserved. When you open a CLAUDE.md file directly with the Read tool, comments remain visible.",
@@ -2878,7 +2908,7 @@
           "title": "​How CLAUDE.md files load",
           "paragraphs": [
             "Claude Code reads CLAUDE.md files by walking up the directory tree from your current working directory, checking each directory along the way for CLAUDE.md and CLAUDE.local.md files. This means if you run Claude Code in foo/bar/, it loads instructions from foo/bar/CLAUDE.md, foo/CLAUDE.md, and any CLAUDE.local.md files alongside them.",
-            "All discovered files are concatenated into context rather than overriding each other. Within each directory, CLAUDE.local.md is appended after CLAUDE.md, so when instructions conflict, your personal notes are the last thing Claude reads at that level.",
+            "All discovered files are concatenated into context rather than overriding each other. Across the directory tree, content is ordered from the filesystem root down to your working directory. For the foo/bar/ example, foo/CLAUDE.md appears in context before foo/bar/CLAUDE.md, so instructions closer to where you launched Claude are read last. Within each directory, CLAUDE.local.md is appended after CLAUDE.md, so your personal notes are the last thing Claude reads at that level.",
             "Claude also discovers CLAUDE.md and CLAUDE.local.md files in subdirectories under your current working directory. Instead of loading them at launch, they are included when Claude reads files in those subdirectories.",
             "If you work in a large monorepo where other teams’ CLAUDE.md files get picked up, use claudeMdExcludes to skip them.",
             "Block-level HTML comments (<!-- maintainer notes -->) in CLAUDE.md files are stripped before the content is injected into Claude’s context. Use them to leave notes for human maintainers without spending context tokens on them. Comments inside code blocks are preserved. When you open a CLAUDE.md file directly with the Read tool, comments remain visible.",
@@ -3102,7 +3132,7 @@
         "Use this file to discover all available pages before exploring further.",
         "When Claude wants to edit a file, run a shell command, or make a network request, it pauses and asks you to approve the action. Permission modes control how often that pause happens. The mode you pick shapes the flow of a session: default mode has you review each action as it comes, while looser modes let Claude work in longer uninterrupted stretches and report back when done. Pick more oversight for sensitive work, or fewer interruptions when you trust the direction.",
         "Each mode makes a different tradeoff between convenience and oversight. The table below shows what Claude can do without a permission prompt in each mode.",
-        "Regardless of mode, writes to protected paths are never auto-approved, guarding repository state and Claude’s own configuration against accidental corruption.",
+        "In every mode except bypassPermissions, writes to protected paths are never auto-approved, guarding repository state and Claude’s own configuration against accidental corruption.",
         "Modes set the baseline. Layer permission rules on top to pre-approve or block specific tools in any mode except bypassPermissions, which skips the permission layer entirely.",
         "You can switch modes mid-session, at startup, or as a persistent default. The mode is set through these controls, not by asking Claude in chat. Select your interface below to see how to change it.",
         "JetBrains",
@@ -3129,6 +3159,7 @@
         "For Remote Control, you can also set the starting mode when launching the host:",
         "acceptEdits mode lets Claude create and edit files in your working directory without prompting. The status bar shows ⏵⏵ accept edits on while this mode is active.",
         "In addition to file edits, acceptEdits mode auto-approves common filesystem Bash commands: mkdir, touch, rm, rmdir, mv, cp, and sed. These commands are also auto-approved when prefixed with safe environment variables such as LANG=C or NO_COLOR=1, or process wrappers such as timeout, nice, or nohup. Like file edits, auto-approval applies only to paths inside your working directory or additionalDirectories. Paths outside that scope, writes to protected paths, and all other Bash commands still prompt.",
+        "When the PowerShell tool is enabled, acceptEdits mode also auto-approves Set-Content, Add-Content, Clear-Content, and Remove-Item on in-scope paths, along with their common aliases. The same scope and protected-path rules apply.",
         "Use acceptEdits when you want to review changes in your editor or via git diff after the fact rather than approving each edit inline. Press Shift+Tab once from default mode to enter it, or start with it directly:",
         "Plan mode tells Claude to research and propose changes without making them. Claude reads files, runs shell commands to explore, and writes a plan, but does not edit your source. Permission prompts still apply the same as default mode.",
         "Enter plan mode by pressing Shift+Tab or prefixing a single prompt with /plan. You can also start in plan mode from the CLI:",
@@ -3194,11 +3225,11 @@
         "The classifier runs on a server-configured model that is independent of your /model selection, so switching models does not change classifier availability. Classifier calls count toward your token usage. Each check sends a portion of the transcript plus the pending action, adding a round-trip before execution. Reads and working-directory edits outside protected paths skip the classifier, so the overhead comes mainly from shell commands and network operations.",
         "dontAsk mode auto-denies every tool call that would otherwise prompt. Only actions matching your permissions.allow rules and read-only Bash commands can execute; explicit ask rules are denied rather than prompting. This makes the mode fully non-interactive for CI pipelines or restricted environments where you pre-define exactly what Claude may do.",
         "Set it at startup with the flag:",
-        "bypassPermissions mode disables permission prompts and safety checks so tool calls execute immediately. Writes to protected paths are the only actions that still prompt. Only use this mode in isolated environments like containers, VMs, or dev containers without internet access, where Claude Code cannot damage your host system.",
+        "bypassPermissions mode disables permission prompts and safety checks so tool calls execute immediately. As of v2.1.126 this includes writes to protected paths, which earlier versions still prompted for. Removals targeting the filesystem root or home directory, such as rm -rf / and rm -rf ~, still prompt as a circuit breaker against model error. Only use this mode in isolated environments like containers, VMs, or dev containers without internet access, where Claude Code cannot damage your host system.",
         "You cannot enter bypassPermissions from a session that was started without one of the enabling flags; restart with one to enable it:",
         "The --dangerously-skip-permissions flag is equivalent.",
         "bypassPermissions offers no protection against prompt injection or unintended actions. For background safety checks without prompts, use auto mode instead. Administrators can block this mode by setting permissions.disableBypassPermissionsMode to \"disable\" in managed settings.",
-        "Writes to a small set of paths are never auto-approved, in every mode. This prevents accidental corruption of repository state and Claude’s own configuration. In default, acceptEdits, plan, and bypassPermissions these writes prompt; in auto they route to the classifier; in dontAsk they are denied.",
+        "Writes to a small set of paths are never auto-approved, in every mode except bypassPermissions. This prevents accidental corruption of repository state and Claude’s own configuration. In default, acceptEdits, and plan these writes prompt; in auto they route to the classifier; in dontAsk they are denied; in bypassPermissions they are allowed.",
         "Protected directories:",
         ".claude, except for .claude/commands, .claude/agents, .claude/skills, and .claude/worktrees where Claude routinely creates content",
         "Protected files:",
@@ -3255,7 +3286,7 @@
           "title": "​Available modes",
           "paragraphs": [
             "Each mode makes a different tradeoff between convenience and oversight. The table below shows what Claude can do without a permission prompt in each mode.",
-            "Regardless of mode, writes to protected paths are never auto-approved, guarding repository state and Claude’s own configuration against accidental corruption.",
+            "In every mode except bypassPermissions, writes to protected paths are never auto-approved, guarding repository state and Claude’s own configuration against accidental corruption.",
             "Modes set the baseline. Layer permission rules on top to pre-approve or block specific tools in any mode except bypassPermissions, which skips the permission layer entirely."
           ],
           "codeBlocks": []
@@ -3287,6 +3318,7 @@
           "paragraphs": [
             "acceptEdits mode lets Claude create and edit files in your working directory without prompting. The status bar shows ⏵⏵ accept edits on while this mode is active.",
             "In addition to file edits, acceptEdits mode auto-approves common filesystem Bash commands: mkdir, touch, rm, rmdir, mv, cp, and sed. These commands are also auto-approved when prefixed with safe environment variables such as LANG=C or NO_COLOR=1, or process wrappers such as timeout, nice, or nohup. Like file edits, auto-approval applies only to paths inside your working directory or additionalDirectories. Paths outside that scope, writes to protected paths, and all other Bash commands still prompt.",
+            "When the PowerShell tool is enabled, acceptEdits mode also auto-approves Set-Content, Add-Content, Clear-Content, and Remove-Item on in-scope paths, along with their common aliases. The same scope and protected-path rules apply.",
             "Use acceptEdits when you want to review changes in your editor or via git diff after the fact rather than approving each edit inline. Press Shift+Tab once from default mode to enter it, or start with it directly:"
           ],
           "codeBlocks": [
@@ -3383,7 +3415,7 @@
         {
           "title": "​Skip all checks with bypassPermissions mode",
           "paragraphs": [
-            "bypassPermissions mode disables permission prompts and safety checks so tool calls execute immediately. Writes to protected paths are the only actions that still prompt. Only use this mode in isolated environments like containers, VMs, or dev containers without internet access, where Claude Code cannot damage your host system.",
+            "bypassPermissions mode disables permission prompts and safety checks so tool calls execute immediately. As of v2.1.126 this includes writes to protected paths, which earlier versions still prompted for. Removals targeting the filesystem root or home directory, such as rm -rf / and rm -rf ~, still prompt as a circuit breaker against model error. Only use this mode in isolated environments like containers, VMs, or dev containers without internet access, where Claude Code cannot damage your host system.",
             "You cannot enter bypassPermissions from a session that was started without one of the enabling flags; restart with one to enable it:",
             "The --dangerously-skip-permissions flag is equivalent.",
             "bypassPermissions offers no protection against prompt injection or unintended actions. For background safety checks without prompts, use auto mode instead. Administrators can block this mode by setting permissions.disableBypassPermissionsMode to \"disable\" in managed settings."
@@ -3395,7 +3427,7 @@
         {
           "title": "​Protected paths",
           "paragraphs": [
-            "Writes to a small set of paths are never auto-approved, in every mode. This prevents accidental corruption of repository state and Claude’s own configuration. In default, acceptEdits, plan, and bypassPermissions these writes prompt; in auto they route to the classifier; in dontAsk they are denied.",
+            "Writes to a small set of paths are never auto-approved, in every mode except bypassPermissions. This prevents accidental corruption of repository state and Claude’s own configuration. In default, acceptEdits, and plan these writes prompt; in auto they route to the classifier; in dontAsk they are denied; in bypassPermissions they are allowed.",
             "Protected directories:",
             ".claude, except for .claude/commands, .claude/agents, .claude/skills, and .claude/worktrees where Claude routinely creates content",
             "Protected files:",
@@ -7699,7 +7731,7 @@
         "Inline definitions use the same schema as .mcp.json server entries (stdio, http, sse, ws), keyed by the server name.",
         "To keep an MCP server out of the main conversation entirely and avoid its tool descriptions consuming context there, define it inline here rather than in .mcp.json. The subagent gets the tools; the parent conversation does not.",
         "The permissionMode field controls how the subagent handles permission prompts. Subagents inherit the permission context from the main conversation and can override the mode, except when the parent mode takes precedence as described below.",
-        "Use bypassPermissions with caution. It skips permission prompts, allowing the subagent to execute operations without approval. Writes to .git, .claude, .vscode, .idea, and .husky directories still prompt for confirmation, except for .claude/commands, .claude/agents, and .claude/skills. See permission modes for details.",
+        "Use bypassPermissions with caution. It skips all permission prompts, allowing the subagent to execute operations without approval, including writes to .git, .claude, .vscode, .idea, and .husky. Root and home directory removals such as rm -rf / still prompt as a circuit breaker. See permission modes for details.",
         "If the parent uses bypassPermissions or acceptEdits, this takes precedence and cannot be overridden. If the parent uses auto mode, the subagent inherits auto mode and any permissionMode in its frontmatter is ignored: the classifier evaluates the subagent’s tool calls with the same block and allow rules as the parent session.",
         "Use the skills field to inject skill content into a subagent’s context at startup. This gives the subagent domain knowledge without requiring it to discover and load skills during execution.",
         "The full content of each skill is injected into the subagent’s context, not just made available for invocation. Subagents don’t inherit skills from the parent conversation; you must list them explicitly.",
@@ -12669,7 +12701,7 @@
         "OAuth error: Invalid code",
         "403 Forbidden after login",
         "This organization has been disabled with an active subscription",
-        "OAuth login fails in WSL2",
+        "OAuth login fails in WSL2, SSH, or containers",
         "Not logged in or token expired",
         "Bedrock, Vertex, or Foundry credentials not loading",
         "Still stuck",
@@ -14677,7 +14709,7 @@
         "macOS: signed by “Anthropic PBC” and notarized by Apple. Verify with codesign --verify --verbose ./claude.",
         "Windows: signed by “Anthropic, PBC”. Verify with Get-AuthenticodeSignature .\\claude.exe.",
         "Linux: binaries are not individually code-signed. If you download directly from the claude-code-releases bucket or use the native installer, verify integrity with the manifest signature above. If you install with apt, dnf, or apk, your package manager verifies signatures automatically using the repository signing key.",
-        "To remove Claude Code, follow the instructions for your installation method.",
+        "To remove Claude Code, follow the instructions for your installation method. If claude still runs afterward, you likely have a second installation or a leftover shell alias from an older installer. See Check for conflicting installations to find and remove it.",
         "Remove the Claude Code binary and version files:",
         "Remove the Homebrew cask you installed. If you installed the stable cask:",
         "If you installed the latest cask:",
@@ -14998,7 +15030,7 @@
         {
           "title": "​Uninstall Claude Code",
           "paragraphs": [
-            "To remove Claude Code, follow the instructions for your installation method."
+            "To remove Claude Code, follow the instructions for your installation method. If claude still runs afterward, you likely have a second installation or a leftover shell alias from an older installer. See Check for conflicting installations to find and remove it."
           ],
           "codeBlocks": []
         },
@@ -15113,7 +15145,7 @@
         "Claude Code supports multiple authentication methods depending on your setup. Individual users can log in with a Claude.ai account, while teams can use Claude for Teams or Enterprise, the Claude Console, or a cloud provider like Amazon Bedrock, Google Vertex AI, or Microsoft Foundry.",
         "After installing Claude Code, run claude in your terminal. On first launch, Claude Code opens a browser window for you to log in.",
         "If the browser doesn’t open automatically, press c to copy the login URL to your clipboard, then paste it into your browser.",
-        "If your browser shows a login code instead of redirecting back after you sign in, paste it into the terminal at the Paste code here if prompted prompt.",
+        "If your browser shows a login code instead of redirecting back after you sign in, paste it into the terminal at the Paste code here if prompted prompt. This happens when the browser can’t reach Claude Code’s local callback server, which is common in WSL2, SSH sessions, and containers.",
         "You can authenticate with any of these account types:",
         "Claude Pro or Max subscription: log in with your Claude.ai account. Subscribe at claude.com/pricing.",
         "Claude for Teams or Enterprise: log in with the Claude.ai account your team admin invited you to.",
@@ -15215,7 +15247,7 @@
           "paragraphs": [
             "After installing Claude Code, run claude in your terminal. On first launch, Claude Code opens a browser window for you to log in.",
             "If the browser doesn’t open automatically, press c to copy the login URL to your clipboard, then paste it into your browser.",
-            "If your browser shows a login code instead of redirecting back after you sign in, paste it into the terminal at the Paste code here if prompted prompt.",
+            "If your browser shows a login code instead of redirecting back after you sign in, paste it into the terminal at the Paste code here if prompted prompt. This happens when the browser can’t reach Claude Code’s local callback server, which is common in WSL2, SSH sessions, and containers.",
             "You can authenticate with any of these account types:",
             "Claude Pro or Max subscription: log in with your Claude.ai account. Subscribe at claude.com/pricing.",
             "Claude for Teams or Enterprise: log in with the Claude.ai account your team admin invited you to.",
@@ -15696,6 +15728,7 @@
         "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
         "Use this file to discover all available pages before exploring further.",
         "Auto mode lets Claude Code run without permission prompts by routing each tool call through a classifier that blocks anything irreversible, destructive, or aimed outside your environment. Use the autoMode settings block to tell that classifier which repos, buckets, and domains your organization trusts, so it stops blocking routine internal operations.",
+        "Auto mode is available on Max, Team, Enterprise, and API plans through the Anthropic API. It is not available on Pro or on Bedrock, Vertex, or Foundry. If Claude Code reports auto mode as unavailable for your account, check the full requirements, which also cover the supported models and admin enablement on Team and Enterprise plans.",
         "Out of the box, the classifier trusts only the working directory and the current repo’s configured remotes. Actions like pushing to your company’s source-control org or writing to a team cloud bucket are blocked until you add them to autoMode.environment.",
         "For how to enable auto mode and what it blocks by default, see Permission modes. This page is the configuration reference.",
         "This page covers how to:",
@@ -15772,6 +15805,7 @@
             "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
             "Use this file to discover all available pages before exploring further.",
             "Auto mode lets Claude Code run without permission prompts by routing each tool call through a classifier that blocks anything irreversible, destructive, or aimed outside your environment. Use the autoMode settings block to tell that classifier which repos, buckets, and domains your organization trusts, so it stops blocking routine internal operations.",
+            "Auto mode is available on Max, Team, Enterprise, and API plans through the Anthropic API. It is not available on Pro or on Bedrock, Vertex, or Foundry. If Claude Code reports auto mode as unavailable for your account, check the full requirements, which also cover the supported models and admin enablement on Team and Enterprise plans.",
             "Out of the box, the classifier trusts only the working directory and the current repo’s configured remotes. Actions like pushing to your company’s source-control org or writing to a team cloud bucket are blocked until you add them to autoMode.environment.",
             "For how to enable auto mode and what it blocks by default, see Permission modes. This page is the configuration reference.",
             "This page covers how to:",
@@ -17384,8 +17418,11 @@
         "Request headers",
         "Claude Code includes the following headers on every API request:",
         "Claude Code also prepends a short attribution block to the system prompt containing the client version and a fingerprint derived from the conversation. The Anthropic API strips this block before processing, so it does not affect first-party prompt caching. If your gateway implements its own prompt cache keyed on the full request body, set CLAUDE_CODE_ATTRIBUTION_HEADER=0 to omit it.",
-        "By default, Claude Code will use standard model names for the selected API format.",
-        "If you have configured custom model names in your gateway, use the environment variables documented in Model configuration to match your custom names.",
+        "By default, Claude Code uses standard model names for the selected API format.",
+        "When ANTHROPIC_BASE_URL points at a gateway that exposes the Anthropic Messages format, Claude Code queries the gateway’s /v1/models endpoint at startup and adds the returned models to the /model picker. Each discovered entry is labeled “From gateway” and uses the display_name field from the response when one is provided. This requires Claude Code v2.1.126 or later.",
+        "Discovery applies only to the Anthropic Messages format. It does not run for Bedrock or Vertex pass-through endpoints, and it does not run when ANTHROPIC_BASE_URL is unset or points at api.anthropic.com.",
+        "The discovery request authenticates the same way as inference requests: it sends ANTHROPIC_AUTH_TOKEN as a bearer token, or ANTHROPIC_API_KEY as the x-api-key header when no auth token is set, along with any headers from ANTHROPIC_CUSTOM_HEADERS. Only models whose ID begins with claude or anthropic are added to the picker. Results are cached to ~/.claude/cache/gateway-models.json and refreshed on each startup. If the request fails or the gateway does not implement /v1/models, the picker falls back to the cached list from the previous startup or to the built-in model list.",
+        "If your gateway uses model names that do not match the discovery filter, use the environment variables documented in Model configuration to add them manually.",
         "LiteLLM PyPI versions 1.82.7 and 1.82.8 were compromised with credential-stealing malware. Do not install these versions. If you have already installed them:",
         "Remove the package",
         "Rotate all credentials on affected systems",
@@ -17483,8 +17520,11 @@
         {
           "title": "​Model selection",
           "paragraphs": [
-            "By default, Claude Code will use standard model names for the selected API format.",
-            "If you have configured custom model names in your gateway, use the environment variables documented in Model configuration to match your custom names."
+            "By default, Claude Code uses standard model names for the selected API format.",
+            "When ANTHROPIC_BASE_URL points at a gateway that exposes the Anthropic Messages format, Claude Code queries the gateway’s /v1/models endpoint at startup and adds the returned models to the /model picker. Each discovered entry is labeled “From gateway” and uses the display_name field from the response when one is provided. This requires Claude Code v2.1.126 or later.",
+            "Discovery applies only to the Anthropic Messages format. It does not run for Bedrock or Vertex pass-through endpoints, and it does not run when ANTHROPIC_BASE_URL is unset or points at api.anthropic.com.",
+            "The discovery request authenticates the same way as inference requests: it sends ANTHROPIC_AUTH_TOKEN as a bearer token, or ANTHROPIC_API_KEY as the x-api-key header when no auth token is set, along with any headers from ANTHROPIC_CUSTOM_HEADERS. Only models whose ID begins with claude or anthropic are added to the picker. Results are cached to ~/.claude/cache/gateway-models.json and refreshed on each startup. If the request fails or the gateway does not implement /v1/models, the picker falls back to the cached list from the previous startup or to the built-in model list.",
+            "If your gateway uses model names that do not match the discovery filter, use the environment variables documented in Model configuration to add them manually."
           ],
           "codeBlocks": []
         },
@@ -18761,6 +18801,7 @@
         "Contribution metrics: PRs and lines of code shipped with Claude Code assistance, with GitHub integration",
         "Leaderboard: top contributors ranked by Claude Code usage",
         "Data export: download contribution data as CSV for custom reporting",
+        "For per-user token counts and cost estimates, configure OpenTelemetry export.",
         "Contribution metrics are in public beta and available on Claude for Teams and Claude for Enterprise plans. These metrics only cover users within your claude.ai organization. Usage through the Claude Console API or third-party integrations is not included.",
         "Usage and adoption data is available for all Claude for Teams and Claude for Enterprise accounts. Contribution metrics require additional setup to connect your GitHub organization.",
         "You need the Owner role to configure analytics settings. A GitHub admin must install the GitHub app.",
@@ -18886,7 +18927,8 @@
             "Usage metrics: lines of code accepted, suggestion accept rate, daily active users and sessions",
             "Contribution metrics: PRs and lines of code shipped with Claude Code assistance, with GitHub integration",
             "Leaderboard: top contributors ranked by Claude Code usage",
-            "Data export: download contribution data as CSV for custom reporting"
+            "Data export: download contribution data as CSV for custom reporting",
+            "For per-user token counts and cost estimates, configure OpenTelemetry export."
           ],
           "codeBlocks": []
         },
@@ -20286,6 +20328,7 @@
         "When users run the /feedback command, a copy of their full conversation history including code is sent to Anthropic. The data is encrypted in transit via TLS. Optionally, a GitHub issue is created in the public repository. To opt out, set the DISABLE_FEEDBACK_COMMAND environment variable to 1.",
         "By default, error reporting, telemetry, and bug reporting are disabled when using Bedrock, Vertex, or Foundry. Session quality surveys and the WebFetch domain safety check are exceptions and run regardless of provider. You can opt out of all non-essential traffic, including surveys, at once by setting CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC. This variable does not affect the WebFetch check, which has its own opt-out. Here are the full default behaviors:",
         "All environment variables can be checked into settings.json (see settings reference).",
+        "As of v2.1.126, when a host platform sets CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST, Statsig metrics default to on for Vertex, Bedrock, and Foundry, and follow the standard DISABLE_TELEMETRY opt-out. Sentry error reporting and /feedback reports remain off by default on those providers.",
         "Before fetching a URL, the WebFetch tool sends the requested hostname to api.anthropic.com to check it against a safety blocklist maintained by Anthropic. Only the hostname is sent, not the full URL, path, or page contents. Results are cached per hostname for five minutes.",
         "This check runs regardless of which model provider you use and is not affected by CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC. If your network blocks api.anthropic.com, WebFetch requests fail until you either allowlist the domain or set skipWebFetchPreflight: true in settings. Disabling the check means WebFetch attempts to retrieve any URL without consulting the blocklist, so combine it with WebFetch permission rules if you need to restrict which domains Claude can reach.",
         "Was this page helpful?"
@@ -20418,7 +20461,8 @@
           "title": "​Default behaviors by API provider",
           "paragraphs": [
             "By default, error reporting, telemetry, and bug reporting are disabled when using Bedrock, Vertex, or Foundry. Session quality surveys and the WebFetch domain safety check are exceptions and run regardless of provider. You can opt out of all non-essential traffic, including surveys, at once by setting CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC. This variable does not affect the WebFetch check, which has its own opt-out. Here are the full default behaviors:",
-            "All environment variables can be checked into settings.json (see settings reference)."
+            "All environment variables can be checked into settings.json (see settings reference).",
+            "As of v2.1.126, when a host platform sets CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST, Statsig metrics default to on for Vertex, Bedrock, and Foundry, and follow the standard DISABLE_TELEMETRY opt-out. Sentry error reporting and /feedback reports remain off by default on those providers."
           ],
           "codeBlocks": []
         },
@@ -21768,6 +21812,7 @@
         "​Wildcard patterns",
         "​Tool-specific permission rules",
         "​Bash",
+        "​PowerShell",
         "​Read and Edit",
         "​WebFetch",
         "​MCP",
@@ -21776,8 +21821,7 @@
         "​Working directories",
         "​Additional directories grant file access, not configuration",
         "​How permissions interact with sandboxing",
-        "​Managed settings",
-        "​Managed-only settings"
+        "​Managed settings"
       ],
       "toc": [
         "Permission system",
@@ -21792,14 +21836,14 @@
         "Compound commands",
         "Process wrappers",
         "Read-only commands",
+        "PowerShell",
         "Read and Edit",
         "WebFetch",
         "MCP",
         "Agent (subagents)",
         "Extend permissions with hooks",
         "Working directories",
-        "Additional directories grant file access, not configuration",
-        "How permissions interact with sandboxing"
+        "Additional directories grant file access, not configuration"
       ],
       "paragraphs": [
         "Permission system",
@@ -21813,6 +21857,7 @@
         "Compound commands",
         "Process wrappers",
         "Read-only commands",
+        "PowerShell",
         "Read and Edit",
         "WebFetch",
         "Agent (subagents)",
@@ -21836,7 +21881,7 @@
         "Deny rules prevent Claude Code from using the specified tool.",
         "Rules are evaluated in order: deny -> ask -> allow. The first matching rule wins, so deny rules always take precedence.",
         "Claude Code supports several permission modes that control how tools are approved. See Permission modes for when to use each one. Set the defaultMode in your settings files:",
-        "bypassPermissions mode skips permission prompts. Writes to .git, .claude, .vscode, .idea, and .husky directories still prompt for confirmation to prevent accidental corruption of repository state, editor configuration, and git hooks. Writes to .claude/commands, .claude/agents, and .claude/skills are exempt and do not prompt, because Claude routinely writes there when creating skills, subagents, and commands. Only use this mode in isolated environments like containers or VMs where Claude Code cannot cause damage. Administrators can prevent this mode by setting permissions.disableBypassPermissionsMode to \"disable\" in managed settings.",
+        "bypassPermissions mode skips all permission prompts, including writes to .git, .claude, .vscode, .idea, and .husky. Removals targeting the filesystem root or home directory, such as rm -rf / and rm -rf ~, still prompt as a circuit breaker against model error. Only use this mode in isolated environments like containers or VMs where Claude Code cannot cause damage. Administrators can prevent this mode by setting permissions.disableBypassPermissionsMode to \"disable\" in managed settings.",
         "To prevent bypassPermissions or auto mode from being used, set permissions.disableBypassPermissionsMode or permissions.disableAutoMode to \"disable\" in any settings file. These are most useful in managed settings where they cannot be overridden.",
         "Permission rules follow the format Tool or Tool(specifier).",
         "To match all uses of a tool, use just the tool name without parentheses:",
@@ -21873,6 +21918,9 @@
         "Use PreToolUse hooks: implement a hook that validates URLs in Bash commands and blocks disallowed domains",
         "Instructing Claude Code about your allowed curl patterns via CLAUDE.md",
         "Note that using WebFetch alone does not prevent network access. If Bash is allowed, Claude can still use curl, wget, or other tools to reach any URL.",
+        "PowerShell permission rules use the same shape as Bash rules. Wildcards with * match at any position, the :* suffix is equivalent to a trailing *, and a bare PowerShell or PowerShell(*) matches every command. This configuration allows Get-ChildItem and git commit commands while blocking Remove-Item:",
+        "Common aliases are canonicalized before matching. A rule written for the cmdlet name also matches its aliases, so PowerShell(Get-ChildItem *) matches gci, ls, and dir as well. Matching is case-insensitive.",
+        "Claude Code parses the PowerShell AST and checks each command in a compound command independently. Pipeline operators |, statement separators ;, and on PowerShell 7+ the chain operators && and || split a compound command into subcommands. A rule must match every subcommand for the compound command to be allowed.",
         "Edit rules apply to all built-in tools that edit files. Claude makes a best-effort attempt to apply Read rules to all built-in tools that read files like Grep and Glob.",
         "Read and Edit deny rules apply to Claude’s built-in file tools, not to Bash subprocesses. A Read(./.env) deny rule blocks the Read tool but does not prevent cat .env in Bash. For OS-level enforcement that blocks all processes from accessing a path, enable the sandbox.",
         "Read and Edit rules both follow the gitignore specification with four distinct pattern types:",
@@ -21943,6 +21991,7 @@
       ],
       "codeBlocks": [
         "{\n  \"permissions\": {\n    \"allow\": [\n      \"Bash(npm run *)\",\n      \"Bash(git commit *)\",\n      \"Bash(git * main)\",\n      \"Bash(* --version)\",\n      \"Bash(* --help *)\"\n    ],\n    \"deny\": [\n      \"Bash(git push *)\"\n    ]\n  }\n}",
+        "{\n  \"permissions\": {\n    \"allow\": [\n      \"PowerShell(Get-ChildItem *)\",\n      \"PowerShell(git commit *)\"\n    ],\n    \"deny\": [\n      \"PowerShell(Remove-Item *)\"\n    ]\n  }\n}",
         "{\n  \"permissions\": {\n    \"deny\": [\"Agent(Explore)\"]\n  }\n}"
       ],
       "sectionBlocks": [
@@ -21960,7 +22009,7 @@
             "Compound commands",
             "Process wrappers",
             "Read-only commands",
-            "Read and Edit"
+            "PowerShell"
           ],
           "codeBlocks": []
         },
@@ -21995,7 +22044,7 @@
           "title": "​Permission modes",
           "paragraphs": [
             "Claude Code supports several permission modes that control how tools are approved. See Permission modes for when to use each one. Set the defaultMode in your settings files:",
-            "bypassPermissions mode skips permission prompts. Writes to .git, .claude, .vscode, .idea, and .husky directories still prompt for confirmation to prevent accidental corruption of repository state, editor configuration, and git hooks. Writes to .claude/commands, .claude/agents, and .claude/skills are exempt and do not prompt, because Claude routinely writes there when creating skills, subagents, and commands. Only use this mode in isolated environments like containers or VMs where Claude Code cannot cause damage. Administrators can prevent this mode by setting permissions.disableBypassPermissionsMode to \"disable\" in managed settings.",
+            "bypassPermissions mode skips all permission prompts, including writes to .git, .claude, .vscode, .idea, and .husky. Removals targeting the filesystem root or home directory, such as rm -rf / and rm -rf ~, still prompt as a circuit breaker against model error. Only use this mode in isolated environments like containers or VMs where Claude Code cannot cause damage. Administrators can prevent this mode by setting permissions.disableBypassPermissionsMode to \"disable\" in managed settings.",
             "To prevent bypassPermissions or auto mode from being used, set permissions.disableBypassPermissionsMode or permissions.disableAutoMode to \"disable\" in any settings file. These are most useful in managed settings where they cannot be overridden."
           ],
           "codeBlocks": []
@@ -22055,6 +22104,17 @@
             "Bare xargs is also stripped, so Bash(grep *) matches xargs grep pattern. Stripping applies only when xargs has no flags: an invocation like xargs -n1 grep pattern is matched as an xargs command, so rules written for the inner command do not cover it."
           ],
           "codeBlocks": []
+        },
+        {
+          "title": "​PowerShell",
+          "paragraphs": [
+            "PowerShell permission rules use the same shape as Bash rules. Wildcards with * match at any position, the :* suffix is equivalent to a trailing *, and a bare PowerShell or PowerShell(*) matches every command. This configuration allows Get-ChildItem and git commit commands while blocking Remove-Item:",
+            "Common aliases are canonicalized before matching. A rule written for the cmdlet name also matches its aliases, so PowerShell(Get-ChildItem *) matches gci, ls, and dir as well. Matching is case-insensitive.",
+            "Claude Code parses the PowerShell AST and checks each command in a compound command independently. Pipeline operators |, statement separators ;, and on PowerShell 7+ the chain operators && and || split a compound command into subcommands. A rule must match every subcommand for the compound command to be allowed."
+          ],
+          "codeBlocks": [
+            "{\n  \"permissions\": {\n    \"allow\": [\n      \"PowerShell(Get-ChildItem *)\",\n      \"PowerShell(git commit *)\"\n    ],\n    \"deny\": [\n      \"PowerShell(Remove-Item *)\"\n    ]\n  }\n}"
+          ]
         },
         {
           "title": "​Read and Edit",
@@ -22882,7 +22942,7 @@
         "You can see which model you’re currently using in several ways:",
         "In status line (if configured)",
         "In /status, which also displays your account information.",
-        "Use ANTHROPIC_CUSTOM_MODEL_OPTION to add a single custom entry to the /model picker without replacing the built-in aliases. This is useful for LLM gateway deployments or testing model IDs that Claude Code does not list by default.",
+        "Use ANTHROPIC_CUSTOM_MODEL_OPTION to add a single custom entry to the /model picker without replacing the built-in aliases. This is useful for testing model IDs that Claude Code does not list by default. For LLM gateway deployments, Claude Code populates the picker automatically from the gateway’s /v1/models endpoint, so this variable is needed only when discovery does not return the model you want. See LLM gateway model selection.",
         "This example sets all three variables to make a gateway-routed Opus deployment selectable:",
         "The custom entry appears at the bottom of the /model picker. ANTHROPIC_CUSTOM_MODEL_OPTION_NAME and ANTHROPIC_CUSTOM_MODEL_OPTION_DESCRIPTION are optional. If omitted, the model ID is used as the name and the description defaults to Custom model (<model-id>).",
         "Claude Code skips validation for the model ID set in ANTHROPIC_CUSTOM_MODEL_OPTION, so you can use any string your API endpoint accepts.",
@@ -23111,7 +23171,7 @@
         {
           "title": "​Add a custom model option",
           "paragraphs": [
-            "Use ANTHROPIC_CUSTOM_MODEL_OPTION to add a single custom entry to the /model picker without replacing the built-in aliases. This is useful for LLM gateway deployments or testing model IDs that Claude Code does not list by default.",
+            "Use ANTHROPIC_CUSTOM_MODEL_OPTION to add a single custom entry to the /model picker without replacing the built-in aliases. This is useful for testing model IDs that Claude Code does not list by default. For LLM gateway deployments, Claude Code populates the picker automatically from the gateway’s /v1/models endpoint, so this variable is needed only when discovery does not return the model you want. See LLM gateway model selection.",
             "This example sets all three variables to make a gateway-routed Opus deployment selectable:",
             "The custom entry appears at the bottom of the /model picker. ANTHROPIC_CUSTOM_MODEL_OPTION_NAME and ANTHROPIC_CUSTOM_MODEL_OPTION_DESCRIPTION are optional. If omitted, the model ID is used as the name and the description defaults to Custom model (<model-id>).",
             "Claude Code skips validation for the model ID set in ANTHROPIC_CUSTOM_MODEL_OPTION, so you can use any string your API endpoint accepts."
@@ -23688,13 +23748,14 @@
         "Add \"terminal.integrated.macOptionIsMeta\": true to your VS Code settings.",
         "For Ghostty, Kitty, and other terminals, look for an Option-as-Alt or Option-as-Meta setting in the terminal’s configuration file.",
         "When Claude finishes a task or pauses for a permission prompt, it fires a notification event. Surfacing this as a terminal bell or desktop notification lets you switch to other work while a long task runs.",
-        "Claude Code sends a desktop notification only in Ghostty, Kitty, and iTerm2; every other terminal needs a Notification hook instead. The notification also reaches your local machine over SSH, so a remote session can still alert you. Ghostty and Kitty forward it to your OS notification center without further setup. iTerm2 requires you to enable forwarding:",
+        "By default Claude Code sends a desktop notification only in Ghostty, Kitty, and iTerm2. In other terminals, set preferredNotifChannel to \"terminal_bell\" to ring the terminal bell instead, or configure a Notification hook for a custom sound or command.",
+        "The desktop notification reaches your local machine over SSH, so a remote session can still alert you. Ghostty and Kitty forward it to your OS notification center without further setup. iTerm2 requires you to enable forwarding:",
         "Open iTerm2 notification settings",
         "Go to Settings → Profiles → Terminal.",
         "Enable alerts",
         "Check “Notification Center Alerts”, then click “Filter Alerts” and enable “Send escape sequence-generated alerts”.",
         "If notifications still do not appear, confirm that your terminal application has notification permission in your OS settings, and if you are running inside tmux, enable passthrough.",
-        "In any terminal you can configure a Notification hook to play a sound or run a custom command when Claude needs your attention. Hooks run alongside the desktop notification rather than replacing it. Terminals such as Warp or Apple Terminal rely on a hook alone since Claude Code does not send them a desktop notification.",
+        "In any terminal you can configure a Notification hook to play a sound or run a custom command when Claude needs your attention. Hooks run alongside the built-in notification rather than replacing it, so terminals that do not receive a desktop notification, such as Warp or the VS Code integrated terminal, can use a hook or set preferredNotifChannel to \"terminal_bell\" instead.",
         "The example below plays a system sound on macOS. The linked guide has desktop notification commands for macOS, Linux, and Windows.",
         "When Claude Code runs inside tmux, two things break by default: Shift+Enter submits instead of inserting a newline, and desktop notifications and the progress bar never reach the outer terminal. Add these lines to ~/.tmux.conf, then run tmux source-file ~/.tmux.conf to apply them to the running server:",
         "The allow-passthrough line lets notifications and progress updates reach iTerm2, Ghostty, or Kitty instead of being swallowed by tmux. The extended-keys lines let tmux distinguish Shift+Enter from plain Enter so the newline shortcut works.",
@@ -23801,7 +23862,8 @@
           "title": "​Get a terminal bell or notification",
           "paragraphs": [
             "When Claude finishes a task or pauses for a permission prompt, it fires a notification event. Surfacing this as a terminal bell or desktop notification lets you switch to other work while a long task runs.",
-            "Claude Code sends a desktop notification only in Ghostty, Kitty, and iTerm2; every other terminal needs a Notification hook instead. The notification also reaches your local machine over SSH, so a remote session can still alert you. Ghostty and Kitty forward it to your OS notification center without further setup. iTerm2 requires you to enable forwarding:",
+            "By default Claude Code sends a desktop notification only in Ghostty, Kitty, and iTerm2. In other terminals, set preferredNotifChannel to \"terminal_bell\" to ring the terminal bell instead, or configure a Notification hook for a custom sound or command.",
+            "The desktop notification reaches your local machine over SSH, so a remote session can still alert you. Ghostty and Kitty forward it to your OS notification center without further setup. iTerm2 requires you to enable forwarding:",
             "Open iTerm2 notification settings",
             "Go to Settings → Profiles → Terminal.",
             "Enable alerts",
@@ -23813,7 +23875,7 @@
         {
           "title": "​Play a sound with a Notification hook",
           "paragraphs": [
-            "In any terminal you can configure a Notification hook to play a sound or run a custom command when Claude needs your attention. Hooks run alongside the desktop notification rather than replacing it. Terminals such as Warp or Apple Terminal rely on a hook alone since Claude Code does not send them a desktop notification.",
+            "In any terminal you can configure a Notification hook to play a sound or run a custom command when Claude needs your attention. Hooks run alongside the built-in notification rather than replacing it, so terminals that do not receive a desktop notification, such as Warp or the VS Code integrated terminal, can use a hook or set preferredNotifChannel to \"terminal_bell\" instead.",
             "The example below plays a system sound on macOS. The linked guide has desktop notification commands for macOS, Linux, and Windows."
           ],
           "codeBlocks": [
@@ -23981,7 +24043,7 @@
         "[: writes the full conversation into your terminal’s native scrollback buffer, with all tool output expanded. The conversation is now ordinary text in your terminal, so Cmd+f, tmux copy mode, and any other native tool can search or select it. Long sessions may pause for a moment while this happens. This lasts until you exit transcript mode with Esc or q, which returns you to fullscreen rendering. The next Ctrl+o starts fresh.",
         "v: writes the conversation to a temporary file and opens it in $VISUAL or $EDITOR.",
         "Press Esc or q to return to the prompt.",
-        "Press Ctrl+L twice within two seconds to run /clear and start a new conversation. The first press clears the input box and shows a hint; the second press clears the conversation. On macOS, double-pressing Cmd+K also runs /clear.",
+        "Press Ctrl+L twice within two seconds to run /clear and start a new conversation. The first press redraws the screen and shows a hint; the second press clears the conversation. On macOS, double-pressing Cmd+K also runs /clear.",
         "Fullscreen rendering works inside tmux, with two caveats.",
         "Mouse wheel scrolling requires tmux’s mouse mode. If your ~/.tmux.conf does not already enable it, add this line and reload your config:",
         "Without mouse mode, wheel events go to tmux instead of Claude Code. Keyboard scrolling with PgUp and PgDn works either way. Claude Code prints a one-time hint at startup if it detects tmux with mouse mode off.",
@@ -24111,7 +24173,7 @@
         {
           "title": "​Clear the conversation",
           "paragraphs": [
-            "Press Ctrl+L twice within two seconds to run /clear and start a new conversation. The first press clears the input box and shows a hint; the second press clears the conversation. On macOS, double-pressing Cmd+K also runs /clear."
+            "Press Ctrl+L twice within two seconds to run /clear and start a new conversation. The first press redraws the screen and shows a hint; the second press clears the conversation. On macOS, double-pressing Cmd+K also runs /clear."
           ],
           "codeBlocks": []
         },
@@ -25433,6 +25495,7 @@
         "Use this file to discover all available pages before exploring further.",
         "Commands control Claude Code from inside a session. They provide a quick way to switch models, manage permissions, clear context, run a workflow, and more.",
         "Type / to see every command available to you, or type / followed by letters to filter.",
+        "A command is only recognized at the start of your message. Text that follows the command name is passed to it as arguments.",
         "The table below lists all the commands included in Claude Code. Entries marked Skill are bundled skills. They use the same mechanism as skills you write yourself: a prompt handed to Claude, which Claude can also invoke automatically when relevant. Everything else is a built-in command whose behavior is coded into the CLI. To add your own commands, see skills.",
         "Not every command appears for every user. Availability depends on your platform, plan, and environment. For example, /desktop only shows on macOS and Windows, and /upgrade only shows on Pro and Max plans.",
         "In the table below, <arg> indicates a required argument and [arg] indicates an optional one.",
@@ -25460,6 +25523,7 @@
             "Use this file to discover all available pages before exploring further.",
             "Commands control Claude Code from inside a session. They provide a quick way to switch models, manage permissions, clear context, run a workflow, and more.",
             "Type / to see every command available to you, or type / followed by letters to filter.",
+            "A command is only recognized at the start of your message. Text that follows the command name is passed to it as arguments.",
             "The table below lists all the commands included in Claude Code. Entries marked Skill are bundled skills. They use the same mechanism as skills you write yourself: a prompt handed to Claude, which Claude can also invoke automatically when relevant. Everything else is a built-in command whose behavior is coded into the CLI. To add your own commands, see skills.",
             "Not every command appears for every user. Availability depends on your platform, plan, and environment. For example, /desktop only shows on macOS and Windows, and /upgrade only shows on Pro and Max plans.",
             "In the table below, <arg> indicates a required argument and [arg] indicates an optional one."
@@ -25615,7 +25679,7 @@
         "The PowerShell tool lets Claude run PowerShell commands natively. On Windows, this means commands run in PowerShell instead of routing through Git Bash. On Windows without Git Bash, the tool is enabled automatically. On Windows with Git Bash installed, the tool is rolling out progressively. On Linux, macOS, and WSL, the tool is opt-in.",
         "Set CLAUDE_CODE_USE_POWERSHELL_TOOL=1 in your environment or in settings.json:",
         "On Windows, set the variable to 0 to opt out of the rollout. On Linux, macOS, and WSL, the tool requires PowerShell 7 or later: install pwsh and ensure it is on your PATH.",
-        "On Windows, Claude Code auto-detects pwsh.exe for PowerShell 7+ with a fallback to powershell.exe for PowerShell 5.1. The Bash tool remains registered alongside the PowerShell tool, so you may need to ask Claude to use PowerShell.",
+        "On Windows, Claude Code auto-detects pwsh.exe for PowerShell 7+ with a fallback to powershell.exe for PowerShell 5.1. When the tool is enabled, Claude treats PowerShell as the primary shell. The Bash tool remains available for POSIX scripts when Git Bash is installed.",
         "Three additional settings control where PowerShell is used:",
         "\"defaultShell\": \"powershell\" in settings.json: routes interactive ! commands through PowerShell. Requires the PowerShell tool to be enabled.",
         "\"shell\": \"powershell\" on individual command hooks: runs that hook in PowerShell. Hooks spawn PowerShell directly, so this works regardless of CLAUDE_CODE_USE_POWERSHELL_TOOL.",
@@ -25717,7 +25781,7 @@
           "paragraphs": [
             "Set CLAUDE_CODE_USE_POWERSHELL_TOOL=1 in your environment or in settings.json:",
             "On Windows, set the variable to 0 to opt out of the rollout. On Linux, macOS, and WSL, the tool requires PowerShell 7 or later: install pwsh and ensure it is on your PATH.",
-            "On Windows, Claude Code auto-detects pwsh.exe for PowerShell 7+ with a fallback to powershell.exe for PowerShell 5.1. The Bash tool remains registered alongside the PowerShell tool, so you may need to ask Claude to use PowerShell."
+            "On Windows, Claude Code auto-detects pwsh.exe for PowerShell 7+ with a fallback to powershell.exe for PowerShell 5.1. When the tool is enabled, Claude treats PowerShell as the primary shell. The Bash tool remains available for POSIX scripts when Git Bash is installed."
           ],
           "codeBlocks": [
             "{\n  \"env\": {\n    \"CLAUDE_CODE_USE_POWERSHELL_TOOL\": \"1\"\n  }\n}"
@@ -25870,6 +25934,7 @@
         "Start search: press Ctrl+R to activate reverse history search",
         "Type query: enter text to search for in previous commands. The search term is highlighted in matching results",
         "Navigate matches: press Ctrl+R again to cycle through older matches",
+        "Change scope: press Ctrl+S to cycle between this session, this project, and all projects",
         "Accept match: Press Tab or Esc to accept the current match and continue editing Press Enter to accept and execute the command immediately",
         "Press Tab or Esc to accept the current match and continue editing",
         "Press Enter to accept and execute the command immediately",
@@ -26090,6 +26155,7 @@
             "Start search: press Ctrl+R to activate reverse history search",
             "Type query: enter text to search for in previous commands. The search term is highlighted in matching results",
             "Navigate matches: press Ctrl+R again to cycle through older matches",
+            "Change scope: press Ctrl+S to cycle between this session, this project, and all projects",
             "Accept match: Press Tab or Esc to accept the current match and continue editing Press Enter to accept and execute the command immediately",
             "Press Tab or Esc to accept the current match and continue editing",
             "Press Enter to accept and execute the command immediately",
@@ -36123,6 +36189,7 @@
         "SDKCompactBoundaryMessage",
         "SDKPluginInstallMessage",
         "SDKPermissionDenial",
+        "SDKMessageOrigin",
         "Hook Types",
         "HookEvent",
         "HookCallback",
@@ -36257,8 +36324,7 @@
         "Configuration for built-in tool behavior.",
         "Configuration for MCP servers.",
         "Configuration for loading plugins in the SDK.",
-        "Example:",
-        "For complete information on creating and using plugins, see Plugins."
+        "Example:"
       ],
       "codeBlocks": [
         "npm install @anthropic-ai/claude-agent-sdk",
@@ -36590,7 +36656,7 @@
           "paragraphs": [
             "Assistant response message.",
             "The message field is a BetaMessage from the Anthropic SDK. It includes fields like id, content, model, stop_reason, and usage.",
-            "SDKAssistantMessageError is one of: 'authentication_failed', 'billing_error', 'rate_limit', 'invalid_request', 'server_error', 'max_output_tokens', or 'unknown'."
+            "SDKAssistantMessageError is one of: 'authentication_failed', 'oauth_org_not_allowed', 'billing_error', 'rate_limit', 'invalid_request', 'server_error', 'max_output_tokens', or 'unknown'."
           ],
           "codeBlocks": [
             "type SDKAssistantMessage = {\n  type: \"assistant\";\n  uuid: UUID;\n  session_id: string;\n  message: BetaMessage; // From Anthropic SDK\n  parent_tool_use_id: string | null;\n  error?: SDKAssistantMessageError;\n};"
@@ -36603,7 +36669,7 @@
             "Set shouldQuery to false to append the message to the transcript without triggering an assistant turn. The message is held and merged into the next user message that does trigger a turn. Use this to inject context, such as the output of a command you ran out of band, without spending a model call on it."
           ],
           "codeBlocks": [
-            "type SDKUserMessage = {\n  type: \"user\";\n  uuid?: UUID;\n  session_id: string;\n  message: MessageParam; // From Anthropic SDK\n  parent_tool_use_id: string | null;\n  isSynthetic?: boolean;\n  shouldQuery?: boolean;\n  tool_use_result?: unknown;\n};"
+            "type SDKUserMessage = {\n  type: \"user\";\n  uuid?: UUID;\n  session_id: string;\n  message: MessageParam; // From Anthropic SDK\n  parent_tool_use_id: string | null;\n  isSynthetic?: boolean;\n  shouldQuery?: boolean;\n  tool_use_result?: unknown;\n  origin?: SDKMessageOrigin;\n};"
           ]
         },
         {
@@ -36612,7 +36678,7 @@
             "Replayed user message with required UUID."
           ],
           "codeBlocks": [
-            "type SDKUserMessageReplay = {\n  type: \"user\";\n  uuid: UUID;\n  session_id: string;\n  message: MessageParam;\n  parent_tool_use_id: string | null;\n  isSynthetic?: boolean;\n  tool_use_result?: unknown;\n  isReplay: true;\n};"
+            "type SDKUserMessageReplay = {\n  type: \"user\";\n  uuid: UUID;\n  session_id: string;\n  message: MessageParam;\n  parent_tool_use_id: string | null;\n  isSynthetic?: boolean;\n  tool_use_result?: unknown;\n  origin?: SDKMessageOrigin;\n  isReplay: true;\n};"
           ]
         }
       ]
