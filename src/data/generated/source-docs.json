@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-01T05:50:08.359Z",
+  "generatedAt": "2026-05-02T05:20:16.133Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -1307,10 +1307,9 @@
         "Fixed Ctrl+L clearing the prompt input — it now only forces a screen redraw, matching readline behavior",
         "Fixed deferred tools (WebSearch, WebFetch, etc.) not being available to skills with context: fork and other subagents on their first turn",
         "Fixed plan-mode tools being unavailable in interactive sessions launched with --channels",
-        "Fixed blank remote-session transcript when certain messaging tools are unavailable",
         "Fixed /plugin Uninstall reporting “Enabled” instead of “Uninstalled”",
         "Bounded total size of file-modified reminders when a linter touches many files at once",
-        "Fixed /remote-control retries appearing stuck on “connecting…” — each retry now shows its result, and unenrolled trusted-device failures are caught up-front",
+        "Fixed /remote-control retries appearing stuck on “connecting…” — each retry now shows its result",
         "Fixed Remote Control failure notification not showing the error reason for initial connection failures",
         "Windows: clipboard writes no longer expose copied content in process command-line arguments visible to EDR/SIEM telemetry; also fixes >22KB selections not reaching the clipboard",
         "PowerShell tool: bare -- (e.g. git diff -- file) is no longer mis-flagged as the --% stop-parsing token",
@@ -1456,7 +1455,8 @@
         "Added a “Don’t ask again” option to the auto mode opt-in prompt",
         "Added claude plugin tag to create release git tags for plugins with version validation",
         "--continue/--resume now find sessions that added the current directory via /add-dir",
-        "/color now syncs the session accent color to claude.ai/code when Remote Control is connected"
+        "/color now syncs the session accent color to claude.ai/code when Remote Control is connected",
+        "The /model picker now honors ANTHROPIC_DEFAULT_*_MODEL_NAME/_DESCRIPTION overrides when using a custom ANTHROPIC_BASE_URL gateway"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -27469,7 +27469,7 @@
         "{\n  \"name\": \"my-plugin\",\n  \"lspServers\": {\n    \"go\": {\n      \"command\": \"gopls\",\n      \"args\": [\"serve\"],\n      \"extensionToLanguage\": {\n        \".go\": \"go\"\n      }\n    }\n  }\n}",
         "[\n  {\n    \"name\": \"deploy-status\",\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/poll-deploy.sh ${user_config.api_endpoint}\",\n    \"description\": \"Deployment status changes\"\n  },\n  {\n    \"name\": \"error-log\",\n    \"command\": \"tail -F ./logs/error.log\",\n    \"description\": \"Application error log\",\n    \"when\": \"on-skill-invoke:debug\"\n  }\n]",
         "{\n  \"name\": \"Dracula\",\n  \"base\": \"dark\",\n  \"overrides\": {\n    \"claude\": \"#bd93f9\",\n    \"error\": \"#ff5555\",\n    \"success\": \"#50fa7b\"\n  }\n}",
-        "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"themes\": \"./themes/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\",\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
+        "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": [\"./custom/agents/reviewer.md\"],\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"themes\": \"./themes/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\",\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
         "{\n  \"userConfig\": {\n    \"api_endpoint\": {\n      \"type\": \"string\",\n      \"title\": \"API endpoint\",\n      \"description\": \"Your team's API endpoint\"\n    },\n    \"api_token\": {\n      \"type\": \"string\",\n      \"title\": \"API token\",\n      \"description\": \"API authentication token\",\n      \"sensitive\": true\n    }\n  }\n}",
         "{\n  \"channels\": [\n    {\n      \"server\": \"telegram\",\n      \"userConfig\": {\n        \"bot_token\": {\n          \"type\": \"string\",\n          \"title\": \"Bot token\",\n          \"description\": \"Telegram bot token\",\n          \"sensitive\": true\n        },\n        \"owner_id\": {\n          \"type\": \"string\",\n          \"title\": \"Owner ID\",\n          \"description\": \"Your Telegram user ID\"\n        }\n      }\n    }\n  ]\n}",
         "{\n  \"commands\": [\n    \"./specialized/deploy.md\",\n    \"./utilities/batch-process.md\"\n  ],\n  \"agents\": [\n    \"./custom-agents/reviewer.md\",\n    \"./custom-agents/tester.md\"\n  ]\n}",
@@ -27666,7 +27666,7 @@
           "title": "​Complete schema",
           "paragraphs": [],
           "codeBlocks": [
-            "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": \"./custom/agents/\",\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"themes\": \"./themes/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\",\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}"
+            "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": [\"./custom/agents/reviewer.md\"],\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"themes\": \"./themes/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\",\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}"
           ]
         },
         {
