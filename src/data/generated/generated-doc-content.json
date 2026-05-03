@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-02T05:20:16.486Z",
-  "sourceGeneratedAt": "2026-05-02T05:20:16.133Z",
+  "generatedAt": "2026-05-03T05:38:50.254Z",
+  "sourceGeneratedAt": "2026-05-03T05:38:49.977Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -589,12 +589,6 @@
           ],
           "steps": [
             {
-              "title": "原页关键片段：Resume or fork sessions",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "claude --continue --fork-session",
-              "kind": "command"
-            },
-            {
               "title": "原页关键片段：It’s a conversation 1",
               "body": "到这里其实就剩一句话，把下面这句发出去就行。",
               "code": "Fix the login bug",
@@ -703,16 +697,8 @@
         {
           "title": "Resume or fork sessions",
           "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "看到这里，就把\"Resume or fork sessions\"当成一件真要上手的活来看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Resume or fork sessions",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "claude --continue --fork-session",
-              "kind": "command"
-            }
           ]
         },
         {
@@ -1692,6 +1678,12 @@
               "kind": "command"
             },
             {
+              "title": "原页关键片段：Set plan mode as the default",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"permissions\": {\n    \"defaultMode\": \"plan\"\n  }\n}",
+              "kind": "config"
+            },
+            {
               "title": "原页关键片段：Allow only pre-approved tools with dontAsk mode",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
               "code": "claude --permission-mode dontAsk",
@@ -1773,6 +1765,28 @@
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
               "code": "claude --permission-mode plan",
               "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Review and approve a plan",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Set plan mode as the default",
+          "paragraphs": [
+            "这里不是让你背\"Set plan mode as the default\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Set plan mode as the default",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"permissions\": {\n    \"defaultMode\": \"plan\"\n  }\n}",
+              "kind": "config"
             }
           ]
         },
@@ -1890,39 +1904,21 @@
           ],
           "steps": [
             {
-              "title": "原页关键片段：Get a quick codebase overview 1",
+              "title": "原页关键片段：Understand new codebases 1",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
               "code": "cd /path/to/project",
               "kind": "code"
             },
             {
-              "title": "原页关键片段：Get a quick codebase overview 2",
+              "title": "原页关键片段：Understand new codebases 2",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
               "code": "claude",
               "kind": "code"
             },
             {
-              "title": "原页关键片段：Get a quick codebase overview 3",
+              "title": "原页关键片段：Understand new codebases 3",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
               "code": "give me an overview of this codebase",
-              "kind": "code"
-            },
-            {
-              "title": "原页关键片段：Find relevant code 1",
-              "body": "\"Find relevant code\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "find the files that handle user authentication",
-              "kind": "code"
-            },
-            {
-              "title": "原页关键片段：Find relevant code 2",
-              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
-              "code": "how do these authentication files work together?",
-              "kind": "prompt"
-            },
-            {
-              "title": "原页关键片段：Find relevant code 3",
-              "body": "\"Find relevant code\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "trace the login process from front-end to database",
               "kind": "code"
             },
             {
@@ -1960,6 +1956,24 @@
               "body": "\"Refactor code\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
               "code": "refactor utils.js to use ES2024 features while maintaining the same behavior",
               "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Work with tests 1",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "find functions in NotificationsService.swift that are not covered by tests",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Work with tests 2",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "add tests for the notification service",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Work with tests 3",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "add test cases for edge conditions in the notification service",
+              "kind": "code"
             }
           ]
         },
@@ -1971,49 +1985,35 @@
           ]
         },
         {
-          "title": "Understand new codebases",
+          "title": "Prompt recipes",
           "paragraphs": [
-            "看到这里，就把\"Understand new codebases\"当成一件真要上手的活来看。"
+            "这一块主要是在说\"Prompt recipes\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
-          "title": "Get a quick codebase overview",
+          "title": "Understand new codebases",
           "paragraphs": [
-            "看到这里，就把\"Get a quick codebase overview\"当成一件真要上手的活来看。",
+            "看到这里，就把\"Understand new codebases\"当成一件真要上手的活来看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
-              "title": "Get a quick codebase overview 1",
+              "title": "Understand new codebases 1",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
               "code": "cd /path/to/project",
               "kind": "code"
             },
             {
-              "title": "Get a quick codebase overview 2",
+              "title": "Understand new codebases 2",
               "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
               "code": "what are the key data models?",
               "kind": "prompt"
             },
             {
-              "title": "Get a quick codebase overview 3",
+              "title": "Understand new codebases 3",
               "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
               "code": "how is authentication handled?",
-              "kind": "prompt"
-            }
-          ]
-        },
-        {
-          "title": "Find relevant code",
-          "paragraphs": [
-            "这一块主要是在说\"Find relevant code\"真到手上该怎么用，哪里最容易踩坑。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Find relevant code",
-              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
-              "code": "how do these authentication files work together?",
               "kind": "prompt"
             }
           ]
@@ -2036,102 +2036,6 @@
           "title": "Refactor code",
           "paragraphs": [
             "这一块主要是在说\"Refactor code\"真到手上该怎么用，哪里最容易踩坑。"
-          ]
-        },
-        {
-          "title": "Use specialized subagents",
-          "paragraphs": [
-            "这里不是让你背\"Use specialized subagents\"这个词，而是让你看它真干活时怎么使。"
-          ],
-          "steps": [
-            {
-              "title": "Use specialized subagents",
-              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Use specialized subagents\"这一段的意思去办。",
-              "code": "/agents",
-              "kind": "prompt"
-            }
-          ]
-        },
-        {
-          "title": "Use Plan Mode for safe code analysis",
-          "paragraphs": [
-            "这里不是让你背\"Use Plan Mode for safe code analysis\"这个词，而是让你看它真干活时怎么使。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "When to use Plan Mode",
-          "paragraphs": [
-            "这一段主要是在帮你判断：When to use Plan Mode 这种东西到底值不值得现在就上。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ]
-        },
-        {
-          "title": "How to use Plan Mode",
-          "paragraphs": [
-            "这里不是让你背\"How to use Plan Mode\"这个词，而是让你看它真干活时怎么使。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "How to use Plan Mode 1",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "claude --permission-mode plan",
-              "kind": "command"
-            },
-            {
-              "title": "How to use Plan Mode 2",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "claude --permission-mode plan -p \"Analyze the authentication system and suggest improvements\"",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "Example: Planning a complex refactor",
-          "paragraphs": [
-            "这一段主要是在把\"Example: Planning a complex refactor\"讲实，不是只摆个标题给你看。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Example: Planning a complex refactor 1",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "claude --permission-mode plan",
-              "kind": "command"
-            },
-            {
-              "title": "Example: Planning a complex refactor 2",
-              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
-              "code": "I need to refactor our authentication system to use OAuth2. Create a detailed migration plan.",
-              "kind": "prompt"
-            },
-            {
-              "title": "Example: Planning a complex refactor 3",
-              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
-              "code": "What about backward compatibility?",
-              "kind": "prompt"
-            },
-            {
-              "title": "Example: Planning a complex refactor 4",
-              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
-              "code": "How should we handle database migration?",
-              "kind": "prompt"
-            }
-          ]
-        },
-        {
-          "title": "Configure Plan Mode as default",
-          "paragraphs": [
-            "这一段主要是在拧开关，地方和顺序都别搞错。"
-          ],
-          "steps": [
-            {
-              "title": "Configure Plan Mode as default",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "// .claude/settings.json\n{\n  \"permissions\": {\n    \"defaultMode\": \"plan\"\n  }\n}",
-              "kind": "config"
-            }
           ]
         },
         {
@@ -2221,22 +2125,42 @@
           ]
         },
         {
-          "title": "Use extended thinking (thinking mode)",
+          "title": "Run Claude on a schedule",
           "paragraphs": [
-            "这一段主要是在把\"Use extended thinking (thinking mode)\"讲实，不是只摆个标题给你看。"
+            "这里不是让你背\"Run Claude on a schedule\"这个词，而是让你看它真干活时怎么使。"
           ]
         },
         {
-          "title": "Configure thinking mode",
+          "title": "Ask Claude about its capabilities",
           "paragraphs": [
-            "这里讲怎么把某个开关拧对。重点不是概念，而是你该在哪儿改、改完怎么确认生效。"
-          ]
-        },
-        {
-          "title": "How extended thinking works",
-          "paragraphs": [
-            "看懂这里，后面出怪事时你心里会更有底。",
-            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+            "这里不是让你背\"Ask Claude about its capabilities\"这个词，而是让你看它真干活时怎么使。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ],
+          "steps": [
+            {
+              "title": "Ask Claude about its capabilities 1",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Ask Claude about its capabilities\"这一段的意思去办。",
+              "code": "can Claude Code create pull requests?",
+              "kind": "prompt"
+            },
+            {
+              "title": "Ask Claude about its capabilities 2",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Ask Claude about its capabilities\"这一段的意思去办。",
+              "code": "how does Claude Code handle permissions?",
+              "kind": "prompt"
+            },
+            {
+              "title": "Ask Claude about its capabilities 3",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Ask Claude about its capabilities\"这一段的意思去办。",
+              "code": "what skills are available?",
+              "kind": "prompt"
+            },
+            {
+              "title": "Ask Claude about its capabilities 4",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Ask Claude about its capabilities\"这一段的意思去办。",
+              "code": "how do I use MCP with Claude Code?",
+              "kind": "prompt"
+            }
           ]
         },
         {
@@ -2244,144 +2168,98 @@
           "paragraphs": [
             "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Name your sessions",
-          "paragraphs": [
-            "看到这里，就把\"Name your sessions\"当成一件真要上手的活来看。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
-              "title": "Name your sessions 1",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "claude -n auth-refactor",
-              "kind": "command"
-            },
-            {
-              "title": "Name your sessions 2",
-              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
-              "code": "/rename auth-refactor",
-              "kind": "prompt"
-            },
-            {
-              "title": "Name your sessions 3",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "claude --resume auth-refactor",
-              "kind": "command"
-            },
-            {
-              "title": "Name your sessions 4",
-              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
-              "code": "/resume auth-refactor",
-              "kind": "prompt"
-            }
-          ]
-        },
-        {
-          "title": "Use the session picker",
-          "paragraphs": [
-            "这段看着像个标题，其实是在说\"Use the session picker\"管到哪儿。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Run parallel Claude Code sessions with Git worktrees",
-          "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Run parallel Claude Code sessions with Git worktrees 1",
+              "title": "Resume previous conversations",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "# Start Claude in a worktree named \"feature-auth\"\n# Creates .claude/worktrees/feature-auth/ with a new branch\nclaude --worktree feature-auth\n\n# Start another session in a separate worktree\nclaude --worktree bugfix-123",
-              "kind": "command"
-            },
-            {
-              "title": "Run parallel Claude Code sessions with Git worktrees 2",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "# Auto-generates a name like \"bright-running-fox\"\nclaude --worktree",
+              "code": "claude --continue",
               "kind": "command"
             }
           ]
         },
         {
-          "title": "Subagent worktrees",
+          "title": "Run parallel sessions with worktrees",
           "paragraphs": [
-            "看到这里，就把\"Subagent worktrees\"当成一件真要上手的活来看。"
-          ]
-        },
-        {
-          "title": "Worktree cleanup",
-          "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Copy gitignored files to worktrees",
-          "paragraphs": [
-            "看到这里，就把\"Copy gitignored files to worktrees\"当成一件真要上手的活来看。",
+            "看到这里，就把\"Run parallel sessions with worktrees\"当成一件真要上手的活来看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
-              "title": "Copy gitignored files to worktrees",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": ".env\n.env.local\nconfig/secrets.json",
-              "kind": "config"
+              "title": "Run parallel sessions with worktrees",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --worktree feature-auth",
+              "kind": "command"
             }
           ]
         },
         {
-          "title": "Manage worktrees manually",
+          "title": "Plan before editing",
           "paragraphs": [
-            "看到这类标题，就把它当成日常管摊子的规矩。",
+            "这里不是让你背\"Plan before editing\"这个词，而是让你看它真干活时怎么使。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
-              "title": "Manage worktrees manually",
+              "title": "Plan before editing",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "# Create a worktree with a new branch\ngit worktree add ../project-feature-a -b feature-a\n\n# Create a worktree with an existing branch\ngit worktree add ../project-bugfix bugfix-123\n\n# Start Claude in the worktree\ncd ../project-feature-a && claude\n\n# Clean up when done\ngit worktree list\ngit worktree remove ../project-feature-a",
+              "code": "claude --permission-mode plan",
               "kind": "command"
             }
           ]
         },
         {
-          "title": "Non-git version control",
+          "title": "Delegate research to subagents",
           "paragraphs": [
-            "看到这里，就把\"Non-git version control\"当成一件真要上手的活来看。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+            "看到这里，就把\"Delegate research to subagents\"当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
-          "title": "Get notified when Claude needs your attention",
+          "title": "Pipe Claude into scripts",
           "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这一段是在把 Claude non-interactively for CI, pre-commit hooks, or batch processing. Stdin and stdout work like any Unix tool. 真跑起来。别只看命令长什么样，还得看跑完该出现什么。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ],
           "steps": [
             {
-              "title": "Get notified when Claude needs your attention 1",
-              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "Get notified when Claude needs your attention 2",
-              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"notify-send 'Claude Code' 'Claude Code needs your attention'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "Get notified when Claude needs your attention 3",
-              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"powershell.exe -Command \\\"[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code needs your attention', 'Claude Code')\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
-              "kind": "config"
+              "title": "Pipe Claude into scripts",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "git log --oneline -20 | claude -p \"summarize these recent commits\"",
+              "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "Next steps",
+          "paragraphs": [
+            "这里不是让你背\"Next steps\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
+          "title": "Best practices",
+          "paragraphs": [
+            "这段算经验活，听劝通常能省事。"
+          ]
+        },
+        {
+          "title": "Manage sessions",
+          "paragraphs": [
+            "这里讲的是收放和管理，不只是\"能不能用\"，而是\"怎么管住、怎么不乱\"。"
+          ]
+        },
+        {
+          "title": "Worktrees",
+          "paragraphs": [
+            "这一段是在把 isolated parallel sessions 真跑起来。别只看命令长什么样，还得看跑完该出现什么。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Extend Claude Code",
+          "paragraphs": [
+            "这一块主要是在说\"Extend Claude Code\"真到手上该怎么用，哪里最容易踩坑。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
           ]
         }
       ],
@@ -2400,7 +2278,7 @@
       }
     },
     "best-practices": {
-      "sourceLabel": "Best Practices for Claude Code",
+      "sourceLabel": "Best practices for Claude Code",
       "sections": [
         {
           "title": "简要总结",
@@ -2492,9 +2370,9 @@
               "kind": "code"
             },
             {
-              "title": "原页关键片段：Resume conversations",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "claude --continue    # Resume the most recent conversation\nclaude --resume      # Select from recent conversations",
+              "title": "原页关键片段：Run non-interactive mode",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "# One-off queries\nclaude -p \"Explain what this project does\"\n\n# Structured output for scripts\nclaude -p \"List all API endpoints\" --output-format json\n\n# Streaming for real-time processing\nclaude -p \"Analyze this log file\" --output-format stream-json",
               "kind": "command"
             }
           ]
@@ -2724,16 +2602,8 @@
         {
           "title": "Resume conversations",
           "paragraphs": [
-            "这一段是在把 claude --continue to pick up where you left off, or --resume to choose from recent sessions. 真跑起来。别只看命令长什么样，还得看跑完该出现什么。",
+            "看到这里，就把\"Resume conversations\"当成一件真要上手的活来看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Resume conversations",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "claude --continue    # Resume the most recent conversation\nclaude --resume      # Select from recent conversations",
-              "kind": "command"
-            }
           ]
         },
         {
@@ -3758,9 +3628,15 @@
             },
             {
               "title": "原页关键片段：Launch a VS Code tab from other tools 2",
-              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
-              "code": "vscode://anthropic.claude-code/open?prompt=review%20my%20changes",
-              "kind": "code"
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "xdg-open \"vscode://anthropic.claude-code/open\"",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Launch a VS Code tab from other tools 3",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "Start-Process \"vscode://anthropic.claude-code/open\"",
+              "kind": "command"
             },
             {
               "title": "原页关键片段：Connect to external tools with MCP",
@@ -3908,7 +3784,7 @@
           "title": "Launch a VS Code tab from other tools",
           "paragraphs": [
             "这里主要是在交代\"Launch a VS Code tab from other tools\"这一块会碰到哪些事。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
@@ -3919,9 +3795,21 @@
             },
             {
               "title": "Launch a VS Code tab from other tools 2",
-              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
-              "code": "vscode://anthropic.claude-code/open?prompt=review%20my%20changes",
-              "kind": "code"
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "xdg-open \"vscode://anthropic.claude-code/open\"",
+              "kind": "command"
+            },
+            {
+              "title": "Launch a VS Code tab from other tools 3",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "Start-Process \"vscode://anthropic.claude-code/open\"",
+              "kind": "command"
+            },
+            {
+              "title": "Launch a VS Code tab from other tools 4",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "start \"\" \"vscode://anthropic.claude-code/open\"",
+              "kind": "command"
             }
           ]
         },
@@ -6906,25 +6794,25 @@
             {
               "title": "原页关键片段：Create your first skill 1",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "mkdir -p ~/.claude/skills/explain-code",
+              "code": "mkdir -p ~/.claude/skills/summarize-changes",
               "kind": "command"
             },
             {
               "title": "原页关键片段：Create your first skill 2",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "---\ndescription: Explains code with visual diagrams and analogies. Use when explaining how code works, teaching about a codebase, or when the user asks \"how does this work?\"\n---\n\nWhen explaining code, always include:\n\n1. **Start with an analogy**: Compare the code to something from everyday life\n2. **Draw a diagram**: Use ASCII art to show the flow, structure, or relationships\n3. **Walk through the code**: Explain step-by-step what happens\n4. **Highlight a gotcha**: What's a common mistake or misconception?\n\nKeep explanations conversational. For complex concepts, use multiple analogies.",
+              "code": "---\ndescription: Summarizes uncommitted changes and flags anything risky. Use when the user asks what changed, wants a commit message, or asks to review their diff.\n---\n\n## Current changes\n\n!`git diff HEAD`\n\n## Instructions\n\nSummarize the changes above in two or three bullet points, then list any risks you notice such as missing error handling, hardcoded values, or tests that need updating. If the diff is empty, say there are no uncommitted changes.",
               "kind": "config"
             },
             {
               "title": "原页关键片段：Create your first skill 3",
               "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Create your first skill\"这一段的意思去办。",
-              "code": "How does this code work?",
+              "code": "What did I change?",
               "kind": "prompt"
             },
             {
               "title": "原页关键片段：Create your first skill 4",
               "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Create your first skill\"这一段的意思去办。",
-              "code": "/explain-code src/auth/login.ts",
+              "code": "/summarize-changes",
               "kind": "prompt"
             },
             {
@@ -7007,25 +6895,25 @@
             {
               "title": "Create your first skill 1",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "mkdir -p ~/.claude/skills/explain-code",
+              "code": "mkdir -p ~/.claude/skills/summarize-changes",
               "kind": "command"
             },
             {
               "title": "Create your first skill 2",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "---\ndescription: Explains code with visual diagrams and analogies. Use when explaining how code works, teaching about a codebase, or when the user asks \"how does this work?\"\n---\n\nWhen explaining code, always include:\n\n1. **Start with an analogy**: Compare the code to something from everyday life\n2. **Draw a diagram**: Use ASCII art to show the flow, structure, or relationships\n3. **Walk through the code**: Explain step-by-step what happens\n4. **Highlight a gotcha**: What's a common mistake or misconception?\n\nKeep explanations conversational. For complex concepts, use multiple analogies.",
+              "code": "---\ndescription: Summarizes uncommitted changes and flags anything risky. Use when the user asks what changed, wants a commit message, or asks to review their diff.\n---\n\n## Current changes\n\n!`git diff HEAD`\n\n## Instructions\n\nSummarize the changes above in two or three bullet points, then list any risks you notice such as missing error handling, hardcoded values, or tests that need updating. If the diff is empty, say there are no uncommitted changes.",
               "kind": "config"
             },
             {
               "title": "Create your first skill 3",
               "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Create your first skill\"这一段的意思去办。",
-              "code": "How does this code work?",
+              "code": "What did I change?",
               "kind": "prompt"
             },
             {
               "title": "Create your first skill 4",
               "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Create your first skill\"这一段的意思去办。",
-              "code": "/explain-code src/auth/login.ts",
+              "code": "/summarize-changes",
               "kind": "prompt"
             }
           ]
@@ -7141,7 +7029,7 @@
           "title": "Pre-approve tools for a skill",
           "paragraphs": [
             "这一段不只是挂个标题，它是在说明\"Pre-approve tools for a skill\"这一块到底负责什么。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
@@ -7265,13 +7153,13 @@
             {
               "title": "Generate visual output 2",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "---\nname: codebase-visualizer\ndescription: Generate an interactive collapsible tree visualization of your codebase. Use when exploring a new repo, understanding project structure, or identifying large files.\nallowed-tools: Bash(python *)\n---\n\n# Codebase Visualizer\n\nGenerate an interactive HTML tree view that shows your project's file structure with collapsible directories.\n\n## Usage\n\nRun the visualization script from your project root:\n\n```bash\npython ~/.claude/skills/codebase-visualizer/scripts/visualize.py .\n```\n\nThis creates `codebase-map.html` in the current directory and opens it in your default browser.\n\n## What the visualization shows\n\n- **Collapsible directories**: Click folders to expand/collapse\n- **File sizes**: Displayed next to each file\n- **Colors**: Different colors for different file types\n- **Directory totals**: Shows aggregate size of each folder",
+              "code": "---\nname: codebase-visualizer\ndescription: Generate an interactive collapsible tree visualization of your codebase. Use when exploring a new repo, understanding project structure, or identifying large files.\nallowed-tools: Bash(python3 *)\n---\n\n# Codebase Visualizer\n\nGenerate an interactive HTML tree view that shows your project's file structure with collapsible directories.\n\n## Usage\n\nRun the visualization script from your project root:\n\n```bash\npython3 ${CLAUDE_SKILL_DIR}/scripts/visualize.py .\n```\n\nThis creates `codebase-map.html` in the current directory and opens it in your default browser.\n\n## What the visualization shows\n\n- **Collapsible directories**: Click folders to expand/collapse\n- **File sizes**: Displayed next to each file\n- **Colors**: Different colors for different file types\n- **Directory totals**: Shows aggregate size of each folder",
               "kind": "config"
             },
             {
               "title": "Generate visual output 3",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "#!/usr/bin/env python3\n\"\"\"Generate an interactive collapsible tree visualization of a codebase.\"\"\"\n\nimport json\nimport sys\nimport webbrowser\nfrom pathlib import Path\nfrom collections import Counter\n\nIGNORE = {'.git', 'node_modules', '__pycache__', '.venv', 'venv', 'dist', 'build'}\n\ndef scan(path: Path, stats: dict) -> dict:\n    result = {\"name\": path.name, \"children\": [], \"size\": 0}\n    try:\n        for item in sorted(path.iterdir()):\n            if item.name in IGNORE or item.name.startswith('.'):\n                continue\n            if item.is_file():\n                size = item.stat().st_size\n                ext = item.suffix.lower() or '(no ext)'\n                result[\"children\"].append({\"name\": item.name, \"size\": size, \"ext\": ext})\n                result[\"size\"] += size\n                stats[\"files\"] += 1\n                stats[\"extensions\"][ext] += 1\n                stats[\"ext_sizes\"][ext] += size\n            elif item.is_dir():\n                stats[\"dirs\"] += 1\n                child = scan(item, stats)\n                if child[\"children\"]:\n                    result[\"children\"].append(child)\n                    result[\"size\"] += child[\"size\"]\n    except PermissionError:\n        pass\n    return result\n\ndef generate_html(data: dict, stats: dict, output: Path) -> None:\n    ext_sizes = stats[\"ext_sizes\"]\n    total_size = sum(ext_sizes.values()) or 1\n    sorted_exts = sorted(ext_sizes.items(), key=lambda x: -x[1])[:8]\n    colors = {\n        '.js': '#f7df1e', '.ts': '#3178c6', '.py': '#3776ab', '.go': '#00add8',\n        '.rs': '#dea584', '.rb': '#cc342d', '.css': '#264de4', '.html': '#e34c26',\n        '.json': '#6b7280', '.md': '#083fa1', '.yaml': '#cb171e', '.yml': '#cb171e',\n        '.mdx': '#083fa1', '.tsx': '#3178c6', '.jsx': '#61dafb', '.sh': '#4eaa25',\n    }\n    lang_bars = \"\".join(\n        f'<div class=\"bar-row\"><span class=\"bar-label\">{ext}</span>'\n        f'<div class=\"bar\" style=\"width:{(size/total_size)*100}%;background:{colors.get(ext,\"#6b7280\")}\"></div>'\n        f'<span class=\"bar-pct\">{(size/total_size)*100:.1f}%</span></div>'\n        for ext, size in sorted_exts\n    )\n    def fmt(b):\n        if b < 1024: return f\"{b} B\"\n        if b < 1048576: return f\"{b/1024:.1f} KB\"\n        return f\"{b/1048576:.1f} MB\"\n\n    html = f'''<!DOCTYPE html>\n<html><head>\n  <meta charset=\"utf-8\"><title>Codebase Explorer</title>\n  <style>\n    body {{ font: 14px/1.5 system-ui, sans-serif; margin: 0; background: #1a1a2e; color: #eee; }}\n    .container {{ display: flex; height: 100vh; }}\n    .sidebar {{ width: 280px; background: #252542; padding: 20px; border-right: 1px solid #3d3d5c; overflow-y: auto; flex-shrink: 0; }}\n    .main {{ flex: 1; padding: 20px; overflow-y: auto; }}\n    h1 {{ margin: 0 0 10px 0; font-size: 18px; }}\n    h2 {{ margin: 20px 0 10px 0; font-size: 14px; color: #888; text-transform: uppercase; }}\n    .stat {{ display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #3d3d5c; }}\n    .stat-value {{ font-weight: bold; }}\n    .bar-row {{ display: flex; align-items: center; margin: 6px 0; }}\n    .bar-label {{ width: 55px; font-size: 12px; color: #aaa; }}\n    .bar {{ height: 18px; border-radius: 3px; }}\n    .bar-pct {{ margin-left: 8px; font-size: 12px; color: #666; }}\n    .tree {{ list-style: none; padding-left: 20px; }}\n    details {{ cursor: pointer; }}\n    summary {{ padding: 4px 8px; border-radius: 4px; }}\n    summary:hover {{ background: #2d2d44; }}\n    .folder {{ color: #ffd700; }}\n    .file {{ display: flex; align-items: center; padding: 4px 8px; border-radius: 4px; }}\n    .file:hover {{ background: #2d2d44; }}\n    .size {{ color: #888; margin-left: auto; font-size: 12px; }}\n    .dot {{ width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; }}\n  </style>\n</head><body>\n  <div class=\"container\">\n    <div class=\"sidebar\">\n      <h1>📊 Summary</h1>\n      <div class=\"stat\"><span>Files</span><span class=\"stat-value\">{stats[\"files\"]:,}</span></div>\n      <div class=\"stat\"><span>Directories</span><span class=\"stat-value\">{stats[\"dirs\"]:,}</span></div>\n      <div class=\"stat\"><span>Total size</span><span class=\"stat-value\">{fmt(data[\"size\"])}</span></div>\n      <div class=\"stat\"><span>File types</span><span class=\"stat-value\">{len(stats[\"extensions\"])}</span></div>\n      <h2>By file type</h2>\n      {lang_bars}\n    </div>\n    <div class=\"main\">\n      <h1>📁 {data[\"name\"]}</h1>\n      <ul class=\"tree\" id=\"root\"></ul>\n    </div>\n  </div>\n  <script>\n    const data = {json.dumps(data)};\n    const colors = {json.dumps(colors)};\n    function fmt(b) {{ if (b < 1024) return b + ' B'; if (b < 1048576) return (b/1024).toFixed(1) + ' KB'; return (b/1048576).toFixed(1) + ' MB'; }}\n    function render(node, parent) {{\n      if (node.children) {{\n        const det = document.createElement('details');\n        det.open = parent === document.getElementById('root');\n        det.innerHTML = `<summary><span class=\"folder\">📁 ${{node.name}}</span><span class=\"size\">${{fmt(node.size)}}</span></summary>`;\n        const ul = document.createElement('ul'); ul.className = 'tree';\n        node.children.sort((a,b) => (b.children?1:0)-(a.children?1:0) || a.name.localeCompare(b.name));\n        node.children.forEach(c => render(c, ul));\n        det.appendChild(ul);\n        const li = document.createElement('li'); li.appendChild(det); parent.appendChild(li);\n      }} else {{\n        const li = document.createElement('li'); li.className = 'file';\n        li.innerHTML = `<span class=\"dot\" style=\"background:${{colors[node.ext]||'#6b7280'}}\"></span>${{node.name}}<span class=\"size\">${{fmt(node.size)}}</span>`;\n        parent.appendChild(li);\n      }}\n    }}\n    data.children.forEach(c => render(c, document.getElementById('root')));\n  </script>\n</body></html>'''\n    output.write_text(html)\n\nif __name__ == '__main__':\n    target = Path(sys.argv[1] if len(sys.argv) > 1 else '.').resolve()\n    stats = {\"files\": 0, \"dirs\": 0, \"extensions\": Counter(), \"ext_sizes\": Counter()}\n    data = scan(target, stats)\n    out = Path('codebase-map.html')\n    generate_html(data, stats, out)\n    print(f'Generated {out.absolute()}')\n    webbrowser.open(f'file://{out.absolute()}')",
+              "code": "#!/usr/bin/env python3\n\"\"\"Generate an interactive collapsible tree visualization of a codebase.\"\"\"\n\nimport json\nimport sys\nimport webbrowser\nfrom html import escape\nfrom pathlib import Path\nfrom collections import Counter\n\nIGNORE = {'.git', 'node_modules', '__pycache__', '.venv', 'venv', 'dist', 'build'}\n\ndef scan(path: Path, stats: dict) -> dict:\n    result = {\"name\": path.name, \"children\": [], \"size\": 0}\n    try:\n        for item in sorted(path.iterdir()):\n            if item.name in IGNORE or item.name.startswith('.'):\n                continue\n            if item.is_file():\n                size = item.stat().st_size\n                ext = item.suffix.lower() or '(no ext)'\n                result[\"children\"].append({\"name\": item.name, \"size\": size, \"ext\": ext})\n                result[\"size\"] += size\n                stats[\"files\"] += 1\n                stats[\"extensions\"][ext] += 1\n                stats[\"ext_sizes\"][ext] += size\n            elif item.is_dir():\n                stats[\"dirs\"] += 1\n                child = scan(item, stats)\n                if child[\"children\"]:\n                    result[\"children\"].append(child)\n                    result[\"size\"] += child[\"size\"]\n    except PermissionError:\n        pass\n    return result\n\ndef generate_html(data: dict, stats: dict, output: Path) -> None:\n    ext_sizes = stats[\"ext_sizes\"]\n    total_size = sum(ext_sizes.values()) or 1\n    sorted_exts = sorted(ext_sizes.items(), key=lambda x: -x[1])[:8]\n    colors = {\n        '.js': '#f7df1e', '.ts': '#3178c6', '.py': '#3776ab', '.go': '#00add8',\n        '.rs': '#dea584', '.rb': '#cc342d', '.css': '#264de4', '.html': '#e34c26',\n        '.json': '#6b7280', '.md': '#083fa1', '.yaml': '#cb171e', '.yml': '#cb171e',\n        '.mdx': '#083fa1', '.tsx': '#3178c6', '.jsx': '#61dafb', '.sh': '#4eaa25',\n    }\n    lang_bars = \"\".join(\n        f'<div class=\"bar-row\"><span class=\"bar-label\">{ext}</span>'\n        f'<div class=\"bar\" style=\"width:{(size/total_size)*100}%;background:{colors.get(ext,\"#6b7280\")}\"></div>'\n        f'<span class=\"bar-pct\">{(size/total_size)*100:.1f}%</span></div>'\n        for ext, size in sorted_exts\n    )\n    def fmt(b):\n        if b < 1024: return f\"{b} B\"\n        if b < 1048576: return f\"{b/1024:.1f} KB\"\n        return f\"{b/1048576:.1f} MB\"\n\n    html = f'''<!DOCTYPE html>\n<html><head>\n  <meta charset=\"utf-8\"><title>Codebase Explorer</title>\n  <style>\n    body {{ font: 14px/1.5 system-ui, sans-serif; margin: 0; background: #1a1a2e; color: #eee; }}\n    .container {{ display: flex; height: 100vh; }}\n    .sidebar {{ width: 280px; background: #252542; padding: 20px; border-right: 1px solid #3d3d5c; overflow-y: auto; flex-shrink: 0; }}\n    .main {{ flex: 1; padding: 20px; overflow-y: auto; }}\n    h1 {{ margin: 0 0 10px 0; font-size: 18px; }}\n    h2 {{ margin: 20px 0 10px 0; font-size: 14px; color: #888; text-transform: uppercase; }}\n    .stat {{ display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #3d3d5c; }}\n    .stat-value {{ font-weight: bold; }}\n    .bar-row {{ display: flex; align-items: center; margin: 6px 0; }}\n    .bar-label {{ width: 55px; font-size: 12px; color: #aaa; }}\n    .bar {{ height: 18px; border-radius: 3px; }}\n    .bar-pct {{ margin-left: 8px; font-size: 12px; color: #666; }}\n    .tree {{ list-style: none; padding-left: 20px; }}\n    details {{ cursor: pointer; }}\n    summary {{ padding: 4px 8px; border-radius: 4px; }}\n    summary:hover {{ background: #2d2d44; }}\n    .folder {{ color: #ffd700; }}\n    .file {{ display: flex; align-items: center; padding: 4px 8px; border-radius: 4px; }}\n    .file:hover {{ background: #2d2d44; }}\n    .size {{ color: #888; margin-left: auto; font-size: 12px; }}\n    .dot {{ width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; }}\n  </style>\n</head><body>\n  <div class=\"container\">\n    <div class=\"sidebar\">\n      <h1>📊 Summary</h1>\n      <div class=\"stat\"><span>Files</span><span class=\"stat-value\">{stats[\"files\"]:,}</span></div>\n      <div class=\"stat\"><span>Directories</span><span class=\"stat-value\">{stats[\"dirs\"]:,}</span></div>\n      <div class=\"stat\"><span>Total size</span><span class=\"stat-value\">{fmt(data[\"size\"])}</span></div>\n      <div class=\"stat\"><span>File types</span><span class=\"stat-value\">{len(stats[\"extensions\"])}</span></div>\n      <h2>By file type</h2>\n      {lang_bars}\n    </div>\n    <div class=\"main\">\n      <h1>📁 {escape(data[\"name\"])}</h1>\n      <ul class=\"tree\" id=\"root\"></ul>\n    </div>\n  </div>\n  <script>\n    const data = {json.dumps(data)};\n    const colors = {json.dumps(colors)};\n    function fmt(b) {{ if (b < 1024) return b + ' B'; if (b < 1048576) return (b/1024).toFixed(1) + ' KB'; return (b/1048576).toFixed(1) + ' MB'; }}\n    function esc(s) {{ return s.replace(/[&<>\"']/g, c => ({{\"&\":\"&amp;\",\"<\":\"&lt;\",\">\":\"&gt;\",'\"':\"&quot;\",\"'\":\"&#39;\"}}[c])); }}\n    function render(node, parent) {{\n      if (node.children) {{\n        const det = document.createElement('details');\n        det.open = parent === document.getElementById('root');\n        det.innerHTML = `<summary><span class=\"folder\">📁 ${{esc(node.name)}}</span><span class=\"size\">${{fmt(node.size)}}</span></summary>`;\n        const ul = document.createElement('ul'); ul.className = 'tree';\n        node.children.sort((a,b) => (b.children?1:0)-(a.children?1:0) || a.name.localeCompare(b.name));\n        node.children.forEach(c => render(c, ul));\n        det.appendChild(ul);\n        const li = document.createElement('li'); li.appendChild(det); parent.appendChild(li);\n      }} else {{\n        const li = document.createElement('li'); li.className = 'file';\n        li.innerHTML = `<span class=\"dot\" style=\"background:${{colors[node.ext]||'#6b7280'}}\"></span>${{esc(node.name)}}<span class=\"size\">${{fmt(node.size)}}</span>`;\n        parent.appendChild(li);\n      }}\n    }}\n    data.children.forEach(c => render(c, document.getElementById('root')));\n  </script>\n</body></html>'''\n    output.write_text(html)\n\nif __name__ == '__main__':\n    target = Path(sys.argv[1] if len(sys.argv) > 1 else '.').resolve()\n    stats = {\"files\": 0, \"dirs\": 0, \"extensions\": Counter(), \"ext_sizes\": Counter()}\n    data = scan(target, stats)\n    out = Path('codebase-map.html')\n    generate_html(data, stats, out)\n    print(f'Generated {out.absolute()}')\n    webbrowser.open(f'file://{out.absolute()}')",
               "kind": "config"
             }
           ]
@@ -8325,6 +8213,18 @@
               "kind": "command"
             },
             {
+              "title": "原页关键片段：Pipe data through Claude",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "cat build-error.txt | claude -p 'concisely explain the root cause of this build error' > output.txt",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Add Claude to a build script",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"scripts\": {\n    \"lint:claude\": \"git diff main | claude -p \\\"you are a typo linter. for each typo in this diff, report filename:line on one line and the issue on the next. return nothing else.\\\"\"\n  }\n}",
+              "kind": "config"
+            },
+            {
               "title": "原页关键片段：Get structured output 1",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
               "code": "claude -p \"Summarize this project\" --output-format json",
@@ -8364,18 +8264,6 @@
               "title": "原页关键片段：Auto-approve tools 2",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
               "code": "claude -p \"Apply the lint fixes\" --permission-mode acceptEdits",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：Create a commit",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "claude -p \"Look at my staged changes and create an appropriate commit\" \\\n  --allowedTools \"Bash(git diff *),Bash(git log *),Bash(git status *),Bash(git commit *)\"",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：Customize the system prompt",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "gh pr diff \"$1\" | claude -p \\\n  --append-system-prompt \"You are a security engineer. Review for vulnerabilities.\" \\\n  --output-format json",
               "kind": "command"
             }
           ]
@@ -8429,6 +8317,36 @@
           "title": "Examples",
           "paragraphs": [
             "看到这里，就把\"Examples\"当成一件真要上手的活来看。"
+          ]
+        },
+        {
+          "title": "Pipe data through Claude",
+          "paragraphs": [
+            "看到这里，就把\"Pipe data through Claude\"当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Pipe data through Claude",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "cat build-error.txt | claude -p 'concisely explain the root cause of this build error' > output.txt",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Add Claude to a build script",
+          "paragraphs": [
+            "这一段主要是在把\"Add Claude to a build script\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Add Claude to a build script",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"scripts\": {\n    \"lint:claude\": \"git diff main | claude -p \\\"you are a typo linter. for each typo in this diff, report filename:line on one line and the issue on the next. return nothing else.\\\"\"\n  }\n}",
+              "kind": "config"
+            }
           ]
         },
         {
@@ -8561,6 +8479,254 @@
         "title": "一眼看懂这一页",
         "lines": [
           "Programmatic usage",
+          "   |",
+          "   v",
+          "这是 Automation 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "deep-links": {
+      "sourceLabel": "Launch sessions from links",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Launch sessions from links：Open a Claude Code terminal session from a URL. Embed claude-cli:// links in runbooks, alerts, and dashboards so a click opens Claude Code in the right repo with the right prompt.",
+            "你可以把它当成\"Automation\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Launch sessions from links\"理解成 Automation 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 How it works、What a launched session shows、Build a link、Choose between cwd and repo 这些环节往下讲。",
+            "翻成人话，大概就是：What a launched session shows"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：How it works -> What a launched session shows -> Build a link -> Choose between cwd and repo。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Build a link 1",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "claude-cli://open",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Build a link 2",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "claude-cli://open?repo=acme/payments&q=Investigate%20the%20failed%20deploy%20of%20payments-api.%0ACheck%20recent%20commits%20to%20main%20and%20the%20last%20successful%20build.",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Build a link 3",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "Investigate the failed deploy of payments-api.\nCheck recent commits to main and the last successful build.",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Embed a link in a runbook",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "## High 5xx rate on web-gateway\n\n1. Acknowledge the page in PagerDuty.\n2. [Open Claude Code in the gateway repo](claude-cli://open?repo=acme/web-gateway&q=5xx%20rate%20is%20elevated%20on%20web-gateway.%20Check%20recent%20deploys%2C%20error%20logs%20from%20the%20last%2030%20minutes%2C%20and%20open%20incidents%20in%20Linear.)\n3. Post initial findings in #incident.",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Open a link from the shell 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "open \"claude-cli://open?repo=acme/payments&q=review%20open%20PRs\"",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Open a link from the shell 2",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "xdg-open \"claude-cli://open?repo=acme/payments&q=review%20open%20PRs\"",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Open a link from the shell 3",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "Start-Process \"claude-cli://open?repo=acme/payments&q=review%20open%20PRs\"",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Documentation Index",
+          "paragraphs": [
+            "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "How it works",
+          "paragraphs": [
+            "这里讲底层是怎么运转的。你把它看明白，后面遇到异常时就知道该往哪儿查。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "What a launched session shows",
+          "paragraphs": [
+            "这一块主要是在说\"What a launched session shows\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Build a link",
+          "paragraphs": [
+            "看到这里，就把\"Build a link\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Build a link 1",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "claude-cli://open",
+              "kind": "code"
+            },
+            {
+              "title": "Build a link 2",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "claude-cli://open?repo=acme/payments&q=Investigate%20the%20failed%20deploy%20of%20payments-api.%0ACheck%20recent%20commits%20to%20main%20and%20the%20last%20successful%20build.",
+              "kind": "code"
+            },
+            {
+              "title": "Build a link 3",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "Investigate the failed deploy of payments-api.\nCheck recent commits to main and the last successful build.",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Choose between cwd and repo",
+          "paragraphs": [
+            "这段主要是让你挑，不是让你全要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Examples",
+          "paragraphs": [
+            "别把这段只当成标题看，它其实是在给\"Examples\"划边界。"
+          ]
+        },
+        {
+          "title": "Embed a link in a runbook",
+          "paragraphs": [
+            "这一段主要是在把\"Embed a link in a runbook\"讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Embed a link in a runbook",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "## High 5xx rate on web-gateway\n\n1. Acknowledge the page in PagerDuty.\n2. [Open Claude Code in the gateway repo](claude-cli://open?repo=acme/web-gateway&q=5xx%20rate%20is%20elevated%20on%20web-gateway.%20Check%20recent%20deploys%2C%20error%20logs%20from%20the%20last%2030%20minutes%2C%20and%20open%20incidents%20in%20Linear.)\n3. Post initial findings in #incident.",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Open a link from the shell",
+          "paragraphs": [
+            "这里不是让你背\"Open a link from the shell\"这个词，而是让你看它真干活时怎么使。"
+          ],
+          "steps": [
+            {
+              "title": "Open a link from the shell 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "open \"claude-cli://open?repo=acme/payments&q=review%20open%20PRs\"",
+              "kind": "command"
+            },
+            {
+              "title": "Open a link from the shell 2",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "xdg-open \"claude-cli://open?repo=acme/payments&q=review%20open%20PRs\"",
+              "kind": "command"
+            },
+            {
+              "title": "Open a link from the shell 3",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "Start-Process \"claude-cli://open?repo=acme/payments&q=review%20open%20PRs\"",
+              "kind": "command"
+            },
+            {
+              "title": "Open a link from the shell 4",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "start \"\" \"claude-cli://open?repo=acme/payments&q=review%20open%20PRs\"",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Registration and supported platforms",
+          "paragraphs": [
+            "这一段主要是在把\"Registration and supported platforms\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Open a VS Code tab instead of a terminal",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说\"Open a VS Code tab instead of a terminal\"管到哪儿。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Troubleshooting",
+          "paragraphs": [
+            "这里讲的是怎么找毛病，先查明白哪一步出错，再决定怎么修。"
+          ]
+        },
+        {
+          "title": "Clicking the link does nothing",
+          "paragraphs": [
+            "这一段不只是挂个标题，它是在说明\"Clicking the link does nothing\"这一块到底负责什么。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "The link renders as plain text instead of being clickable",
+          "paragraphs": [
+            "看到这里，就把\"The link renders as plain text instead of being clickable\"当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "The session opens in my home directory instead of the repo",
+          "paragraphs": [
+            "这一段不只是挂个标题，它是在说明\"The session opens in my home directory instead of the repo\"这一块到底负责什么。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "The link opens the wrong terminal",
+          "paragraphs": [
+            "这里不是让你背\"The link opens the wrong terminal\"这个词，而是让你看它真干活时怎么使。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+          ]
+        },
+        {
+          "title": "Learn more",
+          "paragraphs": [
+            "这一块主要是在说\"Learn more\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Launch sessions from links",
           "   |",
           "   v",
           "这是 Automation 里的一摊要紧活",
@@ -16133,6 +16299,13 @@
           "title": "Adjust effort level",
           "paragraphs": [
             "这一块主要是在说\"Adjust effort level\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Extended thinking",
+          "paragraphs": [
+            "这一块主要是在说\"Extended thinking\"真到手上该怎么用，哪里最容易踩坑。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },

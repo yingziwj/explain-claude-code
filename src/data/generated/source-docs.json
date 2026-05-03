@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-02T05:20:16.133Z",
+  "generatedAt": "2026-05-03T05:38:49.977Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -176,6 +176,10 @@
         {
           "title": "Programmatic usage",
           "path": "/docs/en/headless"
+        },
+        {
+          "title": "Launch sessions from links",
+          "path": "/docs/en/deep-links"
         }
       ]
     },
@@ -694,7 +698,7 @@
         "The Model Context Protocol (MCP) is an open standard for connecting AI tools to external data sources. With MCP, Claude Code can read your design docs in Google Drive, update tickets in Jira, pull data from Slack, or use your own custom tooling.",
         "Customize with instructions, skills, and hooks",
         "CLAUDE.md is a markdown file you add to your project root that Claude Code reads at the start of every session. Use it to set coding standards, architecture decisions, preferred libraries, and review checklists. Claude also builds auto memory as it works, saving learnings like build commands and debugging insights across sessions without you writing anything.",
-        "Create custom commands to package repeatable workflows your team can share, like /review-pr or /deploy-staging.",
+        "Create skills to package repeatable workflows your team can share, like /review-pr or /deploy-staging.",
         "Hooks let you run shell commands before or after Claude Code actions, like auto-formatting after every file edit or running lint before a commit.",
         "Run agent teams and build custom agents",
         "Spawn multiple Claude Code agents that work on different parts of a task simultaneously. A lead agent coordinates the work, assigns subtasks, and merges results.",
@@ -1599,13 +1603,11 @@
         "You can access Claude Code through the terminal, the desktop app, IDE extensions, claude.ai/code, Remote Control, Slack, and CI/CD pipelines. The interface determines how you see and interact with Claude, but the underlying agentic loop is identical. See Use Claude Code everywhere for the full list.",
         "Claude Code saves your conversation locally as you work. Each message, tool use, and result is written to a plaintext JSONL file under ~/.claude/projects/, which enables rewinding, resuming, and forking sessions. Before Claude makes code changes, it also snapshots the affected files so you can revert if needed. For paths, retention, and how to clear this data, see application data in ~/.claude.",
         "Sessions are independent. Each new session starts with a fresh context window, without the conversation history from previous sessions. Claude can persist learnings across sessions using auto memory, and you can add your own persistent instructions in CLAUDE.md.",
-        "Each Claude Code conversation is a session tied to your current directory. The /resume picker shows sessions from the current worktree by default, with keyboard shortcuts to widen the list to other worktrees or projects. See Resume previous conversations for the full list of picker shortcuts and how name resolution works.",
+        "Each Claude Code conversation is a session tied to your current directory. The /resume picker shows sessions from the current worktree by default, with keyboard shortcuts to widen the list to other worktrees or projects. See Manage sessions for the full list of picker shortcuts and how name resolution works.",
         "Claude sees your current branch’s files. When you switch branches, Claude sees the new branch’s files, but your conversation history stays the same. Claude remembers what you discussed even after switching.",
         "Since sessions are tied to directories, you can run parallel Claude sessions by using git worktrees, which create separate directories for individual branches.",
-        "When you resume a session with claude --continue or claude --resume, you pick up where you left off using the same session ID. New messages append to the existing conversation. Your full conversation history is restored, but session-scoped permissions are not. You’ll need to re-approve those.",
-        "To branch off and try a different approach without affecting the original session, use the --fork-session flag:",
-        "This creates a new session ID while preserving the conversation history up to that point. The original session remains unchanged. Like resume, forked sessions don’t inherit session-scoped permissions.",
-        "Same session in multiple terminals: If you resume the same session in multiple terminals, both terminals write to the same session file. Messages from both get interleaved, like two people writing in the same notebook. Nothing corrupts, but the conversation becomes jumbled. Each terminal only sees its own messages during the session, but if you resume that session later, you’ll see everything interleaved. For parallel work from the same starting point, use --fork-session to give each terminal its own clean session.",
+        "Resuming a session with claude --continue or claude --resume reopens it under the same session ID and appends new messages to the existing conversation. Forking with --fork-session or /branch copies the history into a new session ID, leaving the original unchanged.",
+        "For the resume flags, the /resume picker, naming, and what happens when the same session is open in two terminals, see Manage sessions.",
         "Claude’s context window holds your conversation history, file contents, command outputs, CLAUDE.md, auto memory, loaded skills, and system instructions. As you work, context fills up. Claude compacts automatically, but instructions from early in the conversation can get lost. Put persistent rules in CLAUDE.md, and run /context to see what’s using space.",
         "For an interactive walkthrough of what loads and when, see Explore the context window.",
         "Claude Code manages context automatically as you approach the limit. It clears older tool outputs first, then summarizes the conversation if needed. Your requests and key code snippets are preserved; detailed instructions from early in the conversation may be lost. Put persistent rules in CLAUDE.md rather than relying on conversation history.",
@@ -1649,7 +1651,6 @@
         "Was this page helpful?"
       ],
       "codeBlocks": [
-        "claude --continue --fork-session",
         "Fix the login bug",
         "That's not quite right. The issue is in the session handling.",
         "The checkout flow is broken for users with expired cards.\nCheck src/payments/ for the issue, especially token refresh.\nWrite a failing test first, then fix it.",
@@ -1770,7 +1771,7 @@
         {
           "title": "​Work across branches",
           "paragraphs": [
-            "Each Claude Code conversation is a session tied to your current directory. The /resume picker shows sessions from the current worktree by default, with keyboard shortcuts to widen the list to other worktrees or projects. See Resume previous conversations for the full list of picker shortcuts and how name resolution works.",
+            "Each Claude Code conversation is a session tied to your current directory. The /resume picker shows sessions from the current worktree by default, with keyboard shortcuts to widen the list to other worktrees or projects. See Manage sessions for the full list of picker shortcuts and how name resolution works.",
             "Claude sees your current branch’s files. When you switch branches, Claude sees the new branch’s files, but your conversation history stays the same. Claude remembers what you discussed even after switching.",
             "Since sessions are tied to directories, you can run parallel Claude sessions by using git worktrees, which create separate directories for individual branches."
           ],
@@ -1779,14 +1780,10 @@
         {
           "title": "​Resume or fork sessions",
           "paragraphs": [
-            "When you resume a session with claude --continue or claude --resume, you pick up where you left off using the same session ID. New messages append to the existing conversation. Your full conversation history is restored, but session-scoped permissions are not. You’ll need to re-approve those.",
-            "To branch off and try a different approach without affecting the original session, use the --fork-session flag:",
-            "This creates a new session ID while preserving the conversation history up to that point. The original session remains unchanged. Like resume, forked sessions don’t inherit session-scoped permissions.",
-            "Same session in multiple terminals: If you resume the same session in multiple terminals, both terminals write to the same session file. Messages from both get interleaved, like two people writing in the same notebook. Nothing corrupts, but the conversation becomes jumbled. Each terminal only sees its own messages during the session, but if you resume that session later, you’ll see everything interleaved. For parallel work from the same starting point, use --fork-session to give each terminal its own clean session."
+            "Resuming a session with claude --continue or claude --resume reopens it under the same session ID and appends new messages to the existing conversation. Forking with --fork-session or /branch copies the history into a new session ID, leaving the original unchanged.",
+            "For the resume flags, the /resume picker, naming, and what happens when the same session is open in two terminals, see Manage sessions."
           ],
-          "codeBlocks": [
-            "claude --continue --fork-session"
-          ]
+          "codeBlocks": []
         },
         {
           "title": "​The context window",
@@ -3091,6 +3088,8 @@
         "​Switch permission modes",
         "​Auto-approve file edits with acceptEdits mode",
         "​Analyze before you edit with plan mode",
+        "​Review and approve a plan",
+        "​Set plan mode as the default",
         "​Eliminate prompts with auto mode",
         "​What the classifier blocks by default",
         "​Boundaries you state in conversation",
@@ -3105,6 +3104,8 @@
         "Switch permission modes",
         "Auto-approve file edits with acceptEdits mode",
         "Analyze before you edit with plan mode",
+        "Review and approve a plan",
+        "Set plan mode as the default",
         "Eliminate prompts with auto mode",
         "What the classifier blocks by default",
         "Boundaries you state in conversation",
@@ -3119,6 +3120,8 @@
         "Switch permission modes",
         "Auto-approve file edits with acceptEdits mode",
         "Analyze before you edit with plan mode",
+        "Review and approve a plan",
+        "Set plan mode as the default",
         "Eliminate prompts with auto mode",
         "What the classifier blocks by default",
         "Boundaries you state in conversation",
@@ -3170,7 +3173,9 @@
         "Approve and review each edit manually",
         "Keep planning with feedback",
         "Refine with Ultraplan for browser-based review",
-        "Each approve option also offers to clear the planning context first.",
+        "Press Ctrl+G to open the proposed plan in your default text editor and edit it directly before Claude proceeds. When showClearContextOnPlanAccept is enabled, each approve option also offers to clear the planning context first.",
+        "Accepting a plan also names the session from the plan content automatically, unless you’ve already set a name with --name or /rename.",
+        "To make plan mode the default for a project, set defaultMode in .claude/settings.json:",
         "Auto mode requires Claude Code v2.1.83 or later.",
         "Auto mode lets Claude execute without permission prompts. A separate classifier model reviews actions before they run, blocking anything that escalates beyond your request, targets unrecognized infrastructure, or appears driven by hostile content Claude read.",
         "Auto mode is a research preview. It reduces prompts but does not guarantee safety. Use it for tasks where you trust the general direction, not as a replacement for review on sensitive operations.",
@@ -3251,6 +3256,7 @@
         "{\n  \"permissions\": {\n    \"defaultMode\": \"acceptEdits\"\n  }\n}",
         "claude remote-control --permission-mode acceptEdits",
         "claude --permission-mode acceptEdits",
+        "{\n  \"permissions\": {\n    \"defaultMode\": \"plan\"\n  }\n}",
         "claude --permission-mode dontAsk",
         "claude --permission-mode bypassPermissions"
       ],
@@ -3262,14 +3268,14 @@
             "Switch permission modes",
             "Auto-approve file edits with acceptEdits mode",
             "Analyze before you edit with plan mode",
+            "Review and approve a plan",
+            "Set plan mode as the default",
             "Eliminate prompts with auto mode",
             "What the classifier blocks by default",
             "Boundaries you state in conversation",
             "When auto mode falls back",
             "Allow only pre-approved tools with dontAsk mode",
-            "Skip all checks with bypassPermissions mode",
-            "Protected paths",
-            "See also"
+            "Skip all checks with bypassPermissions mode"
           ],
           "codeBlocks": []
         },
@@ -3330,17 +3336,33 @@
           "paragraphs": [
             "Plan mode tells Claude to research and propose changes without making them. Claude reads files, runs shell commands to explore, and writes a plan, but does not edit your source. Permission prompts still apply the same as default mode.",
             "Enter plan mode by pressing Shift+Tab or prefixing a single prompt with /plan. You can also start in plan mode from the CLI:",
-            "Press Shift+Tab again to leave plan mode without approving a plan.",
+            "Press Shift+Tab again to leave plan mode without approving a plan."
+          ],
+          "codeBlocks": [
+            "claude --permission-mode plan"
+          ]
+        },
+        {
+          "title": "​Review and approve a plan",
+          "paragraphs": [
             "When the plan is ready, Claude presents it and asks how to proceed. From that prompt you can:",
             "Approve and start in auto mode",
             "Approve and accept edits",
             "Approve and review each edit manually",
             "Keep planning with feedback",
             "Refine with Ultraplan for browser-based review",
-            "Each approve option also offers to clear the planning context first."
+            "Press Ctrl+G to open the proposed plan in your default text editor and edit it directly before Claude proceeds. When showClearContextOnPlanAccept is enabled, each approve option also offers to clear the planning context first.",
+            "Accepting a plan also names the session from the plan content automatically, unless you’ve already set a name with --name or /rename."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Set plan mode as the default",
+          "paragraphs": [
+            "To make plan mode the default for a project, set defaultMode in .claude/settings.json:"
           ],
           "codeBlocks": [
-            "claude --permission-mode plan"
+            "{\n  \"permissions\": {\n    \"defaultMode\": \"plan\"\n  }\n}"
           ]
         },
         {
@@ -3462,91 +3484,82 @@
       "metaDescription": "Step-by-step guides for exploring codebases, fixing bugs, refactoring, testing, and other everyday tasks with Claude Code.",
       "headings": [
         "Documentation Index",
+        "​Prompt recipes",
         "​Understand new codebases",
-        "​Get a quick codebase overview",
-        "​Find relevant code",
         "​Fix bugs efficiently",
         "​Refactor code",
-        "​Use specialized subagents",
-        "​Use Plan Mode for safe code analysis",
-        "​When to use Plan Mode",
-        "​How to use Plan Mode",
-        "​Example: Planning a complex refactor",
-        "​Configure Plan Mode as default",
         "​Work with tests",
         "​Create pull requests",
         "​Handle documentation",
         "​Work in notes and non-code folders",
         "​Work with images",
         "​Reference files and directories",
-        "​Use extended thinking (thinking mode)",
-        "​Configure thinking mode"
+        "​Run Claude on a schedule",
+        "​Ask Claude about its capabilities",
+        "​Resume previous conversations",
+        "​Run parallel sessions with worktrees",
+        "​Plan before editing",
+        "​Delegate research to subagents",
+        "​Pipe Claude into scripts",
+        "​Next steps",
+        "Best practices"
       ],
       "toc": [
+        "Prompt recipes",
         "Understand new codebases",
         "Get a quick codebase overview",
         "Find relevant code",
         "Fix bugs efficiently",
         "Refactor code",
-        "Use specialized subagents",
-        "Use Plan Mode for safe code analysis",
-        "When to use Plan Mode",
-        "How to use Plan Mode",
-        "Example: Planning a complex refactor",
-        "Configure Plan Mode as default",
         "Work with tests",
         "Create pull requests",
         "Handle documentation",
         "Work in notes and non-code folders",
         "Work with images",
         "Reference files and directories",
-        "Use extended thinking (thinking mode)",
-        "Configure thinking mode",
-        "How extended thinking works"
-      ],
-      "paragraphs": [
-        "Understand new codebases",
-        "Get a quick codebase overview",
-        "Find relevant code",
-        "Fix bugs efficiently",
-        "Refactor code",
-        "Use specialized subagents",
-        "Use Plan Mode for safe code analysis",
-        "When to use Plan Mode",
-        "How to use Plan Mode",
-        "Example: Planning a complex refactor",
-        "Configure Plan Mode as default",
-        "Work with tests",
-        "Create pull requests",
-        "Handle documentation",
-        "Work in notes and non-code folders",
-        "Work with images",
-        "Reference files and directories",
-        "Use extended thinking (thinking mode)",
-        "Configure thinking mode",
-        "How extended thinking works",
-        "Resume previous conversations",
-        "Name your sessions",
-        "Use the session picker",
-        "Run parallel Claude Code sessions with Git worktrees",
-        "Subagent worktrees",
-        "Worktree cleanup",
-        "Copy gitignored files to worktrees",
-        "Manage worktrees manually",
-        "Non-git version control",
-        "Get notified when Claude needs your attention",
-        "Use Claude as a unix-style utility",
-        "Add Claude to your verification process",
-        "Pipe in, pipe out",
-        "Control output format",
         "Run Claude on a schedule",
         "Ask Claude about its capabilities",
         "Example questions",
+        "Resume previous conversations",
+        "Run parallel sessions with worktrees",
+        "Plan before editing",
+        "Delegate research to subagents",
+        "Pipe Claude into scripts"
+      ],
+      "paragraphs": [
+        "Prompt recipes",
+        "Understand new codebases",
+        "Get a quick codebase overview",
+        "Find relevant code",
+        "Fix bugs efficiently",
+        "Refactor code",
+        "Work with tests",
+        "Create pull requests",
+        "Handle documentation",
+        "Work in notes and non-code folders",
+        "Work with images",
+        "Reference files and directories",
+        "Run Claude on a schedule",
+        "Ask Claude about its capabilities",
+        "Example questions",
+        "Resume previous conversations",
+        "Run parallel sessions with worktrees",
+        "Plan before editing",
+        "Delegate research to subagents",
+        "Pipe Claude into scripts",
         "Next steps",
         "Step-by-step guides for exploring codebases, fixing bugs, refactoring, testing, and other everyday tasks with Claude Code.",
         "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
         "Use this file to discover all available pages before exploring further.",
-        "This page covers practical workflows for everyday development: exploring unfamiliar code, debugging, refactoring, writing tests, creating PRs, and managing sessions. Each section includes example prompts you can adapt to your own projects. For higher-level patterns and tips, see Best practices.",
+        "This page collects short recipes for everyday development. For higher-level guidance on prompting and context management, see Best practices.",
+        "This page covers:",
+        "Prompt recipes for exploring code, fixing bugs, refactoring, testing, PRs, and documentation",
+        "Resume previous conversations so a task can span multiple sittings",
+        "Run parallel sessions with worktrees so concurrent edits don’t collide",
+        "Plan before editing to review changes before they touch disk",
+        "Delegate research to subagents to keep your main context clean",
+        "Pipe Claude into scripts for CI and batch processing",
+        "These are prompt patterns for everyday tasks like exploring unfamiliar code, debugging, refactoring, writing tests, and creating PRs. Each works in any Claude Code surface; adapt the wording to your project.",
         "Suppose you’ve just joined a new project and need to understand its structure quickly.",
         "Navigate to the project root directory",
         "Start Claude Code",
@@ -3577,36 +3590,6 @@
         "Ask Claude to explain the benefits of the modern approach",
         "Request that changes maintain backward compatibility when needed",
         "Do refactoring in small, testable increments",
-        "Suppose you want to use specialized AI subagents to handle specific tasks more effectively.",
-        "View available subagents",
-        "This shows all available subagents and lets you create new ones.",
-        "Use subagents automatically",
-        "Claude Code automatically delegates appropriate tasks to specialized subagents:",
-        "Explicitly request specific subagents",
-        "Create custom subagents for your workflow",
-        "Then select “Create New subagent” and follow the prompts to define:",
-        "A unique identifier that describes the subagent’s purpose (for example, code-reviewer, api-designer).",
-        "When Claude should use this agent",
-        "Which tools it can access",
-        "A system prompt describing the agent’s role and behavior",
-        "Create project-specific subagents in .claude/agents/ for team sharing",
-        "Use descriptive description fields to enable automatic delegation",
-        "Limit tool access to what each subagent actually needs",
-        "Check the subagents documentation for detailed examples",
-        "Plan Mode instructs Claude to create a plan by analyzing the codebase with read-only operations, perfect for exploring codebases, planning complex changes, or reviewing code safely. In Plan Mode, Claude uses AskUserQuestion to gather requirements and clarify your goals before proposing a plan.",
-        "Multi-step implementation: When your feature requires making edits to many files",
-        "Code exploration: When you want to research the codebase thoroughly before changing anything",
-        "Interactive development: When you want to iterate on the direction with Claude",
-        "Turn on Plan Mode during a session",
-        "You can switch into Plan Mode during a session using Shift+Tab to cycle through permission modes.",
-        "If you are in Normal Mode, Shift+Tab first switches into Auto-Accept Mode, indicated by ⏵⏵ accept edits on at the bottom of the terminal. A subsequent Shift+Tab will switch into Plan Mode, indicated by ⏸ plan mode on.",
-        "Start a new session in Plan Mode",
-        "To start a new session in Plan Mode, use the --permission-mode plan flag:",
-        "Run “headless” queries in Plan Mode",
-        "You can also run a query in Plan Mode directly with -p (that is, in “headless mode”):",
-        "Claude analyzes the current implementation and create a comprehensive plan. Refine with follow-ups:",
-        "When you accept a plan, Claude automatically names the session from the plan content. The name appears on the prompt bar and in the session picker. If you’ve already set a name with --name or /rename, accepting a plan won’t overwrite it.",
-        "See settings documentation for more configuration options.",
         "Suppose you need to add tests for uncovered code.",
         "Identify untested code",
         "Generate test scaffolding",
@@ -3655,36 +3638,29 @@
         "@ file references add CLAUDE.md in the file’s directory and parent directories to context",
         "Directory references show file listings, not contents",
         "You can reference multiple files in a single message (for example, “@file1.js and @file2.js”)",
-        "Extended thinking is enabled by default, giving Claude space to reason through complex problems step-by-step before responding. This reasoning is visible in verbose mode, which you can toggle on with Ctrl+O. During extended thinking, the spinner shows inline progress hints such as “still thinking” and “almost done thinking” to indicate Claude is actively working.",
-        "Additionally, models that support effort use adaptive reasoning: instead of a fixed thinking token budget, the model dynamically decides whether and how much to think based on your effort level setting and the task at hand. Adaptive reasoning lets Claude respond faster to routine prompts and reserve deeper thinking for steps that benefit from it.",
-        "Extended thinking is particularly valuable for complex architectural decisions, challenging bugs, multi-step implementation planning, and evaluating tradeoffs between different approaches.",
-        "Phrases like “think”, “think hard”, and “think more” are interpreted as regular prompt instructions and don’t allocate thinking tokens.",
-        "Thinking is enabled by default, but you can adjust or disable it.",
-        "To view Claude’s thinking process, press Ctrl+O to toggle verbose mode and see the internal reasoning displayed as gray italic text.",
-        "Extended thinking controls how much internal reasoning Claude performs before responding. More thinking provides more space to explore solutions, analyze edge cases, and self-correct mistakes.",
-        "On models that support effort, thinking uses adaptive reasoning: the model dynamically allocates thinking tokens based on the effort level you select. This is the recommended way to tune the tradeoff between speed and reasoning depth. If you want Claude to think more or less often than your effort level would otherwise produce, you can also say so directly in your prompt or in CLAUDE.md.",
-        "With older models, thinking uses a fixed token budget drawn from your output allocation. The budget varies by model; see MAX_THINKING_TOKENS for per-model ceilings. You can limit the budget with that environment variable, or disable thinking entirely via /config or the Option+T/Alt+T toggle.",
-        "On models with adaptive reasoning, MAX_THINKING_TOKENS only applies when set to 0 to disable thinking, or when CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1 reverts the model to the fixed budget. CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING applies to Opus 4.6 and Sonnet 4.6 only. Opus 4.7 always uses adaptive reasoning and does not support a fixed thinking budget. See environment variables.",
-        "You’re charged for all thinking tokens used even when thinking summaries are redacted. In interactive mode, thinking appears as a collapsed stub by default. Set showThinkingSummaries: true in settings.json to show full summaries.",
-        "When starting Claude Code, you can resume a previous session:",
-        "claude --continue continues the most recent conversation in the current directory",
-        "claude --resume opens a conversation picker or resumes by name",
-        "claude --from-pr 123 resumes sessions linked to a specific pull request",
-        "From inside an active session, use /resume to switch to a different conversation.",
-        "When the selected session is old and large enough that re-reading it would consume a substantial share of your usage limits, --resume, --continue, and /resume offer to resume from a summary instead of loading the full transcript. This prompt is not available on Amazon Bedrock, Google Cloud Vertex AI, or Microsoft Foundry.",
-        "Sessions are stored per project directory. By default, the /resume picker shows interactive sessions from the current worktree, with keyboard shortcuts to widen the list to other worktrees or projects, search, preview, and rename. Sessions started elsewhere that added the current directory with /add-dir are also included by default. See Use the session picker below for the full shortcut reference.",
-        "When you select a session from another worktree of the same repository, Claude Code resumes it directly without requiring you to switch directories first. Selecting a session from an unrelated project copies a cd and resume command to your clipboard instead.",
-        "Resuming by name resolves across the current repository and its worktrees. Both claude --resume <name> and /resume <name> look for an exact match and resume it directly, even if the session lives in a different worktree.",
-        "When the name is ambiguous, claude --resume <name> opens the picker with the name pre-filled as a search term. /resume <name> from inside a session reports an error instead, so run /resume with no argument to open the picker and choose.",
-        "Sessions created by claude -p or SDK invocations do not appear in the picker, but you can still resume one by passing its session ID directly to claude --resume <session-id>.",
-        "Give sessions descriptive names to find them later. This is a best practice when working on multiple tasks or features.",
-        "Name the session",
-        "Name a session at startup with -n:",
-        "Or use /rename during a session, which also shows the name on the prompt bar:",
-        "You can also rename any session from the picker: run /resume, navigate to a session, and press Ctrl+R.",
-        "Resume by name later",
-        "From the command line:",
-        "Or from inside an active session:"
+        "Suppose you want Claude to handle a task automatically on a recurring basis, like reviewing open PRs every morning, auditing dependencies weekly, or checking for CI failures overnight.",
+        "Pick a scheduling option based on where you want the task to run:",
+        "When writing prompts for scheduled tasks, be explicit about what success looks like and what to do with results. The task runs autonomously, so it can’t ask clarifying questions. For example: “Review open PRs labeled needs-review, leave inline comments on any issues, and post a summary in the #eng-reviews Slack channel.”",
+        "Claude has built-in access to its documentation and can answer questions about its own features and limitations.",
+        "Claude provides documentation-based answers to these questions. For hands-on demonstrations, run /powerup for interactive lessons with animated demos, or refer to the specific workflow sections above.",
+        "Claude always has access to the latest Claude Code documentation, regardless of the version you’re using",
+        "Ask specific questions to get detailed answers",
+        "Claude can explain complex features like MCP integration, enterprise configurations, and advanced workflows",
+        "When a task spans multiple sittings, pick up where you left off instead of re-explaining context. Claude Code saves every conversation locally.",
+        "This resumes the most recent session in the current directory; if there isn’t one yet, it prints No conversation found to continue and exits. Use claude --resume to choose from a list, or /resume from inside a running session. See Manage sessions for naming, branching, and the full picker reference.",
+        "Work on a feature in one terminal while Claude fixes a bug in another, without the edits colliding. Each worktree is a separate checkout on its own branch.",
+        "Run the same command with a different name in a second terminal to start an isolated parallel session. See Worktrees for cleanup, .worktreeinclude, and non-git VCS support.",
+        "For changes you want to review before they touch disk, switch to plan mode. Claude reads files and proposes a plan but makes no edits until you approve.",
+        "You can also press Shift+Tab mid-session to toggle into plan mode. See Plan mode for the approval flow and editing the plan in your text editor.",
+        "Exploring a large codebase fills your context with file reads. Delegate the exploration so only the findings come back.",
+        "The subagent reads files in its own context window and reports a summary. See Subagents for defining custom agents with their own tools and prompts.",
+        "Run Claude non-interactively for CI, pre-commit hooks, or batch processing. Stdin and stdout work like any Unix tool.",
+        "See Non-interactive mode for output formats, permission flags, and fan-out patterns.",
+        "Patterns for getting the most out of Claude Code",
+        "Resume, name, and branch conversations",
+        "Run isolated parallel sessions",
+        "Add skills, hooks, MCP, subagents, and plugins",
+        "Was this page helpful?"
       ],
       "codeBlocks": [
         "cd /path/to/project",
@@ -3703,39 +3679,39 @@
         "suggest how to refactor utils.js to use modern JavaScript features",
         "refactor utils.js to use ES2024 features while maintaining the same behavior",
         "run tests for the refactored code",
-        "/agents",
-        "review my recent code changes for security issues",
-        "run all tests and fix any failures",
-        "use the code-reviewer subagent to check the auth module",
-        "have the debugger subagent investigate why users can't log in",
-        "claude --permission-mode plan",
-        "claude --permission-mode plan -p \"Analyze the authentication system and suggest improvements\"",
-        "I need to refactor our authentication system to use OAuth2. Create a detailed migration plan.",
-        "What about backward compatibility?",
-        "How should we handle database migration?",
-        "// .claude/settings.json\n{\n  \"permissions\": {\n    \"defaultMode\": \"plan\"\n  }\n}",
         "find functions in NotificationsService.swift that are not covered by tests",
         "add tests for the notification service",
         "add test cases for edge conditions in the notification service",
         "run the new tests and fix any failures",
-        "summarize the changes I've made to the authentication module"
+        "summarize the changes I've made to the authentication module",
+        "create a pr",
+        "enhance the PR description with more context about the security improvements",
+        "find functions without proper JSDoc comments in the auth module",
+        "add JSDoc comments to the undocumented functions in auth.js",
+        "improve the generated documentation with more context and examples",
+        "check if the documentation follows our project standards",
+        "What does this image show?",
+        "Describe the UI elements in this screenshot",
+        "Are there any problematic elements in this diagram?",
+        "Here's a screenshot of the error. What's causing it?",
+        "This is our current database schema. How should we modify it for the new feature?"
       ],
       "sectionBlocks": [
         {
           "title": "",
           "paragraphs": [
+            "Prompt recipes",
             "Understand new codebases",
             "Get a quick codebase overview",
             "Find relevant code",
             "Fix bugs efficiently",
             "Refactor code",
-            "Use specialized subagents",
-            "Use Plan Mode for safe code analysis",
-            "When to use Plan Mode",
-            "How to use Plan Mode",
-            "Example: Planning a complex refactor",
-            "Configure Plan Mode as default",
-            "Work with tests"
+            "Work with tests",
+            "Create pull requests",
+            "Handle documentation",
+            "Work in notes and non-code folders",
+            "Work with images",
+            "Reference files and directories"
           ],
           "codeBlocks": []
         },
@@ -3744,17 +3720,26 @@
           "paragraphs": [
             "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
             "Use this file to discover all available pages before exploring further.",
-            "This page covers practical workflows for everyday development: exploring unfamiliar code, debugging, refactoring, writing tests, creating PRs, and managing sessions. Each section includes example prompts you can adapt to your own projects. For higher-level patterns and tips, see Best practices."
+            "This page collects short recipes for everyday development. For higher-level guidance on prompting and context management, see Best practices.",
+            "This page covers:",
+            "Prompt recipes for exploring code, fixing bugs, refactoring, testing, PRs, and documentation",
+            "Resume previous conversations so a task can span multiple sittings",
+            "Run parallel sessions with worktrees so concurrent edits don’t collide",
+            "Plan before editing to review changes before they touch disk",
+            "Delegate research to subagents to keep your main context clean",
+            "Pipe Claude into scripts for CI and batch processing"
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Prompt recipes",
+          "paragraphs": [
+            "These are prompt patterns for everyday tasks like exploring unfamiliar code, debugging, refactoring, writing tests, and creating PRs. Each works in any Claude Code surface; adapt the wording to your project."
           ],
           "codeBlocks": []
         },
         {
           "title": "​Understand new codebases",
-          "paragraphs": [],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Get a quick codebase overview",
           "paragraphs": [
             "Suppose you’ve just joined a new project and need to understand its structure quickly.",
             "Navigate to the project root directory",
@@ -3763,7 +3748,11 @@
             "Dive deeper into specific components",
             "Start with broad questions, then narrow down to specific areas",
             "Ask about coding conventions and patterns used in the project",
-            "Request a glossary of project-specific terms"
+            "Request a glossary of project-specific terms",
+            "Suppose you need to locate code related to a specific feature or functionality.",
+            "Ask Claude to find relevant files",
+            "Get context on how components interact",
+            "Understand the execution flow"
           ],
           "codeBlocks": [
             "cd /path/to/project",
@@ -3772,23 +3761,6 @@
             "explain the main architecture patterns used here",
             "what are the key data models?",
             "how is authentication handled?"
-          ]
-        },
-        {
-          "title": "​Find relevant code",
-          "paragraphs": [
-            "Suppose you need to locate code related to a specific feature or functionality.",
-            "Ask Claude to find relevant files",
-            "Get context on how components interact",
-            "Understand the execution flow",
-            "Be specific about what you’re looking for",
-            "Use domain language from the project",
-            "Install a code intelligence plugin for your language to give Claude precise “go to definition” and “find references” navigation"
-          ],
-          "codeBlocks": [
-            "find the files that handle user authentication",
-            "how do these authentication files work together?",
-            "trace the login process from front-end to database"
           ]
         },
         {
@@ -3825,84 +3797,6 @@
             "suggest how to refactor utils.js to use modern JavaScript features",
             "refactor utils.js to use ES2024 features while maintaining the same behavior",
             "run tests for the refactored code"
-          ]
-        },
-        {
-          "title": "​Use specialized subagents",
-          "paragraphs": [
-            "Suppose you want to use specialized AI subagents to handle specific tasks more effectively.",
-            "View available subagents",
-            "This shows all available subagents and lets you create new ones.",
-            "Use subagents automatically",
-            "Claude Code automatically delegates appropriate tasks to specialized subagents:",
-            "Explicitly request specific subagents",
-            "Create custom subagents for your workflow",
-            "Then select “Create New subagent” and follow the prompts to define:",
-            "A unique identifier that describes the subagent’s purpose (for example, code-reviewer, api-designer).",
-            "When Claude should use this agent",
-            "Which tools it can access",
-            "A system prompt describing the agent’s role and behavior"
-          ],
-          "codeBlocks": [
-            "/agents",
-            "review my recent code changes for security issues",
-            "run all tests and fix any failures",
-            "use the code-reviewer subagent to check the auth module",
-            "have the debugger subagent investigate why users can't log in"
-          ]
-        },
-        {
-          "title": "​Use Plan Mode for safe code analysis",
-          "paragraphs": [
-            "Plan Mode instructs Claude to create a plan by analyzing the codebase with read-only operations, perfect for exploring codebases, planning complex changes, or reviewing code safely. In Plan Mode, Claude uses AskUserQuestion to gather requirements and clarify your goals before proposing a plan."
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​When to use Plan Mode",
-          "paragraphs": [
-            "Multi-step implementation: When your feature requires making edits to many files",
-            "Code exploration: When you want to research the codebase thoroughly before changing anything",
-            "Interactive development: When you want to iterate on the direction with Claude"
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​How to use Plan Mode",
-          "paragraphs": [
-            "Turn on Plan Mode during a session",
-            "You can switch into Plan Mode during a session using Shift+Tab to cycle through permission modes.",
-            "If you are in Normal Mode, Shift+Tab first switches into Auto-Accept Mode, indicated by ⏵⏵ accept edits on at the bottom of the terminal. A subsequent Shift+Tab will switch into Plan Mode, indicated by ⏸ plan mode on.",
-            "Start a new session in Plan Mode",
-            "To start a new session in Plan Mode, use the --permission-mode plan flag:",
-            "Run “headless” queries in Plan Mode",
-            "You can also run a query in Plan Mode directly with -p (that is, in “headless mode”):"
-          ],
-          "codeBlocks": [
-            "claude --permission-mode plan",
-            "claude --permission-mode plan -p \"Analyze the authentication system and suggest improvements\""
-          ]
-        },
-        {
-          "title": "​Example: Planning a complex refactor",
-          "paragraphs": [
-            "Claude analyzes the current implementation and create a comprehensive plan. Refine with follow-ups:",
-            "When you accept a plan, Claude automatically names the session from the plan content. The name appears on the prompt bar and in the session picker. If you’ve already set a name with --name or /rename, accepting a plan won’t overwrite it."
-          ],
-          "codeBlocks": [
-            "claude --permission-mode plan",
-            "I need to refactor our authentication system to use OAuth2. Create a detailed migration plan.",
-            "What about backward compatibility?",
-            "How should we handle database migration?"
-          ]
-        },
-        {
-          "title": "​Configure Plan Mode as default",
-          "paragraphs": [
-            "See settings documentation for more configuration options."
-          ],
-          "codeBlocks": [
-            "// .claude/settings.json\n{\n  \"permissions\": {\n    \"defaultMode\": \"plan\"\n  }\n}"
           ]
         },
         {
@@ -4013,173 +3907,115 @@
           ]
         },
         {
-          "title": "​Use extended thinking (thinking mode)",
+          "title": "​Run Claude on a schedule",
           "paragraphs": [
-            "Extended thinking is enabled by default, giving Claude space to reason through complex problems step-by-step before responding. This reasoning is visible in verbose mode, which you can toggle on with Ctrl+O. During extended thinking, the spinner shows inline progress hints such as “still thinking” and “almost done thinking” to indicate Claude is actively working.",
-            "Additionally, models that support effort use adaptive reasoning: instead of a fixed thinking token budget, the model dynamically decides whether and how much to think based on your effort level setting and the task at hand. Adaptive reasoning lets Claude respond faster to routine prompts and reserve deeper thinking for steps that benefit from it.",
-            "Extended thinking is particularly valuable for complex architectural decisions, challenging bugs, multi-step implementation planning, and evaluating tradeoffs between different approaches.",
-            "Phrases like “think”, “think hard”, and “think more” are interpreted as regular prompt instructions and don’t allocate thinking tokens."
+            "Suppose you want Claude to handle a task automatically on a recurring basis, like reviewing open PRs every morning, auditing dependencies weekly, or checking for CI failures overnight.",
+            "Pick a scheduling option based on where you want the task to run:",
+            "When writing prompts for scheduled tasks, be explicit about what success looks like and what to do with results. The task runs autonomously, so it can’t ask clarifying questions. For example: “Review open PRs labeled needs-review, leave inline comments on any issues, and post a summary in the #eng-reviews Slack channel.”"
           ],
           "codeBlocks": []
         },
         {
-          "title": "​Configure thinking mode",
+          "title": "​Ask Claude about its capabilities",
           "paragraphs": [
-            "Thinking is enabled by default, but you can adjust or disable it.",
-            "To view Claude’s thinking process, press Ctrl+O to toggle verbose mode and see the internal reasoning displayed as gray italic text."
+            "Claude has built-in access to its documentation and can answer questions about its own features and limitations.",
+            "Claude provides documentation-based answers to these questions. For hands-on demonstrations, run /powerup for interactive lessons with animated demos, or refer to the specific workflow sections above.",
+            "Claude always has access to the latest Claude Code documentation, regardless of the version you’re using",
+            "Ask specific questions to get detailed answers",
+            "Claude can explain complex features like MCP integration, enterprise configurations, and advanced workflows"
           ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​How extended thinking works",
-          "paragraphs": [
-            "Extended thinking controls how much internal reasoning Claude performs before responding. More thinking provides more space to explore solutions, analyze edge cases, and self-correct mistakes.",
-            "On models that support effort, thinking uses adaptive reasoning: the model dynamically allocates thinking tokens based on the effort level you select. This is the recommended way to tune the tradeoff between speed and reasoning depth. If you want Claude to think more or less often than your effort level would otherwise produce, you can also say so directly in your prompt or in CLAUDE.md.",
-            "With older models, thinking uses a fixed token budget drawn from your output allocation. The budget varies by model; see MAX_THINKING_TOKENS for per-model ceilings. You can limit the budget with that environment variable, or disable thinking entirely via /config or the Option+T/Alt+T toggle.",
-            "On models with adaptive reasoning, MAX_THINKING_TOKENS only applies when set to 0 to disable thinking, or when CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1 reverts the model to the fixed budget. CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING applies to Opus 4.6 and Sonnet 4.6 only. Opus 4.7 always uses adaptive reasoning and does not support a fixed thinking budget. See environment variables.",
-            "You’re charged for all thinking tokens used even when thinking summaries are redacted. In interactive mode, thinking appears as a collapsed stub by default. Set showThinkingSummaries: true in settings.json to show full summaries."
-          ],
-          "codeBlocks": []
+          "codeBlocks": [
+            "can Claude Code create pull requests?",
+            "how does Claude Code handle permissions?",
+            "what skills are available?",
+            "how do I use MCP with Claude Code?",
+            "how do I configure Claude Code for Amazon Bedrock?",
+            "what are the limitations of Claude Code?"
+          ]
         },
         {
           "title": "​Resume previous conversations",
           "paragraphs": [
-            "When starting Claude Code, you can resume a previous session:",
-            "claude --continue continues the most recent conversation in the current directory",
-            "claude --resume opens a conversation picker or resumes by name",
-            "claude --from-pr 123 resumes sessions linked to a specific pull request",
-            "From inside an active session, use /resume to switch to a different conversation.",
-            "When the selected session is old and large enough that re-reading it would consume a substantial share of your usage limits, --resume, --continue, and /resume offer to resume from a summary instead of loading the full transcript. This prompt is not available on Amazon Bedrock, Google Cloud Vertex AI, or Microsoft Foundry.",
-            "Sessions are stored per project directory. By default, the /resume picker shows interactive sessions from the current worktree, with keyboard shortcuts to widen the list to other worktrees or projects, search, preview, and rename. Sessions started elsewhere that added the current directory with /add-dir are also included by default. See Use the session picker below for the full shortcut reference.",
-            "When you select a session from another worktree of the same repository, Claude Code resumes it directly without requiring you to switch directories first. Selecting a session from an unrelated project copies a cd and resume command to your clipboard instead.",
-            "Resuming by name resolves across the current repository and its worktrees. Both claude --resume <name> and /resume <name> look for an exact match and resume it directly, even if the session lives in a different worktree.",
-            "When the name is ambiguous, claude --resume <name> opens the picker with the name pre-filled as a search term. /resume <name> from inside a session reports an error instead, so run /resume with no argument to open the picker and choose.",
-            "Sessions created by claude -p or SDK invocations do not appear in the picker, but you can still resume one by passing its session ID directly to claude --resume <session-id>."
+            "When a task spans multiple sittings, pick up where you left off instead of re-explaining context. Claude Code saves every conversation locally.",
+            "This resumes the most recent session in the current directory; if there isn’t one yet, it prints No conversation found to continue and exits. Use claude --resume to choose from a list, or /resume from inside a running session. See Manage sessions for naming, branching, and the full picker reference."
+          ],
+          "codeBlocks": [
+            "claude --continue"
+          ]
+        },
+        {
+          "title": "​Run parallel sessions with worktrees",
+          "paragraphs": [
+            "Work on a feature in one terminal while Claude fixes a bug in another, without the edits colliding. Each worktree is a separate checkout on its own branch.",
+            "Run the same command with a different name in a second terminal to start an isolated parallel session. See Worktrees for cleanup, .worktreeinclude, and non-git VCS support."
+          ],
+          "codeBlocks": [
+            "claude --worktree feature-auth"
+          ]
+        },
+        {
+          "title": "​Plan before editing",
+          "paragraphs": [
+            "For changes you want to review before they touch disk, switch to plan mode. Claude reads files and proposes a plan but makes no edits until you approve.",
+            "You can also press Shift+Tab mid-session to toggle into plan mode. See Plan mode for the approval flow and editing the plan in your text editor."
+          ],
+          "codeBlocks": [
+            "claude --permission-mode plan"
+          ]
+        },
+        {
+          "title": "​Delegate research to subagents",
+          "paragraphs": [
+            "Exploring a large codebase fills your context with file reads. Delegate the exploration so only the findings come back.",
+            "The subagent reads files in its own context window and reports a summary. See Subagents for defining custom agents with their own tools and prompts."
+          ],
+          "codeBlocks": [
+            "use a subagent to investigate how our auth system handles token refresh"
+          ]
+        },
+        {
+          "title": "​Pipe Claude into scripts",
+          "paragraphs": [
+            "Run Claude non-interactively for CI, pre-commit hooks, or batch processing. Stdin and stdout work like any Unix tool.",
+            "See Non-interactive mode for output formats, permission flags, and fan-out patterns."
+          ],
+          "codeBlocks": [
+            "git log --oneline -20 | claude -p \"summarize these recent commits\""
+          ]
+        },
+        {
+          "title": "​Next steps",
+          "paragraphs": [],
+          "codeBlocks": []
+        },
+        {
+          "title": "Best practices",
+          "paragraphs": [
+            "Patterns for getting the most out of Claude Code"
           ],
           "codeBlocks": []
         },
         {
-          "title": "​Name your sessions",
+          "title": "Manage sessions",
           "paragraphs": [
-            "Give sessions descriptive names to find them later. This is a best practice when working on multiple tasks or features.",
-            "Name the session",
-            "Name a session at startup with -n:",
-            "Or use /rename during a session, which also shows the name on the prompt bar:",
-            "You can also rename any session from the picker: run /resume, navigate to a session, and press Ctrl+R.",
-            "Resume by name later",
-            "From the command line:",
-            "Or from inside an active session:"
-          ],
-          "codeBlocks": [
-            "claude -n auth-refactor",
-            "/rename auth-refactor",
-            "claude --resume auth-refactor",
-            "/resume auth-refactor"
-          ]
-        },
-        {
-          "title": "​Use the session picker",
-          "paragraphs": [
-            "The /resume command (or claude --resume without arguments) opens an interactive session picker with these features:",
-            "Keyboard shortcuts in the picker:",
-            "Session organization:",
-            "The picker displays sessions with helpful metadata:",
-            "Session name if set, otherwise the conversation summary or first user prompt",
-            "Time elapsed since last activity",
-            "Message count",
-            "Git branch (if applicable)",
-            "Project path, shown after widening to all projects with Ctrl+A",
-            "Forked sessions (created with /branch, /rewind, or --fork-session) are grouped together under their root session, making it easier to find related conversations.",
-            "Name sessions early: Use /rename when starting work on a distinct task: it’s much easier to find “payment-integration” than “explain this function” later",
-            "Use --continue for quick access to your most recent conversation in the current directory"
+            "Resume, name, and branch conversations"
           ],
           "codeBlocks": []
         },
         {
-          "title": "​Run parallel Claude Code sessions with Git worktrees",
+          "title": "Worktrees",
           "paragraphs": [
-            "When working on multiple tasks at once, you need each Claude session to have its own copy of the codebase so changes don’t collide. Git worktrees solve this by creating separate working directories that each have their own files and branch, while sharing the same repository history and remote connections. This means you can have Claude working on a feature in one worktree while fixing a bug in another, without either session interfering with the other.",
-            "Use the --worktree (-w) flag to create an isolated worktree and start Claude in it. The value you pass becomes the worktree directory name and branch name:",
-            "If you omit the name, Claude generates a random one automatically:",
-            "Worktrees are created at <repo>/.claude/worktrees/<name> and branch from the default remote branch, which is where origin/HEAD points. The worktree branch is named worktree-<name>.",
-            "The base branch is not configurable through a Claude Code flag or setting. origin/HEAD is a reference stored in your local .git directory that Git set once when you cloned. If the repository’s default branch later changes on GitHub or GitLab, your local origin/HEAD keeps pointing at the old one, and worktrees will branch from there. To re-sync your local reference with whatever the remote currently considers its default:",
-            "This is a standard Git command that only updates your local .git directory. Nothing on the remote server changes. If you want worktrees to base off a specific branch rather than the remote’s default, set it explicitly with git remote set-head origin your-branch-name.",
-            "For full control over how worktrees are created, including choosing a different base per invocation, configure a WorktreeCreate hook. The hook replaces Claude Code’s default git worktree logic entirely, so you can fetch and branch from whatever ref you need.",
-            "You can also ask Claude to “work in a worktree” or “start a worktree” during a session, and it will create one automatically."
-          ],
-          "codeBlocks": [
-            "# Start Claude in a worktree named \"feature-auth\"\n# Creates .claude/worktrees/feature-auth/ with a new branch\nclaude --worktree feature-auth\n\n# Start another session in a separate worktree\nclaude --worktree bugfix-123",
-            "# Auto-generates a name like \"bright-running-fox\"\nclaude --worktree",
-            "git remote set-head origin -a"
-          ]
-        },
-        {
-          "title": "​Subagent worktrees",
-          "paragraphs": [
-            "Subagents can also use worktree isolation to work in parallel without conflicts. Ask Claude to “use worktrees for your agents” or configure it in a custom subagent by adding isolation: worktree to the agent’s frontmatter. Each subagent gets its own worktree that is automatically cleaned up when the subagent finishes without changes."
+            "Run isolated parallel sessions"
           ],
           "codeBlocks": []
         },
         {
-          "title": "​Worktree cleanup",
+          "title": "Extend Claude Code",
           "paragraphs": [
-            "When you exit a worktree session, Claude handles cleanup based on whether you made changes:",
-            "No changes: the worktree and its branch are removed automatically",
-            "Changes or commits exist: Claude prompts you to keep or remove the worktree. Keeping preserves the directory and branch so you can return later. Removing deletes the worktree directory and its branch, discarding all uncommitted changes and commits",
-            "Subagent worktrees orphaned by a crash or an interrupted parallel run are removed automatically at startup once they are older than your cleanupPeriodDays setting, provided they have no uncommitted changes, no untracked files, and no unpushed commits. Worktrees you create with --worktree are never removed by this sweep.",
-            "To clean up worktrees outside of a Claude session, use manual worktree management.",
-            "Add .claude/worktrees/ to your .gitignore to prevent worktree contents from appearing as untracked files in your main repository."
+            "Add skills, hooks, MCP, subagents, and plugins",
+            "Was this page helpful?"
           ],
           "codeBlocks": []
-        },
-        {
-          "title": "​Copy gitignored files to worktrees",
-          "paragraphs": [
-            "Git worktrees are fresh checkouts, so they don’t include untracked files like .env or .env.local from your main repository. To automatically copy these files when Claude creates a worktree, add a .worktreeinclude file to your project root.",
-            "The file uses .gitignore syntax to list which files to copy. Only files that match a pattern and are also gitignored get copied, so tracked files are never duplicated.",
-            "This applies to worktrees created with --worktree, subagent worktrees, and parallel sessions in the desktop app."
-          ],
-          "codeBlocks": [
-            ".env\n.env.local\nconfig/secrets.json"
-          ]
-        },
-        {
-          "title": "​Manage worktrees manually",
-          "paragraphs": [
-            "For more control over worktree location and branch configuration, create worktrees with Git directly. This is useful when you need to check out a specific existing branch or place the worktree outside the repository.",
-            "Learn more in the official Git worktree documentation.",
-            "Remember to initialize your development environment in each new worktree according to your project’s setup. Depending on your stack, this might include running dependency installation (npm install, yarn), setting up virtual environments, or following your project’s standard setup process."
-          ],
-          "codeBlocks": [
-            "# Create a worktree with a new branch\ngit worktree add ../project-feature-a -b feature-a\n\n# Create a worktree with an existing branch\ngit worktree add ../project-bugfix bugfix-123\n\n# Start Claude in the worktree\ncd ../project-feature-a && claude\n\n# Clean up when done\ngit worktree list\ngit worktree remove ../project-feature-a"
-          ]
-        },
-        {
-          "title": "​Non-git version control",
-          "paragraphs": [
-            "Worktree isolation works with git by default. For other version control systems like SVN, Perforce, or Mercurial, configure WorktreeCreate and WorktreeRemove hooks to provide custom worktree creation and cleanup logic. When configured, these hooks replace the default git behavior when you use --worktree, so .worktreeinclude is not processed. Copy any local configuration files inside your hook script instead.",
-            "For automated coordination of parallel sessions with shared tasks and messaging, see agent teams."
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Get notified when Claude needs your attention",
-          "paragraphs": [
-            "When you kick off a long-running task and switch to another window, you can set up desktop notifications so you know when Claude finishes or needs your input. This uses the Notification hook event, which fires whenever Claude is waiting for permission, idle and ready for a new prompt, or completing authentication.",
-            "Add the hook to your settings",
-            "Open ~/.claude/settings.json and add a Notification hook that calls your platform’s native notification command:",
-            "If your settings file already has a hooks key, merge the Notification entry into it rather than overwriting. You can also ask Claude to write the hook for you by describing what you want in the CLI.",
-            "Optionally narrow the matcher",
-            "By default the hook fires on all notification types. To fire only for specific events, set the matcher field to one of these values:",
-            "Verify the hook",
-            "Type /hooks and select Notification to confirm the hook appears. Selecting it shows the command that will run. To test it end-to-end, ask Claude to run a command that requires permission and switch away from the terminal, or ask Claude to trigger a notification directly.",
-            "For the complete event schema and notification types, see the Notification reference."
-          ],
-          "codeBlocks": [
-            "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
-            "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"notify-send 'Claude Code' 'Claude Code needs your attention'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
-            "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"powershell.exe -Command \\\"[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code needs your attention', 'Claude Code')\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}"
-          ]
         }
       ]
     },
@@ -4187,7 +4023,7 @@
       "section": "Use Claude Code",
       "path": "/docs/en/best-practices",
       "url": "https://code.claude.com/docs/en/best-practices",
-      "title": "Best Practices for Claude Code",
+      "title": "Best practices for Claude Code",
       "metaDescription": "Tips and patterns for getting the most out of Claude Code, from configuring your environment to scaling across parallel sessions.",
       "headings": [
         "Documentation Index",
@@ -4280,15 +4116,15 @@
         "UI changes can be verified using the Claude in Chrome extension. It opens new tabs in your browser, tests the UI, and iterates until the code works.",
         "Your verification can also be a test suite, a linter, or a Bash command that checks output. Invest in making your verification rock-solid.",
         "Separate research and planning from implementation to avoid solving the wrong problem.",
-        "Letting Claude jump straight to coding can produce code that solves the wrong problem. Use Plan Mode to separate exploration from execution.",
+        "Letting Claude jump straight to coding can produce code that solves the wrong problem. Use plan mode to separate exploration from execution.",
         "The recommended workflow has four phases:",
-        "Enter Plan Mode. Claude reads files and answers questions without making changes.",
+        "Enter plan mode. Claude reads files and answers questions without making changes.",
         "Ask Claude to create a detailed implementation plan.",
         "Press Ctrl+G to open the plan in your text editor for direct editing before Claude proceeds.",
         "Implement",
-        "Switch back to Normal Mode and let Claude code, verifying against its plan.",
+        "Switch out of plan mode and let Claude code, verifying against its plan.",
         "Ask Claude to commit with a descriptive message and create a PR.",
-        "Plan Mode is useful, but also adds overhead.",
+        "Plan mode is useful, but also adds overhead.",
         "For tasks where the scope is clear and the fix is small (like fixing a typo, adding a log line, or renaming a variable) ask Claude to do it directly.",
         "Planning is most useful when you’re uncertain about the approach, when the change modifies multiple files, or when you’re unfamiliar with the code being modified. If you could describe the diff in one sentence, skip the plan.",
         "The more precise your instructions, the fewer corrections you’ll need.",
@@ -4379,18 +4215,18 @@
         "Claude automatically checkpoints before changes. Double-tap Escape or run /rewind to open the rewind menu. You can restore conversation only, restore code only, restore both, or summarize from a selected message. See Checkpointing for details.",
         "Instead of carefully planning every move, you can tell Claude to try something risky. If it doesn’t work, rewind and try a different approach. Checkpoints persist across sessions, so you can close your terminal and still rewind later.",
         "Checkpoints only track changes made by Claude, not external processes. This isn’t a replacement for git.",
-        "Run claude --continue to pick up where you left off, or --resume to choose from recent sessions.",
-        "Claude Code saves conversations locally. When a task spans multiple sessions, you don’t have to re-explain the context:",
-        "Use /rename to give sessions descriptive names like \"oauth-migration\" or \"debugging-memory-leak\" so you can find them later. Treat sessions like branches: different workstreams can have separate, persistent contexts.",
+        "Name sessions with /rename and treat them like branches: each workstream gets its own persistent context.",
+        "Claude Code saves conversations locally, so when a task spans multiple sittings you don’t have to re-explain the context. Run claude --continue to pick up the most recent session, or claude --resume to choose from a list. Give sessions descriptive names like oauth-migration so you can find them later. See Manage sessions for the full set of resume, branch, and naming controls.",
         "Once you’re effective with one Claude, multiply your output with parallel sessions, non-interactive mode, and fan-out patterns.",
         "Everything so far assumes one human, one Claude, and one conversation. But Claude Code scales horizontally. The techniques in this section show how you can get more done.",
         "Use claude -p \"prompt\" in CI, pre-commit hooks, or scripts. Add --output-format stream-json for streaming JSON output.",
         "With claude -p \"your prompt\", you can run Claude non-interactively, without a session. Non-interactive mode is how you integrate Claude into CI pipelines, pre-commit hooks, or any automated workflow. The output formats let you parse results programmatically: plain text, JSON, or streaming JSON.",
         "Run multiple Claude sessions in parallel to speed up development, run isolated experiments, or start complex workflows.",
-        "There are three main ways to run parallel sessions:",
-        "Claude Code desktop app: Manage multiple local sessions visually. Each session gets its own isolated worktree.",
-        "Claude Code on the web: Run on Anthropic’s secure cloud infrastructure in isolated VMs.",
-        "Agent teams: Automated coordination of multiple sessions with shared tasks, messaging, and a team lead.",
+        "Pick the parallel approach that fits how much coordination you want to do yourself:",
+        "Worktrees: run separate CLI sessions in isolated git checkouts so edits don’t collide",
+        "Desktop app: manage multiple local sessions visually, each in its own worktree",
+        "Claude Code on the web: run sessions on Anthropic-managed cloud infrastructure in isolated VMs",
+        "Agent teams: automated coordination of multiple sessions with shared tasks, messaging, and a team lead",
         "Beyond parallelizing work, multiple sessions enable quality-focused workflows. A fresh context improves code review since Claude won’t be biased toward code it just wrote.",
         "For example, use a Writer/Reviewer pattern:",
         "You can do something similar with tests: have one Claude write tests, then another write code to pass them.",
@@ -4428,7 +4264,6 @@
         "I want to build [brief description]. Interview me in detail using the AskUserQuestion tool.\n\nAsk about technical implementation, UI/UX, edge cases, concerns, and tradeoffs. Don't ask obvious questions, dig into the hard parts I might not have considered.\n\nKeep interviewing until we've covered everything, then write a complete spec to SPEC.md.",
         "Use subagents to investigate how our authentication system handles token\nrefresh, and whether we have any existing OAuth utilities I should reuse.",
         "use a subagent to review this code for edge cases",
-        "claude --continue    # Resume the most recent conversation\nclaude --resume      # Select from recent conversations",
         "# One-off queries\nclaude -p \"Explain what this project does\"\n\n# Structured output for scripts\nclaude -p \"List all API endpoints\" --output-format json\n\n# Streaming for real-time processing\nclaude -p \"Analyze this log file\" --output-format stream-json",
         "for file in $(cat files.txt); do\n  claude -p \"Migrate $file from React to Vue. Return OK or FAIL.\" \\\n    --allowedTools \"Edit,Bash(git commit *)\"\ndone",
         "claude -p \"<your prompt>\" --output-format json | your_command",
@@ -4483,15 +4318,15 @@
           "title": "​Explore first, then plan, then code",
           "paragraphs": [
             "Separate research and planning from implementation to avoid solving the wrong problem.",
-            "Letting Claude jump straight to coding can produce code that solves the wrong problem. Use Plan Mode to separate exploration from execution.",
+            "Letting Claude jump straight to coding can produce code that solves the wrong problem. Use plan mode to separate exploration from execution.",
             "The recommended workflow has four phases:",
-            "Enter Plan Mode. Claude reads files and answers questions without making changes.",
+            "Enter plan mode. Claude reads files and answers questions without making changes.",
             "Ask Claude to create a detailed implementation plan.",
             "Press Ctrl+G to open the plan in your text editor for direct editing before Claude proceeds.",
             "Implement",
-            "Switch back to Normal Mode and let Claude code, verifying against its plan.",
+            "Switch out of plan mode and let Claude code, verifying against its plan.",
             "Ask Claude to commit with a descriptive message and create a PR.",
-            "Plan Mode is useful, but also adds overhead.",
+            "Plan mode is useful, but also adds overhead.",
             "For tasks where the scope is clear and the fix is small (like fixing a typo, adding a log line, or renaming a variable) ask Claude to do it directly.",
             "Planning is most useful when you’re uncertain about the approach, when the change modifies multiple files, or when you’re unfamiliar with the code being modified. If you could describe the diff in one sentence, skip the plan."
           ],
@@ -4717,13 +4552,10 @@
         {
           "title": "​Resume conversations",
           "paragraphs": [
-            "Run claude --continue to pick up where you left off, or --resume to choose from recent sessions.",
-            "Claude Code saves conversations locally. When a task spans multiple sessions, you don’t have to re-explain the context:",
-            "Use /rename to give sessions descriptive names like \"oauth-migration\" or \"debugging-memory-leak\" so you can find them later. Treat sessions like branches: different workstreams can have separate, persistent contexts."
+            "Name sessions with /rename and treat them like branches: each workstream gets its own persistent context.",
+            "Claude Code saves conversations locally, so when a task spans multiple sittings you don’t have to re-explain the context. Run claude --continue to pick up the most recent session, or claude --resume to choose from a list. Give sessions descriptive names like oauth-migration so you can find them later. See Manage sessions for the full set of resume, branch, and naming controls."
           ],
-          "codeBlocks": [
-            "claude --continue    # Resume the most recent conversation\nclaude --resume      # Select from recent conversations"
-          ]
+          "codeBlocks": []
         },
         {
           "title": "​Automate and scale",
@@ -4747,10 +4579,11 @@
           "title": "​Run multiple Claude sessions",
           "paragraphs": [
             "Run multiple Claude sessions in parallel to speed up development, run isolated experiments, or start complex workflows.",
-            "There are three main ways to run parallel sessions:",
-            "Claude Code desktop app: Manage multiple local sessions visually. Each session gets its own isolated worktree.",
-            "Claude Code on the web: Run on Anthropic’s secure cloud infrastructure in isolated VMs.",
-            "Agent teams: Automated coordination of multiple sessions with shared tasks, messaging, and a team lead.",
+            "Pick the parallel approach that fits how much coordination you want to do yourself:",
+            "Worktrees: run separate CLI sessions in isolated git checkouts so edits don’t collide",
+            "Desktop app: manage multiple local sessions visually, each in its own worktree",
+            "Claude Code on the web: run sessions on Anthropic-managed cloud infrastructure in isolated VMs",
+            "Agent teams: automated coordination of multiple sessions with shared tasks, messaging, and a team lead",
             "Beyond parallelizing work, multiple sessions enable quality-focused workflows. A fresh context improves code review since Claude won’t be biased toward code it just wrote.",
             "For example, use a Writer/Reviewer pattern:",
             "You can do something similar with tests: have one Claude write tests, then another write code to pass them."
@@ -6283,7 +6116,7 @@
         "For large PDFs, you can ask Claude to read specific pages instead of the whole file: a single page, a range like pages 1-10, or an open-ended range like page 3 onward.",
         "When you select text in the editor, Claude can see your highlighted code automatically. The prompt box footer shows how many lines are selected. Press Option+K (Mac) / Alt+K (Windows/Linux) to insert an @-mention with the file path and line numbers (e.g., @app.ts#5-10). Click the selection indicator to toggle whether Claude can see your highlighted text - the eye-slash icon means the selection is hidden from Claude.",
         "You can also hold Shift while dragging files into the prompt box to add them as attachments. Click the X on any attachment to remove it from context.",
-        "Click the Session history button at the top of the Claude Code panel to access your conversation history. You can search by keyword or browse by time (Today, Yesterday, Last 7 days, etc.). Click any conversation to resume it with the full message history. New sessions receive AI-generated titles based on your first message. Hover over a session to reveal rename and remove actions: rename to give it a descriptive title, or remove to delete it from the list. For more on resuming sessions, see Common workflows.",
+        "Click the Session history button at the top of the Claude Code panel to access your conversation history. You can search by keyword or browse by time (Today, Yesterday, Last 7 days, etc.). Click any conversation to resume it with the full message history. New sessions receive AI-generated titles based on your first message. Hover over a session to reveal rename and remove actions: rename to give it a descriptive title, or remove to delete it from the list. For more on resuming sessions, see Manage sessions.",
         "If you use Claude Code on the web, you can resume those remote sessions directly in VS Code. This requires signing in with Claude.ai Subscription, not Anthropic Console.",
         "Open session history",
         "Click the Session history button at the top of the Claude Code panel.",
@@ -6329,10 +6162,12 @@
         "Some shortcuts depend on which panel is “focused” (receiving keyboard input). When your cursor is in a code file, the editor is focused. When your cursor is in Claude’s prompt box, Claude is focused. Use Cmd+Esc / Ctrl+Esc to toggle between them.",
         "These are VS Code commands for controlling the extension. Not all built-in Claude Code commands are available in the extension. See VS Code extension vs. Claude Code CLI for details.",
         "The extension registers a URI handler at vscode://anthropic.claude-code/open. Use it to open a new Claude Code tab from your own tooling: a shell alias, a browser bookmarklet, or any script that can open a URL. If VS Code isn’t already running, opening the URL launches it first. If VS Code is already running, the URL opens in whichever window is currently focused.",
-        "Invoke the handler with your operating system’s URL opener. On macOS:",
-        "Use xdg-open on Linux or start on Windows.",
+        "Invoke the handler with your operating system’s URL opener.",
+        "In PowerShell:",
+        "In cmd.exe, start treats its first quoted argument as a window title, so pass an empty title before the URL:",
         "The handler accepts two optional query parameters:",
         "For example, to open a tab pre-filled with “review my changes”:",
+        "To launch a terminal session instead of a VS Code tab, use the CLI’s claude-cli:// handler. See Launch sessions from links.",
         "The extension has two types of settings:",
         "Extension settings in VS Code: control the extension’s behavior within VS Code. Open with Cmd+, (Mac) or Ctrl+, (Windows/Linux), then go to Extensions → Claude Code. You can also type / and select General Config to open settings.",
         "Claude Code settings in ~/.claude/settings.json: shared between the extension and CLI. Use for allowed commands, environment variables, hooks, and MCP servers. See Settings for details.",
@@ -6379,14 +6214,15 @@
         "Jupyter execution always asks first. mcp__ide__executeCode can’t run anything silently. On each call, the code is inserted as a new cell at the end of the active notebook, VS Code scrolls it into view, and a native Quick Pick asks you to Execute or Cancel. Cancelling — or dismissing the picker with Esc — returns an error to Claude and nothing runs. The tool also refuses outright when there’s no active notebook, when the Jupyter extension (ms-toolsai.jupyter) isn’t installed, or when the kernel isn’t Python.",
         "The Quick Pick confirmation is separate from PreToolUse hooks. An allowlist entry for mcp__ide__executeCode lets Claude propose running a cell; the Quick Pick inside VS Code is what lets it actually run.",
         "Ensure you have a compatible version of VS Code (1.98.0 or later)",
-        "Check that VS Code has permission to install extensions",
-        "Try installing directly from the VS Code Marketplace",
-        "The Spark icon appears in the Editor Toolbar (top-right of editor) when you have a file open. If you don’t see it:"
+        "Check that VS Code has permission to install extensions"
       ],
       "codeBlocks": [
         "> Explain the logic in @auth (fuzzy matches auth.js, AuthService.ts, etc.)\n> What's in @src/components/ (include a trailing slash for folders)",
         "@browser go to localhost:3000 and check the console for errors",
         "open \"vscode://anthropic.claude-code/open\"",
+        "xdg-open \"vscode://anthropic.claude-code/open\"",
+        "Start-Process \"vscode://anthropic.claude-code/open\"",
+        "start \"\" \"vscode://anthropic.claude-code/open\"",
         "vscode://anthropic.claude-code/open?prompt=review%20my%20changes",
         "claude mcp add --transport http github https://api.githubcopilot.com/mcp/ \\\n  --header \"Authorization: Bearer YOUR_GITHUB_PAT\"",
         "> commit my changes with a descriptive message\n> create a pr for this feature\n> summarize the changes I've made to the auth module",
@@ -6487,7 +6323,7 @@
         {
           "title": "​Resume past conversations",
           "paragraphs": [
-            "Click the Session history button at the top of the Claude Code panel to access your conversation history. You can search by keyword or browse by time (Today, Yesterday, Last 7 days, etc.). Click any conversation to resume it with the full message history. New sessions receive AI-generated titles based on your first message. Hover over a session to reveal rename and remove actions: rename to give it a descriptive title, or remove to delete it from the list. For more on resuming sessions, see Common workflows."
+            "Click the Session history button at the top of the Claude Code panel to access your conversation history. You can search by keyword or browse by time (Today, Yesterday, Last 7 days, etc.). Click any conversation to resume it with the full message history. New sessions receive AI-generated titles based on your first message. Hover over a session to reveal rename and remove actions: rename to give it a descriptive title, or remove to delete it from the list. For more on resuming sessions, see Manage sessions."
           ],
           "codeBlocks": []
         },
@@ -6601,13 +6437,18 @@
           "title": "​Launch a VS Code tab from other tools",
           "paragraphs": [
             "The extension registers a URI handler at vscode://anthropic.claude-code/open. Use it to open a new Claude Code tab from your own tooling: a shell alias, a browser bookmarklet, or any script that can open a URL. If VS Code isn’t already running, opening the URL launches it first. If VS Code is already running, the URL opens in whichever window is currently focused.",
-            "Invoke the handler with your operating system’s URL opener. On macOS:",
-            "Use xdg-open on Linux or start on Windows.",
+            "Invoke the handler with your operating system’s URL opener.",
+            "In PowerShell:",
+            "In cmd.exe, start treats its first quoted argument as a window title, so pass an empty title before the URL:",
             "The handler accepts two optional query parameters:",
-            "For example, to open a tab pre-filled with “review my changes”:"
+            "For example, to open a tab pre-filled with “review my changes”:",
+            "To launch a terminal session instead of a VS Code tab, use the CLI’s claude-cli:// handler. See Launch sessions from links."
           ],
           "codeBlocks": [
             "open \"vscode://anthropic.claude-code/open\"",
+            "xdg-open \"vscode://anthropic.claude-code/open\"",
+            "Start-Process \"vscode://anthropic.claude-code/open\"",
+            "start \"\" \"vscode://anthropic.claude-code/open\"",
             "vscode://anthropic.claude-code/open?prompt=review%20my%20changes"
           ]
         },
@@ -10620,23 +10461,24 @@
         "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
         "Use this file to discover all available pages before exploring further.",
         "Skills extend what Claude can do. Create a SKILL.md file with instructions, and Claude adds it to its toolkit. Claude uses skills when relevant, or you can invoke one directly with /skill-name.",
-        "Create a skill when you keep pasting the same playbook, checklist, or multi-step procedure into chat, or when a section of CLAUDE.md has grown into a procedure rather than a fact. Unlike CLAUDE.md content, a skill’s body loads only when it’s used, so long reference material costs almost nothing until you need it.",
+        "Create a skill when you keep pasting the same instructions, checklist, or multi-step procedure into chat, or when a section of CLAUDE.md has grown into a procedure rather than a fact. Unlike CLAUDE.md content, a skill’s body loads only when it’s used, so long reference material costs almost nothing until you need it.",
         "For built-in commands like /help and /compact, and bundled skills like /debug and /simplify, see the commands reference.",
         "Custom commands have been merged into skills. A file at .claude/commands/deploy.md and a skill at .claude/skills/deploy/SKILL.md both create /deploy and work the same way. Your existing .claude/commands/ files keep working. Skills add optional features: a directory for supporting files, frontmatter to control whether you or Claude invokes them, and the ability for Claude to load them automatically when relevant.",
         "Claude Code skills follow the Agent Skills open standard, which works across multiple AI tools. Claude Code extends the standard with additional features like invocation control, subagent execution, and dynamic context injection.",
-        "Claude Code includes a set of bundled skills that are available in every session, including /simplify, /batch, /debug, /loop, and /claude-api. Unlike most built-in commands, which execute fixed logic directly, bundled skills are prompt-based: they give Claude a detailed playbook and let it orchestrate the work using its tools. You invoke them the same way as any other skill, by typing / followed by the skill name.",
+        "Claude Code includes a set of bundled skills that are available in every session, including /simplify, /batch, /debug, /loop, and /claude-api. Unlike most built-in commands, which execute fixed logic directly, bundled skills are prompt-based: they give Claude detailed instructions and let it orchestrate the work using its tools. You invoke them the same way as any other skill, by typing / followed by the skill name.",
         "Bundled skills are listed alongside built-in commands in the commands reference, marked Skill in the Purpose column.",
-        "This example creates a skill that teaches Claude to explain code using visual diagrams and analogies. Since it uses default frontmatter, Claude can load it automatically when you ask how something works, or you can invoke it directly with /explain-code.",
+        "This example creates a skill that summarizes the uncommitted changes in your git repository and flags anything risky. It pulls the live diff into the prompt before Claude reads it, so the response is grounded in your actual working tree rather than what Claude can guess from open files. Claude loads the skill automatically when you ask about your changes, or you can invoke it directly with /summarize-changes.",
         "Create the skill directory",
         "Create a directory for the skill in your personal skills folder. Personal skills are available across all your projects.",
         "Write SKILL.md",
-        "Every skill needs a SKILL.md file with two parts: YAML frontmatter (between --- markers) that tells Claude when to use the skill, and markdown content with instructions Claude follows when the skill is invoked. The directory name becomes the /slash-command, and the description helps Claude decide when to load it automatically.",
-        "Create ~/.claude/skills/explain-code/SKILL.md:",
+        "Every skill needs a SKILL.md file with two parts: YAML frontmatter between --- markers that tells Claude when to use the skill, and markdown content with the instructions Claude follows when the skill runs. The directory name becomes the command you type, and the description helps Claude decide when to load the skill automatically.",
+        "Save this to ~/.claude/skills/summarize-changes/SKILL.md:",
+        "The !`git diff HEAD` line uses dynamic context injection: Claude Code runs the command and replaces the line with its output before Claude sees the skill content, so the instructions arrive with the current diff already inlined.",
         "Test the skill",
-        "You can test it two ways:",
+        "Open a git project, make a small edit to any file, and start Claude Code by running claude. You can test the skill two ways.",
         "Let Claude invoke it automatically by asking something that matches the description:",
         "Or invoke it directly with the skill name:",
-        "Either way, Claude should include an analogy and ASCII diagram in its explanation.",
+        "Either way, Claude should respond with a short summary of your edit and a list of risks.",
         "Where you store a skill determines who can use it:",
         "When skills share the same name across levels, enterprise overrides personal, and personal overrides project. Plugin skills use a plugin-name:skill-name namespace, so they cannot conflict with other levels. If you have files in .claude/commands/, those work the same way, but if a skill and a command share the same name, the skill takes precedence.",
         "Claude Code watches skill directories for file changes. Adding, editing, or removing a skill under ~/.claude/skills/, the project .claude/skills/, or a .claude/skills/ inside an --add-dir directory takes effect within the current session without restarting. Creating a top-level skills directory that did not exist when the session started requires restarting Claude Code so the new directory can be watched.",
@@ -10669,6 +10511,7 @@
         "Auto-compaction carries invoked skills forward within a token budget. When the conversation is summarized to free context, Claude Code re-attaches the most recent invocation of each skill after the summary, keeping the first 5,000 tokens of each. Re-attached skills share a combined budget of 25,000 tokens. Claude Code fills this budget starting from the most recently invoked skill, so older skills can be dropped entirely after compaction if you have invoked many in one session.",
         "If a skill seems to stop influencing behavior after the first response, the content is usually still present and the model is choosing other tools or approaches. Strengthen the skill’s description and instructions so the model keeps preferring it, or use hooks to enforce behavior deterministically. If the skill is large or you invoked several others after it, re-invoke it after compaction to restore the full content.",
         "The allowed-tools field grants permission for the listed tools while the skill is active, so Claude can use them without prompting you for approval. It does not restrict which tools are available: every tool remains callable, and your permission settings still govern tools that are not listed.",
+        "For skills checked into a project’s .claude/skills/ directory, allowed-tools takes effect after you accept the workspace trust dialog for that folder, the same as permission rules in .claude/settings.json. Review project skills before trusting a repository, since a skill can grant itself broad tool access.",
         "This skill lets Claude run git commands without per-use approval whenever you invoke it:",
         "To block a skill from using certain tools, add deny rules in your permission settings instead.",
         "Both you and Claude can pass arguments when invoking a skill. Arguments are available via the $ARGUMENTS placeholder.",
@@ -10686,7 +10529,7 @@
         "This is preprocessing, not something Claude executes. Claude only sees the final result.",
         "For multi-line commands, use a fenced code block opened with ```! instead of the inline form:",
         "To disable this behavior for skills and custom commands from user, project, plugin, or additional-directory sources, set \"disableSkillShellExecution\": true in settings. Each command is replaced with [shell command execution disabled by policy] instead of being run. Bundled and managed skills are not affected. This setting is most useful in managed settings, where users cannot override it.",
-        "To enable extended thinking in a skill, include the word “ultrathink” anywhere in your skill content.",
+        "To request deeper reasoning when a skill runs, include ultrathink anywhere in the skill content. See Use ultrathink for one-off deep reasoning.",
         "Add context: fork to your frontmatter when you want a skill to run in isolation. The skill content becomes the prompt that drives the subagent. It won’t have access to your conversation history.",
         "context: fork only makes sense for skills with explicit instructions. If your skill contains guidelines like “use these API conventions” without a task, the subagent receives the guidelines but no actionable prompt, and returns without meaningful output.",
         "Skills and subagents work together in two directions:",
@@ -10711,14 +10554,14 @@
         "Skills can bundle and run scripts in any language, giving Claude capabilities beyond what’s possible in a single prompt. One powerful pattern is generating visual output: interactive HTML files that open in your browser for exploring data, debugging, or creating reports.",
         "This example creates a codebase explorer: an interactive tree view where you can expand and collapse directories, see file sizes at a glance, and identify file types by color.",
         "Create the Skill directory:",
-        "Create ~/.claude/skills/codebase-visualizer/SKILL.md. The description tells Claude when to activate this Skill, and the instructions tell Claude to run the bundled script:",
-        "Create ~/.claude/skills/codebase-visualizer/scripts/visualize.py. This script scans a directory tree and generates a self-contained HTML file with:",
+        "Save this to ~/.claude/skills/codebase-visualizer/SKILL.md. The description tells Claude when to activate this Skill, and the instructions tell Claude to run the bundled script. The script path uses ${CLAUDE_SKILL_DIR} so it resolves correctly whether the skill is installed at the personal, project, or plugin level:",
+        "Save this to ~/.claude/skills/codebase-visualizer/scripts/visualize.py. This script scans a directory tree and generates a self-contained HTML file with:",
         "A summary sidebar showing file count, directory count, total size, and number of file types",
         "A bar chart breaking down the codebase by file type (top 8 by size)",
         "A collapsible tree where you can expand and collapse directories, with color-coded file type indicators",
-        "The script requires Python but uses only built-in libraries, so there are no packages to install:",
+        "The script requires Python 3 but uses only built-in libraries, so there are no packages to install:",
         "To test, open Claude Code in any project and ask “Visualize this codebase.” Claude runs the script, generates codebase-map.html, and opens it in your browser.",
-        "This pattern works for any visual output: dependency graphs, test coverage reports, API documentation, or database schema visualizations. The bundled script does the heavy lifting while Claude handles orchestration.",
+        "This pattern works for any visual output: dependency graphs, test coverage reports, API documentation, or database schema visualizations. The bundled script does the work while Claude handles orchestration.",
         "If Claude doesn’t use your skill when expected:",
         "Check the description includes keywords users would naturally say",
         "Verify the skill appears in What skills are available?",
@@ -10728,7 +10571,7 @@
         "Make the description more specific",
         "Add disable-model-invocation: true if you only want manual invocation",
         "Skill descriptions are loaded into context so Claude knows what’s available. All skill names are always included, but if you have many skills, descriptions are shortened to fit the character budget, which can strip the keywords Claude needs to match your request. The budget scales dynamically at 1% of the context window, with a fallback of 8,000 characters.",
-        "To raise the limit, set the SLASH_COMMAND_TOOL_CHAR_BUDGET environment variable. Or trim the description and when_to_use text at the source: front-load the key use case, since each entry’s combined text is capped at 1,536 characters regardless of budget.",
+        "To raise the limit, set the SLASH_COMMAND_TOOL_CHAR_BUDGET environment variable. Or trim the description and when_to_use text at the source: put the key use case first, since each entry’s combined text is capped at 1,536 characters regardless of budget.",
         "Debug your configuration: diagnose why a skill isn’t appearing or triggering",
         "Subagents: delegate tasks to specialized agents",
         "Plugins: package and distribute skills with other extensions",
@@ -10739,10 +10582,10 @@
         "Was this page helpful?"
       ],
       "codeBlocks": [
-        "mkdir -p ~/.claude/skills/explain-code",
-        "---\ndescription: Explains code with visual diagrams and analogies. Use when explaining how code works, teaching about a codebase, or when the user asks \"how does this work?\"\n---\n\nWhen explaining code, always include:\n\n1. **Start with an analogy**: Compare the code to something from everyday life\n2. **Draw a diagram**: Use ASCII art to show the flow, structure, or relationships\n3. **Walk through the code**: Explain step-by-step what happens\n4. **Highlight a gotcha**: What's a common mistake or misconception?\n\nKeep explanations conversational. For complex concepts, use multiple analogies.",
-        "How does this code work?",
-        "/explain-code src/auth/login.ts",
+        "mkdir -p ~/.claude/skills/summarize-changes",
+        "---\ndescription: Summarizes uncommitted changes and flags anything risky. Use when the user asks what changed, wants a commit message, or asks to review their diff.\n---\n\n## Current changes\n\n!`git diff HEAD`\n\n## Instructions\n\nSummarize the changes above in two or three bullet points, then list any risks you notice such as missing error handling, hardcoded values, or tests that need updating. If the diff is empty, say there are no uncommitted changes.",
+        "What did I change?",
+        "/summarize-changes",
         "my-skill/\n├── SKILL.md           # Main instructions (required)\n├── template.md        # Template for Claude to fill in\n├── examples/\n│   └── sample.md      # Example output showing expected format\n└── scripts/\n    └── validate.sh    # Script Claude can execute",
         "---\nname: api-conventions\ndescription: API design patterns for this codebase\n---\n\nWhen writing API endpoints:\n- Use RESTful naming conventions\n- Return consistent error formats\n- Include request validation",
         "---\nname: deploy\ndescription: Deploy the application to production\ncontext: fork\ndisable-model-invocation: true\n---\n\nDeploy the application:\n1. Run the test suite\n2. Build the application\n3. Push to the deployment target",
@@ -10761,8 +10604,8 @@
         "# Add to deny rules:\nSkill",
         "# Allow only specific skills\nSkill(commit)\nSkill(review-pr *)\n\n# Deny specific skills\nSkill(deploy *)",
         "mkdir -p ~/.claude/skills/codebase-visualizer/scripts",
-        "---\nname: codebase-visualizer\ndescription: Generate an interactive collapsible tree visualization of your codebase. Use when exploring a new repo, understanding project structure, or identifying large files.\nallowed-tools: Bash(python *)\n---\n\n# Codebase Visualizer\n\nGenerate an interactive HTML tree view that shows your project's file structure with collapsible directories.\n\n## Usage\n\nRun the visualization script from your project root:\n\n```bash\npython ~/.claude/skills/codebase-visualizer/scripts/visualize.py .\n```\n\nThis creates `codebase-map.html` in the current directory and opens it in your default browser.\n\n## What the visualization shows\n\n- **Collapsible directories**: Click folders to expand/collapse\n- **File sizes**: Displayed next to each file\n- **Colors**: Different colors for different file types\n- **Directory totals**: Shows aggregate size of each folder",
-        "#!/usr/bin/env python3\n\"\"\"Generate an interactive collapsible tree visualization of a codebase.\"\"\"\n\nimport json\nimport sys\nimport webbrowser\nfrom pathlib import Path\nfrom collections import Counter\n\nIGNORE = {'.git', 'node_modules', '__pycache__', '.venv', 'venv', 'dist', 'build'}\n\ndef scan(path: Path, stats: dict) -> dict:\n    result = {\"name\": path.name, \"children\": [], \"size\": 0}\n    try:\n        for item in sorted(path.iterdir()):\n            if item.name in IGNORE or item.name.startswith('.'):\n                continue\n            if item.is_file():\n                size = item.stat().st_size\n                ext = item.suffix.lower() or '(no ext)'\n                result[\"children\"].append({\"name\": item.name, \"size\": size, \"ext\": ext})\n                result[\"size\"] += size\n                stats[\"files\"] += 1\n                stats[\"extensions\"][ext] += 1\n                stats[\"ext_sizes\"][ext] += size\n            elif item.is_dir():\n                stats[\"dirs\"] += 1\n                child = scan(item, stats)\n                if child[\"children\"]:\n                    result[\"children\"].append(child)\n                    result[\"size\"] += child[\"size\"]\n    except PermissionError:\n        pass\n    return result\n\ndef generate_html(data: dict, stats: dict, output: Path) -> None:\n    ext_sizes = stats[\"ext_sizes\"]\n    total_size = sum(ext_sizes.values()) or 1\n    sorted_exts = sorted(ext_sizes.items(), key=lambda x: -x[1])[:8]\n    colors = {\n        '.js': '#f7df1e', '.ts': '#3178c6', '.py': '#3776ab', '.go': '#00add8',\n        '.rs': '#dea584', '.rb': '#cc342d', '.css': '#264de4', '.html': '#e34c26',\n        '.json': '#6b7280', '.md': '#083fa1', '.yaml': '#cb171e', '.yml': '#cb171e',\n        '.mdx': '#083fa1', '.tsx': '#3178c6', '.jsx': '#61dafb', '.sh': '#4eaa25',\n    }\n    lang_bars = \"\".join(\n        f'<div class=\"bar-row\"><span class=\"bar-label\">{ext}</span>'\n        f'<div class=\"bar\" style=\"width:{(size/total_size)*100}%;background:{colors.get(ext,\"#6b7280\")}\"></div>'\n        f'<span class=\"bar-pct\">{(size/total_size)*100:.1f}%</span></div>'\n        for ext, size in sorted_exts\n    )\n    def fmt(b):\n        if b < 1024: return f\"{b} B\"\n        if b < 1048576: return f\"{b/1024:.1f} KB\"\n        return f\"{b/1048576:.1f} MB\"\n\n    html = f'''<!DOCTYPE html>\n<html><head>\n  <meta charset=\"utf-8\"><title>Codebase Explorer</title>\n  <style>\n    body {{ font: 14px/1.5 system-ui, sans-serif; margin: 0; background: #1a1a2e; color: #eee; }}\n    .container {{ display: flex; height: 100vh; }}\n    .sidebar {{ width: 280px; background: #252542; padding: 20px; border-right: 1px solid #3d3d5c; overflow-y: auto; flex-shrink: 0; }}\n    .main {{ flex: 1; padding: 20px; overflow-y: auto; }}\n    h1 {{ margin: 0 0 10px 0; font-size: 18px; }}\n    h2 {{ margin: 20px 0 10px 0; font-size: 14px; color: #888; text-transform: uppercase; }}\n    .stat {{ display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #3d3d5c; }}\n    .stat-value {{ font-weight: bold; }}\n    .bar-row {{ display: flex; align-items: center; margin: 6px 0; }}\n    .bar-label {{ width: 55px; font-size: 12px; color: #aaa; }}\n    .bar {{ height: 18px; border-radius: 3px; }}\n    .bar-pct {{ margin-left: 8px; font-size: 12px; color: #666; }}\n    .tree {{ list-style: none; padding-left: 20px; }}\n    details {{ cursor: pointer; }}\n    summary {{ padding: 4px 8px; border-radius: 4px; }}\n    summary:hover {{ background: #2d2d44; }}\n    .folder {{ color: #ffd700; }}\n    .file {{ display: flex; align-items: center; padding: 4px 8px; border-radius: 4px; }}\n    .file:hover {{ background: #2d2d44; }}\n    .size {{ color: #888; margin-left: auto; font-size: 12px; }}\n    .dot {{ width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; }}\n  </style>\n</head><body>\n  <div class=\"container\">\n    <div class=\"sidebar\">\n      <h1>📊 Summary</h1>\n      <div class=\"stat\"><span>Files</span><span class=\"stat-value\">{stats[\"files\"]:,}</span></div>\n      <div class=\"stat\"><span>Directories</span><span class=\"stat-value\">{stats[\"dirs\"]:,}</span></div>\n      <div class=\"stat\"><span>Total size</span><span class=\"stat-value\">{fmt(data[\"size\"])}</span></div>\n      <div class=\"stat\"><span>File types</span><span class=\"stat-value\">{len(stats[\"extensions\"])}</span></div>\n      <h2>By file type</h2>\n      {lang_bars}\n    </div>\n    <div class=\"main\">\n      <h1>📁 {data[\"name\"]}</h1>\n      <ul class=\"tree\" id=\"root\"></ul>\n    </div>\n  </div>\n  <script>\n    const data = {json.dumps(data)};\n    const colors = {json.dumps(colors)};\n    function fmt(b) {{ if (b < 1024) return b + ' B'; if (b < 1048576) return (b/1024).toFixed(1) + ' KB'; return (b/1048576).toFixed(1) + ' MB'; }}\n    function render(node, parent) {{\n      if (node.children) {{\n        const det = document.createElement('details');\n        det.open = parent === document.getElementById('root');\n        det.innerHTML = `<summary><span class=\"folder\">📁 ${{node.name}}</span><span class=\"size\">${{fmt(node.size)}}</span></summary>`;\n        const ul = document.createElement('ul'); ul.className = 'tree';\n        node.children.sort((a,b) => (b.children?1:0)-(a.children?1:0) || a.name.localeCompare(b.name));\n        node.children.forEach(c => render(c, ul));\n        det.appendChild(ul);\n        const li = document.createElement('li'); li.appendChild(det); parent.appendChild(li);\n      }} else {{\n        const li = document.createElement('li'); li.className = 'file';\n        li.innerHTML = `<span class=\"dot\" style=\"background:${{colors[node.ext]||'#6b7280'}}\"></span>${{node.name}}<span class=\"size\">${{fmt(node.size)}}</span>`;\n        parent.appendChild(li);\n      }}\n    }}\n    data.children.forEach(c => render(c, document.getElementById('root')));\n  </script>\n</body></html>'''\n    output.write_text(html)\n\nif __name__ == '__main__':\n    target = Path(sys.argv[1] if len(sys.argv) > 1 else '.').resolve()\n    stats = {\"files\": 0, \"dirs\": 0, \"extensions\": Counter(), \"ext_sizes\": Counter()}\n    data = scan(target, stats)\n    out = Path('codebase-map.html')\n    generate_html(data, stats, out)\n    print(f'Generated {out.absolute()}')\n    webbrowser.open(f'file://{out.absolute()}')"
+        "---\nname: codebase-visualizer\ndescription: Generate an interactive collapsible tree visualization of your codebase. Use when exploring a new repo, understanding project structure, or identifying large files.\nallowed-tools: Bash(python3 *)\n---\n\n# Codebase Visualizer\n\nGenerate an interactive HTML tree view that shows your project's file structure with collapsible directories.\n\n## Usage\n\nRun the visualization script from your project root:\n\n```bash\npython3 ${CLAUDE_SKILL_DIR}/scripts/visualize.py .\n```\n\nThis creates `codebase-map.html` in the current directory and opens it in your default browser.\n\n## What the visualization shows\n\n- **Collapsible directories**: Click folders to expand/collapse\n- **File sizes**: Displayed next to each file\n- **Colors**: Different colors for different file types\n- **Directory totals**: Shows aggregate size of each folder",
+        "#!/usr/bin/env python3\n\"\"\"Generate an interactive collapsible tree visualization of a codebase.\"\"\"\n\nimport json\nimport sys\nimport webbrowser\nfrom html import escape\nfrom pathlib import Path\nfrom collections import Counter\n\nIGNORE = {'.git', 'node_modules', '__pycache__', '.venv', 'venv', 'dist', 'build'}\n\ndef scan(path: Path, stats: dict) -> dict:\n    result = {\"name\": path.name, \"children\": [], \"size\": 0}\n    try:\n        for item in sorted(path.iterdir()):\n            if item.name in IGNORE or item.name.startswith('.'):\n                continue\n            if item.is_file():\n                size = item.stat().st_size\n                ext = item.suffix.lower() or '(no ext)'\n                result[\"children\"].append({\"name\": item.name, \"size\": size, \"ext\": ext})\n                result[\"size\"] += size\n                stats[\"files\"] += 1\n                stats[\"extensions\"][ext] += 1\n                stats[\"ext_sizes\"][ext] += size\n            elif item.is_dir():\n                stats[\"dirs\"] += 1\n                child = scan(item, stats)\n                if child[\"children\"]:\n                    result[\"children\"].append(child)\n                    result[\"size\"] += child[\"size\"]\n    except PermissionError:\n        pass\n    return result\n\ndef generate_html(data: dict, stats: dict, output: Path) -> None:\n    ext_sizes = stats[\"ext_sizes\"]\n    total_size = sum(ext_sizes.values()) or 1\n    sorted_exts = sorted(ext_sizes.items(), key=lambda x: -x[1])[:8]\n    colors = {\n        '.js': '#f7df1e', '.ts': '#3178c6', '.py': '#3776ab', '.go': '#00add8',\n        '.rs': '#dea584', '.rb': '#cc342d', '.css': '#264de4', '.html': '#e34c26',\n        '.json': '#6b7280', '.md': '#083fa1', '.yaml': '#cb171e', '.yml': '#cb171e',\n        '.mdx': '#083fa1', '.tsx': '#3178c6', '.jsx': '#61dafb', '.sh': '#4eaa25',\n    }\n    lang_bars = \"\".join(\n        f'<div class=\"bar-row\"><span class=\"bar-label\">{ext}</span>'\n        f'<div class=\"bar\" style=\"width:{(size/total_size)*100}%;background:{colors.get(ext,\"#6b7280\")}\"></div>'\n        f'<span class=\"bar-pct\">{(size/total_size)*100:.1f}%</span></div>'\n        for ext, size in sorted_exts\n    )\n    def fmt(b):\n        if b < 1024: return f\"{b} B\"\n        if b < 1048576: return f\"{b/1024:.1f} KB\"\n        return f\"{b/1048576:.1f} MB\"\n\n    html = f'''<!DOCTYPE html>\n<html><head>\n  <meta charset=\"utf-8\"><title>Codebase Explorer</title>\n  <style>\n    body {{ font: 14px/1.5 system-ui, sans-serif; margin: 0; background: #1a1a2e; color: #eee; }}\n    .container {{ display: flex; height: 100vh; }}\n    .sidebar {{ width: 280px; background: #252542; padding: 20px; border-right: 1px solid #3d3d5c; overflow-y: auto; flex-shrink: 0; }}\n    .main {{ flex: 1; padding: 20px; overflow-y: auto; }}\n    h1 {{ margin: 0 0 10px 0; font-size: 18px; }}\n    h2 {{ margin: 20px 0 10px 0; font-size: 14px; color: #888; text-transform: uppercase; }}\n    .stat {{ display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #3d3d5c; }}\n    .stat-value {{ font-weight: bold; }}\n    .bar-row {{ display: flex; align-items: center; margin: 6px 0; }}\n    .bar-label {{ width: 55px; font-size: 12px; color: #aaa; }}\n    .bar {{ height: 18px; border-radius: 3px; }}\n    .bar-pct {{ margin-left: 8px; font-size: 12px; color: #666; }}\n    .tree {{ list-style: none; padding-left: 20px; }}\n    details {{ cursor: pointer; }}\n    summary {{ padding: 4px 8px; border-radius: 4px; }}\n    summary:hover {{ background: #2d2d44; }}\n    .folder {{ color: #ffd700; }}\n    .file {{ display: flex; align-items: center; padding: 4px 8px; border-radius: 4px; }}\n    .file:hover {{ background: #2d2d44; }}\n    .size {{ color: #888; margin-left: auto; font-size: 12px; }}\n    .dot {{ width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; }}\n  </style>\n</head><body>\n  <div class=\"container\">\n    <div class=\"sidebar\">\n      <h1>📊 Summary</h1>\n      <div class=\"stat\"><span>Files</span><span class=\"stat-value\">{stats[\"files\"]:,}</span></div>\n      <div class=\"stat\"><span>Directories</span><span class=\"stat-value\">{stats[\"dirs\"]:,}</span></div>\n      <div class=\"stat\"><span>Total size</span><span class=\"stat-value\">{fmt(data[\"size\"])}</span></div>\n      <div class=\"stat\"><span>File types</span><span class=\"stat-value\">{len(stats[\"extensions\"])}</span></div>\n      <h2>By file type</h2>\n      {lang_bars}\n    </div>\n    <div class=\"main\">\n      <h1>📁 {escape(data[\"name\"])}</h1>\n      <ul class=\"tree\" id=\"root\"></ul>\n    </div>\n  </div>\n  <script>\n    const data = {json.dumps(data)};\n    const colors = {json.dumps(colors)};\n    function fmt(b) {{ if (b < 1024) return b + ' B'; if (b < 1048576) return (b/1024).toFixed(1) + ' KB'; return (b/1048576).toFixed(1) + ' MB'; }}\n    function esc(s) {{ return s.replace(/[&<>\"']/g, c => ({{\"&\":\"&amp;\",\"<\":\"&lt;\",\">\":\"&gt;\",'\"':\"&quot;\",\"'\":\"&#39;\"}}[c])); }}\n    function render(node, parent) {{\n      if (node.children) {{\n        const det = document.createElement('details');\n        det.open = parent === document.getElementById('root');\n        det.innerHTML = `<summary><span class=\"folder\">📁 ${{esc(node.name)}}</span><span class=\"size\">${{fmt(node.size)}}</span></summary>`;\n        const ul = document.createElement('ul'); ul.className = 'tree';\n        node.children.sort((a,b) => (b.children?1:0)-(a.children?1:0) || a.name.localeCompare(b.name));\n        node.children.forEach(c => render(c, ul));\n        det.appendChild(ul);\n        const li = document.createElement('li'); li.appendChild(det); parent.appendChild(li);\n      }} else {{\n        const li = document.createElement('li'); li.className = 'file';\n        li.innerHTML = `<span class=\"dot\" style=\"background:${{colors[node.ext]||'#6b7280'}}\"></span>${{esc(node.name)}}<span class=\"size\">${{fmt(node.size)}}</span>`;\n        parent.appendChild(li);\n      }}\n    }}\n    data.children.forEach(c => render(c, document.getElementById('root')));\n  </script>\n</body></html>'''\n    output.write_text(html)\n\nif __name__ == '__main__':\n    target = Path(sys.argv[1] if len(sys.argv) > 1 else '.').resolve()\n    stats = {\"files\": 0, \"dirs\": 0, \"extensions\": Counter(), \"ext_sizes\": Counter()}\n    data = scan(target, stats)\n    out = Path('codebase-map.html')\n    generate_html(data, stats, out)\n    print(f'Generated {out.absolute()}')\n    webbrowser.open(f'file://{out.absolute()}')"
       ],
       "sectionBlocks": [
         {
@@ -10789,7 +10632,7 @@
             "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
             "Use this file to discover all available pages before exploring further.",
             "Skills extend what Claude can do. Create a SKILL.md file with instructions, and Claude adds it to its toolkit. Claude uses skills when relevant, or you can invoke one directly with /skill-name.",
-            "Create a skill when you keep pasting the same playbook, checklist, or multi-step procedure into chat, or when a section of CLAUDE.md has grown into a procedure rather than a fact. Unlike CLAUDE.md content, a skill’s body loads only when it’s used, so long reference material costs almost nothing until you need it.",
+            "Create a skill when you keep pasting the same instructions, checklist, or multi-step procedure into chat, or when a section of CLAUDE.md has grown into a procedure rather than a fact. Unlike CLAUDE.md content, a skill’s body loads only when it’s used, so long reference material costs almost nothing until you need it.",
             "For built-in commands like /help and /compact, and bundled skills like /debug and /simplify, see the commands reference.",
             "Custom commands have been merged into skills. A file at .claude/commands/deploy.md and a skill at .claude/skills/deploy/SKILL.md both create /deploy and work the same way. Your existing .claude/commands/ files keep working. Skills add optional features: a directory for supporting files, frontmatter to control whether you or Claude invokes them, and the ability for Claude to load them automatically when relevant.",
             "Claude Code skills follow the Agent Skills open standard, which works across multiple AI tools. Claude Code extends the standard with additional features like invocation control, subagent execution, and dynamic context injection."
@@ -10799,7 +10642,7 @@
         {
           "title": "​Bundled skills",
           "paragraphs": [
-            "Claude Code includes a set of bundled skills that are available in every session, including /simplify, /batch, /debug, /loop, and /claude-api. Unlike most built-in commands, which execute fixed logic directly, bundled skills are prompt-based: they give Claude a detailed playbook and let it orchestrate the work using its tools. You invoke them the same way as any other skill, by typing / followed by the skill name.",
+            "Claude Code includes a set of bundled skills that are available in every session, including /simplify, /batch, /debug, /loop, and /claude-api. Unlike most built-in commands, which execute fixed logic directly, bundled skills are prompt-based: they give Claude detailed instructions and let it orchestrate the work using its tools. You invoke them the same way as any other skill, by typing / followed by the skill name.",
             "Bundled skills are listed alongside built-in commands in the commands reference, marked Skill in the Purpose column."
           ],
           "codeBlocks": []
@@ -10812,23 +10655,24 @@
         {
           "title": "​Create your first skill",
           "paragraphs": [
-            "This example creates a skill that teaches Claude to explain code using visual diagrams and analogies. Since it uses default frontmatter, Claude can load it automatically when you ask how something works, or you can invoke it directly with /explain-code.",
+            "This example creates a skill that summarizes the uncommitted changes in your git repository and flags anything risky. It pulls the live diff into the prompt before Claude reads it, so the response is grounded in your actual working tree rather than what Claude can guess from open files. Claude loads the skill automatically when you ask about your changes, or you can invoke it directly with /summarize-changes.",
             "Create the skill directory",
             "Create a directory for the skill in your personal skills folder. Personal skills are available across all your projects.",
             "Write SKILL.md",
-            "Every skill needs a SKILL.md file with two parts: YAML frontmatter (between --- markers) that tells Claude when to use the skill, and markdown content with instructions Claude follows when the skill is invoked. The directory name becomes the /slash-command, and the description helps Claude decide when to load it automatically.",
-            "Create ~/.claude/skills/explain-code/SKILL.md:",
+            "Every skill needs a SKILL.md file with two parts: YAML frontmatter between --- markers that tells Claude when to use the skill, and markdown content with the instructions Claude follows when the skill runs. The directory name becomes the command you type, and the description helps Claude decide when to load the skill automatically.",
+            "Save this to ~/.claude/skills/summarize-changes/SKILL.md:",
+            "The !`git diff HEAD` line uses dynamic context injection: Claude Code runs the command and replaces the line with its output before Claude sees the skill content, so the instructions arrive with the current diff already inlined.",
             "Test the skill",
-            "You can test it two ways:",
+            "Open a git project, make a small edit to any file, and start Claude Code by running claude. You can test the skill two ways.",
             "Let Claude invoke it automatically by asking something that matches the description:",
             "Or invoke it directly with the skill name:",
-            "Either way, Claude should include an analogy and ASCII diagram in its explanation."
+            "Either way, Claude should respond with a short summary of your edit and a list of risks."
           ],
           "codeBlocks": [
-            "mkdir -p ~/.claude/skills/explain-code",
-            "---\ndescription: Explains code with visual diagrams and analogies. Use when explaining how code works, teaching about a codebase, or when the user asks \"how does this work?\"\n---\n\nWhen explaining code, always include:\n\n1. **Start with an analogy**: Compare the code to something from everyday life\n2. **Draw a diagram**: Use ASCII art to show the flow, structure, or relationships\n3. **Walk through the code**: Explain step-by-step what happens\n4. **Highlight a gotcha**: What's a common mistake or misconception?\n\nKeep explanations conversational. For complex concepts, use multiple analogies.",
-            "How does this code work?",
-            "/explain-code src/auth/login.ts"
+            "mkdir -p ~/.claude/skills/summarize-changes",
+            "---\ndescription: Summarizes uncommitted changes and flags anything risky. Use when the user asks what changed, wants a commit message, or asks to review their diff.\n---\n\n## Current changes\n\n!`git diff HEAD`\n\n## Instructions\n\nSummarize the changes above in two or three bullet points, then list any risks you notice such as missing error handling, hardcoded values, or tests that need updating. If the diff is empty, say there are no uncommitted changes.",
+            "What did I change?",
+            "/summarize-changes"
           ]
         },
         {
@@ -10921,6 +10765,7 @@
           "title": "​Pre-approve tools for a skill",
           "paragraphs": [
             "The allowed-tools field grants permission for the listed tools while the skill is active, so Claude can use them without prompting you for approval. It does not restrict which tools are available: every tool remains callable, and your permission settings still govern tools that are not listed.",
+            "For skills checked into a project’s .claude/skills/ directory, allowed-tools takes effect after you accept the workspace trust dialog for that folder, the same as permission rules in .claude/settings.json. Review project skills before trusting a repository, since a skill can grant itself broad tool access.",
             "This skill lets Claude run git commands without per-use approval whenever you invoke it:",
             "To block a skill from using certain tools, add deny rules in your permission settings instead."
           ],
@@ -10961,7 +10806,7 @@
             "This is preprocessing, not something Claude executes. Claude only sees the final result.",
             "For multi-line commands, use a fenced code block opened with ```! instead of the inline form:",
             "To disable this behavior for skills and custom commands from user, project, plugin, or additional-directory sources, set \"disableSkillShellExecution\": true in settings. Each command is replaced with [shell command execution disabled by policy] instead of being run. Bundled and managed skills are not affected. This setting is most useful in managed settings, where users cannot override it.",
-            "To enable extended thinking in a skill, include the word “ultrathink” anywhere in your skill content."
+            "To request deeper reasoning when a skill runs, include ultrathink anywhere in the skill content. See Use ultrathink for one-off deep reasoning."
           ],
           "codeBlocks": [
             "---\nname: pr-summary\ndescription: Summarize changes in a pull request\ncontext: fork\nagent: Explore\nallowed-tools: Bash(gh *)\n---\n\n## Pull request context\n- PR diff: !`gh pr diff`\n- PR comments: !`gh pr view --comments`\n- Changed files: !`gh pr diff --name-only`\n\n## Your task\nSummarize this pull request...",
@@ -11019,19 +10864,19 @@
             "Skills can bundle and run scripts in any language, giving Claude capabilities beyond what’s possible in a single prompt. One powerful pattern is generating visual output: interactive HTML files that open in your browser for exploring data, debugging, or creating reports.",
             "This example creates a codebase explorer: an interactive tree view where you can expand and collapse directories, see file sizes at a glance, and identify file types by color.",
             "Create the Skill directory:",
-            "Create ~/.claude/skills/codebase-visualizer/SKILL.md. The description tells Claude when to activate this Skill, and the instructions tell Claude to run the bundled script:",
-            "Create ~/.claude/skills/codebase-visualizer/scripts/visualize.py. This script scans a directory tree and generates a self-contained HTML file with:",
+            "Save this to ~/.claude/skills/codebase-visualizer/SKILL.md. The description tells Claude when to activate this Skill, and the instructions tell Claude to run the bundled script. The script path uses ${CLAUDE_SKILL_DIR} so it resolves correctly whether the skill is installed at the personal, project, or plugin level:",
+            "Save this to ~/.claude/skills/codebase-visualizer/scripts/visualize.py. This script scans a directory tree and generates a self-contained HTML file with:",
             "A summary sidebar showing file count, directory count, total size, and number of file types",
             "A bar chart breaking down the codebase by file type (top 8 by size)",
             "A collapsible tree where you can expand and collapse directories, with color-coded file type indicators",
-            "The script requires Python but uses only built-in libraries, so there are no packages to install:",
+            "The script requires Python 3 but uses only built-in libraries, so there are no packages to install:",
             "To test, open Claude Code in any project and ask “Visualize this codebase.” Claude runs the script, generates codebase-map.html, and opens it in your browser.",
-            "This pattern works for any visual output: dependency graphs, test coverage reports, API documentation, or database schema visualizations. The bundled script does the heavy lifting while Claude handles orchestration."
+            "This pattern works for any visual output: dependency graphs, test coverage reports, API documentation, or database schema visualizations. The bundled script does the work while Claude handles orchestration."
           ],
           "codeBlocks": [
             "mkdir -p ~/.claude/skills/codebase-visualizer/scripts",
-            "---\nname: codebase-visualizer\ndescription: Generate an interactive collapsible tree visualization of your codebase. Use when exploring a new repo, understanding project structure, or identifying large files.\nallowed-tools: Bash(python *)\n---\n\n# Codebase Visualizer\n\nGenerate an interactive HTML tree view that shows your project's file structure with collapsible directories.\n\n## Usage\n\nRun the visualization script from your project root:\n\n```bash\npython ~/.claude/skills/codebase-visualizer/scripts/visualize.py .\n```\n\nThis creates `codebase-map.html` in the current directory and opens it in your default browser.\n\n## What the visualization shows\n\n- **Collapsible directories**: Click folders to expand/collapse\n- **File sizes**: Displayed next to each file\n- **Colors**: Different colors for different file types\n- **Directory totals**: Shows aggregate size of each folder",
-            "#!/usr/bin/env python3\n\"\"\"Generate an interactive collapsible tree visualization of a codebase.\"\"\"\n\nimport json\nimport sys\nimport webbrowser\nfrom pathlib import Path\nfrom collections import Counter\n\nIGNORE = {'.git', 'node_modules', '__pycache__', '.venv', 'venv', 'dist', 'build'}\n\ndef scan(path: Path, stats: dict) -> dict:\n    result = {\"name\": path.name, \"children\": [], \"size\": 0}\n    try:\n        for item in sorted(path.iterdir()):\n            if item.name in IGNORE or item.name.startswith('.'):\n                continue\n            if item.is_file():\n                size = item.stat().st_size\n                ext = item.suffix.lower() or '(no ext)'\n                result[\"children\"].append({\"name\": item.name, \"size\": size, \"ext\": ext})\n                result[\"size\"] += size\n                stats[\"files\"] += 1\n                stats[\"extensions\"][ext] += 1\n                stats[\"ext_sizes\"][ext] += size\n            elif item.is_dir():\n                stats[\"dirs\"] += 1\n                child = scan(item, stats)\n                if child[\"children\"]:\n                    result[\"children\"].append(child)\n                    result[\"size\"] += child[\"size\"]\n    except PermissionError:\n        pass\n    return result\n\ndef generate_html(data: dict, stats: dict, output: Path) -> None:\n    ext_sizes = stats[\"ext_sizes\"]\n    total_size = sum(ext_sizes.values()) or 1\n    sorted_exts = sorted(ext_sizes.items(), key=lambda x: -x[1])[:8]\n    colors = {\n        '.js': '#f7df1e', '.ts': '#3178c6', '.py': '#3776ab', '.go': '#00add8',\n        '.rs': '#dea584', '.rb': '#cc342d', '.css': '#264de4', '.html': '#e34c26',\n        '.json': '#6b7280', '.md': '#083fa1', '.yaml': '#cb171e', '.yml': '#cb171e',\n        '.mdx': '#083fa1', '.tsx': '#3178c6', '.jsx': '#61dafb', '.sh': '#4eaa25',\n    }\n    lang_bars = \"\".join(\n        f'<div class=\"bar-row\"><span class=\"bar-label\">{ext}</span>'\n        f'<div class=\"bar\" style=\"width:{(size/total_size)*100}%;background:{colors.get(ext,\"#6b7280\")}\"></div>'\n        f'<span class=\"bar-pct\">{(size/total_size)*100:.1f}%</span></div>'\n        for ext, size in sorted_exts\n    )\n    def fmt(b):\n        if b < 1024: return f\"{b} B\"\n        if b < 1048576: return f\"{b/1024:.1f} KB\"\n        return f\"{b/1048576:.1f} MB\"\n\n    html = f'''<!DOCTYPE html>\n<html><head>\n  <meta charset=\"utf-8\"><title>Codebase Explorer</title>\n  <style>\n    body {{ font: 14px/1.5 system-ui, sans-serif; margin: 0; background: #1a1a2e; color: #eee; }}\n    .container {{ display: flex; height: 100vh; }}\n    .sidebar {{ width: 280px; background: #252542; padding: 20px; border-right: 1px solid #3d3d5c; overflow-y: auto; flex-shrink: 0; }}\n    .main {{ flex: 1; padding: 20px; overflow-y: auto; }}\n    h1 {{ margin: 0 0 10px 0; font-size: 18px; }}\n    h2 {{ margin: 20px 0 10px 0; font-size: 14px; color: #888; text-transform: uppercase; }}\n    .stat {{ display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #3d3d5c; }}\n    .stat-value {{ font-weight: bold; }}\n    .bar-row {{ display: flex; align-items: center; margin: 6px 0; }}\n    .bar-label {{ width: 55px; font-size: 12px; color: #aaa; }}\n    .bar {{ height: 18px; border-radius: 3px; }}\n    .bar-pct {{ margin-left: 8px; font-size: 12px; color: #666; }}\n    .tree {{ list-style: none; padding-left: 20px; }}\n    details {{ cursor: pointer; }}\n    summary {{ padding: 4px 8px; border-radius: 4px; }}\n    summary:hover {{ background: #2d2d44; }}\n    .folder {{ color: #ffd700; }}\n    .file {{ display: flex; align-items: center; padding: 4px 8px; border-radius: 4px; }}\n    .file:hover {{ background: #2d2d44; }}\n    .size {{ color: #888; margin-left: auto; font-size: 12px; }}\n    .dot {{ width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; }}\n  </style>\n</head><body>\n  <div class=\"container\">\n    <div class=\"sidebar\">\n      <h1>📊 Summary</h1>\n      <div class=\"stat\"><span>Files</span><span class=\"stat-value\">{stats[\"files\"]:,}</span></div>\n      <div class=\"stat\"><span>Directories</span><span class=\"stat-value\">{stats[\"dirs\"]:,}</span></div>\n      <div class=\"stat\"><span>Total size</span><span class=\"stat-value\">{fmt(data[\"size\"])}</span></div>\n      <div class=\"stat\"><span>File types</span><span class=\"stat-value\">{len(stats[\"extensions\"])}</span></div>\n      <h2>By file type</h2>\n      {lang_bars}\n    </div>\n    <div class=\"main\">\n      <h1>📁 {data[\"name\"]}</h1>\n      <ul class=\"tree\" id=\"root\"></ul>\n    </div>\n  </div>\n  <script>\n    const data = {json.dumps(data)};\n    const colors = {json.dumps(colors)};\n    function fmt(b) {{ if (b < 1024) return b + ' B'; if (b < 1048576) return (b/1024).toFixed(1) + ' KB'; return (b/1048576).toFixed(1) + ' MB'; }}\n    function render(node, parent) {{\n      if (node.children) {{\n        const det = document.createElement('details');\n        det.open = parent === document.getElementById('root');\n        det.innerHTML = `<summary><span class=\"folder\">📁 ${{node.name}}</span><span class=\"size\">${{fmt(node.size)}}</span></summary>`;\n        const ul = document.createElement('ul'); ul.className = 'tree';\n        node.children.sort((a,b) => (b.children?1:0)-(a.children?1:0) || a.name.localeCompare(b.name));\n        node.children.forEach(c => render(c, ul));\n        det.appendChild(ul);\n        const li = document.createElement('li'); li.appendChild(det); parent.appendChild(li);\n      }} else {{\n        const li = document.createElement('li'); li.className = 'file';\n        li.innerHTML = `<span class=\"dot\" style=\"background:${{colors[node.ext]||'#6b7280'}}\"></span>${{node.name}}<span class=\"size\">${{fmt(node.size)}}</span>`;\n        parent.appendChild(li);\n      }}\n    }}\n    data.children.forEach(c => render(c, document.getElementById('root')));\n  </script>\n</body></html>'''\n    output.write_text(html)\n\nif __name__ == '__main__':\n    target = Path(sys.argv[1] if len(sys.argv) > 1 else '.').resolve()\n    stats = {\"files\": 0, \"dirs\": 0, \"extensions\": Counter(), \"ext_sizes\": Counter()}\n    data = scan(target, stats)\n    out = Path('codebase-map.html')\n    generate_html(data, stats, out)\n    print(f'Generated {out.absolute()}')\n    webbrowser.open(f'file://{out.absolute()}')"
+            "---\nname: codebase-visualizer\ndescription: Generate an interactive collapsible tree visualization of your codebase. Use when exploring a new repo, understanding project structure, or identifying large files.\nallowed-tools: Bash(python3 *)\n---\n\n# Codebase Visualizer\n\nGenerate an interactive HTML tree view that shows your project's file structure with collapsible directories.\n\n## Usage\n\nRun the visualization script from your project root:\n\n```bash\npython3 ${CLAUDE_SKILL_DIR}/scripts/visualize.py .\n```\n\nThis creates `codebase-map.html` in the current directory and opens it in your default browser.\n\n## What the visualization shows\n\n- **Collapsible directories**: Click folders to expand/collapse\n- **File sizes**: Displayed next to each file\n- **Colors**: Different colors for different file types\n- **Directory totals**: Shows aggregate size of each folder",
+            "#!/usr/bin/env python3\n\"\"\"Generate an interactive collapsible tree visualization of a codebase.\"\"\"\n\nimport json\nimport sys\nimport webbrowser\nfrom html import escape\nfrom pathlib import Path\nfrom collections import Counter\n\nIGNORE = {'.git', 'node_modules', '__pycache__', '.venv', 'venv', 'dist', 'build'}\n\ndef scan(path: Path, stats: dict) -> dict:\n    result = {\"name\": path.name, \"children\": [], \"size\": 0}\n    try:\n        for item in sorted(path.iterdir()):\n            if item.name in IGNORE or item.name.startswith('.'):\n                continue\n            if item.is_file():\n                size = item.stat().st_size\n                ext = item.suffix.lower() or '(no ext)'\n                result[\"children\"].append({\"name\": item.name, \"size\": size, \"ext\": ext})\n                result[\"size\"] += size\n                stats[\"files\"] += 1\n                stats[\"extensions\"][ext] += 1\n                stats[\"ext_sizes\"][ext] += size\n            elif item.is_dir():\n                stats[\"dirs\"] += 1\n                child = scan(item, stats)\n                if child[\"children\"]:\n                    result[\"children\"].append(child)\n                    result[\"size\"] += child[\"size\"]\n    except PermissionError:\n        pass\n    return result\n\ndef generate_html(data: dict, stats: dict, output: Path) -> None:\n    ext_sizes = stats[\"ext_sizes\"]\n    total_size = sum(ext_sizes.values()) or 1\n    sorted_exts = sorted(ext_sizes.items(), key=lambda x: -x[1])[:8]\n    colors = {\n        '.js': '#f7df1e', '.ts': '#3178c6', '.py': '#3776ab', '.go': '#00add8',\n        '.rs': '#dea584', '.rb': '#cc342d', '.css': '#264de4', '.html': '#e34c26',\n        '.json': '#6b7280', '.md': '#083fa1', '.yaml': '#cb171e', '.yml': '#cb171e',\n        '.mdx': '#083fa1', '.tsx': '#3178c6', '.jsx': '#61dafb', '.sh': '#4eaa25',\n    }\n    lang_bars = \"\".join(\n        f'<div class=\"bar-row\"><span class=\"bar-label\">{ext}</span>'\n        f'<div class=\"bar\" style=\"width:{(size/total_size)*100}%;background:{colors.get(ext,\"#6b7280\")}\"></div>'\n        f'<span class=\"bar-pct\">{(size/total_size)*100:.1f}%</span></div>'\n        for ext, size in sorted_exts\n    )\n    def fmt(b):\n        if b < 1024: return f\"{b} B\"\n        if b < 1048576: return f\"{b/1024:.1f} KB\"\n        return f\"{b/1048576:.1f} MB\"\n\n    html = f'''<!DOCTYPE html>\n<html><head>\n  <meta charset=\"utf-8\"><title>Codebase Explorer</title>\n  <style>\n    body {{ font: 14px/1.5 system-ui, sans-serif; margin: 0; background: #1a1a2e; color: #eee; }}\n    .container {{ display: flex; height: 100vh; }}\n    .sidebar {{ width: 280px; background: #252542; padding: 20px; border-right: 1px solid #3d3d5c; overflow-y: auto; flex-shrink: 0; }}\n    .main {{ flex: 1; padding: 20px; overflow-y: auto; }}\n    h1 {{ margin: 0 0 10px 0; font-size: 18px; }}\n    h2 {{ margin: 20px 0 10px 0; font-size: 14px; color: #888; text-transform: uppercase; }}\n    .stat {{ display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #3d3d5c; }}\n    .stat-value {{ font-weight: bold; }}\n    .bar-row {{ display: flex; align-items: center; margin: 6px 0; }}\n    .bar-label {{ width: 55px; font-size: 12px; color: #aaa; }}\n    .bar {{ height: 18px; border-radius: 3px; }}\n    .bar-pct {{ margin-left: 8px; font-size: 12px; color: #666; }}\n    .tree {{ list-style: none; padding-left: 20px; }}\n    details {{ cursor: pointer; }}\n    summary {{ padding: 4px 8px; border-radius: 4px; }}\n    summary:hover {{ background: #2d2d44; }}\n    .folder {{ color: #ffd700; }}\n    .file {{ display: flex; align-items: center; padding: 4px 8px; border-radius: 4px; }}\n    .file:hover {{ background: #2d2d44; }}\n    .size {{ color: #888; margin-left: auto; font-size: 12px; }}\n    .dot {{ width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; }}\n  </style>\n</head><body>\n  <div class=\"container\">\n    <div class=\"sidebar\">\n      <h1>📊 Summary</h1>\n      <div class=\"stat\"><span>Files</span><span class=\"stat-value\">{stats[\"files\"]:,}</span></div>\n      <div class=\"stat\"><span>Directories</span><span class=\"stat-value\">{stats[\"dirs\"]:,}</span></div>\n      <div class=\"stat\"><span>Total size</span><span class=\"stat-value\">{fmt(data[\"size\"])}</span></div>\n      <div class=\"stat\"><span>File types</span><span class=\"stat-value\">{len(stats[\"extensions\"])}</span></div>\n      <h2>By file type</h2>\n      {lang_bars}\n    </div>\n    <div class=\"main\">\n      <h1>📁 {escape(data[\"name\"])}</h1>\n      <ul class=\"tree\" id=\"root\"></ul>\n    </div>\n  </div>\n  <script>\n    const data = {json.dumps(data)};\n    const colors = {json.dumps(colors)};\n    function fmt(b) {{ if (b < 1024) return b + ' B'; if (b < 1048576) return (b/1024).toFixed(1) + ' KB'; return (b/1048576).toFixed(1) + ' MB'; }}\n    function esc(s) {{ return s.replace(/[&<>\"']/g, c => ({{\"&\":\"&amp;\",\"<\":\"&lt;\",\">\":\"&gt;\",'\"':\"&quot;\",\"'\":\"&#39;\"}}[c])); }}\n    function render(node, parent) {{\n      if (node.children) {{\n        const det = document.createElement('details');\n        det.open = parent === document.getElementById('root');\n        det.innerHTML = `<summary><span class=\"folder\">📁 ${{esc(node.name)}}</span><span class=\"size\">${{fmt(node.size)}}</span></summary>`;\n        const ul = document.createElement('ul'); ul.className = 'tree';\n        node.children.sort((a,b) => (b.children?1:0)-(a.children?1:0) || a.name.localeCompare(b.name));\n        node.children.forEach(c => render(c, ul));\n        det.appendChild(ul);\n        const li = document.createElement('li'); li.appendChild(det); parent.appendChild(li);\n      }} else {{\n        const li = document.createElement('li'); li.className = 'file';\n        li.innerHTML = `<span class=\"dot\" style=\"background:${{colors[node.ext]||'#6b7280'}}\"></span>${{esc(node.name)}}<span class=\"size\">${{fmt(node.size)}}</span>`;\n        parent.appendChild(li);\n      }}\n    }}\n    data.children.forEach(c => render(c, document.getElementById('root')));\n  </script>\n</body></html>'''\n    output.write_text(html)\n\nif __name__ == '__main__':\n    target = Path(sys.argv[1] if len(sys.argv) > 1 else '.').resolve()\n    stats = {\"files\": 0, \"dirs\": 0, \"extensions\": Counter(), \"ext_sizes\": Counter()}\n    data = scan(target, stats)\n    out = Path('codebase-map.html')\n    generate_html(data, stats, out)\n    print(f'Generated {out.absolute()}')\n    webbrowser.open(f'file://{out.absolute()}')"
           ]
         },
         {
@@ -11063,7 +10908,7 @@
           "title": "​Skill descriptions are cut short",
           "paragraphs": [
             "Skill descriptions are loaded into context so Claude knows what’s available. All skill names are always included, but if you have many skills, descriptions are shortened to fit the character budget, which can strip the keywords Claude needs to match your request. The budget scales dynamically at 1% of the context window, with a fallback of 8,000 characters.",
-            "To raise the limit, set the SLASH_COMMAND_TOOL_CHAR_BUDGET environment variable. Or trim the description and when_to_use text at the source: front-load the key use case, since each entry’s combined text is capped at 1,536 characters regardless of budget."
+            "To raise the limit, set the SLASH_COMMAND_TOOL_CHAR_BUDGET environment variable. Or trim the description and when_to_use text at the source: put the key use case first, since each entry’s combined text is capped at 1,536 characters regardless of budget."
           ],
           "codeBlocks": []
         },
@@ -11189,6 +11034,8 @@
         "If no notification appears",
         "osascript routes notifications through the built-in Script Editor app. If Script Editor doesn’t have notification permission, the command fails silently, and macOS won’t prompt you to grant it. Run this in Terminal once to make Script Editor appear in your notification settings:",
         "Nothing will appear yet. Open System Settings > Notifications, find Script Editor in the list, and turn on Allow Notifications. Run the command again to confirm the test notification appears.",
+        "The empty matcher fires on all notification types. To fire only on specific events, set it to one of these values:",
+        "Type /hooks and select Notification to confirm the hook is registered. For the full event schema, see the Notification reference.",
         "Automatically run Prettier on every file Claude edits, so formatting stays consistent without manual intervention.",
         "This hook uses the PostToolUse event with an Edit|Write matcher, so it runs only after file-editing tools. The command extracts the edited file path with jq and passes it to Prettier. Add this to .claude/settings.json in your project root:",
         "The Bash examples on this page use jq for JSON parsing. Install it with brew install jq (macOS), apt-get install jq (Debian/Ubuntu), or see jq downloads.",
@@ -11311,9 +11158,7 @@
         "Claude Code shows a JSON parsing error even though your hook script outputs valid JSON.",
         "When Claude Code runs a hook, it spawns a shell that sources your profile (~/.zshrc or ~/.bashrc). If your profile contains unconditional echo statements, that output gets prepended to your hook’s JSON:",
         "Claude Code tries to parse this as JSON and fails. To fix this, wrap echo statements in your shell profile so they only run in interactive shells:",
-        "The $- variable contains shell flags, and i means interactive. Hooks run in non-interactive shells, so the echo is skipped.",
-        "The transcript view, toggled with Ctrl+O, shows a one-line summary for each hook that fired: success is silent, blocking errors show stderr, and non-blocking errors show a <hook name> hook error notice followed by the first line of stderr.",
-        "For full execution details including which hooks matched, their exit codes, stdout, and stderr, read the debug log. Start Claude Code with claude --debug-file /tmp/claude.log to write to a known path, then tail -f /tmp/claude.log in another terminal. If you started without that flag, run /debug mid-session to enable logging and find the log path."
+        "The $- variable contains shell flags, and i means interactive. Hooks run in non-interactive shells, so the echo is skipped."
       ],
       "codeBlocks": [
         "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
@@ -11420,7 +11265,9 @@
             "Windows (PowerShell)",
             "If no notification appears",
             "osascript routes notifications through the built-in Script Editor app. If Script Editor doesn’t have notification permission, the command fails silently, and macOS won’t prompt you to grant it. Run this in Terminal once to make Script Editor appear in your notification settings:",
-            "Nothing will appear yet. Open System Settings > Notifications, find Script Editor in the list, and turn on Allow Notifications. Run the command again to confirm the test notification appears."
+            "Nothing will appear yet. Open System Settings > Notifications, find Script Editor in the list, and turn on Allow Notifications. Run the command again to confirm the test notification appears.",
+            "The empty matcher fires on all notification types. To fire only on specific events, set it to one of these values:",
+            "Type /hooks and select Notification to confirm the hook is registered. For the full event schema, see the Notification reference."
           ],
           "codeBlocks": [
             "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
@@ -12368,6 +12215,8 @@
         "​Basic usage",
         "​Start faster with bare mode",
         "​Examples",
+        "​Pipe data through Claude",
+        "​Add Claude to a build script",
         "​Get structured output",
         "​Stream responses",
         "​Auto-approve tools",
@@ -12380,6 +12229,8 @@
         "Basic usage",
         "Start faster with bare mode",
         "Examples",
+        "Pipe data through Claude",
+        "Add Claude to a build script",
         "Get structured output",
         "Stream responses",
         "Auto-approve tools",
@@ -12392,6 +12243,8 @@
         "Basic usage",
         "Start faster with bare mode",
         "Examples",
+        "Pipe data through Claude",
+        "Add Claude to a build script",
         "Get structured output",
         "Stream responses",
         "Auto-approve tools",
@@ -12418,6 +12271,11 @@
         "Bare mode skips OAuth and keychain reads. Anthropic authentication must come from ANTHROPIC_API_KEY or an apiKeyHelper in the JSON passed to --settings. Bedrock, Vertex, and Foundry use their usual provider credentials.",
         "--bare is the recommended mode for scripted and SDK calls, and will become the default for -p in a future release.",
         "These examples highlight common CLI patterns. For CI and other scripted calls, add --bare so they don’t pick up whatever happens to be configured locally.",
+        "Non-interactive mode reads stdin, so you can pipe data in and redirect the response out like any other command-line tool.",
+        "This example pipes a build log into Claude and writes the explanation to a file:",
+        "With --output-format json, the response payload includes total_cost_usd and a per-model cost breakdown, so scripted callers can track spend per invocation without consulting the usage dashboard.",
+        "You can wrap a non-interactive call in a script to use Claude as a project-specific linter or reviewer.",
+        "This package.json script pipes the diff against main into Claude and asks it to report typos. Piping the diff means Claude doesn’t need Bash permission to read it, and the escaped double quotes keep the script portable to Windows:",
         "Use --output-format to control how responses are returned:",
         "text (default): plain text output",
         "json: structured JSON with result, session ID, and metadata",
@@ -12451,6 +12309,8 @@
         "claude -p \"Find and fix the bug in auth.py\" --allowedTools \"Read,Edit,Bash\"",
         "claude -p \"What does the auth module do?\"",
         "claude --bare -p \"Summarize this file\" --allowedTools \"Read\"",
+        "cat build-error.txt | claude -p 'concisely explain the root cause of this build error' > output.txt",
+        "{\n  \"scripts\": {\n    \"lint:claude\": \"git diff main | claude -p \\\"you are a typo linter. for each typo in this diff, report filename:line on one line and the issue on the next. return nothing else.\\\"\"\n  }\n}",
         "claude -p \"Summarize this project\" --output-format json",
         "claude -p \"Extract the main function names from auth.py\" \\\n  --output-format json \\\n  --json-schema '{\"type\":\"object\",\"properties\":{\"functions\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}}},\"required\":[\"functions\"]}'",
         "# Extract the text result\nclaude -p \"Summarize this project\" --output-format json | jq -r '.result'\n\n# Extract structured output\nclaude -p \"Extract function names from auth.py\" \\\n  --output-format json \\\n  --json-schema '{\"type\":\"object\",\"properties\":{\"functions\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}}},\"required\":[\"functions\"]}' \\\n  | jq '.structured_output'",
@@ -12470,14 +12330,15 @@
             "Basic usage",
             "Start faster with bare mode",
             "Examples",
+            "Pipe data through Claude",
+            "Add Claude to a build script",
             "Get structured output",
             "Stream responses",
             "Auto-approve tools",
             "Create a commit",
             "Customize the system prompt",
             "Continue conversations",
-            "Next steps",
-            "Use the Agent SDK to run Claude Code programmatically from the CLI, Python, or TypeScript."
+            "Next steps"
           ],
           "codeBlocks": []
         },
@@ -12528,6 +12389,27 @@
             "These examples highlight common CLI patterns. For CI and other scripted calls, add --bare so they don’t pick up whatever happens to be configured locally."
           ],
           "codeBlocks": []
+        },
+        {
+          "title": "​Pipe data through Claude",
+          "paragraphs": [
+            "Non-interactive mode reads stdin, so you can pipe data in and redirect the response out like any other command-line tool.",
+            "This example pipes a build log into Claude and writes the explanation to a file:",
+            "With --output-format json, the response payload includes total_cost_usd and a per-model cost breakdown, so scripted callers can track spend per invocation without consulting the usage dashboard."
+          ],
+          "codeBlocks": [
+            "cat build-error.txt | claude -p 'concisely explain the root cause of this build error' > output.txt"
+          ]
+        },
+        {
+          "title": "​Add Claude to a build script",
+          "paragraphs": [
+            "You can wrap a non-interactive call in a script to use Claude as a project-specific linter or reviewer.",
+            "This package.json script pipes the diff against main into Claude and asks it to report typos. Piping the diff means Claude doesn’t need Bash permission to read it, and the escaped double quotes keep the script portable to Windows:"
+          ],
+          "codeBlocks": [
+            "{\n  \"scripts\": {\n    \"lint:claude\": \"git diff main | claude -p \\\"you are a typo linter. for each typo in this diff, report filename:line on one line and the issue on the next. return nothing else.\\\"\"\n  }\n}"
+          ]
         },
         {
           "title": "​Get structured output",
@@ -12612,6 +12494,312 @@
             "CLI reference: all CLI flags and options",
             "GitHub Actions: use the Agent SDK in GitHub workflows",
             "GitLab CI/CD: use the Agent SDK in GitLab pipelines",
+            "Was this page helpful?"
+          ],
+          "codeBlocks": []
+        }
+      ]
+    },
+    {
+      "section": "Automation",
+      "path": "/docs/en/deep-links",
+      "url": "https://code.claude.com/docs/en/deep-links",
+      "title": "Launch sessions from links",
+      "metaDescription": "Open a Claude Code terminal session from a URL. Embed claude-cli:// links in runbooks, alerts, and dashboards so a click opens Claude Code in the right repo with the right prompt.",
+      "headings": [
+        "Documentation Index",
+        "​How it works",
+        "​What a launched session shows",
+        "​Build a link",
+        "​Choose between cwd and repo",
+        "​Examples",
+        "​Embed a link in a runbook",
+        "​Open a link from the shell",
+        "​Registration and supported platforms",
+        "​Open a VS Code tab instead of a terminal",
+        "​Troubleshooting",
+        "​Clicking the link does nothing",
+        "​The link renders as plain text instead of being clickable",
+        "​The session opens in my home directory instead of the repo",
+        "​The link opens the wrong terminal",
+        "​Learn more"
+      ],
+      "toc": [
+        "How it works",
+        "What a launched session shows",
+        "Build a link",
+        "Choose between cwd and repo",
+        "Examples",
+        "Embed a link in a runbook",
+        "Open a link from the shell",
+        "Registration and supported platforms",
+        "Open a VS Code tab instead of a terminal",
+        "Troubleshooting",
+        "Clicking the link does nothing",
+        "The link renders as plain text instead of being clickable",
+        "The session opens in my home directory instead of the repo",
+        "The link opens the wrong terminal",
+        "Learn more"
+      ],
+      "paragraphs": [
+        "How it works",
+        "What a launched session shows",
+        "Build a link",
+        "Choose between cwd and repo",
+        "Examples",
+        "Embed a link in a runbook",
+        "Open a link from the shell",
+        "Registration and supported platforms",
+        "Open a VS Code tab instead of a terminal",
+        "Troubleshooting",
+        "Clicking the link does nothing",
+        "The link renders as plain text instead of being clickable",
+        "The session opens in my home directory instead of the repo",
+        "The link opens the wrong terminal",
+        "Learn more",
+        "Open a Claude Code terminal session from a URL. Embed claude-cli:// links in runbooks, alerts, and dashboards so a click opens Claude Code in the right repo with the right prompt.",
+        "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
+        "Use this file to discover all available pages before exploring further.",
+        "A deep link is a claude-cli:// URL that opens Claude Code in a new terminal window. The URL can carry a working directory and a prompt to pre-fill.",
+        "This lets you share a one-click starting point for a task: anyone with Claude Code installed who clicks the link sees a session open with the prompt already typed. The prompt is populated but not sent until you press Enter.",
+        "Because a deep link is a URL, you can put one anywhere a link can go:",
+        "An incident runbook step that opens the affected service’s repo with a diagnostic prompt",
+        "A monitoring alert or dashboard that links to an investigation prompt for a specific metric",
+        "A README or wiki page that opens the project with an onboarding prompt",
+        "A CI failure notification that pre-fills the failing job’s name",
+        "This page covers how to build a link, embed one in a runbook or trigger it from the shell, and manage or disable handler registration on each platform.",
+        "Deep links require Claude Code v2.1.91 or later.",
+        "The claude-cli:// prefix is a custom URL scheme that Claude Code registers with your operating system, similar to how mailto: links open your email client. The link can live on a web page, in a wiki, in a Slack message, or in any app that renders links. When you click one:",
+        "The browser or app hands the URL to your operating system.",
+        "The operating system recognizes the claude-cli:// prefix and starts Claude Code on your machine.",
+        "A new terminal window opens with Claude Code running in the directory the link specified, and the link’s prompt text already in the input box.",
+        "You read the prompt, edit it if you want, and press Enter to send it.",
+        "The link itself can be hosted anywhere, but the session always opens locally on the computer where you clicked. See Registration and supported platforms for which terminal emulator opens on each operating system.",
+        "The platform that displays the link must allow custom URL schemes. GitHub-rendered Markdown allows http and https but strips schemes like claude-cli:// in READMEs, issues, pull requests, and wikis. Only the link text shows, with no link behind it and the URL hidden. See Troubleshooting for a workaround.",
+        "A deep link never executes anything on its own. The link only chooses a directory and fills the prompt box. If you click a link from a page you do not trust, the prompt is still inert: nothing reaches the model until you read what was filled in and press Enter.",
+        "When the session opens, a banner above the input shows that an external link launched it and which directory it selected. For prompts over 1,000 characters, the banner tells you to scroll and review the full text before pressing Enter, since long prompts can push instructions off screen. Permission rules, CLAUDE.md, and trust prompts for the selected directory apply the same way as for any other session.",
+        "Every deep link starts with claude-cli://open, which is the only path the handler accepts, followed by optional query parameters. The minimal form opens Claude Code in your home directory with an empty prompt:",
+        "Add parameters to control where the session starts and what the prompt box contains:",
+        "cwd and repo are two ways to set the working directory. If you pass both, cwd takes precedence and repo is ignored, even if the cwd path does not exist.",
+        "The following link points at a repository called acme/payments with a two-line diagnostic prompt. Replace acme/payments with your repository’s owner/name slug when you build your own:",
+        "Clicking it opens a new terminal window, starts Claude Code in your local clone of acme/payments, and fills the prompt box with the decoded text:",
+        "You can edit the prompt before pressing Enter to send it. If you have no local clone of the repository, the session opens in your home directory instead. See Choose between cwd and repo for how the local path is selected when you have multiple clones or worktrees.",
+        "Use cwd when everyone who clicks the link has the project at the same absolute path, such as a standardized devcontainer or VM image.",
+        "Use repo when the link is shared and each person clones to a different location. Claude Code resolves the slug to a local path as follows:",
+        "Each time you run claude in a Git repository, that directory’s filesystem path is recorded against the repository’s GitHub owner/name slug.",
+        "When a deep link arrives, repo opens whichever matching path you used most recently. Multiple clones and worktrees are tracked separately, so it picks the one you worked in last.",
+        "The lookup only finds paths where you have already run Claude Code at least once.",
+        "The link does not change which branch is checked out. The session opens in whatever state that directory is currently in.",
+        "The launched session shows which path it picked and when that clone last fetched from the remote, so you can tell if you are looking at stale code.",
+        "The sections below show two common ways to use a deep link: as a Markdown link in a document and as a command in a script or shell alias.",
+        "A deep link in a runbook gives whoever is triaging a one-click way to start investigating in the right repository with a prepared prompt. The platform that renders the runbook must allow custom URL schemes. GitHub-rendered Markdown does not allow claude-cli://, so a deep link in a GitHub README, issue, or wiki shows only its label with no clickable link. See the troubleshooting note for a workaround.",
+        "The prompt is part of the URL and must be URL-encoded. To produce the encoded value, pass your prompt text through encodeURIComponent in a browser console or any URL encoder.",
+        "The example below adds an investigation entry point to an incident runbook for a service called web-gateway:",
+        "To use this in your own runbook, replace acme/web-gateway with your service’s repository slug. This allows engineers with Claude Code installed and a local clone of that repository to click step 2 and start investigating with the prompt ready to send.",
+        "You can also open a deep link from a shell script, alias, or automation rather than by clicking it. Call your operating system’s URL-opening command with the link as the argument.",
+        "The built-in open command passes the URL to the registered claude-cli:// handler:",
+        "Most desktop environments provide xdg-open, which passes the URL to the registered handler:",
+        "In PowerShell, Start-Process passes the URL to the registered handler:",
+        "In cmd.exe, start treats its first quoted argument as a window title, so pass an empty title before the URL:",
+        "Claude Code registers the claude-cli:// handler with your operating system the first time you start an interactive session on macOS, Linux, and Windows. You do not run a separate install command. Registration writes to user-level locations only:",
+        "The handler launches Claude Code in a detected terminal emulator. On macOS, Claude Code remembers the terminal from your most recent interactive session and reuses it, supporting iTerm2, Ghostty, kitty, Alacritty, WezTerm, and Terminal.app. On Linux it honors the $TERMINAL environment variable, then x-terminal-emulator, then a list of common emulators. On Windows it prefers Windows Terminal, then PowerShell, then cmd.exe.",
+        "To prevent registration entirely, set disableDeepLinkRegistration to \"disable\" in settings.json. To enforce this across an organization so users cannot re-enable it, set it in managed settings instead.",
+        "The VS Code extension registers its own handler at vscode://anthropic.claude-code/open, which opens a Claude Code editor tab rather than a terminal window. See Launch a VS Code tab from other tools for that URL’s parameters.",
+        "The handler likely is not registered yet. Start an interactive claude session once on that machine, exit, and try the link again. If you are on Linux without a desktop environment, xdg-open may have nothing to dispatch to.",
+        "Some Markdown renderers only allow http and https links and strip other URL schemes. GitHub does this in READMEs, issues, pull requests, and wikis: [label](claude-cli://...) renders as just label, with no link and the URL removed. On these platforms, put the deep link in a code block so readers can see the URL and paste it into their browser’s address bar.",
+        "The repo parameter only resolves to clones Claude Code has already seen. Run claude inside the clone once so its path is recorded, or switch the link to use cwd with an absolute path.",
+        "On macOS, start claude in your preferred terminal once and the next deep link will use it. On Linux, set the $TERMINAL environment variable to your preferred emulator’s command name. On Windows, the order is fixed: install Windows Terminal if you want links to open there instead of a PowerShell or cmd.exe window.",
+        "These pages cover related ways to launch or extend Claude Code sessions:",
+        "Skills: store a long runbook prompt as a /skill in the repo so the deep link’s q parameter only has to name it",
+        "Non-interactive mode: run Claude from a script and capture the output without opening a terminal",
+        "Was this page helpful?"
+      ],
+      "codeBlocks": [
+        "claude-cli://open",
+        "claude-cli://open?repo=acme/payments&q=Investigate%20the%20failed%20deploy%20of%20payments-api.%0ACheck%20recent%20commits%20to%20main%20and%20the%20last%20successful%20build.",
+        "Investigate the failed deploy of payments-api.\nCheck recent commits to main and the last successful build.",
+        "## High 5xx rate on web-gateway\n\n1. Acknowledge the page in PagerDuty.\n2. [Open Claude Code in the gateway repo](claude-cli://open?repo=acme/web-gateway&q=5xx%20rate%20is%20elevated%20on%20web-gateway.%20Check%20recent%20deploys%2C%20error%20logs%20from%20the%20last%2030%20minutes%2C%20and%20open%20incidents%20in%20Linear.)\n3. Post initial findings in #incident.",
+        "open \"claude-cli://open?repo=acme/payments&q=review%20open%20PRs\"",
+        "xdg-open \"claude-cli://open?repo=acme/payments&q=review%20open%20PRs\"",
+        "Start-Process \"claude-cli://open?repo=acme/payments&q=review%20open%20PRs\"",
+        "start \"\" \"claude-cli://open?repo=acme/payments&q=review%20open%20PRs\""
+      ],
+      "sectionBlocks": [
+        {
+          "title": "",
+          "paragraphs": [
+            "How it works",
+            "What a launched session shows",
+            "Build a link",
+            "Choose between cwd and repo",
+            "Examples",
+            "Embed a link in a runbook",
+            "Open a link from the shell",
+            "Registration and supported platforms",
+            "Open a VS Code tab instead of a terminal",
+            "Troubleshooting",
+            "Clicking the link does nothing",
+            "The link renders as plain text instead of being clickable"
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "Documentation Index",
+          "paragraphs": [
+            "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
+            "Use this file to discover all available pages before exploring further.",
+            "A deep link is a claude-cli:// URL that opens Claude Code in a new terminal window. The URL can carry a working directory and a prompt to pre-fill.",
+            "This lets you share a one-click starting point for a task: anyone with Claude Code installed who clicks the link sees a session open with the prompt already typed. The prompt is populated but not sent until you press Enter.",
+            "Because a deep link is a URL, you can put one anywhere a link can go:",
+            "An incident runbook step that opens the affected service’s repo with a diagnostic prompt",
+            "A monitoring alert or dashboard that links to an investigation prompt for a specific metric",
+            "A README or wiki page that opens the project with an onboarding prompt",
+            "A CI failure notification that pre-fills the failing job’s name",
+            "This page covers how to build a link, embed one in a runbook or trigger it from the shell, and manage or disable handler registration on each platform.",
+            "Deep links require Claude Code v2.1.91 or later."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​How it works",
+          "paragraphs": [
+            "The claude-cli:// prefix is a custom URL scheme that Claude Code registers with your operating system, similar to how mailto: links open your email client. The link can live on a web page, in a wiki, in a Slack message, or in any app that renders links. When you click one:",
+            "The browser or app hands the URL to your operating system.",
+            "The operating system recognizes the claude-cli:// prefix and starts Claude Code on your machine.",
+            "A new terminal window opens with Claude Code running in the directory the link specified, and the link’s prompt text already in the input box.",
+            "You read the prompt, edit it if you want, and press Enter to send it.",
+            "The link itself can be hosted anywhere, but the session always opens locally on the computer where you clicked. See Registration and supported platforms for which terminal emulator opens on each operating system.",
+            "The platform that displays the link must allow custom URL schemes. GitHub-rendered Markdown allows http and https but strips schemes like claude-cli:// in READMEs, issues, pull requests, and wikis. Only the link text shows, with no link behind it and the URL hidden. See Troubleshooting for a workaround."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​What a launched session shows",
+          "paragraphs": [
+            "A deep link never executes anything on its own. The link only chooses a directory and fills the prompt box. If you click a link from a page you do not trust, the prompt is still inert: nothing reaches the model until you read what was filled in and press Enter.",
+            "When the session opens, a banner above the input shows that an external link launched it and which directory it selected. For prompts over 1,000 characters, the banner tells you to scroll and review the full text before pressing Enter, since long prompts can push instructions off screen. Permission rules, CLAUDE.md, and trust prompts for the selected directory apply the same way as for any other session."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Build a link",
+          "paragraphs": [
+            "Every deep link starts with claude-cli://open, which is the only path the handler accepts, followed by optional query parameters. The minimal form opens Claude Code in your home directory with an empty prompt:",
+            "Add parameters to control where the session starts and what the prompt box contains:",
+            "cwd and repo are two ways to set the working directory. If you pass both, cwd takes precedence and repo is ignored, even if the cwd path does not exist.",
+            "The following link points at a repository called acme/payments with a two-line diagnostic prompt. Replace acme/payments with your repository’s owner/name slug when you build your own:",
+            "Clicking it opens a new terminal window, starts Claude Code in your local clone of acme/payments, and fills the prompt box with the decoded text:",
+            "You can edit the prompt before pressing Enter to send it. If you have no local clone of the repository, the session opens in your home directory instead. See Choose between cwd and repo for how the local path is selected when you have multiple clones or worktrees."
+          ],
+          "codeBlocks": [
+            "claude-cli://open",
+            "claude-cli://open?repo=acme/payments&q=Investigate%20the%20failed%20deploy%20of%20payments-api.%0ACheck%20recent%20commits%20to%20main%20and%20the%20last%20successful%20build.",
+            "Investigate the failed deploy of payments-api.\nCheck recent commits to main and the last successful build."
+          ]
+        },
+        {
+          "title": "​Choose between cwd and repo",
+          "paragraphs": [
+            "Use cwd when everyone who clicks the link has the project at the same absolute path, such as a standardized devcontainer or VM image.",
+            "Use repo when the link is shared and each person clones to a different location. Claude Code resolves the slug to a local path as follows:",
+            "Each time you run claude in a Git repository, that directory’s filesystem path is recorded against the repository’s GitHub owner/name slug.",
+            "When a deep link arrives, repo opens whichever matching path you used most recently. Multiple clones and worktrees are tracked separately, so it picks the one you worked in last.",
+            "The lookup only finds paths where you have already run Claude Code at least once.",
+            "The link does not change which branch is checked out. The session opens in whatever state that directory is currently in.",
+            "The launched session shows which path it picked and when that clone last fetched from the remote, so you can tell if you are looking at stale code."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Examples",
+          "paragraphs": [
+            "The sections below show two common ways to use a deep link: as a Markdown link in a document and as a command in a script or shell alias."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Embed a link in a runbook",
+          "paragraphs": [
+            "A deep link in a runbook gives whoever is triaging a one-click way to start investigating in the right repository with a prepared prompt. The platform that renders the runbook must allow custom URL schemes. GitHub-rendered Markdown does not allow claude-cli://, so a deep link in a GitHub README, issue, or wiki shows only its label with no clickable link. See the troubleshooting note for a workaround.",
+            "The prompt is part of the URL and must be URL-encoded. To produce the encoded value, pass your prompt text through encodeURIComponent in a browser console or any URL encoder.",
+            "The example below adds an investigation entry point to an incident runbook for a service called web-gateway:",
+            "To use this in your own runbook, replace acme/web-gateway with your service’s repository slug. This allows engineers with Claude Code installed and a local clone of that repository to click step 2 and start investigating with the prompt ready to send."
+          ],
+          "codeBlocks": [
+            "## High 5xx rate on web-gateway\n\n1. Acknowledge the page in PagerDuty.\n2. [Open Claude Code in the gateway repo](claude-cli://open?repo=acme/web-gateway&q=5xx%20rate%20is%20elevated%20on%20web-gateway.%20Check%20recent%20deploys%2C%20error%20logs%20from%20the%20last%2030%20minutes%2C%20and%20open%20incidents%20in%20Linear.)\n3. Post initial findings in #incident."
+          ]
+        },
+        {
+          "title": "​Open a link from the shell",
+          "paragraphs": [
+            "You can also open a deep link from a shell script, alias, or automation rather than by clicking it. Call your operating system’s URL-opening command with the link as the argument.",
+            "The built-in open command passes the URL to the registered claude-cli:// handler:",
+            "Most desktop environments provide xdg-open, which passes the URL to the registered handler:",
+            "In PowerShell, Start-Process passes the URL to the registered handler:",
+            "In cmd.exe, start treats its first quoted argument as a window title, so pass an empty title before the URL:"
+          ],
+          "codeBlocks": [
+            "open \"claude-cli://open?repo=acme/payments&q=review%20open%20PRs\"",
+            "xdg-open \"claude-cli://open?repo=acme/payments&q=review%20open%20PRs\"",
+            "Start-Process \"claude-cli://open?repo=acme/payments&q=review%20open%20PRs\"",
+            "start \"\" \"claude-cli://open?repo=acme/payments&q=review%20open%20PRs\""
+          ]
+        },
+        {
+          "title": "​Registration and supported platforms",
+          "paragraphs": [
+            "Claude Code registers the claude-cli:// handler with your operating system the first time you start an interactive session on macOS, Linux, and Windows. You do not run a separate install command. Registration writes to user-level locations only:",
+            "The handler launches Claude Code in a detected terminal emulator. On macOS, Claude Code remembers the terminal from your most recent interactive session and reuses it, supporting iTerm2, Ghostty, kitty, Alacritty, WezTerm, and Terminal.app. On Linux it honors the $TERMINAL environment variable, then x-terminal-emulator, then a list of common emulators. On Windows it prefers Windows Terminal, then PowerShell, then cmd.exe.",
+            "To prevent registration entirely, set disableDeepLinkRegistration to \"disable\" in settings.json. To enforce this across an organization so users cannot re-enable it, set it in managed settings instead."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Open a VS Code tab instead of a terminal",
+          "paragraphs": [
+            "The VS Code extension registers its own handler at vscode://anthropic.claude-code/open, which opens a Claude Code editor tab rather than a terminal window. See Launch a VS Code tab from other tools for that URL’s parameters."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Troubleshooting",
+          "paragraphs": [],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Clicking the link does nothing",
+          "paragraphs": [
+            "The handler likely is not registered yet. Start an interactive claude session once on that machine, exit, and try the link again. If you are on Linux without a desktop environment, xdg-open may have nothing to dispatch to."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​The link renders as plain text instead of being clickable",
+          "paragraphs": [
+            "Some Markdown renderers only allow http and https links and strip other URL schemes. GitHub does this in READMEs, issues, pull requests, and wikis: [label](claude-cli://...) renders as just label, with no link and the URL removed. On these platforms, put the deep link in a code block so readers can see the URL and paste it into their browser’s address bar."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​The session opens in my home directory instead of the repo",
+          "paragraphs": [
+            "The repo parameter only resolves to clones Claude Code has already seen. Run claude inside the clone once so its path is recorded, or switch the link to use cwd with an absolute path."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​The link opens the wrong terminal",
+          "paragraphs": [
+            "On macOS, start claude in your preferred terminal once and the next deep link will use it. On Linux, set the $TERMINAL environment variable to your preferred emulator’s command name. On Windows, the order is fixed: install Windows Terminal if you want links to open there instead of a PowerShell or cmd.exe window."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Learn more",
+          "paragraphs": [
+            "These pages cover related ways to launch or extend Claude Code sessions:",
+            "Skills: store a long runbook prompt as a /skill in the repo so the deep link’s q parameter only has to name it",
+            "Non-interactive mode: run Claude from a script and capture the output without opening a terminal",
             "Was this page helpful?"
           ],
           "codeBlocks": []
@@ -18276,7 +18464,7 @@
             "The claude_code.cost.usage metric helps with:",
             "Tracking usage trends across teams or individuals",
             "Identifying high-usage sessions for optimization",
-            "Cost metrics are approximations. For official billing data, refer to your API provider (Claude Console, AWS Bedrock, or Google Cloud Vertex)."
+            "Cost metrics are approximations. For official billing data, refer to your API provider (Claude Console, Amazon Bedrock, or Google Cloud Vertex)."
           ],
           "codeBlocks": []
         },
@@ -20516,7 +20704,7 @@
         "Analytics dashboard",
         "Server-managed settings",
         "Audit logs",
-        "ZDR for Claude Code on Claude for Enterprise applies only to Anthropic’s direct platform. For Claude deployments on AWS Bedrock, Google Vertex AI, or Microsoft Foundry, refer to those platforms’ data retention policies.",
+        "ZDR for Claude Code on Claude for Enterprise applies only to Anthropic’s direct platform. For Claude deployments on Amazon Bedrock, Google Vertex AI, or Microsoft Foundry, refer to those platforms’ data retention policies.",
         "ZDR covers Claude Code inference on Claude for Enterprise.",
         "ZDR is enabled on a per-organization basis. Each new organization requires ZDR to be enabled separately by your Anthropic account team. ZDR does not automatically apply to new organizations created under the same account. Contact your account team to enable ZDR for any new organizations.",
         "ZDR covers model inference calls made through Claude Code on Claude for Enterprise. When you use Claude Code in your terminal, the prompts you send and the responses Claude generates are not retained by Anthropic. This applies regardless of which Claude model is used.",
@@ -20555,7 +20743,7 @@
             "Analytics dashboard",
             "Server-managed settings",
             "Audit logs",
-            "ZDR for Claude Code on Claude for Enterprise applies only to Anthropic’s direct platform. For Claude deployments on AWS Bedrock, Google Vertex AI, or Microsoft Foundry, refer to those platforms’ data retention policies."
+            "ZDR for Claude Code on Claude for Enterprise applies only to Anthropic’s direct platform. For Claude deployments on Amazon Bedrock, Google Vertex AI, or Microsoft Foundry, refer to those platforms’ data retention policies."
           ],
           "codeBlocks": []
         },
@@ -22811,13 +22999,13 @@
         "​default model setting",
         "​opusplan model setting",
         "​Adjust effort level",
+        "​Extended thinking",
         "​Extended context",
         "​Checking your current model",
         "​Add a custom model option",
         "​Environment variables",
         "​Pin models for third-party deployments",
-        "​Customize pinned model display and capabilities",
-        "​Override model IDs per version"
+        "​Customize pinned model display and capabilities"
       ],
       "toc": [
         "Available models",
@@ -22833,13 +23021,13 @@
         "opusplan model setting",
         "Adjust effort level",
         "Choose an effort level",
+        "Use ultrathink for one-off deep reasoning",
         "Set the effort level",
         "Adaptive reasoning and fixed thinking budgets",
+        "Extended thinking",
         "Extended context",
         "Checking your current model",
-        "Add a custom model option",
-        "Environment variables",
-        "Pin models for third-party deployments"
+        "Add a custom model option"
       ],
       "paragraphs": [
         "Available models",
@@ -22855,8 +23043,10 @@
         "opusplan model setting",
         "Adjust effort level",
         "Choose an effort level",
+        "Use ultrathink for one-off deep reasoning",
         "Set the effort level",
         "Adaptive reasoning and fixed thinking budgets",
+        "Extended thinking",
         "Extended context",
         "Checking your current model",
         "Add a custom model option",
@@ -22920,7 +23110,7 @@
         "low, medium, high, and xhigh persist across sessions. max provides the deepest reasoning with no constraint on token spending and applies to the current session only, except when set through the CLAUDE_CODE_EFFORT_LEVEL environment variable.",
         "Each level trades token spend against capability. The default suits most coding tasks; adjust when you want a different balance.",
         "The effort scale is calibrated per model, so the same level name does not represent the same underlying value across models.",
-        "For one-off deep reasoning without changing your session setting, include “ultrathink” in your prompt. This adds an in-context instruction telling the model to reason more on that turn; it does not change the effort level sent to the API.",
+        "Include ultrathink anywhere in your prompt to request deeper reasoning on that turn without changing your session effort setting. Claude Code recognizes the keyword and adds an in-context instruction. The effort level sent to the API is unchanged. Other phrases such as “think”, “think hard”, and “think more” are passed through as ordinary prompt text and are not recognized as keywords.",
         "You can change effort through any of the following:",
         "/effort: run /effort with no arguments to open an interactive slider, /effort followed by a level name to set it directly, or /effort auto to reset to the model default",
         "In /model: use left/right arrow keys to adjust the effort slider when selecting a model",
@@ -22933,6 +23123,8 @@
         "Adaptive reasoning makes thinking optional on each step, so Claude can respond faster to routine prompts and reserve deeper thinking for steps that benefit from it. If you want Claude to think more or less often than the current level produces, you can say so directly in your prompt or in CLAUDE.md; the model responds to that guidance within its effort setting.",
         "Opus 4.7 always uses adaptive reasoning. The fixed thinking budget mode and CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING do not apply to it.",
         "On Opus 4.6 and Sonnet 4.6, you can set CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1 to revert to the previous fixed thinking budget controlled by MAX_THINKING_TOKENS. See environment variables.",
+        "Extended thinking is the reasoning Claude emits before responding. On models that support adaptive reasoning, the effort level is the primary control for how much thinking happens; the settings below turn thinking on or off and control how it displays.",
+        "Thinking output is collapsed by default. Press Ctrl+O to toggle verbose mode and see the reasoning as gray italic text. Interactive sessions on the Anthropic API receive redacted thinking blocks by default, so set showThinkingSummaries: true in settings if you want the full summaries available when you expand. You are charged for all thinking tokens generated, even when collapsed or redacted.",
         "Opus 4.7, Opus 4.6, and Sonnet 4.6 support a 1 million token context window for long sessions with large codebases.",
         "Availability varies by model and plan. On Max, Team, and Enterprise plans, Opus is automatically upgraded to 1M context with no additional configuration. This applies to both Team Standard and Team Premium seats.",
         "To disable 1M context entirely, set CLAUDE_CODE_DISABLE_1M_CONTEXT=1. This removes 1M model variants from the model picker. See environment variables.",
@@ -23138,10 +23330,18 @@
             "low, medium, high, and xhigh persist across sessions. max provides the deepest reasoning with no constraint on token spending and applies to the current session only, except when set through the CLAUDE_CODE_EFFORT_LEVEL environment variable.",
             "Each level trades token spend against capability. The default suits most coding tasks; adjust when you want a different balance.",
             "The effort scale is calibrated per model, so the same level name does not represent the same underlying value across models.",
-            "For one-off deep reasoning without changing your session setting, include “ultrathink” in your prompt. This adds an in-context instruction telling the model to reason more on that turn; it does not change the effort level sent to the API.",
+            "Include ultrathink anywhere in your prompt to request deeper reasoning on that turn without changing your session effort setting. Claude Code recognizes the keyword and adds an in-context instruction. The effort level sent to the API is unchanged. Other phrases such as “think”, “think hard”, and “think more” are passed through as ordinary prompt text and are not recognized as keywords.",
             "You can change effort through any of the following:",
             "/effort: run /effort with no arguments to open an interactive slider, /effort followed by a level name to set it directly, or /effort auto to reset to the model default",
             "In /model: use left/right arrow keys to adjust the effort slider when selecting a model"
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Extended thinking",
+          "paragraphs": [
+            "Extended thinking is the reasoning Claude emits before responding. On models that support adaptive reasoning, the effort level is the primary control for how much thinking happens; the settings below turn thinking on or off and control how it displays.",
+            "Thinking output is collapsed by default. Press Ctrl+O to toggle verbose mode and see the reasoning as gray italic text. Interactive sessions on the Anthropic API receive redacted thinking blocks by default, so set showThinkingSummaries: true in settings if you want the full summaries available when you expand. You are charged for all thinking tokens generated, even when collapsed or redacted."
           ],
           "codeBlocks": []
         },
