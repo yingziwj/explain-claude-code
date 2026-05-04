@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-03T05:38:49.977Z",
+  "generatedAt": "2026-05-04T05:45:29.887Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -2734,8 +2734,8 @@
         "Auto memory is on by default. To toggle it, open /memory in a session and use the auto memory toggle, or set autoMemoryEnabled in your project settings:",
         "To disable auto memory via environment variable, set CLAUDE_CODE_DISABLE_AUTO_MEMORY=1.",
         "Each project gets its own memory directory at ~/.claude/projects/<project>/memory/. The <project> path is derived from the git repository, so all worktrees and subdirectories within the same repo share one auto memory directory. Outside a git repo, the project root is used instead.",
-        "To store auto memory in a different location, set autoMemoryDirectory in your user or local settings:",
-        "This setting is accepted from policy, local, and user settings. It is not accepted from project settings (.claude/settings.json) to prevent a shared project from redirecting auto memory writes to sensitive locations.",
+        "To store auto memory in a different location, set autoMemoryDirectory in your user settings at ~/.claude/settings.json:",
+        "The value must be an absolute path or start with ~/. This setting is accepted from policy and user settings, and from the --settings flag. It is not accepted from project or local settings, since both files live inside the project directory and a cloned repository could supply either to redirect auto memory writes to sensitive locations.",
         "The directory contains a MEMORY.md entrypoint and optional topic files:",
         "MEMORY.md acts as an index of the memory directory. Claude reads and writes files in this directory throughout your session, using MEMORY.md to keep track of what’s stored where.",
         "Auto memory is machine-local. All worktrees and subdirectories within the same git repository share one auto memory directory. Files are not shared across machines or cloud environments.",
@@ -2983,8 +2983,8 @@
           "title": "​Storage location",
           "paragraphs": [
             "Each project gets its own memory directory at ~/.claude/projects/<project>/memory/. The <project> path is derived from the git repository, so all worktrees and subdirectories within the same repo share one auto memory directory. Outside a git repo, the project root is used instead.",
-            "To store auto memory in a different location, set autoMemoryDirectory in your user or local settings:",
-            "This setting is accepted from policy, local, and user settings. It is not accepted from project settings (.claude/settings.json) to prevent a shared project from redirecting auto memory writes to sensitive locations.",
+            "To store auto memory in a different location, set autoMemoryDirectory in your user settings at ~/.claude/settings.json:",
+            "The value must be an absolute path or start with ~/. This setting is accepted from policy and user settings, and from the --settings flag. It is not accepted from project or local settings, since both files live inside the project directory and a cloned repository could supply either to redirect auto memory writes to sensitive locations.",
             "The directory contains a MEMORY.md entrypoint and optional topic files:",
             "MEMORY.md acts as an index of the memory directory. Claude reads and writes files in this directory throughout your session, using MEMORY.md to keep track of what’s stored where.",
             "Auto memory is machine-local. All worktrees and subdirectories within the same git repository share one auto memory directory. Files are not shared across machines or cloud environments."
@@ -9504,9 +9504,9 @@
         "Plugins and marketplaces are highly trusted components that can execute arbitrary code on your machine with your user privileges. Only install plugins and add marketplaces from sources you trust. Organizations can restrict which marketplaces users are allowed to add using managed marketplace restrictions.",
         "If you see “unknown command” or the /plugin command doesn’t appear:",
         "Check your version: Run claude --version to see what’s installed.",
-        "Update Claude Code: Homebrew: brew upgrade claude-code (or brew upgrade claude-code@latest if you installed that cask) npm: npm update -g @anthropic-ai/claude-code Native installer: Re-run the install command from Setup",
+        "Update Claude Code: Homebrew: brew upgrade claude-code (or brew upgrade claude-code@latest if you installed that cask) npm: npm install -g @anthropic-ai/claude-code@latest Native installer: Re-run the install command from Setup",
         "Homebrew: brew upgrade claude-code (or brew upgrade claude-code@latest if you installed that cask)",
-        "npm: npm update -g @anthropic-ai/claude-code",
+        "npm: npm install -g @anthropic-ai/claude-code@latest",
         "Native installer: Re-run the install command from Setup",
         "Restart Claude Code: After updating, restart your terminal and run claude again.",
         "Marketplace not loading: Verify the URL is accessible and that .claude-plugin/marketplace.json exists at the path",
@@ -9854,9 +9854,9 @@
           "paragraphs": [
             "If you see “unknown command” or the /plugin command doesn’t appear:",
             "Check your version: Run claude --version to see what’s installed.",
-            "Update Claude Code: Homebrew: brew upgrade claude-code (or brew upgrade claude-code@latest if you installed that cask) npm: npm update -g @anthropic-ai/claude-code Native installer: Re-run the install command from Setup",
+            "Update Claude Code: Homebrew: brew upgrade claude-code (or brew upgrade claude-code@latest if you installed that cask) npm: npm install -g @anthropic-ai/claude-code@latest Native installer: Re-run the install command from Setup",
             "Homebrew: brew upgrade claude-code (or brew upgrade claude-code@latest if you installed that cask)",
-            "npm: npm update -g @anthropic-ai/claude-code",
+            "npm: npm install -g @anthropic-ai/claude-code@latest",
             "Native installer: Re-run the install command from Setup",
             "Restart Claude Code: After updating, restart your terminal and run claude again."
           ],
@@ -11116,7 +11116,7 @@
         "For decisions that require judgment rather than deterministic rules, use type: \"prompt\" hooks. Instead of running a shell command, Claude Code sends your prompt and the hook’s input data to a Claude model (Haiku by default) to make the decision. You can specify a different model with the model field if you need more capability.",
         "The model’s only job is to return a yes/no decision as JSON:",
         "\"ok\": true: the action proceeds",
-        "\"ok\": false: the action is blocked. The model’s \"reason\" is fed back to Claude so it can adjust.",
+        "\"ok\": false: the action is blocked. For Stop and SubagentStop hooks, the reason is fed back to Claude so it keeps working. For other events, the turn ends and the reason appears in the chat as a warning line. Claude does not see it.",
         "This example uses a Stop hook to ask the model whether all requested tasks are complete. If the model returns \"ok\": false, Claude keeps working and uses the reason as its next instruction:",
         "For full configuration options, see Prompt-based hooks in the reference.",
         "Agent hooks are experimental. Behavior and configuration may change in future releases. For production workflows, prefer command hooks.",
@@ -11432,7 +11432,7 @@
             "For decisions that require judgment rather than deterministic rules, use type: \"prompt\" hooks. Instead of running a shell command, Claude Code sends your prompt and the hook’s input data to a Claude model (Haiku by default) to make the decision. You can specify a different model with the model field if you need more capability.",
             "The model’s only job is to return a yes/no decision as JSON:",
             "\"ok\": true: the action proceeds",
-            "\"ok\": false: the action is blocked. The model’s \"reason\" is fed back to Claude so it can adjust.",
+            "\"ok\": false: the action is blocked. For Stop and SubagentStop hooks, the reason is fed back to Claude so it keeps working. For other events, the turn ends and the reason appears in the chat as a warning line. Claude does not see it.",
             "This example uses a Stop hook to ask the model whether all requested tasks are complete. If the model returns \"ok\": false, Claude keeps working and uses the reason as its next instruction:",
             "For full configuration options, see Prompt-based hooks in the reference."
           ],
