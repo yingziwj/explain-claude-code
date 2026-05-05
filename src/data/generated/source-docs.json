@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-04T05:45:29.887Z",
+  "generatedAt": "2026-05-05T05:24:16.612Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -1259,6 +1259,7 @@
         "Documentation Index"
       ],
       "toc": [
+        "2.1.128",
         "2.1.126",
         "2.1.123",
         "2.1.122",
@@ -1277,8 +1278,7 @@
         "2.1.108",
         "2.1.107",
         "2.1.105",
-        "2.1.101",
-        "2.1.98"
+        "2.1.101"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
@@ -1286,6 +1286,43 @@
         "Use this file to discover all available pages before exploring further.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Bare /color (no args) now picks a random session color",
+        "/mcp now shows the tool count for connected servers and flags servers that connected with 0 tools",
+        "--plugin-dir now accepts .zip plugin archives in addition to directories",
+        "--channels now works with console (API key) authentication — console orgs with managed settings must set channelsEnabled: true to enable",
+        "Updated /model picker: collapsed duplicate Opus 4.7 entries, and current Opus now shows as “Opus” instead of “Opus 4.7”",
+        "Subprocesses (Bash, hooks, MCP, LSP) no longer inherit OTEL_* environment variables, so OTEL-instrumented apps run via the Bash tool no longer pick up the CLI’s own OTLP endpoint",
+        "MCP: workspace is now a reserved server name — existing servers with that name will be skipped with a warning",
+        "Reconnecting MCP servers no longer flood the conversation with full tool-name lists on every reconnect — re-announced tools are summarized by server prefix",
+        "SDK hosts now receive a persistent localSettings suggestion for Bash permission prompts, so “Always allow” writes to .claude/settings.local.json",
+        "EnterWorktree now creates the new branch from local HEAD as documented, instead of origin/<default-branch> — unpushed commits are no longer dropped",
+        "Auto mode: when the classifier can’t evaluate an action, the error now includes a hint (retry, /compact, or run with --debug)",
+        "Fixed focus mode briefly dimming the previous response when submitting a new prompt",
+        "Fixed stray “4;0;” desktop notification on every /exit in Kitty and other terminals that interpret OSC 9 as a notification",
+        "Fixed Remote Control showing an empty “Opening your options…” message on rate limit instead of actionable upsell options",
+        "Fixed drag-and-drop image upload hanging on “Pasting text…” when the image read fails",
+        "Fixed crash loop when piping very large input (>10 MB) to claude -p via stdin",
+        "Fixed long URLs not being individually clickable on every wrapped row in fullscreen mode",
+        "Fixed /plugin Components panel showing “Marketplace ‘inline’ not found” for plugins loaded via --plugin-dir",
+        "Fixed MCP tool results dropping images when the server returns both structured content and content blocks",
+        "Fixed fenced code blocks inside list items carrying leading whitespace into the clipboard on copy-paste",
+        "Fixed tab navigation in /config stranding focus — the tab header now stays focused so arrows and Esc keep working",
+        "Fixed markdown link labels being lost on terminals without OSC 8 hyperlink support — links now render as label (url) instead of just the URL",
+        "Fixed sessions on 1M-context models with a smaller autocompact window being falsely blocked with “Prompt is too long” before reaching the actual API limit",
+        "Fixed parallel shell tool calls: a failing read-only command (grep, git diff, ls) no longer cancels sibling calls",
+        "Fixed banner showing “with X effort” on models that don’t support effort",
+        "Fixed /fast on 3P providers fuzzy-matching to an unrelated skill instead of showing “not available”",
+        "Fixed Bedrock default model resolving to global.* instead of the region-appropriate prefix",
+        "Fixed vim mode: Space in NORMAL mode now moves the cursor right, matching standard vi/vim behavior",
+        "Fixed terminal progress indicator (OSC 9;4) flickering off between tool calls — stays visible across the full turn",
+        "Fixed /rename without args failing on resumed sessions whose last entry is a compact boundary",
+        "Fixed stale “remote-control is active” status lines from prior sessions appearing after --resume/--continue",
+        "Fixed stale installed_plugins.json entries pointing at deleted cache directories polluting PATH",
+        "Fixed MCP stdio servers receiving corrupted arguments when CLAUDE_CODE_SHELL_PREFIX is set and an argument contains spaces or shell metacharacters",
+        "Fixed sub-agent progress summaries missing the prompt cache (~3× cache_creation reduction)",
+        "Fixed /plugin update never detecting new versions of npm-sourced plugins",
+        "Fixed sub-agent summaries firing repeatedly while a sub-agent’s transcript is static, capping worst-case token cost on idle sub-agents",
+        "Headless --output-format stream-json: init.plugin_errors now includes --plugin-dir load failures in addition to dependency demotions",
         "The /model picker now lists models from your gateway’s /v1/models endpoint when ANTHROPIC_BASE_URL points at an Anthropic-compatible gateway",
         "Added claude project purge [path] to delete all Claude Code state for a project (transcripts, tasks, file history, config entry) — supports --dry-run, -y/--yes, -i/--interactive, and --all",
         "--dangerously-skip-permissions now bypasses prompts for writes to .claude/, .git/, .vscode/, shell config files, and other previously-protected paths (catastrophic removal commands still prompt as a safety net)",
@@ -1423,44 +1460,7 @@
         "Fixed Rewind overlay showing “(no prompt)” for messages with image attachments",
         "Fixed auto mode overriding plan mode with conflicting “Execute immediately” instructions",
         "Fixed async PostToolUse hooks that emit no response payload writing empty entries to the session transcript",
-        "Fixed spinner staying on when a subagent task notification is orphaned in the queue",
-        "Tool search is now disabled by default on Vertex AI to avoid an unsupported beta header error (opt in with ENABLE_TOOL_SEARCH)",
-        "Fixed @-file Tab completion replacing the entire prompt when used inside a slash command with an absolute path",
-        "Fixed a stray p character appearing at the prompt on startup in macOS Terminal.app via Docker or SSH",
-        "Fixed ${ENV_VAR} placeholders in headers for HTTP/SSE/WebSocket MCP servers not being substituted before requests",
-        "Fixed MCP OAuth client secret stored via --client-secret not being sent during token exchange for servers requiring client_secret_post",
-        "Fixed /skills Enter key closing the dialog instead of pre-filling /<skill-name> in the prompt",
-        "Fixed /agents detail view mislabeling built-in tools unavailable to subagents as “Unrecognized”",
-        "Fixed MCP servers from plugins not spawning on Windows when the plugin cache was incomplete",
-        "Fixed /export showing the current default model instead of the model the conversation actually used",
-        "Fixed verbose output setting not persisting after restart",
-        "Fixed /usage progress bars overlapping with their “Resets …” labels",
-        "Fixed plugin MCP servers failing when ${user_config.*} references an optional field left blank",
-        "Fixed list items containing a sentence-final number wrapping the number onto its own line",
-        "Fixed /plan and /plan open not acting on the existing plan when entering plan mode",
-        "Fixed skills invoked before auto-compaction being re-executed against the next user message",
-        "Fixed /reload-plugins and /doctor reporting load errors for disabled plugins",
-        "Fixed Agent tool with isolation: \"worktree\" reusing stale worktrees from prior sessions",
-        "Fixed disabled MCP servers appearing as “failed” in /status",
-        "Fixed TaskList returning tasks in arbitrary filesystem order instead of sorted by ID",
-        "Fixed spurious “GitHub API rate limit exceeded” hints when gh output contained PR titles mentioning “rate limit”",
-        "Fixed SDK/bridge read_file not correctly enforcing size cap on growing files",
-        "Fixed PR not linked to session when working in a git worktree",
-        "Fixed /doctor warning about MCP server entries overridden by a higher-precedence scope",
-        "Windows: removed false-positive “Windows requires ‘cmd /c’ wrapper” MCP config warning",
-        "[VSCode] Fixed voice dictation’s first recording producing nothing on macOS while the microphone permission prompt is showing",
-        "Added vim visual mode (v) and visual-line mode (V) with selection, operators, and visual feedback",
-        "Merged /cost and /stats into /usage — both remain as typing shortcuts that open the relevant tab",
-        "Create and switch between named custom themes from /theme, or hand-edit JSON files in ~/.claude/themes/; plugins can also ship themes via a themes/ directory",
-        "Hooks can now invoke MCP tools directly via type: \"mcp_tool\"",
-        "Added DISABLE_UPDATES env var to completely block all update paths including manual claude update — stricter than DISABLE_AUTOUPDATER",
-        "WSL on Windows can now inherit Windows-side managed settings via the wslInheritsWindowsSettings policy key",
-        "Auto mode: include \"$defaults\" in autoMode.allow, autoMode.soft_deny, or autoMode.environment to add custom rules alongside the built-in list instead of replacing it",
-        "Added a “Don’t ask again” option to the auto mode opt-in prompt",
-        "Added claude plugin tag to create release git tags for plugins with version validation",
-        "--continue/--resume now find sessions that added the current directory via /add-dir",
-        "/color now syncs the session accent color to claude.ai/code when Remote Control is connected",
-        "The /model picker now honors ANTHROPIC_DEFAULT_*_MODEL_NAME/_DESCRIPTION overrides when using a custom ANTHROPIC_BASE_URL gateway"
+        "Fixed spinner staying on when a subagent task notification is orphaned in the queue"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1478,14 +1478,14 @@
             "Use this file to discover all available pages before exploring further.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "The /model picker now lists models from your gateway’s /v1/models endpoint when ANTHROPIC_BASE_URL points at an Anthropic-compatible gateway",
-            "Added claude project purge [path] to delete all Claude Code state for a project (transcripts, tasks, file history, config entry) — supports --dry-run, -y/--yes, -i/--interactive, and --all",
-            "--dangerously-skip-permissions now bypasses prompts for writes to .claude/, .git/, .vscode/, shell config files, and other previously-protected paths (catastrophic removal commands still prompt as a safety net)",
-            "claude auth login now accepts the OAuth code pasted into the terminal when the browser callback can’t reach localhost (WSL2, SSH, containers)",
-            "claude_code.skill_activated OpenTelemetry event now fires for user-typed slash commands and carries a new invocation_trigger attribute (\"user-slash\", \"claude-proactive\", or \"nested-skill\")",
-            "Auto mode: the spinner now turns red when a permission check stalls, instead of looking like the tool is running",
-            "Host-managed deployments (CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST) no longer auto-disable analytics on Bedrock/Vertex/Foundry",
-            "Windows: PowerShell 7 installed via the Microsoft Store, MSI without PATH, or .NET global tool is now detected"
+            "Bare /color (no args) now picks a random session color",
+            "/mcp now shows the tool count for connected servers and flags servers that connected with 0 tools",
+            "--plugin-dir now accepts .zip plugin archives in addition to directories",
+            "--channels now works with console (API key) authentication — console orgs with managed settings must set channelsEnabled: true to enable",
+            "Updated /model picker: collapsed duplicate Opus 4.7 entries, and current Opus now shows as “Opus” instead of “Opus 4.7”",
+            "Subprocesses (Bash, hooks, MCP, LSP) no longer inherit OTEL_* environment variables, so OTEL-instrumented apps run via the Bash tool no longer pick up the CLI’s own OTLP endpoint",
+            "MCP: workspace is now a reserved server name — existing servers with that name will be skipped with a warning",
+            "Reconnecting MCP servers no longer flood the conversation with full tool-name lists on every reconnect — re-announced tools are summarized by server prefix"
           ],
           "codeBlocks": []
         }
@@ -6070,6 +6070,7 @@
         "Fix common issues",
         "Extension won’t install",
         "Spark icon not visible",
+        "Cmd+Esc does nothing on macOS",
         "Claude Code never responds",
         "Uninstall the extension",
         "Next steps",
@@ -6213,8 +6214,7 @@
         "Tools exposed to the model. The server hosts a dozen tools, but only two are visible to the model. The rest are internal RPC the CLI uses for its own UI — opening diffs, reading selections, saving files — and are filtered out before the tool list reaches Claude.",
         "Jupyter execution always asks first. mcp__ide__executeCode can’t run anything silently. On each call, the code is inserted as a new cell at the end of the active notebook, VS Code scrolls it into view, and a native Quick Pick asks you to Execute or Cancel. Cancelling — or dismissing the picker with Esc — returns an error to Claude and nothing runs. The tool also refuses outright when there’s no active notebook, when the Jupyter extension (ms-toolsai.jupyter) isn’t installed, or when the kernel isn’t Python.",
         "The Quick Pick confirmation is separate from PreToolUse hooks. An allowlist entry for mcp__ide__executeCode lets Claude propose running a cell; the Quick Pick inside VS Code is what lets it actually run.",
-        "Ensure you have a compatible version of VS Code (1.98.0 or later)",
-        "Check that VS Code has permission to install extensions"
+        "Ensure you have a compatible version of VS Code (1.98.0 or later)"
       ],
       "codeBlocks": [
         "> Explain the logic in @auth (fuzzy matches auth.js, AuthService.ts, etc.)\n> What's in @src/components/ (include a trailing slash for folders)",
@@ -7534,13 +7534,15 @@
         "Project subagents are discovered by walking up from the current working directory. Directories added with --add-dir grant file access only and are not scanned for subagents. To share subagents across projects, use ~/.claude/agents/ or a plugin.",
         "User subagents (~/.claude/agents/) are personal subagents available in all your projects.",
         "CLI-defined subagents are passed as JSON when launching Claude Code. They exist only for that session and aren’t saved to disk, making them useful for quick testing or automation scripts. You can define multiple subagents in a single --agents call:",
+        "macOS, Linux, WSL",
+        "Windows PowerShell",
         "The --agents flag accepts JSON with the same frontmatter fields as file-based subagents: description, prompt, tools, disallowedTools, model, permissionMode, mcpServers, hooks, maxTurns, skills, initialPrompt, memory, effort, background, isolation, and color. Use prompt for the system prompt, equivalent to the markdown body in file-based subagents.",
         "Managed subagents are deployed by organization administrators. Place markdown files in .claude/agents/ inside the managed settings directory, using the same frontmatter format as project and user subagents. Managed definitions take precedence over project and user subagents with the same name.",
         "Plugin subagents come from plugins you’ve installed. They appear in /agents alongside your custom subagents. See the plugin components reference for details on creating plugin subagents.",
         "For security reasons, plugin subagents do not support the hooks, mcpServers, or permissionMode frontmatter fields. These fields are ignored when loading agents from a plugin. If you need them, copy the agent file into .claude/agents/ or ~/.claude/agents/. You can also add rules to permissions.allow in settings.json or settings.local.json, but these rules apply to the entire session, not just the plugin subagent.",
         "Subagent definitions from any of these scopes are also available to agent teams: when spawning a teammate, you can reference a subagent type and the teammate uses its tools and model, with the definition’s body appended to the teammate’s system prompt as additional instructions. See agent teams for which frontmatter fields apply on that path.",
         "Subagent files use YAML frontmatter for configuration, followed by the system prompt in Markdown:",
-        "Subagents are loaded at session start. If you create a subagent by manually adding a file, restart your session or use /agents to load it immediately.",
+        "Subagents are loaded at session start. If you add or edit a subagent file directly on disk, restart your session to load it. Subagents created through the /agents interface take effect immediately without a restart.",
         "The frontmatter defines the subagent’s metadata and configuration. The body becomes the system prompt that guides the subagent’s behavior. Subagents receive only this system prompt (plus basic environment details like working directory), not the full Claude Code system prompt.",
         "A subagent starts in the main conversation’s current working directory. Within a subagent, cd commands do not persist between Bash or PowerShell tool calls and do not affect the main conversation’s working directory. To give the subagent an isolated copy of the repository instead, set isolation: worktree.",
         "The following fields can be used in the YAML frontmatter. Only name and description are required.",
@@ -7592,21 +7594,20 @@
         "For more dynamic control over tool usage, use PreToolUse hooks to validate operations before they execute. This is useful when you need to allow some operations of a tool while blocking others.",
         "This example creates a subagent that only allows read-only database queries. The PreToolUse hook runs the script specified in command before each Bash command executes:",
         "Claude Code passes hook input as JSON via stdin to hook commands. The validation script reads this JSON, extracts the Bash command, and exits with code 2 to block write operations:",
-        "See Hook input for the complete input schema and exit codes for how exit codes affect behavior.",
+        "See Hook input for the complete input schema and exit codes for how exit codes affect behavior. On Windows, write hook scripts in PowerShell and add shell: powershell to the hook entry as shown in running hooks in PowerShell.",
         "You can prevent Claude from using specific subagents by adding them to the deny array in your settings. Use the format Agent(subagent-name) where subagent-name matches the subagent’s name field.",
         "This works for both built-in and custom subagents. You can also use the --disallowedTools CLI flag:",
         "See Permissions documentation for more details on permission rules.",
         "Subagents can define hooks that run during the subagent’s lifecycle. There are two ways to configure hooks:",
         "In the subagent’s frontmatter: Define hooks that run only while that subagent is active",
-        "In settings.json: Define hooks that run in the main session when subagents start or stop",
-        "Define hooks directly in the subagent’s markdown file. These hooks only run while that specific subagent is active and are cleaned up when it finishes.",
-        "Frontmatter hooks fire when the agent is spawned as a subagent through the Agent tool or an @-mention, and when the agent runs as the main session via --agent or the agent setting. In the main-session case they run alongside any hooks defined in settings.json."
+        "In settings.json: Define hooks that run in the main session when subagents start or stop"
       ],
       "codeBlocks": [
         "/agents",
         "A code improvement agent that scans files and suggests improvements\nfor readability, performance, and best practices. It should explain\neach issue, show the current code, and provide an improved version.",
         "Use the code-improver agent to suggest improvements in this project",
         "claude --agents '{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  },\n  \"debugger\": {\n    \"description\": \"Debugging specialist for errors and test failures.\",\n    \"prompt\": \"You are an expert debugger. Analyze errors, identify root causes, and provide fixes.\"\n  }\n}'",
+        "claude --agents @'\n{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  },\n  \"debugger\": {\n    \"description\": \"Debugging specialist for errors and test failures.\",\n    \"prompt\": \"You are an expert debugger. Analyze errors, identify root causes, and provide fixes.\"\n  }\n}\n'@",
         "---\nname: code-reviewer\ndescription: Reviews code for quality and best practices\ntools: Read, Glob, Grep\nmodel: sonnet\n---\n\nYou are a code reviewer. When invoked, analyze the code and provide\nspecific, actionable feedback on quality, security, and best practices.",
         "---\nname: safe-researcher\ndescription: Research agent with restricted capabilities\ntools: Read, Grep, Glob, Bash\n---",
         "---\nname: no-writes\ndescription: Inherits every tool except file writes\ndisallowedTools: Write, Edit\n---",
@@ -7633,8 +7634,7 @@
         "{\n  \"type\": \"system\",\n  \"subtype\": \"compact_boundary\",\n  \"compactMetadata\": {\n    \"trigger\": \"auto\",\n    \"preTokens\": 167189\n  }\n}",
         "/fork draft unit tests for the parser changes so far",
         "---\nname: code-reviewer\ndescription: Expert code review specialist. Proactively reviews code for quality, security, and maintainability. Use immediately after writing or modifying code.\ntools: Read, Grep, Glob, Bash\nmodel: inherit\n---\n\nYou are a senior code reviewer ensuring high standards of code quality and security.\n\nWhen invoked:\n1. Run git diff to see recent changes\n2. Focus on modified files\n3. Begin review immediately\n\nReview checklist:\n- Code is clear and readable\n- Functions and variables are well-named\n- No duplicated code\n- Proper error handling\n- No exposed secrets or API keys\n- Input validation implemented\n- Good test coverage\n- Performance considerations addressed\n\nProvide feedback organized by priority:\n- Critical issues (must fix)\n- Warnings (should fix)\n- Suggestions (consider improving)\n\nInclude specific examples of how to fix issues.",
-        "---\nname: debugger\ndescription: Debugging specialist for errors, test failures, and unexpected behavior. Use proactively when encountering any issues.\ntools: Read, Edit, Bash, Grep, Glob\n---\n\nYou are an expert debugger specializing in root cause analysis.\n\nWhen invoked:\n1. Capture error message and stack trace\n2. Identify reproduction steps\n3. Isolate the failure location\n4. Implement minimal fix\n5. Verify solution works\n\nDebugging process:\n- Analyze error messages and logs\n- Check recent code changes\n- Form and test hypotheses\n- Add strategic debug logging\n- Inspect variable states\n\nFor each issue, provide:\n- Root cause explanation\n- Evidence supporting the diagnosis\n- Specific code fix\n- Testing approach\n- Prevention recommendations\n\nFocus on fixing the underlying issue, not the symptoms.",
-        "---\nname: data-scientist\ndescription: Data analysis expert for SQL queries, BigQuery operations, and data insights. Use proactively for data analysis tasks and queries.\ntools: Bash, Read, Write\nmodel: sonnet\n---\n\nYou are a data scientist specializing in SQL and BigQuery analysis.\n\nWhen invoked:\n1. Understand the data analysis requirement\n2. Write efficient SQL queries\n3. Use BigQuery command line tools (bq) when appropriate\n4. Analyze and summarize results\n5. Present findings clearly\n\nKey practices:\n- Write optimized SQL queries with proper filters\n- Use appropriate aggregations and joins\n- Include comments explaining complex logic\n- Format results for readability\n- Provide data-driven recommendations\n\nFor each analysis:\n- Explain the query approach\n- Document any assumptions\n- Highlight key findings\n- Suggest next steps based on data\n\nAlways ensure queries are efficient and cost-effective."
+        "---\nname: debugger\ndescription: Debugging specialist for errors, test failures, and unexpected behavior. Use proactively when encountering any issues.\ntools: Read, Edit, Bash, Grep, Glob\n---\n\nYou are an expert debugger specializing in root cause analysis.\n\nWhen invoked:\n1. Capture error message and stack trace\n2. Identify reproduction steps\n3. Isolate the failure location\n4. Implement minimal fix\n5. Verify solution works\n\nDebugging process:\n- Analyze error messages and logs\n- Check recent code changes\n- Form and test hypotheses\n- Add strategic debug logging\n- Inspect variable states\n\nFor each issue, provide:\n- Root cause explanation\n- Evidence supporting the diagnosis\n- Specific code fix\n- Testing approach\n- Prevention recommendations\n\nFocus on fixing the underlying issue, not the symptoms."
       ],
       "sectionBlocks": [
         {
@@ -7740,6 +7740,8 @@
             "Project subagents are discovered by walking up from the current working directory. Directories added with --add-dir grant file access only and are not scanned for subagents. To share subagents across projects, use ~/.claude/agents/ or a plugin.",
             "User subagents (~/.claude/agents/) are personal subagents available in all your projects.",
             "CLI-defined subagents are passed as JSON when launching Claude Code. They exist only for that session and aren’t saved to disk, making them useful for quick testing or automation scripts. You can define multiple subagents in a single --agents call:",
+            "macOS, Linux, WSL",
+            "Windows PowerShell",
             "The --agents flag accepts JSON with the same frontmatter fields as file-based subagents: description, prompt, tools, disallowedTools, model, permissionMode, mcpServers, hooks, maxTurns, skills, initialPrompt, memory, effort, background, isolation, and color. Use prompt for the system prompt, equivalent to the markdown body in file-based subagents.",
             "Managed subagents are deployed by organization administrators. Place markdown files in .claude/agents/ inside the managed settings directory, using the same frontmatter format as project and user subagents. Managed definitions take precedence over project and user subagents with the same name.",
             "Plugin subagents come from plugins you’ve installed. They appear in /agents alongside your custom subagents. See the plugin components reference for details on creating plugin subagents.",
@@ -7747,14 +7749,15 @@
             "Subagent definitions from any of these scopes are also available to agent teams: when spawning a teammate, you can reference a subagent type and the teammate uses its tools and model, with the definition’s body appended to the teammate’s system prompt as additional instructions. See agent teams for which frontmatter fields apply on that path."
           ],
           "codeBlocks": [
-            "claude --agents '{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  },\n  \"debugger\": {\n    \"description\": \"Debugging specialist for errors and test failures.\",\n    \"prompt\": \"You are an expert debugger. Analyze errors, identify root causes, and provide fixes.\"\n  }\n}'"
+            "claude --agents '{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  },\n  \"debugger\": {\n    \"description\": \"Debugging specialist for errors and test failures.\",\n    \"prompt\": \"You are an expert debugger. Analyze errors, identify root causes, and provide fixes.\"\n  }\n}'",
+            "claude --agents @'\n{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  },\n  \"debugger\": {\n    \"description\": \"Debugging specialist for errors and test failures.\",\n    \"prompt\": \"You are an expert debugger. Analyze errors, identify root causes, and provide fixes.\"\n  }\n}\n'@"
           ]
         },
         {
           "title": "​Write subagent files",
           "paragraphs": [
             "Subagent files use YAML frontmatter for configuration, followed by the system prompt in Markdown:",
-            "Subagents are loaded at session start. If you create a subagent by manually adding a file, restart your session or use /agents to load it immediately.",
+            "Subagents are loaded at session start. If you add or edit a subagent file directly on disk, restart your session to load it. Subagents created through the /agents interface take effect immediately without a restart.",
             "The frontmatter defines the subagent’s metadata and configuration. The body becomes the system prompt that guides the subagent’s behavior. Subagents receive only this system prompt (plus basic environment details like working directory), not the full Claude Code system prompt.",
             "A subagent starts in the main conversation’s current working directory. Within a subagent, cd commands do not persist between Bash or PowerShell tool calls and do not affect the main conversation’s working directory. To give the subagent an isolated copy of the repository instead, set isolation: worktree.",
             "The following fields can be used in the YAML frontmatter. Only name and description are required."
@@ -8013,7 +8016,8 @@
             "A subagent that allows Bash access but validates commands to permit only read-only SQL queries. This example shows how to use PreToolUse hooks for conditional validation when you need finer control than the tools field provides.",
             "Claude Code passes hook input as JSON via stdin to hook commands. The validation script reads this JSON, extracts the command being executed, and checks it against a list of SQL write operations. If a write operation is detected, the script exits with code 2 to block execution and returns an error message to Claude via stderr.",
             "Create the validation script anywhere in your project. The path must match the command field in your hook configuration:",
-            "Make the script executable:",
+            "On macOS and Linux, make the script executable:",
+            "On Windows, write the validation script in PowerShell and add shell: powershell to the hook entry. See running hooks in PowerShell.",
             "The hook receives JSON via stdin with the Bash command in tool_input.command. Exit code 2 blocks the operation and feeds the error message back to Claude. See Hooks for details on exit codes and Hook input for the complete input schema."
           ],
           "codeBlocks": [
@@ -11116,7 +11120,10 @@
         "For decisions that require judgment rather than deterministic rules, use type: \"prompt\" hooks. Instead of running a shell command, Claude Code sends your prompt and the hook’s input data to a Claude model (Haiku by default) to make the decision. You can specify a different model with the model field if you need more capability.",
         "The model’s only job is to return a yes/no decision as JSON:",
         "\"ok\": true: the action proceeds",
-        "\"ok\": false: the action is blocked. For Stop and SubagentStop hooks, the reason is fed back to Claude so it keeps working. For other events, the turn ends and the reason appears in the chat as a warning line. Claude does not see it.",
+        "\"ok\": false: what happens depends on the event: Stop and SubagentStop: the reason is fed back to Claude so it keeps working PreToolUse: the tool call is denied and the reason is returned to Claude as the tool error, so it can adjust and continue PostToolUse, PostToolBatch, UserPromptSubmit, and UserPromptExpansion: the turn ends and the reason appears in the chat as a warning line",
+        "Stop and SubagentStop: the reason is fed back to Claude so it keeps working",
+        "PreToolUse: the tool call is denied and the reason is returned to Claude as the tool error, so it can adjust and continue",
+        "PostToolUse, PostToolBatch, UserPromptSubmit, and UserPromptExpansion: the turn ends and the reason appears in the chat as a warning line",
         "This example uses a Stop hook to ask the model whether all requested tasks are complete. If the model returns \"ok\": false, Claude keeps working and uses the reason as its next instruction:",
         "For full configuration options, see Prompt-based hooks in the reference.",
         "Agent hooks are experimental. Behavior and configuration may change in future releases. For production workflows, prefer command hooks.",
@@ -11155,10 +11162,7 @@
         "Confirm the settings file is in the correct location: .claude/settings.json for project hooks, ~/.claude/settings.json for global hooks",
         "Claude keeps working in an infinite loop instead of stopping.",
         "Your Stop hook script needs to check whether it already triggered a continuation. Parse the stop_hook_active field from the JSON input and exit early if it’s true:",
-        "Claude Code shows a JSON parsing error even though your hook script outputs valid JSON.",
-        "When Claude Code runs a hook, it spawns a shell that sources your profile (~/.zshrc or ~/.bashrc). If your profile contains unconditional echo statements, that output gets prepended to your hook’s JSON:",
-        "Claude Code tries to parse this as JSON and fails. To fix this, wrap echo statements in your shell profile so they only run in interactive shells:",
-        "The $- variable contains shell flags, and i means interactive. Hooks run in non-interactive shells, so the echo is skipped."
+        "Claude Code shows a JSON parsing error even though your hook script outputs valid JSON."
       ],
       "codeBlocks": [
         "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
@@ -11432,7 +11436,10 @@
             "For decisions that require judgment rather than deterministic rules, use type: \"prompt\" hooks. Instead of running a shell command, Claude Code sends your prompt and the hook’s input data to a Claude model (Haiku by default) to make the decision. You can specify a different model with the model field if you need more capability.",
             "The model’s only job is to return a yes/no decision as JSON:",
             "\"ok\": true: the action proceeds",
-            "\"ok\": false: the action is blocked. For Stop and SubagentStop hooks, the reason is fed back to Claude so it keeps working. For other events, the turn ends and the reason appears in the chat as a warning line. Claude does not see it.",
+            "\"ok\": false: what happens depends on the event: Stop and SubagentStop: the reason is fed back to Claude so it keeps working PreToolUse: the tool call is denied and the reason is returned to Claude as the tool error, so it can adjust and continue PostToolUse, PostToolBatch, UserPromptSubmit, and UserPromptExpansion: the turn ends and the reason appears in the chat as a warning line",
+            "Stop and SubagentStop: the reason is fed back to Claude so it keeps working",
+            "PreToolUse: the tool call is denied and the reason is returned to Claude as the tool error, so it can adjust and continue",
+            "PostToolUse, PostToolBatch, UserPromptSubmit, and UserPromptExpansion: the turn ends and the reason appears in the chat as a warning line",
             "This example uses a Stop hook to ask the model whether all requested tasks are complete. If the model returns \"ok\": false, Claude keeps working and uses the reason as its next instruction:",
             "For full configuration options, see Prompt-based hooks in the reference."
           ],
@@ -13026,7 +13033,9 @@
         "If you’re actually on musl, such as Alpine Linux, install the required packages:",
         "If running claude or the installer prints Illegal instruction, the native binary uses CPU instructions your processor doesn’t support. There are two distinct causes.",
         "Architecture mismatch. The installer downloaded the wrong binary, for example x86 on an ARM server. Check with uname -m on macOS or Linux, or $env:PROCESSOR_ARCHITECTURE in PowerShell. If the result doesn’t match the binary you received, file a GitHub issue with the output.",
-        "Missing instruction set on older CPUs. If your architecture is correct but you still see Illegal instruction, your CPU likely lacks AVX or another instruction the binary requires. This affects roughly pre-2013 Intel and AMD processors. There is currently no native-binary workaround; track issue #50384 for status, and include your CPU model from cat /proc/cpuinfo | grep \"model name\" | head -1 on Linux or sysctl -n machdep.cpu.brand_string on macOS when reporting.",
+        "Missing AVX instruction set. If your architecture is correct but you still see Illegal instruction, your CPU likely lacks AVX or another instruction the binary requires. This affects roughly pre-2013 Intel and AMD processors, and virtual machines where the hypervisor does not pass AVX through to the guest.",
+        "On a VPS or VM, run grep -m1 -ow avx /proc/cpuinfo; an empty result means AVX is not available to the guest.",
+        "There is no native-binary workaround; track issue #50384 for status, and include your CPU model from grep -m1 \"model name\" /proc/cpuinfo on Linux or sysctl -n machdep.cpu.brand_string on macOS when reporting.",
         "Alternative install methods download the same native binary and won’t resolve either cause.",
         "If you see dyld: cannot load, dyld: Symbol not found, or Abort trap: 6 during installation, the binary is incompatible with your macOS version or hardware.",
         "A Symbol not found error that references libicucore also indicates your macOS version is older than the binary supports:",
@@ -13034,9 +13043,7 @@
         "Update macOS if you’re on an older version. The binary uses load commands and system libraries that older macOS versions don’t support. Alternative install methods like Homebrew download the same binary and won’t resolve this error.",
         "If running claude in WSL prints cannot execute binary file: Exec format error, you’re on WSL1 and hitting a known native-binary regression tracked in issue #38788. The binary’s program headers changed in a way WSL1’s loader can’t handle.",
         "The cleanest fix is to convert your distribution to WSL2 from PowerShell:",
-        "If you need to stay on WSL1, invoke the binary through the dynamic linker. Add this function to ~/.bashrc inside WSL, replacing the path if your home directory differs:",
-        "Then run source ~/.bashrc and retry claude.",
-        "These issues apply if you installed Claude Code with npm install -g inside WSL. If you used the native installer, skip this section."
+        "If you need to stay on WSL1, invoke the binary through the dynamic linker. Add this function to ~/.bashrc inside WSL, replacing the path if your home directory differs:"
       ],
       "codeBlocks": [
         "curl -sI https://downloads.claude.ai/claude-code-releases/latest",
@@ -13430,7 +13437,9 @@
           "paragraphs": [
             "If running claude or the installer prints Illegal instruction, the native binary uses CPU instructions your processor doesn’t support. There are two distinct causes.",
             "Architecture mismatch. The installer downloaded the wrong binary, for example x86 on an ARM server. Check with uname -m on macOS or Linux, or $env:PROCESSOR_ARCHITECTURE in PowerShell. If the result doesn’t match the binary you received, file a GitHub issue with the output.",
-            "Missing instruction set on older CPUs. If your architecture is correct but you still see Illegal instruction, your CPU likely lacks AVX or another instruction the binary requires. This affects roughly pre-2013 Intel and AMD processors. There is currently no native-binary workaround; track issue #50384 for status, and include your CPU model from cat /proc/cpuinfo | grep \"model name\" | head -1 on Linux or sysctl -n machdep.cpu.brand_string on macOS when reporting.",
+            "Missing AVX instruction set. If your architecture is correct but you still see Illegal instruction, your CPU likely lacks AVX or another instruction the binary requires. This affects roughly pre-2013 Intel and AMD processors, and virtual machines where the hypervisor does not pass AVX through to the guest.",
+            "On a VPS or VM, run grep -m1 -ow avx /proc/cpuinfo; an empty result means AVX is not available to the guest.",
+            "There is no native-binary workaround; track issue #50384 for status, and include your CPU model from grep -m1 \"model name\" /proc/cpuinfo on Linux or sysctl -n machdep.cpu.brand_string on macOS when reporting.",
             "Alternative install methods download the same native binary and won’t resolve either cause."
           ],
           "codeBlocks": []
@@ -18197,7 +18206,7 @@
         "Incremented when user accepts or rejects Edit, Write, or NotebookEdit tool usage.",
         "tool_name: Tool name (\"Edit\", \"Write\", \"NotebookEdit\")",
         "decision: User decision (\"accept\", \"reject\")",
-        "source: Decision source - \"config\", \"hook\", \"user_permanent\", \"user_temporary\", \"user_abort\", or \"user_reject\"",
+        "source: Where the decision came from. One of \"config\", \"hook\", \"user_permanent\", \"user_temporary\", \"user_abort\", or \"user_reject\". See the Tool decision event for what each value means.",
         "language: Programming language of the edited file, such as \"TypeScript\", \"Python\", \"JavaScript\", or \"Markdown\". Returns \"unknown\" for unrecognized file extensions.",
         "Tracks actual time spent actively using Claude Code, excluding idle time. This metric is incremented during user interactions (typing, reading responses) and during CLI processing (tool execution, AI response generation).",
         "type: \"user\" for keyboard interactions, \"cli\" for tool execution and AI responses",
@@ -18224,7 +18233,7 @@
         "error_type: Error category string when the tool failed, such as \"Error:ENOENT\" or \"ShellError\"",
         "error (when OTEL_LOG_TOOL_DETAILS=1): Full error message when the tool failed",
         "decision_type: Either \"accept\" or \"reject\"",
-        "decision_source: Decision source - \"config\", \"hook\", \"user_permanent\", \"user_temporary\", \"user_abort\", or \"user_reject\"",
+        "decision_source: Where the decision came from. One of \"config\", \"hook\", \"user_permanent\", \"user_temporary\", \"user_abort\", or \"user_reject\". See the Tool decision event for what each value means.",
         "tool_input_size_bytes: Size of the JSON-serialized tool input in bytes",
         "tool_result_size_bytes: Size of the tool result in bytes",
         "mcp_server_scope: MCP server scope identifier (for MCP tools)",
@@ -23967,7 +23976,7 @@
         "Color values accept #rrggbb, #rgb, rgb(r,g,b), ansi256(n), or ansi:<name> where <name> is one of the 16 standard ANSI color names such as red or cyanBright. Unknown tokens and invalid color values are ignored, so a typo cannot break rendering.",
         "The following example defines a theme that keeps the dark preset but recolors the prompt accent, error text, and success text:",
         "Claude Code watches ~/.claude/themes/ and reloads when a file changes, so edits made in your editor apply to a running session without a restart.",
-        "Below is the full list of customizations you can set in overrides. The interactive editor in /theme shows the same tokens with a live preview, including a small number of internal tokens not covered here.",
+        "The reference below covers the tokens you can set in overrides. The interactive editor in /theme shows the same tokens with a live preview, plus a few single-purpose accents such as onboarding screen colors that are omitted here.",
         "Color token reference",
         "The following example combines tokens from several of the groups below: the brand accent, the plan mode border, the diff backgrounds, and the fullscreen message background.",
         "Control the primary brand accent and the foreground text shades used throughout the interface.",
@@ -23975,8 +23984,16 @@
         "Set the input box border color and the accent shown while a permission mode or indicator is active.",
         "Color added and removed code in file edits and reviews.",
         "Apply only in fullscreen rendering mode, where messages have a background fill.",
-        "Several tokens have a paired Shimmer variant, such as claudeShimmer and warningShimmer, that supplies the lighter color used in the spinner’s animated gradient. Override the shimmer alongside its base token if the animation looks mismatched.",
+        "Adjust the bar shown in the /usage view and the labels that distinguish your messages from Claude’s.",
+        "Several tokens have a paired shimmer variant that supplies the lighter color used in the spinner’s animated gradient. Override the shimmer alongside its base token if the animation looks mismatched.",
+        "claude and claudeShimmer",
+        "warning and warningShimmer",
+        "permission and permissionShimmer",
+        "promptBorder and promptBorderShimmer",
+        "inactive and inactiveShimmer",
+        "fastMode and fastModeShimmer",
         "Each subagent and parallel task is shown in one of eight named colors so you can tell them apart in the transcript. The token names follow the pattern <color>_FOR_SUBAGENTS_ONLY, where <color> is red, blue, green, yellow, purple, orange, pink, or cyan. Override these to change what each named color looks like. For example, a subagent with color: blue in its definition is drawn using the blue_FOR_SUBAGENTS_ONLY value.",
+        "The ultrathink and ultraplan keywords in the prompt input are rendered with a seven-color rainbow gradient. The token names follow the pattern rainbow_<color> and rainbow_<color>_shimmer, where <color> is red, orange, yellow, green, blue, indigo, or violet.",
         "If the display flickers or the scroll position jumps while Claude is working, switch to fullscreen rendering mode. It draws to a separate screen the terminal reserves for full-screen apps instead of appending to your normal scrollback, which keeps memory usage flat and adds mouse support for scrolling and selection. In this mode you scroll with the mouse or PageUp inside Claude Code rather than with your terminal’s native scrollback; see the fullscreen page for how to search and copy.",
         "Run /tui fullscreen to switch in the current session with your conversation intact. To make it the default, set the CLAUDE_CODE_NO_FLICKER environment variable before starting Claude Code:",
         "When you paste more than 10,000 characters into the prompt, Claude Code collapses the input to a [Pasted text] placeholder so the input box stays usable. The full content is still sent to Claude when you submit.",
@@ -24109,7 +24126,7 @@
             "Color values accept #rrggbb, #rgb, rgb(r,g,b), ansi256(n), or ansi:<name> where <name> is one of the 16 standard ANSI color names such as red or cyanBright. Unknown tokens and invalid color values are ignored, so a typo cannot break rendering.",
             "The following example defines a theme that keeps the dark preset but recolors the prompt accent, error text, and success text:",
             "Claude Code watches ~/.claude/themes/ and reloads when a file changes, so edits made in your editor apply to a running session without a restart.",
-            "Below is the full list of customizations you can set in overrides. The interactive editor in /theme shows the same tokens with a live preview, including a small number of internal tokens not covered here.",
+            "The reference below covers the tokens you can set in overrides. The interactive editor in /theme shows the same tokens with a live preview, plus a few single-purpose accents such as onboarding screen colors that are omitted here.",
             "Color token reference",
             "The following example combines tokens from several of the groups below: the brand accent, the plan mode border, the diff backgrounds, and the fullscreen message background.",
             "Control the primary brand accent and the foreground text shades used throughout the interface.",
@@ -24482,7 +24499,8 @@
         "If your language setting is not in the supported list, /voice warns you on enable and falls back to English for dictation. Claude’s text responses are not affected by this fallback.",
         "The dictation key is bound to voice:pushToTalk in the Chat context and defaults to Space. The same binding controls both hold and tap modes. Rebind it in ~/.claude/keybindings.json:",
         "Setting \"space\": null removes the default binding. Omit it if you want both keys active.",
-        "In hold mode, avoid binding a bare letter key like v since hold detection relies on key-repeat and the letter types into the prompt during warmup. Use Space, or use a modifier combination like meta+k to start recording on the first keypress with no warmup. Tap mode has no warmup, so any key works. See customize keyboard shortcuts for the full keybinding syntax.",
+        "In hold mode, avoid binding a bare letter key like v since hold detection relies on key-repeat and the letter types into the prompt during warmup. Use Space, or use a modifier combination like meta+k to start recording on the first keypress with no warmup. Tap mode has no warmup, so most keys work.",
+        "Some keys are not delivered to terminal applications and cannot be bound at all. For example, Caps Lock shows an error if you try to bind it. See customize keyboard shortcuts for the full keybinding syntax and the list of reserved shortcuts.",
         "Common issues when voice dictation does not activate or record:",
         "Voice mode requires a Claude.ai account: you are authenticated with an API key or a third-party provider. Run /login to sign in with a Claude.ai account.",
         "Microphone access is denied: grant microphone permission to your terminal in system settings. On macOS, go to System Settings → Privacy & Security → Microphone and enable your terminal app, then run /voice again. On Windows, go to Settings → Privacy & security → Microphone and turn on microphone access for desktop apps, then run /voice again. If your terminal isn’t listed in the macOS settings, see Terminal not listed in macOS Microphone settings.",
@@ -24604,7 +24622,8 @@
           "paragraphs": [
             "The dictation key is bound to voice:pushToTalk in the Chat context and defaults to Space. The same binding controls both hold and tap modes. Rebind it in ~/.claude/keybindings.json:",
             "Setting \"space\": null removes the default binding. Omit it if you want both keys active.",
-            "In hold mode, avoid binding a bare letter key like v since hold detection relies on key-repeat and the letter types into the prompt during warmup. Use Space, or use a modifier combination like meta+k to start recording on the first keypress with no warmup. Tap mode has no warmup, so any key works. See customize keyboard shortcuts for the full keybinding syntax."
+            "In hold mode, avoid binding a bare letter key like v since hold detection relies on key-repeat and the letter types into the prompt during warmup. Use Space, or use a modifier combination like meta+k to start recording on the first keypress with no warmup. Tap mode has no warmup, so most keys work.",
+            "Some keys are not delivered to terminal applications and cannot be bound at all. For example, Caps Lock shows an error if you try to bind it. See customize keyboard shortcuts for the full keybinding syntax and the list of reserved shortcuts."
           ],
           "codeBlocks": [
             "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"meta+k\": \"voice:pushToTalk\",\n        \"space\": null\n      }\n    }\n  ]\n}"

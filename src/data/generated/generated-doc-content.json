@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-04T05:45:30.221Z",
-  "sourceGeneratedAt": "2026-05-04T05:45:29.887Z",
+  "generatedAt": "2026-05-05T05:24:16.943Z",
+  "sourceGeneratedAt": "2026-05-05T05:24:16.612Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -528,7 +528,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.126、2.1.123、2.1.122、2.1.121 这些环节往下讲。",
+            "原文这页大多会按 2.1.128、2.1.126、2.1.123、2.1.122 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -537,7 +537,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.126 -> 2.1.123 -> 2.1.122 -> 2.1.121。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.128 -> 2.1.126 -> 2.1.123 -> 2.1.122。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         },
         {
@@ -4440,9 +4440,15 @@
               "kind": "prompt"
             },
             {
-              "title": "原页关键片段：Choose the subagent scope",
+              "title": "原页关键片段：Choose the subagent scope 1",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
               "code": "claude --agents '{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  },\n  \"debugger\": {\n    \"description\": \"Debugging specialist for errors and test failures.\",\n    \"prompt\": \"You are an expert debugger. Analyze errors, identify root causes, and provide fixes.\"\n  }\n}'",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Choose the subagent scope 2",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude --agents @'\n{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  },\n  \"debugger\": {\n    \"description\": \"Debugging specialist for errors and test failures.\",\n    \"prompt\": \"You are an expert debugger. Analyze errors, identify root causes, and provide fixes.\"\n  }\n}\n'@",
               "kind": "command"
             },
             {
@@ -4485,12 +4491,6 @@
               "title": "原页关键片段：Invoke subagents explicitly 1",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
               "code": "Use the test-runner subagent to fix failing tests\nHave the code-reviewer subagent look at my recent changes",
-              "kind": "code"
-            },
-            {
-              "title": "原页关键片段：Invoke subagents explicitly 2",
-              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "@\"code-reviewer (agent)\" look at the auth changes",
               "kind": "code"
             }
           ]
@@ -4558,9 +4558,15 @@
           ],
           "steps": [
             {
-              "title": "Choose the subagent scope",
+              "title": "Choose the subagent scope 1",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
               "code": "claude --agents '{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  },\n  \"debugger\": {\n    \"description\": \"Debugging specialist for errors and test failures.\",\n    \"prompt\": \"You are an expert debugger. Analyze errors, identify root causes, and provide fixes.\"\n  }\n}'",
+              "kind": "command"
+            },
+            {
+              "title": "Choose the subagent scope 2",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude --agents @'\n{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  },\n  \"debugger\": {\n    \"description\": \"Debugging specialist for errors and test failures.\",\n    \"prompt\": \"You are an expert debugger. Analyze errors, identify root causes, and provide fixes.\"\n  }\n}\n'@",
               "kind": "command"
             }
           ]
@@ -7567,7 +7573,7 @@
           "title": "Prompt-based hooks",
           "paragraphs": [
             "这里不是让你背\"Prompt-based hooks\"这个词，而是让你看它真干活时怎么使。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
