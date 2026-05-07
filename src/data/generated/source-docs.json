@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-06T05:38:20.175Z",
+  "generatedAt": "2026-05-07T05:41:42.295Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -1259,6 +1259,8 @@
         "Documentation Index"
       ],
       "toc": [
+        "2.1.132",
+        "2.1.131",
         "2.1.129",
         "2.1.128",
         "2.1.126",
@@ -1276,9 +1278,7 @@
         "2.1.111",
         "2.1.110",
         "2.1.109",
-        "2.1.108",
-        "2.1.107",
-        "2.1.105"
+        "2.1.108"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
@@ -1286,6 +1286,36 @@
         "Use this file to discover all available pages before exploring further.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Added CLAUDE_CODE_SESSION_ID environment variable to the Bash tool subprocess environment, matching the session_id passed to hooks",
+        "Added CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1 env var to opt out of the fullscreen alternate-screen renderer and keep the conversation in the terminal’s native scrollback",
+        "Added a “Pasting…” footer hint while a Ctrl+V image paste is being read from the clipboard",
+        "Fixed external SIGINT (e.g. IDE stop button, kill -INT) not running graceful shutdown — terminal modes are now restored and the --resume hint is printed instead of an abrupt exit",
+        "Fixed an uncaught exception when the terminal is closed or SSH disconnects mid-session under the native build",
+        "Fixed --resume failing with no low surrogate in string when a tool error truncation split an emoji; pre-corrupted sessions are sanitized on load",
+        "Fixed --permission-mode flag being ignored when resuming a plan-mode session with -p --continue/--resume, and plan mode not being re-applied after ExitPlanMode within the same session",
+        "Fixed fullscreen mode showing a blank screen after laptop sleep/wake or Ctrl+Z/fg until the next keystroke or stream output",
+        "Fixed cursor landing mid-grapheme on Ctrl+E/A/K/U/arrow keys when an Indic conjunct or ZWJ emoji wraps across lines",
+        "Fixed vim operators corrupting text containing decomposed (NFD) accented characters",
+        "Fixed pasting text starting with / silently swallowing the input or triggering an unknown-command reply",
+        "Fixed pasting dumping stray escape sequences into the prompt when focus events or mouse-tracking reports interleave with the bracketed paste",
+        "Fixed mouse wheel scrolling being too fast in Cursor and VS Code 1.92–1.104 due to an upstream xterm.js bug",
+        "Fixed scroll-wheel handling in JetBrains IDE 2025.2 terminals (spurious arrow keys, wrong-direction events, runaway acceleration)",
+        "Fixed /usage Ctrl+S hanging when copying the stats screenshot to the clipboard on Linux/X11",
+        "Fixed /terminal-setup showing a contradictory error in Windows Terminal — Shift+Enter is natively supported there",
+        "Fixed /effort picker not reflecting the CLAUDE_CODE_EFFORT_LEVEL env var override",
+        "Fixed /status showing the wrong default model for some users",
+        "Fixed slash command autocomplete popup being capped at ~3–5 visible commands instead of scaling with terminal height",
+        "Fixed statusline context_window token counts reflecting cumulative session totals instead of current context usage",
+        "Fixed Alt+T (thinking toggle) not working on macOS terminals without “Option as Meta” enabled (iTerm2, Terminal.app defaults)",
+        "Fixed dead keyboard input on Windows after re-opening a background session from claude agents",
+        "Fixed unbounded memory growth (10GB+ RSS) when a stdio MCP server writes non-protocol data to stdout",
+        "Fixed MCP servers that connect but fail tools/list silently showing 0 tools — they now retry once and show “connected · tools fetch failed” in /mcp",
+        "Fixed unauthorized claude.ai MCP connectors showing as “failed” instead of “needs auth”, and headless -p mode retrying non-transient 4xx connection failures",
+        "Improved visual consistency in slash command dialogs and /login, /upgrade, /extra-usage dialog spacing",
+        "Updated the /tui fullscreen startup banner to describe additional renderer benefits (lower memory usage, mouse support, auto-copy on select)",
+        "Fixed Bedrock and Vertex 400 errors when ENABLE_PROMPT_CACHING_1H is set",
+        "Fixed VS Code extension failing to activate on Windows due to a hardcoded build path in the bundled SDK (createRequire polyfill bug)",
+        "Fixed Mantle endpoint authentication failing with missing x-api-key header",
         "Added --plugin-url <url> flag to fetch a plugin .zip archive from a URL for the current session",
         "Added CLAUDE_CODE_FORCE_SYNC_OUTPUT=1 env var to force-enable synchronized output on terminals that auto-detection misses (e.g. Emacs eat)",
         "Added CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE: when set on Homebrew or WinGet installations, Claude Code runs the upgrade command in the background and prompts to restart",
@@ -1430,37 +1460,7 @@
         "Fixed thinking.type.enabled is not supported error when using Bedrock application inference profile ARNs",
         "Fixed Microsoft 365 MCP OAuth failing with duplicate or unsupported prompt parameter",
         "Fixed scrollback duplication when pressing Ctrl+L or triggering a redraw in non-fullscreen mode on tmux, GNOME Terminal, Windows Terminal, and Konsole",
-        "Fixed claude.ai MCP connectors silently disappearing when the connector-list fetch hits a transient auth error at startup",
-        "Fixed “Always allow” rules for built-in tools in remote sessions not surviving worker restarts",
-        "Fixed NO_PROXY not being respected for all HTTP clients when set via managed-settings.json under the native build",
-        "Fixed managed settings approval prompt exiting the session even when accepted — now applies settings and continues",
-        "Fixed /usage returning “rate limited” after a stale OAuth token — now refreshes automatically",
-        "Fixed invalid legacy enum values in settings.json invalidating the entire settings file",
-        "Fixed /usage dialog content being clipped when no-flicker mode is off",
-        "Fixed /focus showing “Unknown command” when the fullscreen renderer is off — now explains how to enable it",
-        "Fixed embedded grep/find/rg shell wrappers failing when the running binary is deleted mid-session — now falls back to installed tools",
-        "Reduced peak file descriptor usage during find in the Bash tool on large directory trees",
-        "Windows: Git for Windows (Git Bash) is no longer required — when absent, Claude Code uses PowerShell as the shell tool",
-        "Added claude ultrareview [target] subcommand to run /ultrareview non-interactively from CI or scripts — prints findings to stdout (--json for raw output) and exits 0 on completion or 1 on failure",
-        "Skills can now reference the current effort level with ${CLAUDE_EFFORT} in their content",
-        "Set AI_AGENT environment variable for subprocesses so gh can attribute traffic to Claude Code",
-        "Spinner tips that recommend installing the desktop app or creating skills/agents are now hidden when you already have them",
-        "Show a “use PgUp/PgDn to scroll” hint when the terminal sends arrow keys instead of scroll events",
-        "Faster session start when you have many claude.ai connectors configured but not authorized",
-        "The auto mode denial message now links to the configuration docs",
-        "claude plugin validate now accepts $schema, version, and description at the top level of marketplace.json and $schema in plugin.json",
-        "Auto-compact in auto mode now displays auto (lowercase, no token count) instead of a misleading token value",
-        "Fixed pressing Esc during a stdio MCP tool call closing the entire server connection (regression in 2.1.105)",
-        "Fixed /rewind and other interactive overlays not responding to keyboard input after launching with claude --resume",
-        "Fixed terminal scrollback duplication in non-fullscreen mode (resize, dialog dismiss, long sessions)",
-        "Fixed DISABLE_TELEMETRY / CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC not suppressing usage metrics telemetry for API and enterprise users",
-        "Fixed false-positive “Dangerous rm operation” permission prompts in auto mode for multi-line bash commands containing both a pipe and a redirect",
-        "Fixed long selection menus clipping below the terminal in fullscreen mode — the focused option now stays on screen as you scroll",
-        "Fixed Write tool output collapsing instead of expanding when clicking “+N lines” in fullscreen",
-        "Fixed slash command picker jumping while typing, and improved highlight to only match contiguous substrings in blue",
-        "Fixed /plugin marketplace failing to load when one entry uses an unrecognized source format — that entry is shown but installing it prompts you to update",
-        "[VSCode] /usage now opens the native Account & Usage dialog instead of returning plain-text session cost",
-        "[VSCode] Voice dictation now respects the language setting in ~/.claude/settings.json"
+        "Fixed claude.ai MCP connectors silently disappearing when the connector-list fetch hits a transient auth error at startup"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1478,14 +1478,14 @@
             "Use this file to discover all available pages before exploring further.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Added --plugin-url <url> flag to fetch a plugin .zip archive from a URL for the current session",
-            "Added CLAUDE_CODE_FORCE_SYNC_OUTPUT=1 env var to force-enable synchronized output on terminals that auto-detection misses (e.g. Emacs eat)",
-            "Added CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE: when set on Homebrew or WinGet installations, Claude Code runs the upgrade command in the background and prompts to restart",
-            "Plugin manifests: themes and monitors should now be declared under \"experimental\": { ... }. Top-level declarations still work but claude plugin validate will warn",
-            "Gateway /v1/models discovery for the /model picker is now opt-in via CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1 (was automatic in 2.1.126–2.1.128)",
-            "Ctrl+R history picker now defaults to searching all prompts across all projects, matching pre-2.1.124 behavior. Press Ctrl+S to narrow to the current project or session",
-            "Third-party deployments (Bedrock, Vertex, Foundry, or ANTHROPIC_BASE_URL gateway) no longer see spinner tips pointing at first-party Anthropic surfaces",
-            "skillOverrides setting now works: off hides from model and /, user-invocable-only hides from model only, name-only collapses description"
+            "Added CLAUDE_CODE_SESSION_ID environment variable to the Bash tool subprocess environment, matching the session_id passed to hooks",
+            "Added CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1 env var to opt out of the fullscreen alternate-screen renderer and keep the conversation in the terminal’s native scrollback",
+            "Added a “Pasting…” footer hint while a Ctrl+V image paste is being read from the clipboard",
+            "Fixed external SIGINT (e.g. IDE stop button, kill -INT) not running graceful shutdown — terminal modes are now restored and the --resume hint is printed instead of an abrupt exit",
+            "Fixed an uncaught exception when the terminal is closed or SSH disconnects mid-session under the native build",
+            "Fixed --resume failing with no low surrogate in string when a tool error truncation split an emoji; pre-corrupted sessions are sanitized on load",
+            "Fixed --permission-mode flag being ignored when resuming a plan-mode session with -p --continue/--resume, and plan mode not being re-applied after ExitPlanMode within the same session",
+            "Fixed fullscreen mode showing a blank screen after laptop sleep/wake or Ctrl+Z/fg until the next keystroke or stream output"
           ],
           "codeBlocks": []
         }
@@ -1615,7 +1615,7 @@
         "If a single file or tool output is so large that context refills immediately after each summary, Claude Code stops auto-compacting after a few attempts and shows an error instead of looping. See Auto-compaction stops with a thrashing error for recovery steps.",
         "Run /context to see what’s using space. MCP tool definitions are deferred by default and loaded on demand via tool search, so only tool names consume context until Claude uses a specific tool. Run /mcp to check per-server costs.",
         "Beyond compaction, you can use other features to control what loads into context.",
-        "Skills load on demand. Claude sees skill descriptions at session start, but the full content only loads when a skill is used. For skills you invoke manually, set disable-model-invocation: true to keep descriptions out of context until you need them.",
+        "Skills load on demand. Claude sees skill descriptions at session start, but the full content only loads when a skill is used. For skills you invoke manually, set disable-model-invocation: true to keep descriptions out of context until you need them. For skills you didn’t write, use skillOverrides to do the same from settings.",
         "Subagents get their own fresh context, completely separate from your main conversation. Their work doesn’t bloat your context. When done, they return a summary. This isolation is why subagents help with long sessions.",
         "See context costs for what each feature costs, and reduce token usage for tips on managing context.",
         "Claude has two safety mechanisms: checkpoints let you undo file changes, and permissions control what Claude can do without asking.",
@@ -1795,7 +1795,7 @@
             "If a single file or tool output is so large that context refills immediately after each summary, Claude Code stops auto-compacting after a few attempts and shows an error instead of looping. See Auto-compaction stops with a thrashing error for recovery steps.",
             "Run /context to see what’s using space. MCP tool definitions are deferred by default and loaded on demand via tool search, so only tool names consume context until Claude uses a specific tool. Run /mcp to check per-server costs.",
             "Beyond compaction, you can use other features to control what loads into context.",
-            "Skills load on demand. Claude sees skill descriptions at session start, but the full content only loads when a skill is used. For skills you invoke manually, set disable-model-invocation: true to keep descriptions out of context until you need them.",
+            "Skills load on demand. Claude sees skill descriptions at session start, but the full content only loads when a skill is used. For skills you invoke manually, set disable-model-invocation: true to keep descriptions out of context until you need them. For skills you didn’t write, use skillOverrides to do the same from settings.",
             "Subagents get their own fresh context, completely separate from your main conversation. Their work doesn’t bloat your context. When done, they return a summary. This isolation is why subagents help with long sessions.",
             "See context costs for what each feature costs, and reduce token usage for tips on managing context."
           ],
@@ -2038,7 +2038,7 @@
         "For example, you might use CLAUDE.md for project conventions, a skill for your deployment workflow, MCP to connect to your database, and a hook to run linting after every edit. Each feature handles what it’s best at.",
         "Every feature you add consumes some of Claude’s context. Too much can fill up your context window, but it can also add noise that makes Claude less effective; skills may not trigger correctly, or Claude may lose track of your conventions. Understanding these trade-offs helps you build an effective setup. For an interactive view of how these features combine in a running session, see Explore the context window.",
         "Each feature has a different loading strategy and context cost:",
-        "*By default, skill descriptions load at session start so Claude can decide when to use them. Set disable-model-invocation: true in a skill’s frontmatter to hide it from Claude entirely until you invoke it manually. This reduces context cost to zero for skills you only trigger yourself.",
+        "*By default, skill descriptions load at session start so Claude can decide when to use them. Set disable-model-invocation: true in a skill’s frontmatter to hide it from Claude entirely until you invoke it manually. This reduces context cost to zero for skills you only trigger yourself. For a skill you didn’t write, set skillOverrides in settings to do the same without editing its file.",
         "Each feature loads at different points in your session. The tabs below explain when each one loads and what goes into context.",
         "CLAUDE.md",
         "MCP servers",
@@ -2186,7 +2186,7 @@
           "title": "​Context cost by feature",
           "paragraphs": [
             "Each feature has a different loading strategy and context cost:",
-            "*By default, skill descriptions load at session start so Claude can decide when to use them. Set disable-model-invocation: true in a skill’s frontmatter to hide it from Claude entirely until you invoke it manually. This reduces context cost to zero for skills you only trigger yourself."
+            "*By default, skill descriptions load at session start so Claude can decide when to use them. Set disable-model-invocation: true in a skill’s frontmatter to hide it from Claude entirely until you invoke it manually. This reduces context cost to zero for skills you only trigger yourself. For a skill you didn’t write, set skillOverrides in settings to do the same without editing its file."
           ],
           "codeBlocks": []
         },
@@ -10048,6 +10048,7 @@
         "Check that agents appear in /agents",
         "Verify hooks work as expected",
         "You can load multiple plugins at once by specifying the flag multiple times:",
+        "To test a plugin that is already packaged as a .zip archive and hosted at a URL, such as a CI build artifact, use --plugin-url instead. Claude Code fetches the archive at startup and loads it for that session only. If the fetch fails or the archive is invalid, Claude Code reports a plugin load error and starts without it. The same trust considerations apply as for any plugin source: only point this flag at archives you control or trust.",
         "If your plugin isn’t working as expected:",
         "Check the structure: Ensure your directories are at the plugin root, not inside .claude-plugin/",
         "Test components individually: Check each skill, agent, and hook separately",
@@ -10105,6 +10106,7 @@
         "{\n  \"agent\": \"security-reviewer\"\n}",
         "claude --plugin-dir ./my-plugin",
         "claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two",
+        "claude --plugin-url https://example.com/my-plugin.zip",
         "mkdir -p my-plugin/.claude-plugin",
         "{\n  \"name\": \"my-plugin\",\n  \"description\": \"Migrated from standalone configuration\",\n  \"version\": \"1.0.0\"\n}",
         "# Copy commands\ncp -r .claude/commands my-plugin/\n\n# Copy agents (if any)\ncp -r .claude/agents my-plugin/\n\n# Copy skills (if any)\ncp -r .claude/skills my-plugin/",
@@ -10277,11 +10279,13 @@
             "Try your skills with /plugin-name:skill-name",
             "Check that agents appear in /agents",
             "Verify hooks work as expected",
-            "You can load multiple plugins at once by specifying the flag multiple times:"
+            "You can load multiple plugins at once by specifying the flag multiple times:",
+            "To test a plugin that is already packaged as a .zip archive and hosted at a URL, such as a CI build artifact, use --plugin-url instead. Claude Code fetches the archive at startup and loads it for that session only. If the fetch fails or the archive is invalid, Claude Code reports a plugin load error and starts without it. The same trust considerations apply as for any plugin source: only point this flag at archives you control or trust."
           ],
           "codeBlocks": [
             "claude --plugin-dir ./my-plugin",
-            "claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two"
+            "claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two",
+            "claude --plugin-url https://example.com/my-plugin.zip"
           ]
         },
         {
@@ -10410,9 +10414,9 @@
         "​Inject dynamic context",
         "​Run skills in a subagent",
         "​Restrict Claude’s skill access",
+        "​Override skill visibility from settings",
         "​Share skills",
-        "​Generate visual output",
-        "​Troubleshooting"
+        "​Generate visual output"
       ],
       "toc": [
         "Bundled skills",
@@ -10458,6 +10462,7 @@
         "Run skills in a subagent",
         "Example: Research skill using Explore agent",
         "Restrict Claude’s skill access",
+        "Override skill visibility from settings",
         "Share skills",
         "Generate visual output",
         "Troubleshooting",
@@ -10556,6 +10561,10 @@
         "Permission syntax: Skill(name) for exact match, Skill(name *) for prefix match with any arguments.",
         "Hide individual skills by adding disable-model-invocation: true to their frontmatter. This removes the skill from Claude’s context entirely.",
         "The user-invocable field only controls menu visibility, not Skill tool access. Use disable-model-invocation: true to block programmatic invocation.",
+        "The skillOverrides setting controls skill visibility from your settings instead of the skill’s own frontmatter. Use it for skills whose SKILL.md you don’t want to edit, such as ones checked into a shared project repo or provided by an MCP server. The /skills menu writes it for you: highlight a skill and press Space to cycle states, then Enter to save to .claude/settings.local.json.",
+        "Each key is a skill name and each value is one of four states:",
+        "A skill that is absent from skillOverrides is treated as \"on\". The example below collapses one skill to its name and turns another off entirely:",
+        "Plugin skills are not affected by skillOverrides. Manage those through /plugin instead.",
         "Skills can be distributed at different scopes depending on your audience:",
         "Project skills: Commit .claude/skills/ to version control",
         "Plugins: Create a skills/ directory in your plugin",
@@ -10580,7 +10589,7 @@
         "Make the description more specific",
         "Add disable-model-invocation: true if you only want manual invocation",
         "Skill descriptions are loaded into context so Claude knows what’s available. All skill names are always included, but if you have many skills, descriptions are shortened to fit the character budget, which can strip the keywords Claude needs to match your request. The budget scales dynamically at 1% of the context window, with a fallback of 8,000 characters.",
-        "To raise the limit, set the SLASH_COMMAND_TOOL_CHAR_BUDGET environment variable. Or trim the description and when_to_use text at the source: put the key use case first, since each entry’s combined text is capped at 1,536 characters regardless of budget.",
+        "To raise the limit, set the SLASH_COMMAND_TOOL_CHAR_BUDGET environment variable. To free budget for other skills, set low-priority entries to \"name-only\" in skillOverrides so they list without a description. You can also trim the description and when_to_use text at the source: put the key use case first, since each entry’s combined text is capped at 1,536 characters regardless of budget.",
         "Debug your configuration: diagnose why a skill isn’t appearing or triggering",
         "Subagents: delegate tasks to specialized agents",
         "Plugins: package and distribute skills with other extensions",
@@ -10612,6 +10621,7 @@
         "---\nname: deep-research\ndescription: Research a topic thoroughly\ncontext: fork\nagent: Explore\n---\n\nResearch $ARGUMENTS thoroughly:\n\n1. Find relevant files using Glob and Grep\n2. Read and analyze the code\n3. Summarize findings with specific file references",
         "# Add to deny rules:\nSkill",
         "# Allow only specific skills\nSkill(commit)\nSkill(review-pr *)\n\n# Deny specific skills\nSkill(deploy *)",
+        "{\n  \"skillOverrides\": {\n    \"legacy-context\": \"name-only\",\n    \"deploy\": \"off\"\n  }\n}",
         "mkdir -p ~/.claude/skills/codebase-visualizer/scripts",
         "---\nname: codebase-visualizer\ndescription: Generate an interactive collapsible tree visualization of your codebase. Use when exploring a new repo, understanding project structure, or identifying large files.\nallowed-tools: Bash(python3 *)\n---\n\n# Codebase Visualizer\n\nGenerate an interactive HTML tree view that shows your project's file structure with collapsible directories.\n\n## Usage\n\nRun the visualization script from your project root:\n\n```bash\npython3 ${CLAUDE_SKILL_DIR}/scripts/visualize.py .\n```\n\nThis creates `codebase-map.html` in the current directory and opens it in your default browser.\n\n## What the visualization shows\n\n- **Collapsible directories**: Click folders to expand/collapse\n- **File sizes**: Displayed next to each file\n- **Colors**: Different colors for different file types\n- **Directory totals**: Shows aggregate size of each folder",
         "#!/usr/bin/env python3\n\"\"\"Generate an interactive collapsible tree visualization of a codebase.\"\"\"\n\nimport json\nimport sys\nimport webbrowser\nfrom html import escape\nfrom pathlib import Path\nfrom collections import Counter\n\nIGNORE = {'.git', 'node_modules', '__pycache__', '.venv', 'venv', 'dist', 'build'}\n\ndef scan(path: Path, stats: dict) -> dict:\n    result = {\"name\": path.name, \"children\": [], \"size\": 0}\n    try:\n        for item in sorted(path.iterdir()):\n            if item.name in IGNORE or item.name.startswith('.'):\n                continue\n            if item.is_file():\n                size = item.stat().st_size\n                ext = item.suffix.lower() or '(no ext)'\n                result[\"children\"].append({\"name\": item.name, \"size\": size, \"ext\": ext})\n                result[\"size\"] += size\n                stats[\"files\"] += 1\n                stats[\"extensions\"][ext] += 1\n                stats[\"ext_sizes\"][ext] += size\n            elif item.is_dir():\n                stats[\"dirs\"] += 1\n                child = scan(item, stats)\n                if child[\"children\"]:\n                    result[\"children\"].append(child)\n                    result[\"size\"] += child[\"size\"]\n    except PermissionError:\n        pass\n    return result\n\ndef generate_html(data: dict, stats: dict, output: Path) -> None:\n    ext_sizes = stats[\"ext_sizes\"]\n    total_size = sum(ext_sizes.values()) or 1\n    sorted_exts = sorted(ext_sizes.items(), key=lambda x: -x[1])[:8]\n    colors = {\n        '.js': '#f7df1e', '.ts': '#3178c6', '.py': '#3776ab', '.go': '#00add8',\n        '.rs': '#dea584', '.rb': '#cc342d', '.css': '#264de4', '.html': '#e34c26',\n        '.json': '#6b7280', '.md': '#083fa1', '.yaml': '#cb171e', '.yml': '#cb171e',\n        '.mdx': '#083fa1', '.tsx': '#3178c6', '.jsx': '#61dafb', '.sh': '#4eaa25',\n    }\n    lang_bars = \"\".join(\n        f'<div class=\"bar-row\"><span class=\"bar-label\">{ext}</span>'\n        f'<div class=\"bar\" style=\"width:{(size/total_size)*100}%;background:{colors.get(ext,\"#6b7280\")}\"></div>'\n        f'<span class=\"bar-pct\">{(size/total_size)*100:.1f}%</span></div>'\n        for ext, size in sorted_exts\n    )\n    def fmt(b):\n        if b < 1024: return f\"{b} B\"\n        if b < 1048576: return f\"{b/1024:.1f} KB\"\n        return f\"{b/1048576:.1f} MB\"\n\n    html = f'''<!DOCTYPE html>\n<html><head>\n  <meta charset=\"utf-8\"><title>Codebase Explorer</title>\n  <style>\n    body {{ font: 14px/1.5 system-ui, sans-serif; margin: 0; background: #1a1a2e; color: #eee; }}\n    .container {{ display: flex; height: 100vh; }}\n    .sidebar {{ width: 280px; background: #252542; padding: 20px; border-right: 1px solid #3d3d5c; overflow-y: auto; flex-shrink: 0; }}\n    .main {{ flex: 1; padding: 20px; overflow-y: auto; }}\n    h1 {{ margin: 0 0 10px 0; font-size: 18px; }}\n    h2 {{ margin: 20px 0 10px 0; font-size: 14px; color: #888; text-transform: uppercase; }}\n    .stat {{ display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #3d3d5c; }}\n    .stat-value {{ font-weight: bold; }}\n    .bar-row {{ display: flex; align-items: center; margin: 6px 0; }}\n    .bar-label {{ width: 55px; font-size: 12px; color: #aaa; }}\n    .bar {{ height: 18px; border-radius: 3px; }}\n    .bar-pct {{ margin-left: 8px; font-size: 12px; color: #666; }}\n    .tree {{ list-style: none; padding-left: 20px; }}\n    details {{ cursor: pointer; }}\n    summary {{ padding: 4px 8px; border-radius: 4px; }}\n    summary:hover {{ background: #2d2d44; }}\n    .folder {{ color: #ffd700; }}\n    .file {{ display: flex; align-items: center; padding: 4px 8px; border-radius: 4px; }}\n    .file:hover {{ background: #2d2d44; }}\n    .size {{ color: #888; margin-left: auto; font-size: 12px; }}\n    .dot {{ width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; }}\n  </style>\n</head><body>\n  <div class=\"container\">\n    <div class=\"sidebar\">\n      <h1>📊 Summary</h1>\n      <div class=\"stat\"><span>Files</span><span class=\"stat-value\">{stats[\"files\"]:,}</span></div>\n      <div class=\"stat\"><span>Directories</span><span class=\"stat-value\">{stats[\"dirs\"]:,}</span></div>\n      <div class=\"stat\"><span>Total size</span><span class=\"stat-value\">{fmt(data[\"size\"])}</span></div>\n      <div class=\"stat\"><span>File types</span><span class=\"stat-value\">{len(stats[\"extensions\"])}</span></div>\n      <h2>By file type</h2>\n      {lang_bars}\n    </div>\n    <div class=\"main\">\n      <h1>📁 {escape(data[\"name\"])}</h1>\n      <ul class=\"tree\" id=\"root\"></ul>\n    </div>\n  </div>\n  <script>\n    const data = {json.dumps(data)};\n    const colors = {json.dumps(colors)};\n    function fmt(b) {{ if (b < 1024) return b + ' B'; if (b < 1048576) return (b/1024).toFixed(1) + ' KB'; return (b/1048576).toFixed(1) + ' MB'; }}\n    function esc(s) {{ return s.replace(/[&<>\"']/g, c => ({{\"&\":\"&amp;\",\"<\":\"&lt;\",\">\":\"&gt;\",'\"':\"&quot;\",\"'\":\"&#39;\"}}[c])); }}\n    function render(node, parent) {{\n      if (node.children) {{\n        const det = document.createElement('details');\n        det.open = parent === document.getElementById('root');\n        det.innerHTML = `<summary><span class=\"folder\">📁 ${{esc(node.name)}}</span><span class=\"size\">${{fmt(node.size)}}</span></summary>`;\n        const ul = document.createElement('ul'); ul.className = 'tree';\n        node.children.sort((a,b) => (b.children?1:0)-(a.children?1:0) || a.name.localeCompare(b.name));\n        node.children.forEach(c => render(c, ul));\n        det.appendChild(ul);\n        const li = document.createElement('li'); li.appendChild(det); parent.appendChild(li);\n      }} else {{\n        const li = document.createElement('li'); li.className = 'file';\n        li.innerHTML = `<span class=\"dot\" style=\"background:${{colors[node.ext]||'#6b7280'}}\"></span>${{esc(node.name)}}<span class=\"size\">${{fmt(node.size)}}</span>`;\n        parent.appendChild(li);\n      }}\n    }}\n    data.children.forEach(c => render(c, document.getElementById('root')));\n  </script>\n</body></html>'''\n    output.write_text(html)\n\nif __name__ == '__main__':\n    target = Path(sys.argv[1] if len(sys.argv) > 1 else '.').resolve()\n    stats = {\"files\": 0, \"dirs\": 0, \"extensions\": Counter(), \"ext_sizes\": Counter()}\n    data = scan(target, stats)\n    out = Path('codebase-map.html')\n    generate_html(data, stats, out)\n    print(f'Generated {out.absolute()}')\n    webbrowser.open(f'file://{out.absolute()}')"
@@ -10859,6 +10869,18 @@
           ]
         },
         {
+          "title": "​Override skill visibility from settings",
+          "paragraphs": [
+            "The skillOverrides setting controls skill visibility from your settings instead of the skill’s own frontmatter. Use it for skills whose SKILL.md you don’t want to edit, such as ones checked into a shared project repo or provided by an MCP server. The /skills menu writes it for you: highlight a skill and press Space to cycle states, then Enter to save to .claude/settings.local.json.",
+            "Each key is a skill name and each value is one of four states:",
+            "A skill that is absent from skillOverrides is treated as \"on\". The example below collapses one skill to its name and turns another off entirely:",
+            "Plugin skills are not affected by skillOverrides. Manage those through /plugin instead."
+          ],
+          "codeBlocks": [
+            "{\n  \"skillOverrides\": {\n    \"legacy-context\": \"name-only\",\n    \"deploy\": \"off\"\n  }\n}"
+          ]
+        },
+        {
           "title": "​Share skills",
           "paragraphs": [
             "Skills can be distributed at different scopes depending on your audience:",
@@ -10918,7 +10940,7 @@
           "title": "​Skill descriptions are cut short",
           "paragraphs": [
             "Skill descriptions are loaded into context so Claude knows what’s available. All skill names are always included, but if you have many skills, descriptions are shortened to fit the character budget, which can strip the keywords Claude needs to match your request. The budget scales dynamically at 1% of the context window, with a fallback of 8,000 characters.",
-            "To raise the limit, set the SLASH_COMMAND_TOOL_CHAR_BUDGET environment variable. Or trim the description and when_to_use text at the source: put the key use case first, since each entry’s combined text is capped at 1,536 characters regardless of budget."
+            "To raise the limit, set the SLASH_COMMAND_TOOL_CHAR_BUDGET environment variable. To free budget for other skills, set low-priority entries to \"name-only\" in skillOverrides so they list without a description. You can also trim the description and when_to_use text at the source: put the key use case first, since each entry’s combined text is capped at 1,536 characters regardless of budget."
           ],
           "codeBlocks": []
         },
@@ -14860,9 +14882,11 @@
         "For a more detailed check of your installation and configuration, run claude doctor:",
         "Claude Code requires a Pro, Max, Team, Enterprise, or Console account. The free Claude.ai plan does not include Claude Code access. You can also use Claude Code with a third-party API provider like Amazon Bedrock, Google Vertex AI, or Microsoft Foundry.",
         "After installing, log in by running claude and following the browser prompts. See Authentication for all account types and team setup options.",
-        "Native installations automatically update in the background. You can configure the release channel to control whether you receive updates immediately or on a delayed stable schedule, or disable auto-updates entirely. Homebrew, WinGet, and Linux package manager installations require manual updates.",
+        "Native installations automatically update in the background. You can configure the release channel to control whether you receive updates immediately or on a delayed stable schedule, or disable auto-updates entirely. Homebrew, WinGet, and Linux package manager installations require manual updates by default.",
         "Claude Code checks for updates on startup and periodically while running. Updates download and install in the background, then take effect the next time you start Claude Code.",
-        "Homebrew, WinGet, apt, dnf, and apk installations do not auto-update. For Homebrew, run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed. For WinGet, run winget upgrade Anthropic.ClaudeCode. For Linux package managers, see the upgrade commands in Install with Linux package managers.",
+        "Homebrew, WinGet, apt, dnf, and apk installations do not auto-update by default; see below to opt in for Homebrew and WinGet. To upgrade Homebrew manually, run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed. For WinGet, run winget upgrade Anthropic.ClaudeCode. For Linux package managers, see the upgrade commands in Install with Linux package managers.",
+        "To have Claude Code run the upgrade command for you on Homebrew or WinGet, set CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE to 1. Claude Code then runs the upgrade in the background when a new version is available and shows a restart prompt on success. The upgrade targets only the Claude Code package and does not affect other software you have installed.",
+        "On WinGet the upgrade may fail while Claude Code is running because Windows locks the executable. In that case Claude Code shows the manual command instead. apt, dnf, and apk continue to require a manual upgrade because those commands need elevated privileges.",
         "Known issue: Claude Code may notify you of updates before the new version is available in these package managers. If an upgrade fails, wait and try again later.",
         "Homebrew keeps old versions on disk after upgrades. Run brew cleanup periodically to reclaim disk space.",
         "Control which release channel Claude Code follows for auto-updates and claude update with the autoUpdatesChannel setting:",
@@ -15094,7 +15118,7 @@
         {
           "title": "​Update Claude Code",
           "paragraphs": [
-            "Native installations automatically update in the background. You can configure the release channel to control whether you receive updates immediately or on a delayed stable schedule, or disable auto-updates entirely. Homebrew, WinGet, and Linux package manager installations require manual updates."
+            "Native installations automatically update in the background. You can configure the release channel to control whether you receive updates immediately or on a delayed stable schedule, or disable auto-updates entirely. Homebrew, WinGet, and Linux package manager installations require manual updates by default."
           ],
           "codeBlocks": []
         },
@@ -15102,7 +15126,9 @@
           "title": "​Auto-updates",
           "paragraphs": [
             "Claude Code checks for updates on startup and periodically while running. Updates download and install in the background, then take effect the next time you start Claude Code.",
-            "Homebrew, WinGet, apt, dnf, and apk installations do not auto-update. For Homebrew, run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed. For WinGet, run winget upgrade Anthropic.ClaudeCode. For Linux package managers, see the upgrade commands in Install with Linux package managers.",
+            "Homebrew, WinGet, apt, dnf, and apk installations do not auto-update by default; see below to opt in for Homebrew and WinGet. To upgrade Homebrew manually, run brew upgrade claude-code or brew upgrade claude-code@latest, depending on which cask you installed. For WinGet, run winget upgrade Anthropic.ClaudeCode. For Linux package managers, see the upgrade commands in Install with Linux package managers.",
+            "To have Claude Code run the upgrade command for you on Homebrew or WinGet, set CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE to 1. Claude Code then runs the upgrade in the background when a new version is available and shows a restart prompt on success. The upgrade targets only the Claude Code package and does not affect other software you have installed.",
+            "On WinGet the upgrade may fail while Claude Code is running because Windows locks the executable. In that case Claude Code shows the manual command instead. apt, dnf, and apk continue to require a manual upgrade because those commands need elevated privileges.",
             "Known issue: Claude Code may notify you of updates before the new version is available in these package managers. If an upgrade fails, wait and try again later.",
             "Homebrew keeps old versions on disk after upgrades. Run brew cleanup periodically to reclaim disk space."
           ],
@@ -17636,7 +17662,7 @@
         "Claude Code includes the following headers on every API request:",
         "Claude Code also prepends a short attribution block to the system prompt containing the client version and a fingerprint derived from the conversation. The Anthropic API strips this block before processing, so it does not affect first-party prompt caching. If your gateway implements its own prompt cache keyed on the full request body, set CLAUDE_CODE_ATTRIBUTION_HEADER=0 to omit it.",
         "By default, Claude Code uses standard model names for the selected API format.",
-        "When ANTHROPIC_BASE_URL points at a gateway that exposes the Anthropic Messages format, Claude Code queries the gateway’s /v1/models endpoint at startup and adds the returned models to the /model picker. Each discovered entry is labeled “From gateway” and uses the display_name field from the response when one is provided. This requires Claude Code v2.1.126 or later.",
+        "When ANTHROPIC_BASE_URL points at a gateway that exposes the Anthropic Messages format, Claude Code can query the gateway’s /v1/models endpoint at startup and add the returned models to the /model picker. Set CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1 to enable this. Discovery is off by default so that gateways backed by a shared API key do not surface every model the key can access to every user. Each discovered entry is labeled “From gateway” and uses the display_name field from the response when one is provided. This requires Claude Code v2.1.129 or later.",
         "Discovery applies only to the Anthropic Messages format. It does not run for Bedrock or Vertex pass-through endpoints, and it does not run when ANTHROPIC_BASE_URL is unset or points at api.anthropic.com.",
         "The discovery request authenticates the same way as inference requests: it sends ANTHROPIC_AUTH_TOKEN as a bearer token, or ANTHROPIC_API_KEY as the x-api-key header when no auth token is set, along with any headers from ANTHROPIC_CUSTOM_HEADERS. Only models whose ID begins with claude or anthropic are added to the picker. Results are cached to ~/.claude/cache/gateway-models.json and refreshed on each startup. If the request fails or the gateway does not implement /v1/models, the picker falls back to the cached list from the previous startup or to the built-in model list.",
         "If your gateway uses model names that do not match the discovery filter, use the environment variables documented in Model configuration to add them manually.",
@@ -17738,7 +17764,7 @@
           "title": "​Model selection",
           "paragraphs": [
             "By default, Claude Code uses standard model names for the selected API format.",
-            "When ANTHROPIC_BASE_URL points at a gateway that exposes the Anthropic Messages format, Claude Code queries the gateway’s /v1/models endpoint at startup and adds the returned models to the /model picker. Each discovered entry is labeled “From gateway” and uses the display_name field from the response when one is provided. This requires Claude Code v2.1.126 or later.",
+            "When ANTHROPIC_BASE_URL points at a gateway that exposes the Anthropic Messages format, Claude Code can query the gateway’s /v1/models endpoint at startup and add the returned models to the /model picker. Set CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1 to enable this. Discovery is off by default so that gateways backed by a shared API key do not surface every model the key can access to every user. Each discovered entry is labeled “From gateway” and uses the display_name field from the response when one is provided. This requires Claude Code v2.1.129 or later.",
             "Discovery applies only to the Anthropic Messages format. It does not run for Bedrock or Vertex pass-through endpoints, and it does not run when ANTHROPIC_BASE_URL is unset or points at api.anthropic.com.",
             "The discovery request authenticates the same way as inference requests: it sends ANTHROPIC_AUTH_TOKEN as a bearer token, or ANTHROPIC_API_KEY as the x-api-key header when no auth token is set, along with any headers from ANTHROPIC_CUSTOM_HEADERS. Only models whose ID begins with claude or anthropic are added to the picker. Results are cached to ~/.claude/cache/gateway-models.json and refreshed on each startup. If the request fails or the gateway does not implement /v1/models, the picker falls back to the cached list from the previous startup or to the built-in model list.",
             "If your gateway uses model names that do not match the discovery filter, use the environment variables documented in Model configuration to add them manually."
@@ -18223,7 +18249,7 @@
         "start_type: How the session was started. One of \"fresh\", \"resume\", or \"continue\"",
         "Incremented when code is added or removed.",
         "type: (\"added\", \"removed\")",
-        "Incremented when creating pull requests via Claude Code.",
+        "Incremented when Claude Code creates a pull request or merge request through a shell command or an MCP tool.",
         "Incremented when creating git commits via Claude Code.",
         "Incremented after each API request.",
         "model: Model identifier (for example, “claude-sonnet-4-6”)",
@@ -18460,7 +18486,7 @@
             "start_type: How the session was started. One of \"fresh\", \"resume\", or \"continue\"",
             "Incremented when code is added or removed.",
             "type: (\"added\", \"removed\")",
-            "Incremented when creating pull requests via Claude Code.",
+            "Incremented when Claude Code creates a pull request or merge request through a shell command or an MCP tool.",
             "Incremented when creating git commits via Claude Code.",
             "Incremented after each API request.",
             "model: Model identifier (for example, “claude-sonnet-4-6”)",
@@ -21604,9 +21630,9 @@
         "Policies deployed by IT through server delivery, MDM configuration profiles, registry policies, or managed settings files",
         "Cannot be overridden by any other level, including command line arguments",
         "Within the managed tier, precedence is: server-managed > MDM/OS-level policies > file-based (managed-settings.d/*.json + managed-settings.json) > HKCU registry (Windows only). Only one managed source is used; sources do not merge across tiers. Within the file-based tier, drop-in files and the base file are merged together.",
-        "Command line arguments Temporary overrides for a specific session",
+        "Command line arguments Temporary overrides for a specific session. JSON passed via --settings <file-or-json> merges with file-based settings using the same rules as the other layers: a key set here overrides the same key in local, project, or user settings, and omitting a key leaves the lower-layer value in place",
         "Command line arguments",
-        "Temporary overrides for a specific session",
+        "Temporary overrides for a specific session. JSON passed via --settings <file-or-json> merges with file-based settings using the same rules as the other layers: a key set here overrides the same key in local, project, or user settings, and omitting a key leaves the lower-layer value in place",
         "Local project settings (.claude/settings.local.json) Personal project-specific settings",
         "Local project settings (.claude/settings.local.json)",
         "Personal project-specific settings",
@@ -21897,9 +21923,9 @@
             "Policies deployed by IT through server delivery, MDM configuration profiles, registry policies, or managed settings files",
             "Cannot be overridden by any other level, including command line arguments",
             "Within the managed tier, precedence is: server-managed > MDM/OS-level policies > file-based (managed-settings.d/*.json + managed-settings.json) > HKCU registry (Windows only). Only one managed source is used; sources do not merge across tiers. Within the file-based tier, drop-in files and the base file are merged together.",
-            "Command line arguments Temporary overrides for a specific session",
+            "Command line arguments Temporary overrides for a specific session. JSON passed via --settings <file-or-json> merges with file-based settings using the same rules as the other layers: a key set here overrides the same key in local, project, or user settings, and omitting a key leaves the lower-layer value in place",
             "Command line arguments",
-            "Temporary overrides for a specific session",
+            "Temporary overrides for a specific session. JSON passed via --settings <file-or-json> merges with file-based settings using the same rules as the other layers: a key set here overrides the same key in local, project, or user settings, and omitting a key leaves the lower-layer value in place",
             "Local project settings (.claude/settings.local.json) Personal project-specific settings",
             "Local project settings (.claude/settings.local.json)",
             "Personal project-specific settings"
@@ -23177,7 +23203,7 @@
         "You can see which model you’re currently using in several ways:",
         "In status line (if configured)",
         "In /status, which also displays your account information.",
-        "Use ANTHROPIC_CUSTOM_MODEL_OPTION to add a single custom entry to the /model picker without replacing the built-in aliases. This is useful for testing model IDs that Claude Code does not list by default. For LLM gateway deployments, Claude Code populates the picker automatically from the gateway’s /v1/models endpoint, so this variable is needed only when discovery does not return the model you want. See LLM gateway model selection.",
+        "Use ANTHROPIC_CUSTOM_MODEL_OPTION to add a single custom entry to the /model picker without replacing the built-in aliases. This is useful for testing model IDs that Claude Code does not list by default. For LLM gateway deployments, Claude Code can populate the picker from the gateway’s /v1/models endpoint when CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1 is set, so this variable is needed only when discovery is disabled or does not return the model you want. See LLM gateway model selection.",
         "This example sets all three variables to make a gateway-routed Opus deployment selectable:",
         "The custom entry appears at the bottom of the /model picker. ANTHROPIC_CUSTOM_MODEL_OPTION_NAME and ANTHROPIC_CUSTOM_MODEL_OPTION_DESCRIPTION are optional. If omitted, the model ID is used as the name and the description defaults to Custom model (<model-id>).",
         "Claude Code skips validation for the model ID set in ANTHROPIC_CUSTOM_MODEL_OPTION, so you can use any string your API endpoint accepts.",
@@ -23414,7 +23440,7 @@
         {
           "title": "​Add a custom model option",
           "paragraphs": [
-            "Use ANTHROPIC_CUSTOM_MODEL_OPTION to add a single custom entry to the /model picker without replacing the built-in aliases. This is useful for testing model IDs that Claude Code does not list by default. For LLM gateway deployments, Claude Code populates the picker automatically from the gateway’s /v1/models endpoint, so this variable is needed only when discovery does not return the model you want. See LLM gateway model selection.",
+            "Use ANTHROPIC_CUSTOM_MODEL_OPTION to add a single custom entry to the /model picker without replacing the built-in aliases. This is useful for testing model IDs that Claude Code does not list by default. For LLM gateway deployments, Claude Code can populate the picker from the gateway’s /v1/models endpoint when CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1 is set, so this variable is needed only when discovery is disabled or does not return the model you want. See LLM gateway model selection.",
             "This example sets all three variables to make a gateway-routed Opus deployment selectable:",
             "The custom entry appears at the bottom of the /model picker. ANTHROPIC_CUSTOM_MODEL_OPTION_NAME and ANTHROPIC_CUSTOM_MODEL_OPTION_DESCRIPTION are optional. If omitted, the model ID is used as the name and the description defaults to Custom model (<model-id>).",
             "Claude Code skips validation for the model ID set in ANTHROPIC_CUSTOM_MODEL_OPTION, so you can use any string your API endpoint accepts."
@@ -24227,6 +24253,7 @@
         "​Scroll the conversation",
         "​Auto-follow",
         "​Mouse wheel scrolling",
+        "​Scroll in the JetBrains IDE terminal",
         "​Search and review the conversation",
         "​Clear the conversation",
         "​Use with tmux",
@@ -24240,6 +24267,7 @@
         "Scroll the conversation",
         "Auto-follow",
         "Mouse wheel scrolling",
+        "Scroll in the JetBrains IDE terminal",
         "Search and review the conversation",
         "Clear the conversation",
         "Use with tmux",
@@ -24253,6 +24281,7 @@
         "Scroll the conversation",
         "Auto-follow",
         "Mouse wheel scrolling",
+        "Scroll in the JetBrains IDE terminal",
         "Search and review the conversation",
         "Clear the conversation",
         "Use with tmux",
@@ -24288,6 +24317,8 @@
         "If mouse wheel scrolling feels slow, your terminal may be sending one scroll event per physical notch with no multiplier. Some terminals, like Ghostty and iTerm2 with faster scrolling enabled, already amplify wheel events. Others, including the VS Code integrated terminal, send exactly one event per notch. Claude Code cannot detect which.",
         "Set CLAUDE_CODE_SCROLL_SPEED to multiply the base scroll distance:",
         "A value of 3 matches the default in vim and similar applications. The setting accepts values from 1 to 20.",
+        "In the JetBrains IDE terminal, Claude Code applies its own scroll handling and ignores CLAUDE_CODE_SCROLL_SPEED. The terminal sends scroll events at a much higher rate than other emulators, so a multiplier tuned elsewhere overshoots here.",
+        "In 2025.2, the terminal also has scroll-wheel bugs that produce spurious arrow keys and wrong-direction events. Claude Code detects these at runtime and mitigates them automatically, so trackpad and mouse wheel scrolling work without configuration. For the best scroll experience, upgrade to 2025.3 or later. Claude Code shows a hint the first time you scroll if it detects the bug.",
         "Ctrl+o toggles between the normal prompt and transcript mode. For a quieter view that shows only your last prompt, a one-line summary of tool calls with edit diffstats, and the final response, run /focus. The setting persists across sessions. Run /focus again to turn it off.",
         "Transcript mode gains less-style navigation and search:",
         "Your terminal’s Cmd+f and tmux search don’t see the conversation because it lives in the alternate screen buffer, not the native scrollback. To hand the content back to your terminal, press Ctrl+o to enter transcript mode first, then:",
@@ -24307,7 +24338,7 @@
         "With mouse capture disabled, keyboard scrolling with PgUp, PgDn, Ctrl+Home, and Ctrl+End still works, and your terminal handles selection natively. You lose click-to-position-cursor, click-to-expand tool output, URL clicking, and wheel scrolling inside Claude Code.",
         "Fullscreen rendering is a research preview feature. It has been tested on common terminal emulators, but you may encounter rendering issues on less common terminals or unusual configurations.",
         "If you encounter a problem, run /feedback inside Claude Code to report it, or open an issue on the claude-code GitHub repo. Include your terminal emulator name and version.",
-        "To turn fullscreen rendering off, run /tui default, or unset the environment variable if you enabled it that way.",
+        "To turn fullscreen rendering off, run /tui default, or unset CLAUDE_CODE_NO_FLICKER if you enabled it that way. To force the classic renderer regardless of the saved tui setting, set CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1. The classic renderer keeps the conversation in your terminal’s native scrollback so Cmd+f and tmux copy mode work as usual.",
         "Was this page helpful?"
       ],
       "codeBlocks": [
@@ -24326,12 +24357,12 @@
             "Scroll the conversation",
             "Auto-follow",
             "Mouse wheel scrolling",
+            "Scroll in the JetBrains IDE terminal",
             "Search and review the conversation",
             "Clear the conversation",
             "Use with tmux",
             "Keep native text selection",
-            "Research preview",
-            "Enable a smoother, flicker-free rendering mode with mouse support and stable memory usage in long conversations."
+            "Research preview"
           ],
           "codeBlocks": []
         },
@@ -24411,6 +24442,14 @@
           ]
         },
         {
+          "title": "​Scroll in the JetBrains IDE terminal",
+          "paragraphs": [
+            "In the JetBrains IDE terminal, Claude Code applies its own scroll handling and ignores CLAUDE_CODE_SCROLL_SPEED. The terminal sends scroll events at a much higher rate than other emulators, so a multiplier tuned elsewhere overshoots here.",
+            "In 2025.2, the terminal also has scroll-wheel bugs that produce spurious arrow keys and wrong-direction events. Claude Code detects these at runtime and mitigates them automatically, so trackpad and mouse wheel scrolling work without configuration. For the best scroll experience, upgrade to 2025.3 or later. Claude Code shows a hint the first time you scroll if it detects the bug."
+          ],
+          "codeBlocks": []
+        },
+        {
           "title": "​Search and review the conversation",
           "paragraphs": [
             "Ctrl+o toggles between the normal prompt and transcript mode. For a quieter view that shows only your last prompt, a one-line summary of tool calls with edit diffstats, and the final response, run /focus. The setting persists across sessions. Run /focus again to turn it off.",
@@ -24460,7 +24499,7 @@
           "paragraphs": [
             "Fullscreen rendering is a research preview feature. It has been tested on common terminal emulators, but you may encounter rendering issues on less common terminals or unusual configurations.",
             "If you encounter a problem, run /feedback inside Claude Code to report it, or open an issue on the claude-code GitHub repo. Include your terminal emulator name and version.",
-            "To turn fullscreen rendering off, run /tui default, or unset the environment variable if you enabled it that way.",
+            "To turn fullscreen rendering off, run /tui default, or unset CLAUDE_CODE_NO_FLICKER if you enabled it that way. To force the classic renderer regardless of the saved tui setting, set CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1. The classic renderer keeps the conversation in your terminal’s native scrollback so Cmd+f and tmux copy mode work as usual.",
             "Was this page helpful?"
           ],
           "codeBlocks": []
@@ -24831,9 +24870,9 @@
         "context_window.current_usage: null before the first API call in a session, and again after /compact until the next API call repopulates it",
         "context_window.used_percentage, context_window.remaining_percentage: may be null early in the session",
         "Handle missing fields with conditional access and null values with fallback defaults in your scripts.",
-        "The context_window object provides two ways to track context usage:",
-        "Cumulative totals (total_input_tokens, total_output_tokens): sum of all tokens across the entire session, useful for tracking total consumption",
-        "Current usage (current_usage): token counts from the most recent API call, use this for accurate context percentage since it reflects the actual context state",
+        "The context_window object describes the live context window from the most recent API response. As of v2.1.132, total_input_tokens and total_output_tokens reflect current context usage, not cumulative session totals.",
+        "Combined totals (total_input_tokens, total_output_tokens): tokens currently in the context window. total_input_tokens is the sum of input_tokens, cache_creation_input_tokens, and cache_read_input_tokens; total_output_tokens is the output tokens from the most recent response. Both are 0 before the first API response.",
+        "Per-component usage (current_usage): the same token counts broken out by category. Use this when you need cache hits separate from fresh input.",
         "The current_usage object contains:",
         "input_tokens: input tokens in current context",
         "output_tokens: output tokens generated",
@@ -24883,8 +24922,7 @@
         "Handle null values in your script with fallbacks such as // 0 in jq",
         "Restart Claude Code if values remain empty after multiple messages",
         "Context percentage shows unexpected values",
-        "Use used_percentage for accurate context state rather than cumulative totals",
-        "The total_input_tokens and total_output_tokens are cumulative across the session and may exceed the context window size",
+        "Use used_percentage for the simplest accurate context state",
         "Context percentage may differ from /context output due to when each is calculated",
         "OSC 8 links not clickable",
         "Verify your terminal supports OSC 8 hyperlinks (iTerm2, Kitty, WezTerm)",
@@ -24919,7 +24957,7 @@
         "#!/bin/bash\n# Read JSON data that Claude Code sends to stdin\ninput=$(cat)\n\n# Extract fields using jq\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nDIR=$(echo \"$input\" | jq -r '.workspace.current_dir')\n# The \"// 0\" provides a fallback if the field is null\nPCT=$(echo \"$input\" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)\n\n# Output the status line - ${DIR##*/} extracts just the folder name\necho \"[$MODEL] 📁 ${DIR##*/} | ${PCT}% context\"",
         "chmod +x ~/.claude/statusline.sh",
         "{\n  \"statusLine\": {\n    \"type\": \"command\",\n    \"command\": \"~/.claude/statusline.sh\"\n  }\n}",
-        "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"effort\": {\n    \"level\": \"high\"\n  },\n  \"thinking\": {\n    \"enabled\": true\n  },\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
+        "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15500,\n    \"total_output_tokens\": 1200,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"effort\": {\n    \"level\": \"high\"\n  },\n  \"thinking\": {\n    \"enabled\": true\n  },\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
         "#!/bin/bash\n# Read all of stdin into a variable\ninput=$(cat)\n\n# Extract fields with jq, \"// 0\" provides fallback for null\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nPCT=$(echo \"$input\" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)\n\n# Build progress bar: printf -v creates a run of spaces, then\n# ${var// /▓} replaces each space with a block character\nBAR_WIDTH=10\nFILLED=$((PCT * BAR_WIDTH / 100))\nEMPTY=$((BAR_WIDTH - FILLED))\nBAR=\"\"\n[ \"$FILLED\" -gt 0 ] && printf -v FILL \"%${FILLED}s\" && BAR=\"${FILL// /▓}\"\n[ \"$EMPTY\" -gt 0 ] && printf -v PAD \"%${EMPTY}s\" && BAR=\"${BAR}${PAD// /░}\"\n\necho \"[$MODEL] $BAR $PCT%\"",
         "#!/bin/bash\ninput=$(cat)\n\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nDIR=$(echo \"$input\" | jq -r '.workspace.current_dir')\n\nGREEN='\\033[32m'\nYELLOW='\\033[33m'\nRESET='\\033[0m'\n\nif git rev-parse --git-dir > /dev/null 2>&1; then\n    BRANCH=$(git branch --show-current 2>/dev/null)\n    STAGED=$(git diff --cached --numstat 2>/dev/null | wc -l | tr -d ' ')\n    MODIFIED=$(git diff --numstat 2>/dev/null | wc -l | tr -d ' ')\n\n    GIT_STATUS=\"\"\n    [ \"$STAGED\" -gt 0 ] && GIT_STATUS=\"${GREEN}+${STAGED}${RESET}\"\n    [ \"$MODIFIED\" -gt 0 ] && GIT_STATUS=\"${GIT_STATUS}${YELLOW}~${MODIFIED}${RESET}\"\n\n    echo -e \"[$MODEL] 📁 ${DIR##*/} | 🌿 $BRANCH $GIT_STATUS\"\nelse\n    echo \"[$MODEL] 📁 ${DIR##*/}\"\nfi",
         "#!/bin/bash\ninput=$(cat)\n\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\nCOST=$(echo \"$input\" | jq -r '.cost.total_cost_usd // 0')\nDURATION_MS=$(echo \"$input\" | jq -r '.cost.total_duration_ms // 0')\n\nCOST_FMT=$(printf '$%.2f' \"$COST\")\nDURATION_SEC=$((DURATION_MS / 1000))\nMINS=$((DURATION_SEC / 60))\nSECS=$((DURATION_SEC % 60))\n\necho \"[$MODEL] 💰 $COST_FMT | ⏱️ ${MINS}m ${SECS}s\"",
@@ -25055,15 +25093,15 @@
             "Fields that may be null:"
           ],
           "codeBlocks": [
-            "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"effort\": {\n    \"level\": \"high\"\n  },\n  \"thinking\": {\n    \"enabled\": true\n  },\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}"
+            "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15500,\n    \"total_output_tokens\": 1200,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"effort\": {\n    \"level\": \"high\"\n  },\n  \"thinking\": {\n    \"enabled\": true\n  },\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}"
           ]
         },
         {
           "title": "​Context window fields",
           "paragraphs": [
-            "The context_window object provides two ways to track context usage:",
-            "Cumulative totals (total_input_tokens, total_output_tokens): sum of all tokens across the entire session, useful for tracking total consumption",
-            "Current usage (current_usage): token counts from the most recent API call, use this for accurate context percentage since it reflects the actual context state",
+            "The context_window object describes the live context window from the most recent API response. As of v2.1.132, total_input_tokens and total_output_tokens reflect current context usage, not cumulative session totals.",
+            "Combined totals (total_input_tokens, total_output_tokens): tokens currently in the context window. total_input_tokens is the sum of input_tokens, cache_creation_input_tokens, and cache_read_input_tokens; total_output_tokens is the output tokens from the most recent response. Both are 0 before the first API response.",
+            "Per-component usage (current_usage): the same token counts broken out by category. Use this when you need cache hits separate from fresh input.",
             "The current_usage object contains:",
             "input_tokens: input tokens in current context",
             "output_tokens: output tokens generated",
@@ -26168,12 +26206,12 @@
         "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
         "Use this file to discover all available pages before exploring further.",
         "Keyboard shortcuts may vary by platform and terminal. Press ? to see available shortcuts for your environment.",
-        "macOS users: Option/Alt key shortcuts (Alt+B, Alt+F, Alt+Y, Alt+M, Alt+P, Alt+T) require configuring Option as Meta in your terminal:",
+        "macOS users: Option/Alt key shortcuts (Alt+B, Alt+F, Alt+Y, Alt+M, Alt+P) require configuring Option as Meta in your terminal:",
         "iTerm2: Settings → Profiles → Keys → General → set Left/Right Option key to “Esc+”",
         "Apple Terminal: Settings → Profiles → Keyboard → check “Use Option as Meta Key”",
         "VS Code: set \"terminal.integrated.macOptionIsMeta\": true in VS Code settings",
         "See Terminal configuration for details.",
-        "Shift+Enter works without configuration in iTerm2, WezTerm, Ghostty, Kitty, Warp, and Apple Terminal. For VS Code, Cursor, Windsurf, Alacritty, and Zed, run /terminal-setup to install the binding.",
+        "Shift+Enter works without configuration in iTerm2, WezTerm, Ghostty, Kitty, Warp, Apple Terminal, and Windows Terminal. For VS Code, Cursor, Windsurf, Alacritty, and Zed, run /terminal-setup to install the binding.",
         "When the transcript viewer is open (toggled with Ctrl+O), these shortcuts are available. Ctrl+E can be rebound via transcript:toggleShowAll.",
         "Type / in Claude Code to see all available commands, or type / followed by any letters to filter. The / menu shows everything you can invoke: built-in commands, bundled and user-authored skills, and commands contributed by plugins and MCP servers. Not all built-in commands are visible to every user since some depend on your platform or plan.",
         "See the commands reference for the full list of commands included in Claude Code.",
@@ -26191,7 +26229,7 @@
         "Start search: press Ctrl+R to activate reverse history search",
         "Type query: enter text to search for in previous commands. The search term is highlighted in matching results",
         "Navigate matches: press Ctrl+R again to cycle through older matches",
-        "Change scope: press Ctrl+S to cycle between this session, this project, and all projects",
+        "Change scope: search defaults to prompts from all projects. Press Ctrl+S to cycle the scope through this session, this project, and all projects",
         "Accept match: Press Tab or Esc to accept the current match and continue editing Press Enter to accept and execute the command immediately",
         "Press Tab or Esc to accept the current match and continue editing",
         "Press Enter to accept and execute the command immediately",
@@ -26300,7 +26338,7 @@
           "title": "​Keyboard shortcuts",
           "paragraphs": [
             "Keyboard shortcuts may vary by platform and terminal. Press ? to see available shortcuts for your environment.",
-            "macOS users: Option/Alt key shortcuts (Alt+B, Alt+F, Alt+Y, Alt+M, Alt+P, Alt+T) require configuring Option as Meta in your terminal:",
+            "macOS users: Option/Alt key shortcuts (Alt+B, Alt+F, Alt+Y, Alt+M, Alt+P) require configuring Option as Meta in your terminal:",
             "iTerm2: Settings → Profiles → Keys → General → set Left/Right Option key to “Esc+”",
             "Apple Terminal: Settings → Profiles → Keyboard → check “Use Option as Meta Key”",
             "VS Code: set \"terminal.integrated.macOptionIsMeta\": true in VS Code settings",
@@ -26326,7 +26364,7 @@
         {
           "title": "​Multiline input",
           "paragraphs": [
-            "Shift+Enter works without configuration in iTerm2, WezTerm, Ghostty, Kitty, Warp, and Apple Terminal. For VS Code, Cursor, Windsurf, Alacritty, and Zed, run /terminal-setup to install the binding."
+            "Shift+Enter works without configuration in iTerm2, WezTerm, Ghostty, Kitty, Warp, Apple Terminal, and Windows Terminal. For VS Code, Cursor, Windsurf, Alacritty, and Zed, run /terminal-setup to install the binding."
           ],
           "codeBlocks": []
         },
@@ -26412,7 +26450,7 @@
             "Start search: press Ctrl+R to activate reverse history search",
             "Type query: enter text to search for in previous commands. The search term is highlighted in matching results",
             "Navigate matches: press Ctrl+R again to cycle through older matches",
-            "Change scope: press Ctrl+S to cycle between this session, this project, and all projects",
+            "Change scope: search defaults to prompts from all projects. Press Ctrl+S to cycle the scope through this session, this project, and all projects",
             "Accept match: Press Tab or Esc to accept the current match and continue editing Press Enter to accept and execute the command immediately",
             "Press Tab or Esc to accept the current match and continue editing",
             "Press Enter to accept and execute the command immediately",
@@ -27507,11 +27545,11 @@
         "​Required fields",
         "​Metadata fields",
         "​Component path fields",
+        "​Experimental components",
         "​User configuration",
         "​Channels",
         "​Path behavior rules",
-        "​Environment variables",
-        "​Plugin caching and file resolution"
+        "​Environment variables"
       ],
       "toc": [
         "Plugin components reference",
@@ -27528,12 +27566,12 @@
         "Required fields",
         "Metadata fields",
         "Component path fields",
+        "Experimental components",
         "User configuration",
         "Channels",
         "Path behavior rules",
         "Environment variables",
-        "Persistent data directory",
-        "Plugin caching and file resolution"
+        "Persistent data directory"
       ],
       "paragraphs": [
         "Plugin components reference",
@@ -27546,6 +27584,7 @@
         "Required fields",
         "Metadata fields",
         "Component path fields",
+        "Experimental components",
         "User configuration",
         "Channels",
         "Path behavior rules",
@@ -27642,10 +27681,10 @@
         "Location: monitors/monitors.json in the plugin root, or inline in plugin.json",
         "Format: JSON array of monitor entries",
         "The following monitors/monitors.json watches a deployment status endpoint and a local error log:",
-        "To declare monitors inline, set the monitors key in plugin.json to the same array. To load from a non-default path, set monitors to a relative path string such as \"./config/monitors.json\".",
+        "To declare monitors inline, set experimental.monitors in plugin.json to the same array. To load from a non-default path, set experimental.monitors to a relative path string such as \"./config/monitors.json\". Monitors are an experimental component.",
         "The command value supports the same variable substitutions as MCP and LSP server configs: ${CLAUDE_PLUGIN_ROOT}, ${CLAUDE_PLUGIN_DATA}, ${user_config.*}, and any ${ENV_VAR} from the environment. Prefix the command with cd \"${CLAUDE_PLUGIN_ROOT}\" && if the script needs to run from the plugin’s own directory.",
         "Disabling a plugin mid-session does not stop monitors that are already running. They stop when the session ends.",
-        "Plugins can ship color themes that appear in /theme alongside the built-in presets and the user’s local themes. A theme is a JSON file in themes/ with a base preset and a sparse overrides map of color tokens.",
+        "Plugins can ship color themes that appear in /theme alongside the built-in presets and the user’s local themes. A theme is a JSON file in themes/ with a base preset and a sparse overrides map of color tokens. Themes are an experimental component.",
         "Selecting a plugin theme persists custom:<plugin-name>:<slug> in the user’s config. Plugin themes are read-only; pressing Ctrl+E on one in /theme copies it into ~/.claude/themes/ so the user can edit the copy.",
         "When you install a plugin, you choose a scope that determines where the plugin is available and who else can use it:",
         "Plugins use the same scope system as other Claude Code configurations. For installation instructions and scope flags, see Install plugins. For a complete explanation of scopes, see Configuration scopes.",
@@ -27653,13 +27692,14 @@
         "The manifest is optional. If omitted, Claude Code auto-discovers components in default locations and derives the plugin name from the directory name. Use a manifest when you need to provide metadata or custom component paths.",
         "If you include a manifest, name is the only required field.",
         "This name is used for namespacing components. For example, in the UI, the agent agent-creator for the plugin with name plugin-dev will appear as plugin-dev:agent-creator.",
+        "Components under the experimental key, themes and monitors, have a manifest schema that may change between releases while they stabilize. Where you declare them is a separate migration: the top level still works, claude plugin validate warns, and a future release will require experimental.*.",
         "The userConfig field declares values that Claude Code prompts the user for when the plugin is enabled. Use this instead of requiring users to hand-edit settings.json.",
         "Keys must be valid identifiers. Each option supports these fields:",
         "Each value is available for substitution as ${user_config.KEY} in MCP and LSP server configs, hook commands, and monitor commands. Non-sensitive values can also be substituted in skill and agent content. All values are exported to plugin subprocesses as CLAUDE_PLUGIN_OPTION_<KEY> environment variables.",
         "Non-sensitive values are stored in settings.json under pluginConfigs[<plugin-id>].options. Sensitive values go to the system keychain (or ~/.claude/.credentials.json where the keychain is unavailable). Keychain storage is shared with OAuth tokens and has an approximately 2 KB total limit, so keep sensitive values small.",
         "The channels field lets a plugin declare one or more message channels that inject content into the conversation. Each channel binds to an MCP server that the plugin provides.",
         "The server field is required and must match a key in the plugin’s mcpServers. The optional per-channel userConfig uses the same schema as the top-level field, letting the plugin prompt for bot tokens or owner IDs when the plugin is enabled.",
-        "For skills, commands, agents, outputStyles, themes, and monitors, a custom path replaces the default. If the manifest specifies skills, the default skills/ directory is not scanned; if it specifies monitors, the default monitors/monitors.json is not loaded. Hooks, MCP servers, and LSP servers have different semantics for handling multiple sources.",
+        "For skills, commands, agents, outputStyles, experimental.themes, and experimental.monitors, a custom path replaces the default. If the manifest specifies skills, the default skills/ directory is not scanned; if it specifies experimental.monitors, the default monitors/monitors.json is not loaded. Hooks, MCP servers, and LSP servers have different semantics for handling multiple sources.",
         "All paths must be relative to the plugin root and start with ./",
         "Components from custom paths use the same naming and namespacing rules",
         "Multiple paths can be specified as arrays",
@@ -27677,7 +27717,7 @@
         "Scripts bundled in ${CLAUDE_PLUGIN_ROOT} can then run against the persisted node_modules:",
         "The data directory is deleted automatically when you uninstall the plugin from the last scope where it is installed. The /plugin interface shows the directory size and prompts before deleting. The CLI deletes by default; pass --keep-data to preserve it.",
         "Plugins are specified in one of two ways:",
-        "Through claude --plugin-dir, for the duration of a session.",
+        "Through claude --plugin-dir or claude --plugin-url, for the duration of a session.",
         "Through a marketplace, installed for future sessions.",
         "For security and verification purposes, Claude Code copies marketplace plugins to the user’s local plugin cache (~/.claude/plugins/cache) rather than using them in-place. Understanding this behavior is important when developing plugins that reference external files.",
         "Each installed version is a separate directory in the cache. When you update or uninstall a plugin, the previous version directory is marked as orphaned and removed automatically 7 days later. The grace period lets concurrent Claude Code sessions that already loaded the old version keep running without errors.",
@@ -27713,9 +27753,7 @@
         "Which plugins are being loaded",
         "Any errors in plugin manifests",
         "Skill, agent, and hook registration",
-        "MCP server initialization",
-        "Manifest validation errors:",
-        "Invalid JSON syntax: Unexpected token } in JSON at position 142: check for missing commas, extra commas, or unquoted strings"
+        "MCP server initialization"
       ],
       "codeBlocks": [
         "skills/\n├── pdf-processor/\n│   ├── SKILL.md\n│   ├── reference.md (optional)\n│   └── scripts/ (optional)\n└── code-reviewer/\n    └── SKILL.md",
@@ -27726,7 +27764,7 @@
         "{\n  \"name\": \"my-plugin\",\n  \"lspServers\": {\n    \"go\": {\n      \"command\": \"gopls\",\n      \"args\": [\"serve\"],\n      \"extensionToLanguage\": {\n        \".go\": \"go\"\n      }\n    }\n  }\n}",
         "[\n  {\n    \"name\": \"deploy-status\",\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/poll-deploy.sh ${user_config.api_endpoint}\",\n    \"description\": \"Deployment status changes\"\n  },\n  {\n    \"name\": \"error-log\",\n    \"command\": \"tail -F ./logs/error.log\",\n    \"description\": \"Application error log\",\n    \"when\": \"on-skill-invoke:debug\"\n  }\n]",
         "{\n  \"name\": \"Dracula\",\n  \"base\": \"dark\",\n  \"overrides\": {\n    \"claude\": \"#bd93f9\",\n    \"error\": \"#ff5555\",\n    \"success\": \"#50fa7b\"\n  }\n}",
-        "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": [\"./custom/agents/reviewer.md\"],\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"themes\": \"./themes/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\",\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
+        "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": [\"./custom/agents/reviewer.md\"],\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"experimental\": {\n    \"themes\": \"./themes/\",\n    \"monitors\": \"./monitors.json\"\n  },\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
         "{\n  \"userConfig\": {\n    \"api_endpoint\": {\n      \"type\": \"string\",\n      \"title\": \"API endpoint\",\n      \"description\": \"Your team's API endpoint\"\n    },\n    \"api_token\": {\n      \"type\": \"string\",\n      \"title\": \"API token\",\n      \"description\": \"API authentication token\",\n      \"sensitive\": true\n    }\n  }\n}",
         "{\n  \"channels\": [\n    {\n      \"server\": \"telegram\",\n      \"userConfig\": {\n        \"bot_token\": {\n          \"type\": \"string\",\n          \"title\": \"Bot token\",\n          \"description\": \"Telegram bot token\",\n          \"sensitive\": true\n        },\n        \"owner_id\": {\n          \"type\": \"string\",\n          \"title\": \"Owner ID\",\n          \"description\": \"Your Telegram user ID\"\n        }\n      }\n    }\n  ]\n}",
         "{\n  \"commands\": [\n    \"./specialized/deploy.md\",\n    \"./utilities/batch-process.md\"\n  ],\n  \"agents\": [\n    \"./custom-agents/reviewer.md\",\n    \"./custom-agents/tester.md\"\n  ]\n}",
@@ -27760,8 +27798,8 @@
             "Required fields",
             "Metadata fields",
             "Component path fields",
-            "User configuration",
-            "Channels"
+            "Experimental components",
+            "User configuration"
           ],
           "codeBlocks": []
         },
@@ -27883,7 +27921,7 @@
             "Location: monitors/monitors.json in the plugin root, or inline in plugin.json",
             "Format: JSON array of monitor entries",
             "The following monitors/monitors.json watches a deployment status endpoint and a local error log:",
-            "To declare monitors inline, set the monitors key in plugin.json to the same array. To load from a non-default path, set monitors to a relative path string such as \"./config/monitors.json\".",
+            "To declare monitors inline, set experimental.monitors in plugin.json to the same array. To load from a non-default path, set experimental.monitors to a relative path string such as \"./config/monitors.json\". Monitors are an experimental component.",
             "Required fields:",
             "Optional fields:",
             "The command value supports the same variable substitutions as MCP and LSP server configs: ${CLAUDE_PLUGIN_ROOT}, ${CLAUDE_PLUGIN_DATA}, ${user_config.*}, and any ${ENV_VAR} from the environment. Prefix the command with cd \"${CLAUDE_PLUGIN_ROOT}\" && if the script needs to run from the plugin’s own directory.",
@@ -27896,7 +27934,7 @@
         {
           "title": "​Themes",
           "paragraphs": [
-            "Plugins can ship color themes that appear in /theme alongside the built-in presets and the user’s local themes. A theme is a JSON file in themes/ with a base preset and a sparse overrides map of color tokens.",
+            "Plugins can ship color themes that appear in /theme alongside the built-in presets and the user’s local themes. A theme is a JSON file in themes/ with a base preset and a sparse overrides map of color tokens. Themes are an experimental component.",
             "Selecting a plugin theme persists custom:<plugin-name>:<slug> in the user’s config. Plugin themes are read-only; pressing Ctrl+E on one in /theme copies it into ~/.claude/themes/ so the user can edit the copy."
           ],
           "codeBlocks": [
@@ -27923,7 +27961,7 @@
           "title": "​Complete schema",
           "paragraphs": [],
           "codeBlocks": [
-            "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": [\"./custom/agents/reviewer.md\"],\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"themes\": \"./themes/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\",\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}"
+            "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": [\"./custom/agents/reviewer.md\"],\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"experimental\": {\n    \"themes\": \"./themes/\",\n    \"monitors\": \"./monitors.json\"\n  },\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}"
           ]
         },
         {
@@ -27942,6 +27980,13 @@
         {
           "title": "​Component path fields",
           "paragraphs": [],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Experimental components",
+          "paragraphs": [
+            "Components under the experimental key, themes and monitors, have a manifest schema that may change between releases while they stabilize. Where you declare them is a separate migration: the top level still works, claude plugin validate warns, and a future release will require experimental.*."
+          ],
           "codeBlocks": []
         },
         {
@@ -27969,7 +28014,7 @@
         {
           "title": "​Path behavior rules",
           "paragraphs": [
-            "For skills, commands, agents, outputStyles, themes, and monitors, a custom path replaces the default. If the manifest specifies skills, the default skills/ directory is not scanned; if it specifies monitors, the default monitors/monitors.json is not loaded. Hooks, MCP servers, and LSP servers have different semantics for handling multiple sources.",
+            "For skills, commands, agents, outputStyles, experimental.themes, and experimental.monitors, a custom path replaces the default. If the manifest specifies skills, the default skills/ directory is not scanned; if it specifies experimental.monitors, the default monitors/monitors.json is not loaded. Hooks, MCP servers, and LSP servers have different semantics for handling multiple sources.",
             "All paths must be relative to the plugin root and start with ./",
             "Components from custom paths use the same naming and namespacing rules",
             "Multiple paths can be specified as arrays",
@@ -28005,7 +28050,7 @@
           "title": "​Plugin caching and file resolution",
           "paragraphs": [
             "Plugins are specified in one of two ways:",
-            "Through claude --plugin-dir, for the duration of a session.",
+            "Through claude --plugin-dir or claude --plugin-url, for the duration of a session.",
             "Through a marketplace, installed for future sessions.",
             "For security and verification purposes, Claude Code copies marketplace plugins to the user’s local plugin cache (~/.claude/plugins/cache) rather than using them in-place. Understanding this behavior is important when developing plugins that reference external files.",
             "Each installed version is a separate directory in the cache. When you update or uninstall a plugin, the previous version directory is marked as orphaned and removed automatically 7 days later. The grace period lets concurrent Claude Code sessions that already loaded the old version keep running without errors.",
@@ -28110,18 +28155,6 @@
           ],
           "codeBlocks": [
             "claude plugin enable <plugin> [options]"
-          ]
-        },
-        {
-          "title": "​plugin disable",
-          "paragraphs": [
-            "Disable a plugin without uninstalling it.",
-            "Arguments:",
-            "<plugin>: Plugin name or plugin-name@marketplace-name",
-            "Options:"
-          ],
-          "codeBlocks": [
-            "claude plugin disable <plugin> [options]"
           ]
         }
       ]
@@ -36422,7 +36455,7 @@
         "tagSession()",
         "Types",
         "Options",
-        "Query object"
+        "Handle slow or stalled API responses"
       ],
       "paragraphs": [
         "Installation",
@@ -36438,7 +36471,9 @@
         "getSessionInfo()",
         "renameSession()",
         "tagSession()",
+        "Handle slow or stalled API responses",
         "Query object",
+        "applyFlagSettings()",
         "WarmQuery",
         "SDKControlInitializeResponse",
         "AgentDefinition",
@@ -36579,7 +36614,18 @@
         "Renames a session by appending a custom-title entry. Repeated calls are safe; the most recent title wins.",
         "Tags a session. Pass null to clear the tag. Repeated calls are safe; the most recent tag wins.",
         "Configuration object for the query() function.",
+        "The CLI subprocess reads several environment variables that control API timeouts and stall detection. Pass them through the env option:",
+        "API_TIMEOUT_MS: per-request timeout on the Anthropic client, in milliseconds. Default 600000. Applies to the main loop and all subagents.",
+        "CLAUDE_CODE_MAX_RETRIES: maximum API retries. Default 10. Each retry gets its own API_TIMEOUT_MS window, so worst-case wall time is roughly API_TIMEOUT_MS × (CLAUDE_CODE_MAX_RETRIES + 1) plus backoff.",
+        "CLAUDE_ASYNC_AGENT_STALL_TIMEOUT_MS: stall watchdog for subagents launched with run_in_background. Default 600000. Resets on each stream event; on stall it aborts the subagent, marks the task failed, and surfaces the error to the parent with any partial result. Does not apply to synchronous subagents.",
+        "CLAUDE_ENABLE_STREAM_WATCHDOG=1 with CLAUDE_STREAM_IDLE_TIMEOUT_MS: aborts the request when headers have arrived but the response body stops streaming. Off by default. CLAUDE_STREAM_IDLE_TIMEOUT_MS defaults to 300000 and is clamped to that minimum. The aborted request goes through the normal retry path.",
         "Interface returned by the query() function.",
+        "Changes any setting on a running session without restarting the query. Use it when a setting that has no dedicated setter needs to change mid-session, such as tightening permissions after the agent reads untrusted input. setModel() and setPermissionMode() are dedicated setters for those two keys; applyFlagSettings() is the general form that accepts any subset of the settings keys, and passing model here behaves the same as setModel().",
+        "The values are written to the flag-settings layer, the same layer the inline settings option of query() populates at startup. Flag settings sit near the top of the settings precedence order: they override user, project, and local settings, and only managed policy settings can override them. This is the same tier the on-page precedence section calls programmatic options.",
+        "Successive calls shallow-merge top-level keys. A second call with { permissions: {...} } replaces the entire permissions object from the prior call rather than deep-merging into it. To clear a key from the flag layer and fall back to lower-precedence sources, pass null for that key. Passing undefined has no effect because JSON serialization drops it.",
+        "Only available in streaming input mode, the same constraint as setModel() and setPermissionMode().",
+        "The example below switches the active model mid-session, then clears the override so the model falls back to whatever the user or project settings specify.",
+        "applyFlagSettings() is TypeScript-only. The Python SDK does not expose an equivalent method.",
         "Handle returned by startup(). The subprocess is already spawned and initialized, so calling query() on this handle writes the prompt directly to a ready process with no startup latency.",
         "WarmQuery implements AsyncDisposable, so it can be used with await using for automatic cleanup.",
         "Return type of initializationResult(). Contains session initialization data.",
@@ -36591,20 +36637,7 @@
         "Disable filesystem settings:",
         "Load all filesystem settings explicitly:",
         "Load only specific setting sources:",
-        "Testing and CI environments:",
-        "SDK-only applications:",
-        "Loading CLAUDE.md project instructions:",
-        "When multiple sources are loaded, settings are merged with this precedence (highest to lowest):",
-        "Local settings (.claude/settings.local.json)",
-        "Project settings (.claude/settings.json)",
-        "User settings (~/.claude/settings.json)",
-        "Programmatic options such as agents and allowedTools override user, project, and local filesystem settings. Managed policy settings take precedence over programmatic options.",
-        "Custom permission function type for controlling tool usage.",
-        "Result of a permission check.",
-        "Configuration for built-in tool behavior.",
-        "Configuration for MCP servers.",
-        "Configuration for loading plugins in the SDK.",
-        "Example:"
+        "Testing and CI environments:"
       ],
       "codeBlocks": [
         "npm install @anthropic-ai/claude-agent-sdk",
@@ -36621,7 +36654,9 @@
         "function getSessionInfo(\n  sessionId: string,\n  options?: GetSessionInfoOptions\n): Promise<SDKSessionInfo | undefined>;",
         "function renameSession(\n  sessionId: string,\n  title: string,\n  options?: SessionMutationOptions\n): Promise<void>;",
         "function tagSession(\n  sessionId: string,\n  tag: string | null,\n  options?: SessionMutationOptions\n): Promise<void>;",
-        "interface Query extends AsyncGenerator<SDKMessage, void> {\n  interrupt(): Promise<void>;\n  rewindFiles(\n    userMessageId: string,\n    options?: { dryRun?: boolean }\n  ): Promise<RewindFilesResult>;\n  setPermissionMode(mode: PermissionMode): Promise<void>;\n  setModel(model?: string): Promise<void>;\n  setMaxThinkingTokens(maxThinkingTokens: number | null): Promise<void>;\n  initializationResult(): Promise<SDKControlInitializeResponse>;\n  supportedCommands(): Promise<SlashCommand[]>;\n  supportedModels(): Promise<ModelInfo[]>;\n  supportedAgents(): Promise<AgentInfo[]>;\n  mcpServerStatus(): Promise<McpServerStatus[]>;\n  accountInfo(): Promise<AccountInfo>;\n  reconnectMcpServer(serverName: string): Promise<void>;\n  toggleMcpServer(serverName: string, enabled: boolean): Promise<void>;\n  setMcpServers(servers: Record<string, McpServerConfig>): Promise<McpSetServersResult>;\n  streamInput(stream: AsyncIterable<SDKUserMessage>): Promise<void>;\n  stopTask(taskId: string): Promise<void>;\n  close(): void;\n}",
+        "const result = query({\n  prompt: \"Analyze this code\",\n  options: {\n    env: {\n      ...process.env,\n      API_TIMEOUT_MS: \"120000\",\n      CLAUDE_CODE_MAX_RETRIES: \"2\",\n      CLAUDE_ASYNC_AGENT_STALL_TIMEOUT_MS: \"120000\",\n    },\n  },\n});",
+        "interface Query extends AsyncGenerator<SDKMessage, void> {\n  interrupt(): Promise<void>;\n  rewindFiles(\n    userMessageId: string,\n    options?: { dryRun?: boolean }\n  ): Promise<RewindFilesResult>;\n  setPermissionMode(mode: PermissionMode): Promise<void>;\n  setModel(model?: string): Promise<void>;\n  setMaxThinkingTokens(maxThinkingTokens: number | null): Promise<void>;\n  applyFlagSettings(settings: { [K in keyof Settings]?: Settings[K] | null }): Promise<void>;\n  initializationResult(): Promise<SDKControlInitializeResponse>;\n  supportedCommands(): Promise<SlashCommand[]>;\n  supportedModels(): Promise<ModelInfo[]>;\n  supportedAgents(): Promise<AgentInfo[]>;\n  mcpServerStatus(): Promise<McpServerStatus[]>;\n  accountInfo(): Promise<AccountInfo>;\n  reconnectMcpServer(serverName: string): Promise<void>;\n  toggleMcpServer(serverName: string, enabled: boolean): Promise<void>;\n  setMcpServers(servers: Record<string, McpServerConfig>): Promise<McpSetServersResult>;\n  streamInput(stream: AsyncIterable<SDKUserMessage>): Promise<void>;\n  stopTask(taskId: string): Promise<void>;\n  close(): void;\n}",
+        "const q = query({ prompt: messageStream });\n\n// Override the model for the rest of the session\nawait q.applyFlagSettings({ model: \"claude-opus-4-6\" });\n\n// Later: clear the override and fall back to lower-precedence settings\nawait q.applyFlagSettings({ model: null });",
         "interface WarmQuery extends AsyncDisposable {\n  query(prompt: string | AsyncIterable<SDKUserMessage>): Query;\n  close(): void;\n}",
         "type SDKControlInitializeResponse = {\n  commands: SlashCommand[];\n  agents: AgentInfo[];\n  output_style: string;\n  available_output_styles: string[];\n  models: ModelInfo[];\n  account: AccountInfo;\n  fast_mode_state?: \"off\" | \"cooldown\" | \"on\";\n};",
         "type AgentDefinition = {\n  description: string;\n  tools?: string[];\n  disallowedTools?: string[];\n  prompt: string;\n  model?: string;\n  mcpServers?: AgentMcpServerSpec[];\n  skills?: string[];\n  initialPrompt?: string;\n  maxTurns?: number;\n  background?: boolean;\n  memory?: \"user\" | \"project\" | \"local\";\n  effort?: \"low\" | \"medium\" | \"high\" | \"xhigh\" | \"max\" | number;\n  permissionMode?: PermissionMode;\n  criticalSystemReminder_EXPERIMENTAL?: string;\n};",
@@ -36636,9 +36671,7 @@
         "type PermissionMode =\n  | \"default\" // Standard permission behavior\n  | \"acceptEdits\" // Auto-accept file edits\n  | \"bypassPermissions\" // Bypass all permission checks\n  | \"plan\" // Planning mode - read-only tools only\n  | \"dontAsk\" // Don't prompt for permissions, deny if not pre-approved\n  | \"auto\"; // Use a model classifier to approve or deny each tool call",
         "type CanUseTool = (\n  toolName: string,\n  input: Record<string, unknown>,\n  options: {\n    signal: AbortSignal;\n    suggestions?: PermissionUpdate[];\n    blockedPath?: string;\n    decisionReason?: string;\n    toolUseID: string;\n    agentID?: string;\n  }\n) => Promise<PermissionResult>;",
         "type PermissionResult =\n  | {\n      behavior: \"allow\";\n      updatedInput?: Record<string, unknown>;\n      updatedPermissions?: PermissionUpdate[];\n      toolUseID?: string;\n    }\n  | {\n      behavior: \"deny\";\n      message: string;\n      interrupt?: boolean;\n      toolUseID?: string;\n    };",
-        "type ToolConfig = {\n  askUserQuestion?: {\n    previewFormat?: \"markdown\" | \"html\";\n  };\n};",
-        "type McpServerConfig =\n  | McpStdioServerConfig\n  | McpSSEServerConfig\n  | McpHttpServerConfig\n  | McpSdkServerConfigWithInstance;",
-        "type McpStdioServerConfig = {\n  type?: \"stdio\";\n  command: string;\n  args?: string[];\n  env?: Record<string, string>;\n};"
+        "type ToolConfig = {\n  askUserQuestion?: {\n    previewFormat?: \"markdown\" | \"html\";\n  };\n};"
       ],
       "sectionBlocks": [
         {
@@ -36781,17 +36814,31 @@
         {
           "title": "​Options",
           "paragraphs": [
-            "Configuration object for the query() function."
+            "Configuration object for the query() function.",
+            "The CLI subprocess reads several environment variables that control API timeouts and stall detection. Pass them through the env option:",
+            "API_TIMEOUT_MS: per-request timeout on the Anthropic client, in milliseconds. Default 600000. Applies to the main loop and all subagents.",
+            "CLAUDE_CODE_MAX_RETRIES: maximum API retries. Default 10. Each retry gets its own API_TIMEOUT_MS window, so worst-case wall time is roughly API_TIMEOUT_MS × (CLAUDE_CODE_MAX_RETRIES + 1) plus backoff.",
+            "CLAUDE_ASYNC_AGENT_STALL_TIMEOUT_MS: stall watchdog for subagents launched with run_in_background. Default 600000. Resets on each stream event; on stall it aborts the subagent, marks the task failed, and surfaces the error to the parent with any partial result. Does not apply to synchronous subagents.",
+            "CLAUDE_ENABLE_STREAM_WATCHDOG=1 with CLAUDE_STREAM_IDLE_TIMEOUT_MS: aborts the request when headers have arrived but the response body stops streaming. Off by default. CLAUDE_STREAM_IDLE_TIMEOUT_MS defaults to 300000 and is clamped to that minimum. The aborted request goes through the normal retry path."
           ],
-          "codeBlocks": []
+          "codeBlocks": [
+            "const result = query({\n  prompt: \"Analyze this code\",\n  options: {\n    env: {\n      ...process.env,\n      API_TIMEOUT_MS: \"120000\",\n      CLAUDE_CODE_MAX_RETRIES: \"2\",\n      CLAUDE_ASYNC_AGENT_STALL_TIMEOUT_MS: \"120000\",\n    },\n  },\n});"
+          ]
         },
         {
           "title": "​Query object",
           "paragraphs": [
-            "Interface returned by the query() function."
+            "Interface returned by the query() function.",
+            "Changes any setting on a running session without restarting the query. Use it when a setting that has no dedicated setter needs to change mid-session, such as tightening permissions after the agent reads untrusted input. setModel() and setPermissionMode() are dedicated setters for those two keys; applyFlagSettings() is the general form that accepts any subset of the settings keys, and passing model here behaves the same as setModel().",
+            "The values are written to the flag-settings layer, the same layer the inline settings option of query() populates at startup. Flag settings sit near the top of the settings precedence order: they override user, project, and local settings, and only managed policy settings can override them. This is the same tier the on-page precedence section calls programmatic options.",
+            "Successive calls shallow-merge top-level keys. A second call with { permissions: {...} } replaces the entire permissions object from the prior call rather than deep-merging into it. To clear a key from the flag layer and fall back to lower-precedence sources, pass null for that key. Passing undefined has no effect because JSON serialization drops it.",
+            "Only available in streaming input mode, the same constraint as setModel() and setPermissionMode().",
+            "The example below switches the active model mid-session, then clears the override so the model falls back to whatever the user or project settings specify.",
+            "applyFlagSettings() is TypeScript-only. The Python SDK does not expose an equivalent method."
           ],
           "codeBlocks": [
-            "interface Query extends AsyncGenerator<SDKMessage, void> {\n  interrupt(): Promise<void>;\n  rewindFiles(\n    userMessageId: string,\n    options?: { dryRun?: boolean }\n  ): Promise<RewindFilesResult>;\n  setPermissionMode(mode: PermissionMode): Promise<void>;\n  setModel(model?: string): Promise<void>;\n  setMaxThinkingTokens(maxThinkingTokens: number | null): Promise<void>;\n  initializationResult(): Promise<SDKControlInitializeResponse>;\n  supportedCommands(): Promise<SlashCommand[]>;\n  supportedModels(): Promise<ModelInfo[]>;\n  supportedAgents(): Promise<AgentInfo[]>;\n  mcpServerStatus(): Promise<McpServerStatus[]>;\n  accountInfo(): Promise<AccountInfo>;\n  reconnectMcpServer(serverName: string): Promise<void>;\n  toggleMcpServer(serverName: string, enabled: boolean): Promise<void>;\n  setMcpServers(servers: Record<string, McpServerConfig>): Promise<McpSetServersResult>;\n  streamInput(stream: AsyncIterable<SDKUserMessage>): Promise<void>;\n  stopTask(taskId: string): Promise<void>;\n  close(): void;\n}"
+            "interface Query extends AsyncGenerator<SDKMessage, void> {\n  interrupt(): Promise<void>;\n  rewindFiles(\n    userMessageId: string,\n    options?: { dryRun?: boolean }\n  ): Promise<RewindFilesResult>;\n  setPermissionMode(mode: PermissionMode): Promise<void>;\n  setModel(model?: string): Promise<void>;\n  setMaxThinkingTokens(maxThinkingTokens: number | null): Promise<void>;\n  applyFlagSettings(settings: { [K in keyof Settings]?: Settings[K] | null }): Promise<void>;\n  initializationResult(): Promise<SDKControlInitializeResponse>;\n  supportedCommands(): Promise<SlashCommand[]>;\n  supportedModels(): Promise<ModelInfo[]>;\n  supportedAgents(): Promise<AgentInfo[]>;\n  mcpServerStatus(): Promise<McpServerStatus[]>;\n  accountInfo(): Promise<AccountInfo>;\n  reconnectMcpServer(serverName: string): Promise<void>;\n  toggleMcpServer(serverName: string, enabled: boolean): Promise<void>;\n  setMcpServers(servers: Record<string, McpServerConfig>): Promise<McpSetServersResult>;\n  streamInput(stream: AsyncIterable<SDKUserMessage>): Promise<void>;\n  stopTask(taskId: string): Promise<void>;\n  close(): void;\n}",
+            "const q = query({ prompt: messageStream });\n\n// Override the model for the rest of the session\nawait q.applyFlagSettings({ model: \"claude-opus-4-6\" });\n\n// Later: clear the override and fall back to lower-precedence settings\nawait q.applyFlagSettings({ model: null });"
           ]
         },
         {
@@ -37314,6 +37361,7 @@
         "SdkMcpTool",
         "Transport",
         "ClaudeAgentOptions",
+        "Handle slow or stalled API responses",
         "OutputFormat",
         "SystemPromptPreset",
         "SettingSource",
@@ -37464,8 +37512,7 @@
         "@dataclass vs TypedDict: This SDK uses two kinds of types. Classes decorated with @dataclass (such as ResultMessage, AgentDefinition, TextBlock) are object instances at runtime and support attribute access: msg.result. Classes defined with TypedDict (such as ThinkingConfigEnabled, McpStdioServerConfig, SyncHookJSONOutput) are plain dicts at runtime and require key access: config[\"budget_tokens\"], not config.budget_tokens. The ClassName(field=value) call syntax works for both, but only dataclasses produce objects with attributes.",
         "Definition for an SDK MCP tool created with the @tool decorator.",
         "Abstract base class for custom transport implementations. Use this to communicate with the Claude process over a custom channel (for example, a remote connection instead of a local subprocess).",
-        "This is a low-level internal API. The interface may change in future releases. Custom implementations must be updated to match any interface changes.",
-        "Import: from claude_agent_sdk import Transport"
+        "This is a low-level internal API. The interface may change in future releases. Custom implementations must be updated to match any interface changes."
       ],
       "codeBlocks": [
         "pip install claude-agent-sdk",
@@ -37496,10 +37543,10 @@
         "from claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions\nfrom claude_agent_sdk.types import (\n    PermissionResultAllow,\n    PermissionResultDeny,\n    ToolPermissionContext,\n)\n\n\nasync def custom_permission_handler(\n    tool_name: str, input_data: dict, context: ToolPermissionContext\n) -> PermissionResultAllow | PermissionResultDeny:\n    \"\"\"Custom logic for tool permissions.\"\"\"\n\n    # Block writes to system directories\n    if tool_name == \"Write\" and input_data.get(\"file_path\", \"\").startswith(\"/system/\"):\n        return PermissionResultDeny(\n            message=\"System directory write not allowed\", interrupt=True\n        )\n\n    # Redirect sensitive file operations\n    if tool_name in [\"Write\", \"Edit\"] and \"config\" in input_data.get(\"file_path\", \"\"):\n        safe_path = f\"./sandbox/{input_data['file_path']}\"\n        return PermissionResultAllow(\n            updated_input={**input_data, \"file_path\": safe_path}\n        )\n\n    # Allow everything else\n    return PermissionResultAllow(updated_input=input_data)\n\n\nasync def main():\n    options = ClaudeAgentOptions(\n        can_use_tool=custom_permission_handler, allowed_tools=[\"Read\", \"Write\", \"Edit\"]\n    )\n\n    async with ClaudeSDKClient(options=options) as client:\n        await client.query(\"Update the system config file\")\n\n        async for message in client.receive_response():\n            # Will use sandbox path instead\n            print(message)\n\n\nasyncio.run(main())",
         "@dataclass\nclass SdkMcpTool(Generic[T]):\n    name: str\n    description: str\n    input_schema: type[T] | dict[str, Any]\n    handler: Callable[[T], Awaitable[dict[str, Any]]]\n    annotations: ToolAnnotations | None = None",
         "from abc import ABC, abstractmethod\nfrom collections.abc import AsyncIterator\nfrom typing import Any\n\n\nclass Transport(ABC):\n    @abstractmethod\n    async def connect(self) -> None: ...\n\n    @abstractmethod\n    async def write(self, data: str) -> None: ...\n\n    @abstractmethod\n    def read_messages(self) -> AsyncIterator[dict[str, Any]]: ...\n\n    @abstractmethod\n    async def close(self) -> None: ...\n\n    @abstractmethod\n    def is_ready(self) -> bool: ...\n\n    @abstractmethod\n    async def end_input(self) -> None: ...",
-        "@dataclass\nclass ClaudeAgentOptions:\n    tools: list[str] | ToolsPreset | None = None\n    allowed_tools: list[str] = field(default_factory=list)\n    system_prompt: str | SystemPromptPreset | None = None\n    mcp_servers: dict[str, McpServerConfig] | str | Path = field(default_factory=dict)\n    permission_mode: PermissionMode | None = None\n    continue_conversation: bool = False\n    resume: str | None = None\n    max_turns: int | None = None\n    max_budget_usd: float | None = None\n    disallowed_tools: list[str] = field(default_factory=list)\n    model: str | None = None\n    fallback_model: str | None = None\n    betas: list[SdkBeta] = field(default_factory=list)\n    output_format: dict[str, Any] | None = None\n    permission_prompt_tool_name: str | None = None\n    cwd: str | Path | None = None\n    cli_path: str | Path | None = None\n    settings: str | None = None\n    add_dirs: list[str | Path] = field(default_factory=list)\n    env: dict[str, str] = field(default_factory=dict)\n    extra_args: dict[str, str | None] = field(default_factory=dict)\n    max_buffer_size: int | None = None\n    debug_stderr: Any = sys.stderr  # Deprecated\n    stderr: Callable[[str], None] | None = None\n    can_use_tool: CanUseTool | None = None\n    hooks: dict[HookEvent, list[HookMatcher]] | None = None\n    user: str | None = None\n    include_partial_messages: bool = False\n    fork_session: bool = False\n    agents: dict[str, AgentDefinition] | None = None\n    setting_sources: list[SettingSource] | None = None\n    sandbox: SandboxSettings | None = None\n    plugins: list[SdkPluginConfig] = field(default_factory=list)\n    max_thinking_tokens: int | None = None  # Deprecated: use thinking instead\n    thinking: ThinkingConfig | None = None\n    effort: Literal[\"low\", \"medium\", \"high\", \"max\"] | None = None\n    enable_file_checkpointing: bool = False\n    session_store: SessionStore | None = None\n    session_store_flush: SessionStoreFlushMode = \"batched\"",
+        "@dataclass\nclass ClaudeAgentOptions:\n    tools: list[str] | ToolsPreset | None = None\n    allowed_tools: list[str] = field(default_factory=list)\n    system_prompt: str | SystemPromptPreset | None = None\n    mcp_servers: dict[str, McpServerConfig] | str | Path = field(default_factory=dict)\n    strict_mcp_config: bool = False\n    permission_mode: PermissionMode | None = None\n    continue_conversation: bool = False\n    resume: str | None = None\n    max_turns: int | None = None\n    max_budget_usd: float | None = None\n    disallowed_tools: list[str] = field(default_factory=list)\n    model: str | None = None\n    fallback_model: str | None = None\n    betas: list[SdkBeta] = field(default_factory=list)\n    output_format: dict[str, Any] | None = None\n    permission_prompt_tool_name: str | None = None\n    cwd: str | Path | None = None\n    cli_path: str | Path | None = None\n    settings: str | None = None\n    add_dirs: list[str | Path] = field(default_factory=list)\n    env: dict[str, str] = field(default_factory=dict)\n    extra_args: dict[str, str | None] = field(default_factory=dict)\n    max_buffer_size: int | None = None\n    debug_stderr: Any = sys.stderr  # Deprecated\n    stderr: Callable[[str], None] | None = None\n    can_use_tool: CanUseTool | None = None\n    hooks: dict[HookEvent, list[HookMatcher]] | None = None\n    user: str | None = None\n    include_partial_messages: bool = False\n    include_hook_events: bool = False\n    fork_session: bool = False\n    agents: dict[str, AgentDefinition] | None = None\n    setting_sources: list[SettingSource] | None = None\n    sandbox: SandboxSettings | None = None\n    plugins: list[SdkPluginConfig] = field(default_factory=list)\n    max_thinking_tokens: int | None = None  # Deprecated: use thinking instead\n    thinking: ThinkingConfig | None = None\n    effort: Literal[\"low\", \"medium\", \"high\", \"xhigh\", \"max\"] | None = None\n    enable_file_checkpointing: bool = False\n    session_store: SessionStore | None = None\n    session_store_flush: SessionStoreFlushMode = \"batched\"",
+        "options = ClaudeAgentOptions(\n    env={\n        \"API_TIMEOUT_MS\": \"120000\",\n        \"CLAUDE_CODE_MAX_RETRIES\": \"2\",\n        \"CLAUDE_ASYNC_AGENT_STALL_TIMEOUT_MS\": \"120000\",\n    },\n)",
         "# Expected dict shape for output_format\n{\n    \"type\": \"json_schema\",\n    \"schema\": {...},  # Your JSON Schema definition\n}",
-        "class SystemPromptPreset(TypedDict):\n    type: Literal[\"preset\"]\n    preset: Literal[\"claude_code\"]\n    append: NotRequired[str]\n    exclude_dynamic_sections: NotRequired[bool]",
-        "SettingSource = Literal[\"user\", \"project\", \"local\"]"
+        "class SystemPromptPreset(TypedDict):\n    type: Literal[\"preset\"]\n    preset: Literal[\"claude_code\"]\n    append: NotRequired[str]\n    exclude_dynamic_sections: NotRequired[bool]"
       ],
       "sectionBlocks": [
         {
@@ -37731,10 +37778,16 @@
         {
           "title": "​ClaudeAgentOptions",
           "paragraphs": [
-            "Configuration dataclass for Claude Code queries."
+            "Configuration dataclass for Claude Code queries.",
+            "The CLI subprocess reads several environment variables that control API timeouts and stall detection. Pass them through ClaudeAgentOptions.env:",
+            "API_TIMEOUT_MS: per-request timeout on the Anthropic client, in milliseconds. Default 600000. Applies to the main loop and all subagents.",
+            "CLAUDE_CODE_MAX_RETRIES: maximum API retries. Default 10. Each retry gets its own API_TIMEOUT_MS window, so worst-case wall time is roughly API_TIMEOUT_MS × (CLAUDE_CODE_MAX_RETRIES + 1) plus backoff.",
+            "CLAUDE_ASYNC_AGENT_STALL_TIMEOUT_MS: stall watchdog for subagents launched with run_in_background. Default 600000. Resets on each stream event; on stall it aborts the subagent, marks the task failed, and surfaces the error to the parent with any partial result. Does not apply to synchronous subagents.",
+            "CLAUDE_ENABLE_STREAM_WATCHDOG=1 with CLAUDE_STREAM_IDLE_TIMEOUT_MS: aborts the request when headers have arrived but the response body stops streaming. Off by default. CLAUDE_STREAM_IDLE_TIMEOUT_MS defaults to 300000 and is clamped to that minimum. The aborted request goes through the normal retry path."
           ],
           "codeBlocks": [
-            "@dataclass\nclass ClaudeAgentOptions:\n    tools: list[str] | ToolsPreset | None = None\n    allowed_tools: list[str] = field(default_factory=list)\n    system_prompt: str | SystemPromptPreset | None = None\n    mcp_servers: dict[str, McpServerConfig] | str | Path = field(default_factory=dict)\n    permission_mode: PermissionMode | None = None\n    continue_conversation: bool = False\n    resume: str | None = None\n    max_turns: int | None = None\n    max_budget_usd: float | None = None\n    disallowed_tools: list[str] = field(default_factory=list)\n    model: str | None = None\n    fallback_model: str | None = None\n    betas: list[SdkBeta] = field(default_factory=list)\n    output_format: dict[str, Any] | None = None\n    permission_prompt_tool_name: str | None = None\n    cwd: str | Path | None = None\n    cli_path: str | Path | None = None\n    settings: str | None = None\n    add_dirs: list[str | Path] = field(default_factory=list)\n    env: dict[str, str] = field(default_factory=dict)\n    extra_args: dict[str, str | None] = field(default_factory=dict)\n    max_buffer_size: int | None = None\n    debug_stderr: Any = sys.stderr  # Deprecated\n    stderr: Callable[[str], None] | None = None\n    can_use_tool: CanUseTool | None = None\n    hooks: dict[HookEvent, list[HookMatcher]] | None = None\n    user: str | None = None\n    include_partial_messages: bool = False\n    fork_session: bool = False\n    agents: dict[str, AgentDefinition] | None = None\n    setting_sources: list[SettingSource] | None = None\n    sandbox: SandboxSettings | None = None\n    plugins: list[SdkPluginConfig] = field(default_factory=list)\n    max_thinking_tokens: int | None = None  # Deprecated: use thinking instead\n    thinking: ThinkingConfig | None = None\n    effort: Literal[\"low\", \"medium\", \"high\", \"max\"] | None = None\n    enable_file_checkpointing: bool = False\n    session_store: SessionStore | None = None\n    session_store_flush: SessionStoreFlushMode = \"batched\""
+            "@dataclass\nclass ClaudeAgentOptions:\n    tools: list[str] | ToolsPreset | None = None\n    allowed_tools: list[str] = field(default_factory=list)\n    system_prompt: str | SystemPromptPreset | None = None\n    mcp_servers: dict[str, McpServerConfig] | str | Path = field(default_factory=dict)\n    strict_mcp_config: bool = False\n    permission_mode: PermissionMode | None = None\n    continue_conversation: bool = False\n    resume: str | None = None\n    max_turns: int | None = None\n    max_budget_usd: float | None = None\n    disallowed_tools: list[str] = field(default_factory=list)\n    model: str | None = None\n    fallback_model: str | None = None\n    betas: list[SdkBeta] = field(default_factory=list)\n    output_format: dict[str, Any] | None = None\n    permission_prompt_tool_name: str | None = None\n    cwd: str | Path | None = None\n    cli_path: str | Path | None = None\n    settings: str | None = None\n    add_dirs: list[str | Path] = field(default_factory=list)\n    env: dict[str, str] = field(default_factory=dict)\n    extra_args: dict[str, str | None] = field(default_factory=dict)\n    max_buffer_size: int | None = None\n    debug_stderr: Any = sys.stderr  # Deprecated\n    stderr: Callable[[str], None] | None = None\n    can_use_tool: CanUseTool | None = None\n    hooks: dict[HookEvent, list[HookMatcher]] | None = None\n    user: str | None = None\n    include_partial_messages: bool = False\n    include_hook_events: bool = False\n    fork_session: bool = False\n    agents: dict[str, AgentDefinition] | None = None\n    setting_sources: list[SettingSource] | None = None\n    sandbox: SandboxSettings | None = None\n    plugins: list[SdkPluginConfig] = field(default_factory=list)\n    max_thinking_tokens: int | None = None  # Deprecated: use thinking instead\n    thinking: ThinkingConfig | None = None\n    effort: Literal[\"low\", \"medium\", \"high\", \"xhigh\", \"max\"] | None = None\n    enable_file_checkpointing: bool = False\n    session_store: SessionStore | None = None\n    session_store_flush: SessionStoreFlushMode = \"batched\"",
+            "options = ClaudeAgentOptions(\n    env={\n        \"API_TIMEOUT_MS\": \"120000\",\n        \"CLAUDE_CODE_MAX_RETRIES\": \"2\",\n        \"CLAUDE_ASYNC_AGENT_STALL_TIMEOUT_MS\": \"120000\",\n    },\n)"
           ]
         },
         {
@@ -37787,7 +37840,7 @@
             "AgentDefinition field names use camelCase, such as disallowedTools, permissionMode, and maxTurns. These names map directly to the wire format shared with the TypeScript SDK. This differs from ClaudeAgentOptions, which uses Python snake_case for the equivalent top-level fields such as disallowed_tools and permission_mode. Because AgentDefinition is a dataclass, passing a snake_case keyword raises a TypeError at construction time."
           ],
           "codeBlocks": [
-            "@dataclass\nclass AgentDefinition:\n    description: str\n    prompt: str\n    tools: list[str] | None = None\n    disallowedTools: list[str] | None = None\n    model: str | None = None\n    skills: list[str] | None = None\n    memory: Literal[\"user\", \"project\", \"local\"] | None = None\n    mcpServers: list[str | dict[str, Any]] | None = None\n    initialPrompt: str | None = None\n    maxTurns: int | None = None\n    background: bool | None = None\n    effort: Literal[\"low\", \"medium\", \"high\", \"max\"] | int | None = None\n    permissionMode: PermissionMode | None = None"
+            "@dataclass\nclass AgentDefinition:\n    description: str\n    prompt: str\n    tools: list[str] | None = None\n    disallowedTools: list[str] | None = None\n    model: str | None = None\n    skills: list[str] | None = None\n    memory: Literal[\"user\", \"project\", \"local\"] | None = None\n    mcpServers: list[str | dict[str, Any]] | None = None\n    initialPrompt: str | None = None\n    maxTurns: int | None = None\n    background: bool | None = None\n    effort: Literal[\"low\", \"medium\", \"high\", \"xhigh\", \"max\"] | int | None = None\n    permissionMode: PermissionMode | None = None"
           ]
         },
         {
@@ -37819,7 +37872,7 @@
             "Context information passed to tool permission callbacks."
           ],
           "codeBlocks": [
-            "@dataclass\nclass ToolPermissionContext:\n    signal: Any | None = None  # Future: abort signal support\n    suggestions: list[PermissionUpdate] = field(default_factory=list)"
+            "@dataclass\nclass ToolPermissionContext:\n    signal: Any | None = None  # Future: abort signal support\n    suggestions: list[PermissionUpdate] = field(default_factory=list)\n    blocked_path: str | None = None\n    decision_reason: str | None = None\n    title: str | None = None\n    display_name: str | None = None\n    description: str | None = None"
           ]
         },
         {

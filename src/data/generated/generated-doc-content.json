@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-06T05:38:20.499Z",
-  "sourceGeneratedAt": "2026-05-06T05:38:20.175Z",
+  "generatedAt": "2026-05-07T05:41:42.624Z",
+  "sourceGeneratedAt": "2026-05-07T05:41:42.295Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -528,7 +528,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.129、2.1.128、2.1.126、2.1.123 这些环节往下讲。",
+            "原文这页大多会按 2.1.132、2.1.131、2.1.129、2.1.128 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -537,7 +537,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.129 -> 2.1.128 -> 2.1.126 -> 2.1.123。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.132 -> 2.1.131 -> 2.1.129 -> 2.1.128。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         },
         {
@@ -6667,6 +6667,12 @@
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
               "code": "claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two",
               "kind": "command"
+            },
+            {
+              "title": "Test your plugins locally 3",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude --plugin-url https://example.com/my-plugin.zip",
+              "kind": "command"
             }
           ]
         },
@@ -7133,6 +7139,21 @@
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
               "code": "# Allow only specific skills\nSkill(commit)\nSkill(review-pr *)\n\n# Deny specific skills\nSkill(deploy *)",
               "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Override skill visibility from settings",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说\"Override skill visibility from settings\"管到哪儿。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Override skill visibility from settings",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"skillOverrides\": {\n    \"legacy-context\": \"name-only\",\n    \"deploy\": \"off\"\n  }\n}",
+              "kind": "config"
             }
           ]
         },
@@ -10420,7 +10441,8 @@
         {
           "title": "Auto-updates",
           "paragraphs": [
-            "这一段主要是在把\"Auto-updates\"讲实，不是只摆个标题给你看。"
+            "这一段主要是在把\"Auto-updates\"讲实，不是只摆个标题给你看。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
           ]
         },
         {
@@ -12491,7 +12513,7 @@
           "title": "Model selection",
           "paragraphs": [
             "看到这里，就把\"Model selection\"当成一件真要上手的活来看。",
-            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -16383,7 +16405,8 @@
         {
           "title": "Add a custom model option",
           "paragraphs": [
-            "这一段是在说怎么用 ANTHROPIC_CUSTOM_MODEL_OPTION to add a single custom entry 去做 the /model picker without replacing the built-in aliases. This is useful for testing model IDs that Claude Code does not list by default. For LLM gateway deployments, Claude Code populates the picker automatically from the gateway’s /v1/models endpoint, so this variable is needed only when discovery does not return the model you want. See LLM gateway model selection.。看这种内容，光知道名字没用，还是得落到手上。"
+            "这一段是在说怎么用 ANTHROPIC_CUSTOM_MODEL_OPTION to add a single custom entry 去做 the /model picker without replacing the built-in aliases. This is useful for testing model IDs that Claude Code does not list by default. For LLM gateway deployments, Claude Code can populate the picker from the gateway’s /v1/models endpoint when CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1 is set, so this variable is needed only when discovery is disabled or does not return the model you want. See LLM gateway model selection.。看这种内容，光知道名字没用，还是得落到手上。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
           ],
           "steps": [
             {
@@ -17046,6 +17069,13 @@
           ]
         },
         {
+          "title": "Scroll in the JetBrains IDE terminal",
+          "paragraphs": [
+            "看到这里，就把\"Scroll in the JetBrains IDE terminal\"当成一件真要上手的活来看。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+          ]
+        },
+        {
           "title": "Search and review the conversation",
           "paragraphs": [
             "看到这里，就把\"Search and review the conversation\"当成一件真要上手的活来看。",
@@ -17084,7 +17114,7 @@
           "title": "Research preview",
           "paragraphs": [
             "看到这里，就把\"Research preview\"当成一件真要上手的活来看。",
-            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+            "这一段还会谈显示方式和终端环境，重点是先选一个你当前最稳能用的模式，不必一上来追求花哨。"
           ]
         }
       ],
@@ -17343,7 +17373,7 @@
             {
               "title": "原页关键片段：Available data",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"effort\": {\n    \"level\": \"high\"\n  },\n  \"thinking\": {\n    \"enabled\": true\n  },\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
+              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15500,\n    \"total_output_tokens\": 1200,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"effort\": {\n    \"level\": \"high\"\n  },\n  \"thinking\": {\n    \"enabled\": true\n  },\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
               "kind": "config"
             },
             {
@@ -17477,7 +17507,7 @@
             {
               "title": "Available data",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15234,\n    \"total_output_tokens\": 4521,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"effort\": {\n    \"level\": \"high\"\n  },\n  \"thinking\": {\n    \"enabled\": true\n  },\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
+              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15500,\n    \"total_output_tokens\": 1200,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"effort\": {\n    \"level\": \"high\"\n  },\n  \"thinking\": {\n    \"enabled\": true\n  },\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
               "kind": "config"
             }
           ]
@@ -19380,7 +19410,7 @@
             {
               "title": "原页关键片段：Complete schema",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": [\"./custom/agents/reviewer.md\"],\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"themes\": \"./themes/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\",\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
+              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": [\"./custom/agents/reviewer.md\"],\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"experimental\": {\n    \"themes\": \"./themes/\",\n    \"monitors\": \"./monitors.json\"\n  },\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
               "kind": "config"
             },
             {
@@ -19549,7 +19579,7 @@
             {
               "title": "Complete schema",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": [\"./custom/agents/reviewer.md\"],\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"themes\": \"./themes/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"monitors\": \"./monitors.json\",\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
+              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": [\"./custom/agents/reviewer.md\"],\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"experimental\": {\n    \"themes\": \"./themes/\",\n    \"monitors\": \"./monitors.json\"\n  },\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
               "kind": "config"
             }
           ]
@@ -19570,6 +19600,12 @@
           "title": "Component path fields",
           "paragraphs": [
             "看到这里，就别靠猜了，字段、格式和写法都得按说明来。"
+          ]
+        },
+        {
+          "title": "Experimental components",
+          "paragraphs": [
+            "这一段主要是在把\"Experimental components\"讲实，不是只摆个标题给你看。"
           ]
         },
         {
@@ -19764,20 +19800,6 @@
               "title": "plugin enable",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
               "code": "claude plugin enable <plugin> [options]",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "plugin disable",
-          "paragraphs": [
-            "看到这里，就把\"plugin disable\"当成一件真要上手的活来看。"
-          ],
-          "steps": [
-            {
-              "title": "plugin disable",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "claude plugin disable <plugin> [options]",
               "kind": "command"
             }
           ]
@@ -26642,20 +26664,36 @@
         {
           "title": "Options",
           "paragraphs": [
-            "这一段主要是在把\"Options\"讲实，不是只摆个标题给你看。"
+            "这一段主要是在把\"Options\"讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Options",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "const result = query({\n  prompt: \"Analyze this code\",\n  options: {\n    env: {\n      ...process.env,\n      API_TIMEOUT_MS: \"120000\",\n      CLAUDE_CODE_MAX_RETRIES: \"2\",\n      CLAUDE_ASYNC_AGENT_STALL_TIMEOUT_MS: \"120000\",\n    },\n  },\n});",
+              "kind": "code"
+            }
           ]
         },
         {
           "title": "Query object",
           "paragraphs": [
-            "这一块主要是在说\"Query object\"真到手上该怎么用，哪里最容易踩坑。"
+            "这一块主要是在说\"Query object\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
-              "title": "Query object",
+              "title": "Query object 1",
               "body": "\"Query object\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "interface Query extends AsyncGenerator<SDKMessage, void> {\n  interrupt(): Promise<void>;\n  rewindFiles(\n    userMessageId: string,\n    options?: { dryRun?: boolean }\n  ): Promise<RewindFilesResult>;\n  setPermissionMode(mode: PermissionMode): Promise<void>;\n  setModel(model?: string): Promise<void>;\n  setMaxThinkingTokens(maxThinkingTokens: number | null): Promise<void>;\n  initializationResult(): Promise<SDKControlInitializeResponse>;\n  supportedCommands(): Promise<SlashCommand[]>;\n  supportedModels(): Promise<ModelInfo[]>;\n  supportedAgents(): Promise<AgentInfo[]>;\n  mcpServerStatus(): Promise<McpServerStatus[]>;\n  accountInfo(): Promise<AccountInfo>;\n  reconnectMcpServer(serverName: string): Promise<void>;\n  toggleMcpServer(serverName: string, enabled: boolean): Promise<void>;\n  setMcpServers(servers: Record<string, McpServerConfig>): Promise<McpSetServersResult>;\n  streamInput(stream: AsyncIterable<SDKUserMessage>): Promise<void>;\n  stopTask(taskId: string): Promise<void>;\n  close(): void;\n}",
+              "code": "interface Query extends AsyncGenerator<SDKMessage, void> {\n  interrupt(): Promise<void>;\n  rewindFiles(\n    userMessageId: string,\n    options?: { dryRun?: boolean }\n  ): Promise<RewindFilesResult>;\n  setPermissionMode(mode: PermissionMode): Promise<void>;\n  setModel(model?: string): Promise<void>;\n  setMaxThinkingTokens(maxThinkingTokens: number | null): Promise<void>;\n  applyFlagSettings(settings: { [K in keyof Settings]?: Settings[K] | null }): Promise<void>;\n  initializationResult(): Promise<SDKControlInitializeResponse>;\n  supportedCommands(): Promise<SlashCommand[]>;\n  supportedModels(): Promise<ModelInfo[]>;\n  supportedAgents(): Promise<AgentInfo[]>;\n  mcpServerStatus(): Promise<McpServerStatus[]>;\n  accountInfo(): Promise<AccountInfo>;\n  reconnectMcpServer(serverName: string): Promise<void>;\n  toggleMcpServer(serverName: string, enabled: boolean): Promise<void>;\n  setMcpServers(servers: Record<string, McpServerConfig>): Promise<McpSetServersResult>;\n  streamInput(stream: AsyncIterable<SDKUserMessage>): Promise<void>;\n  stopTask(taskId: string): Promise<void>;\n  close(): void;\n}",
               "kind": "code"
+            },
+            {
+              "title": "Query object 2",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "const q = query({ prompt: messageStream });\n\n// Override the model for the rest of the session\nawait q.applyFlagSettings({ model: \"claude-opus-4-6\" });\n\n// Later: clear the override and fall back to lower-precedence settings\nawait q.applyFlagSettings({ model: null });",
+              "kind": "command"
             }
           ]
         },
@@ -27652,13 +27690,20 @@
         {
           "title": "ClaudeAgentOptions",
           "paragraphs": [
-            "这一块主要是在说\"ClaudeAgentOptions\"真到手上该怎么用，哪里最容易踩坑。"
+            "这一块主要是在说\"ClaudeAgentOptions\"真到手上该怎么用，哪里最容易踩坑。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ],
           "steps": [
             {
-              "title": "ClaudeAgentOptions",
+              "title": "ClaudeAgentOptions 1",
               "body": "\"ClaudeAgentOptions\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "@dataclass\nclass ClaudeAgentOptions:\n    tools: list[str] | ToolsPreset | None = None\n    allowed_tools: list[str] = field(default_factory=list)\n    system_prompt: str | SystemPromptPreset | None = None\n    mcp_servers: dict[str, McpServerConfig] | str | Path = field(default_factory=dict)\n    permission_mode: PermissionMode | None = None\n    continue_conversation: bool = False\n    resume: str | None = None\n    max_turns: int | None = None\n    max_budget_usd: float | None = None\n    disallowed_tools: list[str] = field(default_factory=list)\n    model: str | None = None\n    fallback_model: str | None = None\n    betas: list[SdkBeta] = field(default_factory=list)\n    output_format: dict[str, Any] | None = None\n    permission_prompt_tool_name: str | None = None\n    cwd: str | Path | None = None\n    cli_path: str | Path | None = None\n    settings: str | None = None\n    add_dirs: list[str | Path] = field(default_factory=list)\n    env: dict[str, str] = field(default_factory=dict)\n    extra_args: dict[str, str | None] = field(default_factory=dict)\n    max_buffer_size: int | None = None\n    debug_stderr: Any = sys.stderr  # Deprecated\n    stderr: Callable[[str], None] | None = None\n    can_use_tool: CanUseTool | None = None\n    hooks: dict[HookEvent, list[HookMatcher]] | None = None\n    user: str | None = None\n    include_partial_messages: bool = False\n    fork_session: bool = False\n    agents: dict[str, AgentDefinition] | None = None\n    setting_sources: list[SettingSource] | None = None\n    sandbox: SandboxSettings | None = None\n    plugins: list[SdkPluginConfig] = field(default_factory=list)\n    max_thinking_tokens: int | None = None  # Deprecated: use thinking instead\n    thinking: ThinkingConfig | None = None\n    effort: Literal[\"low\", \"medium\", \"high\", \"max\"] | None = None\n    enable_file_checkpointing: bool = False\n    session_store: SessionStore | None = None\n    session_store_flush: SessionStoreFlushMode = \"batched\"",
+              "code": "@dataclass\nclass ClaudeAgentOptions:\n    tools: list[str] | ToolsPreset | None = None\n    allowed_tools: list[str] = field(default_factory=list)\n    system_prompt: str | SystemPromptPreset | None = None\n    mcp_servers: dict[str, McpServerConfig] | str | Path = field(default_factory=dict)\n    strict_mcp_config: bool = False\n    permission_mode: PermissionMode | None = None\n    continue_conversation: bool = False\n    resume: str | None = None\n    max_turns: int | None = None\n    max_budget_usd: float | None = None\n    disallowed_tools: list[str] = field(default_factory=list)\n    model: str | None = None\n    fallback_model: str | None = None\n    betas: list[SdkBeta] = field(default_factory=list)\n    output_format: dict[str, Any] | None = None\n    permission_prompt_tool_name: str | None = None\n    cwd: str | Path | None = None\n    cli_path: str | Path | None = None\n    settings: str | None = None\n    add_dirs: list[str | Path] = field(default_factory=list)\n    env: dict[str, str] = field(default_factory=dict)\n    extra_args: dict[str, str | None] = field(default_factory=dict)\n    max_buffer_size: int | None = None\n    debug_stderr: Any = sys.stderr  # Deprecated\n    stderr: Callable[[str], None] | None = None\n    can_use_tool: CanUseTool | None = None\n    hooks: dict[HookEvent, list[HookMatcher]] | None = None\n    user: str | None = None\n    include_partial_messages: bool = False\n    include_hook_events: bool = False\n    fork_session: bool = False\n    agents: dict[str, AgentDefinition] | None = None\n    setting_sources: list[SettingSource] | None = None\n    sandbox: SandboxSettings | None = None\n    plugins: list[SdkPluginConfig] = field(default_factory=list)\n    max_thinking_tokens: int | None = None  # Deprecated: use thinking instead\n    thinking: ThinkingConfig | None = None\n    effort: Literal[\"low\", \"medium\", \"high\", \"xhigh\", \"max\"] | None = None\n    enable_file_checkpointing: bool = False\n    session_store: SessionStore | None = None\n    session_store_flush: SessionStoreFlushMode = \"batched\"",
+              "kind": "code"
+            },
+            {
+              "title": "ClaudeAgentOptions 2",
+              "body": "\"ClaudeAgentOptions\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "options = ClaudeAgentOptions(\n    env={\n        \"API_TIMEOUT_MS\": \"120000\",\n        \"CLAUDE_CODE_MAX_RETRIES\": \"2\",\n        \"CLAUDE_ASYNC_AGENT_STALL_TIMEOUT_MS\": \"120000\",\n    },\n)",
               "kind": "code"
             }
           ]
@@ -27734,7 +27779,7 @@
             {
               "title": "AgentDefinition",
               "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "@dataclass\nclass AgentDefinition:\n    description: str\n    prompt: str\n    tools: list[str] | None = None\n    disallowedTools: list[str] | None = None\n    model: str | None = None\n    skills: list[str] | None = None\n    memory: Literal[\"user\", \"project\", \"local\"] | None = None\n    mcpServers: list[str | dict[str, Any]] | None = None\n    initialPrompt: str | None = None\n    maxTurns: int | None = None\n    background: bool | None = None\n    effort: Literal[\"low\", \"medium\", \"high\", \"max\"] | int | None = None\n    permissionMode: PermissionMode | None = None",
+              "code": "@dataclass\nclass AgentDefinition:\n    description: str\n    prompt: str\n    tools: list[str] | None = None\n    disallowedTools: list[str] | None = None\n    model: str | None = None\n    skills: list[str] | None = None\n    memory: Literal[\"user\", \"project\", \"local\"] | None = None\n    mcpServers: list[str | dict[str, Any]] | None = None\n    initialPrompt: str | None = None\n    maxTurns: int | None = None\n    background: bool | None = None\n    effort: Literal[\"low\", \"medium\", \"high\", \"xhigh\", \"max\"] | int | None = None\n    permissionMode: PermissionMode | None = None",
               "kind": "code"
             }
           ]
@@ -27779,7 +27824,7 @@
             {
               "title": "ToolPermissionContext",
               "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "@dataclass\nclass ToolPermissionContext:\n    signal: Any | None = None  # Future: abort signal support\n    suggestions: list[PermissionUpdate] = field(default_factory=list)",
+              "code": "@dataclass\nclass ToolPermissionContext:\n    signal: Any | None = None  # Future: abort signal support\n    suggestions: list[PermissionUpdate] = field(default_factory=list)\n    blocked_path: str | None = None\n    decision_reason: str | None = None\n    title: str | None = None\n    display_name: str | None = None\n    description: str | None = None",
               "kind": "code"
             }
           ]
