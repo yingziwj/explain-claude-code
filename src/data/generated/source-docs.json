@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-07T05:41:42.295Z",
+  "generatedAt": "2026-05-08T05:12:14.499Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -574,7 +574,7 @@
           "path": "/docs/en/agent-sdk/typescript"
         },
         {
-          "title": "TypeScript V2 (preview)",
+          "title": "TypeScript V2 (deprecated)",
           "path": "/docs/en/agent-sdk/typescript-v2-preview"
         },
         {
@@ -1259,6 +1259,7 @@
         "Documentation Index"
       ],
       "toc": [
+        "2.1.133",
         "2.1.132",
         "2.1.131",
         "2.1.129",
@@ -1277,8 +1278,7 @@
         "2.1.112",
         "2.1.111",
         "2.1.110",
-        "2.1.109",
-        "2.1.108"
+        "2.1.109"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
@@ -1286,6 +1286,23 @@
         "Use this file to discover all available pages before exploring further.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Added worktree.baseRef setting (fresh | head) to choose whether --worktree, EnterWorktree, and agent-isolation worktrees branch from origin/<default> or local HEAD. Note: the default fresh changes EnterWorktree’s base back to origin/<default> (it has been local HEAD since 2.1.128) — set worktree.baseRef: \"head\" to keep unpushed commits in new worktrees",
+        "Added sandbox.bwrapPath and sandbox.socatPath managed settings (Linux/WSL) to specify custom bubblewrap and socat binary locations",
+        "Added parentSettingsBehavior admin-tier key ('first-wins' | 'merge') to let admins opt SDK managedSettings (parent tier) into the policy merge",
+        "Hooks now receive the active effort level via the effort.level JSON input field and the $CLAUDE_EFFORT environment variable, and Bash tool commands can read $CLAUDE_EFFORT",
+        "Improved focus mode behavior",
+        "Improved memory usage by releasing warm-spare background workers under memory pressure",
+        "Fixed parallel sessions all dead-ending at 401 after a refresh-token race wiped shared credentials",
+        "Fixed Edit/Write allow rules scoped to a drive root (C:\\) or POSIX / matching incorrectly and always prompting",
+        "Fixed an unhandled rejection (ECOMPROMISED) when a history or session-log file lock is compromised by clock skew or slow disk",
+        "Fixed pressing Esc during conversation compaction showing a spurious “Error compacting conversation” notification",
+        "Fixed HTTP(S)_PROXY / NO_PROXY / mTLS not being respected for the full MCP OAuth flow including discovery, dynamic client registration, token exchange, and token refresh",
+        "Fixed Read/Write/Edit being denied on mapped network drives passed via --add-dir / SDK additionalDirectories",
+        "Fixed Remote Control stop/interrupt from claude.ai not fully canceling the CLI session the same way local Esc does, causing queued messages to never advance after interrupting a stuck tool or prompt",
+        "Fixed /effort in one session unexpectedly changing the effort level of other concurrent sessions, and a related issue where an IDE effort change could be silently dropped",
+        "Fixed subagents not discovering project, user, or plugin skills via the Skill tool",
+        "claude --help now lists --remote-control alongside --remote-control-session-name-prefix",
+        "[VSCode] Fixed claudeCode.claudeProcessWrapper failing with “Unsupported platform” when the extension build doesn’t bundle a Claude binary",
         "Added CLAUDE_CODE_SESSION_ID environment variable to the Bash tool subprocess environment, matching the session_id passed to hooks",
         "Added CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1 env var to opt out of the fullscreen alternate-screen renderer and keep the conversation in the terminal’s native scrollback",
         "Added a “Pasting…” footer hint while a Ctrl+V image paste is being read from the clipboard",
@@ -1443,24 +1460,7 @@
         "/terminal-setup now enables iTerm2’s “Applications in terminal may access clipboard” setting so /copy works, including from tmux",
         "MCP servers that hit a transient error during startup now auto-retry up to 3 times instead of staying disconnected",
         "The terminal tab session title is now generated in your configured language setting",
-        "Claude.ai connectors with the same upstream URL are now deduplicated instead of appearing as duplicates",
-        "Vertex AI: support X.509 certificate-based Workload Identity Federation (mTLS ADC)",
-        "Faster startup after upgrading: removed the Recent Activity panel from the release-notes splash",
-        "LSP diagnostic summaries now expand on click/ctrl+o and show the expand hint",
-        "SDK: mcp_authenticate now supports redirectUri for custom scheme completion and claude.ai connectors",
-        "OpenTelemetry: added stop_reason, gen_ai.response.finish_reasons, and user_system_prompt (gated behind OTEL_LOG_USER_PROMPTS) to LLM request spans",
-        "[VSCode] Voice dictation now respects the accessibility.voice.speechLanguage setting when no Claude Code language is configured",
-        "[VSCode] /context now opens a native token usage dialog",
-        "Fixed unbounded memory growth (multi-GB RSS) when processing many images in a session",
-        "Fixed /usage leaking up to ~2GB of memory on machines with large transcript histories",
-        "Fixed memory leak when long-running tools fail to emit a clear progress event",
-        "Fixed Bash tool becoming permanently unusable when the directory Claude was started in is deleted or moved mid-session",
-        "Fixed --resume crashing on startup in external builds",
-        "Fixed --resume failing on large sessions when a transcript line was corrupted by an unclean shutdown — the corrupt line is now skipped",
-        "Fixed thinking.type.enabled is not supported error when using Bedrock application inference profile ARNs",
-        "Fixed Microsoft 365 MCP OAuth failing with duplicate or unsupported prompt parameter",
-        "Fixed scrollback duplication when pressing Ctrl+L or triggering a redraw in non-fullscreen mode on tmux, GNOME Terminal, Windows Terminal, and Konsole",
-        "Fixed claude.ai MCP connectors silently disappearing when the connector-list fetch hits a transient auth error at startup"
+        "Claude.ai connectors with the same upstream URL are now deduplicated instead of appearing as duplicates"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1478,14 +1478,14 @@
             "Use this file to discover all available pages before exploring further.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Added CLAUDE_CODE_SESSION_ID environment variable to the Bash tool subprocess environment, matching the session_id passed to hooks",
-            "Added CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1 env var to opt out of the fullscreen alternate-screen renderer and keep the conversation in the terminal’s native scrollback",
-            "Added a “Pasting…” footer hint while a Ctrl+V image paste is being read from the clipboard",
-            "Fixed external SIGINT (e.g. IDE stop button, kill -INT) not running graceful shutdown — terminal modes are now restored and the --resume hint is printed instead of an abrupt exit",
-            "Fixed an uncaught exception when the terminal is closed or SSH disconnects mid-session under the native build",
-            "Fixed --resume failing with no low surrogate in string when a tool error truncation split an emoji; pre-corrupted sessions are sanitized on load",
-            "Fixed --permission-mode flag being ignored when resuming a plan-mode session with -p --continue/--resume, and plan mode not being re-applied after ExitPlanMode within the same session",
-            "Fixed fullscreen mode showing a blank screen after laptop sleep/wake or Ctrl+Z/fg until the next keystroke or stream output"
+            "Added worktree.baseRef setting (fresh | head) to choose whether --worktree, EnterWorktree, and agent-isolation worktrees branch from origin/<default> or local HEAD. Note: the default fresh changes EnterWorktree’s base back to origin/<default> (it has been local HEAD since 2.1.128) — set worktree.baseRef: \"head\" to keep unpushed commits in new worktrees",
+            "Added sandbox.bwrapPath and sandbox.socatPath managed settings (Linux/WSL) to specify custom bubblewrap and socat binary locations",
+            "Added parentSettingsBehavior admin-tier key ('first-wins' | 'merge') to let admins opt SDK managedSettings (parent tier) into the policy merge",
+            "Hooks now receive the active effort level via the effort.level JSON input field and the $CLAUDE_EFFORT environment variable, and Bash tool commands can read $CLAUDE_EFFORT",
+            "Improved focus mode behavior",
+            "Improved memory usage by releasing warm-spare background workers under memory pressure",
+            "Fixed parallel sessions all dead-ending at 401 after a refresh-token race wiped shared credentials",
+            "Fixed Edit/Write allow rules scoped to a drive root (C:\\) or POSIX / matching incorrectly and always prompting"
           ],
           "codeBlocks": []
         }
@@ -2051,7 +2051,7 @@
         "What loads: For model-invocable skills, Claude sees names and descriptions in every request. When you invoke a skill with /<name> or Claude loads it automatically, the full content loads into your conversation.",
         "How Claude chooses skills: Claude matches your task against skill descriptions to decide which are relevant. If descriptions are vague or overlap, Claude may load the wrong skill or miss one that would help. To tell Claude to use a specific skill, invoke it with /<name>. Skills with disable-model-invocation: true are invisible to Claude until you invoke them.",
         "Context cost: Low until used. User-only skills have zero cost until invoked.",
-        "In subagents: Skills work differently in subagents. Instead of on-demand loading, skills passed to a subagent are fully preloaded into its context at launch. Subagents don’t inherit skills from the main session; you must specify them explicitly.",
+        "In subagents: Skills work differently in subagents. Instead of on-demand loading, skills listed in the subagent’s skills field are fully preloaded into its context at launch. Subagents can still discover and invoke unlisted project, user, and plugin skills through the Skill tool.",
         "When: Session start.",
         "What loads: Tool names from connected servers. Full JSON schemas stay deferred until Claude needs a specific tool.",
         "Context cost: Tool search is on by default, so idle MCP tools consume minimal context.",
@@ -2695,6 +2695,9 @@
         "The first time Claude Code encounters external imports in a project, it shows an approval dialog listing the files. If you decline, the imports stay disabled and the dialog does not appear again.",
         "For a more structured approach to organizing instructions, see .claude/rules/.",
         "Claude Code reads CLAUDE.md, not AGENTS.md. If your repository already uses AGENTS.md for other coding agents, create a CLAUDE.md that imports it so both tools read the same instructions without duplicating them. You can also add Claude-specific instructions below the import. Claude loads the imported file at session start, then appends the rest:",
+        "A symlink also works if you don’t need to add Claude-specific content:",
+        "On Windows, creating a symlink requires Administrator privileges or Developer Mode, so use the @AGENTS.md import instead.",
+        "Running /init in a repo that already has an AGENTS.md reads it and incorporates the relevant parts into the generated CLAUDE.md. It also reads other tool configs like .cursorrules and .windsurfrules.",
         "Claude Code reads CLAUDE.md files by walking up the directory tree from your current working directory, checking each directory along the way for CLAUDE.md and CLAUDE.local.md files. This means if you run Claude Code in foo/bar/, it loads instructions from foo/bar/CLAUDE.md, foo/CLAUDE.md, and any CLAUDE.local.md files alongside them.",
         "All discovered files are concatenated into context rather than overriding each other. Across the directory tree, content is ordered from the filesystem root down to your working directory. For the foo/bar/ example, foo/CLAUDE.md appears in context before foo/bar/CLAUDE.md, so instructions closer to where you launched Claude are read last. Within each directory, CLAUDE.local.md is appended after CLAUDE.md, so your personal notes are the last thing Claude reads at that level.",
         "Claude also discovers CLAUDE.md and CLAUDE.local.md files in subdirectories under your current working directory. Instead of loading them at launch, they are included when Claude reads files in those subdirectories.",
@@ -2753,6 +2756,7 @@
         "Check that the relevant CLAUDE.md is in a location that gets loaded for your session (see Choose where to put CLAUDE.md files).",
         "Make instructions more specific. “Use 2-space indentation” works better than “format code nicely.”",
         "Look for conflicting instructions across CLAUDE.md files. If two files give different guidance for the same behavior, Claude may pick one arbitrarily.",
+        "If the instruction is something that must run at a specific point, such as before every commit or after each file edit, write it as a hook instead. Hooks execute as shell commands at fixed lifecycle events and apply regardless of what Claude decides to do.",
         "For instructions you want at the system prompt level, use --append-system-prompt. This must be passed every invocation, so it’s better suited to scripts and automation than interactive use.",
         "Use the InstructionsLoaded hook to log exactly which instruction files are loaded, when they load, and why. This is useful for debugging path-specific rules or lazy-loaded files in subdirectories.",
         "Run /memory and select the auto memory folder to browse what Claude has saved. Everything is plain markdown you can read, edit, or delete.",
@@ -2770,6 +2774,7 @@
         "See @README for project overview and @package.json for available npm commands for this project.\n\n# Additional Instructions\n- git workflow @docs/git-instructions.md",
         "# Individual Preferences\n- @~/.claude/my-project-instructions.md",
         "@AGENTS.md\n\n## Claude Code\n\nUse plan mode for changes under `src/billing/`.",
+        "ln -s AGENTS.md CLAUDE.md",
         "CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1 claude --add-dir ../shared-config",
         "your-project/\n├── .claude/\n│   ├── CLAUDE.md           # Main project instructions\n│   └── rules/\n│       ├── code-style.md   # Code style guidelines\n│       ├── testing.md      # Testing conventions\n│       └── security.md     # Security requirements",
         "---\npaths:\n  - \"src/api/**/*.ts\"\n---\n\n# API Development Rules\n\n- All API endpoints must include input validation\n- Use the standard error response format\n- Include OpenAPI documentation comments",
@@ -2895,10 +2900,14 @@
         {
           "title": "​AGENTS.md",
           "paragraphs": [
-            "Claude Code reads CLAUDE.md, not AGENTS.md. If your repository already uses AGENTS.md for other coding agents, create a CLAUDE.md that imports it so both tools read the same instructions without duplicating them. You can also add Claude-specific instructions below the import. Claude loads the imported file at session start, then appends the rest:"
+            "Claude Code reads CLAUDE.md, not AGENTS.md. If your repository already uses AGENTS.md for other coding agents, create a CLAUDE.md that imports it so both tools read the same instructions without duplicating them. You can also add Claude-specific instructions below the import. Claude loads the imported file at session start, then appends the rest:",
+            "A symlink also works if you don’t need to add Claude-specific content:",
+            "On Windows, creating a symlink requires Administrator privileges or Developer Mode, so use the @AGENTS.md import instead.",
+            "Running /init in a repo that already has an AGENTS.md reads it and incorporates the relevant parts into the generated CLAUDE.md. It also reads other tool configs like .cursorrules and .windsurfrules."
           ],
           "codeBlocks": [
-            "@AGENTS.md\n\n## Claude Code\n\nUse plan mode for changes under `src/billing/`."
+            "@AGENTS.md\n\n## Claude Code\n\nUse plan mode for changes under `src/billing/`.",
+            "ln -s AGENTS.md CLAUDE.md"
           ]
         },
         {
@@ -3035,6 +3044,7 @@
             "Check that the relevant CLAUDE.md is in a location that gets loaded for your session (see Choose where to put CLAUDE.md files).",
             "Make instructions more specific. “Use 2-space indentation” works better than “format code nicely.”",
             "Look for conflicting instructions across CLAUDE.md files. If two files give different guidance for the same behavior, Claude may pick one arbitrarily.",
+            "If the instruction is something that must run at a specific point, such as before every commit or after each file edit, write it as a hook instead. Hooks execute as shell commands at fixed lifecycle events and apply regardless of what Claude decides to do.",
             "For instructions you want at the system prompt level, use --append-system-prompt. This must be passed every invocation, so it’s better suited to scripts and automation than interactive use.",
             "Use the InstructionsLoaded hook to log exactly which instruction files are loaded, when they load, and why. This is useful for debugging path-specific rules or lazy-loaded files in subdirectories."
           ],
@@ -6089,6 +6099,7 @@
         "Install for VS Code",
         "Install for Cursor",
         "Or in VS Code, press Cmd+Shift+X (Mac) or Ctrl+Shift+X (Windows/Linux) to open the Extensions view, search for “Claude Code”, and click Install.",
+        "The extension also installs in other VS Code forks like Windsurf or Kiro. Search for “Claude Code” in the editor’s Extensions view, or install from the Open VSX registry. If your editor can’t install the extension, run claude in its integrated terminal instead. The CLI works in any terminal.",
         "Once installed, you can start using Claude Code through the VS Code interface:",
         "Open the Claude Code panel",
         "Throughout VS Code, the Spark icon indicates Claude Code:",
@@ -6215,8 +6226,7 @@
         "Transport and authentication. The server binds to 127.0.0.1 on a random high port and is not reachable from other machines. Each extension activation generates a fresh random auth token that the CLI must present to connect. The token is written to a lock file under ~/.claude/ide/ with 0600 permissions in a 0700 directory, so only the user running VS Code can read it.",
         "Tools exposed to the model. The server hosts a dozen tools, but only two are visible to the model. The rest are internal RPC the CLI uses for its own UI — opening diffs, reading selections, saving files — and are filtered out before the tool list reaches Claude.",
         "Jupyter execution always asks first. mcp__ide__executeCode can’t run anything silently. On each call, the code is inserted as a new cell at the end of the active notebook, VS Code scrolls it into view, and a native Quick Pick asks you to Execute or Cancel. Cancelling — or dismissing the picker with Esc — returns an error to Claude and nothing runs. The tool also refuses outright when there’s no active notebook, when the Jupyter extension (ms-toolsai.jupyter) isn’t installed, or when the kernel isn’t Python.",
-        "The Quick Pick confirmation is separate from PreToolUse hooks. An allowlist entry for mcp__ide__executeCode lets Claude propose running a cell; the Quick Pick inside VS Code is what lets it actually run.",
-        "Ensure you have a compatible version of VS Code (1.98.0 or later)"
+        "The Quick Pick confirmation is separate from PreToolUse hooks. An allowlist entry for mcp__ide__executeCode lets Claude propose running a cell; the Quick Pick inside VS Code is what lets it actually run."
       ],
       "codeBlocks": [
         "> Explain the logic in @auth (fuzzy matches auth.js, AuthService.ts, etc.)\n> What's in @src/components/ (include a trailing slash for folders)",
@@ -6276,7 +6286,8 @@
             "Click the link for your IDE to install directly:",
             "Install for VS Code",
             "Install for Cursor",
-            "Or in VS Code, press Cmd+Shift+X (Mac) or Ctrl+Shift+X (Windows/Linux) to open the Extensions view, search for “Claude Code”, and click Install."
+            "Or in VS Code, press Cmd+Shift+X (Mac) or Ctrl+Shift+X (Windows/Linux) to open the Extensions view, search for “Claude Code”, and click Install.",
+            "The extension also installs in other VS Code forks like Windsurf or Kiro. Search for “Claude Code” in the editor’s Extensions view, or install from the Open VSX registry. If your editor can’t install the extension, run claude in its integrated terminal instead. The CLI works in any terminal."
           ],
           "codeBlocks": []
         },
@@ -7579,7 +7590,7 @@
         "Use bypassPermissions with caution. It skips all permission prompts, allowing the subagent to execute operations without approval, including writes to .git, .claude, .vscode, .idea, and .husky. Root and home directory removals such as rm -rf / still prompt as a circuit breaker. See permission modes for details.",
         "If the parent uses bypassPermissions or acceptEdits, this takes precedence and cannot be overridden. If the parent uses auto mode, the subagent inherits auto mode and any permissionMode in its frontmatter is ignored: the classifier evaluates the subagent’s tool calls with the same block and allow rules as the parent session.",
         "Use the skills field to inject skill content into a subagent’s context at startup. This gives the subagent domain knowledge without requiring it to discover and load skills during execution.",
-        "The full content of each skill is injected into the subagent’s context, not just made available for invocation. Subagents don’t inherit skills from the parent conversation; you must list them explicitly.",
+        "The full content of each listed skill is injected into the subagent’s context at startup. This field controls which skills are preloaded, not which skills the subagent can access: without it, the subagent can still discover and invoke project, user, and plugin skills through the Skill tool during execution. To prevent a subagent from invoking skills entirely, omit Skill from the tools list or add it to disallowedTools.",
         "You cannot preload skills that set disable-model-invocation: true, since preloading draws from the same set of skills Claude can invoke. If a listed skill is missing or disabled, Claude Code skips it and logs a warning to the debug log.",
         "This is the inverse of running a skill in a subagent. With skills in a subagent, the subagent controls the system prompt and loads skill content. With context: fork in a skill, the skill content is injected into the agent you specify. Both use the same underlying system.",
         "The memory field gives the subagent a persistent directory that survives across conversations. The subagent uses this directory to build up knowledge over time, such as codebase patterns, debugging insights, and architectural decisions.",
@@ -8783,7 +8794,7 @@
         "Automatic setup: No manual MCP configuration needed",
         "Team consistency: Everyone gets the same tools when plugin is installed",
         "See the plugin components reference for details on bundling MCP servers with plugins.",
-        "MCP servers can be configured at three scopes. The scope you choose controls which projects the server loads in and whether the configuration is shared with your team.",
+        "MCP servers can be configured at three scopes. The scope you choose controls which projects the server loads in and whether the configuration is shared with your team. Administrators can also deploy servers at the enterprise level via managed configuration.",
         "Local scope is the default. A local-scoped server loads only in the project where you added it and stays private to you. Claude Code stores it in ~/.claude.json under that project’s path, so the same server won’t appear in your other projects. Use local scope for personal development servers, experimental configurations, or servers with credentials you don’t want in version control.",
         "The term “local scope” for MCP servers differs from general local settings. MCP local-scoped servers are stored in ~/.claude.json (your home directory), while general local settings use .claude/settings.local.json (in the project directory). See Settings for details on settings file locations.",
         "The command writes the server into the entry for your current project inside ~/.claude.json. The example below shows the result when you run it from /path/to/your/project:",
@@ -9041,7 +9052,7 @@
         {
           "title": "​MCP installation scopes",
           "paragraphs": [
-            "MCP servers can be configured at three scopes. The scope you choose controls which projects the server loads in and whether the configuration is shared with your team."
+            "MCP servers can be configured at three scopes. The scope you choose controls which projects the server loads in and whether the configuration is shared with your team. Administrators can also deploy servers at the enterprise level via managed configuration."
           ],
           "codeBlocks": []
         },
@@ -9457,7 +9468,7 @@
         "Remote URLs: direct URLs to hosted marketplace.json files",
         "Add a GitHub repository that contains a .claude-plugin/marketplace.json file using the owner/repo format—where owner is the GitHub username or organization and repo is the repository name.",
         "For example, anthropics/claude-code refers to the claude-code repository owned by anthropics:",
-        "Add any git repository by providing the full URL. This works with any Git host, including GitLab, Bitbucket, and self-hosted servers:",
+        "Add any git repository by providing the full URL. This works with any Git host, including GitLab, Bitbucket, and self-hosted servers. Include the .git suffix so Claude Code clones the repository rather than treating the URL as a direct link to a hosted marketplace.json file.",
         "Using HTTPS:",
         "Using SSH:",
         "To add a specific branch or tag, append # followed by the ref:",
@@ -9704,7 +9715,7 @@
         {
           "title": "​Add from other Git hosts",
           "paragraphs": [
-            "Add any git repository by providing the full URL. This works with any Git host, including GitLab, Bitbucket, and self-hosted servers:",
+            "Add any git repository by providing the full URL. This works with any Git host, including GitLab, Bitbucket, and self-hosted servers. Include the .git suffix so Claude Code clones the repository rather than treating the URL as a direct link to a hosted marketplace.json file.",
             "Using HTTPS:",
             "Using SSH:",
             "To add a specific branch or tag, append # followed by the ref:"
@@ -10049,6 +10060,8 @@
         "Verify hooks work as expected",
         "You can load multiple plugins at once by specifying the flag multiple times:",
         "To test a plugin that is already packaged as a .zip archive and hosted at a URL, such as a CI build artifact, use --plugin-url instead. Claude Code fetches the archive at startup and loads it for that session only. If the fetch fails or the archive is invalid, Claude Code reports a plugin load error and starts without it. The same trust considerations apply as for any plugin source: only point this flag at archives you control or trust.",
+        "To load multiple plugins, repeat the flag for each URL:",
+        "Or pass space-separated URLs as one quoted argument:",
         "If your plugin isn’t working as expected:",
         "Check the structure: Ensure your directories are at the plugin root, not inside .claude-plugin/",
         "Test components individually: Check each skill, agent, and hook separately",
@@ -10106,7 +10119,8 @@
         "{\n  \"agent\": \"security-reviewer\"\n}",
         "claude --plugin-dir ./my-plugin",
         "claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two",
-        "claude --plugin-url https://example.com/my-plugin.zip",
+        "claude --plugin-url https://example.com/my-plugin.zip --plugin-url https://example.com/other.zip",
+        "claude --plugin-url \"https://example.com/my-plugin.zip https://example.com/other.zip\"",
         "mkdir -p my-plugin/.claude-plugin",
         "{\n  \"name\": \"my-plugin\",\n  \"description\": \"Migrated from standalone configuration\",\n  \"version\": \"1.0.0\"\n}",
         "# Copy commands\ncp -r .claude/commands my-plugin/\n\n# Copy agents (if any)\ncp -r .claude/agents my-plugin/\n\n# Copy skills (if any)\ncp -r .claude/skills my-plugin/",
@@ -10280,12 +10294,15 @@
             "Check that agents appear in /agents",
             "Verify hooks work as expected",
             "You can load multiple plugins at once by specifying the flag multiple times:",
-            "To test a plugin that is already packaged as a .zip archive and hosted at a URL, such as a CI build artifact, use --plugin-url instead. Claude Code fetches the archive at startup and loads it for that session only. If the fetch fails or the archive is invalid, Claude Code reports a plugin load error and starts without it. The same trust considerations apply as for any plugin source: only point this flag at archives you control or trust."
+            "To test a plugin that is already packaged as a .zip archive and hosted at a URL, such as a CI build artifact, use --plugin-url instead. Claude Code fetches the archive at startup and loads it for that session only. If the fetch fails or the archive is invalid, Claude Code reports a plugin load error and starts without it. The same trust considerations apply as for any plugin source: only point this flag at archives you control or trust.",
+            "To load multiple plugins, repeat the flag for each URL:",
+            "Or pass space-separated URLs as one quoted argument:"
           ],
           "codeBlocks": [
             "claude --plugin-dir ./my-plugin",
             "claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two",
-            "claude --plugin-url https://example.com/my-plugin.zip"
+            "claude --plugin-url https://example.com/my-plugin.zip --plugin-url https://example.com/other.zip",
+            "claude --plugin-url \"https://example.com/my-plugin.zip https://example.com/other.zip\""
           ]
         },
         {
@@ -13773,7 +13790,8 @@
         "​Check resolved settings",
         "​Check MCP servers",
         "​Check hooks",
-        "​Common causes",
+        "​Test against a clean configuration",
+        "​Check common causes",
         "​Related resources"
       ],
       "toc": [
@@ -13781,7 +13799,8 @@
         "Check resolved settings",
         "Check MCP servers",
         "Check hooks",
-        "Common causes",
+        "Test against a clean configuration",
+        "Check common causes",
         "Related resources"
       ],
       "paragraphs": [
@@ -13789,7 +13808,8 @@
         "Check resolved settings",
         "Check MCP servers",
         "Check hooks",
-        "Common causes",
+        "Test against a clean configuration",
+        "Check common causes",
         "Related resources",
         "Diagnose why CLAUDE.md, settings, hooks, MCP servers, or skills aren’t taking effect. Use /context, /doctor, /hooks, and /mcp to see what actually loaded.",
         "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
@@ -13803,7 +13823,8 @@
         "Adherence drops when an instruction is vague enough to interpret multiple ways, when two files give conflicting direction, or when the file has grown long enough that individual rules get less attention. Write effective instructions covers the specificity, size, and structure patterns that keep adherence high.",
         "CLAUDE.md and permissions solve different problems. CLAUDE.md tells Claude how your project works so it makes good decisions. Permissions and hooks enforce limits regardless of what Claude decides. Use CLAUDE.md for “we do it this way here.” Use permissions or hooks for security boundaries and anything that must never happen, where you need a guarantee instead of guidance.",
         "Settings merge across managed, user, project, and local scopes. Managed settings always win when present. Among the rest, the closer scope overrides the broader one in the order local, then project, then user. Some settings can also be set by command-line flags or environment variables, which act as another override layer. When a setting doesn’t seem to apply, the value you set is usually being overridden by another scope or an environment variable.",
-        "Run /doctor to validate your configuration files and surface invalid keys or schema errors. Run /status to see which settings sources are active, including whether managed settings are in effect. To understand which scope wins for a given key, see How scopes interact.",
+        "Run /doctor to validate your configuration files and surface invalid keys or schema errors. When /doctor reports issues, press f to send the diagnostic report to Claude and have it walk through fixes with you.",
+        "Run /status to see which settings sources are active, including whether managed settings are in effect. To understand which scope wins for a given key, see How scopes interact.",
         "Run /mcp to see every configured server, its connection status, and whether you have approved it for the current project. A server can be defined correctly but still not provide tools for a few common reasons:",
         "Project-scoped servers in .mcp.json require a one-time approval. If the prompt was dismissed, the server stays disabled until you approve it from /mcp.",
         "A server that fails to start shows as failed in /mcp. Relative file paths in command or args are a frequent cause, since they resolve against the directory you launched Claude Code from rather than the location of .mcp.json.",
@@ -13813,6 +13834,12 @@
         "If the hook appears but doesn’t fire, the matcher is the usual cause. The matcher field is a single string that uses | to match multiple tool names, for example \"Edit|Write\". A misspelled tool name fails silently because the matcher never matches. An array value is a schema error: Claude Code shows a settings error notice, /doctor reports the validation failure, and the hook entry is dropped so it won’t appear in /hooks.",
         "Edits to settings.json take effect in the running session after a brief file-stability delay. You don’t need to restart. If /hooks still shows the old definition a few seconds after saving, run /hooks again to refresh the view.",
         "If /hooks shows the hook but it still does not fire, the next step is to watch hook evaluation live. Start a session with claude --debug hooks and trigger the tool call. The debug log records each event, which matchers were checked, and the hook’s exit code and output. See Debug hooks for the log format and hooks troubleshooting for common failure patterns.",
+        "If targeted checks don’t isolate the cause, or your configuration is in an unknown state, compare against a session that loads nothing from your usual setup. Point CLAUDE_CONFIG_DIR at an empty directory to bypass everything under ~/.claude, and launch from a directory that has no .claude folder, .mcp.json, or CLAUDE.md so project configuration is also skipped.",
+        "The clean session has no user or project settings, hooks, MCP servers, plugins, or memory.",
+        "Managed settings still apply if your organization deploys them, since they live at a system path outside ~/.claude",
+        "On Linux and Windows, you’ll be prompted to log in again because credentials are stored under the configuration directory",
+        "On macOS, credentials are in the Keychain and carry over to the clean session",
+        "If the problem disappears here, the cause is somewhere in your real ~/.claude or project .claude files. Reintroduce them one at a time, by copying files into the temporary directory or by launching from your project, to find which one. If it persists in the clean session, the cause is outside your user and project configuration. Run /status to check whether managed settings are in effect, look for environment variables that affect Claude Code, then see Troubleshooting.",
         "Most configuration surprises trace back to a small set of location and syntax rules. Check these before assuming a bug:",
         "For full reference on each configuration surface, see the dedicated page:",
         ".claude directory reference: every config file location and what reads it",
@@ -13823,7 +13850,9 @@
         "Troubleshooting: performance, hangs, and search issues",
         "Was this page helpful?"
       ],
-      "codeBlocks": [],
+      "codeBlocks": [
+        "cd /tmp && CLAUDE_CONFIG_DIR=/tmp/claude-clean claude"
+      ],
       "sectionBlocks": [
         {
           "title": "",
@@ -13832,7 +13861,8 @@
             "Check resolved settings",
             "Check MCP servers",
             "Check hooks",
-            "Common causes",
+            "Test against a clean configuration",
+            "Check common causes",
             "Related resources",
             "Diagnose why CLAUDE.md, settings, hooks, MCP servers, or skills aren’t taking effect. Use /context, /doctor, /hooks, and /mcp to see what actually loaded."
           ],
@@ -13864,7 +13894,8 @@
           "title": "​Check resolved settings",
           "paragraphs": [
             "Settings merge across managed, user, project, and local scopes. Managed settings always win when present. Among the rest, the closer scope overrides the broader one in the order local, then project, then user. Some settings can also be set by command-line flags or environment variables, which act as another override layer. When a setting doesn’t seem to apply, the value you set is usually being overridden by another scope or an environment variable.",
-            "Run /doctor to validate your configuration files and surface invalid keys or schema errors. Run /status to see which settings sources are active, including whether managed settings are in effect. To understand which scope wins for a given key, see How scopes interact."
+            "Run /doctor to validate your configuration files and surface invalid keys or schema errors. When /doctor reports issues, press f to send the diagnostic report to Claude and have it walk through fixes with you.",
+            "Run /status to see which settings sources are active, including whether managed settings are in effect. To understand which scope wins for a given key, see How scopes interact."
           ],
           "codeBlocks": []
         },
@@ -13890,7 +13921,21 @@
           "codeBlocks": []
         },
         {
-          "title": "​Common causes",
+          "title": "​Test against a clean configuration",
+          "paragraphs": [
+            "If targeted checks don’t isolate the cause, or your configuration is in an unknown state, compare against a session that loads nothing from your usual setup. Point CLAUDE_CONFIG_DIR at an empty directory to bypass everything under ~/.claude, and launch from a directory that has no .claude folder, .mcp.json, or CLAUDE.md so project configuration is also skipped.",
+            "The clean session has no user or project settings, hooks, MCP servers, plugins, or memory.",
+            "Managed settings still apply if your organization deploys them, since they live at a system path outside ~/.claude",
+            "On Linux and Windows, you’ll be prompted to log in again because credentials are stored under the configuration directory",
+            "On macOS, credentials are in the Keychain and carry over to the clean session",
+            "If the problem disappears here, the cause is somewhere in your real ~/.claude or project .claude files. Reintroduce them one at a time, by copying files into the temporary directory or by launching from your project, to find which one. If it persists in the clean session, the cause is outside your user and project configuration. Run /status to check whether managed settings are in effect, look for environment variables that affect Claude Code, then see Troubleshooting."
+          ],
+          "codeBlocks": [
+            "cd /tmp && CLAUDE_CONFIG_DIR=/tmp/claude-clean claude"
+          ]
+        },
+        {
+          "title": "​Check common causes",
           "paragraphs": [
             "Most configuration surprises trace back to a small set of location and syntax rules. Check these before assuming a bug:"
           ],
@@ -13984,6 +14029,7 @@
         "Network and connection errors",
         "Unable to connect to API",
         "SSL certificate errors",
+        "Host not allowed in a cloud session",
         "Request errors",
         "Prompt is too long",
         "Error during compaction: Conversation too long",
@@ -14076,7 +14122,7 @@
         "For other failures including 403 Forbidden and OAuth browser issues, see Login and authentication",
         "The stored token predates a permission scope that a newer feature needs. You see this most often from /usage and the status line usage indicator:",
         "Run /login to mint a new token with the current scopes. You do not need to log out first.",
-        "These errors mean Claude Code could not reach the API at all. They almost always originate in your local network, proxy, or firewall rather than Anthropic infrastructure.",
+        "These errors mean a network request from Claude Code failed to reach its destination. They usually originate in your local network, proxy, or firewall, or in the cloud environment’s network policy.",
         "The TCP connection to the API failed or never completed.",
         "Common causes include no internet access, a VPN that blocks api.anthropic.com, or a required corporate proxy that is not configured.",
         "Confirm you can reach the API host from the same shell by running curl -I https://api.anthropic.com. On Windows PowerShell use curl.exe -I https://api.anthropic.com so the built-in Invoke-WebRequest alias is not used.",
@@ -14092,6 +14138,13 @@
         "Export your organization’s CA bundle and point Claude Code at it with NODE_EXTRA_CA_CERTS=/path/to/ca-bundle.pem",
         "See Network configuration for full setup instructions",
         "Do not set NODE_TLS_REJECT_UNAUTHORIZED=0, which disables certificate validation entirely",
+        "An outbound HTTP request from a cloud session or routine was blocked by the environment’s network policy.",
+        "You may also see a TLS certificate that doesn’t match the destination’s real certificate. The cloud environment routes outbound traffic through a proxy that enforces the network policy, so a mismatched certificate means the proxy terminated the connection, not the destination.",
+        "This is not a client-side network problem. Cloud sessions and routines run inside a sandboxed environment whose outbound traffic is filtered to the environment’s allowlist. The Default environment uses Trusted access, which permits the default allowlist of package registries, cloud provider APIs, container registries, and common development domains but blocks everything else.",
+        "Open the routine for editing, or start a cloud session. Select the cloud icon showing your environment’s name, such as Default, to open the selector. Hover over your environment and click the settings icon.",
+        "In the Update cloud environment dialog, change Network access from Trusted to Custom, then add the blocked domain to Allowed domains. Enter one domain per line. Check Also include default list of common package managers to keep the default allowlist alongside your custom domains. Select Full instead if you want unrestricted access.",
+        "Click Save changes. The next run uses the updated allowlist.",
+        "See Network access for access levels and the default allowlist. Local CLI sessions are not affected by this policy.",
         "These errors mean the API received your request but rejected its content.",
         "The conversation plus attached files exceeds the model’s context window.",
         "Run /compact to summarize earlier turns and free space, or /clear to start fresh",
@@ -14134,15 +14187,7 @@
         "Your Claude Code version is older than the minimum for Opus 4.7. The CLI sent a thinking configuration the model no longer accepts.",
         "Run claude update to upgrade to v2.1.111 or later, then restart Claude Code",
         "If you cannot upgrade, run /model and select Opus 4.6 or Sonnet instead",
-        "If you hit this in the Agent SDK, see SDK troubleshooting",
-        "The configured extended thinking budget exceeds the maximum response length, so there is no room left for the actual answer.",
-        "Claude Code adjusts these values automatically on the Anthropic API. You typically see this error on Amazon Bedrock or Google Vertex AI when MAX_THINKING_TOKENS is set higher than the provider’s output limit, or when plan mode raises the thinking budget.",
-        "Lower MAX_THINKING_TOKENS, or raise CLAUDE_CODE_MAX_OUTPUT_TOKENS above the thinking budget",
-        "See Extended thinking for how the budget interacts with output length",
-        "The conversation history reached the API in an inconsistent state, usually after a tool call was interrupted or a turn was edited mid-stream.",
-        "All three variants mean the same thing: the sequence of tool_use, tool_result, and thinking blocks in history no longer matches what the API expects.",
-        "Run /rewind, or press Esc twice, to step back to a checkpoint before the corrupted turn and continue from there. See Checkpointing for how checkpoints are created and restored.",
-        "If Claude’s answers seem less capable than you expect but no error is shown, the cause is usually conversation state rather than the model itself. Claude Code does not silently change model versions. It can switch to a fallback model in specific cases such as an Opus quota being reached or a Bedrock or Vertex AI region lacking your model; the Model selection check below catches both, and Model configuration explains when fallback applies."
+        "If you hit this in the Agent SDK, see SDK troubleshooting"
       ],
       "codeBlocks": [
         "API Error: 500 {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"Internal server error\"}} · check status.claude.com",
@@ -14160,6 +14205,7 @@
         "OAuth token does not meet scope requirement: user:profile",
         "Unable to connect to API. Check your internet connection\nUnable to connect to API (ECONNREFUSED)\nUnable to connect to API (ECONNRESET)\nUnable to connect to API (ETIMEDOUT)\nfetch failed\nRequest timed out. Check your internet connection and proxy settings",
         "Unable to connect to API: SSL certificate verification failed. Check your proxy or corporate SSL certificates\nUnable to connect to API: Self-signed certificate detected",
+        "HTTP 403\nx-deny-reason: host_not_allowed",
         "Prompt is too long",
         "Error during compaction: Conversation too long. Press esc twice to go up a few messages and try again.",
         "Request too large (max 30 MB). Double press esc to go back and remove or shrink the attached content.",
@@ -14423,7 +14469,7 @@
         {
           "title": "​Network and connection errors",
           "paragraphs": [
-            "These errors mean Claude Code could not reach the API at all. They almost always originate in your local network, proxy, or firewall rather than Anthropic infrastructure."
+            "These errors mean a network request from Claude Code failed to reach its destination. They usually originate in your local network, proxy, or firewall, or in the cloud environment’s network policy."
           ],
           "codeBlocks": []
         },
@@ -14458,6 +14504,22 @@
           ],
           "codeBlocks": [
             "Unable to connect to API: SSL certificate verification failed. Check your proxy or corporate SSL certificates\nUnable to connect to API: Self-signed certificate detected"
+          ]
+        },
+        {
+          "title": "​Host not allowed in a cloud session",
+          "paragraphs": [
+            "An outbound HTTP request from a cloud session or routine was blocked by the environment’s network policy.",
+            "You may also see a TLS certificate that doesn’t match the destination’s real certificate. The cloud environment routes outbound traffic through a proxy that enforces the network policy, so a mismatched certificate means the proxy terminated the connection, not the destination.",
+            "This is not a client-side network problem. Cloud sessions and routines run inside a sandboxed environment whose outbound traffic is filtered to the environment’s allowlist. The Default environment uses Trusted access, which permits the default allowlist of package registries, cloud provider APIs, container registries, and common development domains but blocks everything else.",
+            "What to do:",
+            "Open the routine for editing, or start a cloud session. Select the cloud icon showing your environment’s name, such as Default, to open the selector. Hover over your environment and click the settings icon.",
+            "In the Update cloud environment dialog, change Network access from Trusted to Custom, then add the blocked domain to Allowed domains. Enter one domain per line. Check Also include default list of common package managers to keep the default allowlist alongside your custom domains. Select Full instead if you want unrestricted access.",
+            "Click Save changes. The next run uses the updated allowlist.",
+            "See Network access for access levels and the default allowlist. Local CLI sessions are not affected by this policy."
+          ],
+          "codeBlocks": [
+            "HTTP 403\nx-deny-reason: host_not_allowed"
           ]
         },
         {
@@ -14562,19 +14624,6 @@
           ],
           "codeBlocks": [
             "There's an issue with the selected model (claude-...). It may not exist or you may not have access to it. Run /model to select a different one."
-          ]
-        },
-        {
-          "title": "​Claude Opus is not available with the Claude Pro plan",
-          "paragraphs": [
-            "Your active subscription plan does not include the model you selected.",
-            "What to do:",
-            "Run /model and select a model your plan includes",
-            "If you upgraded your plan recently and still see this, run /logout then /login. The stored token reflects your plan at the time you signed in, so upgrading on the web does not take effect in an existing session until you re-authenticate.",
-            "See claude.com/pricing for which models each plan includes"
-          ],
-          "codeBlocks": [
-            "Claude Opus is not available with the Claude Pro plan · Select a different model in /model"
           ]
         }
       ]
@@ -15429,11 +15478,12 @@
         "Distribute the environment variables and instructions for generating cloud credentials to your users. Read more about how to manage configuration here.",
         "Users can install Claude Code.",
         "Claude Code securely manages your authentication credentials:",
-        "Storage location: On macOS, credentials are stored in the encrypted macOS Keychain. On Linux, credentials are stored in ~/.claude/.credentials.json with file mode 0600. On Windows, credentials are stored in %USERPROFILE%\\.claude\\.credentials.json and inherit the access controls of your user profile directory, which restricts the file to your user account by default. If you’ve set the CLAUDE_CONFIG_DIR environment variable on Linux or Windows, the .credentials.json file lives under that directory instead.",
+        "Storage location: On macOS, credentials are stored in the encrypted macOS Keychain. On Linux, credentials are stored in ~/.claude/.credentials.json with file mode 0600. On Windows, credentials are stored in %USERPROFILE%\\.claude\\.credentials.json and inherit the access controls of your user profile directory, which restricts the file to your user account by default. If you’ve set the CLAUDE_CONFIG_DIR environment variable on Linux or Windows, the .credentials.json file lives under that directory instead. Claude Code manages .credentials.json through /login and /logout. To route requests through a custom API endpoint, set the ANTHROPIC_BASE_URL environment variable instead.",
         "On macOS, credentials are stored in the encrypted macOS Keychain.",
         "On Linux, credentials are stored in ~/.claude/.credentials.json with file mode 0600.",
         "On Windows, credentials are stored in %USERPROFILE%\\.claude\\.credentials.json and inherit the access controls of your user profile directory, which restricts the file to your user account by default.",
         "If you’ve set the CLAUDE_CONFIG_DIR environment variable on Linux or Windows, the .credentials.json file lives under that directory instead.",
+        "Claude Code manages .credentials.json through /login and /logout. To route requests through a custom API endpoint, set the ANTHROPIC_BASE_URL environment variable instead.",
         "Supported authentication types: Claude.ai credentials, Claude API credentials, Azure Auth, Bedrock Auth, and Vertex Auth.",
         "Custom credential scripts: the apiKeyHelper setting can be configured to run a shell script that returns an API key.",
         "Refresh intervals: by default, apiKeyHelper is called after 5 minutes or on HTTP 401 response. Set CLAUDE_CODE_API_KEY_HELPER_TTL_MS environment variable for custom refresh intervals.",
@@ -15561,11 +15611,12 @@
           "title": "​Credential management",
           "paragraphs": [
             "Claude Code securely manages your authentication credentials:",
-            "Storage location: On macOS, credentials are stored in the encrypted macOS Keychain. On Linux, credentials are stored in ~/.claude/.credentials.json with file mode 0600. On Windows, credentials are stored in %USERPROFILE%\\.claude\\.credentials.json and inherit the access controls of your user profile directory, which restricts the file to your user account by default. If you’ve set the CLAUDE_CONFIG_DIR environment variable on Linux or Windows, the .credentials.json file lives under that directory instead.",
+            "Storage location: On macOS, credentials are stored in the encrypted macOS Keychain. On Linux, credentials are stored in ~/.claude/.credentials.json with file mode 0600. On Windows, credentials are stored in %USERPROFILE%\\.claude\\.credentials.json and inherit the access controls of your user profile directory, which restricts the file to your user account by default. If you’ve set the CLAUDE_CONFIG_DIR environment variable on Linux or Windows, the .credentials.json file lives under that directory instead. Claude Code manages .credentials.json through /login and /logout. To route requests through a custom API endpoint, set the ANTHROPIC_BASE_URL environment variable instead.",
             "On macOS, credentials are stored in the encrypted macOS Keychain.",
             "On Linux, credentials are stored in ~/.claude/.credentials.json with file mode 0600.",
             "On Windows, credentials are stored in %USERPROFILE%\\.claude\\.credentials.json and inherit the access controls of your user profile directory, which restricts the file to your user account by default.",
             "If you’ve set the CLAUDE_CONFIG_DIR environment variable on Linux or Windows, the .credentials.json file lives under that directory instead.",
+            "Claude Code manages .credentials.json through /login and /logout. To route requests through a custom API endpoint, set the ANTHROPIC_BASE_URL environment variable instead.",
             "Supported authentication types: Claude.ai credentials, Claude API credentials, Azure Auth, Bedrock Auth, and Vertex Auth.",
             "Custom credential scripts: the apiKeyHelper setting can be configured to run a shell script that returns an API key.",
             "Refresh intervals: by default, apiKeyHelper is called after 5 minutes or on HTTP 401 response. Set CLAUDE_CODE_API_KEY_HELPER_TTL_MS environment variable for custom refresh intervals.",
@@ -16591,7 +16642,7 @@
         "{\n  \"Credentials\": {\n    \"AccessKeyId\": \"value\",\n    \"SecretAccessKey\": \"value\",\n    \"SessionToken\": \"value\"\n  }\n}",
         "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the region for the small/fast model (Haiku).\n# Also applies to Bedrock Mantle.\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2\n\n# Optional: Override the Bedrock endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_BEDROCK_BASE_URL=https://bedrock-runtime.us-east-1.amazonaws.com",
         "export ANTHROPIC_DEFAULT_OPUS_MODEL='us.anthropic.claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='us.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'",
-        "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1",
+        "# Using inference profile ID\nexport ANTHROPIC_MODEL='us.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1",
         "{\n  \"modelOverrides\": {\n    \"claude-opus-4-7\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-47-prod\",\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-46-prod\",\n    \"claude-opus-4-5-20251101\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-45-prod\",\n    \"claude-opus-4-1-20250805\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-41-prod\"\n  }\n}",
         "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"AllowModelAndInferenceProfileAccess\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"bedrock:InvokeModel\",\n        \"bedrock:InvokeModelWithResponseStream\",\n        \"bedrock:ListInferenceProfiles\",\n        \"bedrock:GetInferenceProfile\"\n      ],\n      \"Resource\": [\n        \"arn:aws:bedrock:*:*:inference-profile/*\",\n        \"arn:aws:bedrock:*:*:application-inference-profile/*\",\n        \"arn:aws:bedrock:*:*:foundation-model/*\"\n      ]\n    },\n    {\n      \"Sid\": \"AllowMarketplaceSubscription\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"aws-marketplace:ViewSubscriptions\",\n        \"aws-marketplace:Subscribe\"\n      ],\n      \"Resource\": \"*\",\n      \"Condition\": {\n        \"StringEquals\": {\n          \"aws:CalledViaLast\": \"bedrock.amazonaws.com\"\n        }\n      }\n    }\n  ]\n}",
         "export ANTHROPIC_BEDROCK_SERVICE_TIER=priority",
@@ -16727,7 +16778,7 @@
           ],
           "codeBlocks": [
             "export ANTHROPIC_DEFAULT_OPUS_MODEL='us.anthropic.claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='us.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'",
-            "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1",
+            "# Using inference profile ID\nexport ANTHROPIC_MODEL='us.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1",
             "{\n  \"modelOverrides\": {\n    \"claude-opus-4-7\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-47-prod\",\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-46-prod\",\n    \"claude-opus-4-5-20251101\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-45-prod\",\n    \"claude-opus-4-1-20250805\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-41-prod\"\n  }\n}"
           ]
         },
@@ -16921,6 +16972,7 @@
         "1. Enable Vertex AI API",
         "2. Request model access",
         "3. Configure GCP credentials",
+        "Advanced credential configuration",
         "4. Configure Claude Code",
         "5. Pin model versions",
         "Startup model checks",
@@ -16937,6 +16989,7 @@
         "1. Enable Vertex AI API",
         "2. Request model access",
         "3. Configure GCP credentials",
+        "Advanced credential configuration",
         "4. Configure Claude Code",
         "5. Pin model versions",
         "Startup model checks",
@@ -16975,7 +17028,9 @@
         "Claude Code uses standard Google Cloud authentication.",
         "For more information, see Google Cloud authentication documentation.",
         "Claude Code v2.1.121 or later supports X.509 certificate-based Workload Identity Federation through the same Application Default Credentials chain. Set GOOGLE_APPLICATION_CREDENTIALS to the path of your credential configuration file.",
-        "When authenticating, Claude Code will automatically use the project ID from the ANTHROPIC_VERTEX_PROJECT_ID environment variable. To override this, set one of these environment variables: GCLOUD_PROJECT, GOOGLE_CLOUD_PROJECT, or GOOGLE_APPLICATION_CREDENTIALS.",
+        "Claude Code uses ANTHROPIC_VERTEX_PROJECT_ID as the project ID for Vertex AI requests. The GCLOUD_PROJECT and GOOGLE_CLOUD_PROJECT environment variables and the credential file referenced by GOOGLE_APPLICATION_CREDENTIALS take precedence over it. If none of these are set, the project ID is resolved from your gcloud configuration or the attached service account.",
+        "Claude Code supports automatic credential refresh for GCP through the gcpAuthRefresh setting. When Claude Code detects that your GCP credentials are expired or cannot be loaded, it runs the configured command to obtain new credentials before retrying the request.",
+        "The command’s output is displayed to the user, but interactive input isn’t supported. This works well for browser-based authentication flows where the CLI shows a URL and you complete authentication in the browser. The refresh command times out after three minutes if authentication does not complete. If you set gcpAuthRefresh in project settings such as .claude/settings.json, the command runs only after you accept the workspace trust prompt.",
         "Set the following environment variables:",
         "Most model versions have a corresponding VERTEX_REGION_CLAUDE_* variable. See the Environment variables reference for the full list. Check Vertex Model Garden to determine which models support global endpoints versus regional only.",
         "Prompt caching is enabled automatically. To disable it, set DISABLE_PROMPT_CACHING=1. To request a 1-hour cache TTL instead of the 5-minute default, set ENABLE_PROMPT_CACHING_1H=1; cache writes with a 1-hour TTL are billed at a higher rate. For heightened rate limits, contact Google Cloud support. When using Vertex AI, the /login and /logout commands are disabled since authentication is handled through Google Cloud credentials.",
@@ -16997,6 +17052,10 @@
         "Create a dedicated GCP project for Claude Code to simplify cost tracking and access control.",
         "Claude Opus 4.7, Opus 4.6, and Sonnet 4.6 support the 1M token context window on Vertex AI. Claude Code automatically enables the extended context window when you select a 1M model variant.",
         "The setup wizard offers a 1M context option when it pins models. To enable it for a manually pinned model instead, append [1m] to the model ID. See Pin models for third-party deployments for details.",
+        "If you encounter “Could not load the default credentials” errors:",
+        "Run gcloud auth application-default login to set up Application Default Credentials",
+        "Set GOOGLE_APPLICATION_CREDENTIALS to a service account key file path",
+        "See Configure GCP credentials for all options",
         "If you encounter quota issues:",
         "Check current quotas or request quota increase through Cloud Console",
         "If you encounter “model not found” 404 errors:",
@@ -17015,6 +17074,7 @@
       ],
       "codeBlocks": [
         "# Set your project ID\ngcloud config set project YOUR-PROJECT-ID\n\n# Enable Vertex AI API\ngcloud services enable aiplatform.googleapis.com",
+        "{\n  \"gcpAuthRefresh\": \"gcloud auth application-default login\",\n  \"env\": {\n    \"ANTHROPIC_VERTEX_PROJECT_ID\": \"your-project-id\"\n  }\n}",
         "# Enable Vertex AI integration\nexport CLAUDE_CODE_USE_VERTEX=1\nexport CLOUD_ML_REGION=global\nexport ANTHROPIC_VERTEX_PROJECT_ID=YOUR-PROJECT-ID\n\n# Optional: Override the Vertex endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_VERTEX_BASE_URL=https://aiplatform.googleapis.com\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1\n\n# When CLOUD_ML_REGION=global, override region for models that don't support global endpoints\nexport VERTEX_REGION_CLAUDE_HAIKU_4_5=us-east5\nexport VERTEX_REGION_CLAUDE_4_6_SONNET=europe-west1",
         "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'",
         "export ANTHROPIC_MODEL='claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'"
@@ -17030,11 +17090,11 @@
             "1. Enable Vertex AI API",
             "2. Request model access",
             "3. Configure GCP credentials",
+            "Advanced credential configuration",
             "4. Configure Claude Code",
             "5. Pin model versions",
             "Startup model checks",
-            "IAM configuration",
-            "1M token context window"
+            "IAM configuration"
           ],
           "codeBlocks": []
         },
@@ -17115,9 +17175,13 @@
             "Claude Code uses standard Google Cloud authentication.",
             "For more information, see Google Cloud authentication documentation.",
             "Claude Code v2.1.121 or later supports X.509 certificate-based Workload Identity Federation through the same Application Default Credentials chain. Set GOOGLE_APPLICATION_CREDENTIALS to the path of your credential configuration file.",
-            "When authenticating, Claude Code will automatically use the project ID from the ANTHROPIC_VERTEX_PROJECT_ID environment variable. To override this, set one of these environment variables: GCLOUD_PROJECT, GOOGLE_CLOUD_PROJECT, or GOOGLE_APPLICATION_CREDENTIALS."
+            "Claude Code uses ANTHROPIC_VERTEX_PROJECT_ID as the project ID for Vertex AI requests. The GCLOUD_PROJECT and GOOGLE_CLOUD_PROJECT environment variables and the credential file referenced by GOOGLE_APPLICATION_CREDENTIALS take precedence over it. If none of these are set, the project ID is resolved from your gcloud configuration or the attached service account.",
+            "Claude Code supports automatic credential refresh for GCP through the gcpAuthRefresh setting. When Claude Code detects that your GCP credentials are expired or cannot be loaded, it runs the configured command to obtain new credentials before retrying the request.",
+            "The command’s output is displayed to the user, but interactive input isn’t supported. This works well for browser-based authentication flows where the CLI shows a URL and you complete authentication in the browser. The refresh command times out after three minutes if authentication does not complete. If you set gcpAuthRefresh in project settings such as .claude/settings.json, the command runs only after you accept the workspace trust prompt."
           ],
-          "codeBlocks": []
+          "codeBlocks": [
+            "{\n  \"gcpAuthRefresh\": \"gcloud auth application-default login\",\n  \"env\": {\n    \"ANTHROPIC_VERTEX_PROJECT_ID\": \"your-project-id\"\n  }\n}"
+          ]
         },
         {
           "title": "​4. Configure Claude Code",
@@ -17178,6 +17242,10 @@
         {
           "title": "​Troubleshooting",
           "paragraphs": [
+            "If you encounter “Could not load the default credentials” errors:",
+            "Run gcloud auth application-default login to set up Application Default Credentials",
+            "Set GOOGLE_APPLICATION_CREDENTIALS to a service account key file path",
+            "See Configure GCP credentials for all options",
             "If you encounter quota issues:",
             "Check current quotas or request quota increase through Cloud Console",
             "If you encounter “model not found” 404 errors:",
@@ -17185,10 +17253,7 @@
             "Verify the model is available in the location you specified. Some models are offered only on global or multi-region locations such as eu and us, not in specific regions",
             "If using CLOUD_ML_REGION=global, check that your models support global endpoints in Model Garden under “Supported features”. For models that don’t support global endpoints, either: Specify a supported model via ANTHROPIC_MODEL or ANTHROPIC_DEFAULT_HAIKU_MODEL, or Set a region or multi-region location using VERTEX_REGION_<MODEL_NAME> environment variables",
             "Specify a supported model via ANTHROPIC_MODEL or ANTHROPIC_DEFAULT_HAIKU_MODEL, or",
-            "Set a region or multi-region location using VERTEX_REGION_<MODEL_NAME> environment variables",
-            "If you encounter 429 errors:",
-            "For regional endpoints, ensure the primary model and small/fast model are supported in your selected region",
-            "Consider switching to CLOUD_ML_REGION=global for better availability"
+            "Set a region or multi-region location using VERTEX_REGION_<MODEL_NAME> environment variables"
           ],
           "codeBlocks": []
         },
@@ -21593,7 +21658,7 @@
         "settings.json supports a number of options:",
         "These settings are stored in ~/.claude.json rather than settings.json. Adding them to settings.json will trigger a schema validation error.",
         "Versions before v2.1.119 also store autoScrollEnabled, editorMode, showTurnDuration, teammateMode, and terminalProgressBarEnabled here instead of in settings.json.",
-        "Configure how --worktree creates and manages git worktrees. Use these settings to reduce disk usage and startup time in large monorepos.",
+        "Configure how --worktree creates and manages git worktrees.",
         "To copy gitignored files like .env into new worktrees, use a .worktreeinclude file in your project root instead of a setting.",
         "Permission rules follow the format Tool or Tool(specifier). Rules are evaluated in order: deny rules first, then ask, then allow. The first matching rule wins.",
         "Quick examples:",
@@ -21621,7 +21686,7 @@
         "Hooks from plugins force-enabled in managed settings enabledPlugins are loaded. This lets administrators distribute vetted hooks through an organization marketplace while blocking everything else. Trust is granted by full plugin@marketplace ID, so a plugin with the same name from a different marketplace stays blocked",
         "User hooks, project hooks, and all other plugin hooks are blocked",
         "Restrict HTTP hook URLs:",
-        "Limit which URLs HTTP hooks can target. Supports * as a wildcard for matching. When the array is defined, HTTP hooks targeting non-matching URLs are silently blocked.",
+        "Limit which URLs HTTP hooks can target. Supports * as a wildcard for matching. When the array is defined, HTTP hooks targeting non-matching URLs are silently blocked. Hostname matching is case-insensitive and ignores a trailing FQDN dot, matching DNS semantics.",
         "Restrict HTTP hook environment variables:",
         "Limit which environment variable names HTTP hooks can interpolate into header values. Each hook’s effective allowedEnvVars is the intersection of its own list and this setting.",
         "Settings apply in order of precedence. From highest to lowest:",
@@ -21830,7 +21895,7 @@
         {
           "title": "​Worktree settings",
           "paragraphs": [
-            "Configure how --worktree creates and manages git worktrees. Use these settings to reduce disk usage and startup time in large monorepos.",
+            "Configure how --worktree creates and manages git worktrees.",
             "To copy gitignored files like .env into new worktrees, use a .worktreeinclude file in your project root instead of a setting."
           ],
           "codeBlocks": []
@@ -21905,7 +21970,7 @@
             "Hooks from plugins force-enabled in managed settings enabledPlugins are loaded. This lets administrators distribute vetted hooks through an organization marketplace while blocking everything else. Trust is granted by full plugin@marketplace ID, so a plugin with the same name from a different marketplace stays blocked",
             "User hooks, project hooks, and all other plugin hooks are blocked",
             "Restrict HTTP hook URLs:",
-            "Limit which URLs HTTP hooks can target. Supports * as a wildcard for matching. When the array is defined, HTTP hooks targeting non-matching URLs are silently blocked.",
+            "Limit which URLs HTTP hooks can target. Supports * as a wildcard for matching. When the array is defined, HTTP hooks targeting non-matching URLs are silently blocked. Hostname matching is case-insensitive and ignores a trailing FQDN dot, matching DNS semantics.",
             "Restrict HTTP hook environment variables:",
             "Limit which environment variable names HTTP hooks can interpolate into header values. Each hook’s effective allowedEnvVars is the intersection of its own list and this setting."
           ],
@@ -23134,6 +23199,7 @@
         "Bedrock: an inference profile ARN",
         "Foundry: a deployment name",
         "Vertex: a version name",
+        "ANTHROPIC_BASE_URL changes where requests are sent, not which model answers them. To route Claude through an LLM gateway, see LLM gateway configuration.",
         "Model aliases provide a convenient way to select model settings without remembering exact version numbers:",
         "On the Anthropic API, opus resolves to Opus 4.7 and sonnet resolves to Sonnet 4.6. On Bedrock, Vertex, and Foundry, opus resolves to Opus 4.6 and sonnet resolves to Sonnet 4.5; newer models are available on those providers by selecting the full model name explicitly or setting ANTHROPIC_DEFAULT_OPUS_MODEL or ANTHROPIC_DEFAULT_SONNET_MODEL.",
         "Aliases point to the recommended version for your provider and update over time. To pin to a specific version, use the full model name (for example, claude-opus-4-7) or set the corresponding environment variable like ANTHROPIC_DEFAULT_OPUS_MODEL.",
@@ -23281,7 +23347,8 @@
             "Anthropic API: A full model name",
             "Bedrock: an inference profile ARN",
             "Foundry: a deployment name",
-            "Vertex: a version name"
+            "Vertex: a version name",
+            "ANTHROPIC_BASE_URL changes where requests are sent, not which model answers them. To route Claude through an LLM gateway, see LLM gateway configuration."
           ],
           "codeBlocks": []
         },
@@ -23831,7 +23898,11 @@
         "To set a style without the menu, edit the outputStyle field directly in a settings file:",
         "Because the output style is set in the system prompt at session start, changes take effect the next time you start a new session. This keeps the system prompt stable throughout a conversation so prompt caching can reduce latency and cost.",
         "Custom output styles are Markdown files with frontmatter and the text that will be added to the system prompt:",
-        "You can save these files at the user level (~/.claude/output-styles) or project level (.claude/output-styles). Plugins can also ship output styles in an output-styles/ directory.",
+        "You can save these files at three levels:",
+        "User: ~/.claude/output-styles",
+        "Project: .claude/output-styles",
+        "Managed policy: .claude/output-styles inside the managed settings directory",
+        "Plugins can also ship output styles in an output-styles/ directory.",
         "Output style files support frontmatter for specifying metadata:",
         "Output styles completely “turn off” the parts of Claude Code’s default system prompt specific to software engineering. Neither CLAUDE.md nor --append-system-prompt edit Claude Code’s default system prompt. CLAUDE.md adds the contents as a user message following Claude Code’s default system prompt. --append-system-prompt appends the content to the system prompt.",
         "Output styles directly affect the main agent loop and only affect the system prompt. Agents are invoked to handle specific tasks and can include additional settings like the model to use, the tools they have available, and some context about when to use the agent.",
@@ -23905,7 +23976,11 @@
           "title": "​Create a custom output style",
           "paragraphs": [
             "Custom output styles are Markdown files with frontmatter and the text that will be added to the system prompt:",
-            "You can save these files at the user level (~/.claude/output-styles) or project level (.claude/output-styles). Plugins can also ship output styles in an output-styles/ directory."
+            "You can save these files at three levels:",
+            "User: ~/.claude/output-styles",
+            "Project: .claude/output-styles",
+            "Managed policy: .claude/output-styles inside the managed settings directory",
+            "Plugins can also ship output styles in an output-styles/ directory."
           ],
           "codeBlocks": [
             "---\nname: My Custom Style\ndescription:\n  A brief description of what this style does, to be displayed to the user\n---\n\n# Custom Style Instructions\n\nYou are an interactive CLI tool that helps users with software engineering\ntasks. [Your custom instructions here...]\n\n## Specific Behaviors\n\n[Define how the assistant should behave in this style...]"
@@ -30163,7 +30238,7 @@
         "You can also inject context directly via systemPrompt without using CLAUDE.md files. See Modify system prompts. Use CLAUDE.md when you want the same context shared between interactive Claude Code sessions and your SDK agents.",
         "For how to structure and organize CLAUDE.md content, see Manage Claude’s memory.",
         "Skills are markdown files that give your agent specialized knowledge and invocable workflows. Unlike CLAUDE.md (which loads every session), skills load on demand. The agent receives skill descriptions at startup and loads the full content when relevant.",
-        "Skills are discovered from the filesystem through settingSources. With default options, user and project skills load automatically. The Skill tool is enabled by default when you don’t specify allowedTools. If you are using an allowedTools allowlist, include \"Skill\" explicitly.",
+        "Skills are discovered from the filesystem through settingSources. When the skills option on query() is omitted, discovered user and project skills are enabled and the Skill tool is available, matching CLI behavior. To control which skills are enabled, pass skills as \"all\", a list of skill names, or [] to disable all. The SDK enables the Skill tool automatically when skills is set, so you do not need to add it to allowedTools.",
         "Skills must be created as filesystem artifacts (.claude/skills/<name>/SKILL.md). The SDK does not have a programmatic API for registering skills. See Agent Skills in the SDK for full details.",
         "For more on creating and using skills, see Agent Skills in the SDK.",
         "The SDK supports two ways to define hooks, and they run side by side:",
@@ -30186,7 +30261,7 @@
       ],
       "codeBlocks": [
         "from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ResultMessage\n\nasync for message in query(\n    prompt=\"Help me refactor the auth module\",\n    options=ClaudeAgentOptions(\n        # \"user\" loads from ~/.claude/, \"project\" loads from ./.claude/ in cwd.\n        # Together they give the agent access to CLAUDE.md, skills, hooks, and\n        # permissions from both locations.\n        setting_sources=[\"user\", \"project\"],\n        allowed_tools=[\"Read\", \"Edit\", \"Bash\"],\n    ),\n):\n    if isinstance(message, AssistantMessage):\n        for block in message.content:\n            if hasattr(block, \"text\"):\n                print(block.text)\n    if isinstance(message, ResultMessage) and message.subtype == \"success\":\n        print(f\"\\nResult: {message.result}\")",
-        "from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage\n\n# Skills in .claude/skills/ are discovered automatically\n# when settingSources includes \"project\"\nasync for message in query(\n    prompt=\"Review this PR using our code review checklist\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"user\", \"project\"],\n        allowed_tools=[\"Skill\", \"Read\", \"Grep\", \"Glob\"],\n    ),\n):\n    if isinstance(message, ResultMessage) and message.subtype == \"success\":\n        print(message.result)",
+        "from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage\n\n# Skills in .claude/skills/ are discovered automatically\n# when settingSources includes \"project\"\nasync for message in query(\n    prompt=\"Review this PR using our code review checklist\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"user\", \"project\"],\n        skills=\"all\",\n        allowed_tools=[\"Read\", \"Grep\", \"Glob\"],\n    ),\n):\n    if isinstance(message, ResultMessage) and message.subtype == \"success\":\n        print(message.result)",
         "from claude_agent_sdk import query, ClaudeAgentOptions, HookMatcher, ResultMessage\n\n\n# PreToolUse hook callback. Positional args:\n#   input_data: HookInput dict with tool_name, tool_input, hook_event_name\n#   tool_use_id: str | None, the ID of the tool call being intercepted\n#   context: HookContext, carries session metadata\nasync def audit_bash(input_data, tool_use_id, context):\n    command = input_data.get(\"tool_input\", {}).get(\"command\", \"\")\n    if \"rm -rf\" in command:\n        return {\"decision\": \"block\", \"reason\": \"Destructive command blocked\"}\n    return {}  # Empty dict: allow the tool to proceed\n\n\n# Filesystem hooks from .claude/settings.json run automatically\n# when settingSources loads them. You can also add programmatic hooks:\nasync for message in query(\n    prompt=\"Refactor the auth module\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"project\"],  # Loads hooks from .claude/settings.json\n        hooks={\n            \"PreToolUse\": [\n                HookMatcher(matcher=\"Bash\", hooks=[audit_bash]),\n            ]\n        },\n    ),\n):\n    if isinstance(message, ResultMessage) and message.subtype == \"success\":\n        print(message.result)"
       ],
       "sectionBlocks": [
@@ -30256,12 +30331,12 @@
           "title": "​Skills",
           "paragraphs": [
             "Skills are markdown files that give your agent specialized knowledge and invocable workflows. Unlike CLAUDE.md (which loads every session), skills load on demand. The agent receives skill descriptions at startup and loads the full content when relevant.",
-            "Skills are discovered from the filesystem through settingSources. With default options, user and project skills load automatically. The Skill tool is enabled by default when you don’t specify allowedTools. If you are using an allowedTools allowlist, include \"Skill\" explicitly.",
+            "Skills are discovered from the filesystem through settingSources. When the skills option on query() is omitted, discovered user and project skills are enabled and the Skill tool is available, matching CLI behavior. To control which skills are enabled, pass skills as \"all\", a list of skill names, or [] to disable all. The SDK enables the Skill tool automatically when skills is set, so you do not need to add it to allowedTools.",
             "Skills must be created as filesystem artifacts (.claude/skills/<name>/SKILL.md). The SDK does not have a programmatic API for registering skills. See Agent Skills in the SDK for full details.",
             "For more on creating and using skills, see Agent Skills in the SDK."
           ],
           "codeBlocks": [
-            "from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage\n\n# Skills in .claude/skills/ are discovered automatically\n# when settingSources includes \"project\"\nasync for message in query(\n    prompt=\"Review this PR using our code review checklist\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"user\", \"project\"],\n        allowed_tools=[\"Skill\", \"Read\", \"Grep\", \"Glob\"],\n    ),\n):\n    if isinstance(message, ResultMessage) and message.subtype == \"success\":\n        print(message.result)"
+            "from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage\n\n# Skills in .claude/skills/ are discovered automatically\n# when settingSources includes \"project\"\nasync for message in query(\n    prompt=\"Review this PR using our code review checklist\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"user\", \"project\"],\n        skills=\"all\",\n        allowed_tools=[\"Read\", \"Grep\", \"Glob\"],\n    ),\n):\n    if isinstance(message, ResultMessage) and message.subtype == \"success\":\n        print(message.result)"
           ]
         },
         {
@@ -30373,7 +30448,7 @@
         "See the Python SDK reference for details on when to use ClaudeSDKClient vs the standalone query() function.",
         "The stable TypeScript SDK (the query() function used throughout these docs, sometimes called V1) doesn’t have a session-holding client object like Python’s ClaudeSDKClient. Instead, pass continue: true on each subsequent query() call and the SDK picks up the most recent session in the current directory. No ID tracking required.",
         "This example makes two separate query() calls. The first creates a fresh session; the second sets continue: true, which tells the SDK to find and resume the most recent session on disk. The agent has full context from the first call:",
-        "There’s also a V2 preview of the TypeScript SDK that provides createSession() with a send / stream pattern, closer to Python’s ClaudeSDKClient in feel. V2 is unstable and its APIs may change; the rest of this documentation uses the stable V1 query() function.",
+        "The experimental V2 session API, which provided createSession() with a send / stream pattern, is deprecated. Use the V1 query() function and the session options described on this page instead.",
         "Resume and fork require a session ID. Read it from the session_id field on the result message (ResultMessage in Python, SDKResultMessage in TypeScript), which is present on every result regardless of success or error. In TypeScript the ID is also available earlier as a direct field on the init SystemMessage; in Python it’s nested inside SystemMessage.data.",
         "Pass a session ID to resume to return to that specific session. The agent picks up with full context from wherever the session left off. Common reasons to resume:",
         "Follow up on a completed task. The agent already analyzed something; now you want it to act on that analysis without re-reading files.",
@@ -30475,7 +30550,7 @@
           "paragraphs": [
             "The stable TypeScript SDK (the query() function used throughout these docs, sometimes called V1) doesn’t have a session-holding client object like Python’s ClaudeSDKClient. Instead, pass continue: true on each subsequent query() call and the SDK picks up the most recent session in the current directory. No ID tracking required.",
             "This example makes two separate query() calls. The first creates a fresh session; the second sets continue: true, which tells the SDK to find and resume the most recent session on disk. The agent has full context from the first call:",
-            "There’s also a V2 preview of the TypeScript SDK that provides createSession() with a send / stream pattern, closer to Python’s ClaudeSDKClient in feel. V2 is unstable and its APIs may change; the rest of this documentation uses the stable V1 query() function."
+            "The experimental V2 session API, which provided createSession() with a send / stream pattern, is deprecated. Use the V1 query() function and the session options described on this page instead."
           ],
           "codeBlocks": [
             "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// First query: creates a new session\nfor await (const message of query({\n  prompt: \"Analyze the auth module\",\n  options: { allowedTools: [\"Read\", \"Glob\", \"Grep\"] }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}\n\n// Second query: continue: true resumes the most recent session\nfor await (const message of query({\n  prompt: \"Now refactor it to use JWT\",\n  options: {\n    continue: true,\n    allowedTools: [\"Read\", \"Edit\", \"Write\", \"Glob\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}"
@@ -31521,6 +31596,7 @@
         "​Return images and resources",
         "​Images",
         "​Resources",
+        "​Return structured data",
         "​Example: unit converter",
         "​Next steps",
         "​Related documentation"
@@ -31539,6 +31615,7 @@
         "Return images and resources",
         "Images",
         "Resources",
+        "Return structured data",
         "Example: unit converter",
         "Next steps",
         "Related documentation"
@@ -31556,6 +31633,7 @@
         "Handle errors",
         "Return images and resources",
         "Resources",
+        "Return structured data",
         "Example: unit converter",
         "Next steps",
         "Related documentation",
@@ -31568,8 +31646,9 @@
         "Name: a unique identifier Claude uses to call the tool.",
         "Description: what the tool does. Claude reads this to decide when to call it.",
         "Input schema: the arguments Claude must provide. In TypeScript this is always a Zod schema, and the handler’s args are typed from it automatically. In Python this is a dict mapping names to types, like {\"latitude\": float}, which the SDK converts to JSON Schema for you. The Python decorator also accepts a full JSON Schema dict directly when you need enums, ranges, optional fields, or nested objects.",
-        "Handler: the async function that runs when Claude calls the tool. It receives the validated arguments and must return an object with: content (required): an array of result blocks, each with a type of \"text\", \"image\", or \"resource\". See Return images and resources for non-text blocks. isError (optional): set to true to signal a tool failure so Claude can react to it. See Handle errors.",
+        "Handler: the async function that runs when Claude calls the tool. It receives the validated arguments and must return an object with: content (required): an array of result blocks, each with a type of \"text\", \"image\", or \"resource\". See Return images and resources for non-text blocks. structuredContent (optional): a JSON object holding the result as machine-readable data, returned alongside content. See Return structured data. isError (optional): set to true to signal a tool failure so Claude can react to it. See Handle errors.",
         "content (required): an array of result blocks, each with a type of \"text\", \"image\", or \"resource\". See Return images and resources for non-text blocks.",
+        "structuredContent (optional): a JSON object holding the result as machine-readable data, returned alongside content. See Return structured data.",
         "isError (optional): set to true to signal a tool failure so Claude can react to it. See Handle errors.",
         "After defining a tool, wrap it in a server with createSdkMcpServer (TypeScript) or create_sdk_mcp_server (Python). The server runs in-process inside your application, not as a separate process.",
         "This example defines a get_temperature tool and wraps it in an MCP server. It only sets up the tool; to pass it to query and run it, see Call a custom tool below.",
@@ -31597,6 +31676,9 @@
         "A resource block embeds a piece of content identified by a URI. The URI is a label for Claude to reference; the actual content rides in the block’s text or blob field. Use this when your tool produces something that makes sense to address by name later, such as a generated file or a record from an external system.",
         "This example shows a resource block returned from inside a tool handler. The URI file:///tmp/report.md is a label that Claude can reference later; the SDK does not read from that path.",
         "These block shapes come from the MCP CallToolResult type. See the MCP specification for the full definition.",
+        "structuredContent is an optional JSON object on the result, separate from the content array. Use it to return raw values that Claude can read as exact fields instead of parsing them out of a text string or image.",
+        "When structuredContent is set, Claude receives the JSON plus any image or resource blocks from content. Text blocks in content are not forwarded, since they are assumed to duplicate the structured data. The example below renders a chart as an image block and returns the data points behind it in structuredContent from the same handler.",
+        "The Python @tool decorator forwards only content and is_error from the handler’s return dict. To return structuredContent from Python, run a standalone MCP server instead of an in-process SDK server.",
         "This tool converts values between units of length, temperature, and weight. A user can ask “convert 100 kilometers to miles” or “what is 72°F in Celsius,” and Claude picks the right unit type and units from the request.",
         "It demonstrates two patterns:",
         "Enum schemas: unit_type is constrained to a fixed set of values. In TypeScript, use z.enum(). In Python, the dict schema doesn’t support enums, so the full JSON Schema dict is required.",
@@ -31621,6 +31703,7 @@
         "import json\nimport httpx\nfrom typing import Any\n\n\n@tool(\n    \"fetch_data\",\n    \"Fetch data from an API\",\n    {\"endpoint\": str},  # Simple schema\n)\nasync def fetch_data(args: dict[str, Any]) -> dict[str, Any]:\n    try:\n        async with httpx.AsyncClient() as client:\n            response = await client.get(args[\"endpoint\"])\n            if response.status_code != 200:\n                # Return the failure as a tool result so Claude can react to it.\n                # is_error marks this as a failed call rather than odd-looking data.\n                return {\n                    \"content\": [\n                        {\n                            \"type\": \"text\",\n                            \"text\": f\"API error: {response.status_code} {response.reason_phrase}\",\n                        }\n                    ],\n                    \"is_error\": True,\n                }\n\n            data = response.json()\n            return {\"content\": [{\"type\": \"text\", \"text\": json.dumps(data, indent=2)}]}\n    except Exception as e:\n        # Catching here keeps the agent loop alive. An uncaught exception\n        # would end the whole query() call.\n        return {\n            \"content\": [{\"type\": \"text\", \"text\": f\"Failed to fetch data: {str(e)}\"}],\n            \"is_error\": True,\n        }",
         "import base64\nimport httpx\n\n\n# Define a tool that fetches an image from a URL and returns it to Claude\n@tool(\"fetch_image\", \"Fetch an image from a URL and return it to Claude\", {\"url\": str})\nasync def fetch_image(args):\n    async with httpx.AsyncClient() as client:  # Fetch the image bytes\n        response = await client.get(args[\"url\"])\n\n    return {\n        \"content\": [\n            {\n                \"type\": \"image\",\n                \"data\": base64.b64encode(response.content).decode(\n                    \"ascii\"\n                ),  # Base64-encode the raw bytes\n                \"mimeType\": response.headers.get(\n                    \"content-type\", \"image/png\"\n                ),  # Read MIME type from the response\n            }\n        ]\n    }",
         "return {\n  content: [\n    {\n      type: \"resource\",\n      resource: {\n        uri: \"file:///tmp/report.md\", // Label for Claude to reference, not a path the SDK reads\n        mimeType: \"text/markdown\",\n        text: \"# Report\\n...\" // The actual content, inline\n      }\n    }\n  ]\n};",
+        "return {\n  content: [\n    {\n      type: \"image\",\n      data: chartPngBuffer.toString(\"base64\"),\n      mimeType: \"image/png\"\n    }\n  ],\n  structuredContent: {\n    series: \"temperature_2m\",\n    unit: \"fahrenheit\",\n    points: [62.1, 63.4, 65.0, 64.2]\n  }\n};",
         "from typing import Any\nfrom claude_agent_sdk import tool, create_sdk_mcp_server\n\n\n# z.enum() in TypeScript becomes an \"enum\" constraint in JSON Schema.\n# The dict schema has no equivalent, so full JSON Schema is required.\n@tool(\n    \"convert_units\",\n    \"Convert a value from one unit to another\",\n    {\n        \"type\": \"object\",\n        \"properties\": {\n            \"unit_type\": {\n                \"type\": \"string\",\n                \"enum\": [\"length\", \"temperature\", \"weight\"],\n                \"description\": \"Category of unit\",\n            },\n            \"from_unit\": {\n                \"type\": \"string\",\n                \"description\": \"Unit to convert from, e.g. kilometers, fahrenheit, pounds\",\n            },\n            \"to_unit\": {\"type\": \"string\", \"description\": \"Unit to convert to\"},\n            \"value\": {\"type\": \"number\", \"description\": \"Value to convert\"},\n        },\n        \"required\": [\"unit_type\", \"from_unit\", \"to_unit\", \"value\"],\n    },\n)\nasync def convert_units(args: dict[str, Any]) -> dict[str, Any]:\n    conversions = {\n        \"length\": {\n            \"kilometers_to_miles\": lambda v: v * 0.621371,\n            \"miles_to_kilometers\": lambda v: v * 1.60934,\n            \"meters_to_feet\": lambda v: v * 3.28084,\n            \"feet_to_meters\": lambda v: v * 0.3048,\n        },\n        \"temperature\": {\n            \"celsius_to_fahrenheit\": lambda v: (v * 9) / 5 + 32,\n            \"fahrenheit_to_celsius\": lambda v: (v - 32) * 5 / 9,\n            \"celsius_to_kelvin\": lambda v: v + 273.15,\n            \"kelvin_to_celsius\": lambda v: v - 273.15,\n        },\n        \"weight\": {\n            \"kilograms_to_pounds\": lambda v: v * 2.20462,\n            \"pounds_to_kilograms\": lambda v: v * 0.453592,\n            \"grams_to_ounces\": lambda v: v * 0.035274,\n            \"ounces_to_grams\": lambda v: v * 28.3495,\n        },\n    }\n\n    key = f\"{args['from_unit']}_to_{args['to_unit']}\"\n    fn = conversions.get(args[\"unit_type\"], {}).get(key)\n\n    if not fn:\n        return {\n            \"content\": [\n                {\n                    \"type\": \"text\",\n                    \"text\": f\"Unsupported conversion: {args['from_unit']} to {args['to_unit']}\",\n                }\n            ],\n            \"is_error\": True,\n        }\n\n    result = fn(args[\"value\"])\n    return {\n        \"content\": [\n            {\n                \"type\": \"text\",\n                \"text\": f\"{args['value']} {args['from_unit']} = {result:.4f} {args['to_unit']}\",\n            }\n        ]\n    }\n\n\nconverter_server = create_sdk_mcp_server(\n    name=\"converter\",\n    version=\"1.0.0\",\n    tools=[convert_units],\n)",
         "import asyncio\nfrom claude_agent_sdk import (\n    query,\n    ClaudeAgentOptions,\n    ResultMessage,\n    AssistantMessage,\n    ToolUseBlock,\n)\n\n\nasync def main():\n    options = ClaudeAgentOptions(\n        mcp_servers={\"converter\": converter_server},\n        allowed_tools=[\"mcp__converter__convert_units\"],\n    )\n\n    prompts = [\n        \"Convert 100 kilometers to miles.\",\n        \"What is 72°F in Celsius?\",\n        \"How many pounds is 5 kilograms?\",\n    ]\n\n    for prompt in prompts:\n        async for message in query(prompt=prompt, options=options):\n            if isinstance(message, AssistantMessage):\n                for block in message.content:\n                    if isinstance(block, ToolUseBlock):\n                        print(f\"[tool call] {block.name}({block.input})\")\n            elif isinstance(message, ResultMessage) and message.subtype == \"success\":\n                print(f\"Q: {prompt}\\nA: {message.result}\\n\")\n\n\nasyncio.run(main())"
       ],
@@ -31665,8 +31748,9 @@
             "Name: a unique identifier Claude uses to call the tool.",
             "Description: what the tool does. Claude reads this to decide when to call it.",
             "Input schema: the arguments Claude must provide. In TypeScript this is always a Zod schema, and the handler’s args are typed from it automatically. In Python this is a dict mapping names to types, like {\"latitude\": float}, which the SDK converts to JSON Schema for you. The Python decorator also accepts a full JSON Schema dict directly when you need enums, ranges, optional fields, or nested objects.",
-            "Handler: the async function that runs when Claude calls the tool. It receives the validated arguments and must return an object with: content (required): an array of result blocks, each with a type of \"text\", \"image\", or \"resource\". See Return images and resources for non-text blocks. isError (optional): set to true to signal a tool failure so Claude can react to it. See Handle errors.",
+            "Handler: the async function that runs when Claude calls the tool. It receives the validated arguments and must return an object with: content (required): an array of result blocks, each with a type of \"text\", \"image\", or \"resource\". See Return images and resources for non-text blocks. structuredContent (optional): a JSON object holding the result as machine-readable data, returned alongside content. See Return structured data. isError (optional): set to true to signal a tool failure so Claude can react to it. See Handle errors.",
             "content (required): an array of result blocks, each with a type of \"text\", \"image\", or \"resource\". See Return images and resources for non-text blocks.",
+            "structuredContent (optional): a JSON object holding the result as machine-readable data, returned alongside content. See Return structured data.",
             "isError (optional): set to true to signal a tool failure so Claude can react to it. See Handle errors.",
             "After defining a tool, wrap it in a server with createSdkMcpServer (TypeScript) or create_sdk_mcp_server (Python). The server runs in-process inside your application, not as a separate process."
           ],
@@ -31775,6 +31859,17 @@
           ],
           "codeBlocks": [
             "return {\n  content: [\n    {\n      type: \"resource\",\n      resource: {\n        uri: \"file:///tmp/report.md\", // Label for Claude to reference, not a path the SDK reads\n        mimeType: \"text/markdown\",\n        text: \"# Report\\n...\" // The actual content, inline\n      }\n    }\n  ]\n};"
+          ]
+        },
+        {
+          "title": "​Return structured data",
+          "paragraphs": [
+            "structuredContent is an optional JSON object on the result, separate from the content array. Use it to return raw values that Claude can read as exact fields instead of parsing them out of a text string or image.",
+            "When structuredContent is set, Claude receives the JSON plus any image or resource blocks from content. Text blocks in content are not forwarded, since they are assumed to duplicate the structured data. The example below renders a chart as an image block and returns the data points behind it in structuredContent from the same handler.",
+            "The Python @tool decorator forwards only content and is_error from the handler’s return dict. To return structuredContent from Python, run a standalone MCP server instead of an in-process SDK server."
+          ],
+          "codeBlocks": [
+            "return {\n  content: [\n    {\n      type: \"image\",\n      data: chartPngBuffer.toString(\"base64\"),\n      mimeType: \"image/png\"\n    }\n  ],\n  structuredContent: {\n    series: \"temperature_2m\",\n    unit: \"fahrenheit\",\n    points: [62.1, 63.4, 65.0, 64.2]\n  }\n};"
           ]
         },
         {
@@ -33475,13 +33570,13 @@
         "Loaded from filesystem: Skills are loaded from filesystem locations governed by settingSources (TypeScript) or setting_sources (Python)",
         "Automatically discovered: Once filesystem settings are loaded, Skill metadata is discovered at startup from user and project directories; full content loaded when triggered",
         "Model-invoked: Claude autonomously chooses when to use them based on context",
-        "Enabled via allowed_tools: Add \"Skill\" to your allowed_tools to enable Skills",
+        "Filtered via the skills option: Discovered skills are enabled by default. Pass a list of skill names, \"all\", or [] to control which are available in the session",
         "Unlike subagents (which can be defined programmatically), Skills must be created as filesystem artifacts. The SDK does not provide a programmatic API for registering Skills.",
         "Skills are discovered through the filesystem setting sources. With default query() options, the SDK loads user and project sources, so skills in ~/.claude/skills/ and <cwd>/.claude/skills/ are available. If you set settingSources explicitly, include 'user' or 'project' to keep skill discovery, or use the plugins option to load skills from a specific path.",
-        "To use Skills with the SDK, you need to:",
-        "Include \"Skill\" in your allowed_tools configuration",
-        "Configure settingSources/setting_sources to load Skills from the filesystem",
-        "Once configured, Claude automatically discovers Skills from the specified directories and invokes them when relevant to the user’s request.",
+        "Set the skills option on query() to control which Skills are available to the session. When omitted, discovered Skills are enabled and the Skill tool is available, matching CLI behavior. Pass \"all\" to enable every discovered Skill, a list of Skill names to enable only those, or [] to disable all. When you set skills, the SDK enables the Skill tool automatically, so you do not need to list it in allowedTools.",
+        "Once configured, Claude automatically discovers Skills from the filesystem and invokes them when relevant to the user’s request.",
+        "To enable only specific Skills, pass their names. Names match the name field in SKILL.md or the Skill’s directory name. Use plugin:skill for plugin-provided Skills.",
+        "The skills option is a context filter, not a sandbox. Unlisted Skills are hidden from the model and rejected by the Skill tool, but their files remain on disk and are reachable through Read and Bash.",
         "Skills are loaded from filesystem directories based on your settingSources/setting_sources configuration:",
         "Project Skills (.claude/skills/): Shared with your team via git - loaded when setting_sources includes \"project\"",
         "User Skills (~/.claude/skills/): Personal Skills across all projects - loaded when setting_sources includes \"user\"",
@@ -33504,7 +33599,7 @@
         "Check working directory: The SDK loads Skills relative to the cwd option. Ensure it points to a directory containing .claude/skills/:",
         "See the “Using Skills with the SDK” section above for the complete pattern.",
         "Verify filesystem location:",
-        "Check the Skill tool is enabled: Confirm \"Skill\" is in your allowedTools.",
+        "Check the skills option: If you passed a skills list, confirm the skill’s name is included. Passing [] disables all skills.",
         "Check the description: Ensure it’s specific and includes relevant keywords. See Agent Skills Best Practices for guidance on writing effective descriptions.",
         "For general Skills troubleshooting (YAML syntax, debugging, etc.), see the Claude Code Skills troubleshooting section.",
         "Agent Skills in Claude Code: Complete Skills guide with creation, examples, and troubleshooting",
@@ -33519,13 +33614,14 @@
         "Was this page helpful?"
       ],
       "codeBlocks": [
-        "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\n\nasync def main():\n    options = ClaudeAgentOptions(\n        cwd=\"/path/to/project\",  # Project with .claude/skills/\n        setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n        allowed_tools=[\"Skill\", \"Read\", \"Write\", \"Bash\"],  # Enable Skill tool\n    )\n\n    async for message in query(\n        prompt=\"Help me process this PDF document\", options=options\n    ):\n        print(message)\n\n\nasyncio.run(main())",
+        "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\n\nasync def main():\n    options = ClaudeAgentOptions(\n        cwd=\"/path/to/project\",  # Project with .claude/skills/\n        setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n        skills=\"all\",  # Enable every discovered Skill\n        allowed_tools=[\"Read\", \"Write\", \"Bash\"],\n    )\n\n    async for message in query(\n        prompt=\"Help me process this PDF document\", options=options\n    ):\n        print(message)\n\n\nasyncio.run(main())",
+        "options = ClaudeAgentOptions(skills=[\"pdf\", \"docx\"])",
         ".claude/skills/processing-pdfs/\n└── SKILL.md",
-        "options = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    allowed_tools=[\"Skill\", \"Read\", \"Grep\", \"Glob\"],\n)\n\nasync for message in query(prompt=\"Analyze the codebase structure\", options=options):\n    print(message)",
-        "options = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    allowed_tools=[\"Skill\"],\n)\n\nasync for message in query(prompt=\"What Skills are available?\", options=options):\n    print(message)",
-        "options = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    allowed_tools=[\"Skill\", \"Read\", \"Bash\"],\n)\n\nasync for message in query(prompt=\"Extract text from invoice.pdf\", options=options):\n    print(message)",
-        "# Skills not loaded: setting_sources excludes user and project\noptions = ClaudeAgentOptions(setting_sources=[], allowed_tools=[\"Skill\"])\n\n# Skills loaded: user and project sources included\noptions = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],\n    allowed_tools=[\"Skill\"],\n)",
-        "# Ensure your cwd points to the directory containing .claude/skills/\noptions = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",  # Must contain .claude/skills/\n    setting_sources=[\"user\", \"project\"],  # Loads skills from these sources\n    allowed_tools=[\"Skill\"],\n)",
+        "options = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    skills=\"all\",\n    allowed_tools=[\"Read\", \"Grep\", \"Glob\"],\n)\n\nasync for message in query(prompt=\"Analyze the codebase structure\", options=options):\n    print(message)",
+        "options = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    skills=\"all\",\n)\n\nasync for message in query(prompt=\"What Skills are available?\", options=options):\n    print(message)",
+        "options = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    skills=\"all\",\n    allowed_tools=[\"Read\", \"Bash\"],\n)\n\nasync for message in query(prompt=\"Extract text from invoice.pdf\", options=options):\n    print(message)",
+        "# Skills not loaded: setting_sources excludes user and project\noptions = ClaudeAgentOptions(setting_sources=[], skills=\"all\")\n\n# Skills loaded: user and project sources included\noptions = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],\n    skills=\"all\",\n)",
+        "# Ensure your cwd points to the directory containing .claude/skills/\noptions = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",  # Must contain .claude/skills/\n    setting_sources=[\"user\", \"project\"],  # Loads skills from these sources\n    skills=\"all\",\n)",
         "# Check project Skills\nls .claude/skills/*/SKILL.md\n\n# Check personal Skills\nls ~/.claude/skills/*/SKILL.md"
       ],
       "sectionBlocks": [
@@ -33571,7 +33667,7 @@
             "Loaded from filesystem: Skills are loaded from filesystem locations governed by settingSources (TypeScript) or setting_sources (Python)",
             "Automatically discovered: Once filesystem settings are loaded, Skill metadata is discovered at startup from user and project directories; full content loaded when triggered",
             "Model-invoked: Claude autonomously chooses when to use them based on context",
-            "Enabled via allowed_tools: Add \"Skill\" to your allowed_tools to enable Skills",
+            "Filtered via the skills option: Discovered skills are enabled by default. Pass a list of skill names, \"all\", or [] to control which are available in the session",
             "Unlike subagents (which can be defined programmatically), Skills must be created as filesystem artifacts. The SDK does not provide a programmatic API for registering Skills.",
             "Skills are discovered through the filesystem setting sources. With default query() options, the SDK loads user and project sources, so skills in ~/.claude/skills/ and <cwd>/.claude/skills/ are available. If you set settingSources explicitly, include 'user' or 'project' to keep skill discovery, or use the plugins option to load skills from a specific path."
           ],
@@ -33580,13 +33676,14 @@
         {
           "title": "​Using Skills with the SDK",
           "paragraphs": [
-            "To use Skills with the SDK, you need to:",
-            "Include \"Skill\" in your allowed_tools configuration",
-            "Configure settingSources/setting_sources to load Skills from the filesystem",
-            "Once configured, Claude automatically discovers Skills from the specified directories and invokes them when relevant to the user’s request."
+            "Set the skills option on query() to control which Skills are available to the session. When omitted, discovered Skills are enabled and the Skill tool is available, matching CLI behavior. Pass \"all\" to enable every discovered Skill, a list of Skill names to enable only those, or [] to disable all. When you set skills, the SDK enables the Skill tool automatically, so you do not need to list it in allowedTools.",
+            "Once configured, Claude automatically discovers Skills from the filesystem and invokes them when relevant to the user’s request.",
+            "To enable only specific Skills, pass their names. Names match the name field in SKILL.md or the Skill’s directory name. Use plugin:skill for plugin-provided Skills.",
+            "The skills option is a context filter, not a sandbox. Unlisted Skills are hidden from the model and rejected by the Skill tool, but their files remain on disk and are reachable through Read and Bash."
           ],
           "codeBlocks": [
-            "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\n\nasync def main():\n    options = ClaudeAgentOptions(\n        cwd=\"/path/to/project\",  # Project with .claude/skills/\n        setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n        allowed_tools=[\"Skill\", \"Read\", \"Write\", \"Bash\"],  # Enable Skill tool\n    )\n\n    async for message in query(\n        prompt=\"Help me process this PDF document\", options=options\n    ):\n        print(message)\n\n\nasyncio.run(main())"
+            "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\n\nasync def main():\n    options = ClaudeAgentOptions(\n        cwd=\"/path/to/project\",  # Project with .claude/skills/\n        setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n        skills=\"all\",  # Enable every discovered Skill\n        allowed_tools=[\"Read\", \"Write\", \"Bash\"],\n    )\n\n    async for message in query(\n        prompt=\"Help me process this PDF document\", options=options\n    ):\n        print(message)\n\n\nasyncio.run(main())",
+            "options = ClaudeAgentOptions(skills=[\"pdf\", \"docx\"])"
           ]
         },
         {
@@ -33621,7 +33718,7 @@
             "Import statements from the first example are assumed in the following code snippets."
           ],
           "codeBlocks": [
-            "options = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    allowed_tools=[\"Skill\", \"Read\", \"Grep\", \"Glob\"],\n)\n\nasync for message in query(prompt=\"Analyze the codebase structure\", options=options):\n    print(message)"
+            "options = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    skills=\"all\",\n    allowed_tools=[\"Read\", \"Grep\", \"Glob\"],\n)\n\nasync for message in query(prompt=\"Analyze the codebase structure\", options=options):\n    print(message)"
           ]
         },
         {
@@ -33631,7 +33728,7 @@
             "Claude will list the available Skills based on your current working directory and installed plugins."
           ],
           "codeBlocks": [
-            "options = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    allowed_tools=[\"Skill\"],\n)\n\nasync for message in query(prompt=\"What Skills are available?\", options=options):\n    print(message)"
+            "options = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    skills=\"all\",\n)\n\nasync for message in query(prompt=\"What Skills are available?\", options=options):\n    print(message)"
           ]
         },
         {
@@ -33641,7 +33738,7 @@
             "Claude automatically invokes the relevant Skill if the description matches your request."
           ],
           "codeBlocks": [
-            "options = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    allowed_tools=[\"Skill\", \"Read\", \"Bash\"],\n)\n\nasync for message in query(prompt=\"Extract text from invoice.pdf\", options=options):\n    print(message)"
+            "options = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    skills=\"all\",\n    allowed_tools=[\"Read\", \"Bash\"],\n)\n\nasync for message in query(prompt=\"Extract text from invoice.pdf\", options=options):\n    print(message)"
           ]
         },
         {
@@ -33659,15 +33756,15 @@
             "Verify filesystem location:"
           ],
           "codeBlocks": [
-            "# Skills not loaded: setting_sources excludes user and project\noptions = ClaudeAgentOptions(setting_sources=[], allowed_tools=[\"Skill\"])\n\n# Skills loaded: user and project sources included\noptions = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],\n    allowed_tools=[\"Skill\"],\n)",
-            "# Ensure your cwd points to the directory containing .claude/skills/\noptions = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",  # Must contain .claude/skills/\n    setting_sources=[\"user\", \"project\"],  # Loads skills from these sources\n    allowed_tools=[\"Skill\"],\n)",
+            "# Skills not loaded: setting_sources excludes user and project\noptions = ClaudeAgentOptions(setting_sources=[], skills=\"all\")\n\n# Skills loaded: user and project sources included\noptions = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],\n    skills=\"all\",\n)",
+            "# Ensure your cwd points to the directory containing .claude/skills/\noptions = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",  # Must contain .claude/skills/\n    setting_sources=[\"user\", \"project\"],  # Loads skills from these sources\n    skills=\"all\",\n)",
             "# Check project Skills\nls .claude/skills/*/SKILL.md\n\n# Check personal Skills\nls ~/.claude/skills/*/SKILL.md"
           ]
         },
         {
           "title": "​Skill Not Being Used",
           "paragraphs": [
-            "Check the Skill tool is enabled: Confirm \"Skill\" is in your allowedTools.",
+            "Check the skills option: If you passed a skills list, confirm the skill’s name is included. Passing [] disables all skills.",
             "Check the description: Ensure it’s specific and includes relevant keywords. See Agent Skills Best Practices for guidance on writing effective descriptions."
           ],
           "codeBlocks": []
@@ -36596,7 +36693,6 @@
         "Complete API reference for the TypeScript Agent SDK, including all functions, types, and interfaces.",
         "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
         "Use this file to discover all available pages before exploring further.",
-        "Try the new V2 interface (preview): A simplified interface with send() and stream() patterns is now available, making multi-turn conversations easier. Learn more about the TypeScript V2 preview",
         "The SDK bundles a native Claude Code binary for your platform as an optional dependency such as @anthropic-ai/claude-agent-sdk-darwin-arm64. You don’t need to install Claude Code separately. If your package manager skips optional dependencies, the SDK throws Native CLI binary for <platform> not found; set pathToClaudeCodeExecutable to a separately installed claude binary instead.",
         "The primary function for interacting with Claude Code. Creates an async generator that streams messages as they arrive.",
         "Returns a Query object that extends AsyncGenerator<SDKMessage, void> with additional methods.",
@@ -36637,7 +36733,8 @@
         "Disable filesystem settings:",
         "Load all filesystem settings explicitly:",
         "Load only specific setting sources:",
-        "Testing and CI environments:"
+        "Testing and CI environments:",
+        "SDK-only applications:"
       ],
       "codeBlocks": [
         "npm install @anthropic-ai/claude-agent-sdk",
@@ -36696,8 +36793,7 @@
           "title": "Documentation Index",
           "paragraphs": [
             "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
-            "Use this file to discover all available pages before exploring further.",
-            "Try the new V2 interface (preview): A simplified interface with send() and stream() patterns is now available, making multi-turn conversations easier. Learn more about the TypeScript V2 preview"
+            "Use this file to discover all available pages before exploring further."
           ],
           "codeBlocks": []
         },
@@ -37014,8 +37110,8 @@
       "section": "SDK references",
       "path": "/docs/en/agent-sdk/typescript-v2-preview",
       "url": "https://code.claude.com/docs/en/agent-sdk/typescript-v2-preview",
-      "title": "TypeScript SDK V2 interface (preview)",
-      "metaDescription": "Preview of the simplified V2 TypeScript Agent SDK, with session-based send/stream patterns for multi-turn conversations.",
+      "title": "TypeScript SDK V2 session API (deprecated)",
+      "metaDescription": "Reference for the deprecated V2 TypeScript Agent SDK session API, with session-based send/stream patterns for multi-turn conversations.",
       "headings": [
         "Documentation Index",
         "​Installation",
@@ -37031,7 +37127,6 @@
         "​unstable_v2_prompt()",
         "​SDKSession interface",
         "​Feature availability",
-        "​Feedback",
         "​See also"
       ],
       "toc": [
@@ -37048,7 +37143,6 @@
         "unstable_v2_prompt()",
         "SDKSession interface",
         "Feature availability",
-        "Feedback",
         "See also"
       ],
       "paragraphs": [
@@ -37064,13 +37158,12 @@
         "unstable_v2_prompt()",
         "SDKSession interface",
         "Feature availability",
-        "Feedback",
         "See also",
-        "Preview of the simplified V2 TypeScript Agent SDK, with session-based send/stream patterns for multi-turn conversations.",
+        "Reference for the deprecated V2 TypeScript Agent SDK session API, with session-based send/stream patterns for multi-turn conversations.",
         "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
         "Use this file to discover all available pages before exploring further.",
-        "The V2 interface is an unstable preview. APIs may change based on feedback before becoming stable. Some features like session forking are only available in the V1 SDK.",
-        "The V2 Claude Agent TypeScript SDK removes the need for async generators and yield coordination. This makes multi-turn conversations simpler, instead of managing generator state across turns, each turn is a separate send()/stream() cycle. The API surface reduces to three concepts:",
+        "The V2 session API functions unstable_v2_createSession, unstable_v2_resumeSession, and unstable_v2_prompt are deprecated and will be removed in a future release. Use the V1 query() API instead.",
+        "V2 was an experimental session API that removed the need for async generators and yield coordination. Instead of managing generator state across turns, each turn was a separate send()/stream() cycle. The API surface reduced to three concepts:",
         "createSession() / resumeSession(): Start or continue a conversation",
         "session.send(): Send a message",
         "session.stream(): Get the response",
@@ -37092,10 +37185,9 @@
         "Creates a new session for multi-turn conversations.",
         "Resumes an existing session by ID.",
         "One-shot convenience function for single-turn queries.",
-        "Not all V1 features are available in V2 yet. The following require using the V1 SDK:",
+        "The V2 session API does not support every V1 feature. The following require the V1 SDK:",
         "Session forking (forkSession option)",
         "Some advanced streaming input patterns",
-        "Share your feedback on the V2 interface before it becomes stable. Report issues and suggestions through GitHub Issues.",
         "TypeScript SDK reference (V1) - Full V1 SDK documentation",
         "SDK overview - General SDK concepts",
         "V2 examples on GitHub - Working code examples",
@@ -37138,8 +37230,8 @@
           "paragraphs": [
             "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
             "Use this file to discover all available pages before exploring further.",
-            "The V2 interface is an unstable preview. APIs may change based on feedback before becoming stable. Some features like session forking are only available in the V1 SDK.",
-            "The V2 Claude Agent TypeScript SDK removes the need for async generators and yield coordination. This makes multi-turn conversations simpler, instead of managing generator state across turns, each turn is a separate send()/stream() cycle. The API surface reduces to three concepts:",
+            "The V2 session API functions unstable_v2_createSession, unstable_v2_resumeSession, and unstable_v2_prompt are deprecated and will be removed in a future release. Use the V1 query() API instead.",
+            "V2 was an experimental session API that removed the need for async generators and yield coordination. Instead of managing generator state across turns, each turn was a separate send()/stream() cycle. The API surface reduced to three concepts:",
             "createSession() / resumeSession(): Start or continue a conversation",
             "session.send(): Send a message",
             "session.stream(): Get the response"
@@ -37257,16 +37349,9 @@
         {
           "title": "​Feature availability",
           "paragraphs": [
-            "Not all V1 features are available in V2 yet. The following require using the V1 SDK:",
+            "The V2 session API does not support every V1 feature. The following require the V1 SDK:",
             "Session forking (forkSession option)",
             "Some advanced streaming input patterns"
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Feedback",
-          "paragraphs": [
-            "Share your feedback on the V2 interface before it becomes stable. Report issues and suggestions through GitHub Issues."
           ],
           "codeBlocks": []
         },

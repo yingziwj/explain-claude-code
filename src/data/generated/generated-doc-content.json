@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-07T05:41:42.624Z",
-  "sourceGeneratedAt": "2026-05-07T05:41:42.295Z",
+  "generatedAt": "2026-05-08T05:12:14.843Z",
+  "sourceGeneratedAt": "2026-05-08T05:12:14.499Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -528,7 +528,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.132、2.1.131、2.1.129、2.1.128 这些环节往下讲。",
+            "原文这页大多会按 2.1.133、2.1.132、2.1.131、2.1.129 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -537,14 +537,14 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.132 -> 2.1.131 -> 2.1.129 -> 2.1.128。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.133 -> 2.1.132 -> 2.1.131 -> 2.1.129。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         },
         {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         }
       ],
@@ -1297,9 +1297,15 @@
               "kind": "command"
             },
             {
-              "title": "原页关键片段：AGENTS.md",
+              "title": "原页关键片段：AGENTS.md 1",
               "body": "\"AGENTS.md\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
               "code": "@AGENTS.md\n\n## Claude Code\n\nUse plan mode for changes under `src/billing/`.",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：AGENTS.md 2",
+              "body": "\"AGENTS.md\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "ln -s AGENTS.md CLAUDE.md",
               "kind": "code"
             },
             {
@@ -3674,7 +3680,8 @@
         {
           "title": "Install the extension",
           "paragraphs": [
-            "这里属于实操步骤，重点是照着顺序做，不要自己脑补省略中间步骤。"
+            "这里属于实操步骤，重点是照着顺序做，不要自己脑补省略中间步骤。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -6671,7 +6678,13 @@
             {
               "title": "Test your plugins locally 3",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude --plugin-url https://example.com/my-plugin.zip",
+              "code": "claude --plugin-url https://example.com/my-plugin.zip --plugin-url https://example.com/other.zip",
+              "kind": "command"
+            },
+            {
+              "title": "Test your plugins locally 4",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude --plugin-url \"https://example.com/my-plugin.zip https://example.com/other.zip\"",
               "kind": "command"
             }
           ]
@@ -9583,6 +9596,14 @@
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
             "第三，照着原文这几个环节挨个过：See what loaded into context -> Check resolved settings -> Check MCP servers -> Check hooks。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Test against a clean configuration",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "cd /tmp && CLAUDE_CONFIG_DIR=/tmp/claude-clean claude",
+              "kind": "command"
+            }
           ]
         },
         {
@@ -9620,9 +9641,24 @@
           ]
         },
         {
-          "title": "Common causes",
+          "title": "Test against a clean configuration",
           "paragraphs": [
-            "这一块主要是在说\"Common causes\"真到手上该怎么用，哪里最容易踩坑。"
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Test against a clean configuration",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "cd /tmp && CLAUDE_CONFIG_DIR=/tmp/claude-clean claude",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Check common causes",
+          "paragraphs": [
+            "看到这里，就把\"Check common causes\"当成一件真要上手的活来看。"
           ]
         },
         {
@@ -9988,6 +10024,21 @@
           ]
         },
         {
+          "title": "Host not allowed in a cloud session",
+          "paragraphs": [
+            "这里不是让你背\"Host not allowed in a cloud session\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Host not allowed in a cloud session",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "HTTP 403\nx-deny-reason: host_not_allowed",
+              "kind": "code"
+            }
+          ]
+        },
+        {
           "title": "Request errors",
           "paragraphs": [
             "这里不是让你背\"Request errors\"这个词，而是让你看它真干活时怎么使。"
@@ -10085,21 +10136,6 @@
               "title": "There’s an issue with the selected model",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
               "code": "There's an issue with the selected model (claude-...). It may not exist or you may not have access to it. Run /model to select a different one.",
-              "kind": "code"
-            }
-          ]
-        },
-        {
-          "title": "Claude Opus is not available with the Claude Pro plan",
-          "paragraphs": [
-            "这里不是让你背\"Claude Opus is not available with the Claude Pro plan\"这个词，而是让你看它真干活时怎么使。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Claude Opus is not available with the Claude Pro plan",
-              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
-              "code": "Claude Opus is not available with the Claude Pro plan · Select a different model in /model",
               "kind": "code"
             }
           ]
@@ -11548,7 +11584,7 @@
             {
               "title": "原页关键片段：4. Pin model versions 2",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1",
+              "code": "# Using inference profile ID\nexport ANTHROPIC_MODEL='us.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1",
               "kind": "command"
             },
             {
@@ -11687,7 +11723,7 @@
             {
               "title": "4. Pin model versions 2",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "# Using inference profile ID\nexport ANTHROPIC_MODEL='global.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1",
+              "code": "# Using inference profile ID\nexport ANTHROPIC_MODEL='us.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1",
               "kind": "command"
             },
             {
@@ -11912,6 +11948,12 @@
               "kind": "command"
             },
             {
+              "title": "原页关键片段：3. Configure GCP credentials",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"gcpAuthRefresh\": \"gcloud auth application-default login\",\n  \"env\": {\n    \"ANTHROPIC_VERTEX_PROJECT_ID\": \"your-project-id\"\n  }\n}",
+              "kind": "config"
+            },
+            {
               "title": "原页关键片段：4. Configure Claude Code",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
               "code": "# Enable Vertex AI integration\nexport CLAUDE_CODE_USE_VERTEX=1\nexport CLOUD_ML_REGION=global\nexport ANTHROPIC_VERTEX_PROJECT_ID=YOUR-PROJECT-ID\n\n# Optional: Override the Vertex endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_VERTEX_BASE_URL=https://aiplatform.googleapis.com\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1\n\n# When CLOUD_ML_REGION=global, override region for models that don't support global endpoints\nexport VERTEX_REGION_CLAUDE_HAIKU_4_5=us-east5\nexport VERTEX_REGION_CLAUDE_4_6_SONNET=europe-west1",
@@ -11990,6 +12032,14 @@
           "paragraphs": [
             "看到这里，就把\"3. Configure GCP credentials\"当成一件真要上手的活来看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "3. Configure GCP credentials",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"gcpAuthRefresh\": \"gcloud auth application-default login\",\n  \"env\": {\n    \"ANTHROPIC_VERTEX_PROJECT_ID\": \"your-project-id\"\n  }\n}",
+              "kind": "config"
+            }
           ]
         },
         {
@@ -15385,7 +15435,7 @@
         {
           "title": "Worktree settings",
           "paragraphs": [
-            "这一段是在把 how --worktree creates and manages git worktrees. Use these settings to reduce disk usage and startup time in large monorepos. 配起来、配稳当。你主要盯住在哪儿改、怎么写、改完怎么看它真生效。",
+            "这一段是在把 how --worktree creates and manages git worktrees. 配起来、配稳当。你主要盯住在哪儿改、怎么写、改完怎么看它真生效。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
@@ -21261,7 +21311,7 @@
             {
               "title": "原页关键片段：Skills",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage\n\n# Skills in .claude/skills/ are discovered automatically\n# when settingSources includes \"project\"\nasync for message in query(\n    prompt=\"Review this PR using our code review checklist\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"user\", \"project\"],\n        allowed_tools=[\"Skill\", \"Read\", \"Grep\", \"Glob\"],\n    ),\n):\n    if isinstance(message, ResultMessage) and message.subtype == \"success\":\n        print(message.result)",
+              "code": "from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage\n\n# Skills in .claude/skills/ are discovered automatically\n# when settingSources includes \"project\"\nasync for message in query(\n    prompt=\"Review this PR using our code review checklist\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"user\", \"project\"],\n        skills=\"all\",\n        allowed_tools=[\"Read\", \"Grep\", \"Glob\"],\n    ),\n):\n    if isinstance(message, ResultMessage) and message.subtype == \"success\":\n        print(message.result)",
               "kind": "command"
             },
             {
@@ -21325,7 +21375,7 @@
             {
               "title": "Skills",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage\n\n# Skills in .claude/skills/ are discovered automatically\n# when settingSources includes \"project\"\nasync for message in query(\n    prompt=\"Review this PR using our code review checklist\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"user\", \"project\"],\n        allowed_tools=[\"Skill\", \"Read\", \"Grep\", \"Glob\"],\n    ),\n):\n    if isinstance(message, ResultMessage) and message.subtype == \"success\":\n        print(message.result)",
+              "code": "from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage\n\n# Skills in .claude/skills/ are discovered automatically\n# when settingSources includes \"project\"\nasync for message in query(\n    prompt=\"Review this PR using our code review checklist\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"user\", \"project\"],\n        skills=\"all\",\n        allowed_tools=[\"Read\", \"Grep\", \"Glob\"],\n    ),\n):\n    if isinstance(message, ResultMessage) and message.subtype == \"success\":\n        print(message.result)",
               "kind": "command"
             }
           ]
@@ -22490,6 +22540,12 @@
               "kind": "code"
             },
             {
+              "title": "原页关键片段：Return structured data",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "return {\n  content: [\n    {\n      type: \"image\",\n      data: chartPngBuffer.toString(\"base64\"),\n      mimeType: \"image/png\"\n    }\n  ],\n  structuredContent: {\n    series: \"temperature_2m\",\n    unit: \"fahrenheit\",\n    points: [62.1, 63.4, 65.0, 64.2]\n  }\n};",
+              "kind": "code"
+            },
+            {
               "title": "原页关键片段：Example: unit converter 1",
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
               "code": "from typing import Any\nfrom claude_agent_sdk import tool, create_sdk_mcp_server\n\n\n# z.enum() in TypeScript becomes an \"enum\" constraint in JSON Schema.\n# The dict schema has no equivalent, so full JSON Schema is required.\n@tool(\n    \"convert_units\",\n    \"Convert a value from one unit to another\",\n    {\n        \"type\": \"object\",\n        \"properties\": {\n            \"unit_type\": {\n                \"type\": \"string\",\n                \"enum\": [\"length\", \"temperature\", \"weight\"],\n                \"description\": \"Category of unit\",\n            },\n            \"from_unit\": {\n                \"type\": \"string\",\n                \"description\": \"Unit to convert from, e.g. kilometers, fahrenheit, pounds\",\n            },\n            \"to_unit\": {\"type\": \"string\", \"description\": \"Unit to convert to\"},\n            \"value\": {\"type\": \"number\", \"description\": \"Value to convert\"},\n        },\n        \"required\": [\"unit_type\", \"from_unit\", \"to_unit\", \"value\"],\n    },\n)\nasync def convert_units(args: dict[str, Any]) -> dict[str, Any]:\n    conversions = {\n        \"length\": {\n            \"kilometers_to_miles\": lambda v: v * 0.621371,\n            \"miles_to_kilometers\": lambda v: v * 1.60934,\n            \"meters_to_feet\": lambda v: v * 3.28084,\n            \"feet_to_meters\": lambda v: v * 0.3048,\n        },\n        \"temperature\": {\n            \"celsius_to_fahrenheit\": lambda v: (v * 9) / 5 + 32,\n            \"fahrenheit_to_celsius\": lambda v: (v - 32) * 5 / 9,\n            \"celsius_to_kelvin\": lambda v: v + 273.15,\n            \"kelvin_to_celsius\": lambda v: v - 273.15,\n        },\n        \"weight\": {\n            \"kilograms_to_pounds\": lambda v: v * 2.20462,\n            \"pounds_to_kilograms\": lambda v: v * 0.453592,\n            \"grams_to_ounces\": lambda v: v * 0.035274,\n            \"ounces_to_grams\": lambda v: v * 28.3495,\n        },\n    }\n\n    key = f\"{args['from_unit']}_to_{args['to_unit']}\"\n    fn = conversions.get(args[\"unit_type\"], {}).get(key)\n\n    if not fn:\n        return {\n            \"content\": [\n                {\n                    \"type\": \"text\",\n                    \"text\": f\"Unsupported conversion: {args['from_unit']} to {args['to_unit']}\",\n                }\n            ],\n            \"is_error\": True,\n        }\n\n    result = fn(args[\"value\"])\n    return {\n        \"content\": [\n            {\n                \"type\": \"text\",\n                \"text\": f\"{args['value']} {args['from_unit']} = {result:.4f} {args['to_unit']}\",\n            }\n        ]\n    }\n\n\nconverter_server = create_sdk_mcp_server(\n    name=\"converter\",\n    version=\"1.0.0\",\n    tools=[convert_units],\n)",
@@ -22651,6 +22707,21 @@
               "title": "Resources",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
               "code": "return {\n  content: [\n    {\n      type: \"resource\",\n      resource: {\n        uri: \"file:///tmp/report.md\", // Label for Claude to reference, not a path the SDK reads\n        mimeType: \"text/markdown\",\n        text: \"# Report\\n...\" // The actual content, inline\n      }\n    }\n  ]\n};",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Return structured data",
+          "paragraphs": [
+            "看到这里，就把\"Return structured data\"当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Return structured data",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "return {\n  content: [\n    {\n      type: \"image\",\n      data: chartPngBuffer.toString(\"base64\"),\n      mimeType: \"image/png\"\n    }\n  ],\n  structuredContent: {\n    series: \"temperature_2m\",\n    unit: \"fahrenheit\",\n    points: [62.1, 63.4, 65.0, 64.2]\n  }\n};",
               "kind": "code"
             }
           ]
@@ -24124,10 +24195,16 @@
           ],
           "steps": [
             {
-              "title": "原页关键片段：Using Skills with the SDK",
+              "title": "原页关键片段：Using Skills with the SDK 1",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\n\nasync def main():\n    options = ClaudeAgentOptions(\n        cwd=\"/path/to/project\",  # Project with .claude/skills/\n        setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n        allowed_tools=[\"Skill\", \"Read\", \"Write\", \"Bash\"],  # Enable Skill tool\n    )\n\n    async for message in query(\n        prompt=\"Help me process this PDF document\", options=options\n    ):\n        print(message)\n\n\nasyncio.run(main())",
+              "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\n\nasync def main():\n    options = ClaudeAgentOptions(\n        cwd=\"/path/to/project\",  # Project with .claude/skills/\n        setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n        skills=\"all\",  # Enable every discovered Skill\n        allowed_tools=[\"Read\", \"Write\", \"Bash\"],\n    )\n\n    async for message in query(\n        prompt=\"Help me process this PDF document\", options=options\n    ):\n        print(message)\n\n\nasyncio.run(main())",
               "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Using Skills with the SDK 2",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "options = ClaudeAgentOptions(skills=[\"pdf\", \"docx\"])",
+              "kind": "code"
             },
             {
               "title": "原页关键片段：Creating Skills",
@@ -24138,31 +24215,31 @@
             {
               "title": "原页关键片段：Tool Restrictions",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "options = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    allowed_tools=[\"Skill\", \"Read\", \"Grep\", \"Glob\"],\n)\n\nasync for message in query(prompt=\"Analyze the codebase structure\", options=options):\n    print(message)",
+              "code": "options = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    skills=\"all\",\n    allowed_tools=[\"Read\", \"Grep\", \"Glob\"],\n)\n\nasync for message in query(prompt=\"Analyze the codebase structure\", options=options):\n    print(message)",
               "kind": "code"
             },
             {
               "title": "原页关键片段：Discovering Available Skills",
               "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "options = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    allowed_tools=[\"Skill\"],\n)\n\nasync for message in query(prompt=\"What Skills are available?\", options=options):\n    print(message)",
+              "code": "options = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    skills=\"all\",\n)\n\nasync for message in query(prompt=\"What Skills are available?\", options=options):\n    print(message)",
               "kind": "code"
             },
             {
               "title": "原页关键片段：Testing Skills",
               "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "options = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    allowed_tools=[\"Skill\", \"Read\", \"Bash\"],\n)\n\nasync for message in query(prompt=\"Extract text from invoice.pdf\", options=options):\n    print(message)",
+              "code": "options = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    skills=\"all\",\n    allowed_tools=[\"Read\", \"Bash\"],\n)\n\nasync for message in query(prompt=\"Extract text from invoice.pdf\", options=options):\n    print(message)",
               "kind": "code"
             },
             {
               "title": "原页关键片段：Skills Not Found 1",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "# Skills not loaded: setting_sources excludes user and project\noptions = ClaudeAgentOptions(setting_sources=[], allowed_tools=[\"Skill\"])\n\n# Skills loaded: user and project sources included\noptions = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],\n    allowed_tools=[\"Skill\"],\n)",
+              "code": "# Skills not loaded: setting_sources excludes user and project\noptions = ClaudeAgentOptions(setting_sources=[], skills=\"all\")\n\n# Skills loaded: user and project sources included\noptions = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],\n    skills=\"all\",\n)",
               "kind": "code"
             },
             {
               "title": "原页关键片段：Skills Not Found 2",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "# Ensure your cwd points to the directory containing .claude/skills/\noptions = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",  # Must contain .claude/skills/\n    setting_sources=[\"user\", \"project\"],  # Loads skills from these sources\n    allowed_tools=[\"Skill\"],\n)",
+              "code": "# Ensure your cwd points to the directory containing .claude/skills/\noptions = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",  # Must contain .claude/skills/\n    setting_sources=[\"user\", \"project\"],  # Loads skills from these sources\n    skills=\"all\",\n)",
               "kind": "command"
             },
             {
@@ -24201,10 +24278,16 @@
           ],
           "steps": [
             {
-              "title": "Using Skills with the SDK",
+              "title": "Using Skills with the SDK 1",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\n\nasync def main():\n    options = ClaudeAgentOptions(\n        cwd=\"/path/to/project\",  # Project with .claude/skills/\n        setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n        allowed_tools=[\"Skill\", \"Read\", \"Write\", \"Bash\"],  # Enable Skill tool\n    )\n\n    async for message in query(\n        prompt=\"Help me process this PDF document\", options=options\n    ):\n        print(message)\n\n\nasyncio.run(main())",
+              "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\n\nasync def main():\n    options = ClaudeAgentOptions(\n        cwd=\"/path/to/project\",  # Project with .claude/skills/\n        setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n        skills=\"all\",  # Enable every discovered Skill\n        allowed_tools=[\"Read\", \"Write\", \"Bash\"],\n    )\n\n    async for message in query(\n        prompt=\"Help me process this PDF document\", options=options\n    ):\n        print(message)\n\n\nasyncio.run(main())",
               "kind": "command"
+            },
+            {
+              "title": "Using Skills with the SDK 2",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "options = ClaudeAgentOptions(skills=[\"pdf\", \"docx\"])",
+              "kind": "code"
             }
           ]
         },
@@ -24240,7 +24323,7 @@
             {
               "title": "Tool Restrictions",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "options = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    allowed_tools=[\"Skill\", \"Read\", \"Grep\", \"Glob\"],\n)\n\nasync for message in query(prompt=\"Analyze the codebase structure\", options=options):\n    print(message)",
+              "code": "options = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    skills=\"all\",\n    allowed_tools=[\"Read\", \"Grep\", \"Glob\"],\n)\n\nasync for message in query(prompt=\"Analyze the codebase structure\", options=options):\n    print(message)",
               "kind": "code"
             }
           ]
@@ -24255,7 +24338,7 @@
             {
               "title": "Discovering Available Skills",
               "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "options = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    allowed_tools=[\"Skill\"],\n)\n\nasync for message in query(prompt=\"What Skills are available?\", options=options):\n    print(message)",
+              "code": "options = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    skills=\"all\",\n)\n\nasync for message in query(prompt=\"What Skills are available?\", options=options):\n    print(message)",
               "kind": "code"
             }
           ]
@@ -24270,7 +24353,7 @@
             {
               "title": "Testing Skills",
               "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "options = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    allowed_tools=[\"Skill\", \"Read\", \"Bash\"],\n)\n\nasync for message in query(prompt=\"Extract text from invoice.pdf\", options=options):\n    print(message)",
+              "code": "options = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",\n    setting_sources=[\"user\", \"project\"],  # Load Skills from filesystem\n    skills=\"all\",\n    allowed_tools=[\"Read\", \"Bash\"],\n)\n\nasync for message in query(prompt=\"Extract text from invoice.pdf\", options=options):\n    print(message)",
               "kind": "code"
             }
           ]
@@ -24291,13 +24374,13 @@
             {
               "title": "Skills Not Found 1",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "# Skills not loaded: setting_sources excludes user and project\noptions = ClaudeAgentOptions(setting_sources=[], allowed_tools=[\"Skill\"])\n\n# Skills loaded: user and project sources included\noptions = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],\n    allowed_tools=[\"Skill\"],\n)",
+              "code": "# Skills not loaded: setting_sources excludes user and project\noptions = ClaudeAgentOptions(setting_sources=[], skills=\"all\")\n\n# Skills loaded: user and project sources included\noptions = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],\n    skills=\"all\",\n)",
               "kind": "code"
             },
             {
               "title": "Skills Not Found 2",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "# Ensure your cwd points to the directory containing .claude/skills/\noptions = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",  # Must contain .claude/skills/\n    setting_sources=[\"user\", \"project\"],  # Loads skills from these sources\n    allowed_tools=[\"Skill\"],\n)",
+              "code": "# Ensure your cwd points to the directory containing .claude/skills/\noptions = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",  # Must contain .claude/skills/\n    setting_sources=[\"user\", \"project\"],  # Loads skills from these sources\n    skills=\"all\",\n)",
               "kind": "command"
             },
             {
@@ -24312,7 +24395,7 @@
           "title": "Skill Not Being Used",
           "paragraphs": [
             "这里不是让你背\"Skill Not Being Used\"这个词，而是让你看它真干活时怎么使。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
           ]
         },
         {
@@ -26982,19 +27065,19 @@
       }
     },
     "agent-sdk/typescript-v2-preview": {
-      "sourceLabel": "TypeScript SDK V2 interface (preview)",
+      "sourceLabel": "TypeScript SDK V2 session API (deprecated)",
       "sections": [
         {
           "title": "简要总结",
           "paragraphs": [
-            "这页主要讲 TypeScript V2 (preview)：Preview of the simplified V2 TypeScript Agent SDK, with session-based send/stream patterns for multi-turn conversations.",
+            "这页主要讲 TypeScript V2 (deprecated)：Reference for the deprecated V2 TypeScript Agent SDK session API, with session-based send/stream patterns for multi-turn conversations.",
             "你可以把它当成\"SDK references\"这块里专门管这一摊事的说明书。"
           ]
         },
         {
           "title": "农民伯伯版解释",
           "paragraphs": [
-            "你可以把\"TypeScript V2 (preview)\"理解成 SDK references 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "你可以把\"TypeScript V2 (deprecated)\"理解成 SDK references 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Installation、Quick start、One-shot prompt、Basic session 这些环节往下讲。",
             "翻成人话，大概就是：Multi-turn conversation"
           ]
@@ -27250,14 +27333,8 @@
         {
           "title": "Feature availability",
           "paragraphs": [
-            "看到这里，就把\"Feature availability\"当成一件真要上手的活来看。",
+            "别把这段只当成标题看，它其实是在给\"Feature availability\"划边界。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Feedback",
-          "paragraphs": [
-            "这一块主要是在说\"Feedback\"真到手上该怎么用，哪里最容易踩坑。"
           ]
         },
         {
@@ -27270,7 +27347,7 @@
       "illustration": {
         "title": "一眼看懂这一页",
         "lines": [
-          "TypeScript V2 (preview)",
+          "TypeScript V2 (deprecated)",
           "   |",
           "   v",
           "这是 SDK references 里的一摊要紧活",
