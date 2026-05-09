@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-08T05:12:14.499Z",
+  "generatedAt": "2026-05-09T05:30:05.938Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -593,6 +593,14 @@
         {
           "title": "What's new",
           "path": "/docs/en/whats-new"
+        },
+        {
+          "title": "Week 19 · May 4–8",
+          "path": "/docs/en/whats-new/2026-w19"
+        },
+        {
+          "title": "Week 18 · Apr 27 – May 1",
+          "path": "/docs/en/whats-new/2026-w18"
         },
         {
           "title": "Week 17 · Apr 20–24",
@@ -1259,6 +1267,8 @@
         "Documentation Index"
       ],
       "toc": [
+        "2.1.137",
+        "2.1.136",
         "2.1.133",
         "2.1.132",
         "2.1.131",
@@ -1276,9 +1286,7 @@
         "2.1.114",
         "2.1.113",
         "2.1.112",
-        "2.1.111",
-        "2.1.110",
-        "2.1.109"
+        "2.1.111"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
@@ -1286,6 +1294,59 @@
         "Use this file to discover all available pages before exploring further.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "[VSCode] Fixed extension failing to activate on Windows",
+        "Added CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL to re-enable the session quality survey for enterprises capturing responses through OpenTelemetry",
+        "Added settings.autoMode.hard_deny for auto mode classifier rules that block unconditionally regardless of user intent or allow exceptions",
+        "Fixed MCP servers configured in .mcp.json, plugins, and claude.ai connectors silently disappearing after /clear in the VS Code extension, JetBrains plugin, and Agent SDK",
+        "Fixed a rare login loop where a concurrent credential write could overwrite a freshly-rotated OAuth token and force re-login",
+        "Fixed MCP OAuth refresh tokens being lost when multiple servers refresh concurrently — users with several remote MCP servers should no longer need daily re-authentication",
+        "Fixed an API error (400) when extended thinking emitted a redacted thinking block after a tool call",
+        "Fixed --resume / --continue not finding sessions when the project path contains underscores",
+        "Fixed plan mode not blocking file writes when a matching Edit(...) allow rule exists",
+        "WSL2: image paste from Windows clipboard now works via a PowerShell fallback when xclip/wl-paste cannot read image data",
+        "Fixed plugin Stop/UserPromptSubmit hooks failing when cache cleanup deletes a version still in use by a running session",
+        "Improved visual consistency across slash command dialogs: standardized footer hints, dialog spacing, and arrow-key styling, and the dialog frame now appears immediately during loading instead of popping in after",
+        "Fixed colors appearing at wrong positions in bash command output and markdown code blocks",
+        "Fixed ReasonML diffs rendering corrupted “undefined” text artifacts at word-diff boundaries",
+        "Fixed worktree exit dialog warning about uncommitted files in the wrong directory after worktree removal",
+        "Fixed @ file picker not matching files created mid-session in small non-git directories",
+        "Fixed @-mention file picker not finding files in directories with more than 100 entries",
+        "Fixed failed tool calls not being click-to-expand in fullscreen mode when their output was truncated",
+        "Fixed Backspace and Ctrl+Backspace getting swapped after using Ctrl+G to open an external editor on terminals with persistent extended-key modes",
+        "Fixed /usage weekly reset showing time of day instead of the calendar date",
+        "Fixed welcome banner ellipsis causing column overflow on CJK terminals",
+        "Fixed /insights crash when session history contains tool calls with malformed input fields",
+        "Fixed a renderer crash when a tool’s collapsibility classification changes mid-session",
+        "Fixed a skills entry in plugin.json hiding the plugin’s default skills/ directory, and listing a file path now shows an error instead of failing silently",
+        "Fixed IDE shell-integration lock files not respecting CLAUDE_CONFIG_DIR",
+        "Fixed trailing whitespace in copied terminal output during streaming",
+        "Fixed plugin uninstall and enable/disable not matching slugs case-insensitively",
+        "Fixed tool error truncation marker showing a negative count for surrogate-pair strings",
+        "Fixed env vars from CLAUDE_ENV_FILE SessionStart hooks going stale after /resume or /clear",
+        "Fixed /branch saving a multi-line session title when given a pasted multi-line name",
+        "Fixed a stray leading space on the second line of wrapped text at the column boundary",
+        "Fixed Esc not dismissing dialogs in /install-github-app, /desktop, /resume, and /web-setup",
+        "Fixed /doctor MCP schema errors not naming the missing field or showing the source file path",
+        "Fixed Bash permission prompts showing an internal parser diagnostic instead of a user-readable explanation",
+        "Fixed plugin slash commands with spaces (e.g. /myplugin review) not resolving to their namespaced form",
+        "Fixed AskUserQuestion discarding multi-select answers when supplied as an array",
+        "Fixed /clear <name> not labeling the cleared session for /resume",
+        "Fixed CronList output missing qualifiers and the scheduled prompt",
+        "Fixed “Jump to bottom” overlay leaving color artifacts on CJK characters in fullscreen mode",
+        "Fixed wide markdown tables leaving a stale bordered render in terminal scrollback while streaming",
+        "Fixed pasted text being silently dropped when a long prompt with a pasted-text placeholder was auto-truncated",
+        "Fixed /release-notes getting stuck on an old version after a failed changelog refresh",
+        "Fixed /mcp server list not scrolling when there are more servers than fit in the terminal",
+        "Fixed mid-input slash command autocomplete not working after an initial slash command",
+        "Fixed scrolling to bottom re-engaging auto-follow with autoScrollEnabled: false",
+        "Fixed prompt suggestions being auto-submitted by Enter on an empty input instead of requiring Tab or arrow to accept",
+        "Fixed keyboard shortcut hints not reflecting rebound keys from keybindings.json",
+        "Fixed /settings language change being reverted on Escape after confirming",
+        "Fixed /terminal-setup only appearing in autocomplete on exact name match instead of partial prefixes",
+        "Fixed “Chat about this” on an AskUserQuestion dialog erasing the question text",
+        "Fixed MCP tool results being invisible when the server returns content blocks",
+        "Improved error message when --worktree collides with an existing or stale worktree",
+        "Changed plugin marketplace removal key to d (matching delete elsewhere) instead of r which collided with retry",
         "Added worktree.baseRef setting (fresh | head) to choose whether --worktree, EnterWorktree, and agent-isolation worktrees branch from origin/<default> or local HEAD. Note: the default fresh changes EnterWorktree’s base back to origin/<default> (it has been local HEAD since 2.1.128) — set worktree.baseRef: \"head\" to keep unpushed commits in new worktrees",
         "Added sandbox.bwrapPath and sandbox.socatPath managed settings (Linux/WSL) to specify custom bubblewrap and socat binary locations",
         "Added parentSettingsBehavior admin-tier key ('first-wins' | 'merge') to let admins opt SDK managedSettings (parent tier) into the policy merge",
@@ -1407,60 +1468,7 @@
         "Windows: PowerShell 7 installed via the Microsoft Store, MSI without PATH, or .NET global tool is now detected",
         "Windows: when the PowerShell tool is enabled, Claude now treats PowerShell as the primary shell instead of defaulting to Bash",
         "Read tool: removed the per-file malware-assessment reminder that could cause spurious refusals and “this is not malware” commentary on legacy models",
-        "Security: Fixed allowManagedDomainsOnly / allowManagedReadPathsOnly being ignored when a higher-priority managed-settings source lacked a sandbox block",
-        "Fixed pasting an image larger than 2000px breaking the session — images are now downscaled on paste, and oversized images in history are automatically removed and the request retried",
-        "Fixed showing the login screen for “OAuth not allowed for organization” errors — now shows guidance to contact your admin",
-        "Fixed OAuth login failing with timeout on slow or proxied connections, in IPv6-only devcontainers, and when the browser callback can’t reach localhost",
-        "Fixed a rare race where a concurrent credential write could clear a valid OAuth refresh token",
-        "Fixed API retry countdown sticking at “0s” instead of counting down between attempts",
-        "Fixed “Stream idle timeout” error after waking Mac from sleep mid-request",
-        "Fixed background and remote sessions falsely aborting with “Stream idle timeout” during long model thinking pauses",
-        "Fixed a hang where the assistant could finish thinking but show no output after a run of empty turns",
-        "Fixed overly fast trackpad scrolling in Cursor and VS Code 1.92–1.104 integrated terminals",
-        "Fixed claude.ai MCP connectors being suppressed by manual servers stuck in needs-auth state",
-        "Fixed Japanese/Korean/Chinese text rendering as garbled characters on Windows in no-flicker mode",
-        "Fixed Ctrl+L clearing the prompt input — it now only forces a screen redraw, matching readline behavior",
-        "Fixed deferred tools (WebSearch, WebFetch, etc.) not being available to skills with context: fork and other subagents on their first turn",
-        "Fixed plan-mode tools being unavailable in interactive sessions launched with --channels",
-        "Fixed /plugin Uninstall reporting “Enabled” instead of “Uninstalled”",
-        "Bounded total size of file-modified reminders when a linter touches many files at once",
-        "Fixed /remote-control retries appearing stuck on “connecting…” — each retry now shows its result",
-        "Fixed Remote Control failure notification not showing the error reason for initial connection failures",
-        "Windows: clipboard writes no longer expose copied content in process command-line arguments visible to EDR/SIEM telemetry; also fixes >22KB selections not reaching the clipboard",
-        "PowerShell tool: bare -- (e.g. git diff -- file) is no longer mis-flagged as the --% stop-parsing token",
-        "Fixed Agent SDK hang when the model emits a malformed tool name in a parallel tool call batch",
-        "Fixed OAuth authentication failing with a 401 retry loop when CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1 is set",
-        "Added ANTHROPIC_BEDROCK_SERVICE_TIER environment variable to select a Bedrock service tier (default, flex, or priority), sent as the X-Amzn-Bedrock-Service-Tier header",
-        "Pasting a PR URL into the /resume search box now finds the session that created that PR (GitHub, GitHub Enterprise, GitLab, and Bitbucket)",
-        "/mcp now shows claude.ai connectors hidden by a manually-added server with the same URL, with a hint to remove the duplicate",
-        "Clarified the /mcp message shown when an MCP server is still unauthorized after the browser sign-in flow",
-        "OpenTelemetry: numeric attributes on api_request/api_error log events are now emitted as numbers, not strings",
-        "OpenTelemetry: added claude_code.at_mention log event for @-mention resolution",
-        "Fixed /branch producing forks that fail with “tool_use ids were found without tool_result blocks” when the source session contained entries from rewound timelines",
-        "Fixed /model not showing the Effort option for Bedrock application inference profile ARNs, and those ARNs not receiving output_config.effort",
-        "Fixed Vertex AI / Bedrock returning invalid_request_error: output_config: Extra inputs are not permitted on session-title generation and other structured-output queries",
-        "Fixed Vertex AI count_tokens endpoint returning 400 errors for users behind proxy gateways",
-        "Fixed spinnerTipsOverride.excludeDefault not suppressing the time-based spinner tips",
-        "Fixed ToolSearch missing MCP tools that connected after session start in nonblocking mode",
-        "Fixed !exit / !quit in bash mode terminating the CLI instead of running as a shell command",
-        "Fixed images sent to newer models being resized to 2576px per side instead of the correct 2000px maximum",
-        "Fixed remote control session idle status redrawing twice per second, which could flood tmux -CC control pipes and pause the terminal",
-        "Fixed assistant messages appearing blank in some sessions due to a stale view preference",
-        "Fixed a malformed hooks entry in settings.json no longer invalidating the entire file",
-        "Voice mode: keybindings bound to Caps Lock now show an error since terminals don’t deliver Caps Lock as a key event",
-        "Added alwaysLoad option to MCP server config — when true, all tools from that server skip tool-search deferral and are always available",
-        "Added claude plugin prune to remove orphaned auto-installed plugin dependencies; plugin uninstall --prune cascades",
-        "Added a type-to-filter search box to /skills so you can find a skill in long lists without scrolling",
-        "PostToolUse hooks can now replace tool output for all tools via hookSpecificOutput.updatedToolOutput (previously MCP-only)",
-        "Fullscreen mode: typing into the prompt no longer jumps scroll back to the bottom after you’ve scrolled up to read earlier output",
-        "Dialogs that overflow the terminal are now scrollable with arrow keys, PgUp/PgDn, home/end, and mouse wheel in both fullscreen and non-fullscreen modes",
-        "Clicking any line of a long URL that wraps across rows in fullscreen mode now opens the full URL",
-        "SDK and claude -p: CLAUDE_CODE_FORK_SUBAGENT=1 now works in non-interactive sessions",
-        "--dangerously-skip-permissions no longer prompts for writes to .claude/skills/, .claude/agents/, and .claude/commands/",
-        "/terminal-setup now enables iTerm2’s “Applications in terminal may access clipboard” setting so /copy works, including from tmux",
-        "MCP servers that hit a transient error during startup now auto-retry up to 3 times instead of staying disconnected",
-        "The terminal tab session title is now generated in your configured language setting",
-        "Claude.ai connectors with the same upstream URL are now deduplicated instead of appearing as duplicates"
+        "Security: Fixed allowManagedDomainsOnly / allowManagedReadPathsOnly being ignored when a higher-priority managed-settings source lacked a sandbox block"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1478,14 +1486,14 @@
             "Use this file to discover all available pages before exploring further.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Added worktree.baseRef setting (fresh | head) to choose whether --worktree, EnterWorktree, and agent-isolation worktrees branch from origin/<default> or local HEAD. Note: the default fresh changes EnterWorktree’s base back to origin/<default> (it has been local HEAD since 2.1.128) — set worktree.baseRef: \"head\" to keep unpushed commits in new worktrees",
-            "Added sandbox.bwrapPath and sandbox.socatPath managed settings (Linux/WSL) to specify custom bubblewrap and socat binary locations",
-            "Added parentSettingsBehavior admin-tier key ('first-wins' | 'merge') to let admins opt SDK managedSettings (parent tier) into the policy merge",
-            "Hooks now receive the active effort level via the effort.level JSON input field and the $CLAUDE_EFFORT environment variable, and Bash tool commands can read $CLAUDE_EFFORT",
-            "Improved focus mode behavior",
-            "Improved memory usage by releasing warm-spare background workers under memory pressure",
-            "Fixed parallel sessions all dead-ending at 401 after a refresh-token race wiped shared credentials",
-            "Fixed Edit/Write allow rules scoped to a drive root (C:\\) or POSIX / matching incorrectly and always prompting"
+            "[VSCode] Fixed extension failing to activate on Windows",
+            "Added CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL to re-enable the session quality survey for enterprises capturing responses through OpenTelemetry",
+            "Added settings.autoMode.hard_deny for auto mode classifier rules that block unconditionally regardless of user intent or allow exceptions",
+            "Fixed MCP servers configured in .mcp.json, plugins, and claude.ai connectors silently disappearing after /clear in the VS Code extension, JetBrains plugin, and Agent SDK",
+            "Fixed a rare login loop where a concurrent credential write could overwrite a freshly-rotated OAuth token and force re-login",
+            "Fixed MCP OAuth refresh tokens being lost when multiple servers refresh concurrently — users with several remote MCP servers should no longer need daily re-authentication",
+            "Fixed an API error (400) when extended thinking emitted a redacted thinking block after a tool call",
+            "Fixed --resume / --continue not finding sessions when the project path contains underscores"
           ],
           "codeBlocks": []
         }
@@ -8264,7 +8272,7 @@
         "No session resumption with in-process teammates: /resume and /rewind do not restore in-process teammates. After resuming a session, the lead may attempt to message teammates that no longer exist. If this happens, tell the lead to spawn new teammates.",
         "Task status can lag: teammates sometimes fail to mark tasks as completed, which blocks dependent tasks. If a task appears stuck, check whether the work is actually done and update the task status manually or tell the lead to nudge the teammate.",
         "Shutdown can be slow: teammates finish their current request or tool call before shutting down, which can take time.",
-        "One team per session: a lead can only manage one team at a time. Clean up the current team before starting a new one.",
+        "One team at a time: a lead can only manage one team. Clean up the current team before creating a new one.",
         "No nested teams: teammates cannot spawn their own teams or teammates. Only the lead can manage the team.",
         "Lead is fixed: the session that creates the team is the lead for its lifetime. You can’t promote a teammate to lead or transfer leadership.",
         "Permissions set at spawn: all teammates start with the lead’s permission mode. You can change individual teammate modes after spawning, but you can’t set per-teammate modes at spawn time.",
@@ -8750,6 +8758,7 @@
         "Need a specific integration? Find hundreds more MCP servers on GitHub, or build your own using the MCP SDK.",
         "MCP servers can be configured in three different ways depending on your needs:",
         "HTTP servers are the recommended option for connecting to remote MCP servers. This is the most widely supported transport for cloud-based services.",
+        "When configuring MCP servers via JSON in .mcp.json, ~/.claude.json, or claude mcp add-json, the type field accepts streamable-http as an alias for http. The MCP specification uses the name streamable-http for this transport, so configurations copied from server documentation work without modification.",
         "The SSE (Server-Sent Events) transport is deprecated. Use HTTP servers instead, where available.",
         "Stdio servers run as local processes on your machine. They’re ideal for tools that need direct system access or custom scripts.",
         "Important: Option ordering",
@@ -8858,8 +8867,7 @@
         "Use claude mcp get <name> to verify that OAuth credentials are configured for a server",
         "Point Claude Code at a specific OAuth authorization server metadata URL to bypass the default discovery chain. Set authServerMetadataUrl when the MCP server’s standard endpoints error, or when you want to route discovery through an internal proxy. By default, Claude Code first checks RFC 9728 Protected Resource Metadata at /.well-known/oauth-protected-resource, then falls back to RFC 8414 authorization server metadata at /.well-known/oauth-authorization-server.",
         "Set authServerMetadataUrl in the oauth object of your server’s config in .mcp.json:",
-        "The URL must use https://. authServerMetadataUrl requires Claude Code v2.1.64 or later. The metadata URL’s scopes_supported overrides the scopes the upstream server advertises.",
-        "Set oauth.scopes to pin the scopes Claude Code requests during the authorization flow. This is the supported way to restrict an MCP server to a security-team-approved subset when the upstream authorization server advertises more scopes than you want to grant. The value is a single space-separated string, matching the scope parameter format in RFC 6749 §3.3."
+        "The URL must use https://. authServerMetadataUrl requires Claude Code v2.1.64 or later. The metadata URL’s scopes_supported overrides the scopes the upstream server advertises."
       ],
       "codeBlocks": [
         "# Basic syntax\nclaude mcp add --transport http <name> <url>\n\n# Real example: Connect to Notion\nclaude mcp add --transport http notion https://mcp.notion.com/mcp\n\n# Example with Bearer token\nclaude mcp add --transport http secure-api https://api.example.com/mcp \\\n  --header \"Authorization: Bearer your-token\"",
@@ -8956,7 +8964,8 @@
         {
           "title": "​Option 1: Add a remote HTTP server",
           "paragraphs": [
-            "HTTP servers are the recommended option for connecting to remote MCP servers. This is the most widely supported transport for cloud-based services."
+            "HTTP servers are the recommended option for connecting to remote MCP servers. This is the most widely supported transport for cloud-based services.",
+            "When configuring MCP servers via JSON in .mcp.json, ~/.claude.json, or claude mcp add-json, the type field accepts streamable-http as an alias for http. The MCP specification uses the name streamable-http for this transport, so configurations copied from server documentation work without modification."
           ],
           "codeBlocks": [
             "# Basic syntax\nclaude mcp add --transport http <name> <url>\n\n# Real example: Connect to Notion\nclaude mcp add --transport http notion https://mcp.notion.com/mcp\n\n# Example with Bearer token\nclaude mcp add --transport http secure-api https://api.example.com/mcp \\\n  --header \"Authorization: Bearer your-token\""
@@ -13981,9 +13990,9 @@
         "​Not logged in",
         "​Invalid API key",
         "​This organization has been disabled",
+        "​Routines are disabled by your organization’s policy",
         "​OAuth token revoked or expired",
-        "​OAuth scope requirement",
-        "​Network and connection errors"
+        "​OAuth scope requirement"
       ],
       "toc": [
         "Find your error",
@@ -14002,10 +14011,10 @@
         "Not logged in",
         "Invalid API key",
         "This organization has been disabled",
+        "Routines are disabled by your organization’s policy",
         "OAuth token revoked or expired",
         "OAuth scope requirement",
-        "Network and connection errors",
-        "Unable to connect to API"
+        "Network and connection errors"
       ],
       "paragraphs": [
         "Find your error",
@@ -14024,6 +14033,7 @@
         "Not logged in",
         "Invalid API key",
         "This organization has been disabled",
+        "Routines are disabled by your organization’s policy",
         "OAuth token revoked or expired",
         "OAuth scope requirement",
         "Network and connection errors",
@@ -14115,6 +14125,10 @@
         "Unset ANTHROPIC_API_KEY in the current shell and remove it from your shell profile, then relaunch claude",
         "Run /status afterward to confirm the active credential is your subscription",
         "If no environment variable is set and the error persists, the disabled organization is the one tied to your /login. Contact support or sign in with a different account.",
+        "Your Team or Enterprise admin has turned off routines at the organization level. The error appears when you try to create or run a routine, including from /schedule and the Routines UI on claude.ai/code.",
+        "This is a server-side setting, so it cannot be overridden from local settings, environment variables, or CLI flags.",
+        "Ask your admin to enable the Routines toggle at claude.ai/admin-settings/claude-code",
+        "For one-off scheduled work that does not require organization-level routines, see scheduled tasks",
         "Your saved login is no longer valid. A revoked token means you signed out everywhere or an admin removed access; an expired token means the automatic refresh failed mid-session.",
         "Run /login to sign in again",
         "If the error returns within the same session after re-authenticating, run /logout first to fully clear the stored token, then /login",
@@ -14182,12 +14196,7 @@
         "For Vertex AI deployments, see Vertex AI troubleshooting.",
         "Your active subscription plan does not include the model you selected.",
         "Run /model and select a model your plan includes",
-        "If you upgraded your plan recently and still see this, run /logout then /login. The stored token reflects your plan at the time you signed in, so upgrading on the web does not take effect in an existing session until you re-authenticate.",
-        "See claude.com/pricing for which models each plan includes",
-        "Your Claude Code version is older than the minimum for Opus 4.7. The CLI sent a thinking configuration the model no longer accepts.",
-        "Run claude update to upgrade to v2.1.111 or later, then restart Claude Code",
-        "If you cannot upgrade, run /model and select Opus 4.6 or Sonnet instead",
-        "If you hit this in the Agent SDK, see SDK troubleshooting"
+        "If you upgraded your plan recently and still see this, run /logout then /login. The stored token reflects your plan at the time you signed in, so upgrading on the web does not take effect in an existing session until you re-authenticate."
       ],
       "codeBlocks": [
         "API Error: 500 {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"Internal server error\"}} · check status.claude.com",
@@ -14201,6 +14210,7 @@
         "Not logged in · Please run /login",
         "Invalid API key · Fix external API key",
         "Your ANTHROPIC_API_KEY belongs to a disabled organization · Unset the environment variable to use your other credentials\nAPI Error: 400 ... This organization has been disabled.",
+        "Routines are disabled by your organization's policy.",
         "OAuth token revoked · Please run /login\nOAuth token has expired · Please run /login\nAPI Error: 401 ... authentication_error",
         "OAuth token does not meet scope requirement: user:profile",
         "Unable to connect to API. Check your internet connection\nUnable to connect to API (ECONNREFUSED)\nUnable to connect to API (ECONNRESET)\nUnable to connect to API (ETIMEDOUT)\nfetch failed\nRequest timed out. Check your internet connection and proxy settings",
@@ -14442,6 +14452,19 @@
           ]
         },
         {
+          "title": "​Routines are disabled by your organization’s policy",
+          "paragraphs": [
+            "Your Team or Enterprise admin has turned off routines at the organization level. The error appears when you try to create or run a routine, including from /schedule and the Routines UI on claude.ai/code.",
+            "This is a server-side setting, so it cannot be overridden from local settings, environment variables, or CLI flags.",
+            "What to do:",
+            "Ask your admin to enable the Routines toggle at claude.ai/admin-settings/claude-code",
+            "For one-off scheduled work that does not require organization-level routines, see scheduled tasks"
+          ],
+          "codeBlocks": [
+            "Routines are disabled by your organization's policy."
+          ]
+        },
+        {
           "title": "​OAuth token revoked or expired",
           "paragraphs": [
             "Your saved login is no longer valid. A revoked token means you signed out everywhere or an admin removed access; an expired token means the automatic refresh failed mid-session.",
@@ -14610,20 +14633,6 @@
           ],
           "codeBlocks": [
             "API Error: 400 ... Extra inputs are not permitted ... context_management\nAPI Error: 400 ... Extra inputs are not permitted ... tools.0.custom.input_examples\nAPI Error: 400 ... Unexpected value(s) for the `anthropic-beta` header"
-          ]
-        },
-        {
-          "title": "​There’s an issue with the selected model",
-          "paragraphs": [
-            "The configured model name was not recognized or your account lacks access to it.",
-            "What to do:",
-            "Run /model to pick from models available to your account",
-            "Use an alias such as sonnet or opus instead of a full versioned ID. Aliases track the latest release so they do not go stale. See Model configuration.",
-            "If the wrong model keeps coming back, a stale ID is set somewhere. Check in priority order: the --model flag, the ANTHROPIC_MODEL environment variable, then the model field in .claude/settings.local.json, your project’s .claude/settings.json, and ~/.claude/settings.json. Remove the stale value and Claude Code falls back to your account default.",
-            "For Vertex AI deployments, see Vertex AI troubleshooting."
-          ],
-          "codeBlocks": [
-            "There's an issue with the selected model (claude-...). It may not exist or you may not have access to it. Run /model to select a different one."
           ]
         }
       ]
@@ -14973,6 +14982,7 @@
         "You can also install Claude Code as a global npm package. The package requires Node.js 18 or later.",
         "The npm package installs the same native binary as the standalone installer. npm pulls the binary in through a per-platform optional dependency such as @anthropic-ai/claude-code-darwin-arm64, and a postinstall step links it into place. The installed claude binary does not itself invoke Node.",
         "Supported npm install platforms are darwin-arm64, darwin-x64, linux-x64, linux-arm64, linux-x64-musl, linux-arm64-musl, win32-x64, and win32-arm64. Your package manager must allow optional dependencies. See troubleshooting if the binary is missing after install.",
+        "To upgrade an npm installation, run npm install -g @anthropic-ai/claude-code@latest. Avoid npm update -g, which respects the semver range from the original install and may not move you to the newest release.",
         "Do NOT use sudo npm install -g as this can lead to permission issues and security risks. If you encounter permission errors, see troubleshooting permission errors.",
         "Each release publishes a manifest.json containing SHA256 checksums for every platform binary. The manifest is signed with an Anthropic GPG key, so verifying the signature on the manifest transitively verifies every binary it lists.",
         "Steps 1-3 require a POSIX shell with gpg and curl. On Windows, run them in Git Bash or WSL. Step 4 includes a PowerShell option.",
@@ -15282,6 +15292,7 @@
             "You can also install Claude Code as a global npm package. The package requires Node.js 18 or later.",
             "The npm package installs the same native binary as the standalone installer. npm pulls the binary in through a per-platform optional dependency such as @anthropic-ai/claude-code-darwin-arm64, and a postinstall step links it into place. The installed claude binary does not itself invoke Node.",
             "Supported npm install platforms are darwin-arm64, darwin-x64, linux-x64, linux-arm64, linux-x64-musl, linux-arm64-musl, win32-x64, and win32-arm64. Your package manager must allow optional dependencies. See troubleshooting if the binary is missing after install.",
+            "To upgrade an npm installation, run npm install -g @anthropic-ai/claude-code@latest. Avoid npm update -g, which respects the semver range from the original install and may not move you to the newest release.",
             "Do NOT use sudo npm install -g as this can lead to permission issues and security risks. If you encounter permission errors, see troubleshooting permission errors."
           ],
           "codeBlocks": [
@@ -15731,12 +15742,12 @@
         "Open the admin console",
         "In Claude.ai, navigate to Admin Settings > Claude Code > Managed settings.",
         "Define your settings",
-        "Add your configuration as JSON. All settings available in settings.json are supported, including hooks, environment variables, and managed-only settings like allowManagedPermissionRulesOnly.",
+        "Add your configuration as JSON. All settings available in settings.json are supported except those restricted to OS-level policy delivery; see Current limitations for that short list. This includes hooks, environment variables, and managed-only settings like allowManagedPermissionRulesOnly.",
         "This example enforces a permission deny list, prevents users from bypassing permissions, and restricts permission rules to those defined in managed settings:",
         "Hooks use the same format as in settings.json.",
         "This example runs an audit script after every file edit across the organization:",
         "To configure the auto mode classifier so it knows which repos, buckets, and domains your organization trusts:",
-        "Because hooks execute shell commands, users see a security approval dialog before they’re applied. See Configure auto mode for how the autoMode entries affect what the classifier blocks and important warnings about the allow and soft_deny fields.",
+        "Because hooks execute shell commands, users see a security approval dialog before they’re applied. See Configure auto mode for how the autoMode entries affect what the classifier blocks and important warnings about the environment, allow, soft_deny, and hard_deny fields.",
         "Save and deploy",
         "Save your changes. Claude Code clients receive the updated settings on their next startup or hourly polling cycle.",
         "To confirm that settings are being applied, ask a user to restart Claude Code. If the configuration includes settings that trigger the security approval dialog, the user sees a prompt describing the managed settings on startup. You can also verify that managed permission rules are active by having a user run /permissions to view their effective permission rules.",
@@ -15747,6 +15758,7 @@
         "Server-managed settings have the following limitations:",
         "Settings apply uniformly to all users in the organization. Per-group configurations are not yet supported.",
         "MCP server configurations cannot be distributed through server-managed settings.",
+        "Settings restricted to OS-level policy sources, such as policyHelper and wslInheritsWindowsSettings, are not honored. Deploy them through MDM or a system managed-settings.json file instead.",
         "Server-managed settings and endpoint-managed settings both occupy the highest tier in the Claude Code settings hierarchy. No other settings level can override them, including command line arguments.",
         "Within the managed tier, the first source that delivers a non-empty configuration wins. Server-managed settings are checked first, then endpoint-managed settings. Sources do not merge: if server-managed settings deliver any keys at all, endpoint-managed settings are ignored entirely. If server-managed settings deliver nothing, endpoint-managed settings apply.",
         "If you clear your server-managed configuration in the admin console with the intent of falling back to an endpoint-managed plist or registry policy, be aware that cached settings persist on client machines until the next successful fetch. Run /status to see which managed source is active.",
@@ -15847,12 +15859,12 @@
             "Open the admin console",
             "In Claude.ai, navigate to Admin Settings > Claude Code > Managed settings.",
             "Define your settings",
-            "Add your configuration as JSON. All settings available in settings.json are supported, including hooks, environment variables, and managed-only settings like allowManagedPermissionRulesOnly.",
+            "Add your configuration as JSON. All settings available in settings.json are supported except those restricted to OS-level policy delivery; see Current limitations for that short list. This includes hooks, environment variables, and managed-only settings like allowManagedPermissionRulesOnly.",
             "This example enforces a permission deny list, prevents users from bypassing permissions, and restricts permission rules to those defined in managed settings:",
             "Hooks use the same format as in settings.json.",
             "This example runs an audit script after every file edit across the organization:",
             "To configure the auto mode classifier so it knows which repos, buckets, and domains your organization trusts:",
-            "Because hooks execute shell commands, users see a security approval dialog before they’re applied. See Configure auto mode for how the autoMode entries affect what the classifier blocks and important warnings about the allow and soft_deny fields.",
+            "Because hooks execute shell commands, users see a security approval dialog before they’re applied. See Configure auto mode for how the autoMode entries affect what the classifier blocks and important warnings about the environment, allow, soft_deny, and hard_deny fields.",
             "Save and deploy",
             "Save your changes. Claude Code clients receive the updated settings on their next startup or hourly polling cycle."
           ],
@@ -15890,7 +15902,8 @@
           "paragraphs": [
             "Server-managed settings have the following limitations:",
             "Settings apply uniformly to all users in the organization. Per-group configurations are not yet supported.",
-            "MCP server configurations cannot be distributed through server-managed settings."
+            "MCP server configurations cannot be distributed through server-managed settings.",
+            "Settings restricted to OS-level policy sources, such as policyHelper and wslInheritsWindowsSettings, are not honored. Deploy them through MDM or a system managed-settings.json file instead."
           ],
           "codeBlocks": []
         },
@@ -16036,7 +16049,7 @@
         "The classifier reads the same CLAUDE.md content Claude itself loads, so an instruction like “never force push” in your project’s CLAUDE.md steers both Claude and the classifier at the same time. Start there for project conventions and behavioral rules.",
         "For rules that apply across projects, such as trusted infrastructure or organization-wide deny rules, use the autoMode settings block. The classifier reads autoMode from the following scopes:",
         "The classifier does not read autoMode from shared project settings in .claude/settings.json, so a checked-in repo cannot inject its own allow rules.",
-        "Entries from each scope are combined. A developer can extend environment, allow, and soft_deny with personal entries but cannot remove entries that managed settings provide. Because allow rules act as exceptions to block rules inside the classifier, a developer-added allow entry can override an organization soft_deny entry: the combination is additive, not a hard policy boundary.",
+        "Entries from each scope are combined. A developer can extend environment, allow, soft_deny, and hard_deny with personal entries but cannot remove entries that managed settings provide. Because allow rules act as exceptions to soft block rules inside the classifier, a developer-added allow entry can override an organization soft_deny entry: the combination is additive, not a hard policy boundary.",
         "The classifier is a second gate that runs after the permissions system. For actions that must never run regardless of user intent or classifier configuration, use permissions.deny in managed settings, which blocks the action before the classifier is consulted and cannot be overridden.",
         "For most organizations, autoMode.environment is the only field you need to set. It tells the classifier which repos, buckets, and domains are trusted: the classifier uses it to decide what “external” means, so any destination not listed is a potential exfiltration target.",
         "The default environment list trusts the working repo and its configured remotes. To add your own entries alongside that default, include the literal string \"$defaults\" in the array. The default entries are spliced in at that position, so your custom entries can go before or after them.",
@@ -16050,19 +16063,20 @@
         "A useful starting template: fill in the bracketed fields and remove any lines that don’t apply.",
         "The more specific context you give, the better the classifier can distinguish routine internal operations from exfiltration attempts.",
         "You don’t need to fill everything in at once. A reasonable rollout: start with the defaults and add your source control org and key internal services, which resolves the most common false positives like pushing to your own repos. Add trusted domains and cloud buckets next. Fill the rest as blocks come up.",
-        "Two additional fields let you replace the classifier’s built-in rule lists: autoMode.soft_deny controls what gets blocked, and autoMode.allow controls which exceptions apply. Each is an array of prose descriptions, read as natural-language rules. There is no autoMode.deny field; to hard-block an action regardless of intent, use permissions.deny, which runs before the classifier.",
-        "Inside the classifier, precedence works in three tiers:",
-        "soft_deny rules block first",
-        "allow rules then override matching blocks as exceptions",
-        "Explicit user intent overrides both: if the user’s message directly and specifically describes the exact action Claude is about to take, the classifier allows it even when a soft_deny rule matches",
+        "Three additional fields let you replace the classifier’s built-in rule lists: autoMode.hard_deny for unconditional security boundaries, autoMode.soft_deny for destructive actions that user intent can clear, and autoMode.allow for exceptions. Each is an array of prose descriptions, read as natural-language rules. For tool-pattern-based hard blocks that run before the classifier, use permissions.deny.",
+        "Inside the classifier, precedence works in four tiers:",
+        "hard_deny rules block unconditionally. User intent and allow exceptions do not apply.",
+        "soft_deny rules block next. User intent and allow exceptions can override these.",
+        "allow rules then override matching soft_deny rules as exceptions.",
+        "Explicit user intent overrides the remaining soft blocks: if the user’s message directly and specifically describes the exact action Claude is about to take, the classifier allows it even when a soft_deny rule matches.",
         "General requests don’t count as explicit intent. Asking Claude to “clean up the repo” does not authorize force-pushing, but asking Claude to “force-push this branch” does.",
-        "To loosen, add to allow when the classifier repeatedly flags a routine pattern the default exceptions don’t cover. To tighten, add to soft_deny for risks specific to your environment that the defaults miss. To keep the built-in rules while adding your own, include the literal string \"$defaults\" in the array. The default rules are spliced in at that position, so your custom rules can go before or after them, and you continue to inherit updates as the built-in list changes across releases.",
-        "Setting any of environment, allow, or soft_deny without \"$defaults\" replaces the entire default list for that section. If you set soft_deny with a single entry and omit \"$defaults\", every built-in block rule is discarded: force push, data exfiltration, curl | bash, production deploys, and all other default block rules become allowed. Only omit \"$defaults\" when you intend to take full ownership of the list. In that case, run claude auto-mode defaults to print the built-in rules, copy them into your settings file, then review each rule against your own pipeline and risk tolerance.",
-        "Each section is evaluated independently, so setting environment alone leaves the default allow and soft_deny lists intact.",
+        "To loosen, add to allow when the classifier repeatedly flags a routine pattern the default exceptions don’t cover. To tighten, add to soft_deny for destructive risks specific to your environment that the defaults miss, or to hard_deny for security boundaries that must never be crossed. To keep the built-in rules while adding your own, include the literal string \"$defaults\" in the array. The default rules are spliced in at that position, so your custom rules can go before or after them, and you continue to inherit updates as the built-in list changes across releases.",
+        "Setting any of environment, allow, soft_deny, or hard_deny without \"$defaults\" replaces the entire default list for that section. A soft_deny array without \"$defaults\" discards every built-in soft block rule, including force push, curl | bash, and production deploys. A hard_deny array without \"$defaults\" discards the built-in data exfiltration and safety-check bypass rules.",
+        "Each section is evaluated independently, so setting environment alone leaves the default allow, soft_deny, and hard_deny lists intact. Only omit \"$defaults\" when you intend to take full ownership of the list. To do that safely, run claude auto-mode defaults to print the built-in rules, copy them into your settings file, then review each rule against your own pipeline and risk tolerance.",
         "Three CLI subcommands help you inspect and validate your configuration.",
-        "Print the built-in environment, allow, and soft_deny rules as JSON:",
+        "Print the built-in environment, allow, soft_deny, and hard_deny rules as JSON:",
         "Print what the classifier actually uses as JSON, with your settings applied where set and defaults otherwise:",
-        "Get AI feedback on your custom allow and soft_deny rules:",
+        "Get AI feedback on your custom allow, soft_deny, and hard_deny rules:",
         "Run claude auto-mode config after saving your settings to confirm the effective rules are what you expect, with \"$defaults\" expanded in place. If you’ve written custom rules, claude auto-mode critique reviews them and flags entries that are ambiguous, redundant, or likely to cause false positives. If you need to remove or rewrite a built-in rule rather than add alongside it, save the output of claude auto-mode defaults to a file, edit the lists, and paste the result into your settings file in place of \"$defaults\".",
         "When auto mode denies a tool call, the denial is recorded in /permissions under the Recently denied tab. Press r on a denied action to mark it for retry: when you exit the dialog, Claude Code sends a message telling the model it may retry that tool call and resumes the conversation.",
         "Repeated denials for the same destination usually mean the classifier is missing context. Add that destination to autoMode.environment, then run claude auto-mode config to confirm it took effect.",
@@ -16076,7 +16090,7 @@
       "codeBlocks": [
         "{\n  \"autoMode\": {\n    \"environment\": [\n      \"$defaults\",\n      \"Source control: github.example.com/acme-corp and all repos under it\",\n      \"Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets\",\n      \"Trusted internal domains: *.corp.example.com, api.internal.example.com\",\n      \"Key internal services: Jenkins at ci.example.com, Artifactory at artifacts.example.com\"\n    ]\n  }\n}",
         "{\n  \"autoMode\": {\n    \"environment\": [\n      \"$defaults\",\n      \"Organization: {COMPANY_NAME}. Primary use: {PRIMARY_USE_CASE, e.g. software development, infrastructure automation}\",\n      \"Source control: {SOURCE_CONTROL, e.g. GitHub org github.example.com/acme-corp}\",\n      \"Cloud provider(s): {CLOUD_PROVIDERS, e.g. AWS, GCP, Azure}\",\n      \"Trusted cloud buckets: {TRUSTED_BUCKETS, e.g. s3://acme-builds, gs://acme-datasets}\",\n      \"Trusted internal domains: {TRUSTED_DOMAINS, e.g. *.internal.example.com, api.example.com}\",\n      \"Key internal services: {SERVICES, e.g. Jenkins at ci.example.com, Artifactory at artifacts.example.com}\",\n      \"Additional context: {EXTRA, e.g. regulated industry, multi-tenant infrastructure, compliance requirements}\"\n    ]\n  }\n}",
-        "{\n  \"autoMode\": {\n    \"environment\": [\n      \"$defaults\",\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"$defaults\",\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"$defaults\",\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\"\n    ]\n  }\n}",
+        "{\n  \"autoMode\": {\n    \"environment\": [\n      \"$defaults\",\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"$defaults\",\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"$defaults\",\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\"\n    ],\n    \"hard_deny\": [\n      \"$defaults\",\n      \"Never send repository contents to third-party code-review APIs\"\n    ]\n  }\n}",
         "claude auto-mode defaults",
         "claude auto-mode config",
         "claude auto-mode critique"
@@ -16119,7 +16133,7 @@
             "The classifier reads the same CLAUDE.md content Claude itself loads, so an instruction like “never force push” in your project’s CLAUDE.md steers both Claude and the classifier at the same time. Start there for project conventions and behavioral rules.",
             "For rules that apply across projects, such as trusted infrastructure or organization-wide deny rules, use the autoMode settings block. The classifier reads autoMode from the following scopes:",
             "The classifier does not read autoMode from shared project settings in .claude/settings.json, so a checked-in repo cannot inject its own allow rules.",
-            "Entries from each scope are combined. A developer can extend environment, allow, and soft_deny with personal entries but cannot remove entries that managed settings provide. Because allow rules act as exceptions to block rules inside the classifier, a developer-added allow entry can override an organization soft_deny entry: the combination is additive, not a hard policy boundary.",
+            "Entries from each scope are combined. A developer can extend environment, allow, soft_deny, and hard_deny with personal entries but cannot remove entries that managed settings provide. Because allow rules act as exceptions to soft block rules inside the classifier, a developer-added allow entry can override an organization soft_deny entry: the combination is additive, not a hard policy boundary.",
             "The classifier is a second gate that runs after the permissions system. For actions that must never run regardless of user intent or classifier configuration, use permissions.deny in managed settings, which blocks the action before the classifier is consulted and cannot be overridden."
           ],
           "codeBlocks": []
@@ -16148,27 +16162,28 @@
         {
           "title": "​Override the block and allow rules",
           "paragraphs": [
-            "Two additional fields let you replace the classifier’s built-in rule lists: autoMode.soft_deny controls what gets blocked, and autoMode.allow controls which exceptions apply. Each is an array of prose descriptions, read as natural-language rules. There is no autoMode.deny field; to hard-block an action regardless of intent, use permissions.deny, which runs before the classifier.",
-            "Inside the classifier, precedence works in three tiers:",
-            "soft_deny rules block first",
-            "allow rules then override matching blocks as exceptions",
-            "Explicit user intent overrides both: if the user’s message directly and specifically describes the exact action Claude is about to take, the classifier allows it even when a soft_deny rule matches",
+            "Three additional fields let you replace the classifier’s built-in rule lists: autoMode.hard_deny for unconditional security boundaries, autoMode.soft_deny for destructive actions that user intent can clear, and autoMode.allow for exceptions. Each is an array of prose descriptions, read as natural-language rules. For tool-pattern-based hard blocks that run before the classifier, use permissions.deny.",
+            "Inside the classifier, precedence works in four tiers:",
+            "hard_deny rules block unconditionally. User intent and allow exceptions do not apply.",
+            "soft_deny rules block next. User intent and allow exceptions can override these.",
+            "allow rules then override matching soft_deny rules as exceptions.",
+            "Explicit user intent overrides the remaining soft blocks: if the user’s message directly and specifically describes the exact action Claude is about to take, the classifier allows it even when a soft_deny rule matches.",
             "General requests don’t count as explicit intent. Asking Claude to “clean up the repo” does not authorize force-pushing, but asking Claude to “force-push this branch” does.",
-            "To loosen, add to allow when the classifier repeatedly flags a routine pattern the default exceptions don’t cover. To tighten, add to soft_deny for risks specific to your environment that the defaults miss. To keep the built-in rules while adding your own, include the literal string \"$defaults\" in the array. The default rules are spliced in at that position, so your custom rules can go before or after them, and you continue to inherit updates as the built-in list changes across releases.",
-            "Setting any of environment, allow, or soft_deny without \"$defaults\" replaces the entire default list for that section. If you set soft_deny with a single entry and omit \"$defaults\", every built-in block rule is discarded: force push, data exfiltration, curl | bash, production deploys, and all other default block rules become allowed. Only omit \"$defaults\" when you intend to take full ownership of the list. In that case, run claude auto-mode defaults to print the built-in rules, copy them into your settings file, then review each rule against your own pipeline and risk tolerance.",
-            "Each section is evaluated independently, so setting environment alone leaves the default allow and soft_deny lists intact."
+            "To loosen, add to allow when the classifier repeatedly flags a routine pattern the default exceptions don’t cover. To tighten, add to soft_deny for destructive risks specific to your environment that the defaults miss, or to hard_deny for security boundaries that must never be crossed. To keep the built-in rules while adding your own, include the literal string \"$defaults\" in the array. The default rules are spliced in at that position, so your custom rules can go before or after them, and you continue to inherit updates as the built-in list changes across releases.",
+            "Setting any of environment, allow, soft_deny, or hard_deny without \"$defaults\" replaces the entire default list for that section. A soft_deny array without \"$defaults\" discards every built-in soft block rule, including force push, curl | bash, and production deploys. A hard_deny array without \"$defaults\" discards the built-in data exfiltration and safety-check bypass rules.",
+            "Each section is evaluated independently, so setting environment alone leaves the default allow, soft_deny, and hard_deny lists intact. Only omit \"$defaults\" when you intend to take full ownership of the list. To do that safely, run claude auto-mode defaults to print the built-in rules, copy them into your settings file, then review each rule against your own pipeline and risk tolerance."
           ],
           "codeBlocks": [
-            "{\n  \"autoMode\": {\n    \"environment\": [\n      \"$defaults\",\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"$defaults\",\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"$defaults\",\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\"\n    ]\n  }\n}"
+            "{\n  \"autoMode\": {\n    \"environment\": [\n      \"$defaults\",\n      \"Source control: github.example.com/acme-corp and all repos under it\"\n    ],\n    \"allow\": [\n      \"$defaults\",\n      \"Deploying to the staging namespace is allowed: staging is isolated from production and resets nightly\",\n      \"Writing to s3://acme-scratch/ is allowed: ephemeral bucket with a 7-day lifecycle policy\"\n    ],\n    \"soft_deny\": [\n      \"$defaults\",\n      \"Never run database migrations outside the migrations CLI, even against dev databases\",\n      \"Never modify files under infra/terraform/prod/: production infrastructure changes go through the review workflow\"\n    ],\n    \"hard_deny\": [\n      \"$defaults\",\n      \"Never send repository contents to third-party code-review APIs\"\n    ]\n  }\n}"
           ]
         },
         {
           "title": "​Inspect the defaults and your effective config",
           "paragraphs": [
             "Three CLI subcommands help you inspect and validate your configuration.",
-            "Print the built-in environment, allow, and soft_deny rules as JSON:",
+            "Print the built-in environment, allow, soft_deny, and hard_deny rules as JSON:",
             "Print what the classifier actually uses as JSON, with your settings applied where set and defaults otherwise:",
-            "Get AI feedback on your custom allow and soft_deny rules:",
+            "Get AI feedback on your custom allow, soft_deny, and hard_deny rules:",
             "Run claude auto-mode config after saving your settings to confirm the effective rules are what you expect, with \"$defaults\" expanded in place. If you’ve written custom rules, claude auto-mode critique reviews them and flags entries that are ambiguous, redundant, or likely to cause false positives. If you need to remove or rewrite a built-in rule rather than add alongside it, save the output of claude auto-mode defaults to a file, edit the lists, and paste the result into your settings file in place of \"$defaults\"."
           ],
           "codeBlocks": [
@@ -20317,8 +20332,8 @@
         "For full details, please review our Commercial Terms of Service (for Team, Enterprise, and API users) or Consumer Terms (for Free, Pro, and Max users) and Privacy Policy.",
         "Network request approval: Tools that make network requests require user approval by default",
         "Isolated context windows: Web fetch uses a separate context window to avoid injecting potentially malicious prompts",
-        "Trust verification: First-time codebase runs and new MCP servers require trust verification Note: Trust verification is disabled when running non-interactively with the -p flag",
-        "Note: Trust verification is disabled when running non-interactively with the -p flag",
+        "Trust verification: First-time codebase runs and new MCP servers require trust verification Note: Trust verification is disabled when running non-interactively with the -p flag. The exception is --worktree, which still requires that trust has been accepted for the directory",
+        "Note: Trust verification is disabled when running non-interactively with the -p flag. The exception is --worktree, which still requires that trust has been accepted for the directory",
         "Command injection detection: Suspicious bash commands require manual approval even if previously allowlisted",
         "Fail-closed matching: Unmatched commands default to requiring manual approval",
         "Natural language descriptions: Complex bash commands include explanations for user understanding",
@@ -20464,8 +20479,8 @@
           "paragraphs": [
             "Network request approval: Tools that make network requests require user approval by default",
             "Isolated context windows: Web fetch uses a separate context window to avoid injecting potentially malicious prompts",
-            "Trust verification: First-time codebase runs and new MCP servers require trust verification Note: Trust verification is disabled when running non-interactively with the -p flag",
-            "Note: Trust verification is disabled when running non-interactively with the -p flag",
+            "Trust verification: First-time codebase runs and new MCP servers require trust verification Note: Trust verification is disabled when running non-interactively with the -p flag. The exception is --worktree, which still requires that trust has been accepted for the directory",
+            "Note: Trust verification is disabled when running non-interactively with the -p flag. The exception is --worktree, which still requires that trust has been accepted for the directory",
             "Command injection detection: Suspicious bash commands require manual approval even if previously allowlisted",
             "Fail-closed matching: Unmatched commands default to requiring manual approval",
             "Natural language descriptions: Complex bash commands include explanations for user understanding",
@@ -21536,10 +21551,10 @@
         "​Attribution settings",
         "​File suggestion settings",
         "​Hook configuration",
+        "​Compute managed settings with a policy helper",
         "​Settings precedence",
         "​Verify active settings",
-        "​Key points about the configuration system",
-        "​System prompt"
+        "​Key points about the configuration system"
       ],
       "toc": [
         "Configuration scopes",
@@ -21558,10 +21573,10 @@
         "Attribution settings",
         "File suggestion settings",
         "Hook configuration",
+        "Compute managed settings with a policy helper",
         "Settings precedence",
         "Verify active settings",
-        "Key points about the configuration system",
-        "System prompt"
+        "Key points about the configuration system"
       ],
       "paragraphs": [
         "Configuration scopes",
@@ -21580,6 +21595,7 @@
         "Attribution settings",
         "File suggestion settings",
         "Hook configuration",
+        "Compute managed settings with a policy helper",
         "Settings precedence",
         "Verify active settings",
         "Key points about the configuration system",
@@ -21689,6 +21705,10 @@
         "Limit which URLs HTTP hooks can target. Supports * as a wildcard for matching. When the array is defined, HTTP hooks targeting non-matching URLs are silently blocked. Hostname matching is case-insensitive and ignores a trailing FQDN dot, matching DNS semantics.",
         "Restrict HTTP hook environment variables:",
         "Limit which environment variable names HTTP hooks can interpolate into header values. Each hook’s effective allowedEnvVars is the intersection of its own list and this setting.",
+        "The policyHelper setting points at an executable that computes managed settings at startup, so admins can derive policy from device posture, identity, or a remote service instead of a static file. Configure it from MDM or a system managed-settings.json file. Claude Code ignores policyHelper when it appears in any other scope, including user settings, project settings, the HKCU registry hive, and server-managed settings.",
+        "The setting accepts these keys:",
+        "The helper writes a JSON envelope to stdout. Put the settings under a managedSettings key rather than at the top level, since a bare settings object parses with managedSettings undefined and applies nothing:",
+        "When the helper emits managedSettings, that object replaces the file-based managed settings for the run. When the helper exits non-zero at startup, Claude Code prints the error and refuses to start, so a helper that needs outage resilience should serve from its own cache and exit 0.",
         "Settings apply in order of precedence. From highest to lowest:",
         "Managed settings (server-managed, MDM/OS-level policies, or managed settings) Policies deployed by IT through server delivery, MDM configuration profiles, registry policies, or managed settings files Cannot be overridden by any other level, including command line arguments Within the managed tier, precedence is: server-managed > MDM/OS-level policies > file-based (managed-settings.d/*.json + managed-settings.json) > HKCU registry (Windows only). Only one managed source is used; sources do not merge across tiers. Within the file-based tier, drop-in files and the base file are merged together.",
         "Managed settings (server-managed, MDM/OS-level policies, or managed settings)",
@@ -21738,12 +21758,7 @@
         "Team members are prompted to install the marketplace when they trust the folder",
         "Team members are then prompted to install plugins from that marketplace",
         "Users can skip unwanted marketplaces or plugins (stored in user settings)",
-        "Installation respects trust boundaries and requires explicit consent",
-        "Marketplace source types:",
-        "github: GitHub repository (uses repo)",
-        "git: Any git URL (uses url)",
-        "directory: Local filesystem path (uses path, for development only)",
-        "hostPattern: regex pattern to match marketplace hosts (uses hostPattern)"
+        "Installation respects trust boundaries and requires explicit consent"
       ],
       "codeBlocks": [
         "{\n  \"$schema\": \"https://json.schemastore.org/claude-code-settings.json\",\n  \"permissions\": {\n    \"allow\": [\n      \"Bash(npm run lint)\",\n      \"Bash(npm run test *)\",\n      \"Read(~/.zshrc)\"\n    ],\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ]\n  },\n  \"env\": {\n    \"CLAUDE_CODE_ENABLE_TELEMETRY\": \"1\",\n    \"OTEL_METRICS_EXPORTER\": \"otlp\"\n  },\n  \"companyAnnouncements\": [\n    \"Welcome to Acme Corp! Review our code guidelines at docs.acme.com\",\n    \"Reminder: Code reviews required for all PRs\",\n    \"New security policy in effect\"\n  ]\n}",
@@ -21757,6 +21772,7 @@
         "#!/bin/bash\nquery=$(cat | jq -r '.query')\nyour-repo-file-index --query \"$query\" | head -20",
         "{\n  \"allowedHttpHookUrls\": [\"https://hooks.example.com/*\", \"http://localhost:*\"]\n}",
         "{\n  \"httpHookAllowedEnvVars\": [\"MY_TOKEN\", \"HOOK_SECRET\"]\n}",
+        "{\n  \"managedSettings\": {\n    \"permissions\": { \"deny\": [\"Read(//etc/secrets/**)\"] }\n  },\n  \"claudeMd\": \"# Organization context\\n...\",\n  \"appendSystemPrompt\": \"Always cite the internal style guide.\"\n}",
         "{\n  \"permissions\": {\n    \"deny\": [\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\",\n      \"Read(./config/credentials.json)\",\n      \"Read(./build)\"\n    ]\n  }\n}",
         "{\n  \"enabledPlugins\": {\n    \"formatter@acme-tools\": true,\n    \"deployer@acme-tools\": true,\n    \"analyzer@security-plugins\": false\n  },\n  \"extraKnownMarketplaces\": {\n    \"acme-tools\": {\n      \"source\": {\n        \"source\": \"github\",\n        \"repo\": \"acme-corp/claude-plugins\"\n      }\n    }\n  }\n}",
         "{\n  \"enabledPlugins\": {\n    \"code-formatter@team-tools\": true,\n    \"deployment-tools@team-tools\": true,\n    \"experimental-features@personal\": false\n  }\n}",
@@ -21977,6 +21993,18 @@
           "codeBlocks": [
             "{\n  \"allowedHttpHookUrls\": [\"https://hooks.example.com/*\", \"http://localhost:*\"]\n}",
             "{\n  \"httpHookAllowedEnvVars\": [\"MY_TOKEN\", \"HOOK_SECRET\"]\n}"
+          ]
+        },
+        {
+          "title": "​Compute managed settings with a policy helper",
+          "paragraphs": [
+            "The policyHelper setting points at an executable that computes managed settings at startup, so admins can derive policy from device posture, identity, or a remote service instead of a static file. Configure it from MDM or a system managed-settings.json file. Claude Code ignores policyHelper when it appears in any other scope, including user settings, project settings, the HKCU registry hive, and server-managed settings.",
+            "The setting accepts these keys:",
+            "The helper writes a JSON envelope to stdout. Put the settings under a managedSettings key rather than at the top level, since a bare settings object parses with managedSettings undefined and applies nothing:",
+            "When the helper emits managedSettings, that object replaces the file-based managed settings for the run. When the helper exits non-zero at startup, Claude Code prints the error and refuses to start, so a helper that needs outage resilience should serve from its own cache and exit 0."
+          ],
+          "codeBlocks": [
+            "{\n  \"managedSettings\": {\n    \"permissions\": { \"deny\": [\"Read(//etc/secrets/**)\"] }\n  },\n  \"claudeMd\": \"# Organization context\\n...\",\n  \"appendSystemPrompt\": \"Always cite the internal style guide.\"\n}"
           ]
         },
         {
@@ -22253,6 +22281,7 @@
         "Read(~/.zshrc): reads your home directory’s .zshrc",
         "Edit(//tmp/scratch.txt): edits the absolute path /tmp/scratch.txt",
         "Read(src/**): reads from <current-directory>/src/",
+        "A rule only matches files under its anchor, so the anchor determines how far a deny rule reaches. Bare filenames follow gitignore semantics and match at any depth, so Read(.env) and Read(**/.env) are equivalent:",
         "In gitignore patterns, * matches files in a single directory while ** matches recursively across directories. To allow all file access, use just the tool name without parentheses: Read, Edit, or Write.",
         "When Claude accesses a symlink, permission rules check two paths: the symlink itself and the file it resolves to. Allow and deny rules treat that pair differently: allow rules fall back to prompting you, while deny rules block outright.",
         "Allow rules: apply only when both the symlink path and its target match. A symlink inside an allowed directory that points outside it still prompts you.",
@@ -22451,8 +22480,8 @@
             "Read(~/.zshrc): reads your home directory’s .zshrc",
             "Edit(//tmp/scratch.txt): edits the absolute path /tmp/scratch.txt",
             "Read(src/**): reads from <current-directory>/src/",
-            "In gitignore patterns, * matches files in a single directory while ** matches recursively across directories. To allow all file access, use just the tool name without parentheses: Read, Edit, or Write.",
-            "When Claude accesses a symlink, permission rules check two paths: the symlink itself and the file it resolves to. Allow and deny rules treat that pair differently: allow rules fall back to prompting you, while deny rules block outright."
+            "A rule only matches files under its anchor, so the anchor determines how far a deny rule reaches. Bare filenames follow gitignore semantics and match at any depth, so Read(.env) and Read(**/.env) are equivalent:",
+            "In gitignore patterns, * matches files in a single directory while ** matches recursively across directories. To allow all file access, use just the tool name without parentheses: Read, Edit, or Write."
           ],
           "codeBlocks": []
         },
@@ -24102,7 +24131,7 @@
         "In any terminal you can configure a Notification hook to play a sound or run a custom command when Claude needs your attention. Hooks run alongside the built-in notification rather than replacing it, so terminals that do not receive a desktop notification, such as Warp or the VS Code integrated terminal, can use a hook or set preferredNotifChannel to \"terminal_bell\" instead.",
         "The example below plays a system sound on macOS. The linked guide has desktop notification commands for macOS, Linux, and Windows.",
         "When Claude Code runs inside tmux, two things break by default: Shift+Enter submits instead of inserting a newline, and desktop notifications and the progress bar never reach the outer terminal. Add these lines to ~/.tmux.conf, then run tmux source-file ~/.tmux.conf to apply them to the running server:",
-        "The allow-passthrough line lets notifications and progress updates reach iTerm2, Ghostty, or Kitty instead of being swallowed by tmux. The extended-keys lines let tmux distinguish Shift+Enter from plain Enter so the newline shortcut works.",
+        "The allow-passthrough line lets notifications and progress updates reach the outer terminal instead of being swallowed by tmux. The extended-keys lines let tmux distinguish Shift+Enter from plain Enter so the newline shortcut works.",
         "Use the /theme command, or the theme picker in /config, to choose a Claude Code theme that matches your terminal. Selecting the auto option detects your terminal’s light or dark background, so the theme follows OS appearance changes whenever your terminal does. Claude Code does not control the terminal’s own color scheme, which is set by the terminal application.",
         "To customize what appears at the bottom of the interface, configure a custom status line that shows the current model, working directory, git branch, or other context.",
         "Custom themes require Claude Code v2.1.118 or later.",
@@ -24238,7 +24267,7 @@
           "title": "​Configure tmux",
           "paragraphs": [
             "When Claude Code runs inside tmux, two things break by default: Shift+Enter submits instead of inserting a newline, and desktop notifications and the progress bar never reach the outer terminal. Add these lines to ~/.tmux.conf, then run tmux source-file ~/.tmux.conf to apply them to the running server:",
-            "The allow-passthrough line lets notifications and progress updates reach iTerm2, Ghostty, or Kitty instead of being swallowed by tmux. The extended-keys lines let tmux distinguish Shift+Enter from plain Enter so the newline shortcut works."
+            "The allow-passthrough line lets notifications and progress updates reach the outer terminal instead of being swallowed by tmux. The extended-keys lines let tmux distinguish Shift+Enter from plain Enter so the newline shortcut works."
           ],
           "codeBlocks": [
             "set -g allow-passthrough on\nset -s extended-keys on\nset -as terminal-features 'xterm*:extkeys'"
@@ -25850,14 +25879,20 @@
       "metaDescription": "Complete reference for commands available in Claude Code, including built-in commands and bundled skills.",
       "headings": [
         "Documentation Index",
+        "​Commands across a typical workflow",
+        "​All commands",
         "​MCP prompts",
         "​See also"
       ],
       "toc": [
+        "Commands across a typical workflow",
+        "All commands",
         "MCP prompts",
         "See also"
       ],
       "paragraphs": [
+        "Commands across a typical workflow",
+        "All commands",
         "MCP prompts",
         "See also",
         "Complete reference for commands available in Claude Code, including built-in commands and bundled skills.",
@@ -25866,9 +25901,15 @@
         "Commands control Claude Code from inside a session. They provide a quick way to switch models, manage permissions, clear context, run a workflow, and more.",
         "Type / to see every command available to you, or type / followed by letters to filter.",
         "A command is only recognized at the start of your message. Text that follows the command name is passed to it as arguments.",
+        "Most commands are useful at a specific point in a session, from setting up a project to shipping a change.",
+        "First session in a repo. Run /init to generate a starter CLAUDE.md, then /memory to refine it. Use /mcp and /agents to set up any servers or subagents the project needs, and /permissions to set the approval rules you want.",
+        "During a task. /plan switches into plan mode before a large change. /model and /effort adjust how much reasoning you’re spending. When the conversation gets long, /context shows where the window is going and /compact summarizes it down; use /btw for a quick aside that shouldn’t bloat history.",
+        "Before you ship. /diff shows what changed, /simplify reviews recent files and applies quality and efficiency fixes, and /review or /security-review give a deeper read-only pass.",
+        "Between sessions. /clear starts fresh on a new task while keeping project memory. /resume and /branch let you return to or fork an earlier conversation. /teleport pulls a web session into this terminal, and /remote-control lets you continue this local session from another device.",
+        "When something is wrong. /rewind rolls code and conversation back to a checkpoint. /doctor and /debug diagnose install and runtime issues, and /feedback reports a bug with session context attached.",
         "The table below lists all the commands included in Claude Code. Entries marked Skill are bundled skills. They use the same mechanism as skills you write yourself: a prompt handed to Claude, which Claude can also invoke automatically when relevant. Everything else is a built-in command whose behavior is coded into the CLI. To add your own commands, see skills.",
-        "Not every command appears for every user. Availability depends on your platform, plan, and environment. For example, /desktop only shows on macOS and Windows, and /upgrade only shows on Pro and Max plans.",
         "In the table below, <arg> indicates a required argument and [arg] indicates an optional one.",
+        "Not every command appears for every user. Availability depends on your platform, plan, and environment. For example, /desktop only shows on macOS and Windows, and /upgrade only shows on Pro and Max plans.",
         "MCP servers can expose prompts that appear as commands. These use the format /mcp__<server>__<prompt> and are dynamically discovered from connected servers. See MCP prompts for details.",
         "Skills: create your own commands",
         "Interactive mode: keyboard shortcuts, Vim mode, and command history",
@@ -25880,6 +25921,8 @@
         {
           "title": "",
           "paragraphs": [
+            "Commands across a typical workflow",
+            "All commands",
             "MCP prompts",
             "See also",
             "Complete reference for commands available in Claude Code, including built-in commands and bundled skills."
@@ -25893,10 +25936,28 @@
             "Use this file to discover all available pages before exploring further.",
             "Commands control Claude Code from inside a session. They provide a quick way to switch models, manage permissions, clear context, run a workflow, and more.",
             "Type / to see every command available to you, or type / followed by letters to filter.",
-            "A command is only recognized at the start of your message. Text that follows the command name is passed to it as arguments.",
+            "A command is only recognized at the start of your message. Text that follows the command name is passed to it as arguments."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Commands across a typical workflow",
+          "paragraphs": [
+            "Most commands are useful at a specific point in a session, from setting up a project to shipping a change.",
+            "First session in a repo. Run /init to generate a starter CLAUDE.md, then /memory to refine it. Use /mcp and /agents to set up any servers or subagents the project needs, and /permissions to set the approval rules you want.",
+            "During a task. /plan switches into plan mode before a large change. /model and /effort adjust how much reasoning you’re spending. When the conversation gets long, /context shows where the window is going and /compact summarizes it down; use /btw for a quick aside that shouldn’t bloat history.",
+            "Before you ship. /diff shows what changed, /simplify reviews recent files and applies quality and efficiency fixes, and /review or /security-review give a deeper read-only pass.",
+            "Between sessions. /clear starts fresh on a new task while keeping project memory. /resume and /branch let you return to or fork an earlier conversation. /teleport pulls a web session into this terminal, and /remote-control lets you continue this local session from another device.",
+            "When something is wrong. /rewind rolls code and conversation back to a checkpoint. /doctor and /debug diagnose install and runtime issues, and /feedback reports a bug with session context attached."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​All commands",
+          "paragraphs": [
             "The table below lists all the commands included in Claude Code. Entries marked Skill are bundled skills. They use the same mechanism as skills you write yourself: a prompt handed to Claude, which Claude can also invoke automatically when relevant. Everything else is a built-in command whose behavior is coded into the CLI. To add your own commands, see skills.",
-            "Not every command appears for every user. Availability depends on your platform, plan, and environment. For example, /desktop only shows on macOS and Windows, and /upgrade only shows on Pro and Max plans.",
-            "In the table below, <arg> indicates a required argument and [arg] indicates an optional one."
+            "In the table below, <arg> indicates a required argument and [arg] indicates an optional one.",
+            "Not every command appears for every user. Availability depends on your platform, plan, and environment. For example, /desktop only shows on macOS and Windows, and /upgrade only shows on Pro and Max plans."
           ],
           "codeBlocks": []
         },
@@ -26341,7 +26402,7 @@
         "This is useful for quick shell operations while maintaining conversation context.",
         "When you first open a session, a grayed-out example command appears in the prompt input to help you get started. Claude Code picks this from your project’s git history, so it reflects files you’ve been working on recently.",
         "After Claude responds, suggestions continue to appear based on your conversation history, such as a follow-up step from a multi-part request or a natural continuation of your workflow.",
-        "Press Tab or Right arrow to accept the suggestion, or press Enter to accept and submit",
+        "Press Tab or Right arrow to place the suggestion in the prompt input, then Enter to submit",
         "Start typing to dismiss it",
         "The suggestion runs as a background request that reuses the parent conversation’s prompt cache, so the additional cost is minimal. Claude Code skips suggestion generation when the cache is cold to avoid unnecessary cost.",
         "Suggestions are automatically skipped after the first turn of a conversation, in non-interactive mode, and in plan mode.",
@@ -26584,7 +26645,7 @@
           "paragraphs": [
             "When you first open a session, a grayed-out example command appears in the prompt input to help you get started. Claude Code picks this from your project’s git history, so it reflects files you’ve been working on recently.",
             "After Claude responds, suggestions continue to appear based on your conversation history, such as a follow-up step from a multi-part request or a natural continuation of your workflow.",
-            "Press Tab or Right arrow to accept the suggestion, or press Enter to accept and submit",
+            "Press Tab or Right arrow to place the suggestion in the prompt input, then Enter to submit",
             "Start typing to dismiss it",
             "The suggestion runs as a background request that reuses the parent conversation’s prompt cache, so the additional cost is minimal. Claude Code skips suggestion generation when the cache is cold to avoid unnecessary cost.",
             "Suggestions are automatically skipped after the first turn of a conversation, in non-interactive mode, and in plan mode.",
@@ -27774,11 +27835,14 @@
         "Non-sensitive values are stored in settings.json under pluginConfigs[<plugin-id>].options. Sensitive values go to the system keychain (or ~/.claude/.credentials.json where the keychain is unavailable). Keychain storage is shared with OAuth tokens and has an approximately 2 KB total limit, so keep sensitive values small.",
         "The channels field lets a plugin declare one or more message channels that inject content into the conversation. Each channel binds to an MCP server that the plugin provides.",
         "The server field is required and must match a key in the plugin’s mcpServers. The optional per-channel userConfig uses the same schema as the top-level field, letting the plugin prompt for bot tokens or owner IDs when the plugin is enabled.",
-        "For skills, commands, agents, outputStyles, experimental.themes, and experimental.monitors, a custom path replaces the default. If the manifest specifies skills, the default skills/ directory is not scanned; if it specifies experimental.monitors, the default monitors/monitors.json is not loaded. Hooks, MCP servers, and LSP servers have different semantics for handling multiple sources.",
+        "Whether a custom path replaces or extends the plugin’s default directory depends on the field:",
+        "Replaces the default: commands, agents, outputStyles, experimental.themes, experimental.monitors. For example, when the manifest specifies commands, the default commands/ directory is not scanned. To keep the default and add more, list it explicitly: \"commands\": [\"./commands/\", \"./extras/\"]",
+        "Adds to the default: skills. The default skills/ directory is always scanned, and directories listed in skills are loaded alongside it",
+        "Own merge rules: hooks, MCP servers, and LSP servers. See each section for how multiple sources combine",
+        "For all path fields:",
         "All paths must be relative to the plugin root and start with ./",
         "Components from custom paths use the same naming and namespacing rules",
         "Multiple paths can be specified as arrays",
-        "To keep the default directory and add more paths for skills, commands, agents, or output styles, include the default in your array: \"skills\": [\"./skills/\", \"./extras/\"]",
         "When a skill path points to a directory that contains a SKILL.md directly, for example \"skills\": [\"./\"] pointing to the plugin root, the frontmatter name field in SKILL.md determines the skill’s invocation name. This gives a stable name regardless of the install directory. If name is not set in the frontmatter, the directory basename is used as a fallback.",
         "Path examples:",
         "Claude Code provides two variables for referencing plugin paths. Both are substituted inline anywhere they appear in skill content, agent content, hook commands, monitor commands, and MCP or LSP server configs. Both are also exported as environment variables to hook processes and MCP or LSP server subprocesses.",
@@ -27825,10 +27889,7 @@
         "Create a release git tag for the plugin in the current directory. Run from inside the plugin’s folder. See Tag plugin releases.",
         "Use claude --debug to see plugin loading details:",
         "This shows:",
-        "Which plugins are being loaded",
-        "Any errors in plugin manifests",
-        "Skill, agent, and hook registration",
-        "MCP server initialization"
+        "Which plugins are being loaded"
       ],
       "codeBlocks": [
         "skills/\n├── pdf-processor/\n│   ├── SKILL.md\n│   ├── reference.md (optional)\n│   └── scripts/ (optional)\n└── code-reviewer/\n    └── SKILL.md",
@@ -28089,11 +28150,14 @@
         {
           "title": "​Path behavior rules",
           "paragraphs": [
-            "For skills, commands, agents, outputStyles, experimental.themes, and experimental.monitors, a custom path replaces the default. If the manifest specifies skills, the default skills/ directory is not scanned; if it specifies experimental.monitors, the default monitors/monitors.json is not loaded. Hooks, MCP servers, and LSP servers have different semantics for handling multiple sources.",
+            "Whether a custom path replaces or extends the plugin’s default directory depends on the field:",
+            "Replaces the default: commands, agents, outputStyles, experimental.themes, experimental.monitors. For example, when the manifest specifies commands, the default commands/ directory is not scanned. To keep the default and add more, list it explicitly: \"commands\": [\"./commands/\", \"./extras/\"]",
+            "Adds to the default: skills. The default skills/ directory is always scanned, and directories listed in skills are loaded alongside it",
+            "Own merge rules: hooks, MCP servers, and LSP servers. See each section for how multiple sources combine",
+            "For all path fields:",
             "All paths must be relative to the plugin root and start with ./",
             "Components from custom paths use the same naming and namespacing rules",
             "Multiple paths can be specified as arrays",
-            "To keep the default directory and add more paths for skills, commands, agents, or output styles, include the default in your array: \"skills\": [\"./skills/\", \"./extras/\"]",
             "When a skill path points to a directory that contains a SKILL.md directly, for example \"skills\": [\"./\"] pointing to the plugin root, the frontmatter name field in SKILL.md determines the skill’s invocation name. This gives a stable name regardless of the install directory. If name is not set in the frontmatter, the directory basename is used as a fallback.",
             "Path examples:"
           ],
@@ -30937,14 +31001,14 @@
         "Present the questions to the user and collect their selections. How you do this depends on your application: a terminal prompt, a web form, a mobile dialog, etc.",
         "Return answers to Claude",
         "Build the answers object as a record where each key is the question text and each value is the selected option’s label:",
-        "For multi-select questions, join multiple labels with \", \". If you support free-text input, use the user’s custom text as the value.",
+        "For multi-select questions, pass an array of labels or join them with \", \". If you support free-text input, use the user’s custom text as the value.",
         "The input contains Claude’s generated questions in a questions array. Each question has these fields:",
         "The structure your callback receives:",
         "toolConfig.askUserQuestion.previewFormat adds a preview field to each option so your app can show a visual mockup alongside the label. Without this setting, Claude does not generate previews and the field is absent.",
         "The format applies to all questions in the session. Claude includes preview on options where a visual comparison helps (layout choices, color schemes) and omits it where one wouldn’t (yes/no confirmations, text-only choices). Check for undefined before rendering.",
         "An option with an HTML preview:",
         "Return an answers object mapping each question’s question field to the selected option’s label:",
-        "For multi-select questions, join multiple labels with \", \". For free-text input, use the user’s custom text directly.",
+        "For multi-select questions, pass an array of labels or join them with \", \". For free-text input, use the user’s custom text directly.",
         "Claude’s predefined options won’t always cover what users want. To let users type their own answer:",
         "Display an additional “Other” choice after Claude’s options that accepts text input",
         "Use the user’s custom text as the answer value (not the word “Other”)",
@@ -30985,11 +31049,11 @@
         "async for message in query(\n    prompt=\"Analyze this codebase\",\n    options=ClaudeAgentOptions(\n        # Include AskUserQuestion in your tools list\n        tools=[\"Read\", \"Glob\", \"Grep\", \"AskUserQuestion\"],\n        can_use_tool=can_use_tool,\n    ),\n):\n    print(message)",
         "async def can_use_tool(tool_name: str, input_data: dict, context):\n    if tool_name == \"AskUserQuestion\":\n        # Your implementation to collect answers from the user\n        return await handle_clarifying_questions(input_data)\n    # Handle other tools normally\n    return await prompt_for_approval(tool_name, input_data)",
         "{\n  \"questions\": [\n    {\n      \"question\": \"How should I format the output?\",\n      \"header\": \"Format\",\n      \"options\": [\n        { \"label\": \"Summary\", \"description\": \"Brief overview\" },\n        { \"label\": \"Detailed\", \"description\": \"Full explanation\" }\n      ],\n      \"multiSelect\": false\n    },\n    {\n      \"question\": \"Which sections should I include?\",\n      \"header\": \"Sections\",\n      \"options\": [\n        { \"label\": \"Introduction\", \"description\": \"Opening context\" },\n        { \"label\": \"Conclusion\", \"description\": \"Final summary\" }\n      ],\n      \"multiSelect\": true\n    }\n  ]\n}",
-        "return PermissionResultAllow(\n    updated_input={\n        \"questions\": input_data.get(\"questions\", []),\n        \"answers\": {\n            \"How should I format the output?\": \"Summary\",\n            \"Which sections should I include?\": \"Introduction, Conclusion\",\n        },\n    }\n)",
+        "return PermissionResultAllow(\n    updated_input={\n        \"questions\": input_data.get(\"questions\", []),\n        \"answers\": {\n            \"How should I format the output?\": \"Summary\",\n            \"Which sections should I include?\": [\"Introduction\", \"Conclusion\"],\n        },\n    }\n)",
         "{\n  \"questions\": [\n    {\n      \"question\": \"How should I format the output?\",\n      \"header\": \"Format\",\n      \"options\": [\n        { \"label\": \"Summary\", \"description\": \"Brief overview of key points\" },\n        { \"label\": \"Detailed\", \"description\": \"Full explanation with examples\" }\n      ],\n      \"multiSelect\": false\n    }\n  ]\n}",
         "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Help me choose a card layout\",\n  options: {\n    toolConfig: {\n      askUserQuestion: { previewFormat: \"html\" }\n    },\n    canUseTool: async (toolName, input) => {\n      // input.questions[].options[].preview is an HTML string or undefined\n      return { behavior: \"allow\", updatedInput: input };\n    }\n  }\n})) {\n  // ...\n}",
         "{\n  \"label\": \"Compact\",\n  \"description\": \"Title and metric value only\",\n  \"preview\": \"<div style=\\\"padding:12px;border:1px solid #ddd;border-radius:8px\\\"><div style=\\\"font-size:12px;color:#666\\\">Active users</div><div style=\\\"font-size:28px;font-weight:600\\\">1,284</div></div>\"\n}",
-        "{\n  \"questions\": [\n    // ...\n  ],\n  \"answers\": {\n    \"How should I format the output?\": \"Summary\",\n    \"Which sections should I include?\": \"Introduction, Conclusion\"\n  }\n}",
+        "{\n  \"questions\": [\n    // ...\n  ],\n  \"answers\": {\n    \"How should I format the output?\": \"Summary\",\n    \"Which sections should I include?\": [\"Introduction\", \"Conclusion\"]\n  }\n}",
         "import asyncio\n\nfrom claude_agent_sdk import ClaudeAgentOptions, ResultMessage, query\nfrom claude_agent_sdk.types import HookMatcher, PermissionResultAllow\n\n\ndef parse_response(response: str, options: list) -> str:\n    \"\"\"Parse user input as option number(s) or free text.\"\"\"\n    try:\n        indices = [int(s.strip()) - 1 for s in response.split(\",\")]\n        labels = [options[i][\"label\"] for i in indices if 0 <= i < len(options)]\n        return \", \".join(labels) if labels else response\n    except ValueError:\n        return response\n\n\nasync def handle_ask_user_question(input_data: dict) -> PermissionResultAllow:\n    \"\"\"Display Claude's questions and collect user answers.\"\"\"\n    answers = {}\n\n    for q in input_data.get(\"questions\", []):\n        print(f\"\\n{q['header']}: {q['question']}\")\n\n        options = q[\"options\"]\n        for i, opt in enumerate(options):\n            print(f\"  {i + 1}. {opt['label']} - {opt['description']}\")\n        if q.get(\"multiSelect\"):\n            print(\"  (Enter numbers separated by commas, or type your own answer)\")\n        else:\n            print(\"  (Enter a number, or type your own answer)\")\n\n        response = input(\"Your choice: \").strip()\n        answers[q[\"question\"]] = parse_response(response, options)\n\n    return PermissionResultAllow(\n        updated_input={\n            \"questions\": input_data.get(\"questions\", []),\n            \"answers\": answers,\n        }\n    )\n\n\nasync def can_use_tool(\n    tool_name: str, input_data: dict, context\n) -> PermissionResultAllow:\n    # Route AskUserQuestion to our question handler\n    if tool_name == \"AskUserQuestion\":\n        return await handle_ask_user_question(input_data)\n    # Auto-approve other tools for this example\n    return PermissionResultAllow(updated_input=input_data)\n\n\nasync def prompt_stream():\n    yield {\n        \"type\": \"user\",\n        \"message\": {\n            \"role\": \"user\",\n            \"content\": \"Help me decide on the tech stack for a new mobile app\",\n        },\n    }\n\n\n# Required workaround: dummy hook keeps the stream open for can_use_tool\nasync def dummy_hook(input_data, tool_use_id, context):\n    return {\"continue_\": True}\n\n\nasync def main():\n    async for message in query(\n        prompt=prompt_stream(),\n        options=ClaudeAgentOptions(\n            can_use_tool=can_use_tool,\n            hooks={\"PreToolUse\": [HookMatcher(matcher=None, hooks=[dummy_hook])]},\n        ),\n    ):\n        if isinstance(message, ResultMessage) and message.subtype == \"success\":\n            print(message.result)\n\n\nasyncio.run(main())"
       ],
       "sectionBlocks": [
@@ -31096,7 +31160,7 @@
             "async for message in query(\n    prompt=\"Analyze this codebase\",\n    options=ClaudeAgentOptions(\n        # Include AskUserQuestion in your tools list\n        tools=[\"Read\", \"Glob\", \"Grep\", \"AskUserQuestion\"],\n        can_use_tool=can_use_tool,\n    ),\n):\n    print(message)",
             "async def can_use_tool(tool_name: str, input_data: dict, context):\n    if tool_name == \"AskUserQuestion\":\n        # Your implementation to collect answers from the user\n        return await handle_clarifying_questions(input_data)\n    # Handle other tools normally\n    return await prompt_for_approval(tool_name, input_data)",
             "{\n  \"questions\": [\n    {\n      \"question\": \"How should I format the output?\",\n      \"header\": \"Format\",\n      \"options\": [\n        { \"label\": \"Summary\", \"description\": \"Brief overview\" },\n        { \"label\": \"Detailed\", \"description\": \"Full explanation\" }\n      ],\n      \"multiSelect\": false\n    },\n    {\n      \"question\": \"Which sections should I include?\",\n      \"header\": \"Sections\",\n      \"options\": [\n        { \"label\": \"Introduction\", \"description\": \"Opening context\" },\n        { \"label\": \"Conclusion\", \"description\": \"Final summary\" }\n      ],\n      \"multiSelect\": true\n    }\n  ]\n}",
-            "return PermissionResultAllow(\n    updated_input={\n        \"questions\": input_data.get(\"questions\", []),\n        \"answers\": {\n            \"How should I format the output?\": \"Summary\",\n            \"Which sections should I include?\": \"Introduction, Conclusion\",\n        },\n    }\n)"
+            "return PermissionResultAllow(\n    updated_input={\n        \"questions\": input_data.get(\"questions\", []),\n        \"answers\": {\n            \"How should I format the output?\": \"Summary\",\n            \"Which sections should I include?\": [\"Introduction\", \"Conclusion\"],\n        },\n    }\n)"
           ]
         },
         {
@@ -31118,14 +31182,14 @@
           "title": "​Response format",
           "paragraphs": [
             "Return an answers object mapping each question’s question field to the selected option’s label:",
-            "For multi-select questions, join multiple labels with \", \". For free-text input, use the user’s custom text directly.",
+            "For multi-select questions, pass an array of labels or join them with \", \". For free-text input, use the user’s custom text directly.",
             "Claude’s predefined options won’t always cover what users want. To let users type their own answer:",
             "Display an additional “Other” choice after Claude’s options that accepts text input",
             "Use the user’s custom text as the answer value (not the word “Other”)",
             "See the complete example below for a full implementation."
           ],
           "codeBlocks": [
-            "{\n  \"questions\": [\n    // ...\n  ],\n  \"answers\": {\n    \"How should I format the output?\": \"Summary\",\n    \"Which sections should I include?\": \"Introduction, Conclusion\"\n  }\n}"
+            "{\n  \"questions\": [\n    // ...\n  ],\n  \"answers\": {\n    \"How should I format the output?\": \"Summary\",\n    \"Which sections should I include?\": [\"Introduction\", \"Conclusion\"]\n  }\n}"
           ]
         },
         {
@@ -31991,6 +32055,7 @@
         "Use this file to discover all available pages before exploring further.",
         "The Model Context Protocol (MCP) is an open standard for connecting AI agents to external tools and data sources. With MCP, your agent can query databases, integrate with APIs like Slack and GitHub, and connect to other services without writing custom tool implementations.",
         "MCP servers can run as local processes, connect over HTTP, or execute directly within your SDK application.",
+        "This page covers MCP configuration for the Agent SDK. To add MCP servers to the Claude Code CLI so they load in every project, see MCP installation scopes.",
         "This example connects to the Claude Code documentation MCP server using HTTP transport and uses allowedTools with a wildcard to permit all tools from the server.",
         "The agent connects to the documentation server, searches for information about hooks, and returns the results.",
         "You can configure MCP servers in code when calling query(), or in a .mcp.json file loaded via settingSources.",
@@ -32009,7 +32074,7 @@
         "Local processes that communicate via stdin/stdout. Use this for MCP servers you run on the same machine:",
         ".mcp.json",
         "Use HTTP or SSE for cloud-hosted MCP servers and remote APIs:",
-        "For HTTP (non-streaming), use \"type\": \"http\" instead.",
+        "For the streamable HTTP transport, use \"type\": \"http\" instead. In .mcp.json and other JSON config files, \"streamable-http\" is accepted as an alias for \"http\". The programmatic mcpServers option accepts only \"http\".",
         "Define custom tools directly in your application code instead of running a separate server process. See the custom tools guide for implementation details.",
         "When you have many MCP tools configured, tool definitions can consume a significant portion of your context window. Tool search solves this by withholding tool definitions from context and loading only the ones Claude needs for each turn.",
         "Tool search is enabled by default. See Tool search for configuration options and details.",
@@ -32090,7 +32155,8 @@
             "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
             "Use this file to discover all available pages before exploring further.",
             "The Model Context Protocol (MCP) is an open standard for connecting AI agents to external tools and data sources. With MCP, your agent can query databases, integrate with APIs like Slack and GitHub, and connect to other services without writing custom tool implementations.",
-            "MCP servers can run as local processes, connect over HTTP, or execute directly within your SDK application."
+            "MCP servers can run as local processes, connect over HTTP, or execute directly within your SDK application.",
+            "This page covers MCP configuration for the Agent SDK. To add MCP servers to the Claude Code CLI so they load in every project, see MCP installation scopes."
           ],
           "codeBlocks": []
         },
@@ -32189,7 +32255,7 @@
           "paragraphs": [
             "Use HTTP or SSE for cloud-hosted MCP servers and remote APIs:",
             ".mcp.json",
-            "For HTTP (non-streaming), use \"type\": \"http\" instead."
+            "For the streamable HTTP transport, use \"type\": \"http\" instead. In .mcp.json and other JSON config files, \"streamable-http\" is accepted as an alias for \"http\". The programmatic mcpServers option accepts only \"http\"."
           ],
           "codeBlocks": [
             "const _ = {\n  options: {\n    mcpServers: {\n      \"remote-api\": {\n        type: \"sse\",\n        url: \"https://api.example.com/mcp/sse\",\n        headers: {\n          Authorization: `Bearer ${process.env.API_TOKEN}`\n        }\n      }\n    },\n    allowedTools: [\"mcp__remote-api__*\"]\n  }\n};",
@@ -36523,14 +36589,14 @@
         "​getSessionInfo()",
         "​renameSession()",
         "​tagSession()",
+        "​resolveSettings()",
         "​Types",
         "​Options",
         "​Query object",
         "​WarmQuery",
         "​SDKControlInitializeResponse",
         "​AgentDefinition",
-        "​AgentMcpServerSpec",
-        "​SettingSource"
+        "​AgentMcpServerSpec"
       ],
       "toc": [
         "Installation",
@@ -36550,9 +36616,9 @@
         "getSessionInfo()",
         "renameSession()",
         "tagSession()",
-        "Types",
-        "Options",
-        "Handle slow or stalled API responses"
+        "resolveSettings()",
+        "Return type: ResolvedSettings",
+        "Types"
       ],
       "paragraphs": [
         "Installation",
@@ -36568,6 +36634,8 @@
         "getSessionInfo()",
         "renameSession()",
         "tagSession()",
+        "resolveSettings()",
+        "Return type: ResolvedSettings",
         "Handle slow or stalled API responses",
         "Query object",
         "applyFlagSettings()",
@@ -36600,6 +36668,7 @@
         "SDKPartialAssistantMessage",
         "SDKCompactBoundaryMessage",
         "SDKPluginInstallMessage",
+        "SDKPermissionDeniedMessage",
         "SDKPermissionDenial",
         "SDKMessageOrigin",
         "Hook Types",
@@ -36709,6 +36778,11 @@
         "Returns SDKSessionInfo, or undefined if the session is not found.",
         "Renames a session by appending a custom-title entry. Repeated calls are safe; the most recent title wins.",
         "Tags a session. Pass null to clear the tag. Repeated calls are safe; the most recent tag wins.",
+        "Resolves the effective Claude Code settings for a given directory using the same merge engine as the CLI, without spawning the Claude CLI. Use it to inspect what configuration a query() call would see before invoking one.",
+        "This function is alpha and its API may change before stabilization. It reads MDM sources, including macOS plist and Windows HKLM/HKCU, for parity with CLI startup, but does not execute the admin-configured policyHelper subprocess. The permissions.defaultMode field is returned as-is from all tiers including project settings. The trust filter the CLI applies before honoring escalating permission modes is not applied.",
+        "resolveSettings() accepts a single options object. All fields are optional.",
+        "resolveSettings() returns an object describing the merged settings and the source that contributed each key.",
+        "The example below resolves settings for a project directory and prints the source that controls the cleanup period.",
         "Configuration object for the query() function.",
         "The CLI subprocess reads several environment variables that control API timeouts and stall detection. Pass them through the env option:",
         "API_TIMEOUT_MS: per-request timeout on the Anthropic client, in milliseconds. Default 600000. Applies to the main loop and all subagents.",
@@ -36726,15 +36800,7 @@
         "WarmQuery implements AsyncDisposable, so it can be used with await using for automatic cleanup.",
         "Return type of initializationResult(). Contains session initialization data.",
         "Configuration for a subagent defined programmatically.",
-        "Specifies MCP servers available to a subagent. Can be a server name (string referencing a server from the parent’s mcpServers config) or an inline server configuration record mapping server names to configs.",
-        "Where McpServerConfigForProcessTransport is McpStdioServerConfig | McpSSEServerConfig | McpHttpServerConfig | McpSdkServerConfig.",
-        "Controls which filesystem-based configuration sources the SDK loads settings from.",
-        "When settingSources is omitted or undefined, query() loads the same filesystem settings as the Claude Code CLI: user, project, and local. Managed policy settings are loaded in all cases. See What settingSources does not control for inputs that are read regardless of this option, and how to disable them.",
-        "Disable filesystem settings:",
-        "Load all filesystem settings explicitly:",
-        "Load only specific setting sources:",
-        "Testing and CI environments:",
-        "SDK-only applications:"
+        "Specifies MCP servers available to a subagent. Can be a server name (string referencing a server from the parent’s mcpServers config) or an inline server configuration record mapping server names to configs."
       ],
       "codeBlocks": [
         "npm install @anthropic-ai/claude-agent-sdk",
@@ -36751,6 +36817,8 @@
         "function getSessionInfo(\n  sessionId: string,\n  options?: GetSessionInfoOptions\n): Promise<SDKSessionInfo | undefined>;",
         "function renameSession(\n  sessionId: string,\n  title: string,\n  options?: SessionMutationOptions\n): Promise<void>;",
         "function tagSession(\n  sessionId: string,\n  tag: string | null,\n  options?: SessionMutationOptions\n): Promise<void>;",
+        "function resolveSettings(\n  options?: ResolveSettingsOptions\n): Promise<ResolvedSettings>;",
+        "import { resolveSettings } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst { effective, provenance } = await resolveSettings({\n  cwd: \"/path/to/project\",\n  settingSources: [\"user\", \"project\", \"local\"],\n});\n\nconsole.log(`Cleanup period: ${effective.cleanupPeriodDays} days`);\nconsole.log(`Set by: ${provenance.cleanupPeriodDays?.source}`);",
         "const result = query({\n  prompt: \"Analyze this code\",\n  options: {\n    env: {\n      ...process.env,\n      API_TIMEOUT_MS: \"120000\",\n      CLAUDE_CODE_MAX_RETRIES: \"2\",\n      CLAUDE_ASYNC_AGENT_STALL_TIMEOUT_MS: \"120000\",\n    },\n  },\n});",
         "interface Query extends AsyncGenerator<SDKMessage, void> {\n  interrupt(): Promise<void>;\n  rewindFiles(\n    userMessageId: string,\n    options?: { dryRun?: boolean }\n  ): Promise<RewindFilesResult>;\n  setPermissionMode(mode: PermissionMode): Promise<void>;\n  setModel(model?: string): Promise<void>;\n  setMaxThinkingTokens(maxThinkingTokens: number | null): Promise<void>;\n  applyFlagSettings(settings: { [K in keyof Settings]?: Settings[K] | null }): Promise<void>;\n  initializationResult(): Promise<SDKControlInitializeResponse>;\n  supportedCommands(): Promise<SlashCommand[]>;\n  supportedModels(): Promise<ModelInfo[]>;\n  supportedAgents(): Promise<AgentInfo[]>;\n  mcpServerStatus(): Promise<McpServerStatus[]>;\n  accountInfo(): Promise<AccountInfo>;\n  reconnectMcpServer(serverName: string): Promise<void>;\n  toggleMcpServer(serverName: string, enabled: boolean): Promise<void>;\n  setMcpServers(servers: Record<string, McpServerConfig>): Promise<McpSetServersResult>;\n  streamInput(stream: AsyncIterable<SDKUserMessage>): Promise<void>;\n  stopTask(taskId: string): Promise<void>;\n  close(): void;\n}",
         "const q = query({ prompt: messageStream });\n\n// Override the model for the rest of the session\nawait q.applyFlagSettings({ model: \"claude-opus-4-6\" });\n\n// Later: clear the override and fall back to lower-precedence settings\nawait q.applyFlagSettings({ model: null });",
@@ -36766,9 +36834,7 @@
         "// Define everything programmatically.\n// Pass [] to opt out of filesystem setting sources.\nconst result = query({\n  prompt: \"Review this PR\",\n  options: {\n    settingSources: [],\n    agents: {\n      /* ... */\n    },\n    mcpServers: {\n      /* ... */\n    },\n    allowedTools: [\"Read\", \"Grep\", \"Glob\"]\n  }\n});",
         "// Load project settings to include CLAUDE.md files\nconst result = query({\n  prompt: \"Add a new feature following project conventions\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\" // Use Claude Code's system prompt\n    },\n    settingSources: [\"project\"], // Loads CLAUDE.md from project directory\n    allowedTools: [\"Read\", \"Write\", \"Edit\"]\n  }\n});",
         "type PermissionMode =\n  | \"default\" // Standard permission behavior\n  | \"acceptEdits\" // Auto-accept file edits\n  | \"bypassPermissions\" // Bypass all permission checks\n  | \"plan\" // Planning mode - read-only tools only\n  | \"dontAsk\" // Don't prompt for permissions, deny if not pre-approved\n  | \"auto\"; // Use a model classifier to approve or deny each tool call",
-        "type CanUseTool = (\n  toolName: string,\n  input: Record<string, unknown>,\n  options: {\n    signal: AbortSignal;\n    suggestions?: PermissionUpdate[];\n    blockedPath?: string;\n    decisionReason?: string;\n    toolUseID: string;\n    agentID?: string;\n  }\n) => Promise<PermissionResult>;",
-        "type PermissionResult =\n  | {\n      behavior: \"allow\";\n      updatedInput?: Record<string, unknown>;\n      updatedPermissions?: PermissionUpdate[];\n      toolUseID?: string;\n    }\n  | {\n      behavior: \"deny\";\n      message: string;\n      interrupt?: boolean;\n      toolUseID?: string;\n    };",
-        "type ToolConfig = {\n  askUserQuestion?: {\n    previewFormat?: \"markdown\" | \"html\";\n  };\n};"
+        "type CanUseTool = (\n  toolName: string,\n  input: Record<string, unknown>,\n  options: {\n    signal: AbortSignal;\n    suggestions?: PermissionUpdate[];\n    blockedPath?: string;\n    decisionReason?: string;\n    toolUseID: string;\n    agentID?: string;\n  }\n) => Promise<PermissionResult>;"
       ],
       "sectionBlocks": [
         {
@@ -36900,6 +36966,20 @@
           ],
           "codeBlocks": [
             "function tagSession(\n  sessionId: string,\n  tag: string | null,\n  options?: SessionMutationOptions\n): Promise<void>;"
+          ]
+        },
+        {
+          "title": "​resolveSettings()",
+          "paragraphs": [
+            "Resolves the effective Claude Code settings for a given directory using the same merge engine as the CLI, without spawning the Claude CLI. Use it to inspect what configuration a query() call would see before invoking one.",
+            "This function is alpha and its API may change before stabilization. It reads MDM sources, including macOS plist and Windows HKLM/HKCU, for parity with CLI startup, but does not execute the admin-configured policyHelper subprocess. The permissions.defaultMode field is returned as-is from all tiers including project settings. The trust filter the CLI applies before honoring escalating permission modes is not applied.",
+            "resolveSettings() accepts a single options object. All fields are optional.",
+            "resolveSettings() returns an object describing the merged settings and the source that contributed each key.",
+            "The example below resolves settings for a project directory and prints the source that controls the cleanup period."
+          ],
+          "codeBlocks": [
+            "function resolveSettings(\n  options?: ResolveSettingsOptions\n): Promise<ResolvedSettings>;",
+            "import { resolveSettings } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst { effective, provenance } = await resolveSettings({\n  cwd: \"/path/to/project\",\n  settingSources: [\"user\", \"project\", \"local\"],\n});\n\nconsole.log(`Cleanup period: ${effective.cleanupPeriodDays} days`);\nconsole.log(`Set by: ${provenance.cleanupPeriodDays?.source}`);"
           ]
         },
         {
@@ -37071,7 +37151,7 @@
             "Union type of all possible messages returned by the query."
           ],
           "codeBlocks": [
-            "type SDKMessage =\n  | SDKAssistantMessage\n  | SDKUserMessage\n  | SDKUserMessageReplay\n  | SDKResultMessage\n  | SDKSystemMessage\n  | SDKPartialAssistantMessage\n  | SDKCompactBoundaryMessage\n  | SDKStatusMessage\n  | SDKLocalCommandOutputMessage\n  | SDKHookStartedMessage\n  | SDKHookProgressMessage\n  | SDKHookResponseMessage\n  | SDKPluginInstallMessage\n  | SDKToolProgressMessage\n  | SDKAuthStatusMessage\n  | SDKTaskNotificationMessage\n  | SDKTaskStartedMessage\n  | SDKTaskProgressMessage\n  | SDKTaskUpdatedMessage\n  | SDKFilesPersistedEvent\n  | SDKToolUseSummaryMessage\n  | SDKRateLimitEvent\n  | SDKPromptSuggestionMessage;"
+            "type SDKMessage =\n  | SDKAssistantMessage\n  | SDKUserMessage\n  | SDKUserMessageReplay\n  | SDKResultMessage\n  | SDKSystemMessage\n  | SDKPartialAssistantMessage\n  | SDKCompactBoundaryMessage\n  | SDKStatusMessage\n  | SDKLocalCommandOutputMessage\n  | SDKHookStartedMessage\n  | SDKHookProgressMessage\n  | SDKHookResponseMessage\n  | SDKPluginInstallMessage\n  | SDKToolProgressMessage\n  | SDKAuthStatusMessage\n  | SDKTaskNotificationMessage\n  | SDKTaskStartedMessage\n  | SDKTaskProgressMessage\n  | SDKTaskUpdatedMessage\n  | SDKFilesPersistedEvent\n  | SDKToolUseSummaryMessage\n  | SDKRateLimitEvent\n  | SDKPermissionDeniedMessage\n  | SDKPromptSuggestionMessage;"
           ]
         },
         {
@@ -37093,15 +37173,6 @@
           ],
           "codeBlocks": [
             "type SDKUserMessage = {\n  type: \"user\";\n  uuid?: UUID;\n  session_id: string;\n  message: MessageParam; // From Anthropic SDK\n  parent_tool_use_id: string | null;\n  isSynthetic?: boolean;\n  shouldQuery?: boolean;\n  tool_use_result?: unknown;\n  origin?: SDKMessageOrigin;\n};"
-          ]
-        },
-        {
-          "title": "​SDKUserMessageReplay",
-          "paragraphs": [
-            "Replayed user message with required UUID."
-          ],
-          "codeBlocks": [
-            "type SDKUserMessageReplay = {\n  type: \"user\";\n  uuid: UUID;\n  session_id: string;\n  message: MessageParam;\n  parent_tool_use_id: string | null;\n  isSynthetic?: boolean;\n  tool_use_result?: unknown;\n  origin?: SDKMessageOrigin;\n  isReplay: true;\n};"
           ]
         }
       ]
@@ -38277,11 +38348,17 @@
         "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
         "Use this file to discover all available pages before exploring further.",
         "The weekly dev digest highlights the features most likely to change how you work. Each entry includes runnable code, a short demo, and a link to the full docs. For every bug fix and minor improvement, see the changelog.",
+        "Plugins load from .zip archives and URLs: --plugin-dir now accepts .zip files, and --plugin-url fetches a plugin archive for the current session.",
+        "Also this week: worktree.baseRef chooses whether new worktrees branch from the remote default or local HEAD; auto mode hard deny rules block actions unconditionally regardless of allow exceptions; and hooks see the active effort level via effort.level and $CLAUDE_EFFORT.",
+        "Read the Week 19 digest →",
+        "Windows without Git Bash: Git for Windows is no longer required, and Claude Code uses PowerShell as the shell tool when Bash is absent.",
+        "Also this week: claude ultrareview brings cloud code review to CI and scripts; claude project purge cleans up local state for a project; and pasting a PR URL into /resume finds the session that created it.",
+        "Read the Week 18 digest →",
         "/ultrareview opens as a public research preview: a fleet of bug-hunting agents runs in the cloud and findings land back in your CLI or Desktop automatically.",
         "Also this week: session recap shows you what happened while a terminal was unfocused; custom themes let you build and ship color palettes from /theme or a plugin; and Claude Code on the web gets a redesign with a new sessions sidebar and drag-and-drop layout.",
         "Read the Week 17 digest →",
         "Claude Opus 4.7 lands as the new default on Max and Team Premium, with a new xhigh effort level that’s the recommended setting for most coding work and an interactive /effort slider to dial it in.",
-        "Also this week: Routines on Claude Code on the web fire templated cloud agents from a schedule, GitHub event, or API call; /ultrareview runs parallel multi-agent code review in the cloud; /usage shows what’s driving your limits; and the CLI moves to native binaries.",
+        "Also this week: Routines on Claude Code on the web fire templated cloud agents from a schedule, GitHub event, or API call; mobile push notifications ping your phone when a long task finishes or Claude needs you; /usage shows what’s driving your limits; and the CLI moves to native binaries.",
         "Read the Week 16 digest →",
         "Ultraplan enters early preview: draft a plan in the cloud from your CLI, review and comment on it in a web editor, then run it remotely or pull it back local. The first run now auto-creates a cloud environment for you.",
         "Also this week: the Monitor tool streams background events into the conversation so Claude can tail logs and react live, /loop self-paces when you omit the interval, /team-onboarding packages your setup into a replayable guide, and /autofix-pr turns on PR auto-fix from your terminal.",
@@ -38309,17 +38386,138 @@
             "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
             "Use this file to discover all available pages before exploring further.",
             "The weekly dev digest highlights the features most likely to change how you work. Each entry includes runnable code, a short demo, and a link to the full docs. For every bug fix and minor improvement, see the changelog.",
+            "Plugins load from .zip archives and URLs: --plugin-dir now accepts .zip files, and --plugin-url fetches a plugin archive for the current session.",
+            "Also this week: worktree.baseRef chooses whether new worktrees branch from the remote default or local HEAD; auto mode hard deny rules block actions unconditionally regardless of allow exceptions; and hooks see the active effort level via effort.level and $CLAUDE_EFFORT.",
+            "Read the Week 19 digest →",
+            "Windows without Git Bash: Git for Windows is no longer required, and Claude Code uses PowerShell as the shell tool when Bash is absent.",
+            "Also this week: claude ultrareview brings cloud code review to CI and scripts; claude project purge cleans up local state for a project; and pasting a PR URL into /resume finds the session that created it.",
+            "Read the Week 18 digest →",
             "/ultrareview opens as a public research preview: a fleet of bug-hunting agents runs in the cloud and findings land back in your CLI or Desktop automatically.",
             "Also this week: session recap shows you what happened while a terminal was unfocused; custom themes let you build and ship color palettes from /theme or a plugin; and Claude Code on the web gets a redesign with a new sessions sidebar and drag-and-drop layout.",
-            "Read the Week 17 digest →",
-            "Claude Opus 4.7 lands as the new default on Max and Team Premium, with a new xhigh effort level that’s the recommended setting for most coding work and an interactive /effort slider to dial it in.",
-            "Also this week: Routines on Claude Code on the web fire templated cloud agents from a schedule, GitHub event, or API call; /ultrareview runs parallel multi-agent code review in the cloud; /usage shows what’s driving your limits; and the CLI moves to native binaries.",
-            "Read the Week 16 digest →",
-            "Ultraplan enters early preview: draft a plan in the cloud from your CLI, review and comment on it in a web editor, then run it remotely or pull it back local. The first run now auto-creates a cloud environment for you.",
-            "Also this week: the Monitor tool streams background events into the conversation so Claude can tail logs and react live, /loop self-paces when you omit the interval, /team-onboarding packages your setup into a replayable guide, and /autofix-pr turns on PR auto-fix from your terminal.",
-            "Read the Week 15 digest →"
+            "Read the Week 17 digest →"
           ],
           "codeBlocks": []
+        }
+      ]
+    },
+    {
+      "section": "What's New",
+      "path": "/docs/en/whats-new/2026-w19",
+      "url": "https://code.claude.com/docs/en/whats-new/2026-w19",
+      "title": "Week 19 · May 4–8, 2026",
+      "metaDescription": "Load plugins from .zip archives and URLs, search command history across every project with Ctrl+R, branch new worktrees from local HEAD or the remote default, and block actions unconditionally with auto mode hard deny rules.",
+      "headings": [
+        "Documentation Index"
+      ],
+      "toc": [],
+      "paragraphs": [
+        "Load plugins from .zip archives and URLs, search command history across every project with Ctrl+R, branch new worktrees from local HEAD or the remote default, and block actions unconditionally with auto mode hard deny rules.",
+        "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
+        "Use this file to discover all available pages before exploring further.",
+        "--plugin-dir now accepts a .zip plugin archive in addition to a directory, and the new --plugin-url flag fetches a plugin archive from a URL for the current session. Useful for trying a plugin before adding it to a marketplace, or for shipping internal plugins from an artifact store.",
+        "Load a plugin straight from a URL:",
+        "Ctrl+R reverse-search now defaults to all prompts across every project, restoring the behavior from before v2.1.124. Press Ctrl+S while searching to narrow back to the current project or session. Handy when you remember a command you ran in another repo last week and don’t want to go digging for it.",
+        "Other wins",
+        "Full changelog for v2.1.128–v2.1.136 →",
+        "Was this page helpful?"
+      ],
+      "codeBlocks": [
+        "claude --plugin-url https://example.com/my-plugin.zip"
+      ],
+      "sectionBlocks": [
+        {
+          "title": "",
+          "paragraphs": [
+            "Load plugins from .zip archives and URLs, search command history across every project with Ctrl+R, branch new worktrees from local HEAD or the remote default, and block actions unconditionally with auto mode hard deny rules."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "Documentation Index",
+          "paragraphs": [
+            "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
+            "Use this file to discover all available pages before exploring further.",
+            "--plugin-dir now accepts a .zip plugin archive in addition to a directory, and the new --plugin-url flag fetches a plugin archive from a URL for the current session. Useful for trying a plugin before adding it to a marketplace, or for shipping internal plugins from an artifact store.",
+            "Load a plugin straight from a URL:",
+            "Ctrl+R reverse-search now defaults to all prompts across every project, restoring the behavior from before v2.1.124. Press Ctrl+S while searching to narrow back to the current project or session. Handy when you remember a command you ran in another repo last week and don’t want to go digging for it.",
+            "Other wins",
+            "Full changelog for v2.1.128–v2.1.136 →",
+            "Was this page helpful?"
+          ],
+          "codeBlocks": [
+            "claude --plugin-url https://example.com/my-plugin.zip"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "What's New",
+      "path": "/docs/en/whats-new/2026-w18",
+      "url": "https://code.claude.com/docs/en/whats-new/2026-w18",
+      "title": "Week 18 · April 27 – May 1, 2026",
+      "metaDescription": "Claude Code on Windows runs without Git Bash, claude auth login accepts a pasted OAuth code when the browser callback can't reach localhost, claude project purge cleans up local state per project, and pasting a PR URL into /resume finds the session that created it.",
+      "headings": [
+        "Documentation Index"
+      ],
+      "toc": [],
+      "paragraphs": [
+        "Claude Code on Windows runs without Git Bash, claude auth login accepts a pasted OAuth code when the browser callback can’t reach localhost, claude project purge cleans up local state per project, and pasting a PR URL into /resume finds the session that created it.",
+        "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
+        "Use this file to discover all available pages before exploring further.",
+        "claude auth login now accepts the OAuth code pasted directly into the terminal when the browser callback can’t reach localhost. That covers WSL2, SSH sessions, and containers, where the redirect to a local port doesn’t work. The same release also fixes login timeouts on slow or proxied connections and in IPv6-only devcontainers.",
+        "Sign in, then paste the code from the browser:",
+        "Delete all Claude Code state for a project: transcripts, tasks, file history, and the project’s config entry. Supports --dry-run to preview, -y/--yes to skip confirmation, -i/--interactive to choose, and --all to clear every project.",
+        "Preview what would be removed:",
+        "Then run it for real:",
+        "When you create a pull request with gh pr create, Claude Code links it to the session that produced it. Now you can get back to that session from the PR URL alone, without remembering its name.",
+        "Open the session picker:",
+        "Paste the PR URL into the picker. The first character of the paste drops you into search mode, and the list filters to the session that created that PR. Press Enter to resume it. GitHub, GitHub Enterprise, GitLab, and Bitbucket pull and merge request URLs all work.",
+        "To skip the picker, pass the PR number on the command line instead:",
+        "Git for Windows is no longer required. When Bash is absent, Claude Code uses PowerShell as the shell tool, and when the PowerShell tool is enabled it is treated as the primary shell. PowerShell 7 installed via the Microsoft Store, MSI without PATH, or a .NET global tool is now detected automatically.",
+        "Other wins",
+        "Full changelog for v2.1.120–v2.1.126 →",
+        "Was this page helpful?"
+      ],
+      "codeBlocks": [
+        "claude auth login",
+        "claude project purge --dry-run",
+        "claude project purge",
+        "> /resume",
+        "https://github.com/your-org/your-repo/pull/1234",
+        "claude --from-pr 1234"
+      ],
+      "sectionBlocks": [
+        {
+          "title": "",
+          "paragraphs": [
+            "Claude Code on Windows runs without Git Bash, claude auth login accepts a pasted OAuth code when the browser callback can’t reach localhost, claude project purge cleans up local state per project, and pasting a PR URL into /resume finds the session that created it."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "Documentation Index",
+          "paragraphs": [
+            "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
+            "Use this file to discover all available pages before exploring further.",
+            "claude auth login now accepts the OAuth code pasted directly into the terminal when the browser callback can’t reach localhost. That covers WSL2, SSH sessions, and containers, where the redirect to a local port doesn’t work. The same release also fixes login timeouts on slow or proxied connections and in IPv6-only devcontainers.",
+            "Sign in, then paste the code from the browser:",
+            "Delete all Claude Code state for a project: transcripts, tasks, file history, and the project’s config entry. Supports --dry-run to preview, -y/--yes to skip confirmation, -i/--interactive to choose, and --all to clear every project.",
+            "Preview what would be removed:",
+            "Then run it for real:",
+            "When you create a pull request with gh pr create, Claude Code links it to the session that produced it. Now you can get back to that session from the PR URL alone, without remembering its name.",
+            "Open the session picker:",
+            "Paste the PR URL into the picker. The first character of the paste drops you into search mode, and the list filters to the session that created that PR. Press Enter to resume it. GitHub, GitHub Enterprise, GitLab, and Bitbucket pull and merge request URLs all work.",
+            "To skip the picker, pass the PR number on the command line instead:",
+            "Git for Windows is no longer required. When Bash is absent, Claude Code uses PowerShell as the shell tool, and when the PowerShell tool is enabled it is treated as the primary shell. PowerShell 7 installed via the Microsoft Store, MSI without PATH, or a .NET global tool is now detected automatically."
+          ],
+          "codeBlocks": [
+            "claude auth login",
+            "claude project purge --dry-run",
+            "claude project purge",
+            "> /resume",
+            "https://github.com/your-org/your-repo/pull/1234",
+            "claude --from-pr 1234"
+          ]
         }
       ]
     },
@@ -38393,13 +38591,13 @@
       "path": "/docs/en/whats-new/2026-w16",
       "url": "https://code.claude.com/docs/en/whats-new/2026-w16",
       "title": "Week 16 · April 13–17, 2026",
-      "metaDescription": "Claude Opus 4.7 with the new xhigh effort level, Routines on Claude Code on the web, /ultrareview cloud code review, a /usage breakdown that shows what's driving your limits, and native binaries replacing the bundled JavaScript.",
+      "metaDescription": "Claude Opus 4.7 with the new xhigh effort level, Routines on Claude Code on the web, mobile push notifications that ping your phone when Claude needs you, a /usage breakdown that shows what's driving your limits, and native binaries replacing the bundled JavaScript.",
       "headings": [
         "Documentation Index"
       ],
       "toc": [],
       "paragraphs": [
-        "Claude Opus 4.7 with the new xhigh effort level, Routines on Claude Code on the web, /ultrareview cloud code review, a /usage breakdown that shows what’s driving your limits, and native binaries replacing the bundled JavaScript.",
+        "Claude Opus 4.7 with the new xhigh effort level, Routines on Claude Code on the web, mobile push notifications that ping your phone when Claude needs you, a /usage breakdown that shows what’s driving your limits, and native binaries replacing the bundled JavaScript.",
         "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
         "Use this file to discover all available pages before exploring further.",
         "Anthropic’s strongest coding model yet is now the default on Max and Team Premium, and available everywhere else from /model. It adds a new xhigh effort level that sits between high and max: best results for most coding and agentic tasks, applied as the default the first time you switch to 4.7. /effort now opens an interactive arrow-key slider when you call it without arguments, so you can dial intelligence against speed without remembering the level names.",
@@ -38408,9 +38606,8 @@
         "Create one from the web UI, or scaffold from your terminal:",
         "More visibility into where your Claude Code usage goes. /usage now shows what’s driving your limits: parallel sessions, subagents, cache misses, and long context, each with a percentage of your last 24 hours and a tip to optimize it. Press d or w to switch between day and week views.",
         "Run it any time:",
-        "Comprehensive code review in the cloud. Ultrareview fans your branch out across parallel reviewers on Claude Code on the web, runs an adversarial critique pass over each finding, and returns a verified findings report while your terminal stays free. Call it with no arguments to review your current branch, or pass a PR number to fetch and review that PR. The launch dialog now shows a diffstat so you know what’s going up before you confirm.",
-        "Review the branch you’re on:",
-        "Or point it at a PR:",
+        "With Remote Control connected, Claude can send a push notification to your phone when a long task finishes or it needs a decision to keep going. Turn it on with “Push when Claude decides” in /config, or ask for one in your prompt. Useful when you kick off a long agent run and want to step away from the terminal.",
+        "Ask Claude to ping you when it’s done:",
         "The claude CLI now spawns a native per-platform binary instead of bundled JavaScript, so the installed claude command no longer invokes Node. The npm package pulls the right binary in through an optional dependency such as @anthropic-ai/claude-code-darwin-arm64, so your install command doesn’t change. The standalone installer already shipped this binary; npm now matches it.",
         "Upgrade and check what you’re running:",
         "Other wins",
@@ -38421,15 +38618,14 @@
         "> /model opus\n> /effort xhigh",
         "> /schedule daily PR review at 9am",
         "> /usage",
-        "> /ultrareview",
-        "> /ultrareview 1234",
+        "> notify me when the tests pass",
         "claude update\nclaude --version"
       ],
       "sectionBlocks": [
         {
           "title": "",
           "paragraphs": [
-            "Claude Opus 4.7 with the new xhigh effort level, Routines on Claude Code on the web, /ultrareview cloud code review, a /usage breakdown that shows what’s driving your limits, and native binaries replacing the bundled JavaScript."
+            "Claude Opus 4.7 with the new xhigh effort level, Routines on Claude Code on the web, mobile push notifications that ping your phone when Claude needs you, a /usage breakdown that shows what’s driving your limits, and native binaries replacing the bundled JavaScript."
           ],
           "codeBlocks": []
         },
@@ -38444,17 +38640,16 @@
             "Create one from the web UI, or scaffold from your terminal:",
             "More visibility into where your Claude Code usage goes. /usage now shows what’s driving your limits: parallel sessions, subagents, cache misses, and long context, each with a percentage of your last 24 hours and a tip to optimize it. Press d or w to switch between day and week views.",
             "Run it any time:",
-            "Comprehensive code review in the cloud. Ultrareview fans your branch out across parallel reviewers on Claude Code on the web, runs an adversarial critique pass over each finding, and returns a verified findings report while your terminal stays free. Call it with no arguments to review your current branch, or pass a PR number to fetch and review that PR. The launch dialog now shows a diffstat so you know what’s going up before you confirm.",
-            "Review the branch you’re on:",
-            "Or point it at a PR:",
-            "The claude CLI now spawns a native per-platform binary instead of bundled JavaScript, so the installed claude command no longer invokes Node. The npm package pulls the right binary in through an optional dependency such as @anthropic-ai/claude-code-darwin-arm64, so your install command doesn’t change. The standalone installer already shipped this binary; npm now matches it."
+            "With Remote Control connected, Claude can send a push notification to your phone when a long task finishes or it needs a decision to keep going. Turn it on with “Push when Claude decides” in /config, or ask for one in your prompt. Useful when you kick off a long agent run and want to step away from the terminal.",
+            "Ask Claude to ping you when it’s done:",
+            "The claude CLI now spawns a native per-platform binary instead of bundled JavaScript, so the installed claude command no longer invokes Node. The npm package pulls the right binary in through an optional dependency such as @anthropic-ai/claude-code-darwin-arm64, so your install command doesn’t change. The standalone installer already shipped this binary; npm now matches it.",
+            "Upgrade and check what you’re running:"
           ],
           "codeBlocks": [
             "> /model opus\n> /effort xhigh",
             "> /schedule daily PR review at 9am",
             "> /usage",
-            "> /ultrareview",
-            "> /ultrareview 1234",
+            "> notify me when the tests pass",
             "claude update\nclaude --version"
           ]
         }
