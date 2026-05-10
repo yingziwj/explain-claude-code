@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-09T05:30:06.255Z",
-  "sourceGeneratedAt": "2026-05-09T05:30:05.938Z",
+  "generatedAt": "2026-05-10T05:46:11.452Z",
+  "sourceGeneratedAt": "2026-05-10T05:46:11.140Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -528,7 +528,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.137、2.1.136、2.1.133、2.1.132 这些环节往下讲。",
+            "原文这页大多会按 2.1.138、2.1.137、2.1.136、2.1.133 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -537,7 +537,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.137 -> 2.1.136 -> 2.1.133 -> 2.1.132。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.138 -> 2.1.137 -> 2.1.136 -> 2.1.133。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         },
         {
@@ -9728,9 +9728,21 @@
               "kind": "prompt"
             },
             {
-              "title": "原页关键片段：Auto mode cannot determine the safety of an action",
+              "title": "原页关键片段：Auto mode cannot determine the safety of an action 1",
               "body": "\"Auto mode cannot determine the safety of an action\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
               "code": "<model> is temporarily unavailable, so auto mode cannot determine the safety of <tool> right now. Wait briefly and then try this action again.",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Auto mode cannot determine the safety of an action 2",
+              "body": "\"Auto mode cannot determine the safety of an action\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "Auto mode could not evaluate this action and is blocking it for safety — run with --debug for details",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Auto mode cannot determine the safety of an action 3",
+              "body": "\"Auto mode cannot determine the safety of an action\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "Auto mode classifier transcript exceeded context window — falling back to manual approval (try /compact to reduce conversation size)",
               "kind": "code"
             },
             {
@@ -9768,18 +9780,6 @@
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
               "code": "Invalid API key · Fix external API key",
               "kind": "code"
-            },
-            {
-              "title": "原页关键片段：This organization has been disabled",
-              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "Your ANTHROPIC_API_KEY belongs to a disabled organization · Unset the environment variable to use your other credentials\nAPI Error: 400 ... This organization has been disabled.",
-              "kind": "code"
-            },
-            {
-              "title": "原页关键片段：Routines are disabled by your organization’s policy",
-              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
-              "code": "Routines are disabled by your organization's policy.",
-              "kind": "prompt"
             }
           ]
         },
@@ -9856,6 +9856,14 @@
           "paragraphs": [
             "这一段不只是挂个标题，它是在说明\"Auto mode cannot determine the safety of an action\"这一块到底负责什么。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Auto mode cannot determine the safety of an action",
+              "body": "\"Auto mode cannot determine the safety of an action\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "Auto mode classifier transcript exceeded context window — falling back to manual approval (try /compact to reduce conversation size)",
+              "kind": "code"
+            }
           ]
         },
         {
