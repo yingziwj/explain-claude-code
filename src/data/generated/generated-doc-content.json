@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-10T05:46:11.452Z",
-  "sourceGeneratedAt": "2026-05-10T05:46:11.140Z",
+  "generatedAt": "2026-05-11T06:08:39.292Z",
+  "sourceGeneratedAt": "2026-05-11T06:08:38.932Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -7534,6 +7534,21 @@
           "paragraphs": [
             "这一块主要是在说\"How hooks work\"真到手上该怎么用，哪里最容易踩坑。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Combine results from multiple hooks",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Combine results from multiple hooks",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"jq -r .tool_input.command >> ~/.claude/bash.log\"\n          },\n          {\n            \"type\": \"command\",\n            \"command\": \"\\\"$CLAUDE_PROJECT_DIR\\\"/.claude/hooks/block-rm-rf.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "kind": "config"
+            }
           ]
         },
         {

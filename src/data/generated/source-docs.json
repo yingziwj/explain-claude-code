@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-10T05:46:11.140Z",
+  "generatedAt": "2026-05-11T06:08:38.932Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -10614,8 +10614,8 @@
         "If Claude uses your skill when you don’t want it:",
         "Make the description more specific",
         "Add disable-model-invocation: true if you only want manual invocation",
-        "Skill descriptions are loaded into context so Claude knows what’s available. All skill names are always included, but if you have many skills, descriptions are shortened to fit the character budget, which can strip the keywords Claude needs to match your request. The budget scales dynamically at 1% of the context window, with a fallback of 8,000 characters.",
-        "To raise the limit, set the SLASH_COMMAND_TOOL_CHAR_BUDGET environment variable. To free budget for other skills, set low-priority entries to \"name-only\" in skillOverrides so they list without a description. You can also trim the description and when_to_use text at the source: put the key use case first, since each entry’s combined text is capped at 1,536 characters regardless of budget.",
+        "Skill descriptions are loaded into context so Claude knows what’s available. All skill names are always included, but if you have many skills, descriptions are shortened to fit the character budget, which can strip the keywords Claude needs to match your request. The budget scales at 1% of the model’s context window. When it overflows, descriptions for the skills you invoke least are dropped first, so the skills you actually use keep their full text. Run /doctor to see whether the budget is overflowing and which skills are affected.",
+        "To raise the budget, set the skillListingBudgetFraction setting (e.g. 0.02 = 2%) or the SLASH_COMMAND_TOOL_CHAR_BUDGET environment variable to a fixed character count. To free budget for other skills, set low-priority entries to \"name-only\" in skillOverrides so they list without a description. You can also trim the description and when_to_use text at the source: put the key use case first, since each entry’s combined text is capped at 1,536 characters regardless of budget. The cap is configurable with maxSkillDescriptionChars.",
         "Debug your configuration: diagnose why a skill isn’t appearing or triggering",
         "Subagents: delegate tasks to specialized agents",
         "Plugins: package and distribute skills with other extensions",
@@ -10965,8 +10965,8 @@
         {
           "title": "​Skill descriptions are cut short",
           "paragraphs": [
-            "Skill descriptions are loaded into context so Claude knows what’s available. All skill names are always included, but if you have many skills, descriptions are shortened to fit the character budget, which can strip the keywords Claude needs to match your request. The budget scales dynamically at 1% of the context window, with a fallback of 8,000 characters.",
-            "To raise the limit, set the SLASH_COMMAND_TOOL_CHAR_BUDGET environment variable. To free budget for other skills, set low-priority entries to \"name-only\" in skillOverrides so they list without a description. You can also trim the description and when_to_use text at the source: put the key use case first, since each entry’s combined text is capped at 1,536 characters regardless of budget."
+            "Skill descriptions are loaded into context so Claude knows what’s available. All skill names are always included, but if you have many skills, descriptions are shortened to fit the character budget, which can strip the keywords Claude needs to match your request. The budget scales at 1% of the model’s context window. When it overflows, descriptions for the skills you invoke least are dropped first, so the skills you actually use keep their full text. Run /doctor to see whether the budget is overflowing and which skills are affected.",
+            "To raise the budget, set the skillListingBudgetFraction setting (e.g. 0.02 = 2%) or the SLASH_COMMAND_TOOL_CHAR_BUDGET environment variable to a fixed character count. To free budget for other skills, set low-priority entries to \"name-only\" in skillOverrides so they list without a description. You can also trim the description and when_to_use text at the source: put the key use case first, since each entry’s combined text is capped at 1,536 characters regardless of budget. The cap is configurable with maxSkillDescriptionChars."
           ],
           "codeBlocks": []
         },
@@ -11004,6 +11004,7 @@
         "​Reload environment when directory or files change",
         "​Auto-approve specific permission prompts",
         "​How hooks work",
+        "​Combine results from multiple hooks",
         "​Read input and return output",
         "​Filter hooks with matchers",
         "​Configure hook location",
@@ -11011,8 +11012,7 @@
         "​Agent-based hooks",
         "​HTTP hooks",
         "​Limitations and troubleshooting",
-        "​Limitations",
-        "​Hooks and permission modes"
+        "​Limitations"
       ],
       "toc": [
         "Set up your first hook",
@@ -11025,6 +11025,7 @@
         "Reload environment when directory or files change",
         "Auto-approve specific permission prompts",
         "How hooks work",
+        "Combine results from multiple hooks",
         "Read input and return output",
         "Hook input",
         "Hook output",
@@ -11033,8 +11034,7 @@
         "Filter by tool name and arguments with the if field",
         "Configure hook location",
         "Prompt-based hooks",
-        "Agent-based hooks",
-        "HTTP hooks"
+        "Agent-based hooks"
       ],
       "paragraphs": [
         "Set up your first hook",
@@ -11047,6 +11047,7 @@
         "Reload environment when directory or files change",
         "Auto-approve specific permission prompts",
         "How hooks work",
+        "Combine results from multiple hooks",
         "Read input and return output",
         "Hook input",
         "Hook output",
@@ -11125,12 +11126,15 @@
         "To switch the session to acceptEdits, your hook writes this JSON to stdout:",
         "Keep the matcher as narrow as possible. Matching on .* or leaving the matcher empty would auto-approve every permission prompt, including file writes and shell commands. See the PermissionRequest reference for the full set of decision fields.",
         "Hook events fire at specific lifecycle points in Claude Code. When an event fires, all matching hooks run in parallel, and identical hook commands are automatically deduplicated. The table below shows each event and when it triggers:",
-        "When multiple hooks match, each one returns its own result. For decisions, Claude Code picks the most restrictive answer. A PreToolUse hook returning deny cancels the tool call no matter what the others return. One hook returning ask forces the permission prompt even if the rest return allow. Text from additionalContext is kept from every hook and passed to Claude together.",
         "Each hook has a type that determines how it runs. Most hooks use \"type\": \"command\", which runs a shell command. Four other types are available:",
         "\"type\": \"http\": POST event data to a URL. See HTTP hooks.",
         "\"type\": \"mcp_tool\": call a tool on an already-connected MCP server. See MCP tool hooks.",
         "\"type\": \"prompt\": single-turn LLM evaluation. See Prompt-based hooks.",
         "\"type\": \"agent\": multi-turn verification with tool access. Agent hooks are experimental and may change. See Agent-based hooks.",
+        "When multiple hooks match the same event, every hook’s command runs to completion before Claude Code merges the results. One hook returning deny does not stop sibling hooks from executing. Don’t rely on one hook’s deny to suppress side effects in another hook.",
+        "After all matching hooks finish, Claude Code combines their outputs. For PreToolUse permission decisions, the most restrictive answer wins: deny overrides ask, which overrides allow. Text from additionalContext is kept from every hook and passed to Claude together.",
+        "The example below registers two PreToolUse hooks on Bash. The first appends every command to a log file and exits 0. The second runs a script that exits 2 to deny when the command contains rm -rf:",
+        "When Claude tries to run rm -rf /tmp/build, both hooks execute in parallel. The logging hook writes the command to ~/.claude/bash.log and exits 0, which reports no decision. The guardrail hook exits 2, which denies the tool call. The deny wins, so Claude Code blocks the command and shows Claude the guardrail’s stderr. The log entry is still written because the logging hook already ran.",
         "Hooks communicate with Claude Code through stdin, stdout, stderr, and exit codes. When an event fires, Claude Code passes event-specific data as JSON to your script’s stdin. Your script reads that data, does its work, and tells Claude Code what to do next via the exit code.",
         "Every event includes common fields like session_id and cwd, but each event type adds different data. For example, when Claude runs a Bash command, a PreToolUse hook receives something like this on stdin:",
         "Your script can parse that JSON and act on any of those fields. UserPromptSubmit hooks get the prompt text instead, SessionStart hooks get the source (startup, resume, clear, compact), and so on. See Common input fields in the reference for shared fields, and each event’s section for event-specific schemas.",
@@ -11212,11 +11216,7 @@
         "If the script isn’t running at all, make it executable: chmod +x ./my-hook.sh",
         "You edited a settings file but the hooks don’t appear in the menu.",
         "File edits are normally picked up automatically. If they haven’t appeared after a few seconds, the file watcher may have missed the change: restart your session to force a reload.",
-        "Verify your JSON is valid (trailing commas and comments are not allowed)",
-        "Confirm the settings file is in the correct location: .claude/settings.json for project hooks, ~/.claude/settings.json for global hooks",
-        "Claude keeps working in an infinite loop instead of stopping.",
-        "Your Stop hook script needs to check whether it already triggered a continuation. Parse the stop_hook_active field from the JSON input and exit early if it’s true:",
-        "Claude Code shows a JSON parsing error even though your hook script outputs valid JSON."
+        "Verify your JSON is valid (trailing commas and comments are not allowed)"
       ],
       "codeBlocks": [
         "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
@@ -11234,6 +11234,7 @@
         "{\n  \"hooks\": {\n    \"FileChanged\": [\n      {\n        \"matcher\": \".envrc|.env\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"direnv export bash > \\\"$CLAUDE_ENV_FILE\\\"\"\n          }\n        ]\n      }\n    ]\n  }\n}",
         "{\n  \"hooks\": {\n    \"PermissionRequest\": [\n      {\n        \"matcher\": \"ExitPlanMode\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"echo '{\\\"hookSpecificOutput\\\": {\\\"hookEventName\\\": \\\"PermissionRequest\\\", \\\"decision\\\": {\\\"behavior\\\": \\\"allow\\\"}}}'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
         "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PermissionRequest\",\n    \"decision\": {\n      \"behavior\": \"allow\",\n      \"updatedPermissions\": [\n        { \"type\": \"setMode\", \"mode\": \"acceptEdits\", \"destination\": \"session\" }\n      ]\n    }\n  }\n}",
+        "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"jq -r .tool_input.command >> ~/.claude/bash.log\"\n          },\n          {\n            \"type\": \"command\",\n            \"command\": \"\\\"$CLAUDE_PROJECT_DIR\\\"/.claude/hooks/block-rm-rf.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
         "{\n  \"session_id\": \"abc123\",          // unique ID for this session\n  \"cwd\": \"/Users/sarah/myproject\", // working directory when the event fired\n  \"hook_event_name\": \"PreToolUse\", // which event triggered this hook\n  \"tool_name\": \"Bash\",             // the tool Claude is about to use\n  \"tool_input\": {                  // the arguments Claude passed to the tool\n    \"command\": \"npm test\"          // for Bash, this is the shell command\n  }\n}",
         "#!/bin/bash\nINPUT=$(cat)\nCOMMAND=$(echo \"$INPUT\" | jq -r '.tool_input.command')\n\nif echo \"$COMMAND\" | grep -q \"drop table\"; then\n  echo \"Blocked: dropping tables is not allowed\" >&2  # stderr becomes Claude's feedback\n  exit 2                                               # exit 2 = block the action\nfi\n\nexit 0  # exit 0 = let it proceed",
         "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PreToolUse\",\n    \"permissionDecision\": \"deny\",\n    \"permissionDecisionReason\": \"Use rg instead of grep for better performance\"\n  }\n}",
@@ -11264,8 +11265,8 @@
             "Reload environment when directory or files change",
             "Auto-approve specific permission prompts",
             "How hooks work",
-            "Read input and return output",
-            "Hook input"
+            "Combine results from multiple hooks",
+            "Read input and return output"
           ],
           "codeBlocks": []
         },
@@ -11420,7 +11421,6 @@
           "title": "​How hooks work",
           "paragraphs": [
             "Hook events fire at specific lifecycle points in Claude Code. When an event fires, all matching hooks run in parallel, and identical hook commands are automatically deduplicated. The table below shows each event and when it triggers:",
-            "When multiple hooks match, each one returns its own result. For decisions, Claude Code picks the most restrictive answer. A PreToolUse hook returning deny cancels the tool call no matter what the others return. One hook returning ask forces the permission prompt even if the rest return allow. Text from additionalContext is kept from every hook and passed to Claude together.",
             "Each hook has a type that determines how it runs. Most hooks use \"type\": \"command\", which runs a shell command. Four other types are available:",
             "\"type\": \"http\": POST event data to a URL. See HTTP hooks.",
             "\"type\": \"mcp_tool\": call a tool on an already-connected MCP server. See MCP tool hooks.",
@@ -11428,6 +11428,18 @@
             "\"type\": \"agent\": multi-turn verification with tool access. Agent hooks are experimental and may change. See Agent-based hooks."
           ],
           "codeBlocks": []
+        },
+        {
+          "title": "​Combine results from multiple hooks",
+          "paragraphs": [
+            "When multiple hooks match the same event, every hook’s command runs to completion before Claude Code merges the results. One hook returning deny does not stop sibling hooks from executing. Don’t rely on one hook’s deny to suppress side effects in another hook.",
+            "After all matching hooks finish, Claude Code combines their outputs. For PreToolUse permission decisions, the most restrictive answer wins: deny overrides ask, which overrides allow. Text from additionalContext is kept from every hook and passed to Claude together.",
+            "The example below registers two PreToolUse hooks on Bash. The first appends every command to a log file and exits 0. The second runs a script that exits 2 to deny when the command contains rm -rf:",
+            "When Claude tries to run rm -rf /tmp/build, both hooks execute in parallel. The logging hook writes the command to ~/.claude/bash.log and exits 0, which reports no decision. The guardrail hook exits 2, which denies the tool call. The deny wins, so Claude Code blocks the command and shows Claude the guardrail’s stderr. The log entry is still written because the logging hook already ran."
+          ],
+          "codeBlocks": [
+            "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"jq -r .tool_input.command >> ~/.claude/bash.log\"\n          },\n          {\n            \"type\": \"command\",\n            \"command\": \"\\\"$CLAUDE_PROJECT_DIR\\\"/.claude/hooks/block-rm-rf.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}"
+          ]
         },
         {
           "title": "​Read input and return output",
