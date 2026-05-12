@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-11T06:08:39.292Z",
-  "sourceGeneratedAt": "2026-05-11T06:08:38.932Z",
+  "generatedAt": "2026-05-12T05:48:26.724Z",
+  "sourceGeneratedAt": "2026-05-12T05:48:26.395Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -528,7 +528,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.138、2.1.137、2.1.136、2.1.133 这些环节往下讲。",
+            "原文这页大多会按 2.1.139、2.1.138、2.1.137、2.1.136 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -537,7 +537,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.138 -> 2.1.137 -> 2.1.136 -> 2.1.133。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.139 -> 2.1.138 -> 2.1.137 -> 2.1.136。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         },
         {
@@ -1333,7 +1333,13 @@
               "kind": "config"
             },
             {
-              "title": "原页关键片段：Manage CLAUDE.md for large teams",
+              "title": "原页关键片段：Manage CLAUDE.md for large teams 1",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"claudeMd\": \"Always run `make lint` before committing.\\nNever push directly to main.\"\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Manage CLAUDE.md for large teams 2",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
               "code": "{\n  \"claudeMdExcludes\": [\n    \"**/monorepo/CLAUDE.md\",\n    \"/home/user/monorepo/other-team/.claude/rules/**\"\n  ]\n}",
               "kind": "config"
@@ -1349,12 +1355,6 @@
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
               "code": "{\n  \"autoMemoryDirectory\": \"~/my-custom-memory-dir\"\n}",
               "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Storage location 2",
-              "body": "这一段主要是认目录和文件摆放位置。先把地方放对，后面才不容易串。",
-              "code": "~/.claude/projects/<project>/memory/\n├── MEMORY.md          # Concise index, loaded into every session\n├── debugging.md       # Detailed notes on debugging patterns\n├── api-conventions.md # API design decisions\n└── ...                # Any other topic files Claude creates",
-              "kind": "structure"
             }
           ]
         },
@@ -1499,7 +1499,13 @@
           ],
           "steps": [
             {
-              "title": "Manage CLAUDE.md for large teams",
+              "title": "Manage CLAUDE.md for large teams 1",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"claudeMd\": \"Always run `make lint` before committing.\\nNever push directly to main.\"\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Manage CLAUDE.md for large teams 2",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
               "code": "{\n  \"claudeMdExcludes\": [\n    \"**/monorepo/CLAUDE.md\",\n    \"/home/user/monorepo/other-team/.claude/rules/**\"\n  ]\n}",
               "kind": "config"
@@ -1696,10 +1702,16 @@
               "kind": "command"
             },
             {
-              "title": "原页关键片段：Skip all checks with bypassPermissions mode",
+              "title": "原页关键片段：Skip all checks with bypassPermissions mode 1",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
               "code": "claude --permission-mode bypassPermissions",
               "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Skip all checks with bypassPermissions mode 2",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "--dangerously-skip-permissions cannot be used with root/sudo privileges for security reasons",
+              "kind": "code"
             }
           ]
         },
@@ -1847,10 +1859,16 @@
           ],
           "steps": [
             {
-              "title": "Skip all checks with bypassPermissions mode",
+              "title": "Skip all checks with bypassPermissions mode 1",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
               "code": "claude --permission-mode bypassPermissions",
               "kind": "command"
+            },
+            {
+              "title": "Skip all checks with bypassPermissions mode 2",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "--dangerously-skip-permissions cannot be used with root/sudo privileges for security reasons",
+              "kind": "code"
             }
           ]
         },
@@ -4402,6 +4420,75 @@
         "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
       }
     },
+    "agents": {
+      "sourceLabel": "Run agents in parallel",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Overview：Compare the ways Claude Code can take on multiple tasks at once: subagents, agent view, agent teams, and isolated worktree sessions.",
+            "你可以把它当成\"Agents and parallel work\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Overview\"理解成 Agents and parallel work 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Choose an approach、Check on running work、Learn more 这些环节往下讲。",
+            "翻成人话，大概就是：Choose an approach"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Choose an approach -> Check on running work -> Learn more。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ]
+        },
+        {
+          "title": "Documentation Index",
+          "paragraphs": [
+            "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Choose an approach",
+          "paragraphs": [
+            "这里是在帮你做选择题，不是只告诉你\"有这个选项\"。先看取舍，再决定怎么选。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Check on running work",
+          "paragraphs": [
+            "别把这段只当成标题看，它其实是在给\"Check on running work\"划边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Learn more",
+          "paragraphs": [
+            "这一块主要是在说\"Learn more\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Overview",
+          "   |",
+          "   v",
+          "这是 Agents and parallel work 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
     "sub-agents": {
       "sourceLabel": "Create custom subagents",
       "sections": [
@@ -4890,7 +4977,273 @@
           "Create custom subagents",
           "   |",
           "   v",
-          "这是 Agents 里的一摊要紧活",
+          "这是 Agents and parallel work 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "agent-view": {
+      "sourceLabel": "Manage multiple agents with agent view",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Agent view：Dispatch and manage many Claude Code sessions from one screen. Agent view shows what every session is doing and which ones need your input.",
+            "你可以把它当成\"Agents and parallel work\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Agent view\"理解成 Agents and parallel work 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Quick start、Monitor sessions with agent view、Peek and reply、Attach to a session 这些环节往下讲。",
+            "翻成人话，大概就是：Monitor sessions with agent view"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Quick start -> Monitor sessions with agent view -> Peek and reply -> Attach to a session。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Quick start",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude agents",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Monitor sessions with agent view",
+              "body": "\"Monitor sessions with agent view\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "Pinned\n  ✽ clawd walk cycle          Write assets/sprites/clawd-walk.png           3m\n\nReady for review\n  ∙ jump physics              github.com/anthropics/example/pull/2048       2h\n\nNeeds input\n  ✻ power-up design           needs input: double jump or wall climb?       1m\n\nWorking\n  ✽ collision detection       Edit src/physics/CollisionSystem.ts           2m\n  ✢ playtest level 3          run 12 · all checkpoints cleared           in 4m\n\nCompleted\n  ✻ title screen              result: menu, options, and credits done       9m\n  ∙ sound effects             result: 14 SFX exported to assets/audio       4h\n  … 6 more",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：From the shell 1",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude --bg \"investigate the flaky SettingsChangeDetector test\"",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：From the shell 2",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude --agent code-reviewer --bg \"address review comments on PR 1234\"",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：From the shell 3",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "backgrounded · 7c5dcf5d\n  claude agents             list sessions\n  claude attach 7c5dcf5d    open in this terminal\n  claude logs 7c5dcf5d      show recent output\n  claude stop 7c5dcf5d      stop this session",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Documentation Index",
+          "paragraphs": [
+            "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Quick start",
+          "paragraphs": [
+            "别把这段只当成标题看，它其实是在给\"Quick start\"划边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Quick start",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude agents",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Monitor sessions with agent view",
+          "paragraphs": [
+            "这一段是在把 claude agents to open agent view. It takes over the full terminal and lists every session grouped by state, with pinned sessions and the ones that need you at the top. Each row shows the session’s name, current activity, and how long ago it last changed. 真跑起来。别只看命令长什么样，还得看跑完该出现什么。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Monitor sessions with agent view",
+              "body": "\"Monitor sessions with agent view\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "Pinned\n  ✽ clawd walk cycle          Write assets/sprites/clawd-walk.png           3m\n\nReady for review\n  ∙ jump physics              github.com/anthropics/example/pull/2048       2h\n\nNeeds input\n  ✻ power-up design           needs input: double jump or wall climb?       1m\n\nWorking\n  ✽ collision detection       Edit src/physics/CollisionSystem.ts           2m\n  ✢ playtest level 3          run 12 · all checkpoints cleared           in 4m\n\nCompleted\n  ✻ title screen              result: menu, options, and credits done       9m\n  ∙ sound effects             result: 14 SFX exported to assets/audio       4h\n  … 6 more",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Peek and reply",
+          "paragraphs": [
+            "这一段主要是在把\"Peek and reply\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Attach to a session",
+          "paragraphs": [
+            "这一块主要是在说\"Attach to a session\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Organize the list",
+          "paragraphs": [
+            "这一段主要是在把\"Organize the list\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Filter the list",
+          "paragraphs": [
+            "看到这里，就把\"Filter the list\"当成一件真要上手的活来看。"
+          ]
+        },
+        {
+          "title": "Keyboard shortcuts",
+          "paragraphs": [
+            "这一段主要是在把\"Keyboard shortcuts\"讲实，不是只摆个标题给你看。"
+          ]
+        },
+        {
+          "title": "Dispatch new agents",
+          "paragraphs": [
+            "这一段主要是在把\"Dispatch new agents\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "From agent view",
+          "paragraphs": [
+            "这里不是让你背\"From agent view\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "From inside a session",
+          "paragraphs": [
+            "这一段是在把 /background or its alias /bg to detach the current conversation and keep it running. Pass a prompt such as /bg run the test suite and fix any failures to send one more instruction before detaching. 真跑起来。别只看命令长什么样，还得看跑完该出现什么。"
+          ]
+        },
+        {
+          "title": "From the shell",
+          "paragraphs": [
+            "这一块主要是在说\"From the shell\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "From the shell 1",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude --bg \"investigate the flaky SettingsChangeDetector test\"",
+              "kind": "command"
+            },
+            {
+              "title": "From the shell 2",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude --agent code-reviewer --bg \"address review comments on PR 1234\"",
+              "kind": "command"
+            },
+            {
+              "title": "From the shell 3",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "backgrounded · 7c5dcf5d\n  claude agents             list sessions\n  claude attach 7c5dcf5d    open in this terminal\n  claude logs 7c5dcf5d      show recent output\n  claude stop 7c5dcf5d      stop this session",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "How file edits are isolated",
+          "paragraphs": [
+            "这一段主要是在把\"How file edits are isolated\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Permission mode and settings",
+          "paragraphs": [
+            "这里不是让你背\"Permission mode and settings\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Manage sessions from the shell",
+          "paragraphs": [
+            "这里讲的是收放和管理，不只是\"能不能用\"，而是\"怎么管住、怎么不乱\"。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "How background sessions are hosted",
+          "paragraphs": [
+            "这一段主要是在把\"How background sessions are hosted\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Troubleshooting",
+          "paragraphs": [
+            "这里讲的是怎么找毛病，先查明白哪一步出错，再决定怎么修。"
+          ]
+        },
+        {
+          "title": "Agent view opens with no sessions",
+          "paragraphs": [
+            "看到这里，就把\"Agent view opens with no sessions\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Sessions show as stopped after waking your machine",
+          "paragraphs": [
+            "这里不是让你背\"Sessions show as stopped after waking your machine\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "A session is slow to respond after attaching",
+          "paragraphs": [
+            "这一块主要是在说\"A session is slow to respond after attaching\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": ".claude/worktrees/ is filling up",
+          "paragraphs": [
+            "这里不是让你背\".claude/worktrees/ is filling up\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Limitations",
+          "paragraphs": [
+            "这一块主要是在说\"Limitations\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Next steps",
+          "paragraphs": [
+            "这里不是让你背\"Next steps\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Agent view",
+          "   |",
+          "   v",
+          "这是 Agents and parallel work 里的一摊要紧活",
           "   |",
           "   v",
           "先弄懂，再下手"
@@ -5314,7 +5667,249 @@
           "Run agent teams",
           "   |",
           "   v",
-          "这是 Agents 里的一摊要紧活",
+          "这是 Agents and parallel work 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "worktrees": {
+      "sourceLabel": "Run parallel sessions with worktrees",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Isolate sessions with worktrees：Isolate parallel Claude Code sessions in separate git worktrees so changes don't collide. Covers the --worktree flag, subagent isolation, .worktreeinclude, cleanup, and non-git VCS hooks.",
+            "你可以把它当成\"Agents and parallel work\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Isolate sessions with worktrees\"理解成 Agents and parallel work 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Start Claude in a worktree、Choose the base branch、Copy gitignored files into worktrees、Isolate subagents with worktrees 这些环节往下讲。",
+            "翻成人话，大概就是：Start Claude in a worktree"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Start Claude in a worktree -> Choose the base branch -> Copy gitignored files into worktrees -> Isolate subagents with worktrees。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Start Claude in a worktree 1",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --worktree feature-auth",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Start Claude in a worktree 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --worktree bugfix-123",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Start Claude in a worktree 3",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --worktree",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Choose the base branch 1",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"worktree\": {\n    \"baseRef\": \"head\"\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Choose the base branch 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --worktree \"#1234\"",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Copy gitignored files into worktrees",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": ".env\n.env.local\nconfig/secrets.json",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Manage worktrees manually 1",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "git worktree add ../project-feature-a -b feature-a",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Manage worktrees manually 2",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "git worktree add ../project-bugfix bugfix-123",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Manage worktrees manually 3",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "cd ../project-feature-a && claude",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Non-git version control",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"hooks\": {\n    \"WorktreeCreate\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash -c 'NAME=$(jq -r .name); DIR=\\\"$HOME/.claude/worktrees/$NAME\\\"; svn checkout https://svn.example.com/repo/trunk \\\"$DIR\\\" >&2 && echo \\\"$DIR\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Documentation Index",
+          "paragraphs": [
+            "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Start Claude in a worktree",
+          "paragraphs": [
+            "看到这里，就把\"Start Claude in a worktree\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Start Claude in a worktree 1",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --worktree feature-auth",
+              "kind": "command"
+            },
+            {
+              "title": "Start Claude in a worktree 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --worktree bugfix-123",
+              "kind": "command"
+            },
+            {
+              "title": "Start Claude in a worktree 3",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --worktree",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Choose the base branch",
+          "paragraphs": [
+            "这里是在帮你做选择题，不是只告诉你\"有这个选项\"。先看取舍，再决定怎么选。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ],
+          "steps": [
+            {
+              "title": "Choose the base branch 1",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"worktree\": {\n    \"baseRef\": \"head\"\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Choose the base branch 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --worktree \"#1234\"",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Copy gitignored files into worktrees",
+          "paragraphs": [
+            "这里不是让你背\"Copy gitignored files into worktrees\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Copy gitignored files into worktrees",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": ".env\n.env.local\nconfig/secrets.json",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Isolate subagents with worktrees",
+          "paragraphs": [
+            "看到这里，就把\"Isolate subagents with worktrees\"当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Clean up worktrees",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Manage worktrees manually",
+          "paragraphs": [
+            "看到这类标题，就把它当成日常管摊子的规矩。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Manage worktrees manually 1",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "git worktree add ../project-feature-a -b feature-a",
+              "kind": "code"
+            },
+            {
+              "title": "Manage worktrees manually 2",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "git worktree add ../project-bugfix bugfix-123",
+              "kind": "code"
+            },
+            {
+              "title": "Manage worktrees manually 3",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "cd ../project-feature-a && claude",
+              "kind": "command"
+            },
+            {
+              "title": "Manage worktrees manually 4",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "git worktree remove ../project-feature-a",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Non-git version control",
+          "paragraphs": [
+            "看到这里，就把\"Non-git version control\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Non-git version control",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"hooks\": {\n    \"WorktreeCreate\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash -c 'NAME=$(jq -r .name); DIR=\\\"$HOME/.claude/worktrees/$NAME\\\"; svn checkout https://svn.example.com/repo/trunk \\\"$DIR\\\" >&2 && echo \\\"$DIR\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "See also",
+          "paragraphs": [
+            "这一段主要是在把\"See also\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Isolate sessions with worktrees",
+          "   |",
+          "   v",
+          "这是 Agents and parallel work 里的一摊要紧活",
           "   |",
           "   v",
           "先弄懂，再下手"
@@ -8213,6 +8808,187 @@
         "title": "一眼看懂这一页",
         "lines": [
           "Run prompts on a schedule",
+          "   |",
+          "   v",
+          "这是 Automation 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "goal": {
+      "sourceLabel": "Keep Claude working toward a goal",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Goals：Set a completion condition with /goal and Claude keeps working across turns until the condition is met.",
+            "你可以把它当成\"Automation\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Goals\"理解成 Automation 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Compare to other autonomous workflows、Use /goal、Set a goal、Write an effective condition 这些环节往下讲。",
+            "翻成人话，大概就是：Compare to other autonomous workflows"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Compare to other autonomous workflows -> Use /goal -> Set a goal -> Write an effective condition。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Set a goal",
+              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
+              "code": "/goal all tests in test/auth pass and the lint step is clean",
+              "kind": "prompt"
+            },
+            {
+              "title": "原页关键片段：Check status",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Check status\"这一段的意思去办。",
+              "code": "/goal",
+              "kind": "prompt"
+            },
+            {
+              "title": "原页关键片段：Clear a goal",
+              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
+              "code": "/goal clear",
+              "kind": "prompt"
+            },
+            {
+              "title": "原页关键片段：Run non-interactively",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude -p \"/goal CHANGELOG.md has an entry for every PR merged this week\"",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Documentation Index",
+          "paragraphs": [
+            "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ]
+        },
+        {
+          "title": "Compare to other autonomous workflows",
+          "paragraphs": [
+            "这里就是把两条像样的路摆一块，让你别走岔。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Use /goal",
+          "paragraphs": [
+            "看到这里，就把\"Use /goal\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Set a goal",
+          "paragraphs": [
+            "这一段是在把 /goal followed by the condition you want satisfied. If a goal is already active, the new one replaces it. 真跑起来。别只看命令长什么样，还得看跑完该出现什么。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Set a goal",
+              "body": "最省事的做法，就是把下面这句原样说给 Claude。",
+              "code": "/goal all tests in test/auth pass and the lint step is clean",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Write an effective condition",
+          "paragraphs": [
+            "这里主要是在交代\"Write an effective condition\"这一块会碰到哪些事。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Check status",
+          "paragraphs": [
+            "这一段是在把 /goal with no arguments to see the current state. 真跑起来。别只看命令长什么样，还得看跑完该出现什么。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Check status",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Check status\"这一段的意思去办。",
+              "code": "/goal",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Clear a goal",
+          "paragraphs": [
+            "这一段是在把 /goal clear to remove an active goal before its condition is met. 真跑起来。别只看命令长什么样，还得看跑完该出现什么。"
+          ],
+          "steps": [
+            {
+              "title": "Clear a goal",
+              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
+              "code": "/goal clear",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Resume with an active goal",
+          "paragraphs": [
+            "看到这里，就把\"Resume with an active goal\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Run non-interactively",
+          "paragraphs": [
+            "这一段主要是在把\"Run non-interactively\"讲实，不是只摆个标题给你看。"
+          ],
+          "steps": [
+            {
+              "title": "Run non-interactively",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude -p \"/goal CHANGELOG.md has an entry for every PR merged this week\"",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "How evaluation works",
+          "paragraphs": [
+            "这一段是在讲它背后怎么转，不是立刻让你去按按钮。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Requirements",
+          "paragraphs": [
+            "这一段主要是在把\"Requirements\"讲实，不是只摆个标题给你看。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ]
+        },
+        {
+          "title": "See also",
+          "paragraphs": [
+            "这一段是在把 a prompt repeatedly with /loop: re-run on a time interval instead of until a condition holds 真跑起来。别只看命令长什么样，还得看跑完该出现什么。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Goals",
           "   |",
           "   v",
           "这是 Automation 里的一摊要紧活",
@@ -11928,6 +12704,243 @@
         "title": "一眼看懂这一页",
         "lines": [
           "Amazon Bedrock",
+          "   |",
+          "   v",
+          "这是 Deployment 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "claude-platform-on-aws": {
+      "sourceLabel": "Claude Code on Claude Platform on AWS",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Claude Platform on AWS：Configure Claude Code to use the Anthropic-operated Claude API with AWS authentication, IAM access control, and AWS Marketplace billing.",
+            "你可以把它当成\"Deployment\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Claude Platform on AWS\"理解成 Deployment 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Prerequisites、Setup、1. Configure AWS credentials、2. Configure Claude Code 这些环节往下讲。",
+            "翻成人话，大概就是：1. Configure AWS credentials"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Prerequisites -> Setup -> 1. Configure AWS credentials -> 2. Configure Claude Code。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：1. Configure AWS credentials 1",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "aws sso login --profile my-profile\nexport AWS_PROFILE=my-profile",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：1. Configure AWS credentials 2",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"awsAuthRefresh\": \"aws sso login --profile my-profile\"\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：1. Configure AWS credentials 3",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "export ANTHROPIC_AWS_API_KEY=sk-ant-xxxxx",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：2. Configure Claude Code",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "export CLAUDE_CODE_USE_ANTHROPIC_AWS=1\nexport ANTHROPIC_AWS_WORKSPACE_ID=wrkspc_01ABCDEFGHIJKLMN\nexport AWS_REGION=us-east-1",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：3. Pin model versions",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL=claude-opus-4-7\nexport ANTHROPIC_DEFAULT_SONNET_MODEL=claude-sonnet-4-6\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL=claude-haiku-4-5",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Use the Agent SDK",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nprocess.env.CLAUDE_CODE_USE_ANTHROPIC_AWS = \"1\";\nprocess.env.ANTHROPIC_AWS_WORKSPACE_ID = \"wrkspc_01ABCDEFGHIJKLMN\";\nprocess.env.AWS_REGION = \"us-east-1\";\n\nfor await (const msg of query({ prompt: \"What's in this repo?\" })) {\n  console.log(msg);\n}",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Route through a corporate proxy 1",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "export CLAUDE_CODE_USE_ANTHROPIC_AWS=1\nexport ANTHROPIC_AWS_WORKSPACE_ID=wrkspc_01ABCDEFGHIJKLMN\nexport ANTHROPIC_AWS_BASE_URL=https://anthropic-proxy.example.com",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Route through a corporate proxy 2",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "export CLAUDE_CODE_USE_ANTHROPIC_AWS=1\nexport CLAUDE_CODE_SKIP_ANTHROPIC_AWS_AUTH=1\nexport ANTHROPIC_AWS_WORKSPACE_ID=wrkspc_01ABCDEFGHIJKLMN\nexport ANTHROPIC_AWS_BASE_URL=https://anthropic-proxy.example.com",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Documentation Index",
+          "paragraphs": [
+            "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Prerequisites",
+          "paragraphs": [
+            "这一块主要是在说\"Prerequisites\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Setup",
+          "paragraphs": [
+            "这一块主要是在说\"Setup\"真到手上该怎么用，哪里最容易踩坑。"
+          ]
+        },
+        {
+          "title": "1. Configure AWS credentials",
+          "paragraphs": [
+            "这里不是让你背\"1. Configure AWS credentials\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "1. Configure AWS credentials 1",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "aws sso login --profile my-profile\nexport AWS_PROFILE=my-profile",
+              "kind": "code"
+            },
+            {
+              "title": "1. Configure AWS credentials 2",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"awsAuthRefresh\": \"aws sso login --profile my-profile\"\n}",
+              "kind": "config"
+            },
+            {
+              "title": "1. Configure AWS credentials 3",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "export ANTHROPIC_AWS_API_KEY=sk-ant-xxxxx",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "2. Configure Claude Code",
+          "paragraphs": [
+            "看到这里，就把\"2. Configure Claude Code\"当成一件真要上手的活来看。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+          ],
+          "steps": [
+            {
+              "title": "2. Configure Claude Code",
+              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "code": "export CLAUDE_CODE_USE_ANTHROPIC_AWS=1\nexport ANTHROPIC_AWS_WORKSPACE_ID=wrkspc_01ABCDEFGHIJKLMN\nexport AWS_REGION=us-east-1",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "3. Pin model versions",
+          "paragraphs": [
+            "这里不是让你背\"3. Pin model versions\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "3. Pin model versions",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "export ANTHROPIC_DEFAULT_OPUS_MODEL=claude-opus-4-7\nexport ANTHROPIC_DEFAULT_SONNET_MODEL=claude-sonnet-4-6\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL=claude-haiku-4-5",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Use the Agent SDK",
+          "paragraphs": [
+            "别把这段只当成标题看，它其实是在给\"Use the Agent SDK\"划边界。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Use the Agent SDK",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nprocess.env.CLAUDE_CODE_USE_ANTHROPIC_AWS = \"1\";\nprocess.env.ANTHROPIC_AWS_WORKSPACE_ID = \"wrkspc_01ABCDEFGHIJKLMN\";\nprocess.env.AWS_REGION = \"us-east-1\";\n\nfor await (const msg of query({ prompt: \"What's in this repo?\" })) {\n  console.log(msg);\n}",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Route through a corporate proxy",
+          "paragraphs": [
+            "这里不是让你背\"Route through a corporate proxy\"这个词，而是让你看它真干活时怎么使。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+          ],
+          "steps": [
+            {
+              "title": "Route through a corporate proxy 1",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "export CLAUDE_CODE_USE_ANTHROPIC_AWS=1\nexport ANTHROPIC_AWS_WORKSPACE_ID=wrkspc_01ABCDEFGHIJKLMN\nexport ANTHROPIC_AWS_BASE_URL=https://anthropic-proxy.example.com",
+              "kind": "code"
+            },
+            {
+              "title": "Route through a corporate proxy 2",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "export CLAUDE_CODE_USE_ANTHROPIC_AWS=1\nexport CLAUDE_CODE_SKIP_ANTHROPIC_AWS_AUTH=1\nexport ANTHROPIC_AWS_WORKSPACE_ID=wrkspc_01ABCDEFGHIJKLMN\nexport ANTHROPIC_AWS_BASE_URL=https://anthropic-proxy.example.com",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Troubleshooting",
+          "paragraphs": [
+            "这里讲的是怎么找毛病，先查明白哪一步出错，再决定怎么修。"
+          ]
+        },
+        {
+          "title": "403 Forbidden or AccessDenied on every request",
+          "paragraphs": [
+            "这一段不只是挂个标题，它是在说明\"403 Forbidden or AccessDenied on every request\"这一块到底负责什么。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Requests fail with a missing-workspace error",
+          "paragraphs": [
+            "这一块主要是在说\"Requests fail with a missing-workspace error\"真到手上该怎么用，哪里最容易踩坑。"
+          ]
+        },
+        {
+          "title": "Requests still go to api.anthropic.com",
+          "paragraphs": [
+            "这里不是让你背\"Requests still go to api.anthropic.com\"这个词，而是让你看它真干活时怎么使。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+          ]
+        },
+        {
+          "title": "Additional resources",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说\"Additional resources\"管到哪儿。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Claude Platform on AWS",
           "   |",
           "   v",
           "这是 Deployment 里的一摊要紧活",
@@ -16758,7 +17771,8 @@
         {
           "title": "Built-in output styles",
           "paragraphs": [
-            "这一块主要是在说\"Built-in output styles\"真到手上该怎么用，哪里最容易踩坑。"
+            "这一块主要是在说\"Built-in output styles\"真到手上该怎么用，哪里最容易踩坑。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -18267,7 +19281,7 @@
         {
           "title": "简要总结",
           "paragraphs": [
-            "这页主要讲 Tools reference：Complete reference for the tools Claude Code can use, including permission requirements.",
+            "这页主要讲 Tools reference：Complete reference for the tools Claude Code can use, including permission requirements and per-tool behavior.",
             "你可以把它当成\"Reference\"这块里专门管这一摊事的说明书。"
           ]
         },
@@ -18275,8 +19289,8 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Tools reference\"理解成 Reference 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 Bash tool behavior、LSP tool behavior、Monitor tool、PowerShell tool 这些环节往下讲。",
-            "翻成人话，大概就是：Bash tool behavior"
+            "原文这页大多会按 Configure tools with permission rules and hooks、Agent tool behavior、Bash tool behavior、Edit tool behavior 这些环节往下讲。",
+            "翻成人话，大概就是：Configure tools with permission rules and hooks"
           ]
         },
         {
@@ -18284,7 +19298,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：Bash tool behavior -> LSP tool behavior -> Monitor tool -> PowerShell tool。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：Configure tools with permission rules and hooks -> Agent tool behavior -> Bash tool behavior -> Edit tool behavior。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ],
           "steps": [
             {
@@ -18309,9 +19323,44 @@
           ]
         },
         {
+          "title": "Configure tools with permission rules and hooks",
+          "paragraphs": [
+            "这一段主要是在拧开关，地方和顺序都别搞错。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Agent tool behavior",
+          "paragraphs": [
+            "这一段不只是挂个标题，它是在说明\"Agent tool behavior\"这一块到底负责什么。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
           "title": "Bash tool behavior",
           "paragraphs": [
             "这段看着像个标题，其实是在说\"Bash tool behavior\"管到哪儿。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Edit tool behavior",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说\"Edit tool behavior\"管到哪儿。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Glob tool behavior",
+          "paragraphs": [
+            "这里主要是在交代\"Glob tool behavior\"这一块会碰到哪些事。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Grep tool behavior",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说\"Grep tool behavior\"管到哪儿。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
@@ -18327,6 +19376,13 @@
           "paragraphs": [
             "这里主要是在交代\"Monitor tool\"这一块会碰到哪些事。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "NotebookEdit tool behavior",
+          "paragraphs": [
+            "这一块主要是在说\"NotebookEdit tool behavior\"真到手上该怎么用，哪里最容易踩坑。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -18362,6 +19418,34 @@
           "title": "Preview limitations",
           "paragraphs": [
             "别把这段只当成标题看，它其实是在给\"Preview limitations\"划边界。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Read tool behavior",
+          "paragraphs": [
+            "这里主要是在交代\"Read tool behavior\"这一块会碰到哪些事。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "WebFetch tool behavior",
+          "paragraphs": [
+            "这里不是让你背\"WebFetch tool behavior\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "WebSearch tool behavior",
+          "paragraphs": [
+            "这里不是让你背\"WebSearch tool behavior\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Write tool behavior",
+          "paragraphs": [
+            "这一段不只是挂个标题，它是在说明\"Write tool behavior\"这一块到底负责什么。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
@@ -18818,7 +19902,7 @@
             {
               "title": "原页关键片段：How a hook resolves 1",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"if\": \"Bash(rm *)\",\n            \"command\": \"\\\"$CLAUDE_PROJECT_DIR\\\"/.claude/hooks/block-rm.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "code": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"if\": \"Bash(rm *)\",\n            \"command\": \"${CLAUDE_PROJECT_DIR}/.claude/hooks/block-rm.sh\",\n            \"args\": []\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             },
             {
@@ -18848,25 +19932,31 @@
             {
               "title": "原页关键片段：Hook handler fields 1",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"http\",\n            \"url\": \"http://localhost:8080/hooks/pre-tool-use\",\n            \"timeout\": 30,\n            \"headers\": {\n              \"Authorization\": \"Bearer $MY_TOKEN\"\n            },\n            \"allowedEnvVars\": [\"MY_TOKEN\"]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "code": "{\n  \"type\": \"command\",\n  \"command\": \"node\",\n  \"args\": [\"${CLAUDE_PLUGIN_ROOT}/scripts/format.js\", \"--fix\"]\n}",
               "kind": "config"
             },
             {
               "title": "原页关键片段：Hook handler fields 2",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"mcp_tool\",\n            \"server\": \"my_server\",\n            \"tool\": \"security_scan\",\n            \"input\": { \"file_path\": \"${tool_input.file_path}\" }\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "code": "{\n  \"type\": \"command\",\n  \"command\": \"node \\\"${CLAUDE_PLUGIN_ROOT}\\\"/scripts/format.js --fix\"\n}",
+              "kind": "config"
+            },
+            {
+              "title": "原页关键片段：Hook handler fields 3",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"http\",\n            \"url\": \"http://localhost:8080/hooks/pre-tool-use\",\n            \"timeout\": 30,\n            \"headers\": {\n              \"Authorization\": \"Bearer $MY_TOKEN\"\n            },\n            \"allowedEnvVars\": [\"MY_TOKEN\"]\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             },
             {
               "title": "原页关键片段：Reference scripts by path 1",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"\\\"$CLAUDE_PROJECT_DIR\\\"/.claude/hooks/check-style.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"${CLAUDE_PROJECT_DIR}/.claude/hooks/check-style.sh\",\n            \"args\": []\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             },
             {
               "title": "原页关键片段：Reference scripts by path 2",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"description\": \"Automatic code formatting\",\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/format.sh\",\n            \"timeout\": 30\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "code": "{\n  \"description\": \"Automatic code formatting\",\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/format.sh\",\n            \"args\": [],\n            \"timeout\": 30\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             },
             {
@@ -18880,12 +19970,6 @@
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/home/user/.claude/projects/.../transcript.jsonl\",\n  \"cwd\": \"/home/user/my-project\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PreToolUse\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"npm test\"\n  }\n}",
               "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Exit code output",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "#!/bin/bash\n# Reads JSON input from stdin, checks the command\ncommand=$(jq -r '.tool_input.command' < /dev/stdin)\n\nif [[ \"$command\" == rm* ]]; then\n  echo \"Blocked: rm commands are not allowed\" >&2\n  exit 2  # Blocking error: tool call is prevented\nfi\n\nexit 0  # Success: tool call proceeds",
-              "kind": "command"
             }
           ]
         },
@@ -18913,7 +19997,7 @@
             {
               "title": "How a hook resolves 1",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"if\": \"Bash(rm *)\",\n            \"command\": \"\\\"$CLAUDE_PROJECT_DIR\\\"/.claude/hooks/block-rm.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "code": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"if\": \"Bash(rm *)\",\n            \"command\": \"${CLAUDE_PROJECT_DIR}/.claude/hooks/block-rm.sh\",\n            \"args\": []\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             },
             {
@@ -18981,11 +20065,23 @@
             {
               "title": "Hook handler fields 1",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"http\",\n            \"url\": \"http://localhost:8080/hooks/pre-tool-use\",\n            \"timeout\": 30,\n            \"headers\": {\n              \"Authorization\": \"Bearer $MY_TOKEN\"\n            },\n            \"allowedEnvVars\": [\"MY_TOKEN\"]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "code": "{\n  \"type\": \"command\",\n  \"command\": \"node\",\n  \"args\": [\"${CLAUDE_PLUGIN_ROOT}/scripts/format.js\", \"--fix\"]\n}",
               "kind": "config"
             },
             {
               "title": "Hook handler fields 2",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"type\": \"command\",\n  \"command\": \"node \\\"${CLAUDE_PLUGIN_ROOT}\\\"/scripts/format.js --fix\"\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Hook handler fields 3",
+              "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
+              "code": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"http\",\n            \"url\": \"http://localhost:8080/hooks/pre-tool-use\",\n            \"timeout\": 30,\n            \"headers\": {\n              \"Authorization\": \"Bearer $MY_TOKEN\"\n            },\n            \"allowedEnvVars\": [\"MY_TOKEN\"]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "kind": "config"
+            },
+            {
+              "title": "Hook handler fields 4",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
               "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"mcp_tool\",\n            \"server\": \"my_server\",\n            \"tool\": \"security_scan\",\n            \"input\": { \"file_path\": \"${tool_input.file_path}\" }\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
@@ -19002,13 +20098,13 @@
             {
               "title": "Reference scripts by path 1",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"\\\"$CLAUDE_PROJECT_DIR\\\"/.claude/hooks/check-style.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"${CLAUDE_PROJECT_DIR}/.claude/hooks/check-style.sh\",\n            \"args\": []\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             },
             {
               "title": "Reference scripts by path 2",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"description\": \"Automatic code formatting\",\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/format.sh\",\n            \"timeout\": 30\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "code": "{\n  \"description\": \"Automatic code formatting\",\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/format.sh\",\n            \"args\": [],\n            \"timeout\": 30\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             }
           ]
@@ -19053,7 +20149,7 @@
           "title": "Common input fields",
           "paragraphs": [
             "这种内容最怕想当然，老老实实照它列的格式走最稳。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
@@ -19476,7 +20572,7 @@
             {
               "title": "原页关键片段：Hooks",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/format-code.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"\\\"${CLAUDE_PLUGIN_ROOT}\\\"/scripts/format-code.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             },
             {
@@ -19500,7 +20596,7 @@
             {
               "title": "原页关键片段：Monitors",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "[\n  {\n    \"name\": \"deploy-status\",\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/poll-deploy.sh ${user_config.api_endpoint}\",\n    \"description\": \"Deployment status changes\"\n  },\n  {\n    \"name\": \"error-log\",\n    \"command\": \"tail -F ./logs/error.log\",\n    \"description\": \"Application error log\",\n    \"when\": \"on-skill-invoke:debug\"\n  }\n]",
+              "code": "[\n  {\n    \"name\": \"deploy-status\",\n    \"command\": \"\\\"${CLAUDE_PLUGIN_ROOT}\\\"/scripts/poll-deploy.sh ${user_config.api_endpoint}\",\n    \"description\": \"Deployment status changes\"\n  },\n  {\n    \"name\": \"error-log\",\n    \"command\": \"tail -F ./logs/error.log\",\n    \"description\": \"Application error log\",\n    \"when\": \"on-skill-invoke:debug\"\n  }\n]",
               "kind": "config"
             },
             {
@@ -19588,7 +20684,7 @@
             {
               "title": "Hooks",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/format-code.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Write|Edit\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"\\\"${CLAUDE_PLUGIN_ROOT}\\\"/scripts/format-code.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             }
           ]
@@ -19639,7 +20735,7 @@
             {
               "title": "Monitors",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "[\n  {\n    \"name\": \"deploy-status\",\n    \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/poll-deploy.sh ${user_config.api_endpoint}\",\n    \"description\": \"Deployment status changes\"\n  },\n  {\n    \"name\": \"error-log\",\n    \"command\": \"tail -F ./logs/error.log\",\n    \"description\": \"Application error log\",\n    \"when\": \"on-skill-invoke:debug\"\n  }\n]",
+              "code": "[\n  {\n    \"name\": \"deploy-status\",\n    \"command\": \"\\\"${CLAUDE_PLUGIN_ROOT}\\\"/scripts/poll-deploy.sh ${user_config.api_endpoint}\",\n    \"description\": \"Deployment status changes\"\n  },\n  {\n    \"name\": \"error-log\",\n    \"command\": \"tail -F ./logs/error.log\",\n    \"description\": \"Application error log\",\n    \"when\": \"on-skill-invoke:debug\"\n  }\n]",
               "kind": "config"
             }
           ]
@@ -19765,7 +20861,7 @@
             {
               "title": "Environment variables 1",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"${CLAUDE_PLUGIN_ROOT}/scripts/process.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "code": "{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"\\\"${CLAUDE_PLUGIN_ROOT}\\\"/scripts/process.sh\"\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             },
             {
@@ -19796,15 +20892,16 @@
           ]
         },
         {
-          "title": "Working with external dependencies",
+          "title": "Share files within a marketplace with symlinks",
           "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。"
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
           ],
           "steps": [
             {
-              "title": "Working with external dependencies",
-              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "ln -s /path/to/shared-utils ./shared-utils",
+              "title": "Share files within a marketplace with symlinks",
+              "body": "\"Share files within a marketplace with symlinks\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "ln -s ../../shared-plugin/skills/foo ./skills/foo",
               "kind": "code"
             }
           ]
@@ -20121,7 +21218,7 @@
           "title": "Notification format",
           "paragraphs": [
             "这一段主要是在把\"Notification format\"讲实，不是只摆个标题给你看。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
@@ -23740,7 +24837,7 @@
             {
               "title": "原页关键片段：Example: Output style with session-specific additions",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Assuming \"Code Reviewer\" output style is active (via /output-style)\n// Add session-specific focus areas\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Review this authentication module\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\",\n      append: `\n        For this review, prioritize:\n        - OAuth 2.0 compliance\n        - Token storage security\n        - Session management\n      `\n    }\n  }\n})) {\n  messages.push(message);\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Assuming \"Code Reviewer\" output style is active (via /config or settings)\n// Add session-specific focus areas\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Review this authentication module\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\",\n      append: `\n        For this review, prioritize:\n        - OAuth 2.0 compliance\n        - Token storage security\n        - Session management\n      `\n    }\n  }\n})) {\n  messages.push(message);\n}",
               "kind": "command"
             }
           ]
@@ -23890,7 +24987,7 @@
             {
               "title": "Example: Output style with session-specific additions",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Assuming \"Code Reviewer\" output style is active (via /output-style)\n// Add session-specific focus areas\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Review this authentication module\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\",\n      append: `\n        For this review, prioritize:\n        - OAuth 2.0 compliance\n        - Token storage security\n        - Session management\n      `\n    }\n  }\n})) {\n  messages.push(message);\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Assuming \"Code Reviewer\" output style is active (via /config or settings)\n// Add session-specific focus areas\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Review this authentication module\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\",\n      append: `\n        For this review, prioritize:\n        - OAuth 2.0 compliance\n        - Token storage security\n        - Session management\n      `\n    }\n  }\n})) {\n  messages.push(message);\n}",
               "kind": "command"
             }
           ]
@@ -25072,7 +26169,7 @@
           "title": "Modify tool input",
           "paragraphs": [
             "这里主要是在交代\"Modify tool input\"这一块会碰到哪些事。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
@@ -25176,7 +26273,7 @@
         {
           "title": "Forward notifications to Slack",
           "paragraphs": [
-            "这一段是在说怎么用 Notification hooks to receive system notifications from the agent and forward them 去做 external services. Notifications fire for specific event types: permission_prompt (Claude needs permission), idle_prompt (Claude is waiting for input), auth_success (authentication completed), and elicitation_dialog (Claude is prompting the user). Each notification includes a message field with a human-readable description and optionally a title.。看这种内容，光知道名字没用，还是得落到手上。",
+            "这一段是在说怎么用 Notification hooks to receive system notifications from the agent and forward them 去做 external services. Notifications fire for specific event types: permission_prompt (Claude needs permission), idle_prompt (Claude is waiting for input), auth_success (authentication completed), elicitation_dialog (Claude is prompting the user), elicitation_response (the user answered an elicitation), and elicitation_complete (an elicitation closed). Each notification includes a message field with a human-readable description and optionally a title.。看这种内容，光知道名字没用，还是得落到手上。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
