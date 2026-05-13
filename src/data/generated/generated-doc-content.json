@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-12T05:48:26.724Z",
-  "sourceGeneratedAt": "2026-05-12T05:48:26.395Z",
+  "generatedAt": "2026-05-13T05:57:35.163Z",
+  "sourceGeneratedAt": "2026-05-13T05:57:34.841Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -528,7 +528,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.139、2.1.138、2.1.137、2.1.136 这些环节往下讲。",
+            "原文这页大多会按 2.1.140、2.1.139、2.1.138、2.1.137 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -537,14 +537,14 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.139 -> 2.1.138 -> 2.1.137 -> 2.1.136。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.140 -> 2.1.139 -> 2.1.138 -> 2.1.137。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         },
         {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         }
       ],
@@ -4999,7 +4999,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Agent view\"理解成 Agents and parallel work 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 Quick start、Monitor sessions with agent view、Peek and reply、Attach to a session 这些环节往下讲。",
+            "原文这页大多会按 Quick start、Monitor sessions with agent view、Read session state、Row summaries 这些环节往下讲。",
             "翻成人话，大概就是：Monitor sessions with agent view"
           ]
         },
@@ -5008,7 +5008,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：Quick start -> Monitor sessions with agent view -> Peek and reply -> Attach to a session。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：Quick start -> Monitor sessions with agent view -> Read session state -> Row summaries。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ],
           "steps": [
             {
@@ -5020,24 +5020,24 @@
             {
               "title": "原页关键片段：Monitor sessions with agent view",
               "body": "\"Monitor sessions with agent view\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "Pinned\n  ✽ clawd walk cycle          Write assets/sprites/clawd-walk.png           3m\n\nReady for review\n  ∙ jump physics              github.com/anthropics/example/pull/2048       2h\n\nNeeds input\n  ✻ power-up design           needs input: double jump or wall climb?       1m\n\nWorking\n  ✽ collision detection       Edit src/physics/CollisionSystem.ts           2m\n  ✢ playtest level 3          run 12 · all checkpoints cleared           in 4m\n\nCompleted\n  ✻ title screen              result: menu, options, and credits done       9m\n  ∙ sound effects             result: 14 SFX exported to assets/audio       4h\n  … 6 more",
+              "code": "Pinned\n  ✽ clawd walk cycle          Write assets/sprites/clawd-walk.png           3m\n\nReady for review\n  ∙ jump physics              github.com/example/game/pull/2048          ●  2h\n\nNeeds input\n  ✻ power-up design           needs input: double jump or wall climb?       1m\n\nWorking\n  ✽ collision detection       Edit src/physics/CollisionSystem.ts           2m\n  ✢ playtest level 3          run 12 · all checkpoints cleared           in 4m\n\nCompleted\n  ✻ title screen              result: menu, options, and credits done       9m\n  ∙ sound effects             result: 14 SFX exported to assets/audio       4h\n  … 6 more",
               "kind": "code"
             },
             {
-              "title": "原页关键片段：From the shell 1",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "title": "原页关键片段：From your shell 1",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "claude --bg \"investigate the flaky SettingsChangeDetector test\"",
               "kind": "command"
             },
             {
-              "title": "原页关键片段：From the shell 2",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "title": "原页关键片段：From your shell 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "claude --agent code-reviewer --bg \"address review comments on PR 1234\"",
               "kind": "command"
             },
             {
-              "title": "原页关键片段：From the shell 3",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "title": "原页关键片段：From your shell 3",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "backgrounded · 7c5dcf5d\n  claude agents             list sessions\n  claude attach 7c5dcf5d    open in this terminal\n  claude logs 7c5dcf5d      show recent output\n  claude stop 7c5dcf5d      stop this session",
               "kind": "command"
             }
@@ -5075,9 +5075,30 @@
             {
               "title": "Monitor sessions with agent view",
               "body": "\"Monitor sessions with agent view\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "Pinned\n  ✽ clawd walk cycle          Write assets/sprites/clawd-walk.png           3m\n\nReady for review\n  ∙ jump physics              github.com/anthropics/example/pull/2048       2h\n\nNeeds input\n  ✻ power-up design           needs input: double jump or wall climb?       1m\n\nWorking\n  ✽ collision detection       Edit src/physics/CollisionSystem.ts           2m\n  ✢ playtest level 3          run 12 · all checkpoints cleared           in 4m\n\nCompleted\n  ✻ title screen              result: menu, options, and credits done       9m\n  ∙ sound effects             result: 14 SFX exported to assets/audio       4h\n  … 6 more",
+              "code": "Pinned\n  ✽ clawd walk cycle          Write assets/sprites/clawd-walk.png           3m\n\nReady for review\n  ∙ jump physics              github.com/example/game/pull/2048          ●  2h\n\nNeeds input\n  ✻ power-up design           needs input: double jump or wall climb?       1m\n\nWorking\n  ✽ collision detection       Edit src/physics/CollisionSystem.ts           2m\n  ✢ playtest level 3          run 12 · all checkpoints cleared           in 4m\n\nCompleted\n  ✻ title screen              result: menu, options, and credits done       9m\n  ∙ sound effects             result: 14 SFX exported to assets/audio       4h\n  … 6 more",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "Read session state",
+          "paragraphs": [
+            "这一块主要是在说\"Read session state\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Row summaries",
+          "paragraphs": [
+            "这里主要是在交代\"Row summaries\"这一块会碰到哪些事。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Pull request status",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -5102,9 +5123,9 @@
           ]
         },
         {
-          "title": "Filter the list",
+          "title": "Filter sessions",
           "paragraphs": [
-            "看到这里，就把\"Filter the list\"当成一件真要上手的活来看。"
+            "这一块主要是在说\"Filter sessions\"真到手上该怎么用，哪里最容易踩坑。"
           ]
         },
         {
@@ -5130,31 +5151,32 @@
         {
           "title": "From inside a session",
           "paragraphs": [
-            "这一段是在把 /background or its alias /bg to detach the current conversation and keep it running. Pass a prompt such as /bg run the test suite and fix any failures to send one more instruction before detaching. 真跑起来。别只看命令长什么样，还得看跑完该出现什么。"
+            "这一段是在把 /background or its alias /bg to move the current conversation into a background session. Pass a prompt such as /bg run the test suite and fix any failures to give one more instruction first. 真跑起来。别只看命令长什么样，还得看跑完该出现什么。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
-          "title": "From the shell",
+          "title": "From your shell",
           "paragraphs": [
-            "这一块主要是在说\"From the shell\"真到手上该怎么用，哪里最容易踩坑。",
+            "看到这里，就把\"From your shell\"当成一件真要上手的活来看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
-              "title": "From the shell 1",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "title": "From your shell 1",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "claude --bg \"investigate the flaky SettingsChangeDetector test\"",
               "kind": "command"
             },
             {
-              "title": "From the shell 2",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "title": "From your shell 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "claude --agent code-reviewer --bg \"address review comments on PR 1234\"",
               "kind": "command"
             },
             {
-              "title": "From the shell 3",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "title": "From your shell 3",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "backgrounded · 7c5dcf5d\n  claude agents             list sessions\n  claude attach 7c5dcf5d    open in this terminal\n  claude logs 7c5dcf5d      show recent output\n  claude stop 7c5dcf5d      stop this session",
               "kind": "command"
             }
@@ -5164,6 +5186,13 @@
           "title": "How file edits are isolated",
           "paragraphs": [
             "这一段主要是在把\"How file edits are isolated\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Set the model",
+          "paragraphs": [
+            "这里主要是在交代\"Set the model\"这一块会碰到哪些事。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
@@ -5189,9 +5218,37 @@
           ]
         },
         {
+          "title": "The supervisor process",
+          "paragraphs": [
+            "这里不是让你背\"The supervisor process\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Where state is stored",
+          "paragraphs": [
+            "这一块主要是在说\"Where state is stored\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Turn off agent view",
+          "paragraphs": [
+            "这里不是让你背\"Turn off agent view\"这个词，而是让你看它真干活时怎么使。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+          ]
+        },
+        {
           "title": "Troubleshooting",
           "paragraphs": [
             "这里讲的是怎么找毛病，先查明白哪一步出错，再决定怎么修。"
+          ]
+        },
+        {
+          "title": "claude agents lists subagents instead of opening agent view",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
           ]
         },
         {
@@ -5202,9 +5259,23 @@
           ]
         },
         {
-          "title": "Sessions show as stopped after waking your machine",
+          "title": "Cannot open agents because background tasks are running",
           "paragraphs": [
-            "这里不是让你背\"Sessions show as stopped after waking your machine\"这个词，而是让你看它真干活时怎么使。",
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Prompt rejected as too short",
+          "paragraphs": [
+            "这里主要是在交代\"Prompt rejected as too short\"这一块会碰到哪些事。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Sessions show as failed after waking your machine",
+          "paragraphs": [
+            "这一段主要是在把\"Sessions show as failed after waking your machine\"讲实，不是只摆个标题给你看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
@@ -5219,20 +5290,6 @@
           "title": ".claude/worktrees/ is filling up",
           "paragraphs": [
             "这里不是让你背\".claude/worktrees/ is filling up\"这个词，而是让你看它真干活时怎么使。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Limitations",
-          "paragraphs": [
-            "这一块主要是在说\"Limitations\"真到手上该怎么用，哪里最容易踩坑。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Next steps",
-          "paragraphs": [
-            "这里不是让你背\"Next steps\"这个词，而是让你看它真干活时怎么使。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         }
@@ -5944,6 +6001,18 @@
           ],
           "steps": [
             {
+              "title": "原页关键片段：Find and build MCP servers 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "/plugin install mcp-server-dev@claude-plugins-official",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Find and build MCP servers 2",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Find and build MCP servers\"这一段的意思去办。",
+              "code": "/mcp-server-dev:build-mcp-server",
+              "kind": "prompt"
+            },
+            {
               "title": "原页关键片段：Option 1: Add a remote HTTP server",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
               "code": "# Basic syntax\nclaude mcp add --transport http <name> <url>\n\n# Real example: Connect to Notion\nclaude mcp add --transport http notion https://mcp.notion.com/mcp\n\n# Example with Bearer token\nclaude mcp add --transport http secure-api https://api.example.com/mcp \\\n  --header \"Authorization: Bearer your-token\"",
@@ -6002,18 +6071,6 @@
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
               "code": "# Add a project-scoped server\nclaude mcp add --transport http paypal --scope project https://mcp.paypal.com/mcp",
               "kind": "command"
-            },
-            {
-              "title": "原页关键片段：Project scope 2",
-              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"mcpServers\": {\n    \"shared-server\": {\n      \"command\": \"/path/to/server\",\n      \"args\": [],\n      \"env\": {}\n    }\n  }\n}",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：User scope",
-              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "# Add a user server\nclaude mcp add --transport http hubspot --scope user https://mcp.hubspot.com/anthropic",
-              "kind": "command"
             }
           ]
         },
@@ -6032,10 +6089,24 @@
           ]
         },
         {
-          "title": "Popular MCP servers",
+          "title": "Find and build MCP servers",
           "paragraphs": [
-            "这一块主要是在说\"Popular MCP servers\"真到手上该怎么用，哪里最容易踩坑。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+            "这里不是让你背\"Find and build MCP servers\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Find and build MCP servers 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "/plugin install mcp-server-dev@claude-plugins-official",
+              "kind": "command"
+            },
+            {
+              "title": "Find and build MCP servers 2",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Find and build MCP servers\"这一段的意思去办。",
+              "code": "/mcp-server-dev:build-mcp-server",
+              "kind": "prompt"
+            }
           ]
         },
         {
@@ -6913,7 +6984,7 @@
           "title": "Configure auto-updates",
           "paragraphs": [
             "这里讲怎么把某个开关拧对。重点不是概念，而是你该在哪儿改、改完怎么确认生效。",
-            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
@@ -7267,19 +7338,19 @@
             {
               "title": "Test your plugins locally 2",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two",
+              "code": "claude --plugin-dir ./my-plugin.zip",
               "kind": "command"
             },
             {
               "title": "Test your plugins locally 3",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude --plugin-url https://example.com/my-plugin.zip --plugin-url https://example.com/other.zip",
+              "code": "claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two",
               "kind": "command"
             },
             {
               "title": "Test your plugins locally 4",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "claude --plugin-url \"https://example.com/my-plugin.zip https://example.com/other.zip\"",
+              "code": "claude --plugin-url https://example.com/my-plugin.zip --plugin-url https://example.com/other.zip",
               "kind": "command"
             }
           ]
@@ -8974,7 +9045,7 @@
           "title": "Requirements",
           "paragraphs": [
             "这一段主要是在把\"Requirements\"讲实，不是只摆个标题给你看。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -17019,6 +17090,12 @@
               "kind": "code"
             },
             {
+              "title": "原页关键片段：Prerequisites 3",
+              "body": "\"Prerequisites\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "sudo tee /etc/apparmor.d/bwrap > /dev/null <<'EOF'\nabi <abi/4.0>,\ninclude <tunables/global>\n\nprofile bwrap /usr/bin/bwrap flags=(unconfined) {\n  userns,\n  include if exists <local/bwrap>\n}\nEOF",
+              "kind": "code"
+            },
+            {
               "title": "原页关键片段：Enable sandboxing",
               "body": "最省事的做法，就是把下面这句原样说给 Claude。",
               "code": "/sandbox",
@@ -17106,7 +17183,16 @@
         {
           "title": "Prerequisites",
           "paragraphs": [
-            "这一块主要是在说\"Prerequisites\"真到手上该怎么用，哪里最容易踩坑。"
+            "这一块主要是在说\"Prerequisites\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Prerequisites",
+              "body": "\"Prerequisites\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "sudo tee /etc/apparmor.d/bwrap > /dev/null <<'EOF'\nabi <abi/4.0>,\ninclude <tunables/global>\n\nprofile bwrap /usr/bin/bwrap flags=(unconfined) {\n  userns,\n  include if exists <local/bwrap>\n}\nEOF",
+              "kind": "code"
+            }
           ]
         },
         {
@@ -17619,6 +17705,18 @@
           ],
           "steps": [
             {
+              "title": "原页关键片段：Use fast mode on Opus 4.7 1",
+              "body": "\"Use fast mode on Opus 4.7\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "export CLAUDE_CODE_ENABLE_OPUS_4_7_FAST_MODE=1",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Use fast mode on Opus 4.7 2",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "{\n  \"env\": {\n    \"CLAUDE_CODE_ENABLE_OPUS_4_7_FAST_MODE\": \"1\"\n  }\n}",
+              "kind": "config"
+            },
+            {
               "title": "原页关键片段：Require per-session opt-in",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"fastModePerSessionOptIn\": true\n}",
@@ -17630,7 +17728,7 @@
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
           ]
         },
         {
@@ -17638,6 +17736,27 @@
           "paragraphs": [
             "这一块主要是在说\"Toggle fast mode\"真到手上该怎么用，哪里最容易踩坑。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Use fast mode on Opus 4.7",
+          "paragraphs": [
+            "这一块主要是在说\"Use fast mode on Opus 4.7\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Use fast mode on Opus 4.7 1",
+              "body": "\"Use fast mode on Opus 4.7\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "export CLAUDE_CODE_ENABLE_OPUS_4_7_FAST_MODE=1",
+              "kind": "code"
+            },
+            {
+              "title": "Use fast mode on Opus 4.7 2",
+              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
+              "code": "{\n  \"env\": {\n    \"CLAUDE_CODE_ENABLE_OPUS_4_7_FAST_MODE\": \"1\"\n  }\n}",
+              "kind": "config"
+            }
           ]
         },
         {
@@ -17827,15 +17946,15 @@
         {
           "title": "Output Styles vs. CLAUDE.md vs. —append-system-prompt",
           "paragraphs": [
-            "这一块主要是在说\"Output Styles vs. CLAUDE.md vs. —append-system-prompt\"真到手上该怎么用，哪里最容易踩坑。",
+            "这一段是在帮你从几个选项里挑 based on whether Claude should stop acting as a coding assistant or keep its default role and learn more. Output styles replace the software-engineering parts of Claude Code’s system prompt with your own role and voice, so use one when Claude should adopt a different identity, like a writing editor or a data-analysis assistant. CLAUDE.md and --append-system-prompt both keep Claude Code’s default identity and add to it, so use them when Claude should remain a coding assistant that also follows your project conventions or extra instructions.。重点不只是知道有哪些，更是看代价和场景。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
           "title": "Output Styles vs. Agents",
           "paragraphs": [
-            "这里不是让你背\"Output Styles vs. Agents\"这个词，而是让你看它真干活时怎么使。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+            "这一段是在说怎么用 an output style to change how the main conversation responds in every session. Use a subagent when you want a separately scoped helper that the main conversation delegates to. Output styles affect only the system prompt of the main agent loop. Agents handle specific tasks and can carry their own model, tools, and context about when 去做 invoke them.。看这种内容，光知道名字没用，还是得落到手上。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -19120,7 +19239,8 @@
         {
           "title": "System prompt flags",
           "paragraphs": [
-            "这一段主要是在把\"System prompt flags\"讲实，不是只摆个标题给你看。"
+            "这一段主要是在把\"System prompt flags\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -23113,7 +23233,7 @@
             {
               "title": "Respond to tool requests 4",
               "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "async def can_use_tool(tool_name, input_data, context):\n    approved = await ask_user(f\"Allow {tool_name}?\")\n\n    if not approved:\n        return PermissionResultDeny(message=\"User rejected this action\")\n    return PermissionResultAllow(updated_input=input_data)",
+              "code": "async def can_use_tool(tool_name, input_data, context):\n    choice = await ask_user(f\"Allow {tool_name}?\", [\"once\", \"always\", \"no\"])\n\n    if choice == \"always\":\n        persist = [\n            s for s in context.suggestions if s.destination == \"localSettings\"\n        ]\n        return PermissionResultAllow(\n            updated_input=input_data, updated_permissions=persist\n        )\n    if choice == \"once\":\n        return PermissionResultAllow(updated_input=input_data)\n    return PermissionResultDeny(message=\"User declined\")",
               "kind": "code"
             }
           ]
@@ -24778,7 +24898,7 @@
         {
           "title": "简要总结",
           "paragraphs": [
-            "这页主要讲 Modifying system prompts：Learn how to customize Claude's behavior by modifying system prompts using three approaches - output styles, systemPrompt with append, and custom system prompts.",
+            "这页主要讲 Modifying system prompts：Choose between the claude_code preset and a custom system prompt, and customize behavior with CLAUDE.md, output styles, append, or a fully custom prompt.",
             "你可以把它当成\"Customize behavior\"这块里专门管这一摊事的说明书。"
           ]
         },
@@ -24786,8 +24906,8 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Modifying system prompts\"理解成 Customize behavior 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 Understanding system prompts、Methods of modification、Method 1: CLAUDE.md files (project-level instructions)、How CLAUDE.md works with the SDK 这些环节往下讲。",
-            "翻成人话，大概就是：Understanding system prompts"
+            "原文这页大多会按 How system prompts work、Decide on a starting point、Customize agent behavior、CLAUDE.md files for project-level instructions 这些环节往下讲。",
+            "翻成人话，大概就是：How system prompts work"
           ]
         },
         {
@@ -24795,48 +24915,42 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：Understanding system prompts -> Methods of modification -> Method 1: CLAUDE.md files (project-level instructions) -> How CLAUDE.md works with the SDK。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：How system prompts work -> Decide on a starting point -> Customize agent behavior -> CLAUDE.md files for project-level instructions。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ],
           "steps": [
             {
-              "title": "原页关键片段：Method 1: CLAUDE.md files (project-level instructions) 1",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "# Project Guidelines\n\n## Code Style\n\n- Use TypeScript strict mode\n- Prefer functional components in React\n- Always include JSDoc comments for public APIs\n\n## Testing\n\n- Run `npm test` before committing\n- Maintain >80% code coverage\n- Use jest for unit tests, playwright for E2E\n\n## Commands\n\n- Build: `npm run build`\n- Dev server: `npm run dev`\n- Type check: `npm run typecheck`",
-              "kind": "command"
-            },
-            {
-              "title": "原页关键片段：Method 1: CLAUDE.md files (project-level instructions) 2",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "title": "原页关键片段：CLAUDE.md files for project-level instructions",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
               "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Add a new React component for user profiles\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\" // Use Claude Code's system prompt\n    },\n    settingSources: [\"project\"] // Loads CLAUDE.md from project\n  }\n})) {\n  messages.push(message);\n}\n\n// Now Claude has access to your project guidelines from CLAUDE.md",
               "kind": "command"
             },
             {
-              "title": "原页关键片段：Method 2: Output styles (persistent configurations)",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "import { writeFile, mkdir } from \"fs/promises\";\nimport { join } from \"path\";\nimport { homedir } from \"os\";\n\nasync function createOutputStyle(name: string, description: string, prompt: string) {\n  // User-level: ~/.claude/output-styles\n  // Project-level: .claude/output-styles\n  const outputStylesDir = join(homedir(), \".claude\", \"output-styles\");\n\n  await mkdir(outputStylesDir, { recursive: true });\n\n  const content = `---\nname: ${name}\ndescription: ${description}\n---\n\n${prompt}`;\n\n  const filePath = join(outputStylesDir, `${name.toLowerCase().replace(/\\s+/g, \"-\")}.md`);\n  await writeFile(filePath, content, \"utf-8\");\n}\n\n// Example: Create a code review specialist\nawait createOutputStyle(\n  \"Code Reviewer\",\n  \"Thorough code review assistant\",\n  `You are an expert code reviewer.\n\nFor every code submission:\n1. Check for bugs and security issues\n2. Evaluate performance\n3. Suggest improvements\n4. Rate code quality (1-10)`\n);",
-              "kind": "command"
+              "title": "原页关键片段：Output styles for persistent configurations",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "---\nname: Code Reviewer\ndescription: Thorough code review assistant\n---\n\nYou are an expert code reviewer.\n\nFor every code submission:\n1. Check for bugs and security issues\n2. Evaluate performance\n3. Suggest improvements\n4. Rate code quality (1-10)",
+              "kind": "config"
             },
             {
-              "title": "原页关键片段：Method 3: Using systemPrompt with append 1",
+              "title": "原页关键片段：Append to the claude_code preset 1",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Help me write a Python function to calculate fibonacci numbers\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\",\n      append: \"Always include detailed docstrings and type hints in Python code.\"\n    }\n  }\n})) {\n  messages.push(message);\n  if (message.type === \"assistant\") {\n    console.log(message.message.content);\n  }\n}",
               "kind": "command"
             },
             {
-              "title": "原页关键片段：Method 3: Using systemPrompt with append 2",
+              "title": "原页关键片段：Append to the claude_code preset 2",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Triage the open issues in this repo\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\",\n      append: \"You operate Acme's internal triage workflow. Label issues by component and severity.\",\n      excludeDynamicSections: true\n    }\n  }\n})) {\n  // ...\n}",
               "kind": "command"
             },
             {
-              "title": "原页关键片段：Method 4: Custom system prompts",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "title": "原页关键片段：Custom system prompts",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
               "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst customPrompt = `You are a Python coding specialist.\nFollow these guidelines:\n- Write clean, well-documented code\n- Use type hints for all functions\n- Include comprehensive docstrings\n- Prefer functional programming patterns when appropriate\n- Always explain your code choices`;\n\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Create a data processing pipeline\",\n  options: {\n    systemPrompt: customPrompt\n  }\n})) {\n  messages.push(message);\n  if (message.type === \"assistant\") {\n    console.log(message.message.content);\n  }\n}",
               "kind": "command"
             },
             {
-              "title": "原页关键片段：Example: Output style with session-specific additions",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "title": "原页关键片段：Combine an output style with session-specific additions",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
               "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Assuming \"Code Reviewer\" output style is active (via /config or settings)\n// Add session-specific focus areas\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Review this authentication module\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\",\n      append: `\n        For this review, prioritize:\n        - OAuth 2.0 compliance\n        - Token storage security\n        - Session management\n      `\n    }\n  }\n})) {\n  messages.push(message);\n}",
               "kind": "command"
             }
@@ -24845,73 +24959,76 @@
         {
           "title": "Documentation Index",
           "paragraphs": [
-            "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。"
-          ]
-        },
-        {
-          "title": "Understanding system prompts",
-          "paragraphs": [
-            "这一段主要是在把\"Understanding system prompts\"讲实，不是只摆个标题给你看。",
+            "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
-          "title": "Methods of modification",
+          "title": "How system prompts work",
           "paragraphs": [
-            "看到这里，就把\"Methods of modification\"当成一件真要上手的活来看。"
+            "看到这里，就把\"How system prompts work\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
-          "title": "Method 1: CLAUDE.md files (project-level instructions)",
+          "title": "Decide on a starting point",
           "paragraphs": [
-            "这里不是让你背\"Method 1: CLAUDE.md files (project-level instructions)\"这个词，而是让你看它真干活时怎么使。",
+            "这里主要是在交代\"Decide on a starting point\"这一块会碰到哪些事。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Customize agent behavior",
+          "paragraphs": [
+            "这里不是让你背\"Customize agent behavior\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "CLAUDE.md files for project-level instructions",
+          "paragraphs": [
+            "这一段主要是在把\"CLAUDE.md files for project-level instructions\"讲实，不是只摆个标题给你看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
-              "title": "Method 1: CLAUDE.md files (project-level instructions) 1",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "# Project Guidelines\n\n## Code Style\n\n- Use TypeScript strict mode\n- Prefer functional components in React\n- Always include JSDoc comments for public APIs\n\n## Testing\n\n- Run `npm test` before committing\n- Maintain >80% code coverage\n- Use jest for unit tests, playwright for E2E\n\n## Commands\n\n- Build: `npm run build`\n- Dev server: `npm run dev`\n- Type check: `npm run typecheck`",
-              "kind": "command"
-            },
-            {
-              "title": "Method 1: CLAUDE.md files (project-level instructions) 2",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "title": "CLAUDE.md files for project-level instructions",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
               "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Add a new React component for user profiles\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\" // Use Claude Code's system prompt\n    },\n    settingSources: [\"project\"] // Loads CLAUDE.md from project\n  }\n})) {\n  messages.push(message);\n}\n\n// Now Claude has access to your project guidelines from CLAUDE.md",
               "kind": "command"
             }
           ]
         },
         {
-          "title": "Method 2: Output styles (persistent configurations)",
+          "title": "Output styles for persistent configurations",
           "paragraphs": [
-            "看到这里，就把\"Method 2: Output styles (persistent configurations)\"当成一件真要上手的活来看。",
+            "这一段主要是在把\"Output styles for persistent configurations\"讲实，不是只摆个标题给你看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
-              "title": "Method 2: Output styles (persistent configurations)",
-              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "import { writeFile, mkdir } from \"fs/promises\";\nimport { join } from \"path\";\nimport { homedir } from \"os\";\n\nasync function createOutputStyle(name: string, description: string, prompt: string) {\n  // User-level: ~/.claude/output-styles\n  // Project-level: .claude/output-styles\n  const outputStylesDir = join(homedir(), \".claude\", \"output-styles\");\n\n  await mkdir(outputStylesDir, { recursive: true });\n\n  const content = `---\nname: ${name}\ndescription: ${description}\n---\n\n${prompt}`;\n\n  const filePath = join(outputStylesDir, `${name.toLowerCase().replace(/\\s+/g, \"-\")}.md`);\n  await writeFile(filePath, content, \"utf-8\");\n}\n\n// Example: Create a code review specialist\nawait createOutputStyle(\n  \"Code Reviewer\",\n  \"Thorough code review assistant\",\n  `You are an expert code reviewer.\n\nFor every code submission:\n1. Check for bugs and security issues\n2. Evaluate performance\n3. Suggest improvements\n4. Rate code quality (1-10)`\n);",
-              "kind": "command"
+              "title": "Output styles for persistent configurations",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "---\nname: Code Reviewer\ndescription: Thorough code review assistant\n---\n\nYou are an expert code reviewer.\n\nFor every code submission:\n1. Check for bugs and security issues\n2. Evaluate performance\n3. Suggest improvements\n4. Rate code quality (1-10)",
+              "kind": "config"
             }
           ]
         },
         {
-          "title": "Method 3: Using systemPrompt with append",
+          "title": "Append to the claude_code preset",
           "paragraphs": [
-            "看到这里，就把\"Method 3: Using systemPrompt with append\"当成一件真要上手的活来看。",
+            "看到这里，就把\"Append to the claude_code preset\"当成一件真要上手的活来看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
-              "title": "Method 3: Using systemPrompt with append 1",
+              "title": "Append to the claude_code preset 1",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Help me write a Python function to calculate fibonacci numbers\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\",\n      append: \"Always include detailed docstrings and type hints in Python code.\"\n    }\n  }\n})) {\n  messages.push(message);\n  if (message.type === \"assistant\") {\n    console.log(message.message.content);\n  }\n}",
               "kind": "command"
             },
             {
-              "title": "Method 3: Using systemPrompt with append 2",
+              "title": "Append to the claude_code preset 2",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Triage the open issues in this repo\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\",\n      append: \"You operate Acme's internal triage workflow. Label issues by component and severity.\",\n      excludeDynamicSections: true\n    }\n  }\n})) {\n  // ...\n}",
               "kind": "command"
@@ -24919,23 +25036,24 @@
           ]
         },
         {
-          "title": "Method 4: Custom system prompts",
+          "title": "Custom system prompts",
           "paragraphs": [
-            "这一段主要是在把\"Method 4: Custom system prompts\"讲实，不是只摆个标题给你看。"
+            "这一块主要是在说\"Custom system prompts\"真到手上该怎么用，哪里最容易踩坑。"
           ],
           "steps": [
             {
-              "title": "Method 4: Custom system prompts",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "title": "Custom system prompts",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
               "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst customPrompt = `You are a Python coding specialist.\nFollow these guidelines:\n- Write clean, well-documented code\n- Use type hints for all functions\n- Include comprehensive docstrings\n- Prefer functional programming patterns when appropriate\n- Always explain your code choices`;\n\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Create a data processing pipeline\",\n  options: {\n    systemPrompt: customPrompt\n  }\n})) {\n  messages.push(message);\n  if (message.type === \"assistant\") {\n    console.log(message.message.content);\n  }\n}",
               "kind": "command"
             }
           ]
         },
         {
-          "title": "Comparison of all four approaches",
+          "title": "Compare the four approaches",
           "paragraphs": [
-            "看到这里，就把\"Comparison of all four approaches\"当成一件真要上手的活来看。"
+            "这里就是把两条像样的路摆一块，让你别走岔。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -24973,20 +25091,22 @@
           ]
         },
         {
-          "title": "Combining approaches",
+          "title": "Combine approaches",
           "paragraphs": [
-            "这一段主要是在把\"Combining approaches\"讲实，不是只摆个标题给你看。"
+            "看到这里，就把\"Combine approaches\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
-          "title": "Example: Output style with session-specific additions",
+          "title": "Combine an output style with session-specific additions",
           "paragraphs": [
-            "这里不是让你背\"Example: Output style with session-specific additions\"这个词，而是让你看它真干活时怎么使。"
+            "这段看着像个标题，其实是在说\"Combine an output style with session-specific additions\"管到哪儿。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
-              "title": "Example: Output style with session-specific additions",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "title": "Combine an output style with session-specific additions",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
               "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Assuming \"Code Reviewer\" output style is active (via /config or settings)\n// Add session-specific focus areas\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Review this authentication module\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\",\n      append: `\n        For this review, prioritize:\n        - OAuth 2.0 compliance\n        - Token storage security\n        - Session management\n      `\n    }\n  }\n})) {\n  messages.push(message);\n}",
               "kind": "command"
             }
@@ -24995,7 +25115,8 @@
         {
           "title": "See also",
           "paragraphs": [
-            "这一段主要是在把\"See also\"讲实，不是只摆个标题给你看。"
+            "这一段主要是在把\"See also\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         }
       ],
@@ -25388,7 +25509,7 @@
             {
               "title": "原页关键片段：Skills Not Found 2",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "# Ensure your cwd points to the directory containing .claude/skills/\noptions = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",  # Must contain .claude/skills/\n    setting_sources=[\"user\", \"project\"],  # Loads skills from these sources\n    skills=\"all\",\n)",
+              "code": "# Ensure your cwd points to the directory containing .claude/skills/\noptions = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",  # .claude/skills/ here or in a parent directory\n    setting_sources=[\"user\", \"project\"],  # Loads skills from these sources\n    skills=\"all\",\n)",
               "kind": "command"
             },
             {
@@ -25529,7 +25650,7 @@
             {
               "title": "Skills Not Found 2",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "# Ensure your cwd points to the directory containing .claude/skills/\noptions = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",  # Must contain .claude/skills/\n    setting_sources=[\"user\", \"project\"],  # Loads skills from these sources\n    skills=\"all\",\n)",
+              "code": "# Ensure your cwd points to the directory containing .claude/skills/\noptions = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",  # .claude/skills/ here or in a parent directory\n    setting_sources=[\"user\", \"project\"],  # Loads skills from these sources\n    skills=\"all\",\n)",
               "kind": "command"
             },
             {
@@ -27064,6 +27185,12 @@
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nclass TodoTracker {\n  private todos: any[] = [];\n\n  displayProgress() {\n    if (this.todos.length === 0) return;\n\n    const completed = this.todos.filter((t) => t.status === \"completed\").length;\n    const inProgress = this.todos.filter((t) => t.status === \"in_progress\").length;\n    const total = this.todos.length;\n\n    console.log(`\\nProgress: ${completed}/${total} completed`);\n    console.log(`Currently working on: ${inProgress} task(s)\\n`);\n\n    this.todos.forEach((todo, index) => {\n      const icon =\n        todo.status === \"completed\" ? \"✅\" : todo.status === \"in_progress\" ? \"🔧\" : \"❌\";\n      const text = todo.status === \"in_progress\" ? todo.activeForm : todo.content;\n      console.log(`${index + 1}. ${icon} ${text}`);\n    });\n  }\n\n  async trackQuery(prompt: string) {\n    for await (const message of query({\n      prompt,\n      options: { maxTurns: 20 }\n    })) {\n      if (message.type === \"assistant\") {\n        for (const block of message.message.content) {\n          if (block.type === \"tool_use\" && block.name === \"TodoWrite\") {\n            this.todos = block.input.todos;\n            this.displayProgress();\n          }\n        }\n      }\n    }\n  }\n}\n\n// Usage\nconst tracker = new TodoTracker();\nawait tracker.trackQuery(\"Build a complete authentication system with todos\");",
               "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Migrate to Task tools",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Optimize my React app performance\",\n  options: { env: { ...process.env, CLAUDE_CODE_ENABLE_TASKS: \"1\" } },\n})) {\n  if (message.type !== \"assistant\") continue;\n  for (const block of message.message.content) {\n    if (block.type !== \"tool_use\") continue;\n    if (block.name === \"TaskCreate\") {\n      const input = block.input as { subject: string };\n      console.log(`+ ${input.subject}`);\n    } else if (block.name === \"TaskUpdate\") {\n      const input = block.input as { taskId: string; status?: string };\n      if (input.status) console.log(`  ${input.taskId} -> ${input.status}`);\n    }\n  }\n}",
+              "kind": "command"
             }
           ]
         },
@@ -27117,6 +27244,21 @@
               "title": "Real-time Progress Display",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nclass TodoTracker {\n  private todos: any[] = [];\n\n  displayProgress() {\n    if (this.todos.length === 0) return;\n\n    const completed = this.todos.filter((t) => t.status === \"completed\").length;\n    const inProgress = this.todos.filter((t) => t.status === \"in_progress\").length;\n    const total = this.todos.length;\n\n    console.log(`\\nProgress: ${completed}/${total} completed`);\n    console.log(`Currently working on: ${inProgress} task(s)\\n`);\n\n    this.todos.forEach((todo, index) => {\n      const icon =\n        todo.status === \"completed\" ? \"✅\" : todo.status === \"in_progress\" ? \"🔧\" : \"❌\";\n      const text = todo.status === \"in_progress\" ? todo.activeForm : todo.content;\n      console.log(`${index + 1}. ${icon} ${text}`);\n    });\n  }\n\n  async trackQuery(prompt: string) {\n    for await (const message of query({\n      prompt,\n      options: { maxTurns: 20 }\n    })) {\n      if (message.type === \"assistant\") {\n        for (const block of message.message.content) {\n          if (block.type === \"tool_use\" && block.name === \"TodoWrite\") {\n            this.todos = block.input.todos;\n            this.displayProgress();\n          }\n        }\n      }\n    }\n  }\n}\n\n// Usage\nconst tracker = new TodoTracker();\nawait tracker.trackQuery(\"Build a complete authentication system with todos\");",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Migrate to Task tools",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说\"Migrate to Task tools\"管到哪儿。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Migrate to Task tools",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Optimize my React app performance\",\n  options: { env: { ...process.env, CLAUDE_CODE_ENABLE_TASKS: \"1\" } },\n})) {\n  if (message.type !== \"assistant\") continue;\n  for (const block of message.message.content) {\n    if (block.type !== \"tool_use\") continue;\n    if (block.name === \"TaskCreate\") {\n      const input = block.input as { subject: string };\n      console.log(`+ ${input.subject}`);\n    } else if (block.name === \"TaskUpdate\") {\n      const input = block.input as { taskId: string; status?: string };\n      if (input.status) console.log(`  ${input.taskId} -> ${input.status}`);\n    }\n  }\n}",
               "kind": "command"
             }
           ]
