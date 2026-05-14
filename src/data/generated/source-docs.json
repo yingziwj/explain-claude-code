@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-13T05:57:34.841Z",
+  "generatedAt": "2026-05-14T05:56:41.959Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -1287,6 +1287,7 @@
         "Documentation Index"
       ],
       "toc": [
+        "2.1.141",
         "2.1.140",
         "2.1.139",
         "2.1.138",
@@ -1305,8 +1306,7 @@
         "2.1.119",
         "2.1.118",
         "2.1.117",
-        "2.1.116",
-        "2.1.114"
+        "2.1.116"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
@@ -1314,6 +1314,67 @@
         "Use this file to discover all available pages before exploring further.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Added terminalSequence field to hook JSON output so hooks can emit desktop notifications, window titles, and bells without a controlling terminal",
+        "Added CLAUDE_CODE_PLUGIN_PREFER_HTTPS to clone GitHub plugin sources over HTTPS instead of SSH, for environments without a GitHub SSH key",
+        "Added ANTHROPIC_WORKSPACE_ID environment variable for workload identity federation — scopes the minted token to a specific workspace when the federation rule covers more than one",
+        "Added claude agents --cwd <path> to scope the session list to a directory",
+        "/feedback can now include recent sessions (last 24 hours or 7 days) for issues spanning more than the current session",
+        "Rewind menu: added “Summarize up to here” to compress earlier context while keeping recent turns intact",
+        "Auto mode permission dialog now explains when a permissions.ask rule caused the prompt",
+        "Restored the “view diff in your IDE” option on file-edit permission prompts when an IDE is connected",
+        "Background agents launched via /bg or ←← now preserve the current permission mode instead of reverting to default",
+        "claude agents: agents that finish work but leave a background shell running now move to Completed instead of staying under Working",
+        "Improved spinner feedback during long thinking periods — the spinner now warms to amber after 10 seconds to signal Claude is still working",
+        "Improved plugin menu navigation: →/Tab switch tabs, ↑ moves to the tab strip, and tab headers and search box are clickable in fullscreen mode",
+        "Fixed background side-queries sending an unavailable Haiku model ID on Bedrock/Vertex/Foundry/gateway when no ANTHROPIC_SMALL_FAST_MODEL override is set — now falls back to the main-loop model",
+        "Fixed claude daemon status and /doctor on Windows throwing when the daemon pipe key file is locked or unreadable — now shows the underlying error instead of an opaque failure",
+        "Fixed claude agents showing the agent-type list instead of the dashboard when launched through a wrapper that adds flags",
+        "Fixed claude agents opening a crashed session firing redundant dispatches when the working directory was deleted",
+        "Fixed background jobs on a custom ANTHROPIC_BASE_URL gateway not getting auto-named — the namer now uses the main model when no Haiku model is configured",
+        "Fixed /model in one session silently changing the autocompact threshold in other concurrent sessions",
+        "Fixed switching permission mode while a tool-permission prompt is open not auto-dismissing the prompt when the new setting permits the tool",
+        "Fixed pressing Enter while a permission/dialog prompt is open also submitting text in the input box",
+        "Fixed hooks receiving a non-existent transcript_path after EnterWorktree switches the working directory",
+        "Fixed markdown tables with cell wrapping falling back to the vertical key-value layout instead of rendering as a bordered grid (regression in 2.1.136)",
+        "Fixed cancelled prompts being removed from Up-arrow history when auto-restored into the input box, avoiding duplicate entries",
+        "Fixed prompts cancelled with Ctrl+C/Esc before any response being dropped from Up-arrow history",
+        "Fixed Ctrl+C not interrupting a running turn while in vim INSERT/VISUAL mode",
+        "Fixed alternative chat:submit keybindings (e.g. meta+enter, ctrl+enter) not working when enter is rebound to chat:newline",
+        "Fixed prompt suggestions being silently disabled when an output style was configured",
+        "Fixed spinnerVerbs setting not being honored in turn-completion messages",
+        "Fixed AskUserQuestion popup hiding the last line of preceding chat content",
+        "Fixed Web Search status showing “Did 0 searches” when searches returned errors",
+        "Fixed multi-line statusline output dropping or corrupting rows when any line exceeds terminal width",
+        "Fixed light-ansi theme using invisible white for diff context lines on light backgrounds — now uses black",
+        "Fixed error overlay dumping minified bundle source that hid the original error message",
+        "Fixed pressing Enter after typing a feedback survey rating digit submitting it as a chat message instead of the rating",
+        "Fixed pressing x on a selected subagent in the agent panel typing into the prompt instead of stopping the agent",
+        "Fixed session title being derived from plugin monitor notifications before the user’s first prompt",
+        "Fixed “Allowed by PermissionRequest hook” repeating once per tool call under a collapsed read/search group",
+        "Fixed /tui silently dropping running background shells and subagents — now refuses and asks to wait for them to finish",
+        "Fixed welcome banner showing “API Usage Billing” on Bedrock, Vertex, Foundry, and other third-party providers — now shows the provider name",
+        "Fixed /mcp server list not keeping the focused server visible in short terminals in fullscreen mode",
+        "Fixed redaction in /feedback bundles producing invalid JSON for quoted values like session IDs",
+        "Fixed desktop and third-party provider sessions incorrectly inheriting apiKeyHelper/ANTHROPIC_AUTH_TOKEN from host managed-settings",
+        "Fixed early analytics events being silently dropped when fired before logger initialization",
+        "Fixed claude plugin install failing for plugins whose marketplace ref no longer exists upstream when a sha is also pinned",
+        "Fixed plugin details pane showing 0 MCP servers for plugins that declare them via .mcp.json",
+        "Fixed plugin MCP servers with unset config variables showing a generic connection failure instead of a “config issue” message with a fix-it hint; malformed .mcp.json entries no longer drop other MCP servers",
+        "Fixed MCP server configs using POSIX shell parameter expansions (e.g. ${var%pattern}) being incorrectly flagged as missing environment variables",
+        "Fixed MCP HTTP/SSE servers returning 403 on connect showing as “failed” instead of “needs auth”",
+        "Fixed remote MCP servers disconnecting unnecessarily when the optional server-events stream failed to reconnect — tool calls continue over POST",
+        "Fixed Remote Control MCP connectors all failing with 401 when the worker session token rotated mid-session",
+        "Fixed Remote Control automatically re-enrolling a trusted device when the server rejects a stale token, instead of looping through /login",
+        "Fixed a race where early OTel spans could be silently dropped in SDK/headless mode with beta tracing enabled",
+        "Fixed custom voice:pushToTalk keybindings and \"space\": null unbinds being silently ignored",
+        "Fixed Windows Alt+V image paste reporting “no image found” when the clipboard contains a screenshot",
+        "Fixed SDK “Claude Code native binary not found” on Linux when both glibc and musl platform packages are installed",
+        "Bedrock: awsCredentialExport now always runs when configured instead of being skipped when ambient AWS credentials resolve, fixing auth for cross-account access",
+        "[VSCode] Fixed in-chat mic showing no feedback when the microphone produced only silence — now shows “No audio detected”",
+        "[VSCode] Voice mode: the WSL error now suggests installing sox libsox-fmt-pulse for WSLg users",
+        "claude agents: launching a session no longer fails when the pre-warmed background worker is unhealthy — now falls back to a fresh launch",
+        "claude agents no longer shows empty placeholder sessions left over from backgrounding a fresh REPL, and shows onboarding text when entered via ← with no other agents",
+        "Empty idle background sessions left over from ← are now automatically retired by the daemon after 5 minutes",
         "Improved Agent tool subagent_type matching to accept case- and separator-insensitive values (e.g. \"Code Reviewer\" resolves to code-reviewer)",
         "Updated agent color palette",
         "Fixed /goal silently hanging when disableAllHooks or allowManagedHooksOnly is set — now shows a clear message instead of an indicator that never resolves",
@@ -1427,68 +1488,7 @@
         "Fixed keyboard shortcut hints not reflecting rebound keys from keybindings.json",
         "Fixed /settings language change being reverted on Escape after confirming",
         "Fixed /terminal-setup only appearing in autocomplete on exact name match instead of partial prefixes",
-        "Fixed “Chat about this” on an AskUserQuestion dialog erasing the question text",
-        "Fixed MCP tool results being invisible when the server returns content blocks",
-        "Improved error message when --worktree collides with an existing or stale worktree",
-        "Changed plugin marketplace removal key to d (matching delete elsewhere) instead of r which collided with retry",
-        "Added worktree.baseRef setting (fresh | head) to choose whether --worktree, EnterWorktree, and agent-isolation worktrees branch from origin/<default> or local HEAD. Note: the default fresh changes EnterWorktree’s base back to origin/<default> (it has been local HEAD since 2.1.128) — set worktree.baseRef: \"head\" to keep unpushed commits in new worktrees",
-        "Added sandbox.bwrapPath and sandbox.socatPath managed settings (Linux/WSL) to specify custom bubblewrap and socat binary locations",
-        "Added parentSettingsBehavior admin-tier key ('first-wins' | 'merge') to let admins opt SDK managedSettings (parent tier) into the policy merge",
-        "Hooks now receive the active effort level via the effort.level JSON input field and the $CLAUDE_EFFORT environment variable, and Bash tool commands can read $CLAUDE_EFFORT",
-        "Improved focus mode behavior",
-        "Improved memory usage by releasing warm-spare background workers under memory pressure",
-        "Fixed parallel sessions all dead-ending at 401 after a refresh-token race wiped shared credentials",
-        "Fixed Edit/Write allow rules scoped to a drive root (C:\\) or POSIX / matching incorrectly and always prompting",
-        "Fixed an unhandled rejection (ECOMPROMISED) when a history or session-log file lock is compromised by clock skew or slow disk",
-        "Fixed pressing Esc during conversation compaction showing a spurious “Error compacting conversation” notification",
-        "Fixed HTTP(S)_PROXY / NO_PROXY / mTLS not being respected for the full MCP OAuth flow including discovery, dynamic client registration, token exchange, and token refresh",
-        "Fixed Read/Write/Edit being denied on mapped network drives passed via --add-dir / SDK additionalDirectories",
-        "Fixed Remote Control stop/interrupt from claude.ai not fully canceling the CLI session the same way local Esc does, causing queued messages to never advance after interrupting a stuck tool or prompt",
-        "Fixed /effort in one session unexpectedly changing the effort level of other concurrent sessions, and a related issue where an IDE effort change could be silently dropped",
-        "Fixed subagents not discovering project, user, or plugin skills via the Skill tool",
-        "claude --help now lists --remote-control alongside --remote-control-session-name-prefix",
-        "[VSCode] Fixed claudeCode.claudeProcessWrapper failing with “Unsupported platform” when the extension build doesn’t bundle a Claude binary",
-        "Added CLAUDE_CODE_SESSION_ID environment variable to the Bash tool subprocess environment, matching the session_id passed to hooks",
-        "Added CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1 env var to opt out of the fullscreen alternate-screen renderer and keep the conversation in the terminal’s native scrollback",
-        "Added a “Pasting…” footer hint while a Ctrl+V image paste is being read from the clipboard",
-        "Fixed external SIGINT (e.g. IDE stop button, kill -INT) not running graceful shutdown — terminal modes are now restored and the --resume hint is printed instead of an abrupt exit",
-        "Fixed an uncaught exception when the terminal is closed or SSH disconnects mid-session under the native build",
-        "Fixed --resume failing with no low surrogate in string when a tool error truncation split an emoji; pre-corrupted sessions are sanitized on load",
-        "Fixed --permission-mode flag being ignored when resuming a plan-mode session with -p --continue/--resume, and plan mode not being re-applied after ExitPlanMode within the same session",
-        "Fixed fullscreen mode showing a blank screen after laptop sleep/wake or Ctrl+Z/fg until the next keystroke or stream output",
-        "Fixed cursor landing mid-grapheme on Ctrl+E/A/K/U/arrow keys when an Indic conjunct or ZWJ emoji wraps across lines",
-        "Fixed vim operators corrupting text containing decomposed (NFD) accented characters",
-        "Fixed pasting text starting with / silently swallowing the input or triggering an unknown-command reply",
-        "Fixed pasting dumping stray escape sequences into the prompt when focus events or mouse-tracking reports interleave with the bracketed paste",
-        "Fixed mouse wheel scrolling being too fast in Cursor and VS Code 1.92–1.104 due to an upstream xterm.js bug",
-        "Fixed scroll-wheel handling in JetBrains IDE 2025.2 terminals (spurious arrow keys, wrong-direction events, runaway acceleration)",
-        "Fixed /usage Ctrl+S hanging when copying the stats screenshot to the clipboard on Linux/X11",
-        "Fixed /terminal-setup showing a contradictory error in Windows Terminal — Shift+Enter is natively supported there",
-        "Fixed /effort picker not reflecting the CLAUDE_CODE_EFFORT_LEVEL env var override",
-        "Fixed /status showing the wrong default model for some users",
-        "Fixed slash command autocomplete popup being capped at ~3–5 visible commands instead of scaling with terminal height",
-        "Fixed statusline context_window token counts reflecting cumulative session totals instead of current context usage",
-        "Fixed Alt+T (thinking toggle) not working on macOS terminals without “Option as Meta” enabled (iTerm2, Terminal.app defaults)",
-        "Fixed dead keyboard input on Windows after re-opening a background session from claude agents",
-        "Fixed unbounded memory growth (10GB+ RSS) when a stdio MCP server writes non-protocol data to stdout",
-        "Fixed MCP servers that connect but fail tools/list silently showing 0 tools — they now retry once and show “connected · tools fetch failed” in /mcp",
-        "Fixed unauthorized claude.ai MCP connectors showing as “failed” instead of “needs auth”, and headless -p mode retrying non-transient 4xx connection failures",
-        "Improved visual consistency in slash command dialogs and /login, /upgrade, /extra-usage dialog spacing",
-        "Updated the /tui fullscreen startup banner to describe additional renderer benefits (lower memory usage, mouse support, auto-copy on select)",
-        "Fixed Bedrock and Vertex 400 errors when ENABLE_PROMPT_CACHING_1H is set",
-        "Fixed VS Code extension failing to activate on Windows due to a hardcoded build path in the bundled SDK (createRequire polyfill bug)",
-        "Fixed Mantle endpoint authentication failing with missing x-api-key header",
-        "Added --plugin-url <url> flag to fetch a plugin .zip archive from a URL for the current session",
-        "Added CLAUDE_CODE_FORCE_SYNC_OUTPUT=1 env var to force-enable synchronized output on terminals that auto-detection misses (e.g. Emacs eat)",
-        "Added CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE: when set on Homebrew or WinGet installations, Claude Code runs the upgrade command in the background and prompts to restart",
-        "Plugin manifests: themes and monitors should now be declared under \"experimental\": { ... }. Top-level declarations still work but claude plugin validate will warn",
-        "Gateway /v1/models discovery for the /model picker is now opt-in via CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1 (was automatic in 2.1.126–2.1.128)",
-        "Ctrl+R history picker now defaults to searching all prompts across all projects, matching pre-2.1.124 behavior. Press Ctrl+S to narrow to the current project or session",
-        "Third-party deployments (Bedrock, Vertex, Foundry, or ANTHROPIC_BASE_URL gateway) no longer see spinner tips pointing at first-party Anthropic surfaces",
-        "skillOverrides setting now works: off hides from model and /, user-invocable-only hides from model only, name-only collapses description",
-        "The claude_code.pull_request.count OTel metric now counts PRs/MRs created via MCP tools, not just shell commands",
-        "Policy refusal error messages now include the API Request ID for easier support debugging",
-        "Fixed API errors with unrecognized 400 status codes showing raw JSON instead of the underlying error message"
+        "Fixed “Chat about this” on an AskUserQuestion dialog erasing the question text"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1506,14 +1506,14 @@
             "Use this file to discover all available pages before exploring further.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Improved Agent tool subagent_type matching to accept case- and separator-insensitive values (e.g. \"Code Reviewer\" resolves to code-reviewer)",
-            "Updated agent color palette",
-            "Fixed /goal silently hanging when disableAllHooks or allowManagedHooksOnly is set — now shows a clear message instead of an indicator that never resolves",
-            "Fixed a regression in settings hot-reload where symlinked settings files caused misattributed change events and spurious ConfigChange hooks",
-            "Fixed claude --bg failing with “connection dropped mid-request” when the background service was about to idle-exit",
-            "Fixed background service startup failing on machines with enterprise endpoint security by allowing more time",
-            "Fixed remote managed settings not retrying on 401 — now retries once with a force-refreshed token",
-            "Fixed managed extraKnownMarketplaces auto-update policy not being persisted to known_marketplaces.json"
+            "Added terminalSequence field to hook JSON output so hooks can emit desktop notifications, window titles, and bells without a controlling terminal",
+            "Added CLAUDE_CODE_PLUGIN_PREFER_HTTPS to clone GitHub plugin sources over HTTPS instead of SSH, for environments without a GitHub SSH key",
+            "Added ANTHROPIC_WORKSPACE_ID environment variable for workload identity federation — scopes the minted token to a specific workspace when the federation rule covers more than one",
+            "Added claude agents --cwd <path> to scope the session list to a directory",
+            "/feedback can now include recent sessions (last 24 hours or 7 days) for issues spanning more than the current session",
+            "Rewind menu: added “Summarize up to here” to compress earlier context while keeping recent turns intact",
+            "Auto mode permission dialog now explains when a permissions.ask rule caused the prompt",
+            "Restored the “view diff in your IDE” option on file-edit permission prompts when an IDE is connected"
           ],
           "codeBlocks": []
         }
@@ -2701,7 +2701,7 @@
         "You type the same correction or clarification into chat that you typed last session",
         "A new teammate would need the same context to be productive",
         "Keep it to facts Claude should hold in every session: build commands, conventions, project layout, “always do X” rules. If an entry is a multi-step procedure or only matters for one part of the codebase, move it to a skill or a path-scoped rule instead. The extension overview covers when to use each mechanism.",
-        "CLAUDE.md files can live in several locations, each with a different scope. More specific locations take precedence over broader ones.",
+        "CLAUDE.md files can live in several locations, each with a different scope. The table below lists them in load order, from broadest scope to most specific, so a project instruction appears in context after a user instruction.",
         "CLAUDE.md and CLAUDE.local.md files in the directory hierarchy above the working directory are loaded in full at launch. Files in subdirectories load on demand when Claude reads files in those directories. See How CLAUDE.md files load for the full resolution order.",
         "For large projects, you can break instructions into topic-specific files using project rules. Rules let you scope instructions to specific file types or subdirectories.",
         "A project CLAUDE.md can be stored in either ./CLAUDE.md or ./.claude/CLAUDE.md. Create this file and add instructions that apply to anyone working on the project: build and test commands, coding standards, architectural decisions, naming conventions, and common workflows. These instructions are shared with your team through version control, so focus on project-level standards rather than personal preferences.",
@@ -2886,7 +2886,7 @@
         {
           "title": "​Choose where to put CLAUDE.md files",
           "paragraphs": [
-            "CLAUDE.md files can live in several locations, each with a different scope. More specific locations take precedence over broader ones.",
+            "CLAUDE.md files can live in several locations, each with a different scope. The table below lists them in load order, from broadest scope to most specific, so a project instruction appears in context after a user instruction.",
             "CLAUDE.md and CLAUDE.local.md files in the directory hierarchy above the working directory are loaded in full at launch. Files in subdirectories load on demand when Claude reads files in those directories. See How CLAUDE.md files load for the full resolution order.",
             "For large projects, you can break instructions into topic-specific files using project rules. Rules let you scope instructions to specific file types or subdirectories."
           ],
@@ -8224,9 +8224,9 @@
         "​From your shell",
         "​How file edits are isolated",
         "​Set the model",
-        "​Permission mode and settings",
-        "​Manage sessions from the shell",
-        "​How background sessions are hosted"
+        "​Permission mode, model, and effort",
+        "​Settings, plugins, and MCP servers",
+        "​Manage sessions from the shell"
       ],
       "toc": [
         "Quick start",
@@ -8246,9 +8246,9 @@
         "From your shell",
         "How file edits are isolated",
         "Set the model",
-        "Permission mode and settings",
-        "Manage sessions from the shell",
-        "How background sessions are hosted"
+        "Permission mode, model, and effort",
+        "Settings, plugins, and MCP servers",
+        "Manage sessions from the shell"
       ],
       "paragraphs": [
         "Quick start",
@@ -8268,7 +8268,8 @@
         "From your shell",
         "How file edits are isolated",
         "Set the model",
-        "Permission mode and settings",
+        "Permission mode, model, and effort",
+        "Settings, plugins, and MCP servers",
         "Manage sessions from the shell",
         "How background sessions are hosted",
         "The supervisor process",
@@ -8352,7 +8353,7 @@
         "From the shell, cd into the directory and run claude --bg \"<prompt>\".",
         "When agent view is grouped by directory, the highlighted row’s directory becomes the dispatch target, so you can scroll to a group and dispatch into it without retyping the path.",
         "Run /background or its alias /bg to move the current conversation into a background session. Pass a prompt such as /bg run the test suite and fix any failures to give one more instruction first.",
-        "Backgrounding from an interactive session starts a fresh process that resumes from the saved conversation, so running subagents and background commands do not transfer to it. Claude asks you to confirm before backgrounding when any are running. Once in the background, the session can start new subagents and background commands, and those keep running across later detach and reattach.",
+        "Backgrounding from an interactive session starts a fresh process that resumes from the saved conversation, so running subagents, monitors, and background commands do not transfer to it. Claude asks you to confirm before backgrounding when any are running. Once in the background, the session can start new subagents, monitors, and background commands, and those keep running across later detach and reattach.",
         "Pass --bg to start a session that goes straight to the background:",
         "To run a specific subagent as the session’s main agent, combine --bg with --agent:",
         "After backgrounding, Claude prints the session’s short ID and the commands for managing it:",
@@ -8360,13 +8361,19 @@
         "Outside a git repository, sessions write to the working directory directly and aren’t isolated from each other, so avoid dispatching parallel sessions that edit the same files.",
         "The worktree is removed when you delete the session, so merge or push the changes you want to keep before you delete. To find a session’s worktree path, peek the session or attach and check its working directory.",
         "To make a subagent always run in its own worktree regardless of how it was started, set isolation: worktree in its frontmatter.",
-        "The model name shown in the agent view header is the dispatch default. New sessions you start from the input use this model, which is the same setting /model controls in any session.",
+        "The model name shown in the agent view header is the dispatch default. New sessions you start from the input use this model, which is the same setting /model controls in any session. To override it for the whole agent view session, pass --model when opening agent view. See Permission mode, model, and effort.",
         "Each background session can run on a different model. To override it for one session:",
         "From the shell, pass --model with claude --bg.",
         "Attach to a running session and run /model there. The change persists if the session is respawned.",
         "Dispatch a subagent whose frontmatter sets a model field.",
-        "A dispatched session reads its settings and permission mode from the directory it runs in, the same as if you had started claude there. Dispatching from the agent view input doesn’t pass a permission mode, so the session uses the defaultMode from that directory’s settings or the permissionMode from the dispatched subagent’s frontmatter.",
-        "To set the mode from the shell, pass --permission-mode with claude --bg. Using bypassPermissions or auto this way is refused until you have accepted that mode by running claude with it once interactively, since those modes let a session you aren’t watching act without approval.",
+        "A dispatched session reads its settings and permission mode from the directory it runs in, the same as if you had started claude there.",
+        "To set defaults for every session you dispatch from agent view, pass any of --permission-mode, --model, or --effort when opening it:",
+        "The active defaults appear in the footer below the dispatch input.",
+        "Without these flags, the session uses the defaultMode from that directory’s settings or the permissionMode from the dispatched subagent’s frontmatter, and the model shown in the agent view header.",
+        "Using bypassPermissions or auto is refused until you have accepted that mode by running claude with it once interactively, since those modes let a session you aren’t watching act without approval. The same applies whether you pass the mode to claude agents or to claude --bg --permission-mode.",
+        "Agent view accepts the same configuration flags as claude for loading settings, plugins, MCP servers, and additional directories. Each flag applies to agent view itself and is passed through to every session you dispatch from it, so a plugin or MCP server you load this way is available in those sessions too.",
+        "Repeat --add-dir, --plugin-dir, or --mcp-config once per value. The space-separated form, such as --add-dir a b c, is not supported with claude agents.",
+        "The following example opens agent view with a settings override and one extra directory:",
         "Every background session has a short ID you can use from the shell. The ID is printed when you start a session with claude --bg, and each session’s ID is its directory name under ~/.claude/jobs/. These commands are useful for scripting or when you don’t want to open agent view.",
         "Every session listed in agent view is considered a background session, whether or not you’re currently attached to it. By contrast, a session started by running claude directly is tied to that terminal and ends when it closes, unless you send it to the background.",
         "Background sessions are hosted by a per-user supervisor process, separate from your terminal and from agent view. The supervisor starts automatically the first time you background a session or open agent view, and you don’t manage it directly.",
@@ -8399,7 +8406,9 @@
         "Pinned\n  ✽ clawd walk cycle          Write assets/sprites/clawd-walk.png           3m\n\nReady for review\n  ∙ jump physics              github.com/example/game/pull/2048          ●  2h\n\nNeeds input\n  ✻ power-up design           needs input: double jump or wall climb?       1m\n\nWorking\n  ✽ collision detection       Edit src/physics/CollisionSystem.ts           2m\n  ✢ playtest level 3          run 12 · all checkpoints cleared           in 4m\n\nCompleted\n  ✻ title screen              result: menu, options, and credits done       9m\n  ∙ sound effects             result: 14 SFX exported to assets/audio       4h\n  … 6 more",
         "claude --bg \"investigate the flaky SettingsChangeDetector test\"",
         "claude --agent code-reviewer --bg \"address review comments on PR 1234\"",
-        "backgrounded · 7c5dcf5d\n  claude agents             list sessions\n  claude attach 7c5dcf5d    open in this terminal\n  claude logs 7c5dcf5d      show recent output\n  claude stop 7c5dcf5d      stop this session"
+        "backgrounded · 7c5dcf5d\n  claude agents             list sessions\n  claude attach 7c5dcf5d    open in this terminal\n  claude logs 7c5dcf5d      show recent output\n  claude stop 7c5dcf5d      stop this session",
+        "claude agents --permission-mode plan --model opus --effort high",
+        "claude agents --settings ./ci-settings.json --add-dir ../shared-lib"
       ],
       "sectionBlocks": [
         {
@@ -8570,7 +8579,7 @@
           "title": "​From inside a session",
           "paragraphs": [
             "Run /background or its alias /bg to move the current conversation into a background session. Pass a prompt such as /bg run the test suite and fix any failures to give one more instruction first.",
-            "Backgrounding from an interactive session starts a fresh process that resumes from the saved conversation, so running subagents and background commands do not transfer to it. Claude asks you to confirm before backgrounding when any are running. Once in the background, the session can start new subagents and background commands, and those keep running across later detach and reattach."
+            "Backgrounding from an interactive session starts a fresh process that resumes from the saved conversation, so running subagents, monitors, and background commands do not transfer to it. Claude asks you to confirm before backgrounding when any are running. Once in the background, the session can start new subagents, monitors, and background commands, and those keep running across later detach and reattach."
           ],
           "codeBlocks": []
         },
@@ -8600,7 +8609,7 @@
         {
           "title": "​Set the model",
           "paragraphs": [
-            "The model name shown in the agent view header is the dispatch default. New sessions you start from the input use this model, which is the same setting /model controls in any session.",
+            "The model name shown in the agent view header is the dispatch default. New sessions you start from the input use this model, which is the same setting /model controls in any session. To override it for the whole agent view session, pass --model when opening agent view. See Permission mode, model, and effort.",
             "Each background session can run on a different model. To override it for one session:",
             "From the shell, pass --model with claude --bg.",
             "Attach to a running session and run /model there. The change persists if the session is respawned.",
@@ -8609,12 +8618,28 @@
           "codeBlocks": []
         },
         {
-          "title": "​Permission mode and settings",
+          "title": "​Permission mode, model, and effort",
           "paragraphs": [
-            "A dispatched session reads its settings and permission mode from the directory it runs in, the same as if you had started claude there. Dispatching from the agent view input doesn’t pass a permission mode, so the session uses the defaultMode from that directory’s settings or the permissionMode from the dispatched subagent’s frontmatter.",
-            "To set the mode from the shell, pass --permission-mode with claude --bg. Using bypassPermissions or auto this way is refused until you have accepted that mode by running claude with it once interactively, since those modes let a session you aren’t watching act without approval."
+            "A dispatched session reads its settings and permission mode from the directory it runs in, the same as if you had started claude there.",
+            "To set defaults for every session you dispatch from agent view, pass any of --permission-mode, --model, or --effort when opening it:",
+            "The active defaults appear in the footer below the dispatch input.",
+            "Without these flags, the session uses the defaultMode from that directory’s settings or the permissionMode from the dispatched subagent’s frontmatter, and the model shown in the agent view header.",
+            "Using bypassPermissions or auto is refused until you have accepted that mode by running claude with it once interactively, since those modes let a session you aren’t watching act without approval. The same applies whether you pass the mode to claude agents or to claude --bg --permission-mode."
           ],
-          "codeBlocks": []
+          "codeBlocks": [
+            "claude agents --permission-mode plan --model opus --effort high"
+          ]
+        },
+        {
+          "title": "​Settings, plugins, and MCP servers",
+          "paragraphs": [
+            "Agent view accepts the same configuration flags as claude for loading settings, plugins, MCP servers, and additional directories. Each flag applies to agent view itself and is passed through to every session you dispatch from it, so a plugin or MCP server you load this way is available in those sessions too.",
+            "Repeat --add-dir, --plugin-dir, or --mcp-config once per value. The space-separated form, such as --add-dir a b c, is not supported with claude agents.",
+            "The following example opens agent view with a settings override and one extra directory:"
+          ],
+          "codeBlocks": [
+            "claude agents --settings ./ci-settings.json --add-dir ../shared-lib"
+          ]
         },
         {
           "title": "​Manage sessions from the shell",
@@ -8700,13 +8725,6 @@
           "title": "​A session is slow to respond after attaching",
           "paragraphs": [
             "Once a session has finished and sat unattached for about an hour, the supervisor stops its process to free resources. Attaching starts a fresh process from where it left off, which takes a moment. Sessions that are working or waiting on you are never stopped this way."
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​.claude/worktrees/ is filling up",
-          "paragraphs": [
-            "Worktrees are removed when you delete the session that created them. If a session ended without cleaning up, list leftover entries with git worktree list in the project directory and remove each with git worktree remove <path>. See Clean up worktrees."
           ],
           "codeBlocks": []
         }
@@ -10952,7 +10970,7 @@
         "For plugins with many components, organize your directory structure by functionality. For complete directory layouts and organization patterns, see Plugin directory structure.",
         "Use the --plugin-dir flag to test plugins during development. This loads your plugin directly without requiring installation.",
         "The flag also accepts a .zip archive of the plugin directory, which requires Claude Code v2.1.128 or later.",
-        "When a --plugin-dir plugin has the same name as an installed marketplace plugin, the local copy takes precedence for that session. This lets you test changes to a plugin you already have installed without uninstalling it first. Marketplace plugins force-enabled by managed settings are the only exception and cannot be overridden.",
+        "When a --plugin-dir plugin has the same name as an installed marketplace plugin, the local copy takes precedence for that session. This lets you test changes to a plugin you already have installed without uninstalling it first. The exception is plugins that managed settings force-enable or force-disable: --plugin-dir cannot override those.",
         "As you make changes to your plugin, run /reload-plugins to pick up the updates without restarting. This reloads plugins, skills, agents, hooks, plugin MCP servers, and plugin LSP servers. Test your plugin components:",
         "Try your skills with /plugin-name:skill-name",
         "Check that agents appear in /agents",
@@ -11189,7 +11207,7 @@
           "paragraphs": [
             "Use the --plugin-dir flag to test plugins during development. This loads your plugin directly without requiring installation.",
             "The flag also accepts a .zip archive of the plugin directory, which requires Claude Code v2.1.128 or later.",
-            "When a --plugin-dir plugin has the same name as an installed marketplace plugin, the local copy takes precedence for that session. This lets you test changes to a plugin you already have installed without uninstalling it first. Marketplace plugins force-enabled by managed settings are the only exception and cannot be overridden.",
+            "When a --plugin-dir plugin has the same name as an installed marketplace plugin, the local copy takes precedence for that session. This lets you test changes to a plugin you already have installed without uninstalling it first. The exception is plugins that managed settings force-enable or force-disable: --plugin-dir cannot override those.",
             "As you make changes to your plugin, run /reload-plugins to pick up the updates without restarting. This reloads plugins, skills, agents, hooks, plugin MCP servers, and plugin LSP servers. Test your plugin components:",
             "Try your skills with /plugin-name:skill-name",
             "Check that agents appear in /agents",
@@ -12066,7 +12084,7 @@
         "The hook process only spawns when a subcommand of the Bash command matches git *, or when the command is too complex to parse into subcommands. For compound commands like npm test && git push, Claude Code evaluates each subcommand and fires the hook because git push matches. The if field accepts the same patterns as permission rules: \"Bash(git *)\", \"Edit(*.ts)\", and so on. To match multiple tool names, use separate handlers each with its own if value, or match at the matcher level where pipe alternation is supported.",
         "if only works on tool events: PreToolUse, PostToolUse, PostToolUseFailure, PermissionRequest, and PermissionDenied. Adding it to any other event prevents the hook from running.",
         "Where you add a hook determines its scope:",
-        "Run /hooks in Claude Code to browse all configured hooks grouped by event. To disable all hooks at once, set \"disableAllHooks\": true in your settings file.",
+        "Run /hooks in Claude Code to browse all configured hooks grouped by event. To disable hooks, set \"disableAllHooks\": true in your settings file. Hooks configured in managed settings still run unless disableAllHooks is also set there.",
         "If you edit settings files directly while Claude Code is running, the file watcher normally picks up hook changes automatically.",
         "For decisions that require judgment rather than deterministic rules, use type: \"prompt\" hooks. Instead of running a shell command, Claude Code sends your prompt and the hook’s input data to a Claude model (Haiku by default) to make the decision. You can specify a different model with the model field if you need more capability.",
         "The model’s only job is to return a yes/no decision as JSON:",
@@ -12384,7 +12402,7 @@
           "title": "​Configure hook location",
           "paragraphs": [
             "Where you add a hook determines its scope:",
-            "Run /hooks in Claude Code to browse all configured hooks grouped by event. To disable all hooks at once, set \"disableAllHooks\": true in your settings file.",
+            "Run /hooks in Claude Code to browse all configured hooks grouped by event. To disable hooks, set \"disableAllHooks\": true in your settings file. Hooks configured in managed settings still run unless disableAllHooks is also set there.",
             "If you edit settings files directly while Claude Code is running, the file watcher normally picks up hook changes automatically."
           ],
           "codeBlocks": []
@@ -13485,9 +13503,9 @@
         "Use the Agent SDK to run Claude Code programmatically from the CLI, Python, or TypeScript.",
         "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
         "Use this file to discover all available pages before exploring further.",
+        "Starting June 15, 2026, Agent SDK and claude -p usage on subscription plans will draw from a new monthly Agent SDK credit, separate from your interactive usage limits. See Use the Claude Agent SDK with your Claude plan for details.",
         "The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code. It’s available as a CLI for scripts and CI/CD, or as Python and TypeScript packages for full programmatic control.",
-        "The CLI was previously called “headless mode.” The -p flag and all CLI options work the same way.",
-        "To run Claude Code programmatically from the CLI, pass -p with your prompt and any CLI options:",
+        "To run Claude Code in non-interactive mode, pass -p with your prompt and any CLI options:",
         "This page covers using the Agent SDK via the CLI (claude -p). For the Python and TypeScript SDK packages with structured outputs, tool approval callbacks, and native message objects, see the full Agent SDK documentation.",
         "Add the -p (or --print) flag to any claude command to run it non-interactively. All CLI options work with -p, including:",
         "--continue for continuing conversations",
@@ -13578,9 +13596,9 @@
           "paragraphs": [
             "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
             "Use this file to discover all available pages before exploring further.",
+            "Starting June 15, 2026, Agent SDK and claude -p usage on subscription plans will draw from a new monthly Agent SDK credit, separate from your interactive usage limits. See Use the Claude Agent SDK with your Claude plan for details.",
             "The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code. It’s available as a CLI for scripts and CI/CD, or as Python and TypeScript packages for full programmatic control.",
-            "The CLI was previously called “headless mode.” The -p flag and all CLI options work the same way.",
-            "To run Claude Code programmatically from the CLI, pass -p with your prompt and any CLI options:",
+            "To run Claude Code in non-interactive mode, pass -p with your prompt and any CLI options:",
             "This page covers using the Agent SDK via the CLI (claude -p). For the Python and TypeScript SDK packages with structured outputs, tool approval callbacks, and native message objects, see the full Agent SDK documentation."
           ],
           "codeBlocks": [
@@ -15849,7 +15867,8 @@
         "Claude Code enforces organization policy through managed settings that take precedence over local developer configuration. You deliver those settings from the Claude admin console, your mobile device management (MDM) system, or a file on disk. The settings control which tools, commands, servers, and network destinations Claude can reach.",
         "This page walks through the deployment decisions in order. Each row links to the section below and to the reference page for that area.",
         "SSO, SCIM provisioning, and seat assignment are configured at the Claude account level. See the Claude Enterprise Administrator Guide and seat assignment for those steps.",
-        "Claude Code connects to Claude through one of several API providers. Your choice affects billing, authentication, and which compliance posture you inherit.",
+        "Claude Code connects to Claude through one of several API providers. Your choice affects billing, authentication, which compliance posture you inherit, and which Claude Code features your developers can use.",
+        "Some Claude Code features require a Claude.ai account. Claude Code on the web, Routines, Code Review, Remote Control, and the Chrome extension are not available through Console API keys or cloud-provider credentials alone. If you deploy through Bedrock, Vertex, or Foundry, plan whether developers also need Claude for Teams or Enterprise seats. Each feature page lists its plan requirements.",
         "For the full provider comparison covering authentication, regions, and feature parity, see the enterprise deployment overview. Each provider’s auth setup is in Authentication.",
         "Proxy and firewall requirements in Network configuration apply regardless of provider. If you want a single endpoint in front of multiple providers or centralized request logging, see LLM gateway.",
         "Managed settings define policy that takes precedence over local developer configuration. Claude Code looks for them in four places and uses the first one it finds on a given device.",
@@ -15913,7 +15932,8 @@
         {
           "title": "​Choose your API provider",
           "paragraphs": [
-            "Claude Code connects to Claude through one of several API providers. Your choice affects billing, authentication, and which compliance posture you inherit.",
+            "Claude Code connects to Claude through one of several API providers. Your choice affects billing, authentication, which compliance posture you inherit, and which Claude Code features your developers can use.",
+            "Some Claude Code features require a Claude.ai account. Claude Code on the web, Routines, Code Review, Remote Control, and the Chrome extension are not available through Console API keys or cloud-provider credentials alone. If you deploy through Bedrock, Vertex, or Foundry, plan whether developers also need Claude for Teams or Enterprise seats. Each feature page lists its plan requirements.",
             "For the full provider comparison covering authentication, regions, and feature parity, see the enterprise deployment overview. Each provider’s auth setup is in Authentication.",
             "Proxy and firewall requirements in Network configuration apply regardless of provider. If you want a single endpoint in front of multiple providers or centralized request logging, see LLM gateway."
           ],
@@ -16682,6 +16702,7 @@
         "Subscription OAuth credentials from /login. This is the default for Claude Pro, Max, Team, and Enterprise users.",
         "If you have an active Claude subscription but also have ANTHROPIC_API_KEY set in your environment, the API key takes precedence once approved. This can cause authentication failures if the key belongs to a disabled or expired organization. Run unset ANTHROPIC_API_KEY to fall back to your subscription, and check /status to confirm which method is active.",
         "Claude Code on the Web always uses your subscription credentials. ANTHROPIC_API_KEY and ANTHROPIC_AUTH_TOKEN in the sandbox environment do not override them.",
+        "Starting June 15, 2026, Agent SDK and claude -p usage on subscription plans will draw from a new monthly Agent SDK credit, separate from your interactive usage limits. See Use the Claude Agent SDK with your Claude plan for details.",
         "For CI pipelines, scripts, or other environments where interactive browser login isn’t available, generate a one-year OAuth token with claude setup-token:",
         "The command walks you through OAuth authorization and prints a token to the terminal. It does not save the token anywhere; copy it and set it as the CLAUDE_CODE_OAUTH_TOKEN environment variable wherever you want to authenticate:",
         "This token authenticates with your Claude subscription and requires a Pro, Max, Team, or Enterprise plan. It is scoped to inference only and cannot establish Remote Control sessions.",
@@ -16827,6 +16848,7 @@
         {
           "title": "​Generate a long-lived token",
           "paragraphs": [
+            "Starting June 15, 2026, Agent SDK and claude -p usage on subscription plans will draw from a new monthly Agent SDK credit, separate from your interactive usage limits. See Use the Claude Agent SDK with your Claude plan for details.",
             "For CI pipelines, scripts, or other environments where interactive browser login isn’t available, generate a one-year OAuth token with claude setup-token:",
             "The command walks you through OAuth authorization and prints a token to the terminal. It does not save the token anywhere; copy it and set it as the CLAUDE_CODE_OAUTH_TOKEN environment variable wherever you want to authenticate:",
             "This token authenticates with your Claude subscription and requires a Pro, Max, Team, or Enterprise plan. It is scoped to inference only and cannot establish Remote Control sessions.",
@@ -23065,13 +23087,13 @@
         "Personal overrides for a specific project",
         "Testing configurations before sharing with the team",
         "Machine-specific settings that won’t work for others",
-        "When the same setting is configured in multiple scopes, more specific scopes take precedence:",
+        "When the same setting appears in multiple scopes, Claude Code applies them in priority order:",
         "Managed (highest) - can’t be overridden by anything",
         "Command line arguments - temporary session overrides",
         "Local - overrides project and user settings",
         "Project - overrides user settings",
         "User (lowest) - applies when nothing else specifies the setting",
-        "For example, if a permission is allowed in user settings but denied in project settings, the project setting takes precedence and the permission is blocked.",
+        "For example, if your user settings set spinnerTipsEnabled to true and project settings set it to false, the project value applies. Permission rules behave differently because they merge across scopes rather than override. See Settings precedence.",
         "Scopes apply to many Claude Code features:",
         "On Windows, paths shown as ~/.claude resolve to %USERPROFILE%\\.claude.",
         "The settings.json file is the official mechanism for configuring Claude Code through hierarchical settings:",
@@ -23162,7 +23184,7 @@
         "User settings (~/.claude/settings.json)",
         "Personal global settings",
         "This hierarchy ensures that organizational policies are always enforced while still allowing teams and individuals to customize their experience. The same precedence applies whether you run Claude Code from the CLI, the VS Code extension, or a JetBrains IDE.",
-        "For example, if your user settings allow Bash(npm run *) but a project’s shared settings deny it, the project setting takes precedence and the command is blocked.",
+        "For example, if your user settings set permissions.defaultMode to acceptEdits and a project’s shared settings set it to default, the project value applies. The example below covers how array-valued settings such as permission rules combine instead.",
         "Array settings merge across scopes. When the same array-valued setting (such as sandbox.filesystem.allowWrite or permissions.allow) appears in multiple scopes, the arrays are concatenated and deduplicated, not replaced. This means lower-priority scopes can add entries without overriding those set by higher-priority scopes, and vice versa. For example, if managed settings set allowWrite to [\"/opt/company-tools\"] and a user adds [\"~/.kube\"], both paths are included in the final configuration.",
         "Run /status inside Claude Code to see which settings sources are active and where they come from. The output shows each configuration layer (managed, user, project) along with its origin, such as Enterprise managed settings (remote), Enterprise managed settings (plist), Enterprise managed settings (HKLM), Enterprise managed settings (HKCU), or Enterprise managed settings (file). If a settings file contains errors, /status reports the issue so you can fix it.",
         "Memory files (CLAUDE.md): Contain instructions and context that Claude loads at startup",
@@ -23170,7 +23192,7 @@
         "Skills: Custom prompts that can be invoked with /skill-name or loaded by Claude automatically",
         "MCP servers: Extend Claude Code with additional tools and integrations",
         "Precedence: Higher-level configurations (Managed) override lower-level ones (User/Project)",
-        "Inheritance: Settings are merged, with more specific settings adding to or overriding broader ones",
+        "Inheritance: Settings merge across scopes; scalar values from higher-priority scopes override, and arrays concatenate",
         "Claude Code’s internal system prompt is not published. To add custom instructions, use CLAUDE.md files or the --append-system-prompt flag.",
         "To prevent Claude Code from accessing files containing sensitive information like API keys, secrets, and environment files, use the permissions.deny setting in your .claude/settings.json file:",
         "This replaces the deprecated ignorePatterns configuration. Files matching these patterns are excluded from file discovery and search results, and read operations on these files are denied.",
@@ -23288,13 +23310,13 @@
         {
           "title": "​How scopes interact",
           "paragraphs": [
-            "When the same setting is configured in multiple scopes, more specific scopes take precedence:",
+            "When the same setting appears in multiple scopes, Claude Code applies them in priority order:",
             "Managed (highest) - can’t be overridden by anything",
             "Command line arguments - temporary session overrides",
             "Local - overrides project and user settings",
             "Project - overrides user settings",
             "User (lowest) - applies when nothing else specifies the setting",
-            "For example, if a permission is allowed in user settings but denied in project settings, the project setting takes precedence and the permission is blocked."
+            "For example, if your user settings set spinnerTipsEnabled to true and project settings set it to false, the project value applies. Permission rules behave differently because they merge across scopes rather than override. See Settings precedence."
           ],
           "codeBlocks": []
         },
@@ -23473,7 +23495,7 @@
             "Skills: Custom prompts that can be invoked with /skill-name or loaded by Claude automatically",
             "MCP servers: Extend Claude Code with additional tools and integrations",
             "Precedence: Higher-level configurations (Managed) override lower-level ones (User/Project)",
-            "Inheritance: Settings are merged, with more specific settings adding to or overriding broader ones"
+            "Inheritance: Settings merge across scopes; scalar values from higher-priority scopes override, and arrays concatenate"
           ],
           "codeBlocks": []
         },
@@ -23765,7 +23787,7 @@
         "User settings (~/.claude/settings.json)",
         "If a tool is denied at any level, no other level can allow it. For example, a managed settings deny cannot be overridden by --allowedTools, and --disallowedTools can add restrictions beyond what managed settings define.",
         "Embedding hosts can supply additional managed policy via the SDK managedSettings option when parentSettingsBehavior is set to \"merge\"; embedder values can tighten policy but not loosen it.",
-        "If a permission is allowed in user settings but denied in project settings, the project setting takes precedence and the permission is blocked.",
+        "For example, if user settings allow a permission and project settings deny it, the deny rule blocks it. The reverse is also true: a user-level deny blocks a project-level allow, because deny rules from any scope are evaluated before allow rules.",
         "This repository includes starter settings configurations for common deployment scenarios. Use these as starting points and adjust them to fit your needs.",
         "Settings: complete configuration reference including the permission settings table",
         "Configure auto mode: tell the auto mode classifier which infrastructure your organization trusts",
@@ -24024,7 +24046,7 @@
             "User settings (~/.claude/settings.json)",
             "If a tool is denied at any level, no other level can allow it. For example, a managed settings deny cannot be overridden by --allowedTools, and --disallowedTools can add restrictions beyond what managed settings define.",
             "Embedding hosts can supply additional managed policy via the SDK managedSettings option when parentSettingsBehavior is set to \"merge\"; embedder values can tighten policy but not loosen it.",
-            "If a permission is allowed in user settings but denied in project settings, the project setting takes precedence and the permission is blocked."
+            "For example, if user settings allow a permission and project settings deny it, the deny rule blocks it. The reverse is also true: a user-level deny blocks a project-level allow, because deny rules from any scope are evaluated before allow rules."
           ],
           "codeBlocks": []
         },
@@ -25111,7 +25133,7 @@
         "What to know:",
         "Use /fast to toggle on fast mode in Claude Code CLI. Also available via /fast in Claude Code VS Code Extension.",
         "By default, /fast runs on Opus 4.6. To run fast mode on Opus 4.7 instead, set the CLAUDE_CODE_ENABLE_OPUS_4_7_FAST_MODE environment variable.",
-        "Fast mode pricing is $30/150 MTok on both Opus 4.6 and Opus 4.7.",
+        "Fast mode pricing is 30/30/30/150 MTok on both Opus 4.6 and Opus 4.7.",
         "Available to all Claude Code users on subscription plans (Pro/Max/Team/Enterprise) and Claude Console.",
         "For Claude Code users on subscription plans (Pro/Max/Team/Enterprise), fast mode is available via extra usage only and not included in the subscription rate limits.",
         "This page covers how to toggle fast mode, use fast mode on Opus 4.7, the cost tradeoff, when to use it, requirements, per-session opt-in, and rate limit behavior.",
@@ -25211,7 +25233,7 @@
             "What to know:",
             "Use /fast to toggle on fast mode in Claude Code CLI. Also available via /fast in Claude Code VS Code Extension.",
             "By default, /fast runs on Opus 4.6. To run fast mode on Opus 4.7 instead, set the CLAUDE_CODE_ENABLE_OPUS_4_7_FAST_MODE environment variable.",
-            "Fast mode pricing is $30/150 MTok on both Opus 4.6 and Opus 4.7.",
+            "Fast mode pricing is 30/30/30/150 MTok on both Opus 4.6 and Opus 4.7.",
             "Available to all Claude Code users on subscription plans (Pro/Max/Team/Enterprise) and Claude Console.",
             "For Claude Code users on subscription plans (Pro/Max/Team/Enterprise), fast mode is available via extra usage only and not included in the subscription rate limits."
           ],
@@ -25358,84 +25380,84 @@
       "headings": [
         "Documentation Index",
         "​Built-in output styles",
-        "​How output styles work",
         "​Change your output style",
         "​Create a custom output style",
         "​Frontmatter",
+        "​How output styles work",
         "​Comparisons to related features",
-        "​Output Styles vs. CLAUDE.md vs. —append-system-prompt",
-        "​Output Styles vs. Agents",
-        "​Output Styles vs. Skills"
+        "​Related resources"
       ],
       "toc": [
         "Built-in output styles",
-        "How output styles work",
         "Change your output style",
         "Create a custom output style",
         "Frontmatter",
+        "How output styles work",
         "Comparisons to related features",
-        "Output Styles vs. CLAUDE.md vs. —append-system-prompt",
-        "Output Styles vs. Agents",
-        "Output Styles vs. Skills"
+        "Related resources"
       ],
       "paragraphs": [
         "Built-in output styles",
-        "How output styles work",
         "Change your output style",
         "Create a custom output style",
         "Frontmatter",
+        "How output styles work",
         "Comparisons to related features",
-        "Output Styles vs. CLAUDE.md vs. —append-system-prompt",
-        "Output Styles vs. Agents",
-        "Output Styles vs. Skills",
+        "Related resources",
         "Adapt Claude Code for uses beyond software engineering",
         "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
         "Use this file to discover all available pages before exploring further.",
-        "Output styles change how Claude responds, not what Claude knows. They modify the system prompt to set role, tone, and output format while keeping core capabilities like running scripts, reading and writing files, and tracking TODOs. Use one when you keep re-prompting for the same voice or format every turn, or when you want Claude to act as something other than a software engineer.",
+        "Output styles change how Claude responds, not what Claude knows. They modify the system prompt to set role, tone, and output format. Use one when you keep re-prompting for the same voice or format every turn, or when you want Claude to act as something other than a software engineer.",
+        "A custom output style adds your instructions to the system prompt and lets you choose whether to keep Claude Code’s built-in software engineering instructions. Keep them when you’re changing how Claude communicates but still coding, like always answering with a diagram. Leave them out when Claude isn’t doing software engineering at all, like a writing assistant or data analyst.",
         "For instructions about your project, conventions, or codebase, use CLAUDE.md instead.",
         "Claude Code’s Default output style is the existing system prompt, designed to help you complete software engineering tasks efficiently.",
         "There are three additional built-in output styles:",
         "Proactive: Claude executes immediately, makes reasonable assumptions instead of pausing for routine decisions, and prefers action over planning. This applies the same guidance as auto mode without changing your permission mode, so you still see permission prompts before tools run.",
         "Explanatory: Provides educational “Insights” in between helping you complete software engineering tasks. Helps you understand implementation choices and codebase patterns.",
         "Learning: Collaborative, learn-by-doing mode where Claude will not only share “Insights” while coding, but also ask you to contribute small, strategic pieces of code yourself. Claude Code will add TODO(human) markers in your code for you to implement.",
-        "Output styles directly modify Claude Code’s system prompt.",
-        "Custom output styles exclude instructions for coding (such as verifying code with tests), unless keep-coding-instructions is true.",
-        "All output styles have their own custom instructions added to the end of the system prompt.",
-        "All output styles trigger reminders for Claude to adhere to the output style instructions during the conversation.",
-        "Token usage depends on the style. Adding instructions to the system prompt increases input tokens, though prompt caching reduces this cost after the first request in a session. The built-in Explanatory and Learning styles produce longer responses than Default by design, which increases output tokens. For custom styles, output token usage depends on what your instructions tell Claude to produce.",
         "Run /config and select Output style to pick a style from a menu. Your selection is saved to .claude/settings.local.json at the local project level.",
         "To set a style without the menu, edit the outputStyle field directly in a settings file:",
         "Because the output style is set in the system prompt at session start, changes take effect the next time you start a new session. This keeps the system prompt stable throughout a conversation so prompt caching can reduce latency and cost.",
-        "Custom output styles are Markdown files with frontmatter and the text that will be added to the system prompt:",
-        "You can save these files at three levels:",
+        "A custom output style is a Markdown file: frontmatter for metadata, then the instructions to add to the system prompt.",
+        "Create a Markdown file",
+        "Save it at one of three levels. The file name becomes the style name unless you set name in the frontmatter.",
         "User: ~/.claude/output-styles",
         "Project: .claude/output-styles",
         "Managed policy: .claude/output-styles inside the managed settings directory",
+        "Add frontmatter and instructions",
+        "Decide whether to keep Claude Code’s software engineering instructions. Set keep-coding-instructions: true if you’re changing how Claude communicates but still want it coding the same way. Leave it out if Claude won’t be doing software engineering.",
+        "This example leads every explanation with a diagram while keeping Claude’s coding behavior:",
+        "Switch to your style",
+        "Run /config and select your style under Output style. It takes effect the next time you start a session.",
         "Plugins can also ship output styles in an output-styles/ directory.",
-        "Output style files support frontmatter for specifying metadata:",
-        "Choose based on whether Claude should stop acting as a coding assistant or keep its default role and learn more. Output styles replace the software-engineering parts of Claude Code’s system prompt with your own role and voice, so use one when Claude should adopt a different identity, like a writing editor or a data-analysis assistant. CLAUDE.md and --append-system-prompt both keep Claude Code’s default identity and add to it, so use them when Claude should remain a coding assistant that also follows your project conventions or extra instructions.",
-        "The mechanisms differ as well. Output styles edit the system prompt directly. CLAUDE.md adds its contents as a user message after the system prompt. --append-system-prompt appends content to the end of the system prompt without removing anything.",
-        "Use an output style to change how the main conversation responds in every session. Use a subagent when you want a separately scoped helper that the main conversation delegates to. Output styles affect only the system prompt of the main agent loop. Agents handle specific tasks and can carry their own model, tools, and context about when to invoke them.",
-        "Output styles modify how Claude responds (formatting, tone, structure) and are always active once selected. Skills are task-specific prompts that you invoke with /skill-name or that Claude loads automatically when relevant. Use output styles for consistent formatting preferences; use skills for reusable workflows and tasks.",
+        "Output style files support these frontmatter fields:",
+        "Output styles directly modify Claude Code’s system prompt.",
+        "All output styles have their own custom instructions added to the end of the system prompt.",
+        "All output styles trigger reminders for Claude to adhere to the output style instructions during the conversation.",
+        "Custom output styles leave out Claude Code’s built-in software engineering instructions, such as how to scope changes, write comments, and verify work, unless keep-coding-instructions is set to true.",
+        "Token usage depends on the style. Adding instructions to the system prompt increases input tokens, though prompt caching reduces this cost after the first request in a session. The built-in Explanatory and Learning styles produce longer responses than Default by design, which increases output tokens. For custom styles, output token usage depends on what your instructions tell Claude to produce.",
+        "Several features customize how Claude Code behaves. Output styles modify the system prompt directly and apply to every response. The others add instructions without changing the default system prompt, or scope them to a specific task.",
+        "Settings: where the outputStyle field lives and how settings precedence works",
+        "Permission modes: the Proactive style mirrors auto mode without changing your permission mode",
+        "Plugins: package and distribute output styles alongside skills, hooks, and agents",
+        "Debug your configuration: diagnose why an output style isn’t taking effect",
         "Was this page helpful?"
       ],
       "codeBlocks": [
         "{\n  \"outputStyle\": \"Explanatory\"\n}",
-        "---\nname: My Custom Style\ndescription:\n  A brief description of what this style does, to be displayed to the user\n---\n\n# Custom Style Instructions\n\nYou are an interactive CLI tool that helps users with software engineering\ntasks. [Your custom instructions here...]\n\n## Specific Behaviors\n\n[Define how the assistant should behave in this style...]"
+        "---\nname: Diagrams first\ndescription: Lead every explanation with a diagram\nkeep-coding-instructions: true\n---\n\nWhen explaining code, architecture, or data flow, start with a Mermaid diagram showing the structure, then explain in prose.\n\n## Diagram conventions\n\nUse `flowchart TD` for control flow and `sequenceDiagram` for request paths. Keep diagrams under 15 nodes."
       ],
       "sectionBlocks": [
         {
           "title": "",
           "paragraphs": [
             "Built-in output styles",
-            "How output styles work",
             "Change your output style",
             "Create a custom output style",
             "Frontmatter",
+            "How output styles work",
             "Comparisons to related features",
-            "Output Styles vs. CLAUDE.md vs. —append-system-prompt",
-            "Output Styles vs. Agents",
-            "Output Styles vs. Skills",
+            "Related resources",
             "Adapt Claude Code for uses beyond software engineering"
           ],
           "codeBlocks": []
@@ -25445,7 +25467,8 @@
           "paragraphs": [
             "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
             "Use this file to discover all available pages before exploring further.",
-            "Output styles change how Claude responds, not what Claude knows. They modify the system prompt to set role, tone, and output format while keeping core capabilities like running scripts, reading and writing files, and tracking TODOs. Use one when you keep re-prompting for the same voice or format every turn, or when you want Claude to act as something other than a software engineer.",
+            "Output styles change how Claude responds, not what Claude knows. They modify the system prompt to set role, tone, and output format. Use one when you keep re-prompting for the same voice or format every turn, or when you want Claude to act as something other than a software engineer.",
+            "A custom output style adds your instructions to the system prompt and lets you choose whether to keep Claude Code’s built-in software engineering instructions. Keep them when you’re changing how Claude communicates but still coding, like always answering with a diagram. Leave them out when Claude isn’t doing software engineering at all, like a writing assistant or data analyst.",
             "For instructions about your project, conventions, or codebase, use CLAUDE.md instead."
           ],
           "codeBlocks": []
@@ -25458,17 +25481,6 @@
             "Proactive: Claude executes immediately, makes reasonable assumptions instead of pausing for routine decisions, and prefers action over planning. This applies the same guidance as auto mode without changing your permission mode, so you still see permission prompts before tools run.",
             "Explanatory: Provides educational “Insights” in between helping you complete software engineering tasks. Helps you understand implementation choices and codebase patterns.",
             "Learning: Collaborative, learn-by-doing mode where Claude will not only share “Insights” while coding, but also ask you to contribute small, strategic pieces of code yourself. Claude Code will add TODO(human) markers in your code for you to implement."
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​How output styles work",
-          "paragraphs": [
-            "Output styles directly modify Claude Code’s system prompt.",
-            "Custom output styles exclude instructions for coding (such as verifying code with tests), unless keep-coding-instructions is true.",
-            "All output styles have their own custom instructions added to the end of the system prompt.",
-            "All output styles trigger reminders for Claude to adhere to the output style instructions during the conversation.",
-            "Token usage depends on the style. Adding instructions to the system prompt increases input tokens, though prompt caching reduces this cost after the first request in a session. The built-in Explanatory and Learning styles produce longer responses than Default by design, which increases output tokens. For custom styles, output token usage depends on what your instructions tell Claude to produce."
           ],
           "codeBlocks": []
         },
@@ -25486,48 +25498,55 @@
         {
           "title": "​Create a custom output style",
           "paragraphs": [
-            "Custom output styles are Markdown files with frontmatter and the text that will be added to the system prompt:",
-            "You can save these files at three levels:",
+            "A custom output style is a Markdown file: frontmatter for metadata, then the instructions to add to the system prompt.",
+            "Create a Markdown file",
+            "Save it at one of three levels. The file name becomes the style name unless you set name in the frontmatter.",
             "User: ~/.claude/output-styles",
             "Project: .claude/output-styles",
             "Managed policy: .claude/output-styles inside the managed settings directory",
+            "Add frontmatter and instructions",
+            "Decide whether to keep Claude Code’s software engineering instructions. Set keep-coding-instructions: true if you’re changing how Claude communicates but still want it coding the same way. Leave it out if Claude won’t be doing software engineering.",
+            "This example leads every explanation with a diagram while keeping Claude’s coding behavior:",
+            "Switch to your style",
+            "Run /config and select your style under Output style. It takes effect the next time you start a session.",
             "Plugins can also ship output styles in an output-styles/ directory."
           ],
           "codeBlocks": [
-            "---\nname: My Custom Style\ndescription:\n  A brief description of what this style does, to be displayed to the user\n---\n\n# Custom Style Instructions\n\nYou are an interactive CLI tool that helps users with software engineering\ntasks. [Your custom instructions here...]\n\n## Specific Behaviors\n\n[Define how the assistant should behave in this style...]"
+            "---\nname: Diagrams first\ndescription: Lead every explanation with a diagram\nkeep-coding-instructions: true\n---\n\nWhen explaining code, architecture, or data flow, start with a Mermaid diagram showing the structure, then explain in prose.\n\n## Diagram conventions\n\nUse `flowchart TD` for control flow and `sequenceDiagram` for request paths. Keep diagrams under 15 nodes."
           ]
         },
         {
           "title": "​Frontmatter",
           "paragraphs": [
-            "Output style files support frontmatter for specifying metadata:"
+            "Output style files support these frontmatter fields:"
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​How output styles work",
+          "paragraphs": [
+            "Output styles directly modify Claude Code’s system prompt.",
+            "All output styles have their own custom instructions added to the end of the system prompt.",
+            "All output styles trigger reminders for Claude to adhere to the output style instructions during the conversation.",
+            "Custom output styles leave out Claude Code’s built-in software engineering instructions, such as how to scope changes, write comments, and verify work, unless keep-coding-instructions is set to true.",
+            "Token usage depends on the style. Adding instructions to the system prompt increases input tokens, though prompt caching reduces this cost after the first request in a session. The built-in Explanatory and Learning styles produce longer responses than Default by design, which increases output tokens. For custom styles, output token usage depends on what your instructions tell Claude to produce."
           ],
           "codeBlocks": []
         },
         {
           "title": "​Comparisons to related features",
-          "paragraphs": [],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Output Styles vs. CLAUDE.md vs. —append-system-prompt",
           "paragraphs": [
-            "Choose based on whether Claude should stop acting as a coding assistant or keep its default role and learn more. Output styles replace the software-engineering parts of Claude Code’s system prompt with your own role and voice, so use one when Claude should adopt a different identity, like a writing editor or a data-analysis assistant. CLAUDE.md and --append-system-prompt both keep Claude Code’s default identity and add to it, so use them when Claude should remain a coding assistant that also follows your project conventions or extra instructions.",
-            "The mechanisms differ as well. Output styles edit the system prompt directly. CLAUDE.md adds its contents as a user message after the system prompt. --append-system-prompt appends content to the end of the system prompt without removing anything."
+            "Several features customize how Claude Code behaves. Output styles modify the system prompt directly and apply to every response. The others add instructions without changing the default system prompt, or scope them to a specific task."
           ],
           "codeBlocks": []
         },
         {
-          "title": "​Output Styles vs. Agents",
+          "title": "​Related resources",
           "paragraphs": [
-            "Use an output style to change how the main conversation responds in every session. Use a subagent when you want a separately scoped helper that the main conversation delegates to. Output styles affect only the system prompt of the main agent loop. Agents handle specific tasks and can carry their own model, tools, and context about when to invoke them."
-          ],
-          "codeBlocks": []
-        },
-        {
-          "title": "​Output Styles vs. Skills",
-          "paragraphs": [
-            "Output styles modify how Claude responds (formatting, tone, structure) and are always active once selected. Skills are task-specific prompts that you invoke with /skill-name or that Claude loads automatically when relevant. Use output styles for consistent formatting preferences; use skills for reusable workflows and tasks.",
+            "Settings: where the outputStyle field lives and how settings precedence works",
+            "Permission modes: the Proactive style mirrors auto mode without changing your permission mode",
+            "Plugins: package and distribute output styles alongside skills, hooks, and agents",
+            "Debug your configuration: diagnose why an output style isn’t taking effect",
             "Was this page helpful?"
           ],
           "codeBlocks": []
@@ -30981,9 +31000,8 @@
         "Build production AI agents with Claude Code as a library",
         "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
         "Use this file to discover all available pages before exploring further.",
-        "The Claude Code SDK has been renamed to the Claude Agent SDK. If you’re migrating from the old SDK, see the Migration Guide.",
+        "Starting June 15, 2026, Agent SDK and claude -p usage on subscription plans will draw from a new monthly Agent SDK credit, separate from your interactive usage limits. See Use the Claude Agent SDK with your Claude plan for details.",
         "Build AI agents that autonomously read files, run commands, search the web, edit code, and more. The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code, programmable in Python and TypeScript.",
-        "Opus 4.7 (claude-opus-4-7) requires Agent SDK v0.2.111 or later. If you see a thinking.type.enabled API error, see Troubleshooting.",
         "The Agent SDK includes built-in tools for reading files, running commands, and editing code, so your agent can start working immediately without you implementing tool execution. Dive into the quickstart or explore real agents built with the SDK:",
         "Build a bug-fixing agent in minutes",
         "Email assistant, research agent, and more",
@@ -31095,9 +31113,8 @@
           "paragraphs": [
             "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
             "Use this file to discover all available pages before exploring further.",
-            "The Claude Code SDK has been renamed to the Claude Agent SDK. If you’re migrating from the old SDK, see the Migration Guide.",
+            "Starting June 15, 2026, Agent SDK and claude -p usage on subscription plans will draw from a new monthly Agent SDK credit, separate from your interactive usage limits. See Use the Claude Agent SDK with your Claude plan for details.",
             "Build AI agents that autonomously read files, run commands, search the web, edit code, and more. The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code, programmable in Python and TypeScript.",
-            "Opus 4.7 (claude-opus-4-7) requires Agent SDK v0.2.111 or later. If you see a thinking.type.enabled API error, see Troubleshooting.",
             "The Agent SDK includes built-in tools for reading files, running commands, and editing code, so your agent can start working immediately without you implementing tool execution. Dive into the quickstart or explore real agents built with the SDK:"
           ],
           "codeBlocks": [
@@ -34781,8 +34798,9 @@
         "To load CLAUDE.md, set settingSources to include the level your CLAUDE.md lives at. The example below loads a project-level CLAUDE.md alongside the claude_code preset, so Claude has both the full coding-agent prompt and your project’s conventions:",
         "CLAUDE.md is persistent across all sessions in a project, shared with your team through git, and discovered automatically without code changes. It is not loaded if you pass an empty settingSources array.",
         "Output styles are saved configurations that modify Claude’s system prompt. They’re stored as markdown files and can be reused across sessions and projects.",
-        "An output style is a markdown file with a name and description in its frontmatter, followed by the prompt content. Save it to ~/.claude/output-styles/ for a user-level style available in every project, or .claude/output-styles/ in your repository for a project-level style you can commit and share with your team.",
-        "The example below defines a code-review persona. Save it as ~/.claude/output-styles/code-reviewer.md to make it available across projects:",
+        "An output style is a markdown file with frontmatter for metadata, followed by the prompt content. Save it to ~/.claude/output-styles/ for a user-level style available in every project, or .claude/output-styles/ in your repository for a project-level style you can commit and share with your team.",
+        "By default, a custom output style replaces the claude_code preset’s software engineering instructions with your own. To keep them and layer your instructions on top, set keep-coding-instructions: true in the frontmatter. Keep them when your agent is still doing software engineering work. Leave them out when you’re replacing the role entirely.",
+        "The example below defines a code-review persona that keeps the coding instructions, since reviewing code still benefits from Claude Code’s security and code-quality guidance. Save it as ~/.claude/output-styles/code-reviewer.md to make it available across projects:",
         "Once created, activate output styles via:",
         "CLI: run /config and select an output style",
         "Settings: set outputStyle in .claude/settings.local.json",
@@ -34834,7 +34852,7 @@
       ],
       "codeBlocks": [
         "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Add a new React component for user profiles\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\" // Use Claude Code's system prompt\n    },\n    settingSources: [\"project\"] // Loads CLAUDE.md from project\n  }\n})) {\n  messages.push(message);\n}\n\n// Now Claude has access to your project guidelines from CLAUDE.md",
-        "---\nname: Code Reviewer\ndescription: Thorough code review assistant\n---\n\nYou are an expert code reviewer.\n\nFor every code submission:\n1. Check for bugs and security issues\n2. Evaluate performance\n3. Suggest improvements\n4. Rate code quality (1-10)",
+        "---\nname: Code Reviewer\ndescription: Thorough code review assistant\nkeep-coding-instructions: true\n---\n\nYou are an expert code reviewer.\n\nFor every code submission:\n1. Check for bugs and security issues\n2. Evaluate performance\n3. Suggest improvements\n4. Rate code quality (1-10)",
         "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Help me write a Python function to calculate fibonacci numbers\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\",\n      append: \"Always include detailed docstrings and type hints in Python code.\"\n    }\n  }\n})) {\n  messages.push(message);\n  if (message.type === \"assistant\") {\n    console.log(message.message.content);\n  }\n}",
         "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Triage the open issues in this repo\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\",\n      append: \"You operate Acme's internal triage workflow. Label issues by component and severity.\",\n      excludeDynamicSections: true\n    }\n  }\n})) {\n  // ...\n}",
         "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst customPrompt = `You are a Python coding specialist.\nFollow these guidelines:\n- Write clean, well-documented code\n- Use type hints for all functions\n- Include comprehensive docstrings\n- Prefer functional programming patterns when appropriate\n- Always explain your code choices`;\n\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Create a data processing pipeline\",\n  options: {\n    systemPrompt: customPrompt\n  }\n})) {\n  messages.push(message);\n  if (message.type === \"assistant\") {\n    console.log(message.message.content);\n  }\n}",
@@ -34919,8 +34937,9 @@
           "title": "​Output styles for persistent configurations",
           "paragraphs": [
             "Output styles are saved configurations that modify Claude’s system prompt. They’re stored as markdown files and can be reused across sessions and projects.",
-            "An output style is a markdown file with a name and description in its frontmatter, followed by the prompt content. Save it to ~/.claude/output-styles/ for a user-level style available in every project, or .claude/output-styles/ in your repository for a project-level style you can commit and share with your team.",
-            "The example below defines a code-review persona. Save it as ~/.claude/output-styles/code-reviewer.md to make it available across projects:",
+            "An output style is a markdown file with frontmatter for metadata, followed by the prompt content. Save it to ~/.claude/output-styles/ for a user-level style available in every project, or .claude/output-styles/ in your repository for a project-level style you can commit and share with your team.",
+            "By default, a custom output style replaces the claude_code preset’s software engineering instructions with your own. To keep them and layer your instructions on top, set keep-coding-instructions: true in the frontmatter. Keep them when your agent is still doing software engineering work. Leave them out when you’re replacing the role entirely.",
+            "The example below defines a code-review persona that keeps the coding instructions, since reviewing code still benefits from Claude Code’s security and code-quality guidance. Save it as ~/.claude/output-styles/code-reviewer.md to make it available across projects:",
             "Once created, activate output styles via:",
             "CLI: run /config and select an output style",
             "Settings: set outputStyle in .claude/settings.local.json",
@@ -34929,7 +34948,7 @@
             "Note for SDK users: Output styles are loaded when you include settingSources: ['user'] or settingSources: ['project'] (TypeScript) / setting_sources=[\"user\"] or setting_sources=[\"project\"] (Python) in your options."
           ],
           "codeBlocks": [
-            "---\nname: Code Reviewer\ndescription: Thorough code review assistant\n---\n\nYou are an expert code reviewer.\n\nFor every code submission:\n1. Check for bugs and security issues\n2. Evaluate performance\n3. Suggest improvements\n4. Rate code quality (1-10)"
+            "---\nname: Code Reviewer\ndescription: Thorough code review assistant\nkeep-coding-instructions: true\n---\n\nYou are an expert code reviewer.\n\nFor every code submission:\n1. Check for bugs and security issues\n2. Evaluate performance\n3. Suggest improvements\n4. Rate code quality (1-10)"
           ]
         },
         {

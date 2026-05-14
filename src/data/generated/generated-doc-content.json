@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-13T05:57:35.163Z",
-  "sourceGeneratedAt": "2026-05-13T05:57:34.841Z",
+  "generatedAt": "2026-05-14T05:56:42.277Z",
+  "sourceGeneratedAt": "2026-05-14T05:56:41.959Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -528,7 +528,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.140、2.1.139、2.1.138、2.1.137 这些环节往下讲。",
+            "原文这页大多会按 2.1.141、2.1.140、2.1.139、2.1.138 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -537,14 +537,14 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.140 -> 2.1.139 -> 2.1.138 -> 2.1.137。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.141 -> 2.1.140 -> 2.1.139 -> 2.1.138。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         },
         {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         }
       ],
@@ -5040,6 +5040,18 @@
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "backgrounded · 7c5dcf5d\n  claude agents             list sessions\n  claude attach 7c5dcf5d    open in this terminal\n  claude logs 7c5dcf5d      show recent output\n  claude stop 7c5dcf5d      stop this session",
               "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Permission mode, model, and effort",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude agents --permission-mode plan --model opus --effort high",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Settings, plugins, and MCP servers",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "claude agents --settings ./ci-settings.json --add-dir ../shared-lib",
+              "kind": "config"
             }
           ]
         },
@@ -5197,10 +5209,33 @@
           ]
         },
         {
-          "title": "Permission mode and settings",
+          "title": "Permission mode, model, and effort",
           "paragraphs": [
-            "这里不是让你背\"Permission mode and settings\"这个词，而是让你看它真干活时怎么使。",
+            "这一段主要是在把\"Permission mode, model, and effort\"讲实，不是只摆个标题给你看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Permission mode, model, and effort",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude agents --permission-mode plan --model opus --effort high",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Settings, plugins, and MCP servers",
+          "paragraphs": [
+            "这一段主要是在把\"Settings, plugins, and MCP servers\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Settings, plugins, and MCP servers",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "claude agents --settings ./ci-settings.json --add-dir ../shared-lib",
+              "kind": "config"
+            }
           ]
         },
         {
@@ -5283,13 +5318,6 @@
           "title": "A session is slow to respond after attaching",
           "paragraphs": [
             "这一块主要是在说\"A session is slow to respond after attaching\"真到手上该怎么用，哪里最容易踩坑。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": ".claude/worktrees/ is filling up",
-          "paragraphs": [
-            "这里不是让你背\".claude/worktrees/ is filling up\"这个词，而是让你看它真干活时怎么使。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         }
@@ -17875,7 +17903,7 @@
             {
               "title": "原页关键片段：Create a custom output style",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "---\nname: My Custom Style\ndescription:\n  A brief description of what this style does, to be displayed to the user\n---\n\n# Custom Style Instructions\n\nYou are an interactive CLI tool that helps users with software engineering\ntasks. [Your custom instructions here...]\n\n## Specific Behaviors\n\n[Define how the assistant should behave in this style...]",
+              "code": "---\nname: Diagrams first\ndescription: Lead every explanation with a diagram\nkeep-coding-instructions: true\n---\n\nWhen explaining code, architecture, or data flow, start with a Mermaid diagram showing the structure, then explain in prose.\n\n## Diagram conventions\n\nUse `flowchart TD` for control flow and `sequenceDiagram` for request paths. Keep diagrams under 15 nodes.",
               "kind": "config"
             }
           ]
@@ -17892,13 +17920,6 @@
           "paragraphs": [
             "这一块主要是在说\"Built-in output styles\"真到手上该怎么用，哪里最容易踩坑。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ]
-        },
-        {
-          "title": "How output styles work",
-          "paragraphs": [
-            "这里不是让你背\"How output styles work\"这个词，而是让你看它真干活时怎么使。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -17926,7 +17947,7 @@
             {
               "title": "Create a custom output style",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "---\nname: My Custom Style\ndescription:\n  A brief description of what this style does, to be displayed to the user\n---\n\n# Custom Style Instructions\n\nYou are an interactive CLI tool that helps users with software engineering\ntasks. [Your custom instructions here...]\n\n## Specific Behaviors\n\n[Define how the assistant should behave in this style...]",
+              "code": "---\nname: Diagrams first\ndescription: Lead every explanation with a diagram\nkeep-coding-instructions: true\n---\n\nWhen explaining code, architecture, or data flow, start with a Mermaid diagram showing the structure, then explain in prose.\n\n## Diagram conventions\n\nUse `flowchart TD` for control flow and `sequenceDiagram` for request paths. Keep diagrams under 15 nodes.",
               "kind": "config"
             }
           ]
@@ -17938,30 +17959,24 @@
           ]
         },
         {
+          "title": "How output styles work",
+          "paragraphs": [
+            "这里不是让你背\"How output styles work\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
           "title": "Comparisons to related features",
           "paragraphs": [
-            "这一块主要是在说\"Comparisons to related features\"真到手上该怎么用，哪里最容易踩坑。"
-          ]
-        },
-        {
-          "title": "Output Styles vs. CLAUDE.md vs. —append-system-prompt",
-          "paragraphs": [
-            "这一段是在帮你从几个选项里挑 based on whether Claude should stop acting as a coding assistant or keep its default role and learn more. Output styles replace the software-engineering parts of Claude Code’s system prompt with your own role and voice, so use one when Claude should adopt a different identity, like a writing editor or a data-analysis assistant. CLAUDE.md and --append-system-prompt both keep Claude Code’s default identity and add to it, so use them when Claude should remain a coding assistant that also follows your project conventions or extra instructions.。重点不只是知道有哪些，更是看代价和场景。",
+            "这一块主要是在说\"Comparisons to related features\"真到手上该怎么用，哪里最容易踩坑。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
-          "title": "Output Styles vs. Agents",
+          "title": "Related resources",
           "paragraphs": [
-            "这一段是在说怎么用 an output style to change how the main conversation responds in every session. Use a subagent when you want a separately scoped helper that the main conversation delegates to. Output styles affect only the system prompt of the main agent loop. Agents handle specific tasks and can carry their own model, tools, and context about when 去做 invoke them.。看这种内容，光知道名字没用，还是得落到手上。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Output Styles vs. Skills",
-          "paragraphs": [
-            "这里不是让你背\"Output Styles vs. Skills\"这个词，而是让你看它真干活时怎么使。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+            "这一段主要是在把\"Related resources\"讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         }
       ],
@@ -24927,7 +24942,7 @@
             {
               "title": "原页关键片段：Output styles for persistent configurations",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "---\nname: Code Reviewer\ndescription: Thorough code review assistant\n---\n\nYou are an expert code reviewer.\n\nFor every code submission:\n1. Check for bugs and security issues\n2. Evaluate performance\n3. Suggest improvements\n4. Rate code quality (1-10)",
+              "code": "---\nname: Code Reviewer\ndescription: Thorough code review assistant\nkeep-coding-instructions: true\n---\n\nYou are an expert code reviewer.\n\nFor every code submission:\n1. Check for bugs and security issues\n2. Evaluate performance\n3. Suggest improvements\n4. Rate code quality (1-10)",
               "kind": "config"
             },
             {
@@ -25009,7 +25024,7 @@
             {
               "title": "Output styles for persistent configurations",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "---\nname: Code Reviewer\ndescription: Thorough code review assistant\n---\n\nYou are an expert code reviewer.\n\nFor every code submission:\n1. Check for bugs and security issues\n2. Evaluate performance\n3. Suggest improvements\n4. Rate code quality (1-10)",
+              "code": "---\nname: Code Reviewer\ndescription: Thorough code review assistant\nkeep-coding-instructions: true\n---\n\nYou are an expert code reviewer.\n\nFor every code submission:\n1. Check for bugs and security issues\n2. Evaluate performance\n3. Suggest improvements\n4. Rate code quality (1-10)",
               "kind": "config"
             }
           ]
