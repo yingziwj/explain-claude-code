@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-14T05:56:42.277Z",
-  "sourceGeneratedAt": "2026-05-14T05:56:41.959Z",
+  "generatedAt": "2026-05-15T06:04:13.744Z",
+  "sourceGeneratedAt": "2026-05-15T06:04:13.418Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -528,7 +528,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.141、2.1.140、2.1.139、2.1.138 这些环节往下讲。",
+            "原文这页大多会按 2.1.142、2.1.141、2.1.140、2.1.139 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -537,7 +537,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.141 -> 2.1.140 -> 2.1.139 -> 2.1.138。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.142 -> 2.1.141 -> 2.1.140 -> 2.1.139。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         },
         {
@@ -5038,7 +5038,7 @@
             {
               "title": "原页关键片段：From your shell 3",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "backgrounded · 7c5dcf5d\n  claude agents             list sessions\n  claude attach 7c5dcf5d    open in this terminal\n  claude logs 7c5dcf5d      show recent output\n  claude stop 7c5dcf5d      stop this session",
+              "code": "claude --bg --name \"flaky-test-fix\" \"investigate the flaky SettingsChangeDetector test\"",
               "kind": "command"
             },
             {
@@ -5188,6 +5188,12 @@
             },
             {
               "title": "From your shell 3",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --bg --name \"flaky-test-fix\" \"investigate the flaky SettingsChangeDetector test\"",
+              "kind": "command"
+            },
+            {
+              "title": "From your shell 4",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "backgrounded · 7c5dcf5d\n  claude agents             list sessions\n  claude attach 7c5dcf5d    open in this terminal\n  claude logs 7c5dcf5d      show recent output\n  claude stop 7c5dcf5d      stop this session",
               "kind": "command"
@@ -8972,8 +8978,7 @@
         {
           "title": "Documentation Index",
           "paragraphs": [
-            "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+            "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。"
           ]
         },
         {
@@ -20277,7 +20282,7 @@
           "title": "Hook input and output",
           "paragraphs": [
             "这一块主要是在说\"Hook input and output\"真到手上该怎么用，哪里最容易踩坑。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -20332,20 +20337,20 @@
             },
             {
               "title": "JSON output 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "#!/bin/bash\n# Notification hook: ping the desktop when Claude Code needs attention.\ninput=$(cat)\ntitle=\"Claude Code\"\nbody=$(jq -r '.message // \"Needs your attention\"' <<<\"$input\")\nseq=$(printf '\\033]777;notify;%s;%s\\007' \"$title\" \"$body\")\njq -nc --arg seq \"$seq\" '{terminalSequence: $seq}'",
+              "kind": "command"
+            },
+            {
+              "title": "JSON output 3",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
               "code": "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolUse\",\n    \"additionalContext\": \"This file is generated. Edit src/schema.ts and run `bun generate` instead.\"\n  }\n}",
               "kind": "config"
             },
             {
-              "title": "JSON output 3",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"decision\": \"block\",\n  \"reason\": \"Test suite must pass before proceeding\"\n}",
-              "kind": "config"
-            },
-            {
               "title": "JSON output 4",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PreToolUse\",\n    \"permissionDecision\": \"deny\",\n    \"permissionDecisionReason\": \"Database writes are not allowed\"\n  }\n}",
+              "code": "{\n  \"decision\": \"block\",\n  \"reason\": \"Test suite must pass before proceeding\"\n}",
               "kind": "config"
             }
           ]
@@ -26182,7 +26187,7 @@
             {
               "title": "原页关键片段：Add context and block a tool",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "async def block_etc_writes(input_data, tool_use_id, context):\n    file_path = input_data[\"tool_input\"].get(\"file_path\", \"\")\n\n    if file_path.startswith(\"/etc\"):\n        return {\n            # Top-level field: inject guidance into the conversation\n            \"systemMessage\": \"Remember: system directories like /etc are protected.\",\n            # hookSpecificOutput: block the operation\n            \"hookSpecificOutput\": {\n                \"hookEventName\": input_data[\"hook_event_name\"],\n                \"permissionDecision\": \"deny\",\n                \"permissionDecisionReason\": \"Writing to /etc is not allowed\",\n            },\n        }\n    return {}",
+              "code": "async def block_etc_writes(input_data, tool_use_id, context):\n    file_path = input_data[\"tool_input\"].get(\"file_path\", \"\")\n\n    if file_path.startswith(\"/etc\"):\n        return {\n            # Top-level field: message shown to the user\n            \"systemMessage\": \"Remember: system directories like /etc are protected.\",\n            # hookSpecificOutput: block the operation\n            \"hookSpecificOutput\": {\n                \"hookEventName\": input_data[\"hook_event_name\"],\n                \"permissionDecision\": \"deny\",\n                \"permissionDecisionReason\": \"Writing to /etc is not allowed\",\n            },\n        }\n    return {}",
               "kind": "code"
             },
             {
@@ -26320,13 +26325,13 @@
           "title": "Add context and block a tool",
           "paragraphs": [
             "别把这段只当成标题看，它其实是在给\"Add context and block a tool\"划边界。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
               "title": "Add context and block a tool",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "async def block_etc_writes(input_data, tool_use_id, context):\n    file_path = input_data[\"tool_input\"].get(\"file_path\", \"\")\n\n    if file_path.startswith(\"/etc\"):\n        return {\n            # Top-level field: inject guidance into the conversation\n            \"systemMessage\": \"Remember: system directories like /etc are protected.\",\n            # hookSpecificOutput: block the operation\n            \"hookSpecificOutput\": {\n                \"hookEventName\": input_data[\"hook_event_name\"],\n                \"permissionDecision\": \"deny\",\n                \"permissionDecisionReason\": \"Writing to /etc is not allowed\",\n            },\n        }\n    return {}",
+              "code": "async def block_etc_writes(input_data, tool_use_id, context):\n    file_path = input_data[\"tool_input\"].get(\"file_path\", \"\")\n\n    if file_path.startswith(\"/etc\"):\n        return {\n            # Top-level field: message shown to the user\n            \"systemMessage\": \"Remember: system directories like /etc are protected.\",\n            # hookSpecificOutput: block the operation\n            \"hookSpecificOutput\": {\n                \"hookEventName\": input_data[\"hook_event_name\"],\n                \"permissionDecision\": \"deny\",\n                \"permissionDecisionReason\": \"Writing to /etc is not allowed\",\n            },\n        }\n    return {}",
               "kind": "code"
             }
           ]
@@ -26511,7 +26516,7 @@
           "title": "systemMessage not appearing in output",
           "paragraphs": [
             "这里主要是在交代\"systemMessage not appearing in output\"这一块会碰到哪些事。",
-            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {

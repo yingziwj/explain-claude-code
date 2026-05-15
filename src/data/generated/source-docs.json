@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-14T05:56:41.959Z",
+  "generatedAt": "2026-05-15T06:04:13.418Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -1287,6 +1287,7 @@
         "Documentation Index"
       ],
       "toc": [
+        "2.1.142",
         "2.1.141",
         "2.1.140",
         "2.1.139",
@@ -1305,8 +1306,7 @@
         "2.1.120",
         "2.1.119",
         "2.1.118",
-        "2.1.117",
-        "2.1.116"
+        "2.1.117"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
@@ -1314,6 +1314,30 @@
         "Use this file to discover all available pages before exploring further.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Added new claude agents flags: --add-dir, --settings, --mcp-config, --plugin-dir, --permission-mode, --model, --effort, and --dangerously-skip-permissions to configure dispatched background sessions",
+        "Fast mode now uses Opus 4.7 by default (previously Opus 4.6). Set CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1 to pin fast mode to Opus 4.6",
+        "Plugins with a root-level SKILL.md and no skills/ subdirectory are now surfaced as a skill",
+        "The /plugin details pane and claude plugin details now show LSP servers a plugin provides",
+        "/web-setup warns before replacing an existing GitHub App connection",
+        "Fixed MCP_TOOL_TIMEOUT not raising the per-request fetch timeout for remote HTTP and SSE MCP servers, which capped tool calls at 60 seconds regardless of the configured value",
+        "Fixed background sessions not recognizing pre-existing git worktrees, blocking Edit while EnterWorktree refused to create a duplicate",
+        "Fixed background sessions disappearing and daemon reconnect failing after macOS sleep/wake — the daemon now detects clock jumps instead of treating them as elapsed idle time",
+        "Fixed daemon not exiting cleanly after the binary is upgraded (e.g. brew upgrade), causing dispatched agents to crash-loop on the deleted path",
+        "Fixed background agents crash-looping when the Claude-in-Chrome extension is connected without a shared tab",
+        "Fixed clicking links in an attached claude agents session — the background worker’s headless browser shim no longer applies while attached",
+        "Fixed claude agents “v to open in editor” using the daemon’s default editor instead of your shell’s $EDITOR/$VISUAL",
+        "Fixed claude agents deadlocking on Windows with network-drive working directories; Ctrl+C now works during startup",
+        "Fixed background-color bleed when attaching to a claude agents session from Apple Terminal or other 256-color-only terminals",
+        "Fixed claude --bg --dangerously-skip-permissions not persisting across retire/wake",
+        "Fixed session titles being derived from the URL when the first message is a link",
+        "Fixed redundant set_model requests from remote clients injecting duplicate /model breadcrumbs into the transcript",
+        "Fixed plugins using skills: [\"./\"] showing a false “path escapes plugin directory” error",
+        "Fixed plugin cache cleanup deleting the active plugin version directory when no installation metadata is present",
+        "Fixed /plugin browse pane showing “0 installs” for newly published plugins",
+        "Fixed plugin advisories not naming every plugin.json key that shadows a default folder",
+        "Improved reactive compaction: the first summarize attempt now seeds from the original request’s overflow size, avoiding a wasted near-full-context retry",
+        "Improved hook configuration error: configuring a prompt- or agent-type hook for SessionStart/Setup/SubagentStart now shows a clear “use a command-type hook instead” error",
+        "Removed stale /model claude-sonnet-4-20250514 suggestion from Usage Policy refusal messages",
         "Added terminalSequence field to hook JSON output so hooks can emit desktop notifications, window titles, and bells without a controlling terminal",
         "Added CLAUDE_CODE_PLUGIN_PREFER_HTTPS to clone GitHub plugin sources over HTTPS instead of SSH, for environments without a GitHub SSH key",
         "Added ANTHROPIC_WORKSPACE_ID environment variable for workload identity federation — scopes the minted token to a specific workspace when the federation rule covers more than one",
@@ -1464,31 +1488,7 @@
         "Fixed a renderer crash when a tool’s collapsibility classification changes mid-session",
         "Fixed a skills entry in plugin.json hiding the plugin’s default skills/ directory, and listing a file path now shows an error instead of failing silently",
         "Fixed IDE shell-integration lock files not respecting CLAUDE_CONFIG_DIR",
-        "Fixed trailing whitespace in copied terminal output during streaming",
-        "Fixed plugin uninstall and enable/disable not matching slugs case-insensitively",
-        "Fixed tool error truncation marker showing a negative count for surrogate-pair strings",
-        "Fixed env vars from CLAUDE_ENV_FILE SessionStart hooks going stale after /resume or /clear",
-        "Fixed /branch saving a multi-line session title when given a pasted multi-line name",
-        "Fixed a stray leading space on the second line of wrapped text at the column boundary",
-        "Fixed Esc not dismissing dialogs in /install-github-app, /desktop, /resume, and /web-setup",
-        "Fixed /doctor MCP schema errors not naming the missing field or showing the source file path",
-        "Fixed Bash permission prompts showing an internal parser diagnostic instead of a user-readable explanation",
-        "Fixed plugin slash commands with spaces (e.g. /myplugin review) not resolving to their namespaced form",
-        "Fixed AskUserQuestion discarding multi-select answers when supplied as an array",
-        "Fixed /clear <name> not labeling the cleared session for /resume",
-        "Fixed CronList output missing qualifiers and the scheduled prompt",
-        "Fixed “Jump to bottom” overlay leaving color artifacts on CJK characters in fullscreen mode",
-        "Fixed wide markdown tables leaving a stale bordered render in terminal scrollback while streaming",
-        "Fixed pasted text being silently dropped when a long prompt with a pasted-text placeholder was auto-truncated",
-        "Fixed /release-notes getting stuck on an old version after a failed changelog refresh",
-        "Fixed /mcp server list not scrolling when there are more servers than fit in the terminal",
-        "Fixed mid-input slash command autocomplete not working after an initial slash command",
-        "Fixed scrolling to bottom re-engaging auto-follow with autoScrollEnabled: false",
-        "Fixed prompt suggestions being auto-submitted by Enter on an empty input instead of requiring Tab or arrow to accept",
-        "Fixed keyboard shortcut hints not reflecting rebound keys from keybindings.json",
-        "Fixed /settings language change being reverted on Escape after confirming",
-        "Fixed /terminal-setup only appearing in autocomplete on exact name match instead of partial prefixes",
-        "Fixed “Chat about this” on an AskUserQuestion dialog erasing the question text"
+        "Fixed trailing whitespace in copied terminal output during streaming"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1506,14 +1506,14 @@
             "Use this file to discover all available pages before exploring further.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Added terminalSequence field to hook JSON output so hooks can emit desktop notifications, window titles, and bells without a controlling terminal",
-            "Added CLAUDE_CODE_PLUGIN_PREFER_HTTPS to clone GitHub plugin sources over HTTPS instead of SSH, for environments without a GitHub SSH key",
-            "Added ANTHROPIC_WORKSPACE_ID environment variable for workload identity federation — scopes the minted token to a specific workspace when the federation rule covers more than one",
-            "Added claude agents --cwd <path> to scope the session list to a directory",
-            "/feedback can now include recent sessions (last 24 hours or 7 days) for issues spanning more than the current session",
-            "Rewind menu: added “Summarize up to here” to compress earlier context while keeping recent turns intact",
-            "Auto mode permission dialog now explains when a permissions.ask rule caused the prompt",
-            "Restored the “view diff in your IDE” option on file-edit permission prompts when an IDE is connected"
+            "Added new claude agents flags: --add-dir, --settings, --mcp-config, --plugin-dir, --permission-mode, --model, --effort, and --dangerously-skip-permissions to configure dispatched background sessions",
+            "Fast mode now uses Opus 4.7 by default (previously Opus 4.6). Set CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1 to pin fast mode to Opus 4.6",
+            "Plugins with a root-level SKILL.md and no skills/ subdirectory are now surfaced as a skill",
+            "The /plugin details pane and claude plugin details now show LSP servers a plugin provides",
+            "/web-setup warns before replacing an existing GitHub App connection",
+            "Fixed MCP_TOOL_TIMEOUT not raising the per-request fetch timeout for remote HTTP and SSE MCP servers, which capped tool calls at 60 seconds regardless of the configured value",
+            "Fixed background sessions not recognizing pre-existing git worktrees, blocking Edit while EnterWorktree refused to create a duplicate",
+            "Fixed background sessions disappearing and daemon reconnect failing after macOS sleep/wake — the daemon now detects clock jumps instead of treating them as elapsed idle time"
           ],
           "codeBlocks": []
         }
@@ -4259,15 +4259,15 @@
         "Use /clear frequently between tasks to reset the context window entirely",
         "When auto compaction triggers, Claude summarizes what matters most, including code patterns, file states, and key decisions",
         "For more control, run /compact <instructions>, like /compact Focus on the API changes",
-        "To compact only part of the conversation, use Esc + Esc or /rewind, select a message checkpoint, and choose Summarize from here. This condenses messages from that point forward while keeping earlier context intact.",
+        "To compact only part of the conversation, use Esc + Esc or /rewind, select a message checkpoint, and choose Summarize from here or Summarize up to here. The first condenses messages from that point forward while keeping earlier context intact; the second condenses earlier messages while keeping recent ones in full. See Restore vs. summarize.",
         "Customize compaction behavior in CLAUDE.md with instructions like \"When compacting, always preserve the full list of modified files and any test commands\" to ensure critical context survives summarization",
         "For quick questions that don’t need to stay in context, use /btw. The answer appears in a dismissible overlay and never enters conversation history, so you can check a detail without growing context.",
         "Delegate research with \"use subagents to investigate X\". They explore in a separate context, keeping your main conversation clean for implementation.",
         "Since context is your fundamental constraint, subagents are one of the most powerful tools available. When Claude researches a codebase it reads lots of files, all of which consume your context. Subagents run in separate context windows and report back summaries:",
         "The subagent explores the codebase, reads relevant files, and reports back with findings, all without cluttering your main conversation.",
         "You can also use subagents for verification after Claude implements something:",
-        "Every action Claude makes creates a checkpoint. You can restore conversation, code, or both to any previous checkpoint.",
-        "Claude automatically checkpoints before changes. Double-tap Escape or run /rewind to open the rewind menu. You can restore conversation only, restore code only, restore both, or summarize from a selected message. See Checkpointing for details.",
+        "Every prompt you send creates a checkpoint. You can restore conversation, code, or both to any previous checkpoint.",
+        "Claude automatically snapshots files before each change so a checkpoint can restore them. Double-tap Escape or run /rewind to open the rewind menu. You can restore conversation only, restore code only, restore both, or summarize from a selected message. See Checkpointing for details.",
         "Instead of carefully planning every move, you can tell Claude to try something risky. If it doesn’t work, rewind and try a different approach. Checkpoints persist across sessions, so you can close your terminal and still rewind later.",
         "Checkpoints only track changes made by Claude, not external processes. This isn’t a replacement for git.",
         "Name sessions with /rename and treat them like branches: each workstream gets its own persistent context.",
@@ -4575,7 +4575,7 @@
             "Use /clear frequently between tasks to reset the context window entirely",
             "When auto compaction triggers, Claude summarizes what matters most, including code patterns, file states, and key decisions",
             "For more control, run /compact <instructions>, like /compact Focus on the API changes",
-            "To compact only part of the conversation, use Esc + Esc or /rewind, select a message checkpoint, and choose Summarize from here. This condenses messages from that point forward while keeping earlier context intact.",
+            "To compact only part of the conversation, use Esc + Esc or /rewind, select a message checkpoint, and choose Summarize from here or Summarize up to here. The first condenses messages from that point forward while keeping earlier context intact; the second condenses earlier messages while keeping recent ones in full. See Restore vs. summarize.",
             "Customize compaction behavior in CLAUDE.md with instructions like \"When compacting, always preserve the full list of modified files and any test commands\" to ensure critical context survives summarization",
             "For quick questions that don’t need to stay in context, use /btw. The answer appears in a dismissible overlay and never enters conversation history, so you can check a detail without growing context."
           ],
@@ -4597,8 +4597,8 @@
         {
           "title": "​Rewind with checkpoints",
           "paragraphs": [
-            "Every action Claude makes creates a checkpoint. You can restore conversation, code, or both to any previous checkpoint.",
-            "Claude automatically checkpoints before changes. Double-tap Escape or run /rewind to open the rewind menu. You can restore conversation only, restore code only, restore both, or summarize from a selected message. See Checkpointing for details.",
+            "Every prompt you send creates a checkpoint. You can restore conversation, code, or both to any previous checkpoint.",
+            "Claude automatically snapshots files before each change so a checkpoint can restore them. Double-tap Escape or run /rewind to open the rewind menu. You can restore conversation only, restore code only, restore both, or summarize from a selected message. See Checkpointing for details.",
             "Instead of carefully planning every move, you can tell Claude to try something risky. If it doesn’t work, rewind and try a different approach. Checkpoints persist across sessions, so you can close your terminal and still rewind later.",
             "Checkpoints only track changes made by Claude, not external processes. This isn’t a replacement for git."
           ],
@@ -4975,7 +4975,7 @@
         "If you didn’t set an explicit name, the title updates to reflect your prompt once you send one.",
         "If the environment already has an active session, you’ll be asked whether to continue it or start a new one.",
         "If you don’t have the Claude app yet, use the /mobile command inside Claude Code to display a download QR code for iOS or Android.",
-        "By default, Remote Control only activates when you explicitly run claude remote-control, claude --remote-control, or /remote-control. To enable it automatically for every interactive session, run /config inside Claude Code and set Enable Remote Control for all sessions to true. Set it back to false to disable.",
+        "By default, Remote Control only activates when you explicitly run claude remote-control, claude --remote-control, or /remote-control. To enable it automatically for every interactive session, run /config inside Claude Code and set Enable Remote Control for all sessions to true. Set it back to false to disable. In the Desktop app, you can also toggle this from Settings → Claude Code → Enable remote control by default.",
         "With this setting on, each interactive Claude Code process registers one remote session. If you run multiple instances, each one gets its own environment and session. To run multiple concurrent sessions from a single process, use server mode instead.",
         "Your local Claude Code session makes outbound HTTPS requests only and never opens inbound ports on your machine. When you start Remote Control, it registers with the Anthropic API and polls for work. When you connect from another device, the server routes messages between the web or mobile client and your local session over a streaming connection.",
         "All traffic travels through the Anthropic API over TLS, the same transport security as any Claude Code session. The connection uses multiple short-lived credentials, each scoped to a single purpose and expiring independently.",
@@ -5129,7 +5129,7 @@
         {
           "title": "​Enable Remote Control for all sessions",
           "paragraphs": [
-            "By default, Remote Control only activates when you explicitly run claude remote-control, claude --remote-control, or /remote-control. To enable it automatically for every interactive session, run /config inside Claude Code and set Enable Remote Control for all sessions to true. Set it back to false to disable.",
+            "By default, Remote Control only activates when you explicitly run claude remote-control, claude --remote-control, or /remote-control. To enable it automatically for every interactive session, run /config inside Claude Code and set Enable Remote Control for all sessions to true. Set it back to false to disable. In the Desktop app, you can also toggle this from Settings → Claude Code → Enable remote control by default.",
             "With this setting on, each interactive Claude Code process registers one remote session. If you run multiple instances, each one gets its own environment and session. To run multiple concurrent sessions from a single process, use server mode instead."
           ],
           "codeBlocks": []
@@ -7689,11 +7689,12 @@
         "Delete custom subagents",
         "See which subagents are active when duplicates exist",
         "This is the recommended way to create and manage subagents. For manual creation or automation, you can also add subagent files directly.",
-        "To list all configured subagents from the command line without opening agent view, pipe the output of claude agents. For example, claude agents | cat prints agents grouped by source and indicates which are overridden by higher-priority definitions.",
         "Subagents are Markdown files with YAML frontmatter. Store them in different locations depending on scope. When multiple subagents share the same name, the higher-priority location wins.",
         "Project subagents (.claude/agents/) are ideal for subagents specific to a codebase. Check them into version control so your team can use and improve them collaboratively.",
         "Project subagents are discovered by walking up from the current working directory. Directories added with --add-dir grant file access only and are not scanned for subagents. To share subagents across projects, use ~/.claude/agents/ or a plugin.",
         "User subagents (~/.claude/agents/) are personal subagents available in all your projects.",
+        "Claude Code scans .claude/agents/ and ~/.claude/agents/ recursively, so you can organize definitions into subfolders such as agents/review/ or agents/research/. The subdirectory path does not affect how a subagent is identified or invoked, because identity comes only from the name frontmatter field. Keep name values unique across the whole tree: if two files within one scope declare the same name, Claude Code keeps one and discards the other without warning.",
+        "Plugin agents/ directories are also scanned recursively. Unlike project and user scopes, a subfolder inside a plugin’s agents/ directory becomes part of the scoped identifier: a file at agents/review/security.md in plugin my-plugin registers as my-plugin:review:security.",
         "CLI-defined subagents are passed as JSON when launching Claude Code. They exist only for that session and aren’t saved to disk, making them useful for quick testing or automation scripts. You can define multiple subagents in a single --agents call:",
         "macOS, Linux, WSL",
         "Windows PowerShell",
@@ -7760,8 +7761,7 @@
         "This works for both built-in and custom subagents. You can also use the --disallowedTools CLI flag:",
         "See Permissions documentation for more details on permission rules.",
         "Subagents can define hooks that run during the subagent’s lifecycle. There are two ways to configure hooks:",
-        "In the subagent’s frontmatter: Define hooks that run only while that subagent is active",
-        "In settings.json: Define hooks that run in the main session when subagents start or stop"
+        "In the subagent’s frontmatter: Define hooks that run only while that subagent is active"
       ],
       "codeBlocks": [
         "/agents",
@@ -7888,8 +7888,7 @@
             "Edit existing subagent configuration and tool access",
             "Delete custom subagents",
             "See which subagents are active when duplicates exist",
-            "This is the recommended way to create and manage subagents. For manual creation or automation, you can also add subagent files directly.",
-            "To list all configured subagents from the command line without opening agent view, pipe the output of claude agents. For example, claude agents | cat prints agents grouped by source and indicates which are overridden by higher-priority definitions."
+            "This is the recommended way to create and manage subagents. For manual creation or automation, you can also add subagent files directly."
           ],
           "codeBlocks": []
         },
@@ -7900,14 +7899,14 @@
             "Project subagents (.claude/agents/) are ideal for subagents specific to a codebase. Check them into version control so your team can use and improve them collaboratively.",
             "Project subagents are discovered by walking up from the current working directory. Directories added with --add-dir grant file access only and are not scanned for subagents. To share subagents across projects, use ~/.claude/agents/ or a plugin.",
             "User subagents (~/.claude/agents/) are personal subagents available in all your projects.",
+            "Claude Code scans .claude/agents/ and ~/.claude/agents/ recursively, so you can organize definitions into subfolders such as agents/review/ or agents/research/. The subdirectory path does not affect how a subagent is identified or invoked, because identity comes only from the name frontmatter field. Keep name values unique across the whole tree: if two files within one scope declare the same name, Claude Code keeps one and discards the other without warning.",
+            "Plugin agents/ directories are also scanned recursively. Unlike project and user scopes, a subfolder inside a plugin’s agents/ directory becomes part of the scoped identifier: a file at agents/review/security.md in plugin my-plugin registers as my-plugin:review:security.",
             "CLI-defined subagents are passed as JSON when launching Claude Code. They exist only for that session and aren’t saved to disk, making them useful for quick testing or automation scripts. You can define multiple subagents in a single --agents call:",
             "macOS, Linux, WSL",
             "Windows PowerShell",
             "The --agents flag accepts JSON with the same frontmatter fields as file-based subagents: description, prompt, tools, disallowedTools, model, permissionMode, mcpServers, hooks, maxTurns, skills, initialPrompt, memory, effort, background, isolation, and color. Use prompt for the system prompt, equivalent to the markdown body in file-based subagents.",
             "Managed subagents are deployed by organization administrators. Place markdown files in .claude/agents/ inside the managed settings directory, using the same frontmatter format as project and user subagents. Managed definitions take precedence over project and user subagents with the same name.",
-            "Plugin subagents come from plugins you’ve installed. They appear in /agents alongside your custom subagents. See the plugin components reference for details on creating plugin subagents.",
-            "For security reasons, plugin subagents do not support the hooks, mcpServers, or permissionMode frontmatter fields. These fields are ignored when loading agents from a plugin. If you need them, copy the agent file into .claude/agents/ or ~/.claude/agents/. You can also add rules to permissions.allow in settings.json or settings.local.json, but these rules apply to the entire session, not just the plugin subagent.",
-            "Subagent definitions from any of these scopes are also available to agent teams: when spawning a teammate, you can reference a subagent type and the teammate uses its tools and model, with the definition’s body appended to the teammate’s system prompt as additional instructions. See agent teams for which frontmatter fields apply on that path."
+            "Plugin subagents come from plugins you’ve installed. They appear in /agents alongside your custom subagents. See the plugin components reference for details on creating plugin subagents."
           ],
           "codeBlocks": [
             "claude --agents '{\n  \"code-reviewer\": {\n    \"description\": \"Expert code reviewer. Use proactively after code changes.\",\n    \"prompt\": \"You are a senior code reviewer. Focus on code quality, security, and best practices.\",\n    \"tools\": [\"Read\", \"Grep\", \"Glob\", \"Bash\"],\n    \"model\": \"sonnet\"\n  },\n  \"debugger\": {\n    \"description\": \"Debugging specialist for errors and test failures.\",\n    \"prompt\": \"You are an expert debugger. Analyze errors, identify root causes, and provide fixes.\"\n  }\n}'",
@@ -8010,11 +8009,11 @@
             "For natural language, there’s no special syntax. Name the subagent and Claude typically delegates:",
             "@-mention the subagent. Type @ and pick the subagent from the typeahead, the same way you @-mention files. This ensures that specific subagent runs rather than leaving the choice to Claude:",
             "Your full message still goes to Claude, which writes the subagent’s task prompt based on what you asked. The @-mention controls which subagent Claude invokes, not what prompt it receives.",
-            "Subagents provided by an enabled plugin appear in the typeahead as <plugin-name>:<agent-name>. Named background subagents currently running in the session also appear in the typeahead, showing their status next to the name. You can also type the mention manually without using the picker: @agent-<name> for local subagents, or @agent-<plugin-name>:<agent-name> for plugin subagents.",
+            "Subagents provided by an enabled plugin appear in the typeahead under their scoped name, such as my-plugin:code-reviewer or my-plugin:review:security when the plugin organizes agents into subfolders. Named background subagents currently running in the session also appear in the typeahead, showing their status next to the name. You can also type the mention manually without using the picker: @agent-<name> for local subagents, or @agent- followed by the scoped name for plugin subagents, for example @agent-my-plugin:code-reviewer.",
             "Run the whole session as a subagent. Pass --agent <name> to start a session where the main thread itself takes on that subagent’s system prompt, tool restrictions, and model:",
             "The subagent’s system prompt replaces the default Claude Code system prompt entirely, the same way --system-prompt does. CLAUDE.md files and project memory still load through the normal message flow. The agent name appears as @<name> in the startup header so you can confirm it’s active.",
             "This works with built-in and custom subagents, and the choice persists when you resume the session.",
-            "For a plugin-provided subagent, pass the scoped name: claude --agent <plugin-name>:<agent-name>."
+            "For a plugin-provided subagent, pass the scoped name: claude --agent <plugin-name>:<agent-name>. If the plugin places the agent in a subfolder of its agents/ directory, include the subfolder in the scoped name, for example claude --agent my-plugin:review:security."
           ],
           "codeBlocks": [
             "Use the test-runner subagent to fix failing tests\nHave the code-reviewer subagent look at my recent changes",
@@ -8314,6 +8313,7 @@
         "You can use claude agents as your primary entry point instead of claude: dispatch every task from agent view, attach when you want the full conversation, and press ← to return to the table.",
         "Run claude agents to open agent view. It takes over the full terminal and lists every session grouped by state, with pinned sessions and the ones that need you at the top. Each row shows the session’s name, current activity, and how long ago it last changed.",
         "The list shows every background session you’ve started, across all your projects. A session working in one repository and another in a different worktree both appear here, regardless of which directory you opened agent view from. Interactive sessions you have open in other terminals don’t appear until you background them. Subagents and teammates a session spawns aren’t listed as separate rows.",
+        "To scope the view to one project, launch with claude agents --cwd <path>. Only sessions started under that directory appear, including any running in a worktree dispatched from it.",
         "Each row starts with an icon whose color and animation show the session’s state:",
         "Separately, the icon’s shape shows whether the underlying process is running:",
         "Background sessions don’t need any terminal open to keep working. A separate supervisor process runs them, so you can close agent view, close your shell, or start a new interactive session and your dispatched work keeps going.",
@@ -8356,6 +8356,7 @@
         "Backgrounding from an interactive session starts a fresh process that resumes from the saved conversation, so running subagents, monitors, and background commands do not transfer to it. Claude asks you to confirm before backgrounding when any are running. Once in the background, the session can start new subagents, monitors, and background commands, and those keep running across later detach and reattach.",
         "Pass --bg to start a session that goes straight to the background:",
         "To run a specific subagent as the session’s main agent, combine --bg with --agent:",
+        "Pass --name to set the session’s display name in agent view instead of the auto-generated one:",
         "After backgrounding, Claude prints the session’s short ID and the commands for managing it:",
         "Every background session, whether started from agent view, /bg, or claude --bg, starts in your working directory. Before editing files, Claude moves the session into an isolated git worktree under .claude/worktrees/, so parallel sessions can read the same checkout but each writes to its own. Claude skips this when the session is already under .claude/worktrees/, when the working directory isn’t a git repository, or for writes outside the working directory.",
         "Outside a git repository, sessions write to the working directory directly and aren’t isolated from each other, so avoid dispatching parallel sessions that edit the same files.",
@@ -8366,8 +8367,10 @@
         "From the shell, pass --model with claude --bg.",
         "Attach to a running session and run /model there. The change persists if the session is respawned.",
         "Dispatch a subagent whose frontmatter sets a model field.",
-        "A dispatched session reads its settings and permission mode from the directory it runs in, the same as if you had started claude there.",
+        "A background session reads its settings from the directory it runs in, the same as if you had started claude there.",
+        "The permission mode depends on how you started the session. Backgrounding an existing session with /bg or ← keeps the current permission mode, so a session you switched to acceptEdits or auto stays in that mode after detaching. Dispatching from the agent view input or running claude --bg from your shell uses the defaultMode from that directory’s settings, or the permissionMode from the dispatched subagent’s frontmatter.",
         "To set defaults for every session you dispatch from agent view, pass any of --permission-mode, --model, or --effort when opening it:",
+        "Passing --permission-mode, --model, or --effort to claude agents requires Claude Code v2.1.142 or later. Earlier versions reject these flags with an unknown-option error.",
         "The active defaults appear in the footer below the dispatch input.",
         "Without these flags, the session uses the defaultMode from that directory’s settings or the permissionMode from the dispatched subagent’s frontmatter, and the model shown in the agent view header.",
         "Using bypassPermissions or auto is refused until you have accepted that mode by running claude with it once interactively, since those modes let a session you aren’t watching act without approval. The same applies whether you pass the mode to claude agents or to claude --bg --permission-mode.",
@@ -8406,6 +8409,7 @@
         "Pinned\n  ✽ clawd walk cycle          Write assets/sprites/clawd-walk.png           3m\n\nReady for review\n  ∙ jump physics              github.com/example/game/pull/2048          ●  2h\n\nNeeds input\n  ✻ power-up design           needs input: double jump or wall climb?       1m\n\nWorking\n  ✽ collision detection       Edit src/physics/CollisionSystem.ts           2m\n  ✢ playtest level 3          run 12 · all checkpoints cleared           in 4m\n\nCompleted\n  ✻ title screen              result: menu, options, and credits done       9m\n  ∙ sound effects             result: 14 SFX exported to assets/audio       4h\n  … 6 more",
         "claude --bg \"investigate the flaky SettingsChangeDetector test\"",
         "claude --agent code-reviewer --bg \"address review comments on PR 1234\"",
+        "claude --bg --name \"flaky-test-fix\" \"investigate the flaky SettingsChangeDetector test\"",
         "backgrounded · 7c5dcf5d\n  claude agents             list sessions\n  claude attach 7c5dcf5d    open in this terminal\n  claude logs 7c5dcf5d      show recent output\n  claude stop 7c5dcf5d      stop this session",
         "claude agents --permission-mode plan --model opus --effort high",
         "claude agents --settings ./ci-settings.json --add-dir ../shared-lib"
@@ -8471,7 +8475,8 @@
           "title": "​Monitor sessions with agent view",
           "paragraphs": [
             "Run claude agents to open agent view. It takes over the full terminal and lists every session grouped by state, with pinned sessions and the ones that need you at the top. Each row shows the session’s name, current activity, and how long ago it last changed.",
-            "The list shows every background session you’ve started, across all your projects. A session working in one repository and another in a different worktree both appear here, regardless of which directory you opened agent view from. Interactive sessions you have open in other terminals don’t appear until you background them. Subagents and teammates a session spawns aren’t listed as separate rows."
+            "The list shows every background session you’ve started, across all your projects. A session working in one repository and another in a different worktree both appear here, regardless of which directory you opened agent view from. Interactive sessions you have open in other terminals don’t appear until you background them. Subagents and teammates a session spawns aren’t listed as separate rows.",
+            "To scope the view to one project, launch with claude agents --cwd <path>. Only sessions started under that directory appear, including any running in a worktree dispatched from it."
           ],
           "codeBlocks": [
             "Pinned\n  ✽ clawd walk cycle          Write assets/sprites/clawd-walk.png           3m\n\nReady for review\n  ∙ jump physics              github.com/example/game/pull/2048          ●  2h\n\nNeeds input\n  ✻ power-up design           needs input: double jump or wall climb?       1m\n\nWorking\n  ✽ collision detection       Edit src/physics/CollisionSystem.ts           2m\n  ✢ playtest level 3          run 12 · all checkpoints cleared           in 4m\n\nCompleted\n  ✻ title screen              result: menu, options, and credits done       9m\n  ∙ sound effects             result: 14 SFX exported to assets/audio       4h\n  … 6 more"
@@ -8588,11 +8593,13 @@
           "paragraphs": [
             "Pass --bg to start a session that goes straight to the background:",
             "To run a specific subagent as the session’s main agent, combine --bg with --agent:",
+            "Pass --name to set the session’s display name in agent view instead of the auto-generated one:",
             "After backgrounding, Claude prints the session’s short ID and the commands for managing it:"
           ],
           "codeBlocks": [
             "claude --bg \"investigate the flaky SettingsChangeDetector test\"",
             "claude --agent code-reviewer --bg \"address review comments on PR 1234\"",
+            "claude --bg --name \"flaky-test-fix\" \"investigate the flaky SettingsChangeDetector test\"",
             "backgrounded · 7c5dcf5d\n  claude agents             list sessions\n  claude attach 7c5dcf5d    open in this terminal\n  claude logs 7c5dcf5d      show recent output\n  claude stop 7c5dcf5d      stop this session"
           ]
         },
@@ -8620,8 +8627,10 @@
         {
           "title": "​Permission mode, model, and effort",
           "paragraphs": [
-            "A dispatched session reads its settings and permission mode from the directory it runs in, the same as if you had started claude there.",
+            "A background session reads its settings from the directory it runs in, the same as if you had started claude there.",
+            "The permission mode depends on how you started the session. Backgrounding an existing session with /bg or ← keeps the current permission mode, so a session you switched to acceptEdits or auto stays in that mode after detaching. Dispatching from the agent view input or running claude --bg from your shell uses the defaultMode from that directory’s settings, or the permissionMode from the dispatched subagent’s frontmatter.",
             "To set defaults for every session you dispatch from agent view, pass any of --permission-mode, --model, or --effort when opening it:",
+            "Passing --permission-mode, --model, or --effort to claude agents requires Claude Code v2.1.142 or later. Earlier versions reject these flags with an unknown-option error.",
             "The active defaults appear in the footer below the dispatch input.",
             "Without these flags, the session uses the defaultMode from that directory’s settings or the permissionMode from the dispatched subagent’s frontmatter, and the model shown in the agent view header.",
             "Using bypassPermissions or auto is refused until you have accepted that mode by running claude with it once interactively, since those modes let a session you aren’t watching act without approval. The same applies whether you pass the mode to claude agents or to claude --bg --permission-mode."
@@ -9734,7 +9743,7 @@
         "Then work with GitHub:",
         "Then query your database naturally:",
         "Many cloud-based MCP servers require authentication. Claude Code supports OAuth 2.0 for secure connections.",
-        "Claude Code marks a remote server as needing authentication when the server responds with 401 Unauthorized and a WWW-Authenticate header pointing to its authorization server. Any custom server that returns that response gets the same /mcp authentication flow as any other remote server.",
+        "Claude Code marks a remote server as needing authentication when the server responds with 401 Unauthorized or 403 Forbidden. Either status code flags the server in /mcp so you can complete the OAuth flow. A custom server that returns a WWW-Authenticate header pointing to its authorization server gets the same automatic discovery as any other remote server.",
         "Add the server that requires authentication",
         "Use the /mcp command within Claude Code",
         "In Claude code, use the command:",
@@ -10083,7 +10092,7 @@
           "title": "​Authenticate with remote MCP servers",
           "paragraphs": [
             "Many cloud-based MCP servers require authentication. Claude Code supports OAuth 2.0 for secure connections.",
-            "Claude Code marks a remote server as needing authentication when the server responds with 401 Unauthorized and a WWW-Authenticate header pointing to its authorization server. Any custom server that returns that response gets the same /mcp authentication flow as any other remote server.",
+            "Claude Code marks a remote server as needing authentication when the server responds with 401 Unauthorized or 403 Forbidden. Either status code flags the server in /mcp so you can complete the OAuth flow. A custom server that returns a WWW-Authenticate header pointing to its authorization server gets the same automatic discovery as any other remote server.",
             "Add the server that requires authentication",
             "For example:",
             "Use the /mcp command within Claude Code",
@@ -12108,7 +12117,10 @@
         "Header values support environment variable interpolation using $VAR_NAME or ${VAR_NAME} syntax. Only variables listed in the allowedEnvVars array are resolved; all other $VAR references remain empty.",
         "For full configuration options and response handling, see HTTP hooks in the reference.",
         "Command hooks communicate through stdout, stderr, and exit codes only. They cannot trigger / commands or tool calls. Text returned via additionalContext is injected as a system reminder that Claude reads as plain text. HTTP hooks communicate through the response body instead.",
-        "Hook timeout is 10 minutes by default, configurable per hook with the timeout field (in seconds).",
+        "Hook timeouts vary by type. Override per hook with the timeout field in seconds. command, http, mcp_tool: 10 minutes. UserPromptSubmit lowers these to 30 seconds. prompt: 30 seconds. agent: 60 seconds.",
+        "command, http, mcp_tool: 10 minutes. UserPromptSubmit lowers these to 30 seconds.",
+        "prompt: 30 seconds.",
+        "agent: 60 seconds.",
         "PostToolUse hooks cannot undo actions since the tool has already executed.",
         "PermissionRequest hooks do not fire in non-interactive mode (-p). Use PreToolUse hooks for automated permission decisions.",
         "Stop hooks fire whenever Claude finishes responding, not only at task completion. They do not fire on user interrupts. API errors fire StopFailure instead.",
@@ -12124,10 +12136,7 @@
         "Your script exited with a non-zero code unexpectedly. Test it manually by piping sample JSON: echo '{\"tool_name\":\"Bash\",\"tool_input\":{\"command\":\"ls\"}}' | ./my-hook.sh echo $? # Check the exit code",
         "If you see “command not found”, use absolute paths or ${CLAUDE_PROJECT_DIR} to reference scripts. To avoid shell quoting entirely, add \"args\": [] to switch to exec form, which spawns the script directly without a shell",
         "If you see “jq: command not found”, install jq or use Python/Node.js for JSON parsing",
-        "If the script isn’t running at all, make it executable: chmod +x ./my-hook.sh",
-        "You edited a settings file but the hooks don’t appear in the menu.",
-        "File edits are normally picked up automatically. If they haven’t appeared after a few seconds, the file watcher may have missed the change: restart your session to force a reload.",
-        "Verify your JSON is valid (trailing commas and comments are not allowed)"
+        "If the script isn’t running at all, make it executable: chmod +x ./my-hook.sh"
       ],
       "codeBlocks": [
         "{\n  \"hooks\": {\n    \"Notification\": [\n      {\n        \"matcher\": \"\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"osascript -e 'display notification \\\"Claude Code needs your attention\\\" with title \\\"Claude Code\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
@@ -12461,7 +12470,10 @@
           "title": "​Limitations",
           "paragraphs": [
             "Command hooks communicate through stdout, stderr, and exit codes only. They cannot trigger / commands or tool calls. Text returned via additionalContext is injected as a system reminder that Claude reads as plain text. HTTP hooks communicate through the response body instead.",
-            "Hook timeout is 10 minutes by default, configurable per hook with the timeout field (in seconds).",
+            "Hook timeouts vary by type. Override per hook with the timeout field in seconds. command, http, mcp_tool: 10 minutes. UserPromptSubmit lowers these to 30 seconds. prompt: 30 seconds. agent: 60 seconds.",
+            "command, http, mcp_tool: 10 minutes. UserPromptSubmit lowers these to 30 seconds.",
+            "prompt: 30 seconds.",
+            "agent: 60 seconds.",
             "PostToolUse hooks cannot undo actions since the tool has already executed.",
             "PermissionRequest hooks do not fire in non-interactive mode (-p). Use PreToolUse hooks for automated permission decisions.",
             "Stop hooks fire whenever Claude finishes responding, not only at task completion. They do not fire on user interrupts. API errors fire StopFailure instead.",
@@ -13245,6 +13257,7 @@
         "Set a completion condition with /goal and Claude keeps working across turns until the condition is met.",
         "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
         "Use this file to discover all available pages before exploring further.",
+        "/goal requires Claude Code v2.1.139 or later.",
         "The /goal command sets a completion condition and Claude keeps working toward it without you prompting each step. After each turn, a small fast model checks whether the condition holds. If not, Claude starts another turn instead of returning control to you. The goal clears automatically once the condition is met.",
         "Use a goal for substantial work with a verifiable end state:",
         "Migrating a module to a new API until every call site compiles and tests pass",
@@ -13283,7 +13296,7 @@
         "Run /goal clear to remove an active goal before its condition is met.",
         "stop, off, reset, none, and cancel are accepted as aliases for clear. Running /clear to start a new conversation also removes any active goal.",
         "A goal that was still active when a session ended is restored when you resume that session with --resume or --continue. The condition carries over, but the turn count, timer, and token-spend baseline all reset on resume. A goal that was already achieved or cleared is not restored.",
-        "/goal works in non-interactive mode and through Remote Control. Setting a goal with -p runs the loop to completion in a single invocation:",
+        "/goal works in non-interactive mode, in the desktop app, and through Remote Control. Setting a goal with -p runs the loop to completion in a single invocation:",
         "Interrupt the process with Ctrl+C to stop a non-interactive goal before the condition is met.",
         "/goal is a wrapper around a session-scoped prompt-based Stop hook. Each time Claude finishes a turn, the condition and the conversation so far are sent to your configured small fast model, which defaults to Haiku. The model returns a yes-or-no decision and a short reason. A “no” tells Claude to keep working and includes the reason as guidance for the next turn. A “yes” clears the goal and records an achieved entry in the transcript.",
         "The evaluator runs on whichever provider your session is configured for. It does not call tools, so it can only judge what Claude has already surfaced in the conversation.",
@@ -13325,6 +13338,7 @@
           "paragraphs": [
             "Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt",
             "Use this file to discover all available pages before exploring further.",
+            "/goal requires Claude Code v2.1.139 or later.",
             "The /goal command sets a completion condition and Claude keeps working toward it without you prompting each step. After each turn, a small fast model checks whether the condition holds. If not, Claude starts another turn instead of returning control to you. The goal clears automatically once the condition is met.",
             "Use a goal for substantial work with a verifiable end state:",
             "Migrating a module to a new API until every call site compiles and tests pass",
@@ -13333,8 +13347,7 @@
             "Working through a labeled issue backlog until the queue is empty",
             "This page covers how to:",
             "Compare autonomous workflow approaches: /loop, Stop hooks, and auto mode",
-            "Set a goal and write an effective condition",
-            "Check status, clear early, and run non-interactively"
+            "Set a goal and write an effective condition"
           ],
           "codeBlocks": []
         },
@@ -13416,7 +13429,7 @@
         {
           "title": "​Run non-interactively",
           "paragraphs": [
-            "/goal works in non-interactive mode and through Remote Control. Setting a goal with -p runs the loop to completion in a single invocation:",
+            "/goal works in non-interactive mode, in the desktop app, and through Remote Control. Setting a goal with -p runs the loop to completion in a single invocation:",
             "Interrupt the process with Ctrl+C to stop a non-interactive goal before the condition is met."
           ],
           "codeBlocks": [
@@ -17781,9 +17794,11 @@
         "Option E: Bedrock API keys",
         "Bedrock API keys provide a simpler authentication method without needing full AWS credentials. Learn more about Bedrock API keys.",
         "Claude Code supports automatic credential refresh for AWS SSO and corporate identity providers. Add these settings to your Claude Code settings file (see Settings for file locations).",
-        "When Claude Code detects that your AWS credentials are expired (either locally based on their timestamp or when Bedrock returns a credential error), it will automatically run your configured awsAuthRefresh and/or awsCredentialExport commands to obtain new credentials before retrying the request.",
+        "These two settings have different trigger conditions:",
+        "awsAuthRefresh: runs only when Claude Code detects that your AWS credentials are expired, either locally based on their timestamp or when Bedrock returns a credential error, then retries the request with refreshed credentials.",
+        "awsCredentialExport: runs at session start and on each credential reload, even when the credentials in your AWS default credential provider chain are still valid. Use this when your Bedrock account requires cross-account credentials that differ from the ones the default provider chain would resolve.",
         "awsAuthRefresh: Use this for commands that modify the .aws directory, such as updating credentials, SSO cache, or config files. The command’s output is displayed to the user, but interactive input isn’t supported. This works well for browser-based SSO flows where the CLI displays a URL or code and you complete authentication in the browser.",
-        "awsCredentialExport: Only use this if you can’t modify .aws and must directly return credentials. Output is captured silently and not shown to the user. The command must output JSON in this format:",
+        "awsCredentialExport: Only use this if you can’t modify .aws and must directly return credentials. This command runs whenever credentials need to be refreshed, not only when credentials are expired. Output is captured silently and not shown to the user. The command must output JSON in this format:",
         "Set the following environment variables to enable Bedrock:",
         "When enabling Bedrock for Claude Code, keep the following in mind:",
         "AWS_REGION is a required environment variable. Claude Code does not read from the .aws config file for this setting.",
@@ -17951,9 +17966,9 @@
             "Option E: Bedrock API keys",
             "Bedrock API keys provide a simpler authentication method without needing full AWS credentials. Learn more about Bedrock API keys.",
             "Claude Code supports automatic credential refresh for AWS SSO and corporate identity providers. Add these settings to your Claude Code settings file (see Settings for file locations).",
-            "When Claude Code detects that your AWS credentials are expired (either locally based on their timestamp or when Bedrock returns a credential error), it will automatically run your configured awsAuthRefresh and/or awsCredentialExport commands to obtain new credentials before retrying the request.",
-            "awsAuthRefresh: Use this for commands that modify the .aws directory, such as updating credentials, SSO cache, or config files. The command’s output is displayed to the user, but interactive input isn’t supported. This works well for browser-based SSO flows where the CLI displays a URL or code and you complete authentication in the browser.",
-            "awsCredentialExport: Only use this if you can’t modify .aws and must directly return credentials. Output is captured silently and not shown to the user. The command must output JSON in this format:"
+            "These two settings have different trigger conditions:",
+            "awsAuthRefresh: runs only when Claude Code detects that your AWS credentials are expired, either locally based on their timestamp or when Bedrock returns a credential error, then retries the request with refreshed credentials.",
+            "awsCredentialExport: runs at session start and on each credential reload, even when the credentials in your AWS default credential provider chain are still valid. Use this when your Bedrock account requires cross-account credentials that differ from the ones the default provider chain would resolve."
           ],
           "codeBlocks": [
             "aws configure",
@@ -23186,7 +23201,8 @@
         "This hierarchy ensures that organizational policies are always enforced while still allowing teams and individuals to customize their experience. The same precedence applies whether you run Claude Code from the CLI, the VS Code extension, or a JetBrains IDE.",
         "For example, if your user settings set permissions.defaultMode to acceptEdits and a project’s shared settings set it to default, the project value applies. The example below covers how array-valued settings such as permission rules combine instead.",
         "Array settings merge across scopes. When the same array-valued setting (such as sandbox.filesystem.allowWrite or permissions.allow) appears in multiple scopes, the arrays are concatenated and deduplicated, not replaced. This means lower-priority scopes can add entries without overriding those set by higher-priority scopes, and vice versa. For example, if managed settings set allowWrite to [\"/opt/company-tools\"] and a user adds [\"~/.kube\"], both paths are included in the final configuration.",
-        "Run /status inside Claude Code to see which settings sources are active and where they come from. The output shows each configuration layer (managed, user, project) along with its origin, such as Enterprise managed settings (remote), Enterprise managed settings (plist), Enterprise managed settings (HKLM), Enterprise managed settings (HKCU), or Enterprise managed settings (file). If a settings file contains errors, /status reports the issue so you can fix it.",
+        "Run /status inside Claude Code to see which settings sources are active. The Status tab includes a Setting sources line that lists each layer Claude Code loaded for the current session, such as User settings or Project local settings. When managed settings are in effect, the entry shows the delivery channel in parentheses, for example Enterprise managed settings (remote), (plist), (HKLM), (HKCU), or (file). A layer appears in the list only when that source is loaded with at least one key, so an empty list means no settings sources were found.",
+        "The Setting sources line confirms which sources are being read. It does not show which layer supplied each individual key. The Config tab in the same dialog is an editor for a fixed set of toggles such as theme and verbose output, not a view of your settings.json contents. If a settings file contains errors, such as invalid JSON or a value that fails validation, /status reports the issue so you can fix it.",
         "Memory files (CLAUDE.md): Contain instructions and context that Claude loads at startup",
         "Settings files (JSON): Configure permissions, environment variables, and tool behavior",
         "Skills: Custom prompts that can be invoked with /skill-name or loaded by Claude automatically",
@@ -23212,8 +23228,7 @@
         "Defines additional marketplaces that should be made available for the repository. Typically used in repository-level settings to ensure team members have access to required plugin sources.",
         "When a repository includes extraKnownMarketplaces:",
         "Team members are prompted to install the marketplace when they trust the folder",
-        "Team members are then prompted to install plugins from that marketplace",
-        "Users can skip unwanted marketplaces or plugins (stored in user settings)"
+        "Team members are then prompted to install plugins from that marketplace"
       ],
       "codeBlocks": [
         "{\n  \"$schema\": \"https://json.schemastore.org/claude-code-settings.json\",\n  \"permissions\": {\n    \"allow\": [\n      \"Bash(npm run lint)\",\n      \"Bash(npm run test *)\",\n      \"Read(~/.zshrc)\"\n    ],\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\"\n    ]\n  },\n  \"env\": {\n    \"CLAUDE_CODE_ENABLE_TELEMETRY\": \"1\",\n    \"OTEL_METRICS_EXPORTER\": \"otlp\"\n  },\n  \"companyAnnouncements\": [\n    \"Welcome to Acme Corp! Review our code guidelines at docs.acme.com\",\n    \"Reminder: Code reviews required for all PRs\",\n    \"New security policy in effect\"\n  ]\n}",
@@ -23483,7 +23498,8 @@
         {
           "title": "​Verify active settings",
           "paragraphs": [
-            "Run /status inside Claude Code to see which settings sources are active and where they come from. The output shows each configuration layer (managed, user, project) along with its origin, such as Enterprise managed settings (remote), Enterprise managed settings (plist), Enterprise managed settings (HKLM), Enterprise managed settings (HKCU), or Enterprise managed settings (file). If a settings file contains errors, /status reports the issue so you can fix it."
+            "Run /status inside Claude Code to see which settings sources are active. The Status tab includes a Setting sources line that lists each layer Claude Code loaded for the current session, such as User settings or Project local settings. When managed settings are in effect, the entry shows the delivery channel in parentheses, for example Enterprise managed settings (remote), (plist), (HKLM), (HKCU), or (file). A layer appears in the list only when that source is loaded with at least one key, so an empty list means no settings sources were found.",
+            "The Setting sources line confirms which sources are being read. It does not show which layer supplied each individual key. The Config tab in the same dialog is an editor for a fixed set of toggles such as theme and verbose output, not a view of your settings.json contents. If a settings file contains errors, such as invalid JSON or a value that fails validation, /status reports the issue so you can fix it."
           ],
           "codeBlocks": []
         },
@@ -26159,13 +26175,13 @@
         "Speak your prompts instead of typing them in the Claude Code CLI. Your speech is transcribed live into the prompt input, so you can mix voice and typing in the same message. Enable dictation with /voice, then either hold a key while you speak or tap once to start and again to send.",
         "Voice dictation requires Claude Code v2.1.69 or later. Tap mode requires v2.1.116 or later. Check your version with claude --version.",
         "Voice dictation streams your recorded audio to Anthropic’s servers for transcription. Audio is not processed locally. The speech-to-text service is only available when you authenticate with a Claude.ai account, and is not available when Claude Code is configured to use an Anthropic API key directly, Amazon Bedrock, Google Vertex AI, or Microsoft Foundry. Transcription does not consume Claude messages or tokens and does not count toward the limits shown in /usage. See data usage for how Anthropic handles your data.",
-        "Voice dictation also needs local microphone access, so it does not work in remote environments such as Claude Code on the web or SSH sessions. In WSL, voice dictation requires WSLg for audio access, which is included with WSL2 on Windows 11. On Windows 10 or WSL1, run Claude Code in native Windows instead.",
+        "Voice dictation also needs local microphone access, so it does not work in remote environments such as Claude Code on the web or SSH sessions. In WSL, voice dictation requires WSLg for audio access. WSLg is included with WSL2 when installed from the Microsoft Store on Windows 10 or 11. If WSLg is not available, for example on WSL1, run Claude Code in native Windows instead.",
         "Audio recording uses a built-in native module on macOS, Linux, and Windows. On Linux, if the native module cannot load, Claude Code falls back to arecord from ALSA utils or rec from SoX. If neither is available, /voice prints an install command for your package manager.",
         "The Claude Code VS Code extension also supports voice dictation with the same Claude.ai account requirement. It is not available in VS Code Remote sessions, including SSH, Dev Containers, and Codespaces, because the microphone is on your local machine and the extension runs on the remote host.",
         "Run /voice to enable dictation. The first time you enable it, Claude Code runs a microphone check. On macOS, this triggers the system microphone permission prompt for your terminal if it has never been granted.",
         "/voice accepts an optional mode argument:",
         "Voice dictation persists across sessions. Set it directly in your user settings file instead of running /voice:",
-        "While voice dictation is enabled, the input footer shows a hold Space to speak hint when the prompt is empty. The hint text is the same in both modes, and it does not appear if you have a custom status line configured.",
+        "While voice dictation is enabled, the input footer shows a hold Space to speak hint when the prompt is empty. The hint reflects your current voice:pushToTalk binding and updates if you rebind the dictation key. The hint text is the same in both modes, and it does not appear if you have a custom status line configured.",
         "Transcription is tuned for coding vocabulary in both modes. Common development terms like regex, OAuth, JSON, and localhost are recognized correctly, and your current project name and git branch name are added as recognition hints automatically.",
         "Hold mode is push-to-talk: recording runs while you hold the key and stops when you release it. This is the default mode.",
         "Hold Space to start recording. Claude Code detects a held key by watching for rapid key-repeat events from your terminal, so there is a brief warmup before recording begins. The footer shows keep holding… during warmup, then switches to a live waveform once recording is active.",
@@ -26188,6 +26204,7 @@
         "Voice mode requires a Claude.ai account: you are authenticated with an API key or a third-party provider. Run /login to sign in with a Claude.ai account.",
         "Microphone access is denied: grant microphone permission to your terminal in system settings. On macOS, go to System Settings → Privacy & Security → Microphone and enable your terminal app, then run /voice again. On Windows, go to Settings → Privacy & security → Microphone and turn on microphone access for desktop apps, then run /voice again. If your terminal isn’t listed in the macOS settings, see Terminal not listed in macOS Microphone settings.",
         "No audio recording tool found on Linux: the native audio module could not load and no fallback is installed. Install SoX with the command shown in the error message, for example sudo apt-get install sox.",
+        "Voice mode could not find a working audio recorder in WSL: WSLg routes audio through PulseAudio rather than an ALSA device, so SoX needs its PulseAudio backend installed explicitly. Run sudo apt install sox libsox-fmt-pulse. Installing sox alone pulls in the ALSA backend, which cannot record on WSL because there is no /dev/snd device.",
         "Voice input is failing repeatedly and has been paused: voice dictation hit several start-up failures in a row and stopped attempting new sessions until one succeeds. This usually means the microphone or audio stack on this host can’t capture audio, for example a headless server, a remote shell with no audio passthrough, or a denied microphone permission. Confirm a working input device, fix the underlying cause from the entries above, then trigger voice again.",
         "Nothing happens when holding Space in hold mode: watch the prompt input while you hold. If spaces keep accumulating, voice dictation is likely off; run /voice hold to enable it. If only one or two spaces appear and then nothing, voice dictation is on but hold detection is not triggering. Hold detection requires your terminal to send key-repeat events, so it cannot detect a held key if key-repeat is disabled at the OS level. Switch to tap mode with /voice tap to avoid the key-repeat requirement.",
         "Tapping Space types a space instead of recording in tap mode: the first tap only starts recording when the prompt input is empty. Clear the input first, or check that you are in tap mode by running /voice tap.",
@@ -26246,7 +26263,7 @@
           "title": "​Requirements",
           "paragraphs": [
             "Voice dictation streams your recorded audio to Anthropic’s servers for transcription. Audio is not processed locally. The speech-to-text service is only available when you authenticate with a Claude.ai account, and is not available when Claude Code is configured to use an Anthropic API key directly, Amazon Bedrock, Google Vertex AI, or Microsoft Foundry. Transcription does not consume Claude messages or tokens and does not count toward the limits shown in /usage. See data usage for how Anthropic handles your data.",
-            "Voice dictation also needs local microphone access, so it does not work in remote environments such as Claude Code on the web or SSH sessions. In WSL, voice dictation requires WSLg for audio access, which is included with WSL2 on Windows 11. On Windows 10 or WSL1, run Claude Code in native Windows instead.",
+            "Voice dictation also needs local microphone access, so it does not work in remote environments such as Claude Code on the web or SSH sessions. In WSL, voice dictation requires WSLg for audio access. WSLg is included with WSL2 when installed from the Microsoft Store on Windows 10 or 11. If WSLg is not available, for example on WSL1, run Claude Code in native Windows instead.",
             "Audio recording uses a built-in native module on macOS, Linux, and Windows. On Linux, if the native module cannot load, Claude Code falls back to arecord from ALSA utils or rec from SoX. If neither is available, /voice prints an install command for your package manager.",
             "The Claude Code VS Code extension also supports voice dictation with the same Claude.ai account requirement. It is not available in VS Code Remote sessions, including SSH, Dev Containers, and Codespaces, because the microphone is on your local machine and the extension runs on the remote host."
           ],
@@ -26258,7 +26275,7 @@
             "Run /voice to enable dictation. The first time you enable it, Claude Code runs a microphone check. On macOS, this triggers the system microphone permission prompt for your terminal if it has never been granted.",
             "/voice accepts an optional mode argument:",
             "Voice dictation persists across sessions. Set it directly in your user settings file instead of running /voice:",
-            "While voice dictation is enabled, the input footer shows a hold Space to speak hint when the prompt is empty. The hint text is the same in both modes, and it does not appear if you have a custom status line configured.",
+            "While voice dictation is enabled, the input footer shows a hold Space to speak hint when the prompt is empty. The hint reflects your current voice:pushToTalk binding and updates if you rebind the dictation key. The hint text is the same in both modes, and it does not appear if you have a custom status line configured.",
             "Transcription is tuned for coding vocabulary in both modes. Common development terms like regex, OAuth, JSON, and localhost are recognized correctly, and your current project name and git branch name are added as recognition hints automatically."
           ],
           "codeBlocks": [
@@ -26320,6 +26337,7 @@
             "Voice mode requires a Claude.ai account: you are authenticated with an API key or a third-party provider. Run /login to sign in with a Claude.ai account.",
             "Microphone access is denied: grant microphone permission to your terminal in system settings. On macOS, go to System Settings → Privacy & Security → Microphone and enable your terminal app, then run /voice again. On Windows, go to Settings → Privacy & security → Microphone and turn on microphone access for desktop apps, then run /voice again. If your terminal isn’t listed in the macOS settings, see Terminal not listed in macOS Microphone settings.",
             "No audio recording tool found on Linux: the native audio module could not load and no fallback is installed. Install SoX with the command shown in the error message, for example sudo apt-get install sox.",
+            "Voice mode could not find a working audio recorder in WSL: WSLg routes audio through PulseAudio rather than an ALSA device, so SoX needs its PulseAudio backend installed explicitly. Run sudo apt install sox libsox-fmt-pulse. Installing sox alone pulls in the ALSA backend, which cannot record on WSL because there is no /dev/snd device.",
             "Voice input is failing repeatedly and has been paused: voice dictation hit several start-up failures in a row and stopped attempting new sessions until one succeeds. This usually means the microphone or audio stack on this host can’t capture audio, for example a headless server, a remote shell with no audio passthrough, or a denied microphone permission. Confirm a working input device, fix the underlying cause from the entries above, then trigger voice again.",
             "Nothing happens when holding Space in hold mode: watch the prompt input while you hold. If spaces keep accumulating, voice dictation is likely off; run /voice hold to enable it. If only one or two spaces appear and then nothing, voice dictation is on but hold detection is not triggering. Hold detection requires your terminal to send key-repeat events, so it cannot detect a held key if key-repeat is disabled at the OS level. Switch to tap mode with /voice tap to avoid the key-repeat requirement.",
             "Tapping Space types a space instead of recording in tap mode: the first tap only starts recording when the prompt input is empty. Clear the input first, or check that you are in tap mode by running /voice tap.",
@@ -27413,7 +27431,7 @@
         "Running work in parallel. /agents opens the manager for the subagents Claude can delegate side tasks to, and /tasks lists what’s running in the background of the current session. /background detaches the whole session to keep running as a background agent and frees your terminal. For a large change that spans the codebase, /batch decomposes it into independent units and runs each in its own worktree. See Run agents in parallel for how these approaches relate.",
         "Before you ship. /diff shows what changed, /simplify reviews recent files and applies quality and efficiency fixes, and /review or /security-review give a deeper read-only pass.",
         "Between sessions. /clear starts fresh on a new task while keeping project memory. /resume and /branch let you return to or fork an earlier conversation. /teleport pulls a web session into this terminal, and /remote-control lets you continue this local session from another device.",
-        "When something is wrong. /rewind rolls code and conversation back to a checkpoint. /doctor and /debug diagnose install and runtime issues, and /feedback reports a bug with session context attached.",
+        "When something is wrong. /rewind rolls code and conversation back to a checkpoint, or summarizes part of the conversation. /doctor and /debug diagnose install and runtime issues, and /feedback reports a bug with session context attached.",
         "The table below lists all the commands included in Claude Code. Entries marked Skill are bundled skills. They use the same mechanism as skills you write yourself: a prompt handed to Claude, which Claude can also invoke automatically when relevant. Everything else is a built-in command whose behavior is coded into the CLI. To add your own commands, see skills.",
         "In the table below, <arg> indicates a required argument and [arg] indicates an optional one.",
         "Not every command appears for every user. Availability depends on your platform, plan, and environment. For example, /desktop only shows on macOS and Windows, and /upgrade only shows on Pro and Max plans.",
@@ -27456,7 +27474,7 @@
             "Running work in parallel. /agents opens the manager for the subagents Claude can delegate side tasks to, and /tasks lists what’s running in the background of the current session. /background detaches the whole session to keep running as a background agent and frees your terminal. For a large change that spans the codebase, /batch decomposes it into independent units and runs each in its own worktree. See Run agents in parallel for how these approaches relate.",
             "Before you ship. /diff shows what changed, /simplify reviews recent files and applies quality and efficiency fixes, and /review or /security-review give a deeper read-only pass.",
             "Between sessions. /clear starts fresh on a new task while keeping project memory. /resume and /branch let you return to or fork an earlier conversation. /teleport pulls a web session into this terminal, and /remote-control lets you continue this local session from another device.",
-            "When something is wrong. /rewind rolls code and conversation back to a checkpoint. /doctor and /debug diagnose install and runtime issues, and /feedback reports a bug with session context attached."
+            "When something is wrong. /rewind rolls code and conversation back to a checkpoint, or summarizes part of the conversation. /doctor and /debug diagnose install and runtime issues, and /feedback reports a bug with session context attached."
           ],
           "codeBlocks": []
         },
@@ -28528,14 +28546,14 @@
         "Restore conversation: rewind to that message while keeping current code",
         "Restore code: revert file changes while keeping the conversation",
         "Summarize from here: compress the conversation from this point forward into a summary, freeing context window space",
+        "Summarize up to here: compress the conversation before this point into a summary, keeping later messages intact",
         "Never mind: return to the message list without making changes",
-        "After restoring the conversation or summarizing, the original prompt from the selected message is restored into the input field so you can re-send or edit it.",
-        "The three restore options revert state: they undo code changes, conversation history, or both. “Summarize from here” works differently:",
-        "Messages before the selected message stay intact",
-        "The selected message and all subsequent messages get replaced with a compact AI-generated summary",
-        "No files on disk are changed",
-        "The original messages are preserved in the session transcript, so Claude can reference the details if needed",
-        "This is similar to /compact, but targeted: instead of summarizing the entire conversation, you keep early context in full detail and only compress the parts that are using up space. You can type optional instructions to guide what the summary focuses on.",
+        "After restoring the conversation or choosing Summarize from here, the original prompt from the selected message is restored into the input field so you can re-send or edit it.",
+        "Choosing Summarize up to here leaves you at the end of the conversation with the input empty.",
+        "The restore options revert state: they undo code changes, conversation history, or both. The summarize options compress part of the conversation into an AI-generated summary without changing files on disk:",
+        "Summarize from here: messages before the selected message stay intact. The selected message and everything after it are replaced with a summary. Use this to discard a side discussion while keeping early context in full detail.",
+        "Summarize up to here: messages before the selected message are replaced with a summary. The selected message and everything after it stay intact, and you remain at the end of the conversation. Use this to compress early setup discussion while keeping recent work in full detail.",
+        "In both cases the original messages are preserved in the session transcript, so Claude can reference the details if needed. You can type optional instructions to guide what the summary focuses on. This is similar to /compact, but targeted: instead of summarizing the entire conversation, you choose which side of the selected message to compress.",
         "Summarize keeps you in the same session and compresses context. If you want to branch off and try a different approach while preserving the original session intact, use fork instead (claude --continue --fork-session).",
         "Checkpoints are particularly useful when:",
         "Exploring alternatives: try different implementation approaches without losing your starting point",
@@ -28609,13 +28627,13 @@
             "Restore conversation: rewind to that message while keeping current code",
             "Restore code: revert file changes while keeping the conversation",
             "Summarize from here: compress the conversation from this point forward into a summary, freeing context window space",
+            "Summarize up to here: compress the conversation before this point into a summary, keeping later messages intact",
             "Never mind: return to the message list without making changes",
-            "After restoring the conversation or summarizing, the original prompt from the selected message is restored into the input field so you can re-send or edit it.",
-            "The three restore options revert state: they undo code changes, conversation history, or both. “Summarize from here” works differently:",
-            "Messages before the selected message stay intact",
-            "The selected message and all subsequent messages get replaced with a compact AI-generated summary",
-            "No files on disk are changed",
-            "The original messages are preserved in the session transcript, so Claude can reference the details if needed"
+            "After restoring the conversation or choosing Summarize from here, the original prompt from the selected message is restored into the input field so you can re-send or edit it.",
+            "Choosing Summarize up to here leaves you at the end of the conversation with the input empty.",
+            "The restore options revert state: they undo code changes, conversation history, or both. The summarize options compress part of the conversation into an AI-generated summary without changing files on disk:",
+            "Summarize from here: messages before the selected message stay intact. The selected message and everything after it are replaced with a summary. Use this to discard a side discussion while keeping early context in full detail.",
+            "Summarize up to here: messages before the selected message are replaced with a summary. The selected message and everything after it stay intact, and you remain at the end of the conversation. Use this to compress early setup discussion while keeping recent work in full detail."
           ],
           "codeBlocks": []
         },
@@ -28747,6 +28765,7 @@
         "Exit code 2 behavior per event",
         "HTTP response handling",
         "JSON output",
+        "Emit terminal notifications",
         "Add context for Claude",
         "Decision control",
         "Hook events",
@@ -28903,8 +28922,7 @@
         "These fields apply to all hook types:",
         "The if field holds exactly one permission rule. There is no &&, ||, or list syntax for combining rules; to apply multiple conditions, define a separate hook handler for each. For Bash, the rule is matched against each subcommand of the tool input after leading VAR=value assignments are stripped, so if: \"Bash(git push *)\" matches both FOO=bar git push and npm test && git push. The hook runs if any subcommand matches, and always runs when the command is too complex to parse.",
         "In addition to the common fields, command hooks accept these fields:",
-        "A command hook runs as exec form when args is set, and shell form when args is omitted. Set args whenever the hook references a path placeholder, since each element is passed as one argument with no quoting. Omit args when you need shell features like pipes or &&, or when neither concern applies.",
-        "Exec form runs when args is present. Claude Code resolves command as an executable on PATH and spawns it directly with args as the argument vector. There is no shell, so each args element is one argument exactly as written, and path placeholders like ${CLAUDE_PLUGIN_ROOT} are substituted into command and into each args element as plain strings. Special characters such as apostrophes, $, and backticks pass through verbatim because there is no shell to interpret them. No shell tokenization happens on any platform."
+        "A command hook runs as exec form when args is set, and shell form when args is omitted. Set args whenever the hook references a path placeholder, since each element is passed as one argument with no quoting. Omit args when you need shell features like pipes or &&, or when neither concern applies."
       ],
       "codeBlocks": [
         "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"if\": \"Bash(rm *)\",\n            \"command\": \"${CLAUDE_PROJECT_DIR}/.claude/hooks/block-rm.sh\",\n            \"args\": []\n          }\n        ]\n      }\n    ]\n  }\n}",
@@ -28923,6 +28941,7 @@
         "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/home/user/.claude/projects/.../transcript.jsonl\",\n  \"cwd\": \"/home/user/my-project\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"PreToolUse\",\n  \"tool_name\": \"Bash\",\n  \"tool_input\": {\n    \"command\": \"npm test\"\n  }\n}",
         "#!/bin/bash\n# Reads JSON input from stdin, checks the command\ncommand=$(jq -r '.tool_input.command' < /dev/stdin)\n\nif [[ \"$command\" == rm* ]]; then\n  echo \"Blocked: rm commands are not allowed\" >&2\n  exit 2  # Blocking error: tool call is prevented\nfi\n\nexit 0  # Success: tool call proceeds",
         "{ \"continue\": false, \"stopReason\": \"Build failed, fix errors before continuing\" }",
+        "#!/bin/bash\n# Notification hook: ping the desktop when Claude Code needs attention.\ninput=$(cat)\ntitle=\"Claude Code\"\nbody=$(jq -r '.message // \"Needs your attention\"' <<<\"$input\")\nseq=$(printf '\\033]777;notify;%s;%s\\007' \"$title\" \"$body\")\njq -nc --arg seq \"$seq\" '{terminalSequence: $seq}'",
         "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolUse\",\n    \"additionalContext\": \"This file is generated. Edit src/schema.ts and run `bun generate` instead.\"\n  }\n}",
         "{\n  \"decision\": \"block\",\n  \"reason\": \"Test suite must pass before proceeding\"\n}",
         "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PreToolUse\",\n    \"permissionDecision\": \"deny\",\n    \"permissionDecisionReason\": \"Database writes are not allowed\"\n  }\n}",
@@ -28937,8 +28956,7 @@
         "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"UserPromptSubmit\",\n  \"prompt\": \"Write a function to calculate the factorial of a number\"\n}",
         "{\n  \"decision\": \"block\",\n  \"reason\": \"Explanation for decision\",\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"UserPromptSubmit\",\n    \"additionalContext\": \"My additional context here\",\n    \"sessionTitle\": \"My session title\"\n  }\n}",
         "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../00893aaf.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"UserPromptExpansion\",\n  \"expansion_type\": \"slash_command\",\n  \"command_name\": \"example-skill\",\n  \"command_args\": \"arg1 arg2\",\n  \"command_source\": \"plugin\",\n  \"prompt\": \"/example-skill arg1 arg2\"\n}",
-        "{\n  \"decision\": \"block\",\n  \"reason\": \"This slash command is not available\",\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"UserPromptExpansion\",\n    \"additionalContext\": \"Additional context for this expansion\"\n  }\n}",
-        "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PreToolUse\",\n    \"permissionDecision\": \"allow\",\n    \"permissionDecisionReason\": \"My reason here\",\n    \"updatedInput\": {\n      \"field_to_modify\": \"new value\"\n    },\n    \"additionalContext\": \"Current environment: production. Proceed with caution.\"\n  }\n}"
+        "{\n  \"decision\": \"block\",\n  \"reason\": \"This slash command is not available\",\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"UserPromptExpansion\",\n    \"additionalContext\": \"Additional context for this expansion\"\n  }\n}"
       ],
       "sectionBlocks": [
         {
@@ -29125,7 +29143,8 @@
         {
           "title": "​Hook input and output",
           "paragraphs": [
-            "Command hooks receive JSON data via stdin and communicate results through exit codes, stdout, and stderr. HTTP hooks receive the same JSON as the POST request body and communicate results through the HTTP response body. This section covers fields and behavior common to all events. Each event’s section under Hook events includes its specific input schema and decision control options."
+            "Command hooks receive JSON data via stdin and communicate results through exit codes, stdout, and stderr. HTTP hooks receive the same JSON as the POST request body and communicate results through the HTTP response body. This section covers fields and behavior common to all events. Each event’s section under Hook events includes its specific input schema and decision control options.",
+            "On macOS and Linux, command hooks run in their own session without a controlling terminal as of v2.1.139. The hook process and any child processes cannot open /dev/tty or send escape sequences directly to the Claude Code interface. Windows has no /dev/tty. To surface a message to the user on any platform, return systemMessage in JSON output. To trigger a desktop notification, set a window title, or ring the bell, return terminalSequence instead."
           ],
           "codeBlocks": []
         },
@@ -29176,18 +29195,19 @@
             "Exit codes let you allow or block, but JSON output gives you finer-grained control. Instead of exiting with code 2 to block, exit 0 and print a JSON object to stdout. Claude Code reads specific fields from that JSON to control behavior, including decision control for blocking, allowing, or escalating to the user.",
             "You must choose one approach per hook, not both: either use exit codes alone for signaling, or exit 0 and print JSON for structured control. Claude Code only processes JSON on exit 0. If you exit 2, any JSON is ignored.",
             "Your hook’s stdout must contain only the JSON object. If your shell profile prints text on startup, it can interfere with JSON parsing. See JSON validation failed in the troubleshooting guide.",
-            "Hook output injected into context (additionalContext, systemMessage, or plain stdout) is capped at 10,000 characters. Output that exceeds this limit is saved to a file and replaced with a preview and file path, the same way large tool results are handled.",
+            "Hook output strings, including additionalContext, systemMessage, and plain stdout, are capped at 10,000 characters. Output that exceeds this limit is saved to a file and replaced with a preview and file path, the same way large tool results are handled.",
             "The JSON object supports three kinds of fields:",
             "Universal fields like continue work across all events. These are listed in the table below.",
             "Top-level decision and reason are used by some events to block or provide feedback.",
             "hookSpecificOutput is a nested object for events that need richer control. It requires a hookEventName field set to the event name.",
             "To stop Claude entirely regardless of event type:",
-            "The additionalContext field passes a string from your hook into Claude’s context window. Claude Code wraps the string in a system reminder and inserts it into the conversation at the point where the hook fired. Claude reads the reminder on the next model request, but it does not appear as a chat message in the interface.",
-            "Return additionalContext inside hookSpecificOutput alongside the event name:",
-            "Where the reminder appears depends on the event:"
+            "The terminalSequence field requires Claude Code v2.1.141 or later.",
+            "Hooks run without a controlling terminal, so writing escape sequences directly to /dev/tty fails. Instead, return the escape sequence in the terminalSequence field and Claude Code emits it for you through its own terminal write path. This is race-free, works inside tmux and GNU screen, and works on Windows where there is no /dev/tty.",
+            "The field accepts a string of one or more allowlisted escape sequences:"
           ],
           "codeBlocks": [
             "{ \"continue\": false, \"stopReason\": \"Build failed, fix errors before continuing\" }",
+            "#!/bin/bash\n# Notification hook: ping the desktop when Claude Code needs attention.\ninput=$(cat)\ntitle=\"Claude Code\"\nbody=$(jq -r '.message // \"Needs your attention\"' <<<\"$input\")\nseq=$(printf '\\033]777;notify;%s;%s\\007' \"$title\" \"$body\")\njq -nc --arg seq \"$seq\" '{terminalSequence: $seq}'",
             "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PostToolUse\",\n    \"additionalContext\": \"This file is generated. Edit src/schema.ts and run `bun generate` instead.\"\n  }\n}",
             "{\n  \"decision\": \"block\",\n  \"reason\": \"Test suite must pass before proceeding\"\n}",
             "{\n  \"hookSpecificOutput\": {\n    \"hookEventName\": \"PreToolUse\",\n    \"permissionDecision\": \"deny\",\n    \"permissionDecisionReason\": \"Database writes are not allowed\"\n  }\n}",
@@ -29255,6 +29275,7 @@
           "title": "​UserPromptSubmit",
           "paragraphs": [
             "Runs when the user submits a prompt, before Claude processes it. This allows you to add additional context based on the prompt/conversation, validate prompts, or block certain types of prompts.",
+            "UserPromptSubmit hooks have a default timeout of 30 seconds for command, http, and mcp_tool types, shorter than the 600-second default for those types on other events. Because this hook runs before every prompt and blocks model processing until it completes, a stuck hook stalls the session. If your hook needs more time, set the timeout field in the hook entry.",
             "In addition to the common input fields, UserPromptSubmit hooks receive the prompt field containing the text the user submitted.",
             "UserPromptSubmit hooks can control whether a user prompt is processed and add context. All JSON output fields are available.",
             "There are two ways to add context to the conversation on exit code 0:",
@@ -30628,7 +30649,7 @@
         "Learn more: Bundled skills",
         "An MCP server that pushes events into your running session so Claude can react to things that happen while you’re away from the terminal. Channels can be two-way: Claude reads an inbound event and replies back through the same channel. Telegram, Discord, and iMessage are included in the research preview.",
         "Learn more: Channels",
-        "An automatic snapshot of your code captured before each edit Claude makes. Press Esc twice or run /rewind to restore code, conversation, or both to an earlier point. Checkpoints are local to the session, separate from git, and don’t track changes made through the Bash tool.",
+        "A restore point created at each prompt you send. Claude Code snapshots files before every edit so a checkpoint can revert them. Press Esc twice or run /rewind to restore code, conversation, or both to an earlier point, or to summarize part of the conversation from a selected message. Checkpoints are local to the session, separate from git, and don’t track changes made through the Bash tool.",
         "Learn more: Checkpointing",
         "The directory where Claude Code reads project-scoped configuration: settings, hooks, skills, subagents, rules, and auto memory. A project has .claude/ at its root; your user-level defaults are at ~/.claude/.",
         "Learn more: The .claude directory",
@@ -30821,7 +30842,7 @@
         {
           "title": "​Checkpoint",
           "paragraphs": [
-            "An automatic snapshot of your code captured before each edit Claude makes. Press Esc twice or run /rewind to restore code, conversation, or both to an earlier point. Checkpoints are local to the session, separate from git, and don’t track changes made through the Bash tool.",
+            "A restore point created at each prompt you send. Claude Code snapshots files before every edit so a checkpoint can revert them. Press Esc twice or run /rewind to restore code, conversation, or both to an earlier point, or to summarize part of the conversation from a selected message. Checkpoints are local to the session, separate from git, and don’t track changes made through the Bash tool.",
             "Learn more: Checkpointing"
           ],
           "codeBlocks": []
@@ -36280,7 +36301,7 @@
         "Tool use ID (str | None / string | undefined): correlates PreToolUse and PostToolUse events for the same tool call.",
         "Context: in TypeScript, contains a signal property (AbortSignal) for cancellation. In Python, this argument is reserved for future use.",
         "Your callback returns an object with two categories of fields:",
-        "Top-level fields control the conversation: systemMessage injects a message into the conversation visible to the model, and continue (continue_ in Python) determines whether the agent keeps running after this hook.",
+        "Top-level fields work the same on every event: systemMessage shows a message to the user, and continue (continue_ in Python) determines whether the agent keeps running after this hook.",
         "hookSpecificOutput controls the current operation. The fields inside depend on the hook event type. For PreToolUse hooks, this is where you set permissionDecision (\"allow\", \"deny\", \"ask\", or \"defer\"), permissionDecisionReason, and updatedInput. Returning \"defer\" ends the query so you can resume it later. For PostToolUse hooks, you can set additionalContext to append information to the tool result, or updatedToolOutput to replace the tool’s output entirely before Claude sees it.",
         "Return {} to allow the operation without changes. SDK callback hooks use the same JSON output format as Claude Code shell command hooks, which documents every field and event-specific option. For the SDK type definitions, see the TypeScript and Python SDK references.",
         "When multiple hooks or permission rules apply, deny takes priority over defer, which takes priority over ask, which takes priority over allow. If any hook returns deny, the operation is blocked regardless of other hooks.",
@@ -36288,7 +36309,10 @@
         "Async outputs cannot block, modify, or inject context into the operation since the agent has already moved on. Use them only for side effects like logging, metrics, or notifications.",
         "This example intercepts Write tool calls and rewrites the file_path argument to prepend /sandbox, redirecting all file writes to a sandboxed directory. The callback returns updatedInput with the modified path and permissionDecision: 'allow' to auto-approve the rewritten operation:",
         "When using updatedInput, you must also include permissionDecision: 'allow' to auto-approve the modified input or permissionDecision: 'ask' to show it to the user. With 'defer', updatedInput is ignored. Always return a new object rather than mutating the original tool_input.",
-        "This example blocks any attempt to write to the /etc directory and uses two output fields together: permissionDecision: 'deny' stops the tool call, while systemMessage injects a reminder into the conversation so the agent receives context about why the operation was blocked and avoids retrying it:",
+        "This example blocks writes to the /etc directory and explains why to both the model and the user:",
+        "permissionDecision: 'deny' stops the tool call.",
+        "permissionDecisionReason tells the model why, so it avoids retrying.",
+        "systemMessage shows the user what happened.",
         "By default, the agent may prompt for permission before using certain tools. This example auto-approves read-only filesystem tools (Read, Glob, Grep) by returning permissionDecision: 'allow', letting them run without user confirmation while leaving all other tools subject to normal permission checks:",
         "When an event fires, all matching hooks run in parallel. For permission decisions, the most restrictive result wins: a single deny blocks the tool call regardless of what the other hooks return. Because completion order is non-deterministic, write each hook to act independently rather than relying on another hook having run first.",
         "The example below registers three independent checks for every tool call:",
@@ -36320,7 +36344,8 @@
         "Check for a subagent indicator in the hook input before spawning",
         "Use a shared variable or session state to track whether you’re already inside a subagent",
         "Scope hooks to only run for the top-level agent session",
-        "The systemMessage field adds context to the conversation that the model sees, but it may not appear in all SDK output modes. If you need to surface hook decisions to your application, log them separately or use a dedicated output channel.",
+        "The systemMessage field shows a message to the user, not the model. By default the SDK does not surface hook output in the message stream, so the message may not appear unless you set includeHookEvents (include_hook_events in Python). To pass context to the model instead, return additionalContext.",
+        "If you need to surface hook decisions to your application reliably, log them separately or use a dedicated output channel.",
         "Claude Code hooks reference: full JSON input/output schemas, event documentation, and matcher patterns",
         "Claude Code hooks guide: shell command hook examples and walkthroughs",
         "TypeScript SDK reference: hook types, input/output definitions, and configuration options",
@@ -36334,7 +36359,7 @@
         "options = ClaudeAgentOptions(\n    hooks={\"PreToolUse\": [HookMatcher(matcher=\"Bash\", hooks=[my_callback])]}\n)\n\nasync with ClaudeSDKClient(options=options) as client:\n    await client.query(\"Your prompt\")\n    async for message in client.receive_response():\n        print(message)",
         "async def async_hook(input_data, tool_use_id, context):\n    # Start a background task, then return immediately\n    asyncio.create_task(send_to_logging_service(input_data))\n    return {\"async_\": True, \"asyncTimeout\": 30000}",
         "async def redirect_to_sandbox(input_data, tool_use_id, context):\n    if input_data[\"hook_event_name\"] != \"PreToolUse\":\n        return {}\n\n    if input_data[\"tool_name\"] == \"Write\":\n        original_path = input_data[\"tool_input\"].get(\"file_path\", \"\")\n        return {\n            \"hookSpecificOutput\": {\n                \"hookEventName\": input_data[\"hook_event_name\"],\n                \"permissionDecision\": \"allow\",\n                \"updatedInput\": {\n                    **input_data[\"tool_input\"],\n                    \"file_path\": f\"/sandbox{original_path}\",\n                },\n            }\n        }\n    return {}",
-        "async def block_etc_writes(input_data, tool_use_id, context):\n    file_path = input_data[\"tool_input\"].get(\"file_path\", \"\")\n\n    if file_path.startswith(\"/etc\"):\n        return {\n            # Top-level field: inject guidance into the conversation\n            \"systemMessage\": \"Remember: system directories like /etc are protected.\",\n            # hookSpecificOutput: block the operation\n            \"hookSpecificOutput\": {\n                \"hookEventName\": input_data[\"hook_event_name\"],\n                \"permissionDecision\": \"deny\",\n                \"permissionDecisionReason\": \"Writing to /etc is not allowed\",\n            },\n        }\n    return {}",
+        "async def block_etc_writes(input_data, tool_use_id, context):\n    file_path = input_data[\"tool_input\"].get(\"file_path\", \"\")\n\n    if file_path.startswith(\"/etc\"):\n        return {\n            # Top-level field: message shown to the user\n            \"systemMessage\": \"Remember: system directories like /etc are protected.\",\n            # hookSpecificOutput: block the operation\n            \"hookSpecificOutput\": {\n                \"hookEventName\": input_data[\"hook_event_name\"],\n                \"permissionDecision\": \"deny\",\n                \"permissionDecisionReason\": \"Writing to /etc is not allowed\",\n            },\n        }\n    return {}",
         "async def auto_approve_read_only(input_data, tool_use_id, context):\n    if input_data[\"hook_event_name\"] != \"PreToolUse\":\n        return {}\n\n    read_only_tools = [\"Read\", \"Glob\", \"Grep\"]\n    if input_data[\"tool_name\"] in read_only_tools:\n        return {\n            \"hookSpecificOutput\": {\n                \"hookEventName\": input_data[\"hook_event_name\"],\n                \"permissionDecision\": \"allow\",\n                \"permissionDecisionReason\": \"Read-only tool auto-approved\",\n            }\n        }\n    return {}",
         "options = ClaudeAgentOptions(\n    hooks={\n        \"PreToolUse\": [\n            HookMatcher(hooks=[authorization_check]),\n            HookMatcher(hooks=[input_validator]),\n            HookMatcher(hooks=[audit_logger]),\n        ]\n    }\n)",
         "options = ClaudeAgentOptions(\n    hooks={\n        \"PreToolUse\": [\n            # Match file modification tools\n            HookMatcher(matcher=\"Write|Edit|Delete\", hooks=[file_security_hook]),\n            # Match all MCP tools\n            HookMatcher(matcher=\"^mcp__\", hooks=[mcp_audit_hook]),\n            # Match everything (no matcher)\n            HookMatcher(hooks=[global_logger]),\n        ]\n    }\n)",
@@ -36437,7 +36462,7 @@
             "Tool use ID (str | None / string | undefined): correlates PreToolUse and PostToolUse events for the same tool call.",
             "Context: in TypeScript, contains a signal property (AbortSignal) for cancellation. In Python, this argument is reserved for future use.",
             "Your callback returns an object with two categories of fields:",
-            "Top-level fields control the conversation: systemMessage injects a message into the conversation visible to the model, and continue (continue_ in Python) determines whether the agent keeps running after this hook.",
+            "Top-level fields work the same on every event: systemMessage shows a message to the user, and continue (continue_ in Python) determines whether the agent keeps running after this hook.",
             "hookSpecificOutput controls the current operation. The fields inside depend on the hook event type. For PreToolUse hooks, this is where you set permissionDecision (\"allow\", \"deny\", \"ask\", or \"defer\"), permissionDecisionReason, and updatedInput. Returning \"defer\" ends the query so you can resume it later. For PostToolUse hooks, you can set additionalContext to append information to the tool result, or updatedToolOutput to replace the tool’s output entirely before Claude sees it.",
             "Return {} to allow the operation without changes. SDK callback hooks use the same JSON output format as Claude Code shell command hooks, which documents every field and event-specific option. For the SDK type definitions, see the TypeScript and Python SDK references.",
             "When multiple hooks or permission rules apply, deny takes priority over defer, which takes priority over ask, which takes priority over allow. If any hook returns deny, the operation is blocked regardless of other hooks.",
@@ -36465,10 +36490,13 @@
         {
           "title": "​Add context and block a tool",
           "paragraphs": [
-            "This example blocks any attempt to write to the /etc directory and uses two output fields together: permissionDecision: 'deny' stops the tool call, while systemMessage injects a reminder into the conversation so the agent receives context about why the operation was blocked and avoids retrying it:"
+            "This example blocks writes to the /etc directory and explains why to both the model and the user:",
+            "permissionDecision: 'deny' stops the tool call.",
+            "permissionDecisionReason tells the model why, so it avoids retrying.",
+            "systemMessage shows the user what happened."
           ],
           "codeBlocks": [
-            "async def block_etc_writes(input_data, tool_use_id, context):\n    file_path = input_data[\"tool_input\"].get(\"file_path\", \"\")\n\n    if file_path.startswith(\"/etc\"):\n        return {\n            # Top-level field: inject guidance into the conversation\n            \"systemMessage\": \"Remember: system directories like /etc are protected.\",\n            # hookSpecificOutput: block the operation\n            \"hookSpecificOutput\": {\n                \"hookEventName\": input_data[\"hook_event_name\"],\n                \"permissionDecision\": \"deny\",\n                \"permissionDecisionReason\": \"Writing to /etc is not allowed\",\n            },\n        }\n    return {}"
+            "async def block_etc_writes(input_data, tool_use_id, context):\n    file_path = input_data[\"tool_input\"].get(\"file_path\", \"\")\n\n    if file_path.startswith(\"/etc\"):\n        return {\n            # Top-level field: message shown to the user\n            \"systemMessage\": \"Remember: system directories like /etc are protected.\",\n            # hookSpecificOutput: block the operation\n            \"hookSpecificOutput\": {\n                \"hookEventName\": input_data[\"hook_event_name\"],\n                \"permissionDecision\": \"deny\",\n                \"permissionDecisionReason\": \"Writing to /etc is not allowed\",\n            },\n        }\n    return {}"
           ]
         },
         {
@@ -36612,7 +36640,8 @@
         {
           "title": "​systemMessage not appearing in output",
           "paragraphs": [
-            "The systemMessage field adds context to the conversation that the model sees, but it may not appear in all SDK output modes. If you need to surface hook decisions to your application, log them separately or use a dedicated output channel."
+            "The systemMessage field shows a message to the user, not the model. By default the SDK does not surface hook output in the message stream, so the message may not appear unless you set includeHookEvents (include_hook_events in Python). To pass context to the model instead, return additionalContext.",
+            "If you need to surface hook decisions to your application reliably, log them separately or use a dedicated output channel."
           ],
           "codeBlocks": []
         },
