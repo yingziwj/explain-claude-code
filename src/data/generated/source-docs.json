@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-15T06:04:13.418Z",
+  "generatedAt": "2026-05-16T05:35:13.102Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -1287,6 +1287,7 @@
         "Documentation Index"
       ],
       "toc": [
+        "2.1.143",
         "2.1.142",
         "2.1.141",
         "2.1.140",
@@ -1305,8 +1306,7 @@
         "2.1.121",
         "2.1.120",
         "2.1.119",
-        "2.1.118",
-        "2.1.117"
+        "2.1.118"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
@@ -1314,6 +1314,39 @@
         "Use this file to discover all available pages before exploring further.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Added plugin dependency enforcement: claude plugin disable now refuses when another enabled plugin depends on the target (with a copy-pasteable disable-chain hint), and claude plugin enable force-enables transitive dependencies",
+        "Added projected context cost (per-turn and per-invocation token estimates) to the /plugin marketplace browse pane",
+        "Added worktree.bgIsolation: \"none\" setting to let background sessions edit the working copy directly without EnterWorktree, for repos where worktrees are impractical",
+        "PowerShell tool now passes -ExecutionPolicy Bypass. Opt out with CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY=1",
+        "Background sessions now preserve the model and effort level you set after waking from idle",
+        "Shift+Tab in attached agent sessions now includes auto mode in the cycle",
+        "Fixed a corrupt .credentials.json with a non-array scopes value hanging the CLI on startup or silently aborting OAuth token refresh",
+        "Fixed right-click paste in claude agents on Windows Terminal and WSL",
+        "Fixed stop hooks that block repeatedly looping forever — the turn now ends with a warning after 8 consecutive blocks (override via CLAUDE_CODE_STOP_HOOK_BLOCK_CAP)",
+        "Fixed Esc/Ctrl+C not cancelling a pending /loop wakeup while Claude is idle between iterations",
+        "Fixed /goal evaluator firing while background shells or delegated subagents are still running",
+        "Fixed NO_COLOR/FORCE_COLOR in settings.json env stripping Claude Code’s own UI colors — they now apply to subprocesses only",
+        "Fixed agent view spawning repeated PowerShell processes on Windows when listing sessions",
+        "Fixed /bg without a prompt sending “continue” to the forked session — the fork now waits for input",
+        "Fixed --agent <name> not finding plugin-contributed agents without the plugin: prefix",
+        "Fixed deleting a session from agent view not removing its transcript file",
+        "Fixed stale-fragment rendering when scrolling in attached background sessions on Windows Terminal",
+        "Fixed background agents false-positive worker-stall detection storm after host sleep or macOS App Nap",
+        "Fixed 5xx error messages pointing at status.claude.com instead of naming the configured gateway or cloud provider",
+        "The PowerShell tool is now enabled by default on Windows for Bedrock, Vertex, and Foundry users. Opt out with CLAUDE_CODE_USE_POWERSHELL_TOOL=0.",
+        "claude agents now accepts --add-dir, --settings, --mcp-config, and --plugin-dir and applies them to the dashboard and to background sessions dispatched from it",
+        "claude agents accepts --permission-mode, --model, --effort, and --dangerously-skip-permissions to set defaults for sessions dispatched from the view",
+        "claude --bg --dangerously-skip-permissions now persists across retire→wake",
+        "Fixed background sessions silently capturing IDE file references into the warm spare’s input, which caused the reference to be prepended to the next prompt dispatched from claude agents",
+        "Worktree cleanup no longer falls back to rm -rf when git worktree remove fails, preventing loss of gitignored or in-progress files",
+        "Fixed background-job sessions on macOS getting “Operation not permitted” errors when reading files under ~/Documents, ~/Desktop, or ~/Downloads, even with Full Disk Access granted.",
+        "/bg now preserves --mcp-config, --settings, --add-dir, --plugin-dir, and --strict-mcp-config, so backgrounded sessions keep their MCP servers and settings across respawn.",
+        "Background sessions launched from claude agents now honor permissions.defaultMode from settings.json (was previously overridden to auto mode)",
+        "Fixed: on Windows, pressing ← in claude agents while a response was streaming could leave the agents list unresponsive to all input",
+        "/bg and ←-detach now preserve --fallback-model, so backgrounded workers degrade to the fallback model on overload instead of hard-failing.",
+        "/bg and ←-detach now preserve --allow-dangerously-skip-permissions, so the forked worker keeps bypass-permissions available in its Shift+Tab cycle.",
+        "Fixed: background daemon spawn now falls back to the running binary when the ~/.local/bin/claude launcher is missing or non-executable",
+        "Fixed claude agents --allow-dangerously-skip-permissions defaulting dispatched sessions to bypass mode instead of making it available in the permission cycle",
         "Added new claude agents flags: --add-dir, --settings, --mcp-config, --plugin-dir, --permission-mode, --model, --effort, and --dangerously-skip-permissions to configure dispatched background sessions",
         "Fast mode now uses Opus 4.7 by default (previously Opus 4.6). Set CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1 to pin fast mode to Opus 4.6",
         "Plugins with a root-level SKILL.md and no skills/ subdirectory are now surfaced as a skill",
@@ -1455,40 +1488,7 @@
         "Fixed fuzzy-match highlighting splitting emoji and astral-plane characters mid-pair",
         "Fixed skill argument names containing regex metacharacters breaking argument substitution",
         "Fixed ProgressBar rendering a full block for an almost-full fractional cell",
-        "Fixed task polling and fs.watch being resurrected when the last subscriber leaves while a fetch is in flight",
-        "Fixed plugin dependency resolution leaving a stale count when the manifest name differs from the source identifier",
-        "Fixed Insights Time-of-Day chart skewing when a session has an unparseable timestamp",
-        "Fixed keybindings using only the cmd/super/win modifier being flagged as unparseable",
-        "Fixed claude_code.active_time.total OpenTelemetry metric not being emitted in --print mode",
-        "Fixed claude plugin update not preserving cross-plugin symlinks inside a marketplace",
-        "[VSCode] Press Cmd/Ctrl+Shift+T to reopen the most recently closed session tab, configurable via claudeCode.enableReopenClosedSessionShortcut",
-        "Internal fixes",
-        "[VSCode] Fixed extension failing to activate on Windows",
-        "Added CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL to re-enable the session quality survey for enterprises capturing responses through OpenTelemetry",
-        "Added settings.autoMode.hard_deny for auto mode classifier rules that block unconditionally regardless of user intent or allow exceptions",
-        "Fixed MCP servers configured in .mcp.json, plugins, and claude.ai connectors silently disappearing after /clear in the VS Code extension, JetBrains plugin, and Agent SDK",
-        "Fixed a rare login loop where a concurrent credential write could overwrite a freshly-rotated OAuth token and force re-login",
-        "Fixed MCP OAuth refresh tokens being lost when multiple servers refresh concurrently — users with several remote MCP servers should no longer need daily re-authentication",
-        "Fixed an API error (400) when extended thinking emitted a redacted thinking block after a tool call",
-        "Fixed --resume / --continue not finding sessions when the project path contains underscores",
-        "Fixed plan mode not blocking file writes when a matching Edit(...) allow rule exists",
-        "WSL2: image paste from Windows clipboard now works via a PowerShell fallback when xclip/wl-paste cannot read image data",
-        "Fixed plugin Stop/UserPromptSubmit hooks failing when cache cleanup deletes a version still in use by a running session",
-        "Improved visual consistency across slash command dialogs: standardized footer hints, dialog spacing, and arrow-key styling, and the dialog frame now appears immediately during loading instead of popping in after",
-        "Fixed colors appearing at wrong positions in bash command output and markdown code blocks",
-        "Fixed ReasonML diffs rendering corrupted “undefined” text artifacts at word-diff boundaries",
-        "Fixed worktree exit dialog warning about uncommitted files in the wrong directory after worktree removal",
-        "Fixed @ file picker not matching files created mid-session in small non-git directories",
-        "Fixed @-mention file picker not finding files in directories with more than 100 entries",
-        "Fixed failed tool calls not being click-to-expand in fullscreen mode when their output was truncated",
-        "Fixed Backspace and Ctrl+Backspace getting swapped after using Ctrl+G to open an external editor on terminals with persistent extended-key modes",
-        "Fixed /usage weekly reset showing time of day instead of the calendar date",
-        "Fixed welcome banner ellipsis causing column overflow on CJK terminals",
-        "Fixed /insights crash when session history contains tool calls with malformed input fields",
-        "Fixed a renderer crash when a tool’s collapsibility classification changes mid-session",
-        "Fixed a skills entry in plugin.json hiding the plugin’s default skills/ directory, and listing a file path now shows an error instead of failing silently",
-        "Fixed IDE shell-integration lock files not respecting CLAUDE_CONFIG_DIR",
-        "Fixed trailing whitespace in copied terminal output during streaming"
+        "Fixed task polling and fs.watch being resurrected when the last subscriber leaves while a fetch is in flight"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1506,14 +1506,14 @@
             "Use this file to discover all available pages before exploring further.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Added new claude agents flags: --add-dir, --settings, --mcp-config, --plugin-dir, --permission-mode, --model, --effort, and --dangerously-skip-permissions to configure dispatched background sessions",
-            "Fast mode now uses Opus 4.7 by default (previously Opus 4.6). Set CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1 to pin fast mode to Opus 4.6",
-            "Plugins with a root-level SKILL.md and no skills/ subdirectory are now surfaced as a skill",
-            "The /plugin details pane and claude plugin details now show LSP servers a plugin provides",
-            "/web-setup warns before replacing an existing GitHub App connection",
-            "Fixed MCP_TOOL_TIMEOUT not raising the per-request fetch timeout for remote HTTP and SSE MCP servers, which capped tool calls at 60 seconds regardless of the configured value",
-            "Fixed background sessions not recognizing pre-existing git worktrees, blocking Edit while EnterWorktree refused to create a duplicate",
-            "Fixed background sessions disappearing and daemon reconnect failing after macOS sleep/wake — the daemon now detects clock jumps instead of treating them as elapsed idle time"
+            "Added plugin dependency enforcement: claude plugin disable now refuses when another enabled plugin depends on the target (with a copy-pasteable disable-chain hint), and claude plugin enable force-enables transitive dependencies",
+            "Added projected context cost (per-turn and per-invocation token estimates) to the /plugin marketplace browse pane",
+            "Added worktree.bgIsolation: \"none\" setting to let background sessions edit the working copy directly without EnterWorktree, for repos where worktrees are impractical",
+            "PowerShell tool now passes -ExecutionPolicy Bypass. Opt out with CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY=1",
+            "Background sessions now preserve the model and effort level you set after waking from idle",
+            "Shift+Tab in attached agent sessions now includes auto mode in the cycle",
+            "Fixed a corrupt .credentials.json with a non-array scopes value hanging the CLI on startup or silently aborting OAuth token refresh",
+            "Fixed right-click paste in claude agents on Windows Terminal and WSL"
           ],
           "codeBlocks": []
         }
@@ -15263,7 +15263,7 @@
         "What to do:",
         "Check status.claude.com for active incidents",
         "Wait a minute, then send your message again. Your original message is still in the conversation, so for a long prompt you can type try again instead of pasting the whole thing.",
-        "If the error persists with no posted incident, run /feedback so Anthropic can investigate with your request details. See Report an error if /feedback is unavailable on your provider.",
+        "If the error persists with no posted incident, run /feedback so Anthropic can investigate with your request details. See Report an error if /feedback is unavailable in your environment.",
         "The API is temporarily at capacity across all users. Claude Code has already retried several times before showing this message:",
         "A 529 is not your usage limit and does not count against your quota.",
         "Check status.claude.com for capacity notices",
@@ -15484,7 +15484,7 @@
             "What to do:",
             "Check status.claude.com for active incidents",
             "Wait a minute, then send your message again. Your original message is still in the conversation, so for a long prompt you can type try again instead of pasting the whole thing.",
-            "If the error persists with no posted incident, run /feedback so Anthropic can investigate with your request details. See Report an error if /feedback is unavailable on your provider."
+            "If the error persists with no posted incident, run /feedback so Anthropic can investigate with your request details. See Report an error if /feedback is unavailable in your environment."
           ],
           "codeBlocks": [
             "API Error: 500 {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"Internal server error\"}} · check status.claude.com"
@@ -17809,6 +17809,7 @@
         "Without ANTHROPIC_DEFAULT_OPUS_MODEL, the opus alias on Bedrock resolves to Opus 4.6. Set it to the Opus 4.7 ID to use the latest model:",
         "These variables use cross-region inference profile IDs (with the us. prefix). If you use a different region prefix or application inference profiles, adjust accordingly. For current and legacy model IDs, see Models overview. See Model configuration for the full list of environment variables.",
         "Claude Code uses these default models when no pinning variables are set:",
+        "Background tasks such as session title generation use the small/fast model, normally a Haiku-class model. On Bedrock, Claude Code defaults this to the primary model because Haiku may not be enabled in every account or region. To use Haiku for background tasks, set ANTHROPIC_DEFAULT_HAIKU_MODEL to a model ID that is available in your account.",
         "To customize models further, use one of these methods:",
         "The ANTHROPIC_DEFAULT_*_MODEL environment variables configure one inference profile per model family. If your organization needs to expose several versions of the same family in the /model picker, each routed to its own application inference profile ARN, use the modelOverrides setting in your settings file instead.",
         "This example maps four Opus versions to distinct ARNs so users can switch between them without bypassing your organization’s inference profiles:",
@@ -17869,7 +17870,7 @@
         "export AWS_BEARER_TOKEN_BEDROCK=your-bedrock-api-key",
         "{\n  \"awsAuthRefresh\": \"aws sso login --profile myprofile\",\n  \"env\": {\n    \"AWS_PROFILE\": \"myprofile\"\n  }\n}",
         "{\n  \"Credentials\": {\n    \"AccessKeyId\": \"value\",\n    \"SecretAccessKey\": \"value\",\n    \"SessionToken\": \"value\"\n  }\n}",
-        "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the region for the small/fast model (Haiku).\n# Also applies to Bedrock Mantle.\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2\n\n# Optional: Override the Bedrock endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_BEDROCK_BASE_URL=https://bedrock-runtime.us-east-1.amazonaws.com",
+        "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the AWS region for the small/fast model (Bedrock and Mantle).\n# On Bedrock, has no effect without ANTHROPIC_DEFAULT_HAIKU_MODEL\n# or the deprecated ANTHROPIC_SMALL_FAST_MODEL set.\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2\n\n# Optional: Override the Bedrock endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_BEDROCK_BASE_URL=https://bedrock-runtime.us-east-1.amazonaws.com",
         "export ANTHROPIC_DEFAULT_OPUS_MODEL='us.anthropic.claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='us.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'",
         "# Using inference profile ID\nexport ANTHROPIC_MODEL='us.anthropic.claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'\n\n# Using application inference profile ARN\nexport ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-inference-profile/your-model-id'\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1",
         "{\n  \"modelOverrides\": {\n    \"claude-opus-4-7\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-47-prod\",\n    \"claude-opus-4-6\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-46-prod\",\n    \"claude-opus-4-5-20251101\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-45-prod\",\n    \"claude-opus-4-1-20250805\": \"arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-41-prod\"\n  }\n}",
@@ -17989,7 +17990,7 @@
             "You can use settings files for environment variables like AWS_PROFILE that you don’t want to leak to other processes. See Settings for more information."
           ],
           "codeBlocks": [
-            "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the region for the small/fast model (Haiku).\n# Also applies to Bedrock Mantle.\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2\n\n# Optional: Override the Bedrock endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_BEDROCK_BASE_URL=https://bedrock-runtime.us-east-1.amazonaws.com"
+            "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the AWS region for the small/fast model (Bedrock and Mantle).\n# On Bedrock, has no effect without ANTHROPIC_DEFAULT_HAIKU_MODEL\n# or the deprecated ANTHROPIC_SMALL_FAST_MODEL set.\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2\n\n# Optional: Override the Bedrock endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_BEDROCK_BASE_URL=https://bedrock-runtime.us-east-1.amazonaws.com"
           ]
         },
         {
@@ -18000,6 +18001,7 @@
             "Without ANTHROPIC_DEFAULT_OPUS_MODEL, the opus alias on Bedrock resolves to Opus 4.6. Set it to the Opus 4.7 ID to use the latest model:",
             "These variables use cross-region inference profile IDs (with the us. prefix). If you use a different region prefix or application inference profiles, adjust accordingly. For current and legacy model IDs, see Models overview. See Model configuration for the full list of environment variables.",
             "Claude Code uses these default models when no pinning variables are set:",
+            "Background tasks such as session title generation use the small/fast model, normally a Haiku-class model. On Bedrock, Claude Code defaults this to the primary model because Haiku may not be enabled in every account or region. To use Haiku for background tasks, set ANTHROPIC_DEFAULT_HAIKU_MODEL to a model ID that is available in your account.",
             "To customize models further, use one of these methods:",
             "The ANTHROPIC_DEFAULT_*_MODEL environment variables configure one inference profile per model family. If your organization needs to expose several versions of the same family in the /model picker, each routed to its own application inference profile ARN, use the modelOverrides setting in your settings file instead.",
             "This example maps four Opus versions to distinct ARNs so users can switch between them without bypassing your organization’s inference profiles:",
@@ -18515,12 +18517,13 @@
         "Set the following environment variables:",
         "Most model versions have a corresponding VERTEX_REGION_CLAUDE_* variable. See the Environment variables reference for the full list. Check Vertex Model Garden to determine which models support global endpoints versus regional only.",
         "Prompt caching is enabled automatically. To disable it, set DISABLE_PROMPT_CACHING=1. To request a 1-hour cache TTL instead of the 5-minute default, set ENABLE_PROMPT_CACHING_1H=1; cache writes with a 1-hour TTL are billed at a higher rate. For heightened rate limits, contact Google Cloud support. When using Vertex AI, the /login and /logout commands are disabled since authentication is handled through Google Cloud credentials.",
-        "MCP tool search is disabled by default on Vertex AI because the endpoint does not accept the required beta header. All MCP tool definitions load upfront instead. Setting ENABLE_TOOL_SEARCH=true forces Claude Code to send the header anyway, which causes Vertex AI to reject requests.",
+        "Claude Code disables MCP tool search by default on Vertex AI, so MCP tool definitions load upfront. Vertex AI supports tool search for Claude Sonnet 4.5 and later and Claude Opus 4.5 and later. Set ENABLE_TOOL_SEARCH=true to enable it on those models. Earlier models on Vertex AI do not accept the required beta header, and requests fail if you enable tool search with them.",
         "Pin specific model versions when deploying to multiple users. Without pinning, model aliases such as sonnet and opus resolve to the latest version, which may not yet be enabled in your Vertex AI project when Anthropic releases an update. Claude Code falls back to the previous version at startup when the latest is unavailable, but pinning lets you control when your users move to a new model.",
         "Set these environment variables to specific Vertex AI model IDs.",
         "Without ANTHROPIC_DEFAULT_OPUS_MODEL, the opus alias on Vertex resolves to Opus 4.6. Set it to the Opus 4.7 ID to use the latest model:",
         "For current and legacy model IDs, see Models overview. See Model configuration for the full list of environment variables.",
         "Claude Code uses these default models when no pinning variables are set:",
+        "Background tasks such as session title generation use the small/fast model, normally a Haiku-class model. On Vertex AI, Claude Code defaults this to the primary model because Haiku may not be enabled in every project or region. To use Haiku for background tasks, set ANTHROPIC_DEFAULT_HAIKU_MODEL to a model ID that is available in your project.",
         "To customize models further:",
         "When Claude Code starts with Vertex AI configured, it verifies that the models it intends to use are accessible in your project. This check requires Claude Code v2.1.98 or later.",
         "If you have pinned a model version that is older than the current Claude Code default, and your project can invoke the newer version, Claude Code prompts you to update the pin. Accepting writes the new model ID to your user settings file and restarts Claude Code. Declining is remembered until the next default version change.",
@@ -18670,7 +18673,7 @@
             "Set the following environment variables:",
             "Most model versions have a corresponding VERTEX_REGION_CLAUDE_* variable. See the Environment variables reference for the full list. Check Vertex Model Garden to determine which models support global endpoints versus regional only.",
             "Prompt caching is enabled automatically. To disable it, set DISABLE_PROMPT_CACHING=1. To request a 1-hour cache TTL instead of the 5-minute default, set ENABLE_PROMPT_CACHING_1H=1; cache writes with a 1-hour TTL are billed at a higher rate. For heightened rate limits, contact Google Cloud support. When using Vertex AI, the /login and /logout commands are disabled since authentication is handled through Google Cloud credentials.",
-            "MCP tool search is disabled by default on Vertex AI because the endpoint does not accept the required beta header. All MCP tool definitions load upfront instead. Setting ENABLE_TOOL_SEARCH=true forces Claude Code to send the header anyway, which causes Vertex AI to reject requests."
+            "Claude Code disables MCP tool search by default on Vertex AI, so MCP tool definitions load upfront. Vertex AI supports tool search for Claude Sonnet 4.5 and later and Claude Opus 4.5 and later. Set ENABLE_TOOL_SEARCH=true to enable it on those models. Earlier models on Vertex AI do not accept the required beta header, and requests fail if you enable tool search with them."
           ],
           "codeBlocks": [
             "# Enable Vertex AI integration\nexport CLAUDE_CODE_USE_VERTEX=1\nexport CLOUD_ML_REGION=global\nexport ANTHROPIC_VERTEX_PROJECT_ID=YOUR-PROJECT-ID\n\n# Optional: Override the Vertex endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_VERTEX_BASE_URL=https://aiplatform.googleapis.com\n\n# Optional: Disable prompt caching if needed\nexport DISABLE_PROMPT_CACHING=1\n\n# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default\nexport ENABLE_PROMPT_CACHING_1H=1\n\n# When CLOUD_ML_REGION=global, override region for models that don't support global endpoints\nexport VERTEX_REGION_CLAUDE_HAIKU_4_5=us-east5\nexport VERTEX_REGION_CLAUDE_4_6_SONNET=europe-west1"
@@ -18684,6 +18687,7 @@
             "Without ANTHROPIC_DEFAULT_OPUS_MODEL, the opus alias on Vertex resolves to Opus 4.6. Set it to the Opus 4.7 ID to use the latest model:",
             "For current and legacy model IDs, see Models overview. See Model configuration for the full list of environment variables.",
             "Claude Code uses these default models when no pinning variables are set:",
+            "Background tasks such as session title generation use the small/fast model, normally a Haiku-class model. On Vertex AI, Claude Code defaults this to the primary model because Haiku may not be enabled in every project or region. To use Haiku for background tasks, set ANTHROPIC_DEFAULT_HAIKU_MODEL to a model ID that is available in your project.",
             "To customize models further:"
           ],
           "codeBlocks": [
@@ -18817,6 +18821,7 @@
         "Pin specific model versions for every deployment. If you use model aliases (sonnet, opus, haiku) without pinning, Claude Code may attempt to use a newer model version that isn’t available in your Foundry account, breaking existing users when Anthropic releases updates. When you create Azure deployments, select a specific model version rather than “auto-update to latest.”",
         "Set the model variables to match the deployment names you created in step 1.",
         "Without ANTHROPIC_DEFAULT_OPUS_MODEL, the opus alias on Foundry resolves to Opus 4.6. Set it to the Opus 4.7 ID to use the latest model:",
+        "Background tasks such as session title generation use the small/fast model, normally a Haiku-class model. On Foundry, Claude Code defaults this to the primary model because not every account has a Haiku deployment. To use Haiku for background tasks, set ANTHROPIC_DEFAULT_HAIKU_MODEL to a Haiku deployment that is available in your account, as shown above.",
         "For current and legacy model IDs, see Models overview. See Model configuration for the full list of environment variables.",
         "Prompt caching is enabled automatically. To request a 1-hour cache TTL instead of the 5-minute default, set the following variable; cache writes with a 1-hour TTL are billed at a higher rate:",
         "The Azure AI User and Cognitive Services User default roles include all required permissions for invoking Claude models.",
@@ -18924,6 +18929,7 @@
             "Pin specific model versions for every deployment. If you use model aliases (sonnet, opus, haiku) without pinning, Claude Code may attempt to use a newer model version that isn’t available in your Foundry account, breaking existing users when Anthropic releases updates. When you create Azure deployments, select a specific model version rather than “auto-update to latest.”",
             "Set the model variables to match the deployment names you created in step 1.",
             "Without ANTHROPIC_DEFAULT_OPUS_MODEL, the opus alias on Foundry resolves to Opus 4.6. Set it to the Opus 4.7 ID to use the latest model:",
+            "Background tasks such as session title generation use the small/fast model, normally a Haiku-class model. On Foundry, Claude Code defaults this to the primary model because not every account has a Haiku deployment. To use Haiku for background tasks, set ANTHROPIC_DEFAULT_HAIKU_MODEL to a Haiku deployment that is available in your account, as shown above.",
             "For current and legacy model IDs, see Models overview. See Model configuration for the full list of environment variables.",
             "Prompt caching is enabled automatically. To request a 1-hour cache TTL instead of the 5-minute default, set the following variable; cache writes with a 1-hour TTL are billed at a higher rate:"
           ],
@@ -22130,7 +22136,8 @@
         "For security details about cloud execution, see Security.",
         "Claude Code connects from users’ machines to Anthropic to log operational metrics such as latency, reliability, and usage patterns. This logging does not include any code or file paths. Data is encrypted in transit and at rest. To opt out of telemetry, set the DISABLE_TELEMETRY environment variable.",
         "Claude Code connects from users’ machines to Sentry for operational error logging. The data is encrypted in transit using TLS and at rest using 256-bit AES encryption. Read more in the Sentry security documentation. To opt out of error logging, set the DISABLE_ERROR_REPORTING environment variable.",
-        "When users run the /feedback command, a copy of their full conversation history including code is sent to Anthropic. The data is encrypted in transit via TLS. Optionally, a GitHub issue is created in the public repository. To opt out, set the DISABLE_FEEDBACK_COMMAND environment variable to 1.",
+        "When you run the /feedback command, a copy of your conversation history including code is sent to Anthropic. Before submitting, you choose how much history to include: the current session only, which is the default, or also other sessions from the same project over the last 24 hours or 7 days. The data is encrypted in transit via TLS. Optionally, a GitHub issue is created in the public repository. To opt out, set the DISABLE_FEEDBACK_COMMAND environment variable to 1.",
+        "When you use a third-party provider such as Bedrock or Vertex, or have no Anthropic credentials configured, /feedback writes the report to a local archive under ~/.claude/feedback-bundles/ instead of sending it to Anthropic. Known API key and token patterns are redacted before the archive is written. Nothing leaves your machine until you send that file to your Anthropic account representative or attach it to a support request.",
         "By default, error reporting, telemetry, and bug reporting are disabled when using Bedrock, Vertex, Foundry, or Claude Platform on AWS. Session quality surveys and the WebFetch domain safety check are exceptions and run regardless of provider. You can opt out of all non-essential traffic, including surveys, at once by setting CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC. This variable does not affect the WebFetch check, which has its own opt-out. Here are the full default behaviors:",
         "All environment variables can be checked into settings.json (see settings reference).",
         "As of v2.1.126, when a host platform sets CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST, metrics default to on for Vertex, Bedrock, and Foundry, and follow the standard DISABLE_TELEMETRY opt-out. Sentry error reporting and /feedback reports remain off by default on those providers.",
@@ -22258,7 +22265,8 @@
           "paragraphs": [
             "Claude Code connects from users’ machines to Anthropic to log operational metrics such as latency, reliability, and usage patterns. This logging does not include any code or file paths. Data is encrypted in transit and at rest. To opt out of telemetry, set the DISABLE_TELEMETRY environment variable.",
             "Claude Code connects from users’ machines to Sentry for operational error logging. The data is encrypted in transit using TLS and at rest using 256-bit AES encryption. Read more in the Sentry security documentation. To opt out of error logging, set the DISABLE_ERROR_REPORTING environment variable.",
-            "When users run the /feedback command, a copy of their full conversation history including code is sent to Anthropic. The data is encrypted in transit via TLS. Optionally, a GitHub issue is created in the public repository. To opt out, set the DISABLE_FEEDBACK_COMMAND environment variable to 1."
+            "When you run the /feedback command, a copy of your conversation history including code is sent to Anthropic. Before submitting, you choose how much history to include: the current session only, which is the default, or also other sessions from the same project over the last 24 hours or 7 days. The data is encrypted in transit via TLS. Optionally, a GitHub issue is created in the public repository. To opt out, set the DISABLE_FEEDBACK_COMMAND environment variable to 1.",
+            "When you use a third-party provider such as Bedrock or Vertex, or have no Anthropic credentials configured, /feedback writes the report to a local archive under ~/.claude/feedback-bundles/ instead of sending it to Anthropic. Known API key and token patterns are redacted before the archive is written. Nothing leaves your machine until you send that file to your Anthropic account representative or attach it to a support request."
           ],
           "codeBlocks": []
         },
@@ -32550,8 +32558,8 @@
         "Was this page helpful?"
       ],
       "codeBlocks": [
-        "import { query } from \"@anthropic-ai/claude-agent-sdk\";\nimport { readFile } from \"fs/promises\";\n\nasync function* generateMessages() {\n  // First message\n  yield {\n    type: \"user\" as const,\n    message: {\n      role: \"user\" as const,\n      content: \"Analyze this codebase for security issues\"\n    }\n  };\n\n  // Wait for conditions or user input\n  await new Promise((resolve) => setTimeout(resolve, 2000));\n\n  // Follow-up with image\n  yield {\n    type: \"user\" as const,\n    message: {\n      role: \"user\" as const,\n      content: [\n        {\n          type: \"text\",\n          text: \"Review this architecture diagram\"\n        },\n        {\n          type: \"image\",\n          source: {\n            type: \"base64\",\n            media_type: \"image/png\",\n            data: await readFile(\"diagram.png\", \"base64\")\n          }\n        }\n      ]\n    }\n  };\n}\n\n// Process streaming responses\nfor await (const message of query({\n  prompt: generateMessages(),\n  options: {\n    maxTurns: 10,\n    allowedTools: [\"Read\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\") {\n    console.log(message.result);\n  }\n}",
-        "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Simple one-shot query\nfor await (const message of query({\n  prompt: \"Explain the authentication flow\",\n  options: {\n    maxTurns: 1,\n    allowedTools: [\"Read\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\") {\n    console.log(message.result);\n  }\n}\n\n// Continue conversation with session management\nfor await (const message of query({\n  prompt: \"Now explain the authorization process\",\n  options: {\n    continue: true,\n    maxTurns: 1\n  }\n})) {\n  if (message.type === \"result\") {\n    console.log(message.result);\n  }\n}"
+        "import { query, type SDKUserMessage } from \"@anthropic-ai/claude-agent-sdk\";\nimport { readFile } from \"fs/promises\";\n\nasync function* generateMessages(): AsyncGenerator<SDKUserMessage> {\n  // First message\n  yield {\n    type: \"user\",\n    message: {\n      role: \"user\",\n      content: \"Analyze this codebase for security issues\"\n    },\n    parent_tool_use_id: null\n  };\n\n  // Wait for conditions or user input\n  await new Promise((resolve) => setTimeout(resolve, 2000));\n\n  // Follow-up with image\n  yield {\n    type: \"user\",\n    message: {\n      role: \"user\",\n      content: [\n        {\n          type: \"text\",\n          text: \"Review this architecture diagram\"\n        },\n        {\n          type: \"image\",\n          source: {\n            type: \"base64\",\n            media_type: \"image/png\",\n            data: await readFile(\"diagram.png\", \"base64\")\n          }\n        }\n      ]\n    },\n    parent_tool_use_id: null\n  };\n}\n\n// Process streaming responses\nfor await (const message of query({\n  prompt: generateMessages(),\n  options: {\n    maxTurns: 10,\n    allowedTools: [\"Read\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}",
+        "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Simple one-shot query\nfor await (const message of query({\n  prompt: \"Explain the authentication flow\",\n  options: {\n    maxTurns: 1,\n    allowedTools: [\"Read\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}\n\n// Continue conversation with session management\nfor await (const message of query({\n  prompt: \"Now explain the authorization process\",\n  options: {\n    continue: true,\n    maxTurns: 1\n  }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}"
       ],
       "sectionBlocks": [
         {
@@ -32651,7 +32659,7 @@
           "title": "​Implementation Example",
           "paragraphs": [],
           "codeBlocks": [
-            "import { query } from \"@anthropic-ai/claude-agent-sdk\";\nimport { readFile } from \"fs/promises\";\n\nasync function* generateMessages() {\n  // First message\n  yield {\n    type: \"user\" as const,\n    message: {\n      role: \"user\" as const,\n      content: \"Analyze this codebase for security issues\"\n    }\n  };\n\n  // Wait for conditions or user input\n  await new Promise((resolve) => setTimeout(resolve, 2000));\n\n  // Follow-up with image\n  yield {\n    type: \"user\" as const,\n    message: {\n      role: \"user\" as const,\n      content: [\n        {\n          type: \"text\",\n          text: \"Review this architecture diagram\"\n        },\n        {\n          type: \"image\",\n          source: {\n            type: \"base64\",\n            media_type: \"image/png\",\n            data: await readFile(\"diagram.png\", \"base64\")\n          }\n        }\n      ]\n    }\n  };\n}\n\n// Process streaming responses\nfor await (const message of query({\n  prompt: generateMessages(),\n  options: {\n    maxTurns: 10,\n    allowedTools: [\"Read\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\") {\n    console.log(message.result);\n  }\n}"
+            "import { query, type SDKUserMessage } from \"@anthropic-ai/claude-agent-sdk\";\nimport { readFile } from \"fs/promises\";\n\nasync function* generateMessages(): AsyncGenerator<SDKUserMessage> {\n  // First message\n  yield {\n    type: \"user\",\n    message: {\n      role: \"user\",\n      content: \"Analyze this codebase for security issues\"\n    },\n    parent_tool_use_id: null\n  };\n\n  // Wait for conditions or user input\n  await new Promise((resolve) => setTimeout(resolve, 2000));\n\n  // Follow-up with image\n  yield {\n    type: \"user\",\n    message: {\n      role: \"user\",\n      content: [\n        {\n          type: \"text\",\n          text: \"Review this architecture diagram\"\n        },\n        {\n          type: \"image\",\n          source: {\n            type: \"base64\",\n            media_type: \"image/png\",\n            data: await readFile(\"diagram.png\", \"base64\")\n          }\n        }\n      ]\n    },\n    parent_tool_use_id: null\n  };\n}\n\n// Process streaming responses\nfor await (const message of query({\n  prompt: generateMessages(),\n  options: {\n    maxTurns: 10,\n    allowedTools: [\"Read\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}"
           ]
         },
         {
@@ -32689,7 +32697,7 @@
             "Was this page helpful?"
           ],
           "codeBlocks": [
-            "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Simple one-shot query\nfor await (const message of query({\n  prompt: \"Explain the authentication flow\",\n  options: {\n    maxTurns: 1,\n    allowedTools: [\"Read\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\") {\n    console.log(message.result);\n  }\n}\n\n// Continue conversation with session management\nfor await (const message of query({\n  prompt: \"Now explain the authorization process\",\n  options: {\n    continue: true,\n    maxTurns: 1\n  }\n})) {\n  if (message.type === \"result\") {\n    console.log(message.result);\n  }\n}"
+            "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Simple one-shot query\nfor await (const message of query({\n  prompt: \"Explain the authentication flow\",\n  options: {\n    maxTurns: 1,\n    allowedTools: [\"Read\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}\n\n// Continue conversation with session management\nfor await (const message of query({\n  prompt: \"Now explain the authorization process\",\n  options: {\n    continue: true,\n    maxTurns: 1\n  }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}"
           ]
         }
       ]
@@ -34245,7 +34253,7 @@
         "Tool search adds one extra round-trip the first time Claude discovers a tool (the search step), but for large tool sets this is offset by smaller context on every turn. With fewer than ~10 tools, loading everything upfront is typically faster.",
         "For details on the underlying API mechanism, see Tool search in the API.",
         "Tool search requires Claude Sonnet 4 or later, or Claude Opus 4 or later. Haiku models do not support tool search.",
-        "Tool search is on by default. It is disabled by default on Vertex AI, which does not accept the tool search beta header, and when ANTHROPIC_BASE_URL points to a non-first-party host, since most proxies do not forward tool_reference blocks. You can override this with the ENABLE_TOOL_SEARCH environment variable:",
+        "Tool search is on by default. It is disabled by default on Vertex AI, where it is supported for Claude Sonnet 4.5 and later and Claude Opus 4.5 and later. It is also disabled when ANTHROPIC_BASE_URL points to a non-first-party host, since most proxies do not forward tool_reference blocks. You can override either default with the ENABLE_TOOL_SEARCH environment variable:",
         "Tool search applies to all registered tools, whether they come from remote MCP servers or custom SDK MCP servers. When using auto, the threshold is based on the combined size of all tool definitions across all servers.",
         "Set the value in the env option on query(). This example connects to a remote MCP server that exposes many tools, pre-approves all of them with a wildcard, and uses auto:5 so tool search activates when their definitions exceed 5% of the context window:",
         "Setting ENABLE_TOOL_SEARCH to \"false\" disables tool search and loads all tool definitions into context on every turn. This removes the search round-trip, which can be faster when the tool set is small (fewer than ~10 tools) and the definitions fit comfortably in the context window.",
@@ -34303,7 +34311,7 @@
         {
           "title": "​Configure tool search",
           "paragraphs": [
-            "Tool search is on by default. It is disabled by default on Vertex AI, which does not accept the tool search beta header, and when ANTHROPIC_BASE_URL points to a non-first-party host, since most proxies do not forward tool_reference blocks. You can override this with the ENABLE_TOOL_SEARCH environment variable:",
+            "Tool search is on by default. It is disabled by default on Vertex AI, where it is supported for Claude Sonnet 4.5 and later and Claude Opus 4.5 and later. It is also disabled when ANTHROPIC_BASE_URL points to a non-first-party host, since most proxies do not forward tool_reference blocks. You can override either default with the ENABLE_TOOL_SEARCH environment variable:",
             "Tool search applies to all registered tools, whether they come from remote MCP servers or custom SDK MCP servers. When using auto, the threshold is based on the combined size of all tool definitions across all servers.",
             "Set the value in the env option on query(). This example connects to a remote MCP server that exposes many tools, pre-approves all of them with a wildcard, and uses auto:5 so tool search activates when their definitions exceed 5% of the context window:",
             "Setting ENABLE_TOOL_SEARCH to \"false\" disables tool search and loads all tool definitions into context on every turn. This removes the search round-trip, which can be faster when the tool set is small (fewer than ~10 tools) and the definitions fit comfortably in the context window."
@@ -34484,8 +34492,8 @@
         "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Review the authentication module for security issues\",\n        options=ClaudeAgentOptions(\n            # Agent tool is required for subagent invocation\n            allowed_tools=[\"Read\", \"Grep\", \"Glob\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    # description tells Claude when to use this subagent\n                    description=\"Expert code review specialist. Use for quality, security, and maintainability reviews.\",\n                    # prompt defines the subagent's behavior and expertise\n                    prompt=\"\"\"You are a code review specialist with expertise in security, performance, and best practices.\n\nWhen reviewing code:\n- Identify security vulnerabilities\n- Check for performance issues\n- Verify adherence to coding standards\n- Suggest specific improvements\n\nBe thorough but concise in your feedback.\"\"\",\n                    # tools restricts what the subagent can do (read-only here)\n                    tools=[\"Read\", \"Grep\", \"Glob\"],\n                    # model overrides the default model for this subagent\n                    model=\"sonnet\",\n                ),\n                \"test-runner\": AgentDefinition(\n                    description=\"Runs and analyzes test suites. Use for test execution and coverage analysis.\",\n                    prompt=\"\"\"You are a test execution specialist. Run tests and provide clear analysis of results.\n\nFocus on:\n- Running test commands\n- Analyzing test output\n- Identifying failing tests\n- Suggesting fixes for failures\"\"\",\n                    # Bash access lets this subagent run test commands\n                    tools=[\"Bash\", \"Read\", \"Grep\"],\n                ),\n            },\n        ),\n    ):\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())",
         "\"Use the code-reviewer agent to check the authentication module\"",
         "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\n\n# Factory function that returns an AgentDefinition\n# This pattern lets you customize agents based on runtime conditions\ndef create_security_agent(security_level: str) -> AgentDefinition:\n    is_strict = security_level == \"strict\"\n    return AgentDefinition(\n        description=\"Security code reviewer\",\n        # Customize the prompt based on strictness level\n        prompt=f\"You are a {'strict' if is_strict else 'balanced'} security reviewer...\",\n        tools=[\"Read\", \"Grep\", \"Glob\"],\n        # Key insight: use a more capable model for high-stakes reviews\n        model=\"opus\" if is_strict else \"sonnet\",\n    )\n\n\nasync def main():\n    # The agent is created at query time, so each request can use different settings\n    async for message in query(\n        prompt=\"Review this PR for security issues\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Grep\", \"Glob\", \"Agent\"],\n            agents={\n                # Call the factory with your desired configuration\n                \"security-reviewer\": create_security_agent(\"strict\")\n            },\n        ),\n    ):\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())",
-        "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Use the code-reviewer agent to review this codebase\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Glob\", \"Grep\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    description=\"Expert code reviewer.\",\n                    prompt=\"Analyze code quality and suggest improvements.\",\n                    tools=[\"Read\", \"Glob\", \"Grep\"],\n                )\n            },\n        ),\n    ):\n        # Check for subagent invocation. Match both names: older SDK\n        # versions emitted \"Task\", current versions emit \"Agent\".\n        if hasattr(message, \"content\") and message.content:\n            for block in message.content:\n                if getattr(block, \"type\", None) == \"tool_use\" and block.name in (\n                    \"Task\",\n                    \"Agent\",\n                ):\n                    print(f\"Subagent invoked: {block.input.get('subagent_type')}\")\n\n        # Check if this message is from within a subagent's context\n        if hasattr(message, \"parent_tool_use_id\") and message.parent_tool_use_id:\n            print(\"  (running inside subagent)\")\n\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())",
-        "import { query, type SDKMessage } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Helper to extract agentId from message content\n// Stringify to avoid traversing different block types (TextBlock, ToolResultBlock, etc.)\nfunction extractAgentId(message: SDKMessage): string | undefined {\n  if (!(\"message\" in message)) return undefined;\n  // Stringify the content so we can search it without traversing nested blocks\n  const content = JSON.stringify(message.message.content);\n  const match = content.match(/agentId:\\s*([a-f0-9-]+)/);\n  return match?.[1];\n}\n\nlet agentId: string | undefined;\nlet sessionId: string | undefined;\n\n// First invocation - use the Explore agent to find API endpoints\nfor await (const message of query({\n  prompt: \"Use the Explore agent to find all API endpoints in this codebase\",\n  options: { allowedTools: [\"Read\", \"Grep\", \"Glob\", \"Agent\"] }\n})) {\n  // Capture session_id from ResultMessage (needed to resume this session)\n  if (\"session_id\" in message) sessionId = message.session_id;\n  // Search message content for the agentId (appears in Agent tool results)\n  const extractedId = extractAgentId(message);\n  if (extractedId) agentId = extractedId;\n  // Print the final result\n  if (\"result\" in message) console.log(message.result);\n}\n\n// Second invocation - resume and ask follow-up\nif (agentId && sessionId) {\n  for await (const message of query({\n    prompt: `Resume agent ${agentId} and list the top 3 most complex endpoints`,\n    options: { allowedTools: [\"Read\", \"Grep\", \"Glob\", \"Agent\"], resume: sessionId }\n  })) {\n    if (\"result\" in message) console.log(message.result);\n  }\n}",
+        "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition, ToolUseBlock\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Use the code-reviewer agent to review this codebase\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Glob\", \"Grep\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    description=\"Expert code reviewer.\",\n                    prompt=\"Analyze code quality and suggest improvements.\",\n                    tools=[\"Read\", \"Glob\", \"Grep\"],\n                )\n            },\n        ),\n    ):\n        # Check for subagent invocation. Match both names: older SDK\n        # versions emitted \"Task\", current versions emit \"Agent\".\n        if hasattr(message, \"content\") and message.content:\n            for block in message.content:\n                if isinstance(block, ToolUseBlock) and block.name in (\n                    \"Task\",\n                    \"Agent\",\n                ):\n                    print(f\"Subagent invoked: {block.input.get('subagent_type')}\")\n\n        # Check if this message is from within a subagent's context\n        if hasattr(message, \"parent_tool_use_id\") and message.parent_tool_use_id:\n            print(\"  (running inside subagent)\")\n\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())",
+        "import { query, type SDKMessage } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Helper to extract agentId from message content\n// Stringify to avoid traversing different block types (TextBlock, ToolResultBlock, etc.)\nfunction extractAgentId(message: SDKMessage): string | undefined {\n  if (message.type !== \"assistant\" && message.type !== \"user\") return undefined;\n  // Stringify the content so we can search it without traversing nested blocks\n  const content = JSON.stringify(message.message.content);\n  const match = content.match(/agentId:\\s*([a-f0-9-]+)/);\n  return match?.[1];\n}\n\nlet agentId: string | undefined;\nlet sessionId: string | undefined;\n\n// First invocation - use the Explore agent to find API endpoints\nfor await (const message of query({\n  prompt: \"Use the Explore agent to find all API endpoints in this codebase\",\n  options: { allowedTools: [\"Read\", \"Grep\", \"Glob\", \"Agent\"] }\n})) {\n  // Capture session_id from ResultMessage (needed to resume this session)\n  if (\"session_id\" in message) sessionId = message.session_id;\n  // Search message content for the agentId (appears in Agent tool results)\n  const extractedId = extractAgentId(message);\n  if (extractedId) agentId = extractedId;\n  // Print the final result\n  if (\"result\" in message) console.log(message.result);\n}\n\n// Second invocation - resume and ask follow-up\nif (agentId && sessionId) {\n  for await (const message of query({\n    prompt: `Resume agent ${agentId} and list the top 3 most complex endpoints`,\n    options: { allowedTools: [\"Read\", \"Grep\", \"Glob\", \"Agent\"], resume: sessionId }\n  })) {\n    if (\"result\" in message) console.log(message.result);\n  }\n}",
         "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Analyze the architecture of this codebase\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Grep\", \"Glob\", \"Agent\"],\n            agents={\n                \"code-analyzer\": AgentDefinition(\n                    description=\"Static code analysis and architecture review\",\n                    prompt=\"\"\"You are a code architecture analyst. Analyze code structure,\nidentify patterns, and suggest improvements without making changes.\"\"\",\n                    # Read-only tools: no Edit, Write, or Bash access\n                    tools=[\"Read\", \"Grep\", \"Glob\"],\n                )\n            },\n        ),\n    ):\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())"
       ],
       "sectionBlocks": [
@@ -34645,7 +34653,7 @@
             "The message structure differs between SDKs. In Python, content blocks are accessed directly via message.content. In TypeScript, SDKAssistantMessage wraps the Claude API message, so content is accessed via message.message.content."
           ],
           "codeBlocks": [
-            "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Use the code-reviewer agent to review this codebase\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Glob\", \"Grep\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    description=\"Expert code reviewer.\",\n                    prompt=\"Analyze code quality and suggest improvements.\",\n                    tools=[\"Read\", \"Glob\", \"Grep\"],\n                )\n            },\n        ),\n    ):\n        # Check for subagent invocation. Match both names: older SDK\n        # versions emitted \"Task\", current versions emit \"Agent\".\n        if hasattr(message, \"content\") and message.content:\n            for block in message.content:\n                if getattr(block, \"type\", None) == \"tool_use\" and block.name in (\n                    \"Task\",\n                    \"Agent\",\n                ):\n                    print(f\"Subagent invoked: {block.input.get('subagent_type')}\")\n\n        # Check if this message is from within a subagent's context\n        if hasattr(message, \"parent_tool_use_id\") and message.parent_tool_use_id:\n            print(\"  (running inside subagent)\")\n\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())"
+            "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition, ToolUseBlock\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Use the code-reviewer agent to review this codebase\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Glob\", \"Grep\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    description=\"Expert code reviewer.\",\n                    prompt=\"Analyze code quality and suggest improvements.\",\n                    tools=[\"Read\", \"Glob\", \"Grep\"],\n                )\n            },\n        ),\n    ):\n        # Check for subagent invocation. Match both names: older SDK\n        # versions emitted \"Task\", current versions emit \"Agent\".\n        if hasattr(message, \"content\") and message.content:\n            for block in message.content:\n                if isinstance(block, ToolUseBlock) and block.name in (\n                    \"Task\",\n                    \"Agent\",\n                ):\n                    print(f\"Subagent invoked: {block.input.get('subagent_type')}\")\n\n        # Check if this message is from within a subagent's context\n        if hasattr(message, \"parent_tool_use_id\") and message.parent_tool_use_id:\n            print(\"  (running inside subagent)\")\n\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())"
           ]
         },
         {
@@ -34665,7 +34673,7 @@
             "Automatic cleanup: Transcripts are cleaned up based on the cleanupPeriodDays setting (default: 30 days)."
           ],
           "codeBlocks": [
-            "import { query, type SDKMessage } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Helper to extract agentId from message content\n// Stringify to avoid traversing different block types (TextBlock, ToolResultBlock, etc.)\nfunction extractAgentId(message: SDKMessage): string | undefined {\n  if (!(\"message\" in message)) return undefined;\n  // Stringify the content so we can search it without traversing nested blocks\n  const content = JSON.stringify(message.message.content);\n  const match = content.match(/agentId:\\s*([a-f0-9-]+)/);\n  return match?.[1];\n}\n\nlet agentId: string | undefined;\nlet sessionId: string | undefined;\n\n// First invocation - use the Explore agent to find API endpoints\nfor await (const message of query({\n  prompt: \"Use the Explore agent to find all API endpoints in this codebase\",\n  options: { allowedTools: [\"Read\", \"Grep\", \"Glob\", \"Agent\"] }\n})) {\n  // Capture session_id from ResultMessage (needed to resume this session)\n  if (\"session_id\" in message) sessionId = message.session_id;\n  // Search message content for the agentId (appears in Agent tool results)\n  const extractedId = extractAgentId(message);\n  if (extractedId) agentId = extractedId;\n  // Print the final result\n  if (\"result\" in message) console.log(message.result);\n}\n\n// Second invocation - resume and ask follow-up\nif (agentId && sessionId) {\n  for await (const message of query({\n    prompt: `Resume agent ${agentId} and list the top 3 most complex endpoints`,\n    options: { allowedTools: [\"Read\", \"Grep\", \"Glob\", \"Agent\"], resume: sessionId }\n  })) {\n    if (\"result\" in message) console.log(message.result);\n  }\n}"
+            "import { query, type SDKMessage } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Helper to extract agentId from message content\n// Stringify to avoid traversing different block types (TextBlock, ToolResultBlock, etc.)\nfunction extractAgentId(message: SDKMessage): string | undefined {\n  if (message.type !== \"assistant\" && message.type !== \"user\") return undefined;\n  // Stringify the content so we can search it without traversing nested blocks\n  const content = JSON.stringify(message.message.content);\n  const match = content.match(/agentId:\\s*([a-f0-9-]+)/);\n  return match?.[1];\n}\n\nlet agentId: string | undefined;\nlet sessionId: string | undefined;\n\n// First invocation - use the Explore agent to find API endpoints\nfor await (const message of query({\n  prompt: \"Use the Explore agent to find all API endpoints in this codebase\",\n  options: { allowedTools: [\"Read\", \"Grep\", \"Glob\", \"Agent\"] }\n})) {\n  // Capture session_id from ResultMessage (needed to resume this session)\n  if (\"session_id\" in message) sessionId = message.session_id;\n  // Search message content for the agentId (appears in Agent tool results)\n  const extractedId = extractAgentId(message);\n  if (extractedId) agentId = extractedId;\n  // Print the final result\n  if (\"result\" in message) console.log(message.result);\n}\n\n// Second invocation - resume and ask follow-up\nif (agentId && sessionId) {\n  for await (const message of query({\n    prompt: `Resume agent ${agentId} and list the top 3 most complex endpoints`,\n    options: { allowedTools: [\"Read\", \"Grep\", \"Glob\", \"Agent\"], resume: sessionId }\n  })) {\n    if (\"result\" in message) console.log(message.result);\n  }\n}"
           ]
         },
         {
@@ -35197,13 +35205,13 @@
       ],
       "codeBlocks": [
         "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello Claude\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Available slash commands:\", message.slash_commands);\n    // Example output: [\"/compact\", \"/context\", \"/usage\"]\n  }\n}",
-        "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Send a slash command\nfor await (const message of query({\n  prompt: \"/compact\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"result\") {\n    console.log(\"Command executed:\", message.result);\n  }\n}",
+        "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Send a slash command\nfor await (const message of query({\n  prompt: \"/compact\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(\"Command executed:\", message.result);\n  }\n}",
         "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"/compact\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"compact_boundary\") {\n    console.log(\"Compaction completed\");\n    console.log(\"Pre-compaction tokens:\", message.compact_metadata.pre_tokens);\n    console.log(\"Trigger:\", message.compact_metadata.trigger);\n  }\n}",
         "Refactor the selected code to improve readability and maintainability.\nFocus on clean code principles and best practices.",
         "---\nallowed-tools: Read, Grep, Glob\ndescription: Run security vulnerability scan\nmodel: claude-opus-4-7\n---\n\nAnalyze the codebase for security vulnerabilities including:\n- SQL injection risks\n- XSS vulnerabilities\n- Exposed credentials\n- Insecure configurations",
         "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use a custom command\nfor await (const message of query({\n  prompt: \"/refactor src/auth/login.ts\",\n  options: { maxTurns: 3 }\n})) {\n  if (message.type === \"assistant\") {\n    console.log(\"Refactoring suggestions:\", message.message);\n  }\n}\n\n// Custom commands appear in the slash_commands list\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Will include both built-in and custom commands\n    console.log(\"Available commands:\", message.slash_commands);\n    // Example: [\"/compact\", \"/context\", \"/usage\", \"/refactor\", \"/security-check\"]\n  }\n}",
         "---\nargument-hint: [issue-number] [priority]\ndescription: Fix a GitHub issue\n---\n\nFix issue #$1 with priority $2.\nCheck the issue description and implement the necessary changes.",
-        "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Pass arguments to custom command\nfor await (const message of query({\n  prompt: \"/fix-issue 123 high\",\n  options: { maxTurns: 5 }\n})) {\n  // Command will process with $1=\"123\" and $2=\"high\"\n  if (message.type === \"result\") {\n    console.log(\"Issue fixed:\", message.result);\n  }\n}",
+        "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Pass arguments to custom command\nfor await (const message of query({\n  prompt: \"/fix-issue 123 high\",\n  options: { maxTurns: 5 }\n})) {\n  // Command will process with $1=\"123\" and $2=\"high\"\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(\"Issue fixed:\", message.result);\n  }\n}",
         "---\nallowed-tools: Bash(git add *), Bash(git status *), Bash(git commit *)\ndescription: Create a git commit\n---\n\n## Context\n\n- Current status: !`git status`\n- Current diff: !`git diff HEAD`\n\n## Task\n\nCreate a git commit with appropriate message based on the changes.",
         "---\ndescription: Review configuration files\n---\n\nReview the following configuration files for issues:\n- Package config: @package.json\n- TypeScript config: @tsconfig.json\n- Environment config: @.env\n\nCheck for security issues, outdated dependencies, and misconfigurations.",
         ".claude/commands/\n├── frontend/\n│   ├── component.md      # Creates /component (project:frontend)\n│   └── style-check.md     # Creates /style-check (project:frontend)\n├── backend/\n│   ├── api-test.md        # Creates /api-test (project:backend)\n│   └── db-migrate.md      # Creates /db-migrate (project:backend)\n└── review.md              # Creates /review (project)",
@@ -35254,7 +35262,7 @@
             "Send slash commands by including them in your prompt string, just like regular text:"
           ],
           "codeBlocks": [
-            "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Send a slash command\nfor await (const message of query({\n  prompt: \"/compact\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"result\") {\n    console.log(\"Command executed:\", message.result);\n  }\n}"
+            "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Send a slash command\nfor await (const message of query({\n  prompt: \"/compact\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(\"Command executed:\", message.result);\n  }\n}"
           ]
         },
         {
@@ -35333,7 +35341,7 @@
           ],
           "codeBlocks": [
             "---\nargument-hint: [issue-number] [priority]\ndescription: Fix a GitHub issue\n---\n\nFix issue #$1 with priority $2.\nCheck the issue description and implement the necessary changes.",
-            "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Pass arguments to custom command\nfor await (const message of query({\n  prompt: \"/fix-issue 123 high\",\n  options: { maxTurns: 5 }\n})) {\n  // Command will process with $1=\"123\" and $2=\"high\"\n  if (message.type === \"result\") {\n    console.log(\"Issue fixed:\", message.result);\n  }\n}",
+            "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Pass arguments to custom command\nfor await (const message of query({\n  prompt: \"/fix-issue 123 high\",\n  options: { maxTurns: 5 }\n})) {\n  // Command will process with $1=\"123\" and $2=\"high\"\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(\"Issue fixed:\", message.result);\n  }\n}",
             "---\nallowed-tools: Bash(git add *), Bash(git status *), Bash(git commit *)\ndescription: Create a git commit\n---\n\n## Context\n\n- Current status: !`git status`\n- Current diff: !`git diff HEAD`\n\n## Task\n\nCreate a git commit with appropriate message based on the changes.",
             "---\ndescription: Review configuration files\n---\n\nReview the following configuration files for issues:\n- Package config: @package.json\n- TypeScript config: @tsconfig.json\n- Environment config: @.env\n\nCheck for security issues, outdated dependencies, and misconfigurations."
           ]
@@ -39005,7 +39013,7 @@
             "Set shouldQuery to false to append the message to the transcript without triggering an assistant turn. The message is held and merged into the next user message that does trigger a turn. Use this to inject context, such as the output of a command you ran out of band, without spending a model call on it."
           ],
           "codeBlocks": [
-            "type SDKUserMessage = {\n  type: \"user\";\n  uuid?: UUID;\n  session_id: string;\n  message: MessageParam; // From Anthropic SDK\n  parent_tool_use_id: string | null;\n  isSynthetic?: boolean;\n  shouldQuery?: boolean;\n  tool_use_result?: unknown;\n  origin?: SDKMessageOrigin;\n};"
+            "type SDKUserMessage = {\n  type: \"user\";\n  uuid?: UUID;\n  session_id?: string;\n  message: MessageParam; // From Anthropic SDK\n  parent_tool_use_id: string | null;\n  isSynthetic?: boolean;\n  shouldQuery?: boolean;\n  tool_use_result?: unknown;\n  origin?: SDKMessageOrigin;\n};"
           ]
         }
       ]

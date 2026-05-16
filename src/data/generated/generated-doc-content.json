@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-15T06:04:13.744Z",
-  "sourceGeneratedAt": "2026-05-15T06:04:13.418Z",
+  "generatedAt": "2026-05-16T05:35:13.464Z",
+  "sourceGeneratedAt": "2026-05-16T05:35:13.102Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -528,7 +528,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.142、2.1.141、2.1.140、2.1.139 这些环节往下讲。",
+            "原文这页大多会按 2.1.143、2.1.142、2.1.141、2.1.140 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -537,7 +537,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.142 -> 2.1.141 -> 2.1.140 -> 2.1.139。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.143 -> 2.1.142 -> 2.1.141 -> 2.1.140。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         },
         {
@@ -12475,7 +12475,7 @@
             {
               "title": "原页关键片段：3. Configure Claude Code",
               "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the region for the small/fast model (Haiku).\n# Also applies to Bedrock Mantle.\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2\n\n# Optional: Override the Bedrock endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_BEDROCK_BASE_URL=https://bedrock-runtime.us-east-1.amazonaws.com",
+              "code": "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the AWS region for the small/fast model (Bedrock and Mantle).\n# On Bedrock, has no effect without ANTHROPIC_DEFAULT_HAIKU_MODEL\n# or the deprecated ANTHROPIC_SMALL_FAST_MODEL set.\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2\n\n# Optional: Override the Bedrock endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_BEDROCK_BASE_URL=https://bedrock-runtime.us-east-1.amazonaws.com",
               "kind": "code"
             },
             {
@@ -12605,7 +12605,7 @@
             {
               "title": "3. Configure Claude Code",
               "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the region for the small/fast model (Haiku).\n# Also applies to Bedrock Mantle.\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2\n\n# Optional: Override the Bedrock endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_BEDROCK_BASE_URL=https://bedrock-runtime.us-east-1.amazonaws.com",
+              "code": "# Enable Bedrock integration\nexport CLAUDE_CODE_USE_BEDROCK=1\nexport AWS_REGION=us-east-1  # or your preferred region\n\n# Optional: Override the AWS region for the small/fast model (Bedrock and Mantle).\n# On Bedrock, has no effect without ANTHROPIC_DEFAULT_HAIKU_MODEL\n# or the deprecated ANTHROPIC_SMALL_FAST_MODEL set.\nexport ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION=us-west-2\n\n# Optional: Override the Bedrock endpoint URL for custom endpoints or gateways\n# export ANTHROPIC_BEDROCK_BASE_URL=https://bedrock-runtime.us-east-1.amazonaws.com",
               "kind": "code"
             }
           ]
@@ -22944,13 +22944,13 @@
             {
               "title": "原页关键片段：Implementation Example",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\nimport { readFile } from \"fs/promises\";\n\nasync function* generateMessages() {\n  // First message\n  yield {\n    type: \"user\" as const,\n    message: {\n      role: \"user\" as const,\n      content: \"Analyze this codebase for security issues\"\n    }\n  };\n\n  // Wait for conditions or user input\n  await new Promise((resolve) => setTimeout(resolve, 2000));\n\n  // Follow-up with image\n  yield {\n    type: \"user\" as const,\n    message: {\n      role: \"user\" as const,\n      content: [\n        {\n          type: \"text\",\n          text: \"Review this architecture diagram\"\n        },\n        {\n          type: \"image\",\n          source: {\n            type: \"base64\",\n            media_type: \"image/png\",\n            data: await readFile(\"diagram.png\", \"base64\")\n          }\n        }\n      ]\n    }\n  };\n}\n\n// Process streaming responses\nfor await (const message of query({\n  prompt: generateMessages(),\n  options: {\n    maxTurns: 10,\n    allowedTools: [\"Read\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\") {\n    console.log(message.result);\n  }\n}",
+              "code": "import { query, type SDKUserMessage } from \"@anthropic-ai/claude-agent-sdk\";\nimport { readFile } from \"fs/promises\";\n\nasync function* generateMessages(): AsyncGenerator<SDKUserMessage> {\n  // First message\n  yield {\n    type: \"user\",\n    message: {\n      role: \"user\",\n      content: \"Analyze this codebase for security issues\"\n    },\n    parent_tool_use_id: null\n  };\n\n  // Wait for conditions or user input\n  await new Promise((resolve) => setTimeout(resolve, 2000));\n\n  // Follow-up with image\n  yield {\n    type: \"user\",\n    message: {\n      role: \"user\",\n      content: [\n        {\n          type: \"text\",\n          text: \"Review this architecture diagram\"\n        },\n        {\n          type: \"image\",\n          source: {\n            type: \"base64\",\n            media_type: \"image/png\",\n            data: await readFile(\"diagram.png\", \"base64\")\n          }\n        }\n      ]\n    },\n    parent_tool_use_id: null\n  };\n}\n\n// Process streaming responses\nfor await (const message of query({\n  prompt: generateMessages(),\n  options: {\n    maxTurns: 10,\n    allowedTools: [\"Read\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}",
               "kind": "command"
             },
             {
               "title": "原页关键片段：Implementation Example",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Simple one-shot query\nfor await (const message of query({\n  prompt: \"Explain the authentication flow\",\n  options: {\n    maxTurns: 1,\n    allowedTools: [\"Read\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\") {\n    console.log(message.result);\n  }\n}\n\n// Continue conversation with session management\nfor await (const message of query({\n  prompt: \"Now explain the authorization process\",\n  options: {\n    continue: true,\n    maxTurns: 1\n  }\n})) {\n  if (message.type === \"result\") {\n    console.log(message.result);\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Simple one-shot query\nfor await (const message of query({\n  prompt: \"Explain the authentication flow\",\n  options: {\n    maxTurns: 1,\n    allowedTools: [\"Read\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}\n\n// Continue conversation with session management\nfor await (const message of query({\n  prompt: \"Now explain the authorization process\",\n  options: {\n    continue: true,\n    maxTurns: 1\n  }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}",
               "kind": "command"
             }
           ]
@@ -23034,7 +23034,7 @@
             {
               "title": "Implementation Example",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\nimport { readFile } from \"fs/promises\";\n\nasync function* generateMessages() {\n  // First message\n  yield {\n    type: \"user\" as const,\n    message: {\n      role: \"user\" as const,\n      content: \"Analyze this codebase for security issues\"\n    }\n  };\n\n  // Wait for conditions or user input\n  await new Promise((resolve) => setTimeout(resolve, 2000));\n\n  // Follow-up with image\n  yield {\n    type: \"user\" as const,\n    message: {\n      role: \"user\" as const,\n      content: [\n        {\n          type: \"text\",\n          text: \"Review this architecture diagram\"\n        },\n        {\n          type: \"image\",\n          source: {\n            type: \"base64\",\n            media_type: \"image/png\",\n            data: await readFile(\"diagram.png\", \"base64\")\n          }\n        }\n      ]\n    }\n  };\n}\n\n// Process streaming responses\nfor await (const message of query({\n  prompt: generateMessages(),\n  options: {\n    maxTurns: 10,\n    allowedTools: [\"Read\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\") {\n    console.log(message.result);\n  }\n}",
+              "code": "import { query, type SDKUserMessage } from \"@anthropic-ai/claude-agent-sdk\";\nimport { readFile } from \"fs/promises\";\n\nasync function* generateMessages(): AsyncGenerator<SDKUserMessage> {\n  // First message\n  yield {\n    type: \"user\",\n    message: {\n      role: \"user\",\n      content: \"Analyze this codebase for security issues\"\n    },\n    parent_tool_use_id: null\n  };\n\n  // Wait for conditions or user input\n  await new Promise((resolve) => setTimeout(resolve, 2000));\n\n  // Follow-up with image\n  yield {\n    type: \"user\",\n    message: {\n      role: \"user\",\n      content: [\n        {\n          type: \"text\",\n          text: \"Review this architecture diagram\"\n        },\n        {\n          type: \"image\",\n          source: {\n            type: \"base64\",\n            media_type: \"image/png\",\n            data: await readFile(\"diagram.png\", \"base64\")\n          }\n        }\n      ]\n    },\n    parent_tool_use_id: null\n  };\n}\n\n// Process streaming responses\nfor await (const message of query({\n  prompt: generateMessages(),\n  options: {\n    maxTurns: 10,\n    allowedTools: [\"Read\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}",
               "kind": "command"
             }
           ]
@@ -23068,7 +23068,7 @@
             {
               "title": "Implementation Example",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Simple one-shot query\nfor await (const message of query({\n  prompt: \"Explain the authentication flow\",\n  options: {\n    maxTurns: 1,\n    allowedTools: [\"Read\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\") {\n    console.log(message.result);\n  }\n}\n\n// Continue conversation with session management\nfor await (const message of query({\n  prompt: \"Now explain the authorization process\",\n  options: {\n    continue: true,\n    maxTurns: 1\n  }\n})) {\n  if (message.type === \"result\") {\n    console.log(message.result);\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Simple one-shot query\nfor await (const message of query({\n  prompt: \"Explain the authentication flow\",\n  options: {\n    maxTurns: 1,\n    allowedTools: [\"Read\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}\n\n// Continue conversation with session management\nfor await (const message of query({\n  prompt: \"Now explain the authorization process\",\n  options: {\n    continue: true,\n    maxTurns: 1\n  }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}",
               "kind": "command"
             }
           ]
@@ -24677,13 +24677,13 @@
             {
               "title": "原页关键片段：Detecting subagent invocation",
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
-              "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Use the code-reviewer agent to review this codebase\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Glob\", \"Grep\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    description=\"Expert code reviewer.\",\n                    prompt=\"Analyze code quality and suggest improvements.\",\n                    tools=[\"Read\", \"Glob\", \"Grep\"],\n                )\n            },\n        ),\n    ):\n        # Check for subagent invocation. Match both names: older SDK\n        # versions emitted \"Task\", current versions emit \"Agent\".\n        if hasattr(message, \"content\") and message.content:\n            for block in message.content:\n                if getattr(block, \"type\", None) == \"tool_use\" and block.name in (\n                    \"Task\",\n                    \"Agent\",\n                ):\n                    print(f\"Subagent invoked: {block.input.get('subagent_type')}\")\n\n        # Check if this message is from within a subagent's context\n        if hasattr(message, \"parent_tool_use_id\") and message.parent_tool_use_id:\n            print(\"  (running inside subagent)\")\n\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())",
+              "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition, ToolUseBlock\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Use the code-reviewer agent to review this codebase\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Glob\", \"Grep\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    description=\"Expert code reviewer.\",\n                    prompt=\"Analyze code quality and suggest improvements.\",\n                    tools=[\"Read\", \"Glob\", \"Grep\"],\n                )\n            },\n        ),\n    ):\n        # Check for subagent invocation. Match both names: older SDK\n        # versions emitted \"Task\", current versions emit \"Agent\".\n        if hasattr(message, \"content\") and message.content:\n            for block in message.content:\n                if isinstance(block, ToolUseBlock) and block.name in (\n                    \"Task\",\n                    \"Agent\",\n                ):\n                    print(f\"Subagent invoked: {block.input.get('subagent_type')}\")\n\n        # Check if this message is from within a subagent's context\n        if hasattr(message, \"parent_tool_use_id\") and message.parent_tool_use_id:\n            print(\"  (running inside subagent)\")\n\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())",
               "kind": "code"
             },
             {
               "title": "原页关键片段：Resuming subagents",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "import { query, type SDKMessage } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Helper to extract agentId from message content\n// Stringify to avoid traversing different block types (TextBlock, ToolResultBlock, etc.)\nfunction extractAgentId(message: SDKMessage): string | undefined {\n  if (!(\"message\" in message)) return undefined;\n  // Stringify the content so we can search it without traversing nested blocks\n  const content = JSON.stringify(message.message.content);\n  const match = content.match(/agentId:\\s*([a-f0-9-]+)/);\n  return match?.[1];\n}\n\nlet agentId: string | undefined;\nlet sessionId: string | undefined;\n\n// First invocation - use the Explore agent to find API endpoints\nfor await (const message of query({\n  prompt: \"Use the Explore agent to find all API endpoints in this codebase\",\n  options: { allowedTools: [\"Read\", \"Grep\", \"Glob\", \"Agent\"] }\n})) {\n  // Capture session_id from ResultMessage (needed to resume this session)\n  if (\"session_id\" in message) sessionId = message.session_id;\n  // Search message content for the agentId (appears in Agent tool results)\n  const extractedId = extractAgentId(message);\n  if (extractedId) agentId = extractedId;\n  // Print the final result\n  if (\"result\" in message) console.log(message.result);\n}\n\n// Second invocation - resume and ask follow-up\nif (agentId && sessionId) {\n  for await (const message of query({\n    prompt: `Resume agent ${agentId} and list the top 3 most complex endpoints`,\n    options: { allowedTools: [\"Read\", \"Grep\", \"Glob\", \"Agent\"], resume: sessionId }\n  })) {\n    if (\"result\" in message) console.log(message.result);\n  }\n}",
+              "code": "import { query, type SDKMessage } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Helper to extract agentId from message content\n// Stringify to avoid traversing different block types (TextBlock, ToolResultBlock, etc.)\nfunction extractAgentId(message: SDKMessage): string | undefined {\n  if (message.type !== \"assistant\" && message.type !== \"user\") return undefined;\n  // Stringify the content so we can search it without traversing nested blocks\n  const content = JSON.stringify(message.message.content);\n  const match = content.match(/agentId:\\s*([a-f0-9-]+)/);\n  return match?.[1];\n}\n\nlet agentId: string | undefined;\nlet sessionId: string | undefined;\n\n// First invocation - use the Explore agent to find API endpoints\nfor await (const message of query({\n  prompt: \"Use the Explore agent to find all API endpoints in this codebase\",\n  options: { allowedTools: [\"Read\", \"Grep\", \"Glob\", \"Agent\"] }\n})) {\n  // Capture session_id from ResultMessage (needed to resume this session)\n  if (\"session_id\" in message) sessionId = message.session_id;\n  // Search message content for the agentId (appears in Agent tool results)\n  const extractedId = extractAgentId(message);\n  if (extractedId) agentId = extractedId;\n  // Print the final result\n  if (\"result\" in message) console.log(message.result);\n}\n\n// Second invocation - resume and ask follow-up\nif (agentId && sessionId) {\n  for await (const message of query({\n    prompt: `Resume agent ${agentId} and list the top 3 most complex endpoints`,\n    options: { allowedTools: [\"Read\", \"Grep\", \"Glob\", \"Agent\"], resume: sessionId }\n  })) {\n    if (\"result\" in message) console.log(message.result);\n  }\n}",
               "kind": "command"
             },
             {
@@ -24824,7 +24824,7 @@
             {
               "title": "Detecting subagent invocation",
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
-              "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Use the code-reviewer agent to review this codebase\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Glob\", \"Grep\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    description=\"Expert code reviewer.\",\n                    prompt=\"Analyze code quality and suggest improvements.\",\n                    tools=[\"Read\", \"Glob\", \"Grep\"],\n                )\n            },\n        ),\n    ):\n        # Check for subagent invocation. Match both names: older SDK\n        # versions emitted \"Task\", current versions emit \"Agent\".\n        if hasattr(message, \"content\") and message.content:\n            for block in message.content:\n                if getattr(block, \"type\", None) == \"tool_use\" and block.name in (\n                    \"Task\",\n                    \"Agent\",\n                ):\n                    print(f\"Subagent invoked: {block.input.get('subagent_type')}\")\n\n        # Check if this message is from within a subagent's context\n        if hasattr(message, \"parent_tool_use_id\") and message.parent_tool_use_id:\n            print(\"  (running inside subagent)\")\n\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())",
+              "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition, ToolUseBlock\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Use the code-reviewer agent to review this codebase\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Glob\", \"Grep\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    description=\"Expert code reviewer.\",\n                    prompt=\"Analyze code quality and suggest improvements.\",\n                    tools=[\"Read\", \"Glob\", \"Grep\"],\n                )\n            },\n        ),\n    ):\n        # Check for subagent invocation. Match both names: older SDK\n        # versions emitted \"Task\", current versions emit \"Agent\".\n        if hasattr(message, \"content\") and message.content:\n            for block in message.content:\n                if isinstance(block, ToolUseBlock) and block.name in (\n                    \"Task\",\n                    \"Agent\",\n                ):\n                    print(f\"Subagent invoked: {block.input.get('subagent_type')}\")\n\n        # Check if this message is from within a subagent's context\n        if hasattr(message, \"parent_tool_use_id\") and message.parent_tool_use_id:\n            print(\"  (running inside subagent)\")\n\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())",
               "kind": "code"
             }
           ]
@@ -24839,7 +24839,7 @@
             {
               "title": "Resuming subagents",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "import { query, type SDKMessage } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Helper to extract agentId from message content\n// Stringify to avoid traversing different block types (TextBlock, ToolResultBlock, etc.)\nfunction extractAgentId(message: SDKMessage): string | undefined {\n  if (!(\"message\" in message)) return undefined;\n  // Stringify the content so we can search it without traversing nested blocks\n  const content = JSON.stringify(message.message.content);\n  const match = content.match(/agentId:\\s*([a-f0-9-]+)/);\n  return match?.[1];\n}\n\nlet agentId: string | undefined;\nlet sessionId: string | undefined;\n\n// First invocation - use the Explore agent to find API endpoints\nfor await (const message of query({\n  prompt: \"Use the Explore agent to find all API endpoints in this codebase\",\n  options: { allowedTools: [\"Read\", \"Grep\", \"Glob\", \"Agent\"] }\n})) {\n  // Capture session_id from ResultMessage (needed to resume this session)\n  if (\"session_id\" in message) sessionId = message.session_id;\n  // Search message content for the agentId (appears in Agent tool results)\n  const extractedId = extractAgentId(message);\n  if (extractedId) agentId = extractedId;\n  // Print the final result\n  if (\"result\" in message) console.log(message.result);\n}\n\n// Second invocation - resume and ask follow-up\nif (agentId && sessionId) {\n  for await (const message of query({\n    prompt: `Resume agent ${agentId} and list the top 3 most complex endpoints`,\n    options: { allowedTools: [\"Read\", \"Grep\", \"Glob\", \"Agent\"], resume: sessionId }\n  })) {\n    if (\"result\" in message) console.log(message.result);\n  }\n}",
+              "code": "import { query, type SDKMessage } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Helper to extract agentId from message content\n// Stringify to avoid traversing different block types (TextBlock, ToolResultBlock, etc.)\nfunction extractAgentId(message: SDKMessage): string | undefined {\n  if (message.type !== \"assistant\" && message.type !== \"user\") return undefined;\n  // Stringify the content so we can search it without traversing nested blocks\n  const content = JSON.stringify(message.message.content);\n  const match = content.match(/agentId:\\s*([a-f0-9-]+)/);\n  return match?.[1];\n}\n\nlet agentId: string | undefined;\nlet sessionId: string | undefined;\n\n// First invocation - use the Explore agent to find API endpoints\nfor await (const message of query({\n  prompt: \"Use the Explore agent to find all API endpoints in this codebase\",\n  options: { allowedTools: [\"Read\", \"Grep\", \"Glob\", \"Agent\"] }\n})) {\n  // Capture session_id from ResultMessage (needed to resume this session)\n  if (\"session_id\" in message) sessionId = message.session_id;\n  // Search message content for the agentId (appears in Agent tool results)\n  const extractedId = extractAgentId(message);\n  if (extractedId) agentId = extractedId;\n  // Print the final result\n  if (\"result\" in message) console.log(message.result);\n}\n\n// Second invocation - resume and ask follow-up\nif (agentId && sessionId) {\n  for await (const message of query({\n    prompt: `Resume agent ${agentId} and list the top 3 most complex endpoints`,\n    options: { allowedTools: [\"Read\", \"Grep\", \"Glob\", \"Agent\"], resume: sessionId }\n  })) {\n    if (\"result\" in message) console.log(message.result);\n  }\n}",
               "kind": "command"
             }
           ]
@@ -25189,7 +25189,7 @@
             {
               "title": "原页关键片段：Sending Slash Commands",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Send a slash command\nfor await (const message of query({\n  prompt: \"/compact\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"result\") {\n    console.log(\"Command executed:\", message.result);\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Send a slash command\nfor await (const message of query({\n  prompt: \"/compact\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(\"Command executed:\", message.result);\n  }\n}",
               "kind": "command"
             },
             {
@@ -25225,7 +25225,7 @@
             {
               "title": "原页关键片段：Advanced Features 2",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Pass arguments to custom command\nfor await (const message of query({\n  prompt: \"/fix-issue 123 high\",\n  options: { maxTurns: 5 }\n})) {\n  // Command will process with $1=\"123\" and $2=\"high\"\n  if (message.type === \"result\") {\n    console.log(\"Issue fixed:\", message.result);\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Pass arguments to custom command\nfor await (const message of query({\n  prompt: \"/fix-issue 123 high\",\n  options: { maxTurns: 5 }\n})) {\n  // Command will process with $1=\"123\" and $2=\"high\"\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(\"Issue fixed:\", message.result);\n  }\n}",
               "kind": "command"
             },
             {
@@ -25285,7 +25285,7 @@
             {
               "title": "Sending Slash Commands",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Send a slash command\nfor await (const message of query({\n  prompt: \"/compact\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"result\") {\n    console.log(\"Command executed:\", message.result);\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Send a slash command\nfor await (const message of query({\n  prompt: \"/compact\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(\"Command executed:\", message.result);\n  }\n}",
               "kind": "command"
             }
           ]
@@ -25380,7 +25380,7 @@
             {
               "title": "Advanced Features 2",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Pass arguments to custom command\nfor await (const message of query({\n  prompt: \"/fix-issue 123 high\",\n  options: { maxTurns: 5 }\n})) {\n  // Command will process with $1=\"123\" and $2=\"high\"\n  if (message.type === \"result\") {\n    console.log(\"Issue fixed:\", message.result);\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Pass arguments to custom command\nfor await (const message of query({\n  prompt: \"/fix-issue 123 high\",\n  options: { maxTurns: 5 }\n})) {\n  // Command will process with $1=\"123\" and $2=\"high\"\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(\"Issue fixed:\", message.result);\n  }\n}",
               "kind": "command"
             },
             {
@@ -28361,7 +28361,7 @@
             {
               "title": "SDKUserMessage",
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
-              "code": "type SDKUserMessage = {\n  type: \"user\";\n  uuid?: UUID;\n  session_id: string;\n  message: MessageParam; // From Anthropic SDK\n  parent_tool_use_id: string | null;\n  isSynthetic?: boolean;\n  shouldQuery?: boolean;\n  tool_use_result?: unknown;\n  origin?: SDKMessageOrigin;\n};",
+              "code": "type SDKUserMessage = {\n  type: \"user\";\n  uuid?: UUID;\n  session_id?: string;\n  message: MessageParam; // From Anthropic SDK\n  parent_tool_use_id: string | null;\n  isSynthetic?: boolean;\n  shouldQuery?: boolean;\n  tool_use_result?: unknown;\n  origin?: SDKMessageOrigin;\n};",
               "kind": "code"
             }
           ]
