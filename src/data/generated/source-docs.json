@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-16T05:35:13.102Z",
+  "generatedAt": "2026-05-17T05:56:46.068Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -11487,6 +11487,7 @@
         "The output replaces the placeholder in the skill content",
         "Claude receives the fully-rendered prompt with actual PR data",
         "This is preprocessing, not something Claude executes. Claude only sees the final result.",
+        "Substitution runs once over the original file. Command output is inserted as plain text and is not re-scanned for further !`<command>` placeholders, so a command cannot emit a placeholder for a later pass to expand.",
         "For multi-line commands, use a fenced code block opened with ```! instead of the inline form:",
         "To disable this behavior for skills and custom commands from user, project, plugin, or additional-directory sources, set \"disableSkillShellExecution\": true in settings. Each command is replaced with [shell command execution disabled by policy] instead of being run. Bundled and managed skills are not affected. This setting is most useful in managed settings, where users cannot override it.",
         "To request deeper reasoning when a skill runs, include ultrathink anywhere in the skill content. See Use ultrathink for one-off deep reasoning.",
@@ -11770,6 +11771,7 @@
             "The output replaces the placeholder in the skill content",
             "Claude receives the fully-rendered prompt with actual PR data",
             "This is preprocessing, not something Claude executes. Claude only sees the final result.",
+            "Substitution runs once over the original file. Command output is inserted as plain text and is not re-scanned for further !`<command>` placeholders, so a command cannot emit a placeholder for a later pass to expand.",
             "For multi-line commands, use a fenced code block opened with ```! instead of the inline form:",
             "To disable this behavior for skills and custom commands from user, project, plugin, or additional-directory sources, set \"disableSkillShellExecution\": true in settings. Each command is replaced with [shell command execution disabled by policy] instead of being run. Bundled and managed skills are not affected. This setting is most useful in managed settings, where users cannot override it.",
             "To request deeper reasoning when a skill runs, include ultrathink anywhere in the skill content. See Use ultrathink for one-off deep reasoning."
@@ -18768,6 +18770,7 @@
         "​2. Configure Azure credentials",
         "​3. Configure Claude Code",
         "​4. Pin model versions",
+        "​5. Run Claude Code",
         "​Azure RBAC configuration",
         "​Troubleshooting",
         "​Additional resources"
@@ -18779,6 +18782,7 @@
         "2. Configure Azure credentials",
         "3. Configure Claude Code",
         "4. Pin model versions",
+        "5. Run Claude Code",
         "Azure RBAC configuration",
         "Troubleshooting",
         "Additional resources"
@@ -18789,6 +18793,7 @@
         "2. Configure Azure credentials",
         "3. Configure Claude Code",
         "4. Pin model versions",
+        "5. Run Claude Code",
         "Azure RBAC configuration",
         "Troubleshooting",
         "Additional resources",
@@ -18824,6 +18829,8 @@
         "Background tasks such as session title generation use the small/fast model, normally a Haiku-class model. On Foundry, Claude Code defaults this to the primary model because not every account has a Haiku deployment. To use Haiku for background tasks, set ANTHROPIC_DEFAULT_HAIKU_MODEL to a Haiku deployment that is available in your account, as shown above.",
         "For current and legacy model IDs, see Models overview. See Model configuration for the full list of environment variables.",
         "Prompt caching is enabled automatically. To request a 1-hour cache TTL instead of the 5-minute default, set the following variable; cache writes with a 1-hour TTL are billed at a higher rate:",
+        "With the environment variables set, start Claude Code from your project directory:",
+        "Claude Code reads CLAUDE_CODE_USE_FOUNDRY and the other Foundry variables from the environment and connects to your Azure resource on the first prompt. Unlike Bedrock and Vertex AI, Foundry has no interactive setup wizard, so the environment variables in steps 3 and 4 are the only configuration path.",
         "The Azure AI User and Cognitive Services User default roles include all required permissions for invoking Claude models.",
         "For more restrictive permissions, create a custom role with the following:",
         "For details, see Microsoft Foundry RBAC documentation.",
@@ -18840,6 +18847,7 @@
         "# Enable Microsoft Foundry integration\nexport CLAUDE_CODE_USE_FOUNDRY=1\n\n# Azure resource name (replace {resource} with your resource name)\nexport ANTHROPIC_FOUNDRY_RESOURCE={resource}\n# Or provide the full base URL:\n# export ANTHROPIC_FOUNDRY_BASE_URL=https://{resource}.services.ai.azure.com/anthropic",
         "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5'",
         "export ENABLE_PROMPT_CACHING_1H=1",
+        "claude",
         "{\n  \"permissions\": [\n    {\n      \"dataActions\": [\n        \"Microsoft.CognitiveServices/accounts/providers/*\"\n      ]\n    }\n  ]\n}"
       ],
       "sectionBlocks": [
@@ -18851,6 +18859,7 @@
             "2. Configure Azure credentials",
             "3. Configure Claude Code",
             "4. Pin model versions",
+            "5. Run Claude Code",
             "Azure RBAC configuration",
             "Troubleshooting",
             "Additional resources",
@@ -18936,6 +18945,16 @@
           "codeBlocks": [
             "export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5'",
             "export ENABLE_PROMPT_CACHING_1H=1"
+          ]
+        },
+        {
+          "title": "​5. Run Claude Code",
+          "paragraphs": [
+            "With the environment variables set, start Claude Code from your project directory:",
+            "Claude Code reads CLAUDE_CODE_USE_FOUNDRY and the other Foundry variables from the environment and connects to your Azure resource on the first prompt. Unlike Bedrock and Vertex AI, Foundry has no interactive setup wizard, so the environment variables in steps 3 and 4 are the only configuration path."
+          ],
+          "codeBlocks": [
+            "claude"
           ]
         },
         {
@@ -24772,7 +24791,7 @@
         "In /model: use left/right arrow keys to adjust the effort slider when selecting a model",
         "--effort flag: pass a level name to set it for a single session when launching Claude Code",
         "Environment variable: set CLAUDE_CODE_EFFORT_LEVEL to a level name or auto",
-        "Settings: set effortLevel in your settings file",
+        "Settings: set effortLevel to low, medium, high, or xhigh in your settings file. max is session-only and is not accepted here",
         "Skill and subagent frontmatter: set effort in a skill or subagent markdown file to override the effort level when that skill or subagent runs",
         "The environment variable takes precedence over all other methods, then your configured level, then the model default. Frontmatter effort applies when that skill or subagent is active, overriding the session level but not the environment variable.",
         "The effort slider appears in /model when a supported model is selected. The current effort level is also displayed next to the logo and spinner, for example “with low effort”, so you can confirm which setting is active without opening /model.",

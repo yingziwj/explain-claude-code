@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-16T05:35:13.464Z",
-  "sourceGeneratedAt": "2026-05-16T05:35:13.102Z",
+  "generatedAt": "2026-05-17T05:56:46.418Z",
+  "sourceGeneratedAt": "2026-05-17T05:56:46.068Z",
   "items": {
     "overview": {
       "sourceLabel": "Claude Code overview",
@@ -13323,6 +13323,12 @@
               "kind": "code"
             },
             {
+              "title": "原页关键片段：5. Run Claude Code",
+              "body": "\"5. Run Claude Code\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
+              "code": "claude",
+              "kind": "code"
+            },
+            {
               "title": "原页关键片段：Azure RBAC configuration",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
               "code": "{\n  \"permissions\": [\n    {\n      \"dataActions\": [\n        \"Microsoft.CognitiveServices/accounts/providers/*\"\n      ]\n    }\n  ]\n}",
@@ -13404,6 +13410,13 @@
               "code": "export ENABLE_PROMPT_CACHING_1H=1",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "5. Run Claude Code",
+          "paragraphs": [
+            "这一块主要是在说\"5. Run Claude Code\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
