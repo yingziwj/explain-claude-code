@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-05-18T06:33:57.219Z",
-  "sourceGeneratedAt": "2026-05-18T06:33:56.872Z",
+  "generatedAt": "2026-05-19T06:20:26.071Z",
+  "sourceGeneratedAt": "2026-05-19T06:20:25.737Z",
   "items": {
     "overview": {
-      "sourceLabel": "Claude Code overview",
+      "sourceLabel": "Overview",
       "sections": [
         {
           "title": "简要总结",
@@ -528,7 +528,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.143、2.1.142、2.1.141、2.1.140 这些环节往下讲。",
+            "原文这页大多会按 2.1.144、2.1.143、2.1.142、2.1.141 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -537,7 +537,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.143 -> 2.1.142 -> 2.1.141 -> 2.1.140。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.144 -> 2.1.143 -> 2.1.142 -> 2.1.141。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         },
         {
@@ -4782,9 +4782,9 @@
             },
             {
               "title": "Invoke subagents explicitly 4",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"agent\": \"code-reviewer\"\n}",
-              "kind": "config"
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --agent security-reviewer",
+              "kind": "command"
             }
           ]
         },
@@ -5018,7 +5018,13 @@
               "kind": "command"
             },
             {
-              "title": "原页关键片段：Monitor sessions with agent view",
+              "title": "原页关键片段：Monitor sessions with agent view 1",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude agents --cwd ~/projects/my-app",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Monitor sessions with agent view 2",
               "body": "\"Monitor sessions with agent view\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
               "code": "Pinned\n  ✽ clawd walk cycle          Write assets/sprites/clawd-walk.png           3m\n\nReady for review\n  ∙ jump physics              github.com/example/game/pull/2048          ●  2h\n\nNeeds input\n  ✻ power-up design           needs input: double jump or wall climb?       1m\n\nWorking\n  ✽ collision detection       Edit src/physics/CollisionSystem.ts           2m\n  ✢ playtest level 3          run 12 · all checkpoints cleared           in 4m\n\nCompleted\n  ✻ title screen              result: menu, options, and credits done       9m\n  ∙ sound effects             result: 14 SFX exported to assets/audio       4h\n  … 6 more",
               "kind": "code"
@@ -5040,6 +5046,12 @@
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "claude --bg --name \"flaky-test-fix\" \"investigate the flaky SettingsChangeDetector test\"",
               "kind": "command"
+            },
+            {
+              "title": "原页关键片段：How file edits are isolated",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"worktree\": {\n    \"bgIsolation\": \"none\"\n  }\n}",
+              "kind": "config"
             },
             {
               "title": "原页关键片段：Permission mode, model, and effort",
@@ -5085,7 +5097,13 @@
           ],
           "steps": [
             {
-              "title": "Monitor sessions with agent view",
+              "title": "Monitor sessions with agent view 1",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "claude agents --cwd ~/projects/my-app",
+              "kind": "command"
+            },
+            {
+              "title": "Monitor sessions with agent view 2",
               "body": "\"Monitor sessions with agent view\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
               "code": "Pinned\n  ✽ clawd walk cycle          Write assets/sprites/clawd-walk.png           3m\n\nReady for review\n  ∙ jump physics              github.com/example/game/pull/2048          ●  2h\n\nNeeds input\n  ✻ power-up design           needs input: double jump or wall climb?       1m\n\nWorking\n  ✽ collision detection       Edit src/physics/CollisionSystem.ts           2m\n  ✢ playtest level 3          run 12 · all checkpoints cleared           in 4m\n\nCompleted\n  ✻ title screen              result: menu, options, and credits done       9m\n  ∙ sound effects             result: 14 SFX exported to assets/audio       4h\n  … 6 more",
               "kind": "code"
@@ -5205,6 +5223,14 @@
           "paragraphs": [
             "这一段主要是在把\"How file edits are isolated\"讲实，不是只摆个标题给你看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "How file edits are isolated",
+              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
+              "code": "{\n  \"worktree\": {\n    \"bgIsolation\": \"none\"\n  }\n}",
+              "kind": "config"
+            }
           ]
         },
         {
@@ -5314,9 +5340,9 @@
           ]
         },
         {
-          "title": "Sessions show as failed after waking your machine",
+          "title": "Sessions show as failed after shutdown",
           "paragraphs": [
-            "这一段主要是在把\"Sessions show as failed after waking your machine\"讲实，不是只摆个标题给你看。",
+            "看到这里，就把\"Sessions show as failed after shutdown\"当成一件真要上手的活来看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
@@ -8413,15 +8439,15 @@
           ]
         },
         {
-          "title": "Stop hook runs forever",
+          "title": "Stop hook hits the block cap",
           "paragraphs": [
-            "这一段主要是在把\"Stop hook runs forever\"讲实，不是只摆个标题给你看。",
+            "看到这里，就把\"Stop hook hits the block cap\"当成一件真要上手的活来看。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ],
           "steps": [
             {
-              "title": "Stop hook runs forever",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "title": "Stop hook hits the block cap",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "#!/bin/bash\nINPUT=$(cat)\nif [ \"$(echo \"$INPUT\" | jq -r '.stop_hook_active')\" = \"true\" ]; then\n  exit 0  # Allow Claude to stop\nfi\n# ... rest of your hook logic",
               "kind": "command"
             }
@@ -10654,9 +10680,9 @@
             },
             {
               "title": "原页关键片段：Request rejected (429)",
-              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "API Error: Request rejected (429) · this may be a temporary capacity issue",
-              "kind": "code"
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "API Error: Request rejected (429) · this may be a temporary capacity issue. If it persists, check status.claude.com.",
+              "kind": "command"
             },
             {
               "title": "原页关键片段：Credit balance is too low",
@@ -10805,9 +10831,9 @@
           "steps": [
             {
               "title": "Request rejected (429)",
-              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "API Error: Request rejected (429) · this may be a temporary capacity issue",
-              "kind": "code"
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "API Error: Request rejected (429) · this may be a temporary capacity issue. If it persists, check status.claude.com.",
+              "kind": "command"
             }
           ]
         },
@@ -10867,6 +10893,13 @@
               "code": "Your ANTHROPIC_API_KEY belongs to a disabled organization · Unset the environment variable to use your other credentials\nAPI Error: 400 ... This organization has been disabled.",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "Your organization has disabled Claude subscription access",
+          "paragraphs": [
+            "这一块主要是在说\"Your organization has disabled Claude subscription access\"真到手上该怎么用，哪里最容易踩坑。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -11024,21 +11057,6 @@
               "title": "PDF errors",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
               "code": "PDF too large (max 100 pages, 32 MB). Try splitting it or extracting text first.\nPDF is password protected. Try removing protection or extracting text first.\nThe PDF file was not valid. Try converting to a different format first.",
-              "kind": "code"
-            }
-          ]
-        },
-        {
-          "title": "Extra inputs are not permitted",
-          "paragraphs": [
-            "这里不是让你背\"Extra inputs are not permitted\"这个词，而是让你看它真干活时怎么使。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ],
-          "steps": [
-            {
-              "title": "Extra inputs are not permitted",
-              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
-              "code": "API Error: 400 ... Extra inputs are not permitted ... context_management\nAPI Error: 400 ... Extra inputs are not permitted ... tools.0.custom.input_examples\nAPI Error: 400 ... Unexpected value(s) for the `anthropic-beta` header",
               "kind": "code"
             }
           ]
@@ -15324,6 +15342,12 @@
               "kind": "command"
             },
             {
+              "title": "原页关键片段：Enable or disable a plugin with dependencies",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "secrets-vault is still required by deploy-kit. Disable that plugin first, or\ndisable everything together: claude plugin disable deploy-kit@acme-tools && claude plugin disable secrets-vault@acme-tools",
+              "kind": "command"
+            },
+            {
               "title": "原页关键片段：Remove orphaned auto-installed dependencies 1",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
               "code": "claude plugin prune",
@@ -15400,6 +15424,21 @@
           "paragraphs": [
             "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Enable or disable a plugin with dependencies",
+          "paragraphs": [
+            "这一段主要是在拧开关，地方和顺序都别搞错。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Enable or disable a plugin with dependencies",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "secrets-vault is still required by deploy-kit. Disable that plugin first, or\ndisable everything together: claude plugin disable deploy-kit@acme-tools && claude plugin disable secrets-vault@acme-tools",
+              "kind": "command"
+            }
           ]
         },
         {
@@ -17751,18 +17790,6 @@
           ],
           "steps": [
             {
-              "title": "原页关键片段：Use fast mode on Opus 4.7 1",
-              "body": "\"Use fast mode on Opus 4.7\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "export CLAUDE_CODE_ENABLE_OPUS_4_7_FAST_MODE=1",
-              "kind": "code"
-            },
-            {
-              "title": "原页关键片段：Use fast mode on Opus 4.7 2",
-              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"env\": {\n    \"CLAUDE_CODE_ENABLE_OPUS_4_7_FAST_MODE\": \"1\"\n  }\n}",
-              "kind": "config"
-            },
-            {
               "title": "原页关键片段：Require per-session opt-in",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"fastModePerSessionOptIn\": true\n}",
@@ -17774,7 +17801,7 @@
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
-            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -17782,27 +17809,6 @@
           "paragraphs": [
             "这一块主要是在说\"Toggle fast mode\"真到手上该怎么用，哪里最容易踩坑。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ]
-        },
-        {
-          "title": "Use fast mode on Opus 4.7",
-          "paragraphs": [
-            "这一块主要是在说\"Use fast mode on Opus 4.7\"真到手上该怎么用，哪里最容易踩坑。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "Use fast mode on Opus 4.7 1",
-              "body": "\"Use fast mode on Opus 4.7\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "export CLAUDE_CODE_ENABLE_OPUS_4_7_FAST_MODE=1",
-              "kind": "code"
-            },
-            {
-              "title": "Use fast mode on Opus 4.7 2",
-              "body": "想把这条规矩固定住，就把下面这块老老实实写进去。",
-              "code": "{\n  \"env\": {\n    \"CLAUDE_CODE_ENABLE_OPUS_4_7_FAST_MODE\": \"1\"\n  }\n}",
-              "kind": "config"
-            }
           ]
         },
         {
@@ -17856,7 +17862,8 @@
         {
           "title": "Handle rate limits",
           "paragraphs": [
-            "这里不是让你背\"Handle rate limits\"这个词，而是让你看它真干活时怎么使。"
+            "这里不是让你背\"Handle rate limits\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -18884,7 +18891,8 @@
         {
           "title": "Windows configuration",
           "paragraphs": [
-            "看到这里，就把\"Windows configuration\"当成一件真要上手的活来看。"
+            "看到这里，就把\"Windows configuration\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
@@ -20761,7 +20769,7 @@
             {
               "title": "原页关键片段：Complete schema",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": [\"./custom/agents/reviewer.md\"],\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"experimental\": {\n    \"themes\": \"./themes/\",\n    \"monitors\": \"./monitors.json\"\n  },\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
+              "code": "{\n  \"name\": \"plugin-name\",\n  \"displayName\": \"Plugin Name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": [\"./custom/agents/reviewer.md\"],\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"experimental\": {\n    \"themes\": \"./themes/\",\n    \"monitors\": \"./monitors.json\"\n  },\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
               "kind": "config"
             },
             {
@@ -20930,7 +20938,7 @@
             {
               "title": "Complete schema",
               "body": "光知道意思还不够，这里得把规矩落进配置里，下面这块照着填。",
-              "code": "{\n  \"name\": \"plugin-name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": [\"./custom/agents/reviewer.md\"],\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"experimental\": {\n    \"themes\": \"./themes/\",\n    \"monitors\": \"./monitors.json\"\n  },\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
+              "code": "{\n  \"name\": \"plugin-name\",\n  \"displayName\": \"Plugin Name\",\n  \"version\": \"1.2.0\",\n  \"description\": \"Brief plugin description\",\n  \"author\": {\n    \"name\": \"Author Name\",\n    \"email\": \"author@example.com\",\n    \"url\": \"https://github.com/author\"\n  },\n  \"homepage\": \"https://docs.example.com/plugin\",\n  \"repository\": \"https://github.com/author/plugin\",\n  \"license\": \"MIT\",\n  \"keywords\": [\"keyword1\", \"keyword2\"],\n  \"skills\": \"./custom/skills/\",\n  \"commands\": [\"./custom/commands/special.md\"],\n  \"agents\": [\"./custom/agents/reviewer.md\"],\n  \"hooks\": \"./config/hooks.json\",\n  \"mcpServers\": \"./mcp-config.json\",\n  \"outputStyles\": \"./styles/\",\n  \"lspServers\": \"./.lsp.json\",\n  \"experimental\": {\n    \"themes\": \"./themes/\",\n    \"monitors\": \"./monitors.json\"\n  },\n  \"dependencies\": [\n    \"helper-lib\",\n    { \"name\": \"secrets-vault\", \"version\": \"~2.1.0\" }\n  ]\n}",
               "kind": "config"
             }
           ]
@@ -21145,7 +21153,8 @@
         {
           "title": "plugin enable",
           "paragraphs": [
-            "这里不是让你背\"plugin enable\"这个词，而是让你看它真干活时怎么使。"
+            "这里不是让你背\"plugin enable\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
@@ -27210,19 +27219,19 @@
             {
               "title": "原页关键片段：Monitoring Todo Changes",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Optimize my React app performance and track progress with todos\",\n  options: { maxTurns: 15 }\n})) {\n  // Todo updates are reflected in the message stream\n  if (message.type === \"assistant\") {\n    for (const block of message.message.content) {\n      if (block.type === \"tool_use\" && block.name === \"TodoWrite\") {\n        const todos = block.input.todos;\n\n        console.log(\"Todo Status Update:\");\n        todos.forEach((todo, index) => {\n          const status =\n            todo.status === \"completed\" ? \"✅\" : todo.status === \"in_progress\" ? \"🔧\" : \"❌\";\n          console.log(`${index + 1}. ${status} ${todo.content}`);\n        });\n      }\n    }\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Optimize my React app performance and track progress with todos\",\n  // Re-enable TodoWrite, which this example monitors. Without it, the SDK uses\n  // Task tools instead and these tool_use blocks never appear.\n  options: { maxTurns: 15, env: { ...process.env, CLAUDE_CODE_ENABLE_TASKS: \"0\" } }\n})) {\n  // Todo updates are reflected in the message stream\n  if (message.type === \"assistant\") {\n    for (const block of message.message.content) {\n      if (block.type === \"tool_use\" && block.name === \"TodoWrite\") {\n        const todos = block.input.todos;\n\n        console.log(\"Todo Status Update:\");\n        todos.forEach((todo, index) => {\n          const status =\n            todo.status === \"completed\" ? \"✅\" : todo.status === \"in_progress\" ? \"🔧\" : \"❌\";\n          console.log(`${index + 1}. ${status} ${todo.content}`);\n        });\n      }\n    }\n  }\n}",
               "kind": "command"
             },
             {
               "title": "原页关键片段：Real-time Progress Display",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nclass TodoTracker {\n  private todos: any[] = [];\n\n  displayProgress() {\n    if (this.todos.length === 0) return;\n\n    const completed = this.todos.filter((t) => t.status === \"completed\").length;\n    const inProgress = this.todos.filter((t) => t.status === \"in_progress\").length;\n    const total = this.todos.length;\n\n    console.log(`\\nProgress: ${completed}/${total} completed`);\n    console.log(`Currently working on: ${inProgress} task(s)\\n`);\n\n    this.todos.forEach((todo, index) => {\n      const icon =\n        todo.status === \"completed\" ? \"✅\" : todo.status === \"in_progress\" ? \"🔧\" : \"❌\";\n      const text = todo.status === \"in_progress\" ? todo.activeForm : todo.content;\n      console.log(`${index + 1}. ${icon} ${text}`);\n    });\n  }\n\n  async trackQuery(prompt: string) {\n    for await (const message of query({\n      prompt,\n      options: { maxTurns: 20 }\n    })) {\n      if (message.type === \"assistant\") {\n        for (const block of message.message.content) {\n          if (block.type === \"tool_use\" && block.name === \"TodoWrite\") {\n            this.todos = block.input.todos;\n            this.displayProgress();\n          }\n        }\n      }\n    }\n  }\n}\n\n// Usage\nconst tracker = new TodoTracker();\nawait tracker.trackQuery(\"Build a complete authentication system with todos\");",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nclass TodoTracker {\n  private todos: any[] = [];\n\n  displayProgress() {\n    if (this.todos.length === 0) return;\n\n    const completed = this.todos.filter((t) => t.status === \"completed\").length;\n    const inProgress = this.todos.filter((t) => t.status === \"in_progress\").length;\n    const total = this.todos.length;\n\n    console.log(`\\nProgress: ${completed}/${total} completed`);\n    console.log(`Currently working on: ${inProgress} task(s)\\n`);\n\n    this.todos.forEach((todo, index) => {\n      const icon =\n        todo.status === \"completed\" ? \"✅\" : todo.status === \"in_progress\" ? \"🔧\" : \"❌\";\n      const text = todo.status === \"in_progress\" ? todo.activeForm : todo.content;\n      console.log(`${index + 1}. ${icon} ${text}`);\n    });\n  }\n\n  async trackQuery(prompt: string) {\n    for await (const message of query({\n      prompt,\n      // Re-enable TodoWrite, which this tracker watches for.\n      options: { maxTurns: 20, env: { ...process.env, CLAUDE_CODE_ENABLE_TASKS: \"0\" } }\n    })) {\n      if (message.type === \"assistant\") {\n        for (const block of message.message.content) {\n          if (block.type === \"tool_use\" && block.name === \"TodoWrite\") {\n            this.todos = block.input.todos;\n            this.displayProgress();\n          }\n        }\n      }\n    }\n  }\n}\n\n// Usage\nconst tracker = new TodoTracker();\nawait tracker.trackQuery(\"Build a complete authentication system with todos\");",
               "kind": "command"
             },
             {
               "title": "原页关键片段：Migrate to Task tools",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Optimize my React app performance\",\n  options: { env: { ...process.env, CLAUDE_CODE_ENABLE_TASKS: \"1\" } },\n})) {\n  if (message.type !== \"assistant\") continue;\n  for (const block of message.message.content) {\n    if (block.type !== \"tool_use\") continue;\n    if (block.name === \"TaskCreate\") {\n      const input = block.input as { subject: string };\n      console.log(`+ ${input.subject}`);\n    } else if (block.name === \"TaskUpdate\") {\n      const input = block.input as { taskId: string; status?: string };\n      if (input.status) console.log(`  ${input.taskId} -> ${input.status}`);\n    }\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Optimize my React app performance\",\n})) {\n  if (message.type !== \"assistant\") continue;\n  for (const block of message.message.content) {\n    if (block.type !== \"tool_use\") continue;\n    if (block.name === \"TaskCreate\") {\n      const input = block.input as { subject: string };\n      console.log(`+ ${input.subject}`);\n    } else if (block.name === \"TaskUpdate\") {\n      const input = block.input as { taskId: string; status?: string };\n      if (input.status) console.log(`  ${input.taskId} -> ${input.status}`);\n    }\n  }\n}",
               "kind": "command"
             }
           ]
@@ -27262,7 +27271,7 @@
             {
               "title": "Monitoring Todo Changes",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Optimize my React app performance and track progress with todos\",\n  options: { maxTurns: 15 }\n})) {\n  // Todo updates are reflected in the message stream\n  if (message.type === \"assistant\") {\n    for (const block of message.message.content) {\n      if (block.type === \"tool_use\" && block.name === \"TodoWrite\") {\n        const todos = block.input.todos;\n\n        console.log(\"Todo Status Update:\");\n        todos.forEach((todo, index) => {\n          const status =\n            todo.status === \"completed\" ? \"✅\" : todo.status === \"in_progress\" ? \"🔧\" : \"❌\";\n          console.log(`${index + 1}. ${status} ${todo.content}`);\n        });\n      }\n    }\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Optimize my React app performance and track progress with todos\",\n  // Re-enable TodoWrite, which this example monitors. Without it, the SDK uses\n  // Task tools instead and these tool_use blocks never appear.\n  options: { maxTurns: 15, env: { ...process.env, CLAUDE_CODE_ENABLE_TASKS: \"0\" } }\n})) {\n  // Todo updates are reflected in the message stream\n  if (message.type === \"assistant\") {\n    for (const block of message.message.content) {\n      if (block.type === \"tool_use\" && block.name === \"TodoWrite\") {\n        const todos = block.input.todos;\n\n        console.log(\"Todo Status Update:\");\n        todos.forEach((todo, index) => {\n          const status =\n            todo.status === \"completed\" ? \"✅\" : todo.status === \"in_progress\" ? \"🔧\" : \"❌\";\n          console.log(`${index + 1}. ${status} ${todo.content}`);\n        });\n      }\n    }\n  }\n}",
               "kind": "command"
             }
           ]
@@ -27276,7 +27285,7 @@
             {
               "title": "Real-time Progress Display",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nclass TodoTracker {\n  private todos: any[] = [];\n\n  displayProgress() {\n    if (this.todos.length === 0) return;\n\n    const completed = this.todos.filter((t) => t.status === \"completed\").length;\n    const inProgress = this.todos.filter((t) => t.status === \"in_progress\").length;\n    const total = this.todos.length;\n\n    console.log(`\\nProgress: ${completed}/${total} completed`);\n    console.log(`Currently working on: ${inProgress} task(s)\\n`);\n\n    this.todos.forEach((todo, index) => {\n      const icon =\n        todo.status === \"completed\" ? \"✅\" : todo.status === \"in_progress\" ? \"🔧\" : \"❌\";\n      const text = todo.status === \"in_progress\" ? todo.activeForm : todo.content;\n      console.log(`${index + 1}. ${icon} ${text}`);\n    });\n  }\n\n  async trackQuery(prompt: string) {\n    for await (const message of query({\n      prompt,\n      options: { maxTurns: 20 }\n    })) {\n      if (message.type === \"assistant\") {\n        for (const block of message.message.content) {\n          if (block.type === \"tool_use\" && block.name === \"TodoWrite\") {\n            this.todos = block.input.todos;\n            this.displayProgress();\n          }\n        }\n      }\n    }\n  }\n}\n\n// Usage\nconst tracker = new TodoTracker();\nawait tracker.trackQuery(\"Build a complete authentication system with todos\");",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nclass TodoTracker {\n  private todos: any[] = [];\n\n  displayProgress() {\n    if (this.todos.length === 0) return;\n\n    const completed = this.todos.filter((t) => t.status === \"completed\").length;\n    const inProgress = this.todos.filter((t) => t.status === \"in_progress\").length;\n    const total = this.todos.length;\n\n    console.log(`\\nProgress: ${completed}/${total} completed`);\n    console.log(`Currently working on: ${inProgress} task(s)\\n`);\n\n    this.todos.forEach((todo, index) => {\n      const icon =\n        todo.status === \"completed\" ? \"✅\" : todo.status === \"in_progress\" ? \"🔧\" : \"❌\";\n      const text = todo.status === \"in_progress\" ? todo.activeForm : todo.content;\n      console.log(`${index + 1}. ${icon} ${text}`);\n    });\n  }\n\n  async trackQuery(prompt: string) {\n    for await (const message of query({\n      prompt,\n      // Re-enable TodoWrite, which this tracker watches for.\n      options: { maxTurns: 20, env: { ...process.env, CLAUDE_CODE_ENABLE_TASKS: \"0\" } }\n    })) {\n      if (message.type === \"assistant\") {\n        for (const block of message.message.content) {\n          if (block.type === \"tool_use\" && block.name === \"TodoWrite\") {\n            this.todos = block.input.todos;\n            this.displayProgress();\n          }\n        }\n      }\n    }\n  }\n}\n\n// Usage\nconst tracker = new TodoTracker();\nawait tracker.trackQuery(\"Build a complete authentication system with todos\");",
               "kind": "command"
             }
           ]
@@ -27291,7 +27300,7 @@
             {
               "title": "Migrate to Task tools",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Optimize my React app performance\",\n  options: { env: { ...process.env, CLAUDE_CODE_ENABLE_TASKS: \"1\" } },\n})) {\n  if (message.type !== \"assistant\") continue;\n  for (const block of message.message.content) {\n    if (block.type !== \"tool_use\") continue;\n    if (block.name === \"TaskCreate\") {\n      const input = block.input as { subject: string };\n      console.log(`+ ${input.subject}`);\n    } else if (block.name === \"TaskUpdate\") {\n      const input = block.input as { taskId: string; status?: string };\n      if (input.status) console.log(`  ${input.taskId} -> ${input.status}`);\n    }\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Optimize my React app performance\",\n})) {\n  if (message.type !== \"assistant\") continue;\n  for (const block of message.message.content) {\n    if (block.type !== \"tool_use\") continue;\n    if (block.name === \"TaskCreate\") {\n      const input = block.input as { subject: string };\n      console.log(`+ ${input.subject}`);\n    } else if (block.name === \"TaskUpdate\") {\n      const input = block.input as { taskId: string; status?: string };\n      if (input.status) console.log(`  ${input.taskId} -> ${input.status}`);\n    }\n  }\n}",
               "kind": "command"
             }
           ]
@@ -28395,19 +28404,19 @@
       }
     },
     "agent-sdk/typescript-v2-preview": {
-      "sourceLabel": "TypeScript SDK V2 session API (deprecated)",
+      "sourceLabel": "TypeScript SDK V2 session API (removed)",
       "sections": [
         {
           "title": "简要总结",
           "paragraphs": [
-            "这页主要讲 TypeScript V2 (deprecated)：Reference for the deprecated V2 TypeScript Agent SDK session API, with session-based send/stream patterns for multi-turn conversations.",
+            "这页主要讲 TypeScript V2 (removed)：Reference for the removed V2 TypeScript Agent SDK session API, with session-based send/stream patterns for multi-turn conversations.",
             "你可以把它当成\"SDK references\"这块里专门管这一摊事的说明书。"
           ]
         },
         {
           "title": "农民伯伯版解释",
           "paragraphs": [
-            "你可以把\"TypeScript V2 (deprecated)\"理解成 SDK references 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "你可以把\"TypeScript V2 (removed)\"理解成 SDK references 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Installation、Quick start、One-shot prompt、Basic session 这些环节往下讲。",
             "翻成人话，大概就是：Multi-turn conversation"
           ]
@@ -28423,7 +28432,7 @@
             {
               "title": "原页关键片段：Installation",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "npm install @anthropic-ai/claude-agent-sdk",
+              "code": "npm install @anthropic-ai/claude-agent-sdk@0.2",
               "kind": "command"
             },
             {
@@ -28498,13 +28507,13 @@
         {
           "title": "Installation",
           "paragraphs": [
-            "这里主要是在交代\"Installation\"这一块会碰到哪些事。"
+            "这里不是让你背\"Installation\"这个词，而是让你看它真干活时怎么使。"
           ],
           "steps": [
             {
               "title": "Installation",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "npm install @anthropic-ai/claude-agent-sdk",
+              "code": "npm install @anthropic-ai/claude-agent-sdk@0.2",
               "kind": "command"
             }
           ]
@@ -28677,7 +28686,7 @@
       "illustration": {
         "title": "一眼看懂这一页",
         "lines": [
-          "TypeScript V2 (deprecated)",
+          "TypeScript V2 (removed)",
           "   |",
           "   v",
           "这是 SDK references 里的一摊要紧活",
@@ -28702,7 +28711,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Python SDK\"理解成 SDK references 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 Installation、Choosing between query() and ClaudeSDKClient、Quick comparison、When to use query() (new session each time) 这些环节往下讲。",
+            "原文这页大多会按 Installation、Choosing between query() and ClaudeSDKClient、Quick comparison、When to use query() (one-off tasks) 这些环节往下讲。",
             "翻成人话，大概就是：Choosing between query() and ClaudeSDKClient"
           ]
         },
@@ -28711,7 +28720,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：Installation -> Choosing between query() and ClaudeSDKClient -> Quick comparison -> When to use query() (new session each time)。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：Installation -> Choosing between query() and ClaudeSDKClient -> Quick comparison -> When to use query() (one-off tasks)。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ],
           "steps": [
             {
@@ -28821,9 +28830,9 @@
           ]
         },
         {
-          "title": "When to use query() (new session each time)",
+          "title": "When to use query() (one-off tasks)",
           "paragraphs": [
-            "这一段主要是在帮你判断：When to use query() (new session each time) 这种东西到底值不值得现在就上。"
+            "When to use query() (one-off tasks) 到底什么时候值得上，这一段就是在算这笔账。"
           ]
         },
         {
@@ -29104,7 +29113,7 @@
             {
               "title": "ClaudeAgentOptions 1",
               "body": "\"ClaudeAgentOptions\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "@dataclass\nclass ClaudeAgentOptions:\n    tools: list[str] | ToolsPreset | None = None\n    allowed_tools: list[str] = field(default_factory=list)\n    system_prompt: str | SystemPromptPreset | None = None\n    mcp_servers: dict[str, McpServerConfig] | str | Path = field(default_factory=dict)\n    strict_mcp_config: bool = False\n    permission_mode: PermissionMode | None = None\n    continue_conversation: bool = False\n    resume: str | None = None\n    max_turns: int | None = None\n    max_budget_usd: float | None = None\n    disallowed_tools: list[str] = field(default_factory=list)\n    model: str | None = None\n    fallback_model: str | None = None\n    betas: list[SdkBeta] = field(default_factory=list)\n    output_format: dict[str, Any] | None = None\n    permission_prompt_tool_name: str | None = None\n    cwd: str | Path | None = None\n    cli_path: str | Path | None = None\n    settings: str | None = None\n    add_dirs: list[str | Path] = field(default_factory=list)\n    env: dict[str, str] = field(default_factory=dict)\n    extra_args: dict[str, str | None] = field(default_factory=dict)\n    max_buffer_size: int | None = None\n    debug_stderr: Any = sys.stderr  # Deprecated\n    stderr: Callable[[str], None] | None = None\n    can_use_tool: CanUseTool | None = None\n    hooks: dict[HookEvent, list[HookMatcher]] | None = None\n    user: str | None = None\n    include_partial_messages: bool = False\n    include_hook_events: bool = False\n    fork_session: bool = False\n    agents: dict[str, AgentDefinition] | None = None\n    setting_sources: list[SettingSource] | None = None\n    sandbox: SandboxSettings | None = None\n    plugins: list[SdkPluginConfig] = field(default_factory=list)\n    max_thinking_tokens: int | None = None  # Deprecated: use thinking instead\n    thinking: ThinkingConfig | None = None\n    effort: Literal[\"low\", \"medium\", \"high\", \"xhigh\", \"max\"] | None = None\n    enable_file_checkpointing: bool = False\n    session_store: SessionStore | None = None\n    session_store_flush: SessionStoreFlushMode = \"batched\"",
+              "code": "@dataclass\nclass ClaudeAgentOptions:\n    tools: list[str] | ToolsPreset | None = None\n    allowed_tools: list[str] = field(default_factory=list)\n    system_prompt: str | SystemPromptPreset | None = None\n    mcp_servers: dict[str, McpServerConfig] | str | Path = field(default_factory=dict)\n    strict_mcp_config: bool = False\n    permission_mode: PermissionMode | None = None\n    continue_conversation: bool = False\n    resume: str | None = None\n    max_turns: int | None = None\n    max_budget_usd: float | None = None\n    disallowed_tools: list[str] = field(default_factory=list)\n    model: str | None = None\n    fallback_model: str | None = None\n    betas: list[SdkBeta] = field(default_factory=list)\n    output_format: dict[str, Any] | None = None\n    permission_prompt_tool_name: str | None = None\n    cwd: str | Path | None = None\n    cli_path: str | Path | None = None\n    settings: str | None = None\n    add_dirs: list[str | Path] = field(default_factory=list)\n    env: dict[str, str] = field(default_factory=dict)\n    extra_args: dict[str, str | None] = field(default_factory=dict)\n    max_buffer_size: int | None = None\n    debug_stderr: Any = sys.stderr  # Deprecated\n    stderr: Callable[[str], None] | None = None\n    can_use_tool: CanUseTool | None = None\n    hooks: dict[HookEvent, list[HookMatcher]] | None = None\n    user: str | None = None\n    include_partial_messages: bool = False\n    include_hook_events: bool = False\n    fork_session: bool = False\n    agents: dict[str, AgentDefinition] | None = None\n    setting_sources: list[SettingSource] | None = None\n    sandbox: SandboxSettings | None = None\n    plugins: list[SdkPluginConfig] = field(default_factory=list)\n    max_thinking_tokens: int | None = None  # Deprecated: use thinking instead\n    thinking: ThinkingConfig | None = None\n    effort: EffortLevel | None = None\n    enable_file_checkpointing: bool = False\n    session_store: SessionStore | None = None\n    session_store_flush: SessionStoreFlushMode = \"batched\"",
               "kind": "code"
             },
             {
@@ -29186,7 +29195,7 @@
             {
               "title": "AgentDefinition",
               "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "@dataclass\nclass AgentDefinition:\n    description: str\n    prompt: str\n    tools: list[str] | None = None\n    disallowedTools: list[str] | None = None\n    model: str | None = None\n    skills: list[str] | None = None\n    memory: Literal[\"user\", \"project\", \"local\"] | None = None\n    mcpServers: list[str | dict[str, Any]] | None = None\n    initialPrompt: str | None = None\n    maxTurns: int | None = None\n    background: bool | None = None\n    effort: Literal[\"low\", \"medium\", \"high\", \"xhigh\", \"max\"] | int | None = None\n    permissionMode: PermissionMode | None = None",
+              "code": "@dataclass\nclass AgentDefinition:\n    description: str\n    prompt: str\n    tools: list[str] | None = None\n    disallowedTools: list[str] | None = None\n    model: str | None = None\n    skills: list[str] | None = None\n    memory: Literal[\"user\", \"project\", \"local\"] | None = None\n    mcpServers: list[str | dict[str, Any]] | None = None\n    initialPrompt: str | None = None\n    maxTurns: int | None = None\n    background: bool | None = None\n    effort: EffortLevel | int | None = None\n    permissionMode: PermissionMode | None = None",
               "kind": "code"
             }
           ]
@@ -29202,6 +29211,20 @@
               "title": "PermissionMode",
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
               "code": "PermissionMode = Literal[\n    \"default\",  # Standard permission behavior\n    \"acceptEdits\",  # Auto-accept file edits\n    \"plan\",  # Planning mode - read-only tools only\n    \"dontAsk\",  # Deny anything not pre-approved instead of prompting\n    \"bypassPermissions\",  # Bypass all permission checks (use with caution)\n]",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "EffortLevel",
+          "paragraphs": [
+            "这里不是让你背\"EffortLevel\"这个词，而是让你看它真干活时怎么使。"
+          ],
+          "steps": [
+            {
+              "title": "EffortLevel",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "EffortLevel = Literal[\n    \"low\",  # Minimal thinking, fastest responses\n    \"medium\",  # Moderate thinking\n    \"high\",  # Deep reasoning\n    \"xhigh\",  # Extended reasoning (Opus 4.7 only; falls back to \"high\" on other models)\n    \"max\",  # Maximum effort\n]",
               "kind": "code"
             }
           ]
@@ -29262,21 +29285,6 @@
               "title": "PermissionResultAllow",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
               "code": "@dataclass\nclass PermissionResultAllow:\n    behavior: Literal[\"allow\"] = \"allow\"\n    updated_input: dict[str, Any] | None = None\n    updated_permissions: list[PermissionUpdate] | None = None",
-              "kind": "code"
-            }
-          ]
-        },
-        {
-          "title": "PermissionResultDeny",
-          "paragraphs": [
-            "这一段主要是在把\"PermissionResultDeny\"讲实，不是只摆个标题给你看。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
-          ],
-          "steps": [
-            {
-              "title": "PermissionResultDeny",
-              "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "@dataclass\nclass PermissionResultDeny:\n    behavior: Literal[\"deny\"] = \"deny\"\n    message: str = \"\"\n    interrupt: bool = False",
               "kind": "code"
             }
           ]
