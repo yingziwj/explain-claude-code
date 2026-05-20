@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-19T06:20:26.071Z",
-  "sourceGeneratedAt": "2026-05-19T06:20:25.737Z",
+  "generatedAt": "2026-05-20T06:19:20.540Z",
+  "sourceGeneratedAt": "2026-05-20T06:19:20.185Z",
   "items": {
     "overview": {
       "sourceLabel": "Overview",
@@ -528,7 +528,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.144、2.1.143、2.1.142、2.1.141 这些环节往下讲。",
+            "原文这页大多会按 2.1.145、2.1.144、2.1.143、2.1.142 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -537,7 +537,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.144 -> 2.1.143 -> 2.1.142 -> 2.1.141。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.145 -> 2.1.144 -> 2.1.143 -> 2.1.142。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         },
         {
@@ -1248,6 +1248,225 @@
         "title": "一眼看懂这一页",
         "lines": [
           "Explore the context window",
+          "   |",
+          "   v",
+          "这是 Core concepts 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "prompt-caching": {
+      "sourceLabel": "How Claude Code uses prompt caching",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Prompt caching：Claude Code manages prompt caching automatically. See why a model switch triggers a slow uncached turn, what /compact costs, why CLAUDE.md edits don't apply mid-session, and how to check your cache hit rate.",
+            "你可以把它当成\"Core concepts\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Prompt caching\"理解成 Core concepts 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 How the cache is organized、Where the cache lives、Actions that invalidate the cache、Switching models 这些环节往下讲。",
+            "翻成人话，大概就是：How the cache is organized"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：How the cache is organized -> Where the cache lives -> Actions that invalidate the cache -> Switching models。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ]
+        },
+        {
+          "title": "Documentation Index",
+          "paragraphs": [
+            "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "How the cache is organized",
+          "paragraphs": [
+            "这里不是让你背\"How the cache is organized\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Where the cache lives",
+          "paragraphs": [
+            "看到这里，就把\"Where the cache lives\"当成一件真要上手的活来看。"
+          ]
+        },
+        {
+          "title": "Actions that invalidate the cache",
+          "paragraphs": [
+            "看到这里，就别靠猜了，字段、格式和写法都得按说明来。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Switching models",
+          "paragraphs": [
+            "这一段主要是在把\"Switching models\"讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Connecting or disconnecting an MCP server",
+          "paragraphs": [
+            "看到这里，就把\"Connecting or disconnecting an MCP server\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Denying an entire tool",
+          "paragraphs": [
+            "这里不是让你背\"Denying an entire tool\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Compacting the conversation",
+          "paragraphs": [
+            "这一块主要是在说\"Compacting the conversation\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Upgrading Claude Code",
+          "paragraphs": [
+            "这里不是让你背\"Upgrading Claude Code\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Actions that keep the cache",
+          "paragraphs": [
+            "看到这里，就别靠猜了，字段、格式和写法都得按说明来。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Editing files in your repository",
+          "paragraphs": [
+            "这一块主要是在说\"Editing files in your repository\"真到手上该怎么用，哪里最容易踩坑。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Editing CLAUDE.md mid-session",
+          "paragraphs": [
+            "这一段主要是在把\"Editing CLAUDE.md mid-session\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Changing output style",
+          "paragraphs": [
+            "这一块主要是在说\"Changing output style\"真到手上该怎么用，哪里最容易踩坑。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Changing permission mode",
+          "paragraphs": [
+            "这一块主要是在说\"Changing permission mode\"真到手上该怎么用，哪里最容易踩坑。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Invoking skills and commands",
+          "paragraphs": [
+            "这一段主要是在把\"Invoking skills and commands\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Running /recap",
+          "paragraphs": [
+            "看到这里，就把\"Running /recap\"当成一件真要上手的活来看。"
+          ]
+        },
+        {
+          "title": "Rewinding the conversation",
+          "paragraphs": [
+            "看到这里，就把\"Rewinding the conversation\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Cache lifetime",
+          "paragraphs": [
+            "看到这里，就把\"Cache lifetime\"当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "On a Claude subscription",
+          "paragraphs": [
+            "这一块主要是在说\"On a Claude subscription\"真到手上该怎么用，哪里最容易踩坑。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "On an API key or third-party provider",
+          "paragraphs": [
+            "看到这里，就把\"On an API key or third-party provider\"当成一件真要上手的活来看。"
+          ]
+        },
+        {
+          "title": "Override the TTL",
+          "paragraphs": [
+            "这一块主要是在说\"Override the TTL\"真到手上该怎么用，哪里最容易踩坑。"
+          ]
+        },
+        {
+          "title": "Cache scope",
+          "paragraphs": [
+            "这里不是让你背\"Cache scope\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Check cache performance",
+          "paragraphs": [
+            "这一段主要是在把\"Check cache performance\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Subagents and the cache",
+          "paragraphs": [
+            "这一段主要是在把\"Subagents and the cache\"讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Disable prompt caching",
+          "paragraphs": [
+            "这一段主要是在拧开关，地方和顺序都别搞错。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+          ]
+        },
+        {
+          "title": "Related resources",
+          "paragraphs": [
+            "这一段主要是在把\"Related resources\"讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Prompt caching",
           "   |",
           "   v",
           "这是 Core concepts 里的一摊要紧活",
@@ -5213,7 +5432,7 @@
             {
               "title": "From your shell 4",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "backgrounded · 7c5dcf5d\n  claude agents             list sessions\n  claude attach 7c5dcf5d    open in this terminal\n  claude logs 7c5dcf5d      show recent output\n  claude stop 7c5dcf5d      stop this session",
+              "code": "backgrounded · 7c5dcf5d · flaky-test-fix\n  claude agents             list sessions\n  claude attach 7c5dcf5d    open in this terminal\n  claude logs 7c5dcf5d      show recent output\n  claude stop 7c5dcf5d      stop this session",
               "kind": "command"
             }
           ]
@@ -6709,6 +6928,18 @@
               "kind": "command"
             },
             {
+              "title": "原页关键片段：Community marketplace 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "/plugin marketplace add anthropics/claude-plugins-community",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Community marketplace 2",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "/plugin install <plugin-name>@claude-community",
+              "kind": "command"
+            },
+            {
               "title": "原页关键片段：Try it: add the demo marketplace 1",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
               "code": "/plugin marketplace add anthropics/claude-code",
@@ -6761,18 +6992,6 @@
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "/plugin marketplace add ./path/to/marketplace.json",
               "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Add from remote URLs",
-              "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "/plugin marketplace add https://example.com/marketplace.json",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Install plugins",
-              "body": "到这里其实就剩一句话，把下面这句发出去就行。",
-              "code": "/plugin install plugin-name@marketplace-name",
-              "kind": "prompt"
             }
           ]
         },
@@ -6830,6 +7049,26 @@
           "paragraphs": [
             "这一块主要是在说\"Output styles\"真到手上该怎么用，哪里最容易踩坑。",
             "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ]
+        },
+        {
+          "title": "Community marketplace",
+          "paragraphs": [
+            "这里主要是在交代\"Community marketplace\"这一块会碰到哪些事。"
+          ],
+          "steps": [
+            {
+              "title": "Community marketplace 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "/plugin marketplace add anthropics/claude-plugins-community",
+              "kind": "command"
+            },
+            {
+              "title": "Community marketplace 2",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "/plugin install <plugin-name>@claude-community",
+              "kind": "command"
+            }
           ]
         },
         {
@@ -7430,9 +7669,9 @@
           ]
         },
         {
-          "title": "Submit your plugin to the official marketplace",
+          "title": "Submit your plugin to the community marketplace",
           "paragraphs": [
-            "这一段主要是在把\"Submit your plugin to the official marketplace\"讲实，不是只摆个标题给你看。",
+            "这一段主要是在把\"Submit your plugin to the community marketplace\"讲实，不是只摆个标题给你看。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
@@ -7627,6 +7866,13 @@
           "title": "Bundled skills",
           "paragraphs": [
             "这一段主要是在把\"Bundled skills\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Run and verify your app",
+          "paragraphs": [
+            "这一块主要是在说\"Run and verify your app\"真到手上该怎么用，哪里最容易踩坑。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
@@ -7828,7 +8074,7 @@
           "title": "Inject dynamic context",
           "paragraphs": [
             "别把这段只当成标题看，它其实是在给\"Inject dynamic context\"划边界。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
           ],
           "steps": [
             {
@@ -16611,6 +16857,13 @@
           ]
         },
         {
+          "title": "When edits take effect",
+          "paragraphs": [
+            "When edits take effect 到底什么时候值得上，这一段就是在算这笔账。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
           "title": "Available settings",
           "paragraphs": [
             "这里不是让你背\"Available settings\"这个词，而是让你看它真干活时怎么使。",
@@ -16950,7 +17203,7 @@
           "title": "Manage permissions",
           "paragraphs": [
             "这段主要是在说平时怎么管，不是光教你怎么开。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -17744,8 +17997,7 @@
         {
           "title": "Prompt caching configuration",
           "paragraphs": [
-            "看到这里，就把\"Prompt caching configuration\"当成一件真要上手的活来看。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+            "看到这里，就把\"Prompt caching configuration\"当成一件真要上手的活来看。"
           ]
         }
       ],
@@ -18634,7 +18886,7 @@
             {
               "title": "原页关键片段：Available data",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15500,\n    \"total_output_tokens\": 1200,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"effort\": {\n    \"level\": \"high\"\n  },\n  \"thinking\": {\n    \"enabled\": true\n  },\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
+              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\",\n    \"repo\": {\n      \"host\": \"github.com\",\n      \"owner\": \"anthropics\",\n      \"name\": \"claude-code\"\n    }\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15500,\n    \"total_output_tokens\": 1200,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"effort\": {\n    \"level\": \"high\"\n  },\n  \"thinking\": {\n    \"enabled\": true\n  },\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"pr\": {\n    \"number\": 1234,\n    \"url\": \"https://github.com/anthropics/claude-code/pull/1234\",\n    \"review_state\": \"pending\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
               "kind": "config"
             },
             {
@@ -18768,7 +19020,7 @@
             {
               "title": "Available data",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\"\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15500,\n    \"total_output_tokens\": 1200,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"effort\": {\n    \"level\": \"high\"\n  },\n  \"thinking\": {\n    \"enabled\": true\n  },\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
+              "code": "{\n  \"cwd\": \"/current/working/directory\",\n  \"session_id\": \"abc123...\",\n  \"session_name\": \"my-session\",\n  \"transcript_path\": \"/path/to/transcript.jsonl\",\n  \"model\": {\n    \"id\": \"claude-opus-4-7\",\n    \"display_name\": \"Opus\"\n  },\n  \"workspace\": {\n    \"current_dir\": \"/current/working/directory\",\n    \"project_dir\": \"/original/project/directory\",\n    \"added_dirs\": [],\n    \"git_worktree\": \"feature-xyz\",\n    \"repo\": {\n      \"host\": \"github.com\",\n      \"owner\": \"anthropics\",\n      \"name\": \"claude-code\"\n    }\n  },\n  \"version\": \"2.1.90\",\n  \"output_style\": {\n    \"name\": \"default\"\n  },\n  \"cost\": {\n    \"total_cost_usd\": 0.01234,\n    \"total_duration_ms\": 45000,\n    \"total_api_duration_ms\": 2300,\n    \"total_lines_added\": 156,\n    \"total_lines_removed\": 23\n  },\n  \"context_window\": {\n    \"total_input_tokens\": 15500,\n    \"total_output_tokens\": 1200,\n    \"context_window_size\": 200000,\n    \"used_percentage\": 8,\n    \"remaining_percentage\": 92,\n    \"current_usage\": {\n      \"input_tokens\": 8500,\n      \"output_tokens\": 1200,\n      \"cache_creation_input_tokens\": 5000,\n      \"cache_read_input_tokens\": 2000\n    }\n  },\n  \"exceeds_200k_tokens\": false,\n  \"effort\": {\n    \"level\": \"high\"\n  },\n  \"thinking\": {\n    \"enabled\": true\n  },\n  \"rate_limits\": {\n    \"five_hour\": {\n      \"used_percentage\": 23.5,\n      \"resets_at\": 1738425600\n    },\n    \"seven_day\": {\n      \"used_percentage\": 41.2,\n      \"resets_at\": 1738857600\n    }\n  },\n  \"vim\": {\n    \"mode\": \"NORMAL\"\n  },\n  \"agent\": {\n    \"name\": \"security-reviewer\"\n  },\n  \"pr\": {\n    \"number\": 1234,\n    \"url\": \"https://github.com/anthropics/claude-code/pull/1234\",\n    \"review_state\": \"pending\"\n  },\n  \"worktree\": {\n    \"name\": \"my-feature\",\n    \"path\": \"/path/to/.claude/worktrees/my-feature\",\n    \"branch\": \"worktree-my-feature\",\n    \"original_cwd\": \"/path/to/project\",\n    \"original_branch\": \"main\"\n  }\n}",
               "kind": "config"
             }
           ]
@@ -19387,7 +19639,7 @@
         {
           "title": "简要总结",
           "paragraphs": [
-            "这页主要讲 Environment variables：Complete reference for environment variables that control Claude Code behavior.",
+            "这页主要讲 Environment variables：Reference for environment variables that control Claude Code behavior.",
             "你可以把它当成\"Reference\"这块里专门管这一摊事的说明书。"
           ]
         },
@@ -19395,8 +19647,8 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Environment variables\"理解成 Reference 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 See also 这些环节往下讲。",
-            "翻成人话，大概就是：Complete reference for environment variables that control Claude Code behavior."
+            "原文这页大多会按 Set environment variables、In your shell、In settings files、Precedence 这些环节往下讲。",
+            "翻成人话，大概就是：Set environment variables"
           ]
         },
         {
@@ -19404,7 +19656,33 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：See also。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：Set environment variables -> In your shell -> In settings files -> Precedence。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：In your shell 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "export API_TIMEOUT_MS=\"1200000\"\nclaude",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：In your shell 2",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "$env:API_TIMEOUT_MS = \"1200000\"\nclaude",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：In your shell 3",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "set API_TIMEOUT_MS=1200000\nclaude",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：In settings files",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"env\": {\n    \"API_TIMEOUT_MS\": \"1200000\",\n    \"BASH_DEFAULT_TIMEOUT_MS\": \"300000\"\n  }\n}",
+              "kind": "config"
+            }
           ]
         },
         {
@@ -19415,10 +19693,72 @@
           ]
         },
         {
+          "title": "Set environment variables",
+          "paragraphs": [
+            "这里不是让你背\"Set environment variables\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "In your shell",
+          "paragraphs": [
+            "这里不是让你背\"In your shell\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "In your shell 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "export API_TIMEOUT_MS=\"1200000\"\nclaude",
+              "kind": "command"
+            },
+            {
+              "title": "In your shell 2",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "$env:API_TIMEOUT_MS = \"1200000\"\nclaude",
+              "kind": "code"
+            },
+            {
+              "title": "In your shell 3",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "set API_TIMEOUT_MS=1200000\nclaude",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "In settings files",
+          "paragraphs": [
+            "看到这里，就把\"In settings files\"当成一件真要上手的活来看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "In settings files",
+              "body": "这一段说完，最后还得写到配置里才算真的生效。",
+              "code": "{\n  \"env\": {\n    \"API_TIMEOUT_MS\": \"1200000\",\n    \"BASH_DEFAULT_TIMEOUT_MS\": \"300000\"\n  }\n}",
+              "kind": "config"
+            }
+          ]
+        },
+        {
+          "title": "Precedence",
+          "paragraphs": [
+            "这里不是让你背\"Precedence\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Variables",
+          "paragraphs": [
+            "这一块主要是在说\"Variables\"真到手上该怎么用，哪里最容易踩坑。"
+          ]
+        },
+        {
           "title": "See also",
           "paragraphs": [
             "这一段主要是在把\"See also\"讲实，不是只摆个标题给你看。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
           ]
         }
       ],
@@ -19883,7 +20223,8 @@
         {
           "title": "PR review status",
           "paragraphs": [
-            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。"
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -20636,7 +20977,7 @@
             {
               "title": "Notification 2",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"hook_event_name\": \"Notification\",\n  \"message\": \"Claude needs your permission to use Bash\",\n  \"title\": \"Permission needed\",\n  \"notification_type\": \"permission_prompt\"\n}",
+              "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"hook_event_name\": \"Notification\",\n  \"message\": \"Claude needs your permission\",\n  \"title\": \"Permission needed\",\n  \"notification_type\": \"permission_prompt\"\n}",
               "kind": "config"
             }
           ]
@@ -20672,7 +21013,7 @@
             {
               "title": "SubagentStop",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
-              "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"~/.claude/projects/.../abc123.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"SubagentStop\",\n  \"stop_hook_active\": false,\n  \"agent_id\": \"def456\",\n  \"agent_type\": \"Explore\",\n  \"agent_transcript_path\": \"~/.claude/projects/.../abc123/subagents/agent-def456.jsonl\",\n  \"last_assistant_message\": \"Analysis complete. Found 3 potential issues...\"\n}",
+              "code": "{\n  \"session_id\": \"abc123\",\n  \"transcript_path\": \"~/.claude/projects/.../abc123.jsonl\",\n  \"cwd\": \"/Users/...\",\n  \"permission_mode\": \"default\",\n  \"hook_event_name\": \"SubagentStop\",\n  \"stop_hook_active\": false,\n  \"agent_id\": \"def456\",\n  \"agent_type\": \"Explore\",\n  \"agent_transcript_path\": \"~/.claude/projects/.../abc123/subagents/agent-def456.jsonl\",\n  \"last_assistant_message\": \"Analysis complete. Found 3 potential issues...\",\n  \"background_tasks\": [],\n  \"session_crons\": []\n}",
               "kind": "config"
             }
           ]
@@ -20773,6 +21114,12 @@
               "kind": "config"
             },
             {
+              "title": "原页关键片段：Unrecognized fields",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude plugin validate ./my-plugin --strict",
+              "kind": "command"
+            },
+            {
               "title": "原页关键片段：User configuration",
               "body": "这一段说完，最后还得写到配置里才算真的生效。",
               "code": "{\n  \"userConfig\": {\n    \"api_endpoint\": {\n      \"type\": \"string\",\n      \"title\": \"API endpoint\",\n      \"description\": \"Your team's API endpoint\"\n    },\n    \"api_token\": {\n      \"type\": \"string\",\n      \"title\": \"API token\",\n      \"description\": \"API authentication token\",\n      \"sensitive\": true\n    }\n  }\n}",
@@ -20782,12 +21129,6 @@
               "title": "原页关键片段：Channels",
               "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
               "code": "{\n  \"channels\": [\n    {\n      \"server\": \"telegram\",\n      \"userConfig\": {\n        \"bot_token\": {\n          \"type\": \"string\",\n          \"title\": \"Bot token\",\n          \"description\": \"Telegram bot token\",\n          \"sensitive\": true\n        },\n        \"owner_id\": {\n          \"type\": \"string\",\n          \"title\": \"Owner ID\",\n          \"description\": \"Your Telegram user ID\"\n        }\n      }\n    }\n  ]\n}",
-              "kind": "config"
-            },
-            {
-              "title": "原页关键片段：Path behavior rules",
-              "body": "这会儿轮到改配置了，字段名和关键字别自己乱换。",
-              "code": "{\n  \"commands\": [\n    \"./specialized/deploy.md\",\n    \"./utilities/batch-process.md\"\n  ],\n  \"agents\": [\n    \"./custom-agents/reviewer.md\",\n    \"./custom-agents/tester.md\"\n  ]\n}",
               "kind": "config"
             }
           ]
@@ -20947,6 +21288,21 @@
           "title": "Required fields",
           "paragraphs": [
             "这一段就是给你查规矩的，像看说明书那样一项项对着来。"
+          ]
+        },
+        {
+          "title": "Unrecognized fields",
+          "paragraphs": [
+            "看到这里，就别靠猜了，字段、格式和写法都得按说明来。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "Unrecognized fields",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "claude plugin validate ./my-plugin --strict",
+              "kind": "command"
+            }
           ]
         },
         {
@@ -21146,21 +21502,6 @@
               "title": "plugin prune",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
               "code": "claude plugin prune [options]",
-              "kind": "command"
-            }
-          ]
-        },
-        {
-          "title": "plugin enable",
-          "paragraphs": [
-            "这里不是让你背\"plugin enable\"这个词，而是让你看它真干活时怎么使。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "plugin enable",
-              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "claude plugin enable <plugin> [options]",
               "kind": "command"
             }
           ]
@@ -23968,7 +24309,7 @@
           "title": "Configure allowed tools",
           "paragraphs": [
             "这里讲怎么把某个开关拧对。重点不是概念，而是你该在哪儿改、改完怎么确认生效。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -26074,7 +26415,7 @@
           "title": "How permissions are evaluated",
           "paragraphs": [
             "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
-            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -27801,8 +28142,8 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"TypeScript SDK\"理解成 SDK references 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 Installation、Functions、query()、Parameters 这些环节往下讲。",
-            "翻成人话，大概就是：createSdkMcpServer()"
+            "原文这页大多会按 Installation、Compile to a single executable、Functions、query() 这些环节往下讲。",
+            "翻成人话，大概就是：Compile to a single executable"
           ]
         },
         {
@@ -27810,13 +28151,19 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：Installation -> Functions -> query() -> Parameters。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：Installation -> Compile to a single executable -> Functions -> query()。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ],
           "steps": [
             {
               "title": "原页关键片段：Installation",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
               "code": "npm install @anthropic-ai/claude-agent-sdk",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Compile to a single executable",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "import binPath from \"@anthropic-ai/claude-agent-sdk-darwin-arm64/claude\" with { type: \"file\" };\nimport { extractFromBunfs } from \"@anthropic-ai/claude-agent-sdk/extract\";\nimport { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst cliPath = extractFromBunfs(binPath);\n\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { pathToClaudeCodeExecutable: cliPath },\n})) {\n  console.log(message);\n}",
               "kind": "command"
             },
             {
@@ -27878,12 +28225,6 @@
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
               "code": "import { listSessions, getSessionMessages } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst [latest] = await listSessions({ dir: \"/path/to/project\", limit: 1 });\n\nif (latest) {\n  const messages = await getSessionMessages(latest.sessionId, {\n    dir: \"/path/to/project\",\n    limit: 20\n  });\n\n  for (const msg of messages) {\n    console.log(`[${msg.type}] ${msg.uuid}`);\n  }\n}",
               "kind": "command"
-            },
-            {
-              "title": "原页关键片段：getSessionInfo()",
-              "body": "\"getSessionInfo()\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
-              "code": "function getSessionInfo(\n  sessionId: string,\n  options?: GetSessionInfoOptions\n): Promise<SDKSessionInfo | undefined>;",
-              "kind": "code"
             }
           ]
         },
@@ -27903,6 +28244,21 @@
               "title": "Installation",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
               "code": "npm install @anthropic-ai/claude-agent-sdk",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Compile to a single executable",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Compile to a single executable",
+              "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
+              "code": "import binPath from \"@anthropic-ai/claude-agent-sdk-darwin-arm64/claude\" with { type: \"file\" };\nimport { extractFromBunfs } from \"@anthropic-ai/claude-agent-sdk/extract\";\nimport { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst cliPath = extractFromBunfs(binPath);\n\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { pathToClaudeCodeExecutable: cliPath },\n})) {\n  console.log(message);\n}",
               "kind": "command"
             }
           ]
@@ -28353,7 +28709,7 @@
             {
               "title": "SDKMessage",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "type SDKMessage =\n  | SDKAssistantMessage\n  | SDKUserMessage\n  | SDKUserMessageReplay\n  | SDKResultMessage\n  | SDKSystemMessage\n  | SDKPartialAssistantMessage\n  | SDKCompactBoundaryMessage\n  | SDKStatusMessage\n  | SDKLocalCommandOutputMessage\n  | SDKHookStartedMessage\n  | SDKHookProgressMessage\n  | SDKHookResponseMessage\n  | SDKPluginInstallMessage\n  | SDKToolProgressMessage\n  | SDKAuthStatusMessage\n  | SDKTaskNotificationMessage\n  | SDKTaskStartedMessage\n  | SDKTaskProgressMessage\n  | SDKTaskUpdatedMessage\n  | SDKFilesPersistedEvent\n  | SDKToolUseSummaryMessage\n  | SDKRateLimitEvent\n  | SDKPermissionDeniedMessage\n  | SDKPromptSuggestionMessage;",
+              "code": "type SDKMessage =\n  | SDKAssistantMessage\n  | SDKUserMessage\n  | SDKUserMessageReplay\n  | SDKResultMessage\n  | SDKSystemMessage\n  | SDKPartialAssistantMessage\n  | SDKCompactBoundaryMessage\n  | SDKStatusMessage\n  | SDKLocalCommandOutputMessage\n  | SDKHookStartedMessage\n  | SDKHookProgressMessage\n  | SDKHookResponseMessage\n  | SDKPluginInstallMessage\n  | SDKToolProgressMessage\n  | SDKAuthStatusMessage\n  | SDKTaskNotificationMessage\n  | SDKTaskStartedMessage\n  | SDKTaskProgressMessage\n  | SDKTaskUpdatedMessage\n  | SDKSessionStateChangedMessage\n  | SDKNotificationMessage\n  | SDKFilesPersistedEvent\n  | SDKToolUseSummaryMessage\n  | SDKMemoryRecallMessage\n  | SDKRateLimitEvent\n  | SDKElicitationCompleteMessage\n  | SDKPermissionDeniedMessage\n  | SDKPromptSuggestionMessage\n  | SDKAPIRetryMessage\n  | SDKMirrorErrorMessage;",
               "kind": "code"
             }
           ]
@@ -28369,21 +28725,6 @@
               "title": "SDKAssistantMessage",
               "body": "\"SDKAssistantMessage\"这一段里最要紧的原始写法在下面，先看它怎么落地。",
               "code": "type SDKAssistantMessage = {\n  type: \"assistant\";\n  uuid: UUID;\n  session_id: string;\n  message: BetaMessage; // From Anthropic SDK\n  parent_tool_use_id: string | null;\n  error?: SDKAssistantMessageError;\n};",
-              "kind": "code"
-            }
-          ]
-        },
-        {
-          "title": "SDKUserMessage",
-          "paragraphs": [
-            "这里不是让你背\"SDKUserMessage\"这个词，而是让你看它真干活时怎么使。",
-            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
-          ],
-          "steps": [
-            {
-              "title": "SDKUserMessage",
-              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
-              "code": "type SDKUserMessage = {\n  type: \"user\";\n  uuid?: UUID;\n  session_id?: string;\n  message: MessageParam; // From Anthropic SDK\n  parent_tool_use_id: string | null;\n  isSynthetic?: boolean;\n  shouldQuery?: boolean;\n  tool_use_result?: unknown;\n  origin?: SDKMessageOrigin;\n};",
               "kind": "code"
             }
           ]
@@ -29600,6 +29941,94 @@
         "title": "一眼看懂这一页",
         "lines": [
           "What's new",
+          "   |",
+          "   v",
+          "这是 What's New 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
+    "whats-new/2026-w20": {
+      "sourceLabel": "Week 20 · May 11–15, 2026",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Week 20 · May 11–15：Manage every Claude Code session from one screen with agent view, keep Claude working toward a goal until a condition holds, and run fast mode on Opus 4.7 by default.",
+            "你可以把它当成\"What's New\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Week 20 · May 11–15\"理解成 What's New 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Documentation Index 这些环节往下讲。",
+            "翻成人话，大概就是：Manage every Claude Code session from one screen with agent view, keep Claude working toward a goal until a condition holds, and run fast mode on Opus 4.7 by default."
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Documentation Index。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Documentation Index 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "claude agents",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Documentation Index 2",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Documentation Index\"这一段的意思去办。",
+              "code": "> /goal all tests in test/auth pass and the lint step is clean",
+              "kind": "prompt"
+            },
+            {
+              "title": "原页关键片段：Documentation Index 3",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Documentation Index\"这一段的意思去办。",
+              "code": "> /fast",
+              "kind": "prompt"
+            }
+          ]
+        },
+        {
+          "title": "Documentation Index",
+          "paragraphs": [
+            "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Documentation Index 1",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "claude agents",
+              "kind": "command"
+            },
+            {
+              "title": "Documentation Index 2",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Documentation Index\"这一段的意思去办。",
+              "code": "> /goal all tests in test/auth pass and the lint step is clean",
+              "kind": "prompt"
+            },
+            {
+              "title": "Documentation Index 3",
+              "body": "这里不用敲命令，直接把下面这句话发给 Claude 就行，让它按\"Documentation Index\"这一段的意思去办。",
+              "code": "> /fast",
+              "kind": "prompt"
+            }
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Week 20 · May 11–15",
           "   |",
           "   v",
           "这是 What's New 里的一摊要紧活",
