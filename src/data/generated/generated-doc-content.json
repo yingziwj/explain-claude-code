@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-20T06:19:20.540Z",
-  "sourceGeneratedAt": "2026-05-20T06:19:20.185Z",
+  "generatedAt": "2026-05-21T06:20:26.277Z",
+  "sourceGeneratedAt": "2026-05-21T06:20:25.923Z",
   "items": {
     "overview": {
       "sourceLabel": "Overview",
@@ -64,6 +64,13 @@
               "code": "# Analyze recent log output\ntail -200 app.log | claude -p \"Slack me if you see any anomalies\"\n\n# Automate translations in CI\nclaude -p \"translate new strings into French and raise a PR for review\"\n\n# Bulk operations across files\ngit diff main --name-only | claude -p \"review these changed files for security issues\"",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -260,6 +267,13 @@
               "code": "add a hello world function to the main file",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -528,7 +542,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.145、2.1.144、2.1.143、2.1.142 这些环节往下讲。",
+            "原文这页大多会按 2.1.146、2.1.145、2.1.144、2.1.143 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -537,7 +551,13 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.145 -> 2.1.144 -> 2.1.143 -> 2.1.142。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.146 -> 2.1.145 -> 2.1.144 -> 2.1.143。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
           ]
         },
         {
@@ -624,6 +644,13 @@
               "code": "The checkout flow is broken for users with expired cards.\nThe relevant code is in src/payments/. Can you investigate and fix it?",
               "kind": "prompt"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里主要是在交代\"On this page\"这一块会碰到哪些事。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -745,7 +772,8 @@
         {
           "title": "It’s a conversation",
           "paragraphs": [
-            "这一块主要是在说\"It’s a conversation\"真到手上该怎么用，哪里最容易踩坑。"
+            "这一块主要是在说\"It’s a conversation\"真到手上该怎么用，哪里最容易踩坑。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ],
           "steps": [
             {
@@ -877,6 +905,12 @@
             "先从眼前最缺的一项能力补，不要为了\"功能全\"一口气全挂上。",
             "几个功能名字看着像，实际负责的事情不一样，这页就是拿来分清边界的。",
             "加功能之前先想收益，再想复杂度，别把帮工越改越笨重。"
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
           ]
         },
         {
@@ -1273,7 +1307,7 @@
           "paragraphs": [
             "你可以把\"Prompt caching\"理解成 Core concepts 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 How the cache is organized、Where the cache lives、Actions that invalidate the cache、Switching models 这些环节往下讲。",
-            "翻成人话，大概就是：How the cache is organized"
+            "翻成人话，大概就是：How the cache is organizedWhere the cache lives"
           ]
         },
         {
@@ -1282,6 +1316,13 @@
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
             "第三，照着原文这几个环节挨个过：How the cache is organized -> Where the cache lives -> Actions that invalidate the cache -> Switching models。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -1575,6 +1616,13 @@
               "code": "{\n  \"autoMemoryDirectory\": \"~/my-custom-memory-dir\"\n}",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -1935,6 +1983,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -2120,6 +2175,145 @@
         "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
       }
     },
+    "sessions": {
+      "sourceLabel": "Manage sessions",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Manage sessions：Name, resume, branch, and switch between Claude Code conversations. Covers --continue, --resume, --from-pr, the /resume picker, session naming, and where transcripts are stored.",
+            "你可以把它当成\"Use Claude Code\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Manage sessions\"理解成 Use Claude Code 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 Resume a session、Where the session picker looks、Name your sessions、Use the session picker 这些环节往下讲。",
+            "翻成人话，大概就是：Resume a sessionWhere the session picker looks"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：Resume a session -> Where the session picker looks -> Name your sessions -> Use the session picker。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Branch a session 1",
+              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
+              "code": "/branch try-streaming-approach",
+              "kind": "prompt"
+            },
+            {
+              "title": "原页关键片段：Branch a session 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --continue --fork-session",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Documentation Index",
+          "paragraphs": [
+            "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Resume a session",
+          "paragraphs": [
+            "这里不是让你背\"Resume a session\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Where the session picker looks",
+          "paragraphs": [
+            "这里不是让你背\"Where the session picker looks\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Name your sessions",
+          "paragraphs": [
+            "看到这里，就把\"Name your sessions\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Use the session picker",
+          "paragraphs": [
+            "这一段是在把 /resume inside a session, or claude --resume with no arguments, to open the interactive session picker. Use these keyboard shortcuts to navigate, search, and widen the list: 真跑起来。别只看命令长什么样，还得看跑完该出现什么。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Branch a session",
+          "paragraphs": [
+            "看到这里，就把\"Branch a session\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Branch a session 1",
+              "body": "这一步不用你自己动手配什么，把下面这句话交出去就行。",
+              "code": "/branch try-streaming-approach",
+              "kind": "prompt"
+            },
+            {
+              "title": "Branch a session 2",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "claude --continue --fork-session",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Manage context within a session",
+          "paragraphs": [
+            "这段主要是在说平时怎么管，不是光教你怎么开。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Export and locate session data",
+          "paragraphs": [
+            "这一段是在把 /export to copy the current conversation to your clipboard or save it as a plain-text file, with messages and tool outputs rendered as readable text. Pass a filename to write directly to that file. 真跑起来。别只看命令长什么样，还得看跑完该出现什么。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "See also",
+          "paragraphs": [
+            "这一段主要是在把\"See also\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Manage sessions",
+          "   |",
+          "   v",
+          "这是 Use Claude Code 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
     "common-workflows": {
       "sourceLabel": "Common workflows",
       "sections": [
@@ -2218,6 +2412,12 @@
               "code": "add test cases for edge conditions in the notification service",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
           ]
         },
         {
@@ -2520,6 +2720,109 @@
         "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
       }
     },
+    "prompt-library": {
+      "sourceLabel": "Prompt library",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Prompt library：Copy-paste prompts for Claude Code, tagged by task and role.",
+            "你可以把它当成\"Use Claude Code\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Prompt library\"理解成 Use Claude Code 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 What makes these prompts work、Where these come from、Related resources 这些环节往下讲。",
+            "翻成人话，大概就是：What makes these prompts work"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：What makes these prompts work -> Where these come from -> Related resources。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：What makes these prompts work 1",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "add rate limiting to the public API and make sure existing tests still pass",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：What makes these prompts work 2",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "write the migration, run it against the dev database, and confirm the schema matches",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：What makes these prompts work 3",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "add a settings page that follows the same layout as the profile page",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
+          "title": "Documentation Index",
+          "paragraphs": [
+            "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "What makes these prompts work",
+          "paragraphs": [
+            "这里主要是在交代\"What makes these prompts work\"这一块会碰到哪些事。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ],
+          "steps": [
+            {
+              "title": "What makes these prompts work",
+              "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
+              "code": "write the migration, run it against the dev database, and confirm the schema matches",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Where these come from",
+          "paragraphs": [
+            "这一段主要是在把\"Where these come from\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Related resources",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说\"Related resources\"管到哪儿。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Prompt library",
+          "   |",
+          "   v",
+          "这是 Use Claude Code 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
     "best-practices": {
       "sourceLabel": "Best practices for Claude Code",
       "sections": [
@@ -2618,6 +2921,13 @@
               "code": "# One-off queries\nclaude -p \"Explain what this project does\"\n\n# Structured output for scripts\nclaude -p \"List all API endpoints\" --output-format json\n\n# Streaming for real-time processing\nclaude -p \"Analyze this log file\" --output-format stream-json",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -2976,6 +3286,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -3095,6 +3412,13 @@
               "code": "claude remote-control --verbose",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -3347,6 +3671,13 @@
               "code": "Record a GIF showing how to complete the checkout flow, from adding\nan item to the cart through to the confirmation page.",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -3633,6 +3964,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -3899,6 +4237,13 @@
               "code": "claude --worktree feature-auth",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -4239,6 +4584,12 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。"
@@ -4421,6 +4772,13 @@
             "先拿一类固定场景试，比如报障或代码审查请求。",
             "群里说的话也要尽量清楚，不然它接到的还是糊涂单。",
             "适合把群消息变成任务，不代表群里每句话都该让它接。"
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -4666,6 +5024,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这一段是在帮你从几个选项里挑 an approach。重点不只是知道有哪些，更是看代价和场景。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -4806,6 +5171,13 @@
               "code": "Use the test-runner subagent to fix failing tests\nHave the code-reviewer subagent look at my recent changes",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -5219,7 +5591,7 @@
           "paragraphs": [
             "你可以把\"Agent view\"理解成 Agents and parallel work 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Quick start、Monitor sessions with agent view、Read session state、Row summaries 这些环节往下讲。",
-            "翻成人话，大概就是：Monitor sessions with agent view"
+            "翻成人话，大概就是：Monitor sessions with agent viewRead session stateRow summariesPull request statusPeek and replyAttach to a sessionOrganize the listFilter sessionsKeyboard shortcuts"
           ]
         },
         {
@@ -5284,6 +5656,13 @@
               "code": "claude agents --settings ./ci-settings.json --add-dir ../shared-lib",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -5688,6 +6067,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -6026,7 +6412,7 @@
           "paragraphs": [
             "你可以把\"Isolate sessions with worktrees\"理解成 Agents and parallel work 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Start Claude in a worktree、Choose the base branch、Copy gitignored files into worktrees、Isolate subagents with worktrees 这些环节往下讲。",
-            "翻成人话，大概就是：Start Claude in a worktree"
+            "翻成人话，大概就是：Start Claude in a worktreeChoose the base branch"
           ]
         },
         {
@@ -6097,6 +6483,13 @@
               "code": "{\n  \"hooks\": {\n    \"WorktreeCreate\": [\n      {\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash -c 'NAME=$(jq -r .name); DIR=\\\"$HOME/.claude/worktrees/$NAME\\\"; svn checkout https://svn.example.com/repo/trunk \\\"$DIR\\\" >&2 && echo \\\"$DIR\\\"'\"\n          }\n        ]\n      }\n    ]\n  }\n}",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -6351,6 +6744,13 @@
               "code": "# Add a project-scoped server\nclaude mcp add --transport http paypal --scope project https://mcp.paypal.com/mcp",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -6996,6 +7396,12 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -7465,6 +7871,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -7853,6 +8266,13 @@
               "code": "---\nname: deploy\ndescription: Deploy the application to production\ndisable-model-invocation: true\n---\n\nDeploy $ARGUMENTS to production:\n\n1. Run the test suite\n2. Build the application\n3. Push to the deployment target\n4. Verify the deployment succeeded",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -8326,6 +8746,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这一段是在把 your first hook 配起来、配稳当。你主要盯住在哪儿改、怎么写、改完怎么看它真生效。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -8539,7 +8966,7 @@
             {
               "title": "Read input and return output 2",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "#!/bin/bash\nINPUT=$(cat)\nCOMMAND=$(echo \"$INPUT\" | jq -r '.tool_input.command')\n\nif echo \"$COMMAND\" | grep -q \"drop table\"; then\n  echo \"Blocked: dropping tables is not allowed\" >&2  # stderr becomes Claude's feedback\n  exit 2                                               # exit 2 = block the action\nfi\n\nexit 0  # exit 0 = let it proceed",
+              "code": "#!/bin/bash\nINPUT=$(cat)\nCOMMAND=$(echo \"$INPUT\" | jq -r '.tool_input.command')\n\nif echo \"$COMMAND\" | grep -q \"drop table\"; then\n  echo \"Blocked: dropping tables is not allowed\" >&2  # stderr becomes Claude's feedback\n  exit 2                                               # exit 2 = block the action\nfi\n\nexit 0  # exit 0 = no decision; the normal permission flow applies",
               "kind": "command"
             },
             {
@@ -8820,6 +9247,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -9035,6 +9469,12 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -9245,6 +9685,13 @@
               "code": "claude -p \"/goal CHANGELOG.md has an entry for every PR merged this week\"",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -9473,6 +9920,13 @@
               "code": "claude -p \"Apply the lint fixes\" --permission-mode acceptEdits",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -9711,7 +10165,7 @@
           "paragraphs": [
             "你可以把\"Launch sessions from links\"理解成 Automation 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 How it works、What a launched session shows、Build a link、Choose between cwd and repo 这些环节往下讲。",
-            "翻成人话，大概就是：What a launched session shows"
+            "翻成人话，大概就是：How it worksWhat a launched session shows"
           ]
         },
         {
@@ -9764,6 +10218,13 @@
               "code": "Start-Process \"claude-cli://open?repo=acme/payments&q=review%20open%20PRs\"",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -10042,6 +10503,13 @@
               "code": "ls -la \"$(command -v claude)\"",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -10650,6 +11118,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -10774,6 +11249,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这一段是在说怎么看 what loaded into context。将来真出问题时，你就知道该去哪儿翻、翻到什么算正常。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。"
@@ -10865,7 +11347,7 @@
           "paragraphs": [
             "你可以把\"Error reference\"理解成 Troubleshooting 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Find your error、Automatic retries、Server errors、API Error: 500 Internal server error 这些环节往下讲。",
-            "翻成人话，大概就是：API Error: 500 Internal server error"
+            "翻成人话，大概就是：Server errorsAPI Error: 500 Internal server errorAPI Error: Repeated 529 Overloaded errorsRequest timed outAuto mode cannot determine the safety of an action"
           ]
         },
         {
@@ -10948,6 +11430,13 @@
               "code": "Invalid API key · Fix external API key",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -11349,6 +11838,12 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这一段是在帮你从几个选项里挑 your API provider。重点不只是知道有哪些，更是看代价和场景。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -11513,6 +12008,12 @@
               "code": "{\n  \"autoUpdatesChannel\": \"stable\"\n}",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
           ]
         },
         {
@@ -12007,6 +12508,12 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -12147,6 +12654,12 @@
               "code": "{\n  \"forceRemoteSettingsRefresh\": true\n}",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
           ]
         },
         {
@@ -12371,6 +12884,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -12538,6 +13058,13 @@
               "code": "# Enable Vertex\nexport CLAUDE_CODE_USE_VERTEX=1\n\n# Configure LLM gateway\nexport ANTHROPIC_VERTEX_BASE_URL='https://your-llm-gateway.com/vertex'\nexport CLAUDE_CODE_SKIP_VERTEX_AUTH=1  # If gateway handles GCP auth",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
           ]
         },
         {
@@ -12790,6 +13317,12 @@
               "code": "claude --model anthropic.claude-haiku-4-5",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
           ]
         },
         {
@@ -13097,7 +13630,7 @@
           "paragraphs": [
             "你可以把\"Claude Platform on AWS\"理解成 Deployment 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Prerequisites、Setup、1. Configure AWS credentials、2. Configure Claude Code 这些环节往下讲。",
-            "翻成人话，大概就是：1. Configure AWS credentials"
+            "翻成人话，大概就是：Setup1. Configure AWS credentials2. Configure Claude Code3. Pin model versions"
           ]
         },
         {
@@ -13156,6 +13689,12 @@
               "code": "export CLAUDE_CODE_USE_ANTHROPIC_AWS=1\nexport CLAUDE_CODE_SKIP_ANTHROPIC_AWS_AUTH=1\nexport ANTHROPIC_AWS_WORKSPACE_ID=wrkspc_01ABCDEFGHIJKLMN\nexport ANTHROPIC_AWS_BASE_URL=https://anthropic-proxy.example.com",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
           ]
         },
         {
@@ -13375,6 +13914,12 @@
               "code": "export ANTHROPIC_MODEL='claude-opus-4-7'\nexport ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
           ]
         },
         {
@@ -13601,6 +14146,12 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。"
@@ -13791,6 +14342,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -13958,6 +14516,12 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -14112,6 +14676,13 @@
               "code": "\"containerEnv\": {\n  \"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\": \"1\",\n  \"DISABLE_AUTOUPDATER\": \"1\"\n}",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -14301,6 +14872,12 @@
               "code": "{\n  \"env\": {\n    \"CLAUDE_CODE_ENABLE_TELEMETRY\": \"1\",\n    \"OTEL_LOGS_EXPORTER\": \"otlp\",\n    \"OTEL_LOG_TOOL_DETAILS\": \"1\",\n    \"OTEL_EXPORTER_OTLP_LOGS_PROTOCOL\": \"http/protobuf\",\n    \"OTEL_EXPORTER_OTLP_LOGS_ENDPOINT\": \"https://siem.example.com:4318/v1/logs\",\n    \"OTEL_EXPORTER_OTLP_HEADERS\": \"Authorization=Bearer your-siem-token\"\n  }\n}",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
           ]
         },
         {
@@ -14656,6 +15233,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -14862,6 +15446,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。"
@@ -15043,6 +15634,12 @@
               "code": "{\n  \"name\": \"my-npm-plugin\",\n  \"source\": {\n    \"source\": \"npm\",\n    \"package\": \"@acme/claude-plugin\"\n  }\n}",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
           ]
         },
         {
@@ -15608,6 +16205,12 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -15737,6 +16340,158 @@
         "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
       }
     },
+    "plugin-hints": {
+      "sourceLabel": "Recommend your plugin from your CLI",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Recommend your plugin from your CLI：Emit a one-line marker from your CLI so Claude Code prompts users to install your official plugin.",
+            "你可以把它当成\"Plugin distribution\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Recommend your plugin from your CLI\"理解成 Plugin distribution 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 How it works、Emit the hint、Choose where to emit、What the user sees 这些环节往下讲。",
+            "翻成人话，大概就是：Choose where to emit"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：How it works -> Emit the hint -> Choose where to emit -> What the user sees。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：Emit the hint",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "if (process.env.CLAUDECODE) {\n  process.stderr.write(\n    '<claude-code-hint v=\"1\" type=\"plugin\" value=\"example-cli@claude-plugins-official\" />\\n',\n  )\n}",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：What the user sees",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "─────────────────────────────────────────────────────────────\n  Plugin Recommendation\n\n    The example-cli command suggests installing a plugin.\n\n    Plugin: example-cli\n    Marketplace: claude-plugins-official\n    Official integration for example-cli deployments\n\n    Would you like to install it?\n    ❯ 1. Yes, install example-cli\n      2. No\n      3. No, and don't show plugin installation hints again\n\n─────────────────────────────────────────────────────────────",
+              "kind": "code"
+            },
+            {
+              "title": "原页关键片段：Hint format",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "<claude-code-hint v=\"1\" type=\"plugin\" value=\"example-cli@claude-plugins-official\" />",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Documentation Index",
+          "paragraphs": [
+            "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "How it works",
+          "paragraphs": [
+            "这里讲底层是怎么运转的。你把它看明白，后面遇到异常时就知道该往哪儿查。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Emit the hint",
+          "paragraphs": [
+            "看到这里，就把\"Emit the hint\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Emit the hint",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "if (process.env.CLAUDECODE) {\n  process.stderr.write(\n    '<claude-code-hint v=\"1\" type=\"plugin\" value=\"example-cli@claude-plugins-official\" />\\n',\n  )\n}",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Choose where to emit",
+          "paragraphs": [
+            "看这段时就盯一个事：到底该选哪条更合适。"
+          ]
+        },
+        {
+          "title": "What the user sees",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "What the user sees",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "─────────────────────────────────────────────────────────────\n  Plugin Recommendation\n\n    The example-cli command suggests installing a plugin.\n\n    Plugin: example-cli\n    Marketplace: claude-plugins-official\n    Official integration for example-cli deployments\n\n    Would you like to install it?\n    ❯ 1. Yes, install example-cli\n      2. No\n      3. No, and don't show plugin installation hints again\n\n─────────────────────────────────────────────────────────────",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Hint format",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说\"Hint format\"管到哪儿。"
+          ],
+          "steps": [
+            {
+              "title": "Hint format",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "<claude-code-hint v=\"1\" type=\"plugin\" value=\"example-cli@claude-plugins-official\" />",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Requirements",
+          "paragraphs": [
+            "这一段主要是在把\"Requirements\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Get your plugin into the official marketplace",
+          "paragraphs": [
+            "别把这段只当成标题看，它其实是在给\"Get your plugin into the official marketplace\"划边界。"
+          ]
+        },
+        {
+          "title": "See also",
+          "paragraphs": [
+            "这一段是在教你把 plugins: build the plugin your CLI recommends 真正建出来。文件放哪儿、字段怎么写、建完怎么验，都得跟着看。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Recommend your plugin from your CLI",
+          "   |",
+          "   v",
+          "这是 Plugin distribution 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
     "security": {
       "sourceLabel": "Security",
       "sections": [
@@ -15761,6 +16516,13 @@
             "先从最基本的权限、认证、数据边界看起。",
             "别把安全理解成只跟管理员有关，普通使用方式也会影响风险。",
             "越是多人共用环境，越要先立规矩，再大规模开用。"
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -15925,6 +16687,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。"
@@ -16054,6 +16823,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -16128,7 +16904,7 @@
           "paragraphs": [
             "你可以把\"Communications kit\"理解成 Adoption 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Launch communications、Before you send、The announcement、Executive sponsor variant 这些环节往下讲。",
-            "翻成人话，大概就是：Launch communications"
+            "翻成人话，大概就是：Launch communicationsBefore you sendThe announcementExecutive sponsor variantPilot group variantChampion recruitment DM"
           ]
         },
         {
@@ -16211,6 +16987,13 @@
               "code": "⏪ *Tip: There is an undo button for the whole conversation*\n\nClaude went down the wrong path three turns ago and now you're untangling\nit? You don't have to fix forward.\n\n`/rewind` rolls back to an earlier point in the conversation, including the\nfile changes Claude made along the way. Checkpointing is automatic; you\ndon't set anything up.\n\n*Try it now:* press *Esc* twice to open the rewind menu, or type `/rewind`.\nPick the point before things went sideways.\n\n📖 Checkpointing → https://code.claude.com/docs/en/checkpointing",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -16510,7 +17293,7 @@
           "paragraphs": [
             "你可以把\"Champion kit\"理解成 Adoption 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 The champion role、What this should cost you、Share what you discover、What is worth sharing 这些环节往下讲。",
-            "翻成人话，大概就是：What this should cost you"
+            "翻成人话，大概就是：The champion roleWhat this should cost you"
           ]
         },
         {
@@ -16545,6 +17328,12 @@
               "code": "Colleague: How did you get it to find that race condition?\n\nChampion: I asked, \"The test in @tests/scheduler.test.ts is flaky, figure\nout why,\" and it traced two unjoined promises in the scheduler. Try the\nsame phrasing on your test.",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里主要是在交代\"On this page\"这一块会碰到哪些事。"
           ]
         },
         {
@@ -16799,6 +17588,13 @@
               "code": "{\n  \"permissions\": {\n    \"deny\": [\n      \"Read(./.env)\",\n      \"Read(./.env.*)\",\n      \"Read(./secrets/**)\",\n      \"Read(./config/credentials.json)\",\n      \"Read(./build)\"\n    ]\n  }\n}",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -17186,6 +17982,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -17463,6 +18266,13 @@
               "code": "npx @anthropic-ai/sandbox-runtime <command-to-sandbox>",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -17784,6 +18594,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。"
@@ -18050,6 +18867,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -18183,6 +19007,12 @@
               "code": "---\nname: Diagrams first\ndescription: Lead every explanation with a diagram\nkeep-coding-instructions: true\n---\n\nWhen explaining code, architecture, or data flow, start with a Mermaid diagram showing the structure, then explain in prose.\n\n## Diagram conventions\n\nUse `flowchart TD` for control flow and `sequenceDiagram` for request paths. Keep diagrams under 15 nodes.",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
           ]
         },
         {
@@ -18327,6 +19157,13 @@
               "code": "CLAUDE_CODE_NO_FLICKER=1 claude",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -18518,6 +19355,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这一段还会谈显示方式和终端环境，重点是先选一个你当前最稳能用的模式，不必一上来追求花哨。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -18701,6 +19545,12 @@
               "code": "{\n  \"bindings\": [\n    {\n      \"context\": \"Chat\",\n      \"bindings\": {\n        \"meta+k\": \"voice:pushToTalk\",\n        \"space\": null\n      }\n    }\n  ]\n}",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
           ]
         },
         {
@@ -18919,6 +19769,12 @@
               "code": "#!/bin/bash\ninput=$(cat)\n\nMODEL=$(echo \"$input\" | jq -r '.model.display_name')\n\n# Convert git SSH URL to HTTPS\nREMOTE=$(git remote get-url origin 2>/dev/null | sed 's/git@github.com:/https:\\/\\/github.com\\//' | sed 's/\\.git$//')\n\nif [ -n \"$REMOTE\" ]; then\n    REPO_NAME=$(basename \"$REMOTE\")\n    # OSC 8 format: \\e]8;;URL\\a then TEXT then \\e]8;;\\a\n    # printf %b interprets escape sequences reliably across shells\n    printf '%b' \"[$MODEL] 🔗 \\e]8;;${REMOTE}\\a${REPO_NAME}\\e]8;;\\a\\n\"\nelse\n    echo \"[$MODEL]\"\nfi",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这一段是在把 a status lineUse the /statusline commandManually configure a status lineDisable the status line 配起来、配稳当。你主要盯住在哪儿改、怎么写、改完怎么看它真生效。"
           ]
         },
         {
@@ -19266,6 +20122,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。"
@@ -19511,6 +20374,12 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。"
@@ -19584,6 +20453,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -19648,7 +20524,7 @@
           "paragraphs": [
             "你可以把\"Environment variables\"理解成 Reference 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Set environment variables、In your shell、In settings files、Precedence 这些环节往下讲。",
-            "翻成人话，大概就是：Set environment variables"
+            "翻成人话，大概就是：Set environment variablesIn your shellIn settings files"
           ]
         },
         {
@@ -19683,6 +20559,13 @@
               "code": "{\n  \"env\": {\n    \"API_TIMEOUT_MS\": \"1200000\",\n    \"BASH_DEFAULT_TIMEOUT_MS\": \"300000\"\n  }\n}",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
           ]
         },
         {
@@ -19814,6 +20697,13 @@
               "code": "What tools do you have access to?",
               "kind": "prompt"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这一段是在把 tools with permission rules and hooks 配起来、配稳当。你主要盯住在哪儿改、怎么写、改完怎么看它真生效。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -20031,6 +20921,13 @@
               "code": "/btw what was the name of that config file again?",
               "kind": "prompt"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -20284,6 +21181,12 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -20307,7 +21210,7 @@
         {
           "title": "Rewind and summarize",
           "paragraphs": [
-            "这一块主要是在说\"Rewind and summarize\"真到手上该怎么用，哪里最容易踩坑。",
+            "这一段是在把 /rewind, or press Esc twice when the prompt input is empty, to open the rewind menu. 真跑起来。别只看命令长什么样，还得看跑完该出现什么。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
@@ -20410,7 +21313,7 @@
             {
               "title": "原页关键片段：How a hook resolves 2",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "#!/bin/bash\n# .claude/hooks/block-rm.sh\nCOMMAND=$(jq -r '.tool_input.command')\n\nif echo \"$COMMAND\" | grep -q 'rm -rf'; then\n  jq -n '{\n    hookSpecificOutput: {\n      hookEventName: \"PreToolUse\",\n      permissionDecision: \"deny\",\n      permissionDecisionReason: \"Destructive command blocked by hook\"\n    }\n  }'\nelse\n  exit 0  # allow the command\nfi",
+              "code": "#!/bin/bash\n# .claude/hooks/block-rm.sh\nCOMMAND=$(jq -r '.tool_input.command')\n\nif echo \"$COMMAND\" | grep -q 'rm -rf'; then\n  jq -n '{\n    hookSpecificOutput: {\n      hookEventName: \"PreToolUse\",\n      permissionDecision: \"deny\",\n      permissionDecisionReason: \"Destructive command blocked by hook\"\n    }\n  }'\nelse\n  exit 0  # no decision; normal permission flow applies\nfi",
               "kind": "command"
             },
             {
@@ -20476,6 +21379,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -20505,7 +21415,7 @@
             {
               "title": "How a hook resolves 2",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "#!/bin/bash\n# .claude/hooks/block-rm.sh\nCOMMAND=$(jq -r '.tool_input.command')\n\nif echo \"$COMMAND\" | grep -q 'rm -rf'; then\n  jq -n '{\n    hookSpecificOutput: {\n      hookEventName: \"PreToolUse\",\n      permissionDecision: \"deny\",\n      permissionDecisionReason: \"Destructive command blocked by hook\"\n    }\n  }'\nelse\n  exit 0  # allow the command\nfi",
+              "code": "#!/bin/bash\n# .claude/hooks/block-rm.sh\nCOMMAND=$(jq -r '.tool_input.command')\n\nif echo \"$COMMAND\" | grep -q 'rm -rf'; then\n  jq -n '{\n    hookSpecificOutput: {\n      hookEventName: \"PreToolUse\",\n      permissionDecision: \"deny\",\n      permissionDecisionReason: \"Destructive command blocked by hook\"\n    }\n  }'\nelse\n  exit 0  # no decision; normal permission flow applies\nfi",
               "kind": "command"
             },
             {
@@ -20672,7 +21582,7 @@
             {
               "title": "Exit code output",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "#!/bin/bash\n# Reads JSON input from stdin, checks the command\ncommand=$(jq -r '.tool_input.command' < /dev/stdin)\n\nif [[ \"$command\" == rm* ]]; then\n  echo \"Blocked: rm commands are not allowed\" >&2\n  exit 2  # Blocking error: tool call is prevented\nfi\n\nexit 0  # Success: tool call proceeds",
+              "code": "#!/bin/bash\n# Reads JSON input from stdin, checks the command\ncommand=$(jq -r '.tool_input.command' < /dev/stdin)\n\nif [[ \"$command\" == rm* ]]; then\n  echo \"Blocked: rm commands are not allowed\" >&2\n  exit 2  # Blocking error: tool call is prevented\nfi\n\nexit 0  # No decision: the normal permission flow applies",
               "kind": "command"
             }
           ]
@@ -21131,6 +22041,13 @@
               "code": "{\n  \"channels\": [\n    {\n      \"server\": \"telegram\",\n      \"userConfig\": {\n        \"bot_token\": {\n          \"type\": \"string\",\n          \"title\": \"Bot token\",\n          \"description\": \"Telegram bot token\",\n          \"sensitive\": true\n        },\n        \"owner_id\": {\n          \"type\": \"string\",\n          \"title\": \"Owner ID\",\n          \"description\": \"Your Telegram user ID\"\n        }\n      }\n    }\n  ]\n}",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -21622,6 +22539,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -21917,7 +22841,7 @@
           "paragraphs": [
             "你可以把\"Glossary\"理解成 Glossary 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 A、Agent teams、Agentic coding、Agentic harness 这些环节往下讲。",
-            "翻成人话，大概就是：MCP (Model Context Protocol)"
+            "翻成人话，大概就是：AAgent teamsAgentic codingAgentic harnessAgentic loopAuto memoryAuto mode"
           ]
         },
         {
@@ -21926,6 +22850,13 @@
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
             "第三，照着原文这几个环节挨个过：A -> Agent teams -> Agentic coding -> Agentic harness。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "如果你打算把外接能力往里挂，这里提到的 hooks、MCP、skills、memory 都要分清各自负责哪一摊。"
           ]
         },
         {
@@ -22164,7 +23095,7 @@
           "paragraphs": [
             "你可以把\"Overview\"理解成 Agent SDK 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Get started、Capabilities、Claude Code features、Compare the Agent SDK to other Claude tools 这些环节往下讲。",
-            "翻成人话，大概就是：Claude Code features"
+            "翻成人话，大概就是：CapabilitiesClaude Code features"
           ]
         },
         {
@@ -22223,6 +23154,13 @@
               "code": "# Client SDK: You implement the tool loop\nresponse = client.messages.create(...)\nwhile response.stop_reason == \"tool_use\":\n    result = your_tool_executor(response.tool_use)\n    response = client.messages.create(tool_result=result, **params)\n\n# Agent SDK: Claude handles tools autonomously\nasync for message in query(prompt=\"Fix the bug in auth.py\"):\n    print(message)",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -22505,6 +23443,12 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -22731,6 +23675,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里主要是在交代\"On this page\"这一块会碰到哪些事。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -22943,7 +23894,7 @@
           "paragraphs": [
             "你可以把\"Use Claude Code features\"理解成 Core concepts 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Control filesystem settings with settingSources、What settingSources does not control、Project instructions (CLAUDE.md and rules)、CLAUDE.md load locations 这些环节往下讲。",
-            "翻成人话，大概就是：Control filesystem settings with settingSources"
+            "翻成人话，大概就是：Control filesystem settings with settingSourcesWhat settingSources does not control"
           ]
         },
         {
@@ -22972,6 +23923,13 @@
               "code": "from claude_agent_sdk import query, ClaudeAgentOptions, HookMatcher, ResultMessage\n\n\n# PreToolUse hook callback. Positional args:\n#   input_data: HookInput dict with tool_name, tool_input, hook_event_name\n#   tool_use_id: str | None, the ID of the tool call being intercepted\n#   context: HookContext, carries session metadata\nasync def audit_bash(input_data, tool_use_id, context):\n    command = input_data.get(\"tool_input\", {}).get(\"command\", \"\")\n    if \"rm -rf\" in command:\n        return {\"decision\": \"block\", \"reason\": \"Destructive command blocked\"}\n    return {}  # Empty dict: allow the tool to proceed\n\n\n# Filesystem hooks from .claude/settings.json run automatically\n# when settingSources loads them. You can also add programmatic hooks:\nasync for message in query(\n    prompt=\"Refactor the auth module\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"project\"],  # Loads hooks from .claude/settings.json\n        hooks={\n            \"PreToolUse\": [\n                HookMatcher(matcher=\"Bash\", hooks=[audit_bash]),\n            ]\n        },\n    ),\n):\n    if isinstance(message, ResultMessage) and message.subtype == \"success\":\n        print(message.result)",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -23097,7 +24055,7 @@
           "paragraphs": [
             "你可以把\"Work with sessions\"理解成 Core concepts 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Choose an approach、Continue, resume, and fork、Automatic session management、Python: ClaudeSDKClient 这些环节往下讲。",
-            "翻成人话，大概就是：Choose an approach"
+            "翻成人话，大概就是：Choose an approachContinue, resume, and fork"
           ]
         },
         {
@@ -23138,6 +24096,13 @@
               "code": "# Fork: branch from session_id into a new session\nforked_id = None\nasync for message in query(\n    prompt=\"Instead of JWT, implement OAuth2 for the auth module\",\n    options=ClaudeAgentOptions(\n        resume=session_id,\n        fork_session=True,\n    ),\n):\n    if isinstance(message, ResultMessage):\n        forked_id = message.session_id  # The fork's ID, distinct from session_id\n        if message.subtype == \"success\":\n            print(message.result)\n\nprint(f\"Forked session: {forked_id}\")\n\n# Original session is untouched; resuming it continues the JWT thread\nasync for message in query(\n    prompt=\"Continue with the JWT approach\",\n    options=ClaudeAgentOptions(resume=session_id),\n):\n    if isinstance(message, ResultMessage) and message.subtype == \"success\":\n        print(message.result)",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这一段是在帮你从几个选项里挑 an approachContinue, resume, and fork。重点不只是知道有哪些，更是看代价和场景。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -23278,6 +24243,214 @@
         "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
       }
     },
+    "agent-sdk/session-storage": {
+      "sourceLabel": "Persist sessions to external storage",
+      "sections": [
+        {
+          "title": "简要总结",
+          "paragraphs": [
+            "这页主要讲 Persist sessions to external storage：Mirror session transcripts to S3, Redis, or your own backend so any host can resume them.",
+            "你可以把它当成\"Core concepts\"这块里专门管这一摊事的说明书。"
+          ]
+        },
+        {
+          "title": "农民伯伯版解释",
+          "paragraphs": [
+            "你可以把\"Persist sessions to external storage\"理解成 Core concepts 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
+            "原文这页大多会按 The SessionStore interface、Quick start、Write your own adapter、Reference implementations 这些环节往下讲。",
+            "翻成人话，大概就是：The SessionStore interface"
+          ]
+        },
+        {
+          "title": "上手时重点盯住什么",
+          "paragraphs": [
+            "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
+            "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
+            "第三，照着原文这几个环节挨个过：The SessionStore interface -> Quick start -> Write your own adapter -> Reference implementations。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ],
+          "steps": [
+            {
+              "title": "原页关键片段：The SessionStore interface",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "// Exported from @anthropic-ai/claude-agent-sdk as\n// SessionStore, SessionKey, SessionStoreEntry.\n\ntype SessionKey = {\n  projectKey: string;\n  sessionId: string;\n  subpath?: string;\n};\n\ntype SessionStore = {\n  // Required\n  append(key: SessionKey, entries: SessionStoreEntry[]): Promise<void>;\n  load(key: SessionKey): Promise<SessionStoreEntry[] | null>;\n\n  // Optional\n  listSessions?(\n    projectKey: string,\n  ): Promise<Array<{ sessionId: string; mtime: number }>>;\n  delete?(key: SessionKey): Promise<void>;\n  listSubkeys?(key: {\n    projectKey: string;\n    sessionId: string;\n  }): Promise<string[]>;\n};",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Quick start",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "import { query, InMemorySessionStore } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst store = new InMemorySessionStore();\n\nlet sessionId: string | undefined;\nfor await (const message of query({\n  prompt: \"List the TypeScript files under src/\",\n  options: { sessionStore: store },\n})) {\n  if (message.type === \"result\") {\n    sessionId = message.session_id;\n  }\n}\n\n// Resume from the store. The agent has full context from the first call.\nfor await (const message of query({\n  prompt: \"Summarize what those files do\",\n  options: { sessionStore: store, resume: sessionId },\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Reference implementations",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\nimport { S3Client } from \"@aws-sdk/client-s3\";\nimport { S3SessionStore } from \"./S3SessionStore\"; // copied from examples/session-stores/s3\n\nconst store = new S3SessionStore({\n  bucket: \"my-claude-sessions\",\n  prefix: \"transcripts\",\n  client: new S3Client({ region: \"us-east-1\" }),\n});\n\nfor await (const message of query({\n  prompt: \"Hello!\",\n  options: { sessionStore: store },\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}\n\n// Later, possibly on a different host:\nfor await (const message of query({\n  prompt: \"Continue where we left off\",\n  options: { sessionStore: store, resume: \"previous-session-id\" },\n})) {\n  // ...\n}",
+              "kind": "command"
+            },
+            {
+              "title": "原页关键片段：Validate your adapter",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "import pytest\nfrom claude_agent_sdk.testing import run_session_store_conformance\n\n\n@pytest.mark.asyncio\nasync def test_my_store_conformance():\n    await run_session_store_conformance(MyRedisStore)",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里主要是在交代\"On this page\"这一块会碰到哪些事。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Documentation Index",
+          "paragraphs": [
+            "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "The SessionStore interface",
+          "paragraphs": [
+            "看到这里，就把\"The SessionStore interface\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "The SessionStore interface",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "// Exported from @anthropic-ai/claude-agent-sdk as\n// SessionStore, SessionKey, SessionStoreEntry.\n\ntype SessionKey = {\n  projectKey: string;\n  sessionId: string;\n  subpath?: string;\n};\n\ntype SessionStore = {\n  // Required\n  append(key: SessionKey, entries: SessionStoreEntry[]): Promise<void>;\n  load(key: SessionKey): Promise<SessionStoreEntry[] | null>;\n\n  // Optional\n  listSessions?(\n    projectKey: string,\n  ): Promise<Array<{ sessionId: string; mtime: number }>>;\n  delete?(key: SessionKey): Promise<void>;\n  listSubkeys?(key: {\n    projectKey: string;\n    sessionId: string;\n  }): Promise<string[]>;\n};",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Quick start",
+          "paragraphs": [
+            "别把这段只当成标题看，它其实是在给\"Quick start\"划边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Quick start",
+              "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
+              "code": "import { query, InMemorySessionStore } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst store = new InMemorySessionStore();\n\nlet sessionId: string | undefined;\nfor await (const message of query({\n  prompt: \"List the TypeScript files under src/\",\n  options: { sessionStore: store },\n})) {\n  if (message.type === \"result\") {\n    sessionId = message.session_id;\n  }\n}\n\n// Resume from the store. The agent has full context from the first call.\nfor await (const message of query({\n  prompt: \"Summarize what those files do\",\n  options: { sessionStore: store, resume: sessionId },\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Write your own adapter",
+          "paragraphs": [
+            "看到这里，就把\"Write your own adapter\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Reference implementations",
+          "paragraphs": [
+            "这种内容最怕想当然，老老实实照它列的格式走最稳。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ],
+          "steps": [
+            {
+              "title": "Reference implementations",
+              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\nimport { S3Client } from \"@aws-sdk/client-s3\";\nimport { S3SessionStore } from \"./S3SessionStore\"; // copied from examples/session-stores/s3\n\nconst store = new S3SessionStore({\n  bucket: \"my-claude-sessions\",\n  prefix: \"transcripts\",\n  client: new S3Client({ region: \"us-east-1\" }),\n});\n\nfor await (const message of query({\n  prompt: \"Hello!\",\n  options: { sessionStore: store },\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}\n\n// Later, possibly on a different host:\nfor await (const message of query({\n  prompt: \"Continue where we left off\",\n  options: { sessionStore: store, resume: \"previous-session-id\" },\n})) {\n  // ...\n}",
+              "kind": "command"
+            }
+          ]
+        },
+        {
+          "title": "Validate your adapter",
+          "paragraphs": [
+            "这里不是让你背\"Validate your adapter\"这个词，而是让你看它真干活时怎么使。"
+          ],
+          "steps": [
+            {
+              "title": "Validate your adapter",
+              "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
+              "code": "import pytest\nfrom claude_agent_sdk.testing import run_session_store_conformance\n\n\n@pytest.mark.asyncio\nasync def test_my_store_conformance():\n    await run_session_store_conformance(MyRedisStore)",
+              "kind": "code"
+            }
+          ]
+        },
+        {
+          "title": "Behavior notes",
+          "paragraphs": [
+            "这一块主要是在说\"Behavior notes\"真到手上该怎么用，哪里最容易踩坑。"
+          ]
+        },
+        {
+          "title": "Dual-write architecture",
+          "paragraphs": [
+            "这一段不只是挂个标题，它是在说明\"Dual-write architecture\"这一块到底负责什么。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Mirror writes are best-effort",
+          "paragraphs": [
+            "这一段更像在讲判断条件，什么时候该上，什么时候先别急。把触发条件看清，比背标题更重要。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "getSessionMessages returns the post-compaction chain",
+          "paragraphs": [
+            "看到这里，就把\"getSessionMessages returns the post-compaction chain\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "forkSession is not a byte copy",
+          "paragraphs": [
+            "看到这里，就把\"forkSession is not a byte copy\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Subagent transcripts",
+          "paragraphs": [
+            "这里不是让你背\"Subagent transcripts\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Retention",
+          "paragraphs": [
+            "这段看着像个标题，其实是在说\"Retention\"管到哪儿。"
+          ]
+        },
+        {
+          "title": "Supported on",
+          "paragraphs": [
+            "别把这段只当成标题看，它其实是在给\"Supported on\"划边界。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
+          "title": "Related resources",
+          "paragraphs": [
+            "这一段主要是在把\"Related resources\"讲实，不是只摆个标题给你看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        }
+      ],
+      "illustration": {
+        "title": "一眼看懂这一页",
+        "lines": [
+          "Persist sessions to external storage",
+          "   |",
+          "   v",
+          "这是 Core concepts 里的一摊要紧活",
+          "   |",
+          "   v",
+          "先弄懂，再下手"
+        ],
+        "caption": "先把这页到底在讲什么看明白，再去碰具体命令和配置，最不容易绕晕。"
+      }
+    },
     "agent-sdk/streaming-vs-single-mode": {
       "sourceLabel": "Streaming Input",
       "sections": [
@@ -23293,7 +24466,7 @@
           "paragraphs": [
             "你可以把\"Streaming Input\"理解成 Input and output 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Overview、Streaming Input Mode (Recommended)、How It Works、Benefits 这些环节往下讲。",
-            "翻成人话，大概就是：Streaming Input Mode (Recommended)"
+            "翻成人话，大概就是：Streaming Input Mode (Recommended)How It WorksBenefitsImplementation Example"
           ]
         },
         {
@@ -23316,6 +24489,12 @@
               "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Simple one-shot query\nfor await (const message of query({\n  prompt: \"Explain the authentication flow\",\n  options: {\n    maxTurns: 1,\n    allowedTools: [\"Read\", \"Grep\"]\n  }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}\n\n// Continue conversation with session management\nfor await (const message of query({\n  prompt: \"Now explain the authorization process\",\n  options: {\n    continue: true,\n    maxTurns: 1\n  }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
           ]
         },
         {
@@ -23549,6 +24728,13 @@
               "code": "{\n  \"questions\": [\n    // ...\n  ],\n  \"answers\": {\n    \"How should I format the output?\": \"Summary\",\n    \"Which sections should I include?\": [\"Introduction\", \"Conclusion\"]\n  }\n}",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -23826,6 +25012,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -24012,6 +25205,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -24138,7 +25338,7 @@
           "paragraphs": [
             "你可以把\"Give Claude custom tools\"理解成 Extend with tools 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Quick reference、Create a custom tool、Weather tool example、Call a custom tool 这些环节往下讲。",
-            "翻成人话，大概就是：Create a custom tool"
+            "翻成人话，大概就是：Create a custom toolWeather tool exampleCall a custom toolAdd more toolsAdd tool annotations"
           ]
         },
         {
@@ -24209,6 +25409,13 @@
               "code": "import asyncio\nfrom claude_agent_sdk import (\n    query,\n    ClaudeAgentOptions,\n    ResultMessage,\n    AssistantMessage,\n    ToolUseBlock,\n)\n\n\nasync def main():\n    options = ClaudeAgentOptions(\n        mcp_servers={\"converter\": converter_server},\n        allowed_tools=[\"mcp__converter__convert_units\"],\n    )\n\n    prompts = [\n        \"Convert 100 kilometers to miles.\",\n        \"What is 72°F in Celsius?\",\n        \"How many pounds is 5 kilograms?\",\n    ]\n\n    for prompt in prompts:\n        async for message in query(prompt=prompt, options=options):\n            if isinstance(message, AssistantMessage):\n                for block in message.content:\n                    if isinstance(block, ToolUseBlock):\n                        print(f\"[tool call] {block.name}({block.input})\")\n            elif isinstance(message, ResultMessage) and message.subtype == \"success\":\n                print(f\"Q: {prompt}\\nA: {message.result}\\n\")\n\n\nasyncio.run(main())",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -24443,7 +25650,7 @@
           "paragraphs": [
             "你可以把\"Connect to external tools with MCP\"理解成 Extend with tools 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Quickstart、Add an MCP server、In code、From a config file 这些环节往下讲。",
-            "翻成人话，大概就是：From a config file"
+            "翻成人话，大概就是：Add an MCP serverIn codeFrom a config file"
           ]
         },
         {
@@ -24526,6 +25733,13 @@
               "code": "const _ = {\n  options: {\n    mcpServers: {\n      \"secure-api\": {\n        type: \"http\",\n        url: \"https://api.example.com/mcp\",\n        headers: {\n          Authorization: `Bearer ${process.env.API_TOKEN}`\n        }\n      }\n    },\n    allowedTools: [\"mcp__secure-api__*\"]\n  }\n};",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -24921,6 +26135,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -25008,7 +26229,7 @@
           "paragraphs": [
             "你可以把\"Subagents in the SDK\"理解成 Extend with tools 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Overview、Benefits of using subagents、Context isolation、Parallelization 这些环节往下讲。",
-            "翻成人话，大概就是：Benefits of using subagents"
+            "翻成人话，大概就是：Benefits of using subagentsContext isolationParallelizationSpecialized instructions and knowledgeTool restrictions"
           ]
         },
         {
@@ -25055,6 +26276,13 @@
               "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Analyze the architecture of this codebase\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Grep\", \"Glob\", \"Agent\"],\n            agents={\n                \"code-analyzer\": AgentDefinition(\n                    description=\"Static code analysis and architecture review\",\n                    prompt=\"\"\"You are a code architecture analyst. Analyze code structure,\nidentify patterns, and suggest improvements without making changes.\"\"\",\n                    # Read-only tools: no Edit, Write, or Bash access\n                    tools=[\"Read\", \"Grep\", \"Glob\"],\n                )\n            },\n        ),\n    ):\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -25290,7 +26518,7 @@
           "paragraphs": [
             "你可以把\"Modifying system prompts\"理解成 Customize behavior 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 How system prompts work、Decide on a starting point、Customize agent behavior、CLAUDE.md files for project-level instructions 这些环节往下讲。",
-            "翻成人话，大概就是：How system prompts work"
+            "翻成人话，大概就是：How system prompts workDecide on a starting point"
           ]
         },
         {
@@ -25337,6 +26565,13 @@
               "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Assuming \"Code Reviewer\" output style is active (via /config or settings)\n// Add session-specific focus areas\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Review this authentication module\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\",\n      append: `\n        For this review, prioritize:\n        - OAuth 2.0 compliance\n        - Token storage security\n        - Session management\n      `\n    }\n  }\n})) {\n  messages.push(message);\n}",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -25615,6 +26850,12 @@
               "code": "---\nallowed-tools: Bash, Read, Edit\nargument-hint: [test-pattern]\ndescription: Run tests with optional pattern\n---\n\nRun tests matching pattern: $ARGUMENTS\n\n1. Detect the test framework (Jest, pytest, etc.)\n2. Run tests with the provided pattern\n3. If tests fail, analyze and fix them\n4. Re-run to verify fixes",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
           ]
         },
         {
@@ -25904,6 +27145,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。"
@@ -26108,7 +27356,7 @@
           "paragraphs": [
             "你可以把\"Plugins in the SDK\"理解成 Customize behavior 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 What are plugins?、Loading plugins、Path specifications、Verifying plugin installation 这些环节往下讲。",
-            "翻成人话，大概就是：Path specifications"
+            "翻成人话，大概就是：Loading pluginsPath specifications"
           ]
         },
         {
@@ -26167,6 +27415,13 @@
               "code": "plugins: [\n  { type: \"local\", path: \"./local-plugin\" },\n  { type: \"local\", path: \"~/.claude/custom-plugins/shared-plugin\" }\n];",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -26405,6 +27660,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -26512,7 +27774,7 @@
           "paragraphs": [
             "你可以把\"Intercept and control agent behavior with hooks\"理解成 Control and observability 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 How hooks work、Available hooks、Configure hooks、Matchers 这些环节往下讲。",
-            "翻成人话，大概就是：Callback functions"
+            "翻成人话，大概就是：Configure hooksMatchersCallback functionsInputsOutputsAsynchronous output"
           ]
         },
         {
@@ -26595,6 +27857,13 @@
               "code": "const myHook: HookCallback = async (input, toolUseID, { signal }) => {\n  const preInput = input as PreToolUseHookInput;\n  const toolInput = preInput.tool_input as Record<string, unknown>;\n  const filePath = toolInput?.file_path as string;\n  if (!filePath?.endsWith(\".md\")) return {}; // Skip non-markdown files\n  // Process markdown files...\n  return {};\n};",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
         {
@@ -26987,6 +28256,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -27223,6 +28499,12 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -27417,6 +28699,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -27578,6 +28867,13 @@
           ]
         },
         {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
           "title": "Documentation Index",
           "paragraphs": [
             "这里不是让你背\"Documentation Index\"这个词，而是让你看它真干活时怎么使。",
@@ -27683,7 +28979,7 @@
           "paragraphs": [
             "你可以把\"Hosting the Agent SDK\"理解成 Deployment 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Hosting Requirements、Container-Based Sandboxing、System Requirements、Understanding the SDK Architecture 这些环节往下讲。",
-            "翻成人话，大概就是：Hosting Requirements"
+            "翻成人话，大概就是：Hosting RequirementsContainer-Based SandboxingSystem Requirements"
           ]
         },
         {
@@ -27692,6 +28988,13 @@
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
             "第三，照着原文这几个环节挨个过：Hosting Requirements -> Container-Based Sandboxing -> System Requirements -> Understanding the SDK Architecture。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -27905,6 +29208,12 @@
               "code": "docker run \\\n  --read-only \\\n  --tmpfs /tmp:rw,noexec,nosuid,size=100m \\\n  --tmpfs /workspace:rw,noexec,size=500m \\\n  agent-image",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。"
           ]
         },
         {
@@ -28143,7 +29452,7 @@
           "paragraphs": [
             "你可以把\"TypeScript SDK\"理解成 SDK references 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Installation、Compile to a single executable、Functions、query() 这些环节往下讲。",
-            "翻成人话，大概就是：Compile to a single executable"
+            "翻成人话，大概就是：InstallationCompile to a single executable"
           ]
         },
         {
@@ -28226,6 +29535,13 @@
               "code": "import { listSessions, getSessionMessages } from \"@anthropic-ai/claude-agent-sdk\";\n\nconst [latest] = await listSessions({ dir: \"/path/to/project\", limit: 1 });\n\nif (latest) {\n  const messages = await getSessionMessages(latest.sessionId, {\n    dir: \"/path/to/project\",\n    limit: 20\n  });\n\n  for (const msg of messages) {\n    console.log(`[${msg.type}] ${msg.uuid}`);\n  }\n}",
               "kind": "command"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -28759,7 +30075,7 @@
           "paragraphs": [
             "你可以把\"TypeScript V2 (removed)\"理解成 SDK references 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Installation、Quick start、One-shot prompt、Basic session 这些环节往下讲。",
-            "翻成人话，大概就是：Multi-turn conversation"
+            "翻成人话，大概就是：Quick startOne-shot promptBasic sessionMulti-turn conversationSession resumeCleanup"
           ]
         },
         {
@@ -28836,6 +30152,13 @@
               "code": "interface SDKSession {\n  readonly sessionId: string;\n  send(message: string | SDKUserMessage): Promise<void>;\n  stream(): AsyncGenerator<SDKMessage, void>;\n  close(): void;\n}",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -29053,7 +30376,7 @@
           "paragraphs": [
             "你可以把\"Python SDK\"理解成 SDK references 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Installation、Choosing between query() and ClaudeSDKClient、Quick comparison、When to use query() (one-off tasks) 这些环节往下讲。",
-            "翻成人话，大概就是：Choosing between query() and ClaudeSDKClient"
+            "翻成人话，大概就是：Choosing between query() and ClaudeSDKClientQuick comparisonWhen to use query() (one-off tasks)When to use ClaudeSDKClient (continuous conversation)"
           ]
         },
         {
@@ -29136,6 +30459,13 @@
               "code": "from claude_agent_sdk import list_sessions, get_session_messages\n\nsessions = list_sessions(limit=1)\nif sessions:\n    messages = get_session_messages(sessions[0].session_id)\n    for msg in messages:\n        print(f\"[{msg.type}] {msg.uuid}\")",
               "kind": "code"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -29660,7 +30990,7 @@
           "paragraphs": [
             "你可以把\"Migration Guide\"理解成 SDK references 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Overview、What’s Changed、Migration Steps、For TypeScript/JavaScript Projects 这些环节往下讲。",
-            "翻成人话，大概就是：For TypeScript/JavaScript Projects"
+            "翻成人话，大概就是：Migration StepsFor TypeScript/JavaScript ProjectsFor Python Projects"
           ]
         },
         {
@@ -29725,6 +31055,13 @@
               "code": "const result = query({\n  prompt: \"Hello\",\n  options: {\n    settingSources: [] // No filesystem settings loaded\n  }\n});\n\n// Or load only specific sources:\nconst result = query({\n  prompt: \"Hello\",\n  options: {\n    settingSources: [\"project\"] // Only project settings\n  }\n});",
               "kind": "prompt"
             }
+          ]
+        },
+        {
+          "title": "On this page",
+          "paragraphs": [
+            "这里不是让你背\"On this page\"这个词，而是让你看它真干活时怎么使。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
