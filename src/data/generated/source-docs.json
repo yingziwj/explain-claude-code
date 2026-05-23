@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-22T06:19:40.331Z",
+  "generatedAt": "2026-05-23T05:48:11.707Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -1322,6 +1322,8 @@
         "Documentation Index"
       ],
       "toc": [
+        "2.1.150",
+        "2.1.149",
         "2.1.148",
         "2.1.147",
         "2.1.145",
@@ -1339,9 +1341,7 @@
         "2.1.131",
         "2.1.129",
         "2.1.128",
-        "2.1.126",
-        "2.1.123",
-        "2.1.122"
+        "2.1.126"
       ],
       "paragraphs": [
         "Release notes for Claude Code, including new features, improvements, and bug fixes by version.",
@@ -1349,6 +1349,33 @@
         "Use this file to discover all available pages before exploring further.",
         "This page is generated from the CHANGELOG.md on GitHub.",
         "Run claude --version to check your installed version.",
+        "Internal infrastructure improvements (no user-facing changes)",
+        "/usage now shows a per-category breakdown of what’s driving your limits usage — skills, subagents, plugins, and per-MCP-server cost",
+        "/diff detail view can now be scrolled with the keyboard (arrows, j/k, PgUp/PgDn, Space, Home/End)",
+        "Markdown output now renders GFM task list checkboxes (- [ ] todo / - [x] done) instead of plain bullets",
+        "Enterprise: added the allowAllClaudeAiMcps managed setting to load claude.ai cloud MCP connectors alongside managed-mcp.json",
+        "Fixed a PowerShell permission bypass: built-in cd functions (cd.., cd\\, cd~, X:) changed the working directory undetected, letting a later command read outside the workspace",
+        "Fixed the sandbox write allowlist in git worktrees covering the entire main repository root instead of only the shared .git directory (with hooks/ and config denied)",
+        "Fixed PowerShell prefix/wildcard allow rules (e.g. PowerShell(dotnet.exe build *)) not pre-approving native executables and scripts",
+        "Fixed a permission-analysis gap where the parser trusted stale variable-tracking values for PWD/OLDPWD/DIRSTACK across cd/pushd/popd",
+        "Fixed find in the Bash tool exhausting the macOS system file/vnode table and crashing the host on large directory trees",
+        "Fixed the managed-settings approval dialog leaving the terminal frozen after accepting at startup",
+        "Fixed /ultraplan and remote session creation failing with “Could not capture uncommitted changes” when the working tree has no real changes",
+        "Fixed otelHeadersHelper failing silently when the script path contains spaces; helper failures are now reported in /doctor and the debug log",
+        "Fixed the thinking spinner staying amber across tool calls and onto fresh thinking bursts",
+        "Fixed collapsed Bash output reporting the wrong hidden-line count for outputs with many short lines",
+        "Fixed slash-command argument-hint clipping trailing typed characters when the hint overflows the input box",
+        "Fixed argument-hint and progressive arg suggestions not appearing after Tab-completing a skill whose frontmatter name: differs from its directory basename",
+        "Fixed the status bar showing the user’s baseline /effort setting instead of the effort level applied by skill/agent effort: frontmatter",
+        "Fixed Ctrl+O transcript view freezing at the moment it was opened instead of tailing new messages",
+        "Fixed editing a recalled prompt-history entry losing the edit when navigating further up/down with arrow keys",
+        "Fixed /config exit summary reporting phantom changes to auto-compact and theme when toggling unrelated settings",
+        "Fixed /insights crashing when cached session-meta files are missing optional fields",
+        "Fixed malformed PowerShell and History tool calls with missing input being misclassified as reads in transcript collapsing",
+        "Fixed renaming a Remote Control session from claude.ai or the Claude mobile app not updating the local session name for claude --resume",
+        "Fixed a race where a just-submitted prompt could appear twice in the up-arrow history",
+        "Fixed tapping the “Jump to bottom” pill in fullscreen mode not dismissing it immediately",
+        "Improved /feedback reports to include the conversation that happened before context compaction, making issues from earlier in long sessions easier to triage",
         "Fixed the Bash tool returning exit code 127 on every command for some users (a regression introduced in 2.1.147)",
         "Pinned background sessions (Ctrl+T in claude agents) now stay alive when idle, are restarted in place to apply Claude Code updates, and are shed under memory pressure only after non-pinned sessions",
         "Renamed /simplify to /code-review. It now reports correctness bugs at a chosen effort level (e.g., /code-review high); pass --comment to post findings as inline GitHub PR comments. The old cleanup-and-fix behavior has been removed",
@@ -1496,34 +1523,7 @@
         "Fixed background sessions disappearing and daemon reconnect failing after macOS sleep/wake — the daemon now detects clock jumps instead of treating them as elapsed idle time",
         "Fixed daemon not exiting cleanly after the binary is upgraded (e.g. brew upgrade), causing dispatched agents to crash-loop on the deleted path",
         "Fixed background agents crash-looping when the Claude-in-Chrome extension is connected without a shared tab",
-        "Fixed clicking links in an attached claude agents session — the background worker’s headless browser shim no longer applies while attached",
-        "Fixed claude agents “v to open in editor” using the daemon’s default editor instead of your shell’s $EDITOR/$VISUAL",
-        "Fixed claude agents deadlocking on Windows with network-drive working directories; Ctrl+C now works during startup",
-        "Fixed background-color bleed when attaching to a claude agents session from Apple Terminal or other 256-color-only terminals",
-        "Fixed claude --bg --dangerously-skip-permissions not persisting across retire/wake",
-        "Fixed session titles being derived from the URL when the first message is a link",
-        "Fixed redundant set_model requests from remote clients injecting duplicate /model breadcrumbs into the transcript",
-        "Fixed plugins using skills: [\"./\"] showing a false “path escapes plugin directory” error",
-        "Fixed plugin cache cleanup deleting the active plugin version directory when no installation metadata is present",
-        "Fixed /plugin browse pane showing “0 installs” for newly published plugins",
-        "Fixed plugin advisories not naming every plugin.json key that shadows a default folder",
-        "Improved reactive compaction: the first summarize attempt now seeds from the original request’s overflow size, avoiding a wasted near-full-context retry",
-        "Improved hook configuration error: configuring a prompt- or agent-type hook for SessionStart/Setup/SubagentStart now shows a clear “use a command-type hook instead” error",
-        "Removed stale /model claude-sonnet-4-20250514 suggestion from Usage Policy refusal messages",
-        "Added terminalSequence field to hook JSON output so hooks can emit desktop notifications, window titles, and bells without a controlling terminal",
-        "Added CLAUDE_CODE_PLUGIN_PREFER_HTTPS to clone GitHub plugin sources over HTTPS instead of SSH, for environments without a GitHub SSH key",
-        "Added ANTHROPIC_WORKSPACE_ID environment variable for workload identity federation — scopes the minted token to a specific workspace when the federation rule covers more than one",
-        "Added claude agents --cwd <path> to scope the session list to a directory",
-        "/feedback can now include recent sessions (last 24 hours or 7 days) for issues spanning more than the current session",
-        "Rewind menu: added “Summarize up to here” to compress earlier context while keeping recent turns intact",
-        "Auto mode permission dialog now explains when a permissions.ask rule caused the prompt",
-        "Restored the “view diff in your IDE” option on file-edit permission prompts when an IDE is connected",
-        "Background agents launched via /bg or ←← now preserve the current permission mode instead of reverting to default",
-        "claude agents: agents that finish work but leave a background shell running now move to Completed instead of staying under Working",
-        "Improved spinner feedback during long thinking periods — the spinner now warms to amber after 10 seconds to signal Claude is still working",
-        "Improved plugin menu navigation: →/Tab switch tabs, ↑ moves to the tab strip, and tab headers and search box are clickable in fullscreen mode",
-        "Fixed background side-queries sending an unavailable Haiku model ID on Bedrock/Vertex/Foundry/gateway when no ANTHROPIC_SMALL_FAST_MODEL override is set — now falls back to the main-loop model",
-        "Fixed claude daemon status and /doctor on Windows throwing when the daemon pipe key file is locked or unreadable — now shows the underlying error instead of an opaque failure"
+        "Fixed clicking links in an attached claude agents session — the background worker’s headless browser shim no longer applies while attached"
       ],
       "codeBlocks": [],
       "sectionBlocks": [
@@ -1541,14 +1541,14 @@
             "Use this file to discover all available pages before exploring further.",
             "This page is generated from the CHANGELOG.md on GitHub.",
             "Run claude --version to check your installed version.",
-            "Fixed the Bash tool returning exit code 127 on every command for some users (a regression introduced in 2.1.147)",
-            "Pinned background sessions (Ctrl+T in claude agents) now stay alive when idle, are restarted in place to apply Claude Code updates, and are shed under memory pressure only after non-pinned sessions",
-            "Renamed /simplify to /code-review. It now reports correctness bugs at a chosen effort level (e.g., /code-review high); pass --comment to post findings as inline GitHub PR comments. The old cleanup-and-fix behavior has been removed",
-            "Improved auto-updater: retries transient network failures, reports specific error categories and OS error codes on failure, and shows the current version when an update fails",
-            "Improved diff rendering performance for large file edits",
-            "Prompt history no longer records consecutive duplicate entries — recalling a prompt with arrow-up and submitting it again won’t add another copy",
-            "Fixed enterprise login restrictions (forceLoginOrgUUID and forceLoginMethod managed-settings) not being enforced against third-party-provider and API-key sessions",
-            "Fixed & in ! command output displaying as &amp;, which broke copy-pasting URLs from commands like gcloud auth login on headless machines"
+            "Internal infrastructure improvements (no user-facing changes)",
+            "/usage now shows a per-category breakdown of what’s driving your limits usage — skills, subagents, plugins, and per-MCP-server cost",
+            "/diff detail view can now be scrolled with the keyboard (arrows, j/k, PgUp/PgDn, Space, Home/End)",
+            "Markdown output now renders GFM task list checkboxes (- [ ] todo / - [x] done) instead of plain bullets",
+            "Enterprise: added the allowAllClaudeAiMcps managed setting to load claude.ai cloud MCP connectors alongside managed-mcp.json",
+            "Fixed a PowerShell permission bypass: built-in cd functions (cd.., cd\\, cd~, X:) changed the working directory undetected, letting a later command read outside the workspace",
+            "Fixed the sandbox write allowlist in git worktrees covering the entire main repository root instead of only the shared .git directory (with hooks/ and config denied)",
+            "Fixed PowerShell prefix/wildcard allow rules (e.g. PowerShell(dotnet.exe build *)) not pre-approving native executables and scripts"
           ],
           "codeBlocks": []
         }
@@ -10200,6 +10200,7 @@
         "This .worktreeinclude copies two env files and a secrets config into each new worktree:",
         "This applies to worktrees created with --worktree, subagent worktrees, and parallel sessions in the desktop app.",
         "Subagents can run in their own worktrees so parallel edits don’t conflict. Ask Claude to “use worktrees for your agents”, or set it permanently on a custom subagent by adding isolation: worktree to the frontmatter. Each subagent gets a temporary worktree that is removed automatically when the subagent finishes without changes.",
+        "Subagent worktrees use the same base branch as --worktree, so they branch from your repository’s default branch unless worktree.baseRef is set to \"head\".",
         "When you exit a worktree session, cleanup depends on whether you made changes:",
         "No uncommitted changes, no untracked files, and no new commits: the worktree and its branch are removed automatically. If the session has a name, Claude prompts instead so you can keep the worktree for later",
         "Uncommitted changes, untracked files, or new commits exist: Claude prompts you to keep or remove the worktree. Keeping preserves the directory and branch so you can return later. Removing deletes the worktree directory and its branch, discarding any uncommitted changes, untracked files, and commits",
@@ -10306,7 +10307,8 @@
         {
           "title": "​Isolate subagents with worktrees",
           "paragraphs": [
-            "Subagents can run in their own worktrees so parallel edits don’t conflict. Ask Claude to “use worktrees for your agents”, or set it permanently on a custom subagent by adding isolation: worktree to the frontmatter. Each subagent gets a temporary worktree that is removed automatically when the subagent finishes without changes."
+            "Subagents can run in their own worktrees so parallel edits don’t conflict. Ask Claude to “use worktrees for your agents”, or set it permanently on a custom subagent by adding isolation: worktree to the frontmatter. Each subagent gets a temporary worktree that is removed automatically when the subagent finishes without changes.",
+            "Subagent worktrees use the same base branch as --worktree, so they branch from your repository’s default branch unless worktree.baseRef is set to \"head\"."
           ],
           "codeBlocks": []
         },
@@ -32896,7 +32898,7 @@
         "This example logs all file changes to an audit file:",
         "Learn more about hooks →",
         "Spawn specialized agents to handle focused subtasks. Your main agent delegates work, and subagents report back with results.",
-        "Define custom agents with specialized instructions. Include Agent in allowedTools since subagents are invoked via the Agent tool:",
+        "Define custom agents with specialized instructions. Subagents are invoked via the Agent tool, so include Agent in allowedTools to auto-approve those invocations:",
         "Messages from within a subagent’s context include a parent_tool_use_id field, letting you track which messages belong to which subagent execution.",
         "Learn more about subagents →",
         "Connect to external systems via the Model Context Protocol: databases, browsers, APIs, and hundreds more.",
@@ -33272,7 +33274,7 @@
         "python3 -m venv .venv && source .venv/bin/activate\npip3 install claude-agent-sdk",
         "ANTHROPIC_API_KEY=your-api-key",
         "def calculate_average(numbers):\n    total = 0\n    for num in numbers:\n        total += num\n    return total / len(numbers)\n\n\ndef get_user_name(user):\n    return user[\"name\"].upper()",
-        "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ResultMessage\n\n\nasync def main():\n    # Agentic loop: streams messages as Claude works\n    async for message in query(\n        prompt=\"Review utils.py for bugs that would cause crashes. Fix any issues you find.\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Edit\", \"Glob\"],  # Tools Claude can use\n            permission_mode=\"acceptEdits\",  # Auto-approve file edits\n        ),\n    ):\n        # Print human-readable output\n        if isinstance(message, AssistantMessage):\n            for block in message.content:\n                if hasattr(block, \"text\"):\n                    print(block.text)  # Claude's reasoning\n                elif hasattr(block, \"name\"):\n                    print(f\"Tool: {block.name}\")  # Tool being called\n        elif isinstance(message, ResultMessage):\n            print(f\"Done: {message.subtype}\")  # Final result\n\n\nasyncio.run(main())",
+        "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ResultMessage\n\n\nasync def main():\n    # Agentic loop: streams messages as Claude works\n    async for message in query(\n        prompt=\"Review utils.py for bugs that would cause crashes. Fix any issues you find.\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Edit\", \"Glob\"],  # Auto-approve these tools\n            permission_mode=\"acceptEdits\",  # Auto-approve file edits\n        ),\n    ):\n        # Print human-readable output\n        if isinstance(message, AssistantMessage):\n            for block in message.content:\n                if hasattr(block, \"text\"):\n                    print(block.text)  # Claude's reasoning\n                elif hasattr(block, \"name\"):\n                    print(f\"Tool: {block.name}\")  # Tool being called\n        elif isinstance(message, ResultMessage):\n            print(f\"Done: {message.subtype}\")  # Final result\n\n\nasyncio.run(main())",
         "python3 agent.py",
         "npx tsx agent.ts",
         "options = ClaudeAgentOptions(\n    allowed_tools=[\"Read\", \"Edit\", \"Glob\", \"WebSearch\"], permission_mode=\"acceptEdits\"\n)",
@@ -33368,7 +33370,7 @@
             "This example uses streaming to show progress in real-time. If you don’t need live output (e.g., for background jobs or CI pipelines), you can collect all messages at once. See Streaming vs. single-turn mode for details."
           ],
           "codeBlocks": [
-            "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ResultMessage\n\n\nasync def main():\n    # Agentic loop: streams messages as Claude works\n    async for message in query(\n        prompt=\"Review utils.py for bugs that would cause crashes. Fix any issues you find.\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Edit\", \"Glob\"],  # Tools Claude can use\n            permission_mode=\"acceptEdits\",  # Auto-approve file edits\n        ),\n    ):\n        # Print human-readable output\n        if isinstance(message, AssistantMessage):\n            for block in message.content:\n                if hasattr(block, \"text\"):\n                    print(block.text)  # Claude's reasoning\n                elif hasattr(block, \"name\"):\n                    print(f\"Tool: {block.name}\")  # Tool being called\n        elif isinstance(message, ResultMessage):\n            print(f\"Done: {message.subtype}\")  # Final result\n\n\nasyncio.run(main())"
+            "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ResultMessage\n\n\nasync def main():\n    # Agentic loop: streams messages as Claude works\n    async for message in query(\n        prompt=\"Review utils.py for bugs that would cause crashes. Fix any issues you find.\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Edit\", \"Glob\"],  # Auto-approve these tools\n            permission_mode=\"acceptEdits\",  # Auto-approve file edits\n        ),\n    ):\n        # Print human-readable output\n        if isinstance(message, AssistantMessage):\n            for block in message.content:\n                if hasattr(block, \"text\"):\n                    print(block.text)  # Claude's reasoning\n                elif hasattr(block, \"name\"):\n                    print(f\"Tool: {block.name}\")  # Tool being called\n        elif isinstance(message, ResultMessage):\n            print(f\"Done: {message.subtype}\")  # Final result\n\n\nasyncio.run(main())"
           ]
         },
         {
@@ -35900,7 +35902,7 @@
         "​From a config file",
         "​Allow MCP tools",
         "​Tool naming convention",
-        "​Grant access with allowedTools",
+        "​Auto-approve with allowedTools",
         "​Discover available tools",
         "​Transport types",
         "​stdio servers",
@@ -35920,7 +35922,7 @@
         "From a config file",
         "Allow MCP tools",
         "Tool naming convention",
-        "Grant access with allowedTools",
+        "Auto-approve with allowedTools",
         "Discover available tools",
         "Transport types",
         "stdio servers",
@@ -35939,9 +35941,9 @@
         "Quickstart",
         "Add an MCP serverIn codeFrom a config file",
         "From a config file",
-        "Allow MCP toolsTool naming conventionGrant access with allowedToolsDiscover available tools",
+        "Allow MCP toolsTool naming conventionAuto-approve with allowedToolsDiscover available tools",
         "Tool naming convention",
-        "Grant access with allowedTools",
+        "Auto-approve with allowedTools",
         "Discover available tools",
         "Transport typesstdio serversHTTP/SSE serversSDK MCP servers",
         "stdio servers",
@@ -35974,7 +35976,7 @@
         "Create a .mcp.json file at your project root. The file is picked up when the project setting source is enabled, which it is for default query() options. If you set settingSources explicitly, include \"project\" for this file to load:",
         "MCP tools require explicit permission before Claude can use them. Without permission, Claude will see that tools are available but won’t be able to call them.",
         "MCP tools follow the naming pattern mcp__<server-name>__<tool-name>. For example, a GitHub server named \"github\" with a list_issues tool becomes mcp__github__list_issues.",
-        "Use allowedTools to specify which MCP tools Claude can use:",
+        "Use allowedTools to auto-approve specific MCP tools so Claude can use them without a permission prompt:",
         "Wildcards (*) let you allow all tools from a server without listing each one individually.",
         "Prefer allowedTools over permission modes for MCP access. permissionMode: \"acceptEdits\" does not auto-approve MCP tools (only file edits and filesystem Bash commands). permissionMode: \"bypassPermissions\" does auto-approve MCP tools but also disables all other safety prompts, which is broader than necessary. A wildcard in allowedTools grants exactly the MCP server you want and nothing more. See Permission modes for a full comparison.",
         "To see what tools an MCP server provides, check the server’s documentation or connect to the server and inspect the system init message:",
@@ -36039,7 +36041,7 @@
         "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Connection string from environment variable\nconst connectionString = process.env.DATABASE_URL;\n\nfor await (const message of query({\n  // Natural language query - Claude writes the SQL\n  prompt: \"How many users signed up last week? Break it down by day.\",\n  options: {\n    mcpServers: {\n      postgres: {\n        command: \"npx\",\n        // Pass connection string as argument to the server\n        args: [\"-y\", \"@modelcontextprotocol/server-postgres\", connectionString]\n      }\n    },\n    // Allow only read queries, not writes\n    allowedTools: [\"mcp__postgres__query\"]\n  }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}",
         "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Process data\",\n  options: {\n    mcpServers: {\n      \"data-processor\": dataServer\n    }\n  }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    const failedServers = message.mcp_servers.filter((s) => s.status !== \"connected\");\n\n    if (failedServers.length > 0) {\n      console.warn(\"Failed to connect:\", failedServers);\n    }\n  }\n\n  if (message.type === \"result\" && message.subtype === \"error_during_execution\") {\n    console.error(\"Execution failed\");\n  }\n}",
         "if (message.type === \"system\" && message.subtype === \"init\") {\n  for (const server of message.mcp_servers) {\n    if (server.status === \"failed\") {\n      console.error(`Server ${server.name} failed to connect`);\n    }\n  }\n}",
-        "const _ = {\n  options: {\n    mcpServers: {\n      // your servers\n    },\n    allowedTools: [\"mcp__servername__*\"] // Required for Claude to use the tools\n  }\n};"
+        "const _ = {\n  options: {\n    mcpServers: {\n      // your servers\n    },\n    allowedTools: [\"mcp__servername__*\"] // Auto-approve calls from this server\n  }\n};"
       ],
       "sectionBlocks": [
         {
@@ -36048,9 +36050,9 @@
             "Quickstart",
             "Add an MCP serverIn codeFrom a config file",
             "From a config file",
-            "Allow MCP toolsTool naming conventionGrant access with allowedToolsDiscover available tools",
+            "Allow MCP toolsTool naming conventionAuto-approve with allowedToolsDiscover available tools",
             "Tool naming convention",
-            "Grant access with allowedTools",
+            "Auto-approve with allowedTools",
             "Discover available tools",
             "Transport typesstdio serversHTTP/SSE serversSDK MCP servers",
             "stdio servers",
@@ -36121,9 +36123,9 @@
           "codeBlocks": []
         },
         {
-          "title": "​Grant access with allowedTools",
+          "title": "​Auto-approve with allowedTools",
           "paragraphs": [
-            "Use allowedTools to specify which MCP tools Claude can use:",
+            "Use allowedTools to auto-approve specific MCP tools so Claude can use them without a permission prompt:",
             "Wildcards (*) let you allow all tools from a server without listing each one individually.",
             "Prefer allowedTools over permission modes for MCP access. permissionMode: \"acceptEdits\" does not auto-approve MCP tools (only file edits and filesystem Bash commands). permissionMode: \"bypassPermissions\" does auto-approve MCP tools but also disables all other safety prompts, which is broader than necessary. A wildcard in allowedTools grants exactly the MCP server you want and nothing more. See Permission modes for a full comparison."
           ],
@@ -36290,7 +36292,7 @@
             "If Claude sees tools but doesn’t use them, check that you’ve granted permission with allowedTools:"
           ],
           "codeBlocks": [
-            "const _ = {\n  options: {\n    mcpServers: {\n      // your servers\n    },\n    allowedTools: [\"mcp__servername__*\"] // Required for Claude to use the tools\n  }\n};"
+            "const _ = {\n  options: {\n    mcpServers: {\n      // your servers\n    },\n    allowedTools: [\"mcp__servername__*\"] // Auto-approve calls from this server\n  }\n};"
           ]
         },
         {
@@ -36550,11 +36552,11 @@
         "Example: a database-migration subagent can have detailed knowledge about SQL best practices, rollback strategies, and data integrity checks that would be unnecessary noise in the main agent’s instructions.",
         "Subagents can be limited to specific tools, reducing the risk of unintended actions.",
         "Example: a doc-reviewer subagent might only have access to Read and Grep tools, ensuring it can analyze but never accidentally modify your documentation files.",
-        "Define subagents directly in your code using the agents parameter. This example creates two subagents: a code reviewer with read-only access and a test runner that can execute commands. The Agent tool must be included in allowedTools since Claude invokes subagents through the Agent tool.",
+        "Define subagents directly in your code using the agents parameter. This example creates two subagents: a code reviewer with read-only access and a test runner that can execute commands. Claude invokes subagents through the Agent tool, so include Agent in allowedTools to auto-approve subagent invocations without a permission prompt.",
         "In the Python SDK, these field names use camelCase to match the wire format. See the AgentDefinition reference for details.",
         "Subagents cannot spawn their own subagents. Don’t include Agent in a subagent’s tools array.",
         "You can also define subagents as markdown files in .claude/agents/ directories. See the Claude Code subagents documentation for details on this approach. Programmatically defined agents take precedence over filesystem-based agents with the same name.",
-        "Even without defining custom subagents, Claude can spawn the built-in general-purpose subagent when Agent is in your allowedTools. This is useful for delegating research or exploration tasks without creating specialized agents.",
+        "Even without defining custom subagents, Claude can spawn the built-in general-purpose subagent. This is useful for delegating research or exploration tasks without creating specialized agents. Include Agent in allowedTools so these invocations auto-approve without a permission prompt.",
         "A subagent’s context window starts fresh (no parent conversation) but isn’t empty. The only channel from parent to subagent is the Agent tool’s prompt string, so include any file paths, error messages, or decisions the subagent needs directly in that prompt.",
         "The parent receives the subagent’s final message verbatim as the Agent tool result, but may summarize it in its own response. To preserve subagent output verbatim in the user-facing response, include an instruction to do so in the prompt or systemPrompt option you pass to the main query() call.",
         "Claude automatically decides when to invoke subagents based on the task and each subagent’s description. For example, if you define a performance-optimizer subagent with the description “Performance optimization specialist for query tuning”, Claude will invoke it when your prompt mentions optimizing queries.",
@@ -36583,7 +36585,7 @@
         "Specify tools: agent can only use listed tools",
         "This example creates a read-only analysis agent that can examine code but cannot modify files or run commands.",
         "If Claude completes tasks directly instead of delegating to your subagent:",
-        "Include the Agent tool: subagents are invoked via the Agent tool, so it must be in allowedTools",
+        "Check Agent invocations are approved: include Agent in allowedTools to auto-approve subagent calls. Without it, Agent invocations fall through to your canUseTool callback or, in dontAsk mode, are denied",
         "Use explicit prompting: mention the subagent by name in your prompt (for example, “Use the code-reviewer agent to…”)",
         "Write a clear description: explain exactly when the subagent should be used so Claude can match tasks appropriately",
         "Agents defined in .claude/agents/ are loaded at startup only. If you create a new agent file while Claude Code is running, restart the session to load it.",
@@ -36593,7 +36595,7 @@
         "Was this page helpful?"
       ],
       "codeBlocks": [
-        "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Review the authentication module for security issues\",\n        options=ClaudeAgentOptions(\n            # Agent tool is required for subagent invocation\n            allowed_tools=[\"Read\", \"Grep\", \"Glob\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    # description tells Claude when to use this subagent\n                    description=\"Expert code review specialist. Use for quality, security, and maintainability reviews.\",\n                    # prompt defines the subagent's behavior and expertise\n                    prompt=\"\"\"You are a code review specialist with expertise in security, performance, and best practices.\n\nWhen reviewing code:\n- Identify security vulnerabilities\n- Check for performance issues\n- Verify adherence to coding standards\n- Suggest specific improvements\n\nBe thorough but concise in your feedback.\"\"\",\n                    # tools restricts what the subagent can do (read-only here)\n                    tools=[\"Read\", \"Grep\", \"Glob\"],\n                    # model overrides the default model for this subagent\n                    model=\"sonnet\",\n                ),\n                \"test-runner\": AgentDefinition(\n                    description=\"Runs and analyzes test suites. Use for test execution and coverage analysis.\",\n                    prompt=\"\"\"You are a test execution specialist. Run tests and provide clear analysis of results.\n\nFocus on:\n- Running test commands\n- Analyzing test output\n- Identifying failing tests\n- Suggesting fixes for failures\"\"\",\n                    # Bash access lets this subagent run test commands\n                    tools=[\"Bash\", \"Read\", \"Grep\"],\n                ),\n            },\n        ),\n    ):\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())",
+        "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Review the authentication module for security issues\",\n        options=ClaudeAgentOptions(\n            # Auto-approve these tools, including Agent for subagent invocation\n            allowed_tools=[\"Read\", \"Grep\", \"Glob\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    # description tells Claude when to use this subagent\n                    description=\"Expert code review specialist. Use for quality, security, and maintainability reviews.\",\n                    # prompt defines the subagent's behavior and expertise\n                    prompt=\"\"\"You are a code review specialist with expertise in security, performance, and best practices.\n\nWhen reviewing code:\n- Identify security vulnerabilities\n- Check for performance issues\n- Verify adherence to coding standards\n- Suggest specific improvements\n\nBe thorough but concise in your feedback.\"\"\",\n                    # tools restricts what the subagent can do (read-only here)\n                    tools=[\"Read\", \"Grep\", \"Glob\"],\n                    # model overrides the default model for this subagent\n                    model=\"sonnet\",\n                ),\n                \"test-runner\": AgentDefinition(\n                    description=\"Runs and analyzes test suites. Use for test execution and coverage analysis.\",\n                    prompt=\"\"\"You are a test execution specialist. Run tests and provide clear analysis of results.\n\nFocus on:\n- Running test commands\n- Analyzing test output\n- Identifying failing tests\n- Suggesting fixes for failures\"\"\",\n                    # Bash access lets this subagent run test commands\n                    tools=[\"Bash\", \"Read\", \"Grep\"],\n                ),\n            },\n        ),\n    ):\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())",
         "\"Use the code-reviewer agent to check the authentication module\"",
         "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\n\n# Factory function that returns an AgentDefinition\n# This pattern lets you customize agents based on runtime conditions\ndef create_security_agent(security_level: str) -> AgentDefinition:\n    is_strict = security_level == \"strict\"\n    return AgentDefinition(\n        description=\"Security code reviewer\",\n        # Customize the prompt based on strictness level\n        prompt=f\"You are a {'strict' if is_strict else 'balanced'} security reviewer...\",\n        tools=[\"Read\", \"Grep\", \"Glob\"],\n        # Key insight: use a more capable model for high-stakes reviews\n        model=\"opus\" if is_strict else \"sonnet\",\n    )\n\n\nasync def main():\n    # The agent is created at query time, so each request can use different settings\n    async for message in query(\n        prompt=\"Review this PR for security issues\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Grep\", \"Glob\", \"Agent\"],\n            agents={\n                # Call the factory with your desired configuration\n                \"security-reviewer\": create_security_agent(\"strict\")\n            },\n        ),\n    ):\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())",
         "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition, ToolUseBlock\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Use the code-reviewer agent to review this codebase\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Glob\", \"Grep\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    description=\"Expert code reviewer.\",\n                    prompt=\"Analyze code quality and suggest improvements.\",\n                    tools=[\"Read\", \"Glob\", \"Grep\"],\n                )\n            },\n        ),\n    ):\n        # Check for subagent invocation. Match both names: older SDK\n        # versions emitted \"Task\", current versions emit \"Agent\".\n        if hasattr(message, \"content\") and message.content:\n            for block in message.content:\n                if isinstance(block, ToolUseBlock) and block.name in (\n                    \"Task\",\n                    \"Agent\",\n                ):\n                    print(f\"Subagent invoked: {block.input.get('subagent_type')}\")\n\n        # Check if this message is from within a subagent's context\n        if hasattr(message, \"parent_tool_use_id\") and message.parent_tool_use_id:\n            print(\"  (running inside subagent)\")\n\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())",
@@ -36686,10 +36688,10 @@
         {
           "title": "​Programmatic definition (recommended)",
           "paragraphs": [
-            "Define subagents directly in your code using the agents parameter. This example creates two subagents: a code reviewer with read-only access and a test runner that can execute commands. The Agent tool must be included in allowedTools since Claude invokes subagents through the Agent tool."
+            "Define subagents directly in your code using the agents parameter. This example creates two subagents: a code reviewer with read-only access and a test runner that can execute commands. Claude invokes subagents through the Agent tool, so include Agent in allowedTools to auto-approve subagent invocations without a permission prompt."
           ],
           "codeBlocks": [
-            "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Review the authentication module for security issues\",\n        options=ClaudeAgentOptions(\n            # Agent tool is required for subagent invocation\n            allowed_tools=[\"Read\", \"Grep\", \"Glob\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    # description tells Claude when to use this subagent\n                    description=\"Expert code review specialist. Use for quality, security, and maintainability reviews.\",\n                    # prompt defines the subagent's behavior and expertise\n                    prompt=\"\"\"You are a code review specialist with expertise in security, performance, and best practices.\n\nWhen reviewing code:\n- Identify security vulnerabilities\n- Check for performance issues\n- Verify adherence to coding standards\n- Suggest specific improvements\n\nBe thorough but concise in your feedback.\"\"\",\n                    # tools restricts what the subagent can do (read-only here)\n                    tools=[\"Read\", \"Grep\", \"Glob\"],\n                    # model overrides the default model for this subagent\n                    model=\"sonnet\",\n                ),\n                \"test-runner\": AgentDefinition(\n                    description=\"Runs and analyzes test suites. Use for test execution and coverage analysis.\",\n                    prompt=\"\"\"You are a test execution specialist. Run tests and provide clear analysis of results.\n\nFocus on:\n- Running test commands\n- Analyzing test output\n- Identifying failing tests\n- Suggesting fixes for failures\"\"\",\n                    # Bash access lets this subagent run test commands\n                    tools=[\"Bash\", \"Read\", \"Grep\"],\n                ),\n            },\n        ),\n    ):\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())"
+            "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Review the authentication module for security issues\",\n        options=ClaudeAgentOptions(\n            # Auto-approve these tools, including Agent for subagent invocation\n            allowed_tools=[\"Read\", \"Grep\", \"Glob\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    # description tells Claude when to use this subagent\n                    description=\"Expert code review specialist. Use for quality, security, and maintainability reviews.\",\n                    # prompt defines the subagent's behavior and expertise\n                    prompt=\"\"\"You are a code review specialist with expertise in security, performance, and best practices.\n\nWhen reviewing code:\n- Identify security vulnerabilities\n- Check for performance issues\n- Verify adherence to coding standards\n- Suggest specific improvements\n\nBe thorough but concise in your feedback.\"\"\",\n                    # tools restricts what the subagent can do (read-only here)\n                    tools=[\"Read\", \"Grep\", \"Glob\"],\n                    # model overrides the default model for this subagent\n                    model=\"sonnet\",\n                ),\n                \"test-runner\": AgentDefinition(\n                    description=\"Runs and analyzes test suites. Use for test execution and coverage analysis.\",\n                    prompt=\"\"\"You are a test execution specialist. Run tests and provide clear analysis of results.\n\nFocus on:\n- Running test commands\n- Analyzing test output\n- Identifying failing tests\n- Suggesting fixes for failures\"\"\",\n                    # Bash access lets this subagent run test commands\n                    tools=[\"Bash\", \"Read\", \"Grep\"],\n                ),\n            },\n        ),\n    ):\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())"
           ]
         },
         {
@@ -36704,7 +36706,7 @@
           "title": "​Filesystem-based definition (alternative)",
           "paragraphs": [
             "You can also define subagents as markdown files in .claude/agents/ directories. See the Claude Code subagents documentation for details on this approach. Programmatically defined agents take precedence over filesystem-based agents with the same name.",
-            "Even without defining custom subagents, Claude can spawn the built-in general-purpose subagent when Agent is in your allowedTools. This is useful for delegating research or exploration tasks without creating specialized agents."
+            "Even without defining custom subagents, Claude can spawn the built-in general-purpose subagent. This is useful for delegating research or exploration tasks without creating specialized agents. Include Agent in allowedTools so these invocations auto-approve without a permission prompt."
           ],
           "codeBlocks": []
         },
@@ -36806,7 +36808,7 @@
           "title": "​Claude not delegating to subagents",
           "paragraphs": [
             "If Claude completes tasks directly instead of delegating to your subagent:",
-            "Include the Agent tool: subagents are invoked via the Agent tool, so it must be in allowedTools",
+            "Check Agent invocations are approved: include Agent in allowedTools to auto-approve subagent calls. Without it, Agent invocations fall through to your canUseTool callback or, in dontAsk mode, are denied",
             "Use explicit prompting: mention the subagent by name in your prompt (for example, “Use the code-reviewer agent to…”)",
             "Write a clear description: explain exactly when the subagent should be used so Claude can match tasks appropriately"
           ],
@@ -37215,8 +37217,8 @@
         "​Discovering Available Slash Commands",
         "​Sending Slash Commands",
         "​Common Slash Commands",
-        "​/compact - Compact Conversation History",
-        "​Clearing the conversation",
+        "​/compact - Compact conversation history",
+        "​/clear - Reset conversation context",
         "​Creating Custom Slash Commands",
         "​File Locations",
         "​File Format",
@@ -37230,8 +37232,8 @@
         "Discovering Available Slash Commands",
         "Sending Slash Commands",
         "Common Slash Commands",
-        "/compact - Compact Conversation History",
-        "Clearing the conversation",
+        "/compact - Compact conversation history",
+        "/clear - Reset conversation context",
         "Creating Custom Slash Commands",
         "File Locations",
         "File Format",
@@ -37251,9 +37253,9 @@
       "paragraphs": [
         "Discovering Available Slash Commands",
         "Sending Slash Commands",
-        "Common Slash Commands/compact - Compact Conversation HistoryClearing the conversation",
-        "/compact - Compact Conversation History",
-        "Clearing the conversation",
+        "Common Slash Commands/compact - Compact conversation history/clear - Reset conversation context",
+        "/compact - Compact conversation history",
+        "/clear - Reset conversation context",
         "Creating Custom Slash CommandsFile LocationsFile FormatBasic ExampleWith FrontmatterUsing Custom Commands in the SDKAdvanced FeaturesArguments and PlaceholdersBash Command ExecutionFile ReferencesOrganization with NamespacingPractical ExamplesCode Review CommandTest Runner Command",
         "File Locations",
         "File Format",
@@ -37276,7 +37278,9 @@
         "The Claude Agent SDK provides information about available slash commands in the system initialization message. Access this information when your session starts:",
         "Send slash commands by including them in your prompt string, just like regular text:",
         "The /compact command reduces the size of your conversation history by summarizing older messages while preserving important context:",
-        "The interactive /clear command is not available in the SDK. Each query() call already starts a fresh conversation, so to clear context, end the current query() and start a new one. The previous conversation stays on disk and can be returned to by passing its session ID to the resume option.",
+        "The /clear command resets the conversation to an empty context, so subsequent prompts start with no prior conversation history. The previous conversation remains on disk and can be returned to by passing its session ID to the resume option.",
+        "This is useful in streaming input mode, where you send multiple prompts over a single connection. For one-shot query() calls, each call already starts with empty context, so sending /clear has no practical effect; start a new query() instead.",
+        "/clear in the SDK requires Claude Code v2.1.117 or later. In earlier versions it is omitted from slash_commands.",
         "In addition to using built-in slash commands, you can create your own custom commands that are available through the SDK. Custom commands are defined as markdown files in specific directories, similar to how subagents are configured.",
         "The .claude/commands/ directory is the legacy format. The recommended format is .claude/skills/<name>/SKILL.md, which supports the same slash-command invocation (/name) plus autonomous invocation by Claude. See Skills for the current format. The CLI continues to support both formats, and the examples below remain accurate for .claude/commands/.",
         "Custom slash commands are stored in designated directories based on their scope:",
@@ -37310,12 +37314,12 @@
         "Was this page helpful?"
       ],
       "codeBlocks": [
-        "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello Claude\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Available slash commands:\", message.slash_commands);\n    // Example output: [\"/compact\", \"/context\", \"/usage\"]\n  }\n}",
+        "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello Claude\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Available slash commands:\", message.slash_commands);\n    // Example output: [\"clear\", \"compact\", \"context\", \"usage\"]\n  }\n}",
         "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Send a slash command\nfor await (const message of query({\n  prompt: \"/compact\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(\"Command executed:\", message.result);\n  }\n}",
         "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"/compact\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"compact_boundary\") {\n    console.log(\"Compaction completed\");\n    console.log(\"Pre-compaction tokens:\", message.compact_metadata.pre_tokens);\n    console.log(\"Trigger:\", message.compact_metadata.trigger);\n  }\n}",
         "Refactor the selected code to improve readability and maintainability.\nFocus on clean code principles and best practices.",
         "---\nallowed-tools: Read, Grep, Glob\ndescription: Run security vulnerability scan\nmodel: claude-opus-4-7\n---\n\nAnalyze the codebase for security vulnerabilities including:\n- SQL injection risks\n- XSS vulnerabilities\n- Exposed credentials\n- Insecure configurations",
-        "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use a custom command\nfor await (const message of query({\n  prompt: \"/refactor src/auth/login.ts\",\n  options: { maxTurns: 3 }\n})) {\n  if (message.type === \"assistant\") {\n    console.log(\"Refactoring suggestions:\", message.message);\n  }\n}\n\n// Custom commands appear in the slash_commands list\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Will include both built-in and custom commands\n    console.log(\"Available commands:\", message.slash_commands);\n    // Example: [\"/compact\", \"/context\", \"/usage\", \"/refactor\", \"/security-check\"]\n  }\n}",
+        "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use a custom command\nfor await (const message of query({\n  prompt: \"/refactor src/auth/login.ts\",\n  options: { maxTurns: 3 }\n})) {\n  if (message.type === \"assistant\") {\n    console.log(\"Refactoring suggestions:\", message.message);\n  }\n}\n\n// Custom commands appear in the slash_commands list\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Will include both built-in and custom commands\n    console.log(\"Available commands:\", message.slash_commands);\n    // Example: [\"clear\", \"compact\", \"context\", \"usage\", \"refactor\", \"security-check\"]\n  }\n}",
         "---\nargument-hint: [issue-number] [priority]\ndescription: Fix a GitHub issue\n---\n\nFix issue #$1 with priority $2.\nCheck the issue description and implement the necessary changes.",
         "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Pass arguments to custom command\nfor await (const message of query({\n  prompt: \"/fix-issue 123 high\",\n  options: { maxTurns: 5 }\n})) {\n  // Command will process with $1=\"123\" and $2=\"high\"\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(\"Issue fixed:\", message.result);\n  }\n}",
         "---\nallowed-tools: Bash(git add *), Bash(git status *), Bash(git commit *)\ndescription: Create a git commit\n---\n\n## Context\n\n- Current status: !`git status`\n- Current diff: !`git diff HEAD`\n\n## Task\n\nCreate a git commit with appropriate message based on the changes.",
@@ -37331,9 +37335,9 @@
           "paragraphs": [
             "Discovering Available Slash Commands",
             "Sending Slash Commands",
-            "Common Slash Commands/compact - Compact Conversation HistoryClearing the conversation",
-            "/compact - Compact Conversation History",
-            "Clearing the conversation",
+            "Common Slash Commands/compact - Compact conversation history/clear - Reset conversation context",
+            "/compact - Compact conversation history",
+            "/clear - Reset conversation context",
             "Creating Custom Slash CommandsFile LocationsFile FormatBasic ExampleWith FrontmatterUsing Custom Commands in the SDKAdvanced FeaturesArguments and PlaceholdersBash Command ExecutionFile ReferencesOrganization with NamespacingPractical ExamplesCode Review CommandTest Runner Command",
             "File Locations",
             "File Format",
@@ -37359,7 +37363,7 @@
             "The Claude Agent SDK provides information about available slash commands in the system initialization message. Access this information when your session starts:"
           ],
           "codeBlocks": [
-            "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello Claude\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Available slash commands:\", message.slash_commands);\n    // Example output: [\"/compact\", \"/context\", \"/usage\"]\n  }\n}"
+            "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello Claude\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Available slash commands:\", message.slash_commands);\n    // Example output: [\"clear\", \"compact\", \"context\", \"usage\"]\n  }\n}"
           ]
         },
         {
@@ -37377,7 +37381,7 @@
           "codeBlocks": []
         },
         {
-          "title": "​/compact - Compact Conversation History",
+          "title": "​/compact - Compact conversation history",
           "paragraphs": [
             "The /compact command reduces the size of your conversation history by summarizing older messages while preserving important context:"
           ],
@@ -37386,9 +37390,11 @@
           ]
         },
         {
-          "title": "​Clearing the conversation",
+          "title": "​/clear - Reset conversation context",
           "paragraphs": [
-            "The interactive /clear command is not available in the SDK. Each query() call already starts a fresh conversation, so to clear context, end the current query() and start a new one. The previous conversation stays on disk and can be returned to by passing its session ID to the resume option."
+            "The /clear command resets the conversation to an empty context, so subsequent prompts start with no prior conversation history. The previous conversation remains on disk and can be returned to by passing its session ID to the resume option.",
+            "This is useful in streaming input mode, where you send multiple prompts over a single connection. For one-shot query() calls, each call already starts with empty context, so sending /clear has no practical effect; start a new query() instead.",
+            "/clear in the SDK requires Claude Code v2.1.117 or later. In earlier versions it is omitted from slash_commands."
           ],
           "codeBlocks": []
         },
@@ -37431,7 +37437,7 @@
             "Once defined in the filesystem, custom commands are automatically available through the SDK:"
           ],
           "codeBlocks": [
-            "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use a custom command\nfor await (const message of query({\n  prompt: \"/refactor src/auth/login.ts\",\n  options: { maxTurns: 3 }\n})) {\n  if (message.type === \"assistant\") {\n    console.log(\"Refactoring suggestions:\", message.message);\n  }\n}\n\n// Custom commands appear in the slash_commands list\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Will include both built-in and custom commands\n    console.log(\"Available commands:\", message.slash_commands);\n    // Example: [\"/compact\", \"/context\", \"/usage\", \"/refactor\", \"/security-check\"]\n  }\n}"
+            "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use a custom command\nfor await (const message of query({\n  prompt: \"/refactor src/auth/login.ts\",\n  options: { maxTurns: 3 }\n})) {\n  if (message.type === \"assistant\") {\n    console.log(\"Refactoring suggestions:\", message.message);\n  }\n}\n\n// Custom commands appear in the slash_commands list\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Will include both built-in and custom commands\n    console.log(\"Available commands:\", message.slash_commands);\n    // Example: [\"clear\", \"compact\", \"context\", \"usage\", \"refactor\", \"security-check\"]\n  }\n}"
           ]
         },
         {
@@ -37900,7 +37906,7 @@
       ],
       "codeBlocks": [
         "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: {\n    plugins: [\n      { type: \"local\", path: \"./my-plugin\" },\n      { type: \"local\", path: \"/absolute/path/to/another-plugin\" }\n    ]\n  }\n})) {\n  // Plugin commands, agents, and other features are now available\n}",
-        "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: {\n    plugins: [{ type: \"local\", path: \"./my-plugin\" }]\n  }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Check loaded plugins\n    console.log(\"Plugins:\", message.plugins);\n    // Example: [{ name: \"my-plugin\", path: \"./my-plugin\" }]\n\n    // Check available commands from plugins\n    console.log(\"Commands:\", message.slash_commands);\n    // Example: [\"/help\", \"/compact\", \"my-plugin:custom-command\"]\n  }\n}",
+        "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: {\n    plugins: [{ type: \"local\", path: \"./my-plugin\" }]\n  }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Check loaded plugins\n    console.log(\"Plugins:\", message.plugins);\n    // Example: [{ name: \"my-plugin\", path: \"./my-plugin\" }]\n\n    // Check available commands from plugins\n    console.log(\"Commands:\", message.slash_commands);\n    // Example: [\"compact\", \"context\", \"my-plugin:custom-command\"]\n  }\n}",
         "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Load a plugin with a custom /greet skill\nfor await (const message of query({\n  prompt: \"/my-plugin:greet\", // Use plugin skill with namespace\n  options: {\n    plugins: [{ type: \"local\", path: \"./my-plugin\" }]\n  }\n})) {\n  // Claude executes the custom greeting skill from the plugin\n  if (message.type === \"assistant\") {\n    console.log(message.message.content);\n  }\n}",
         "import { query } from \"@anthropic-ai/claude-agent-sdk\";\nimport * as path from \"path\";\n\nasync function runWithPlugin() {\n  const pluginPath = path.join(__dirname, \"plugins\", \"my-plugin\");\n\n  console.log(\"Loading plugin from:\", pluginPath);\n\n  for await (const message of query({\n    prompt: \"What custom commands do you have available?\",\n    options: {\n      plugins: [{ type: \"local\", path: pluginPath }],\n      maxTurns: 3\n    }\n  })) {\n    if (message.type === \"system\" && message.subtype === \"init\") {\n      console.log(\"Loaded plugins:\", message.plugins);\n      console.log(\"Available commands:\", message.slash_commands);\n    }\n\n    if (message.type === \"assistant\") {\n      console.log(\"Assistant:\", message.message.content);\n    }\n  }\n}\n\nrunWithPlugin().catch(console.error);",
         "my-plugin/\n├── .claude-plugin/\n│   └── plugin.json          # Required: plugin manifest\n├── skills/                   # Agent Skills (invoked autonomously or via /skill-name)\n│   └── my-skill/\n│       └── SKILL.md\n├── commands/                 # Legacy: use skills/ instead\n│   └── custom-cmd.md\n├── agents/                   # Custom agents\n│   └── specialist.md\n├── hooks/                    # Event handlers\n│   └── hooks.json\n└── .mcp.json                # MCP server definitions",
@@ -37974,7 +37980,7 @@
             "When plugins load successfully, they appear in the system initialization message. You can verify that your plugins are available:"
           ],
           "codeBlocks": [
-            "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: {\n    plugins: [{ type: \"local\", path: \"./my-plugin\" }]\n  }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Check loaded plugins\n    console.log(\"Plugins:\", message.plugins);\n    // Example: [{ name: \"my-plugin\", path: \"./my-plugin\" }]\n\n    // Check available commands from plugins\n    console.log(\"Commands:\", message.slash_commands);\n    // Example: [\"/help\", \"/compact\", \"my-plugin:custom-command\"]\n  }\n}"
+            "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: {\n    plugins: [{ type: \"local\", path: \"./my-plugin\" }]\n  }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Check loaded plugins\n    console.log(\"Plugins:\", message.plugins);\n    // Example: [{ name: \"my-plugin\", path: \"./my-plugin\" }]\n\n    // Check available commands from plugins\n    console.log(\"Commands:\", message.slash_commands);\n    // Example: [\"compact\", \"context\", \"my-plugin:custom-command\"]\n  }\n}"
           ]
         },
         {

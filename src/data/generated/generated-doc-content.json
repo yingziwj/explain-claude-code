@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-22T06:19:40.708Z",
-  "sourceGeneratedAt": "2026-05-22T06:19:40.331Z",
+  "generatedAt": "2026-05-23T05:48:11.917Z",
+  "sourceGeneratedAt": "2026-05-23T05:48:11.707Z",
   "items": {
     "overview": {
       "sourceLabel": "Overview",
@@ -542,7 +542,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Changelog\"理解成 Getting started 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 2.1.148、2.1.147、2.1.145、2.1.144 这些环节往下讲。",
+            "原文这页大多会按 2.1.150、2.1.149、2.1.148、2.1.147 这些环节往下讲。",
             "翻成人话，大概就是：Release notes for Claude Code, including new features, improvements, and bug fixes by version."
           ]
         },
@@ -551,7 +551,7 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：2.1.148 -> 2.1.147 -> 2.1.145 -> 2.1.144。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：2.1.150 -> 2.1.149 -> 2.1.148 -> 2.1.147。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ]
         },
         {
@@ -23783,7 +23783,7 @@
             {
               "title": "原页关键片段：Build an agent that finds and fixes bugs",
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
-              "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ResultMessage\n\n\nasync def main():\n    # Agentic loop: streams messages as Claude works\n    async for message in query(\n        prompt=\"Review utils.py for bugs that would cause crashes. Fix any issues you find.\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Edit\", \"Glob\"],  # Tools Claude can use\n            permission_mode=\"acceptEdits\",  # Auto-approve file edits\n        ),\n    ):\n        # Print human-readable output\n        if isinstance(message, AssistantMessage):\n            for block in message.content:\n                if hasattr(block, \"text\"):\n                    print(block.text)  # Claude's reasoning\n                elif hasattr(block, \"name\"):\n                    print(f\"Tool: {block.name}\")  # Tool being called\n        elif isinstance(message, ResultMessage):\n            print(f\"Done: {message.subtype}\")  # Final result\n\n\nasyncio.run(main())",
+              "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ResultMessage\n\n\nasync def main():\n    # Agentic loop: streams messages as Claude works\n    async for message in query(\n        prompt=\"Review utils.py for bugs that would cause crashes. Fix any issues you find.\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Edit\", \"Glob\"],  # Auto-approve these tools\n            permission_mode=\"acceptEdits\",  # Auto-approve file edits\n        ),\n    ):\n        # Print human-readable output\n        if isinstance(message, AssistantMessage):\n            for block in message.content:\n                if hasattr(block, \"text\"):\n                    print(block.text)  # Claude's reasoning\n                elif hasattr(block, \"name\"):\n                    print(f\"Tool: {block.name}\")  # Tool being called\n        elif isinstance(message, ResultMessage):\n            print(f\"Done: {message.subtype}\")  # Final result\n\n\nasyncio.run(main())",
               "kind": "code"
             },
             {
@@ -23907,7 +23907,7 @@
             {
               "title": "Build an agent that finds and fixes bugs",
               "body": "下面这块是这一段最值钱的原文样板，先对着看一眼。",
-              "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ResultMessage\n\n\nasync def main():\n    # Agentic loop: streams messages as Claude works\n    async for message in query(\n        prompt=\"Review utils.py for bugs that would cause crashes. Fix any issues you find.\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Edit\", \"Glob\"],  # Tools Claude can use\n            permission_mode=\"acceptEdits\",  # Auto-approve file edits\n        ),\n    ):\n        # Print human-readable output\n        if isinstance(message, AssistantMessage):\n            for block in message.content:\n                if hasattr(block, \"text\"):\n                    print(block.text)  # Claude's reasoning\n                elif hasattr(block, \"name\"):\n                    print(f\"Tool: {block.name}\")  # Tool being called\n        elif isinstance(message, ResultMessage):\n            print(f\"Done: {message.subtype}\")  # Final result\n\n\nasyncio.run(main())",
+              "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ResultMessage\n\n\nasync def main():\n    # Agentic loop: streams messages as Claude works\n    async for message in query(\n        prompt=\"Review utils.py for bugs that would cause crashes. Fix any issues you find.\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Edit\", \"Glob\"],  # Auto-approve these tools\n            permission_mode=\"acceptEdits\",  # Auto-approve file edits\n        ),\n    ):\n        # Print human-readable output\n        if isinstance(message, AssistantMessage):\n            for block in message.content:\n                if hasattr(block, \"text\"):\n                    print(block.text)  # Claude's reasoning\n                elif hasattr(block, \"name\"):\n                    print(f\"Tool: {block.name}\")  # Tool being called\n        elif isinstance(message, ResultMessage):\n            print(f\"Done: {message.subtype}\")  # Final result\n\n\nasyncio.run(main())",
               "kind": "code"
             }
           ]
@@ -26062,8 +26062,8 @@
               "kind": "config"
             },
             {
-              "title": "原页关键片段：Grant access with allowedTools",
-              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "title": "原页关键片段：Auto-approve with allowedTools",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
               "code": "const _ = {\n  options: {\n    mcpServers: {\n      // your servers\n    },\n    allowedTools: [\n      \"mcp__github__*\", // All tools from the github server\n      \"mcp__db__query\", // Only the query tool from db server\n      \"mcp__slack__send_message\" // Only send_message from slack server\n    ]\n  }\n};",
               "kind": "code"
             },
@@ -26198,15 +26198,15 @@
           ]
         },
         {
-          "title": "Grant access with allowedTools",
+          "title": "Auto-approve with allowedTools",
           "paragraphs": [
-            "这一段是在说怎么用 allowedTools 去做 specify which MCP tools Claude can use:。看这种内容，光知道名字没用，还是得落到手上。",
+            "这一段是在说怎么用 allowedTools 去做 auto-approve specific MCP tools so Claude can use them without a permission prompt:。看这种内容，光知道名字没用，还是得落到手上。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ],
           "steps": [
             {
-              "title": "Grant access with allowedTools",
-              "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
+              "title": "Auto-approve with allowedTools",
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
               "code": "const _ = {\n  options: {\n    mcpServers: {\n      // your servers\n    },\n    allowedTools: [\n      \"mcp__github__*\", // All tools from the github server\n      \"mcp__db__query\", // Only the query tool from db server\n      \"mcp__slack__send_message\" // Only send_message from slack server\n    ]\n  }\n};",
               "kind": "code"
             }
@@ -26442,7 +26442,7 @@
             {
               "title": "Tools not being called",
               "body": "这一段要真抓重点，通常就抓下面这块原文。",
-              "code": "const _ = {\n  options: {\n    mcpServers: {\n      // your servers\n    },\n    allowedTools: [\"mcp__servername__*\"] // Required for Claude to use the tools\n  }\n};",
+              "code": "const _ = {\n  options: {\n    mcpServers: {\n      // your servers\n    },\n    allowedTools: [\"mcp__servername__*\"] // Auto-approve calls from this server\n  }\n};",
               "kind": "code"
             }
           ]
@@ -26625,7 +26625,7 @@
             {
               "title": "原页关键片段：Programmatic definition (recommended)",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Review the authentication module for security issues\",\n        options=ClaudeAgentOptions(\n            # Agent tool is required for subagent invocation\n            allowed_tools=[\"Read\", \"Grep\", \"Glob\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    # description tells Claude when to use this subagent\n                    description=\"Expert code review specialist. Use for quality, security, and maintainability reviews.\",\n                    # prompt defines the subagent's behavior and expertise\n                    prompt=\"\"\"You are a code review specialist with expertise in security, performance, and best practices.\n\nWhen reviewing code:\n- Identify security vulnerabilities\n- Check for performance issues\n- Verify adherence to coding standards\n- Suggest specific improvements\n\nBe thorough but concise in your feedback.\"\"\",\n                    # tools restricts what the subagent can do (read-only here)\n                    tools=[\"Read\", \"Grep\", \"Glob\"],\n                    # model overrides the default model for this subagent\n                    model=\"sonnet\",\n                ),\n                \"test-runner\": AgentDefinition(\n                    description=\"Runs and analyzes test suites. Use for test execution and coverage analysis.\",\n                    prompt=\"\"\"You are a test execution specialist. Run tests and provide clear analysis of results.\n\nFocus on:\n- Running test commands\n- Analyzing test output\n- Identifying failing tests\n- Suggesting fixes for failures\"\"\",\n                    # Bash access lets this subagent run test commands\n                    tools=[\"Bash\", \"Read\", \"Grep\"],\n                ),\n            },\n        ),\n    ):\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())",
+              "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Review the authentication module for security issues\",\n        options=ClaudeAgentOptions(\n            # Auto-approve these tools, including Agent for subagent invocation\n            allowed_tools=[\"Read\", \"Grep\", \"Glob\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    # description tells Claude when to use this subagent\n                    description=\"Expert code review specialist. Use for quality, security, and maintainability reviews.\",\n                    # prompt defines the subagent's behavior and expertise\n                    prompt=\"\"\"You are a code review specialist with expertise in security, performance, and best practices.\n\nWhen reviewing code:\n- Identify security vulnerabilities\n- Check for performance issues\n- Verify adherence to coding standards\n- Suggest specific improvements\n\nBe thorough but concise in your feedback.\"\"\",\n                    # tools restricts what the subagent can do (read-only here)\n                    tools=[\"Read\", \"Grep\", \"Glob\"],\n                    # model overrides the default model for this subagent\n                    model=\"sonnet\",\n                ),\n                \"test-runner\": AgentDefinition(\n                    description=\"Runs and analyzes test suites. Use for test execution and coverage analysis.\",\n                    prompt=\"\"\"You are a test execution specialist. Run tests and provide clear analysis of results.\n\nFocus on:\n- Running test commands\n- Analyzing test output\n- Identifying failing tests\n- Suggesting fixes for failures\"\"\",\n                    # Bash access lets this subagent run test commands\n                    tools=[\"Bash\", \"Read\", \"Grep\"],\n                ),\n            },\n        ),\n    ):\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())",
               "kind": "code"
             },
             {
@@ -26728,7 +26728,7 @@
             {
               "title": "Programmatic definition (recommended)",
               "body": "先看下面这块原始片段，等会儿再回头看解释会顺得多。",
-              "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Review the authentication module for security issues\",\n        options=ClaudeAgentOptions(\n            # Agent tool is required for subagent invocation\n            allowed_tools=[\"Read\", \"Grep\", \"Glob\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    # description tells Claude when to use this subagent\n                    description=\"Expert code review specialist. Use for quality, security, and maintainability reviews.\",\n                    # prompt defines the subagent's behavior and expertise\n                    prompt=\"\"\"You are a code review specialist with expertise in security, performance, and best practices.\n\nWhen reviewing code:\n- Identify security vulnerabilities\n- Check for performance issues\n- Verify adherence to coding standards\n- Suggest specific improvements\n\nBe thorough but concise in your feedback.\"\"\",\n                    # tools restricts what the subagent can do (read-only here)\n                    tools=[\"Read\", \"Grep\", \"Glob\"],\n                    # model overrides the default model for this subagent\n                    model=\"sonnet\",\n                ),\n                \"test-runner\": AgentDefinition(\n                    description=\"Runs and analyzes test suites. Use for test execution and coverage analysis.\",\n                    prompt=\"\"\"You are a test execution specialist. Run tests and provide clear analysis of results.\n\nFocus on:\n- Running test commands\n- Analyzing test output\n- Identifying failing tests\n- Suggesting fixes for failures\"\"\",\n                    # Bash access lets this subagent run test commands\n                    tools=[\"Bash\", \"Read\", \"Grep\"],\n                ),\n            },\n        ),\n    ):\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())",
+              "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\n\nasync def main():\n    async for message in query(\n        prompt=\"Review the authentication module for security issues\",\n        options=ClaudeAgentOptions(\n            # Auto-approve these tools, including Agent for subagent invocation\n            allowed_tools=[\"Read\", \"Grep\", \"Glob\", \"Agent\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    # description tells Claude when to use this subagent\n                    description=\"Expert code review specialist. Use for quality, security, and maintainability reviews.\",\n                    # prompt defines the subagent's behavior and expertise\n                    prompt=\"\"\"You are a code review specialist with expertise in security, performance, and best practices.\n\nWhen reviewing code:\n- Identify security vulnerabilities\n- Check for performance issues\n- Verify adherence to coding standards\n- Suggest specific improvements\n\nBe thorough but concise in your feedback.\"\"\",\n                    # tools restricts what the subagent can do (read-only here)\n                    tools=[\"Read\", \"Grep\", \"Glob\"],\n                    # model overrides the default model for this subagent\n                    model=\"sonnet\",\n                ),\n                \"test-runner\": AgentDefinition(\n                    description=\"Runs and analyzes test suites. Use for test execution and coverage analysis.\",\n                    prompt=\"\"\"You are a test execution specialist. Run tests and provide clear analysis of results.\n\nFocus on:\n- Running test commands\n- Analyzing test output\n- Identifying failing tests\n- Suggesting fixes for failures\"\"\",\n                    # Bash access lets this subagent run test commands\n                    tools=[\"Bash\", \"Read\", \"Grep\"],\n                ),\n            },\n        ),\n    ):\n        if hasattr(message, \"result\"):\n            print(message.result)\n\n\nasyncio.run(main())",
               "kind": "code"
             }
           ]
@@ -27148,7 +27148,7 @@
           "title": "农民伯伯版解释",
           "paragraphs": [
             "你可以把\"Slash Commands in the SDK\"理解成 Customize behavior 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
-            "原文这页大多会按 Discovering Available Slash Commands、Sending Slash Commands、Common Slash Commands、/compact - Compact Conversation History 这些环节往下讲。",
+            "原文这页大多会按 Discovering Available Slash Commands、Sending Slash Commands、Common Slash Commands、/compact - Compact conversation history 这些环节往下讲。",
             "翻成人话，大概就是：Discovering Available Slash Commands"
           ]
         },
@@ -27157,13 +27157,13 @@
           "paragraphs": [
             "第一，先别一上来全开全配。先按最小一步试通，确认没跑偏，再继续往下加。",
             "第二，命令、配置名、参数名这些硬东西尽量保留原样。人话解释是帮你听懂，不是帮你改关键字。",
-            "第三，照着原文这几个环节挨个过：Discovering Available Slash Commands -> Sending Slash Commands -> Common Slash Commands -> /compact - Compact Conversation History。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
+            "第三，照着原文这几个环节挨个过：Discovering Available Slash Commands -> Sending Slash Commands -> Common Slash Commands -> /compact - Compact conversation history。像下地先看水路、再试机器、再正式开干，一步一步最稳。"
           ],
           "steps": [
             {
               "title": "原页关键片段：Discovering Available Slash Commands",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello Claude\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Available slash commands:\", message.slash_commands);\n    // Example output: [\"/compact\", \"/context\", \"/usage\"]\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello Claude\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Available slash commands:\", message.slash_commands);\n    // Example output: [\"clear\", \"compact\", \"context\", \"usage\"]\n  }\n}",
               "kind": "command"
             },
             {
@@ -27173,7 +27173,7 @@
               "kind": "command"
             },
             {
-              "title": "原页关键片段：/compact - Compact Conversation History",
+              "title": "原页关键片段：/compact - Compact conversation history",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"/compact\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"compact_boundary\") {\n    console.log(\"Compaction completed\");\n    console.log(\"Pre-compaction tokens:\", message.compact_metadata.pre_tokens);\n    console.log(\"Trigger:\", message.compact_metadata.trigger);\n  }\n}",
               "kind": "command"
@@ -27193,7 +27193,7 @@
             {
               "title": "原页关键片段：Using Custom Commands in the SDK",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use a custom command\nfor await (const message of query({\n  prompt: \"/refactor src/auth/login.ts\",\n  options: { maxTurns: 3 }\n})) {\n  if (message.type === \"assistant\") {\n    console.log(\"Refactoring suggestions:\", message.message);\n  }\n}\n\n// Custom commands appear in the slash_commands list\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Will include both built-in and custom commands\n    console.log(\"Available commands:\", message.slash_commands);\n    // Example: [\"/compact\", \"/context\", \"/usage\", \"/refactor\", \"/security-check\"]\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use a custom command\nfor await (const message of query({\n  prompt: \"/refactor src/auth/login.ts\",\n  options: { maxTurns: 3 }\n})) {\n  if (message.type === \"assistant\") {\n    console.log(\"Refactoring suggestions:\", message.message);\n  }\n}\n\n// Custom commands appear in the slash_commands list\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Will include both built-in and custom commands\n    console.log(\"Available commands:\", message.slash_commands);\n    // Example: [\"clear\", \"compact\", \"context\", \"usage\", \"refactor\", \"security-check\"]\n  }\n}",
               "kind": "command"
             },
             {
@@ -27257,7 +27257,7 @@
             {
               "title": "Discovering Available Slash Commands",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello Claude\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Available slash commands:\", message.slash_commands);\n    // Example output: [\"/compact\", \"/context\", \"/usage\"]\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello Claude\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    console.log(\"Available slash commands:\", message.slash_commands);\n    // Example output: [\"clear\", \"compact\", \"context\", \"usage\"]\n  }\n}",
               "kind": "command"
             }
           ]
@@ -27283,13 +27283,13 @@
           ]
         },
         {
-          "title": "/compact - Compact Conversation History",
+          "title": "/compact - Compact conversation history",
           "paragraphs": [
-            "别把这段只当成标题看，它其实是在给\"/compact - Compact Conversation History\"划边界。"
+            "别把这段只当成标题看，它其实是在给\"/compact - Compact conversation history\"划边界。"
           ],
           "steps": [
             {
-              "title": "/compact - Compact Conversation History",
+              "title": "/compact - Compact conversation history",
               "body": "这一段不是只让你理解意思，下面这条命令就是现在要跑的。",
               "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"/compact\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"compact_boundary\") {\n    console.log(\"Compaction completed\");\n    console.log(\"Pre-compaction tokens:\", message.compact_metadata.pre_tokens);\n    console.log(\"Trigger:\", message.compact_metadata.trigger);\n  }\n}",
               "kind": "command"
@@ -27297,9 +27297,9 @@
           ]
         },
         {
-          "title": "Clearing the conversation",
+          "title": "/clear - Reset conversation context",
           "paragraphs": [
-            "这一段不只是挂个标题，它是在说明\"Clearing the conversation\"这一块到底负责什么。",
+            "这里主要是在交代\"/clear - Reset conversation context\"这一块会碰到哪些事。",
             "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
@@ -27346,7 +27346,7 @@
             {
               "title": "Using Custom Commands in the SDK",
               "body": "看到这里，别光点头，下面这条命令先跑起来再说。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use a custom command\nfor await (const message of query({\n  prompt: \"/refactor src/auth/login.ts\",\n  options: { maxTurns: 3 }\n})) {\n  if (message.type === \"assistant\") {\n    console.log(\"Refactoring suggestions:\", message.message);\n  }\n}\n\n// Custom commands appear in the slash_commands list\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Will include both built-in and custom commands\n    console.log(\"Available commands:\", message.slash_commands);\n    // Example: [\"/compact\", \"/context\", \"/usage\", \"/refactor\", \"/security-check\"]\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use a custom command\nfor await (const message of query({\n  prompt: \"/refactor src/auth/login.ts\",\n  options: { maxTurns: 3 }\n})) {\n  if (message.type === \"assistant\") {\n    console.log(\"Refactoring suggestions:\", message.message);\n  }\n}\n\n// Custom commands appear in the slash_commands list\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: { maxTurns: 1 }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Will include both built-in and custom commands\n    console.log(\"Available commands:\", message.slash_commands);\n    // Example: [\"clear\", \"compact\", \"context\", \"usage\", \"refactor\", \"security-check\"]\n  }\n}",
               "kind": "command"
             }
           ]
@@ -27758,7 +27758,7 @@
             {
               "title": "原页关键片段：Verifying plugin installation",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: {\n    plugins: [{ type: \"local\", path: \"./my-plugin\" }]\n  }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Check loaded plugins\n    console.log(\"Plugins:\", message.plugins);\n    // Example: [{ name: \"my-plugin\", path: \"./my-plugin\" }]\n\n    // Check available commands from plugins\n    console.log(\"Commands:\", message.slash_commands);\n    // Example: [\"/help\", \"/compact\", \"my-plugin:custom-command\"]\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: {\n    plugins: [{ type: \"local\", path: \"./my-plugin\" }]\n  }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Check loaded plugins\n    console.log(\"Plugins:\", message.plugins);\n    // Example: [{ name: \"my-plugin\", path: \"./my-plugin\" }]\n\n    // Check available commands from plugins\n    console.log(\"Commands:\", message.slash_commands);\n    // Example: [\"compact\", \"context\", \"my-plugin:custom-command\"]\n  }\n}",
               "kind": "command"
             },
             {
@@ -27850,7 +27850,7 @@
             {
               "title": "Verifying plugin installation",
               "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: {\n    plugins: [{ type: \"local\", path: \"./my-plugin\" }]\n  }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Check loaded plugins\n    console.log(\"Plugins:\", message.plugins);\n    // Example: [{ name: \"my-plugin\", path: \"./my-plugin\" }]\n\n    // Check available commands from plugins\n    console.log(\"Commands:\", message.slash_commands);\n    // Example: [\"/help\", \"/compact\", \"my-plugin:custom-command\"]\n  }\n}",
+              "code": "import { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Hello\",\n  options: {\n    plugins: [{ type: \"local\", path: \"./my-plugin\" }]\n  }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Check loaded plugins\n    console.log(\"Plugins:\", message.plugins);\n    // Example: [{ name: \"my-plugin\", path: \"./my-plugin\" }]\n\n    // Check available commands from plugins\n    console.log(\"Commands:\", message.slash_commands);\n    // Example: [\"compact\", \"context\", \"my-plugin:custom-command\"]\n  }\n}",
               "kind": "command"
             }
           ]
