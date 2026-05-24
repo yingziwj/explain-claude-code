@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-23T05:48:11.917Z",
-  "sourceGeneratedAt": "2026-05-23T05:48:11.707Z",
+  "generatedAt": "2026-05-24T06:11:35.462Z",
+  "sourceGeneratedAt": "2026-05-24T06:11:35.114Z",
   "items": {
     "overview": {
       "sourceLabel": "Overview",
@@ -227,14 +227,14 @@
             },
             {
               "title": "原页关键片段：Step 2: Log in to your account 1",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "claude\n# You'll be prompted to log in on first use",
-              "kind": "command"
+              "body": "这一段要真抓重点，通常就抓下面这块原文。",
+              "code": "claude",
+              "kind": "code"
             },
             {
               "title": "原页关键片段：Step 2: Log in to your account 2",
               "body": "最省事的做法，就是把下面这句原样说给 Claude。",
-              "code": "/login\n# Follow the prompts to log in with your account",
+              "code": "/login",
               "kind": "prompt"
             },
             {
@@ -336,15 +336,9 @@
           ],
           "steps": [
             {
-              "title": "Step 2: Log in to your account 1",
-              "body": "先别急着往下翻，下面这条命令跑完，心里才有底。",
-              "code": "claude\n# You'll be prompted to log in on first use",
-              "kind": "command"
-            },
-            {
-              "title": "Step 2: Log in to your account 2",
+              "title": "Step 2: Log in to your account",
               "body": "最省事的做法，就是把下面这句原样说给 Claude。",
-              "code": "/login\n# Follow the prompts to log in with your account",
+              "code": "/login",
               "kind": "prompt"
             }
           ]
