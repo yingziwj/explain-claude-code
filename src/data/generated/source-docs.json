@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-25T06:47:28.814Z",
+  "generatedAt": "2026-05-26T06:18:00.931Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -2092,7 +2092,7 @@
         "Agent teams are experimental and disabled by default. See agent teams for setup and current limitations.",
         "MCP connects Claude to external services. Skills extend what Claude knows, including how to use those services effectively.",
         "These solve different problems and work well together:",
-        "MCP gives Claude the ability to interact with external systems. Without MCP, Claude can’t query your database or post to Slack.",
+        "MCP gives Claude purpose-built tools for an external system, with the connection and authentication handled by the server.",
         "Skills give Claude knowledge about how to use those tools effectively, plus workflows you can trigger with /<name>. A skill might include your team’s database schema and query patterns, or a /post-to-slack workflow with your team’s message formatting rules.",
         "Example: An MCP server connects Claude to your database. A skill teaches Claude your data model, common query patterns, and which tables to use for different tasks.",
         "A hook fires on a lifecycle event; a skill is loaded into context for Claude to apply.",
@@ -2127,7 +2127,6 @@
         "When: Session start.",
         "What loads: Tool names from connected servers. Full JSON schemas stay deferred until Claude needs a specific tool.",
         "Context cost: Tool search is on by default, so idle MCP tools consume minimal context.",
-        "Reliability note: MCP connections can fail silently mid-session. If a server disconnects, its tools disappear without warning. Claude may try to use a tool that no longer exists. If you notice Claude failing to use an MCP tool it previously could access, check the connection with /mcp.",
         "When: After file edits, and on demand when Claude navigates code.",
         "What loads: Type errors and warnings after each file edit. Definition, reference, and type information when Claude looks up a symbol.",
         "Context cost: Low. Symbol lookups often replace broad file reads, so net context use can go down.",
@@ -2662,6 +2661,7 @@
         "​Where the cache lives",
         "​Actions that invalidate the cache",
         "​Switching models",
+        "​Changing effort level",
         "​Connecting or disconnecting an MCP server",
         "​Denying an entire tool",
         "​Compacting the conversation",
@@ -2674,14 +2674,14 @@
         "​Invoking skills and commands",
         "​Running /recap",
         "​Rewinding the conversation",
-        "​Cache lifetime",
-        "​On a Claude subscription"
+        "​Cache lifetime"
       ],
       "toc": [
         "How the cache is organized",
         "Where the cache lives",
         "Actions that invalidate the cache",
         "Switching models",
+        "Changing effort level",
         "Connecting or disconnecting an MCP server",
         "Denying an entire tool",
         "Compacting the conversation",
@@ -2696,14 +2696,14 @@
         "Rewinding the conversation",
         "Cache lifetime",
         "On a Claude subscription",
-        "On an API key or third-party provider",
-        "Override the TTL"
+        "On an API key or third-party provider"
       ],
       "paragraphs": [
         "How the cache is organizedWhere the cache lives",
         "Where the cache lives",
-        "Actions that invalidate the cacheSwitching modelsConnecting or disconnecting an MCP serverDenying an entire toolCompacting the conversationUpgrading Claude Code",
+        "Actions that invalidate the cacheSwitching modelsChanging effort levelConnecting or disconnecting an MCP serverDenying an entire toolCompacting the conversationUpgrading Claude Code",
         "Switching models",
+        "Changing effort level",
         "Connecting or disconnecting an MCP server",
         "Denying an entire tool",
         "Compacting the conversation",
@@ -2735,10 +2735,10 @@
         "To get the most out of prefix matching, Claude Code orders each request so content that rarely changes between turns comes first:",
         "A change to the conversation layer leaves the system prompt and project context cached. A change to the system prompt invalidates everything, because all later content now sits behind a different prefix. The third column gives common triggers rather than an exhaustive list, and the sections below cover the full set, including content such as output style that is fixed at session start.",
         "The prefix-match rule explains most of the behaviors on this page. Plan mode and skill loading, for example, append their instructions as conversation messages, so the cached prefix stays intact.",
-        "Two settings aren’t part of the prompt text at all, so they don’t appear in the layer table. They behave differently for caching:",
-        "Model: the cache is keyed by model, so each model has its own cache. Switching models recomputes the entire request even when the content is identical. See Switching models below.",
-        "Effort level: not part of the cache key or the prompt, so changing it mid-session has no effect on the cache.",
-        "Pick your model and connect MCP servers at the top of a session, then save /compact for natural breaks between tasks. The fewer changes you make mid-task, the higher your cache hit rate.",
+        "Two settings aren’t part of the prompt text at all, so they don’t appear in the layer table, but both are part of the cache key:",
+        "Model: each model has its own cache. Switching models recomputes the entire request even when the content is identical. See Switching models below.",
+        "Effort level: each effort level has its own cache for the same model. Changing it mid-session recomputes the entire request, and Claude Code asks you to confirm before applying the change. See Changing effort level below.",
+        "Pick your model, effort level, and MCP servers at the top of a session, then save /compact for natural breaks between tasks. The fewer changes you make mid-task, the higher your cache hit rate.",
         "Caching happens server-side, in whichever infrastructure serves your model. Where that is depends on how you authenticate:",
         "API key, Claude subscription, or Claude Platform on AWS: the cache lives in Anthropic’s infrastructure, accessed through the Claude API",
         "Bedrock or Vertex AI: the cache lives in your cloud provider’s serving infrastructure",
@@ -2748,6 +2748,7 @@
         "These actions cause the next request to miss part or all of the cache. You see a one-time slower, more expensive turn, after which the new prefix is cached. Most of them are avoidable mid-task once you know they have a cost. A model switch or an MCP reconnect can feel free until you notice the slower turn that follows.",
         "Each model has its own cache. Switching with /model means the next request reads the entire conversation history with no cache hits, even though the content is identical.",
         "The opusplan model setting resolves to Opus during plan mode and Sonnet during execution, so each plan-mode toggle is a model switch and starts a fresh cache.",
+        "The cache is keyed by effort level as well as model, so switching with /effort means the next request reads the entire conversation history with no cache hits. Once a conversation has started, Claude Code shows a confirmation dialog before applying an effort change that would invalidate the cache. A change that resolves to the same level already in effect, such as setting the model’s default explicitly, skips the dialog and keeps the cache.",
         "Tool definitions sit in the system prompt layer, so the cache invalidates when the set of MCP tools available to Claude changes between turns. The most common cause is an MCP server connecting or disconnecting mid-session, which can happen without any action on your part: a stdio server’s process exits, an HTTP session expires, or a server reconnects automatically after a transient failure. A connected server can also push a dynamic tool update that changes its tool list.",
         "Editing your MCP config does not by itself change the cache. The new config takes effect only after a restart, which is when the server connects or disconnects.",
         "MCP tool search reduces how much each tool contributes to the prefix by deferring full tool definitions, but the set of tool names still has to stay stable for the cache to remain valid.",
@@ -2801,16 +2802,16 @@
           "paragraphs": [
             "How the cache is organizedWhere the cache lives",
             "Where the cache lives",
-            "Actions that invalidate the cacheSwitching modelsConnecting or disconnecting an MCP serverDenying an entire toolCompacting the conversationUpgrading Claude Code",
+            "Actions that invalidate the cacheSwitching modelsChanging effort levelConnecting or disconnecting an MCP serverDenying an entire toolCompacting the conversationUpgrading Claude Code",
             "Switching models",
+            "Changing effort level",
             "Connecting or disconnecting an MCP server",
             "Denying an entire tool",
             "Compacting the conversation",
             "Upgrading Claude Code",
             "Actions that keep the cacheEditing files in your repositoryEditing CLAUDE.md mid-sessionChanging output styleChanging permission modeInvoking skills and commandsRunning /recapRewinding the conversation",
             "Editing files in your repository",
-            "Editing CLAUDE.md mid-session",
-            "Changing output style"
+            "Editing CLAUDE.md mid-session"
           ],
           "codeBlocks": []
         },
@@ -2832,10 +2833,10 @@
             "To get the most out of prefix matching, Claude Code orders each request so content that rarely changes between turns comes first:",
             "A change to the conversation layer leaves the system prompt and project context cached. A change to the system prompt invalidates everything, because all later content now sits behind a different prefix. The third column gives common triggers rather than an exhaustive list, and the sections below cover the full set, including content such as output style that is fixed at session start.",
             "The prefix-match rule explains most of the behaviors on this page. Plan mode and skill loading, for example, append their instructions as conversation messages, so the cached prefix stays intact.",
-            "Two settings aren’t part of the prompt text at all, so they don’t appear in the layer table. They behave differently for caching:",
-            "Model: the cache is keyed by model, so each model has its own cache. Switching models recomputes the entire request even when the content is identical. See Switching models below.",
-            "Effort level: not part of the cache key or the prompt, so changing it mid-session has no effect on the cache.",
-            "Pick your model and connect MCP servers at the top of a session, then save /compact for natural breaks between tasks. The fewer changes you make mid-task, the higher your cache hit rate."
+            "Two settings aren’t part of the prompt text at all, so they don’t appear in the layer table, but both are part of the cache key:",
+            "Model: each model has its own cache. Switching models recomputes the entire request even when the content is identical. See Switching models below.",
+            "Effort level: each effort level has its own cache for the same model. Changing it mid-session recomputes the entire request, and Claude Code asks you to confirm before applying the change. See Changing effort level below.",
+            "Pick your model, effort level, and MCP servers at the top of a session, then save /compact for natural breaks between tasks. The fewer changes you make mid-task, the higher your cache hit rate."
           ],
           "codeBlocks": []
         },
@@ -2856,6 +2857,7 @@
           "paragraphs": [
             "These actions cause the next request to miss part or all of the cache. You see a one-time slower, more expensive turn, after which the new prefix is cached. Most of them are avoidable mid-task once you know they have a cost. A model switch or an MCP reconnect can feel free until you notice the slower turn that follows.",
             "Switching models",
+            "Changing effort level",
             "Connecting or disconnecting an MCP server",
             "Denying an entire tool",
             "Compacting the conversation",
@@ -2868,6 +2870,13 @@
           "paragraphs": [
             "Each model has its own cache. Switching with /model means the next request reads the entire conversation history with no cache hits, even though the content is identical.",
             "The opusplan model setting resolves to Opus during plan mode and Sonnet during execution, so each plan-mode toggle is a model switch and starts a fresh cache."
+          ],
+          "codeBlocks": []
+        },
+        {
+          "title": "​Changing effort level",
+          "paragraphs": [
+            "The cache is keyed by effort level as well as model, so switching with /effort means the next request reads the entire conversation history with no cache hits. Once a conversation has started, Claude Code shows a confirmation dialog before applying an effort change that would invalidate the cache. A change that resolves to the same level already in effect, such as setting the model’s default explicitly, skips the dialog and keeps the cache."
           ],
           "codeBlocks": []
         },
@@ -5741,7 +5750,7 @@
         "The title you set with /rename",
         "The last meaningful message in existing conversation history",
         "An auto-generated name like myhost-graceful-unicorn, where myhost is your machine’s hostname or the prefix you set with --remote-control-session-name-prefix",
-        "If you didn’t set an explicit name, the title updates to reflect your prompt once you send one.",
+        "If you didn’t set an explicit name, the title updates to reflect your prompt once you send one. Renaming a session from claude.ai or the Claude app also updates the local title shown in claude --resume.",
         "If the environment already has an active session, you’ll be asked whether to continue it or start a new one.",
         "If you don’t have the Claude app yet, use the /mobile command inside Claude Code to display a download QR code for iOS or Android.",
         "By default, Remote Control only activates when you explicitly run claude remote-control, claude --remote-control, or /remote-control. To enable it automatically for every interactive session, run /config inside Claude Code and set Enable Remote Control for all sessions to true. Set it back to false to disable. In the Desktop app, you can also toggle this from Settings → Claude Code → Enable remote control by default.",
@@ -5889,7 +5898,7 @@
             "The title you set with /rename",
             "The last meaningful message in existing conversation history",
             "An auto-generated name like myhost-graceful-unicorn, where myhost is your machine’s hostname or the prefix you set with --remote-control-session-name-prefix",
-            "If you didn’t set an explicit name, the title updates to reflect your prompt once you send one.",
+            "If you didn’t set an explicit name, the title updates to reflect your prompt once you send one. Renaming a session from claude.ai or the Claude app also updates the local title shown in claude --resume.",
             "If the environment already has an active session, you’ll be asked whether to continue it or start a new one.",
             "If you don’t have the Claude app yet, use the /mobile command inside Claude Code to display a download QR code for iOS or Android."
           ],
@@ -8494,7 +8503,12 @@
         "The subagent definition’s model frontmatter",
         "The main conversation’s model",
         "You can control what subagents can do through tool access, permission modes, and conditional rules.",
-        "Subagents can use any of Claude Code’s internal tools. By default, subagents inherit all tools from the main conversation, including MCP tools.",
+        "Subagents inherit the internal tools and MCP tools available in the main conversation by default. The following tools depend on the main conversation’s UI or session state and are not available to subagents, even when listed in the tools field:",
+        "AskUserQuestion",
+        "EnterPlanMode",
+        "ExitPlanMode, unless the subagent’s permissionMode is plan",
+        "ScheduleWakeup",
+        "WaitForMcpServers",
         "To restrict tools, use either the tools field (allowlist) or the disallowedTools field (denylist). This example uses tools to exclusively allow Read, Grep, Glob, and Bash. The subagent can’t edit files, write files, or use any MCP tools:",
         "This example uses disallowedTools to inherit every tool from the main conversation except Write and Edit. The subagent keeps Bash, MCP tools, and everything else:",
         "If both are set, disallowedTools is applied first, then tools is resolved against the remaining pool. A tool listed in both is removed.",
@@ -8528,12 +8542,7 @@
         "Ask the subagent to update its memory after completing a task: “Now that you’re done, save what you learned to your memory.” Over time, this builds a knowledge base that makes the subagent more effective.",
         "Include memory instructions directly in the subagent’s markdown file so it proactively maintains its own knowledge base: Update your agent memory as you discover codepaths, patterns, library locations, and key architectural decisions. This builds up institutional knowledge across conversations. Write concise notes about what you found and where.",
         "Include memory instructions directly in the subagent’s markdown file so it proactively maintains its own knowledge base:",
-        "For more dynamic control over tool usage, use PreToolUse hooks to validate operations before they execute. This is useful when you need to allow some operations of a tool while blocking others.",
-        "This example creates a subagent that only allows read-only database queries. The PreToolUse hook runs the script specified in command before each Bash command executes:",
-        "Claude Code passes hook input as JSON via stdin to hook commands. The validation script reads this JSON, extracts the Bash command, and exits with code 2 to block write operations:",
-        "See Hook input for the complete input schema and exit codes for how exit codes affect behavior. On Windows, write hook scripts in PowerShell and add shell: powershell to the hook entry as shown in running hooks in PowerShell.",
-        "You can prevent Claude from using specific subagents by adding them to the deny array in your settings. Use the format Agent(subagent-name) where subagent-name matches the subagent’s name field.",
-        "This works for both built-in and custom subagents. You can also use the --disallowedTools CLI flag:"
+        "For more dynamic control over tool usage, use PreToolUse hooks to validate operations before they execute. This is useful when you need to allow some operations of a tool while blocking others."
       ],
       "codeBlocks": [
         "/agents",
@@ -8718,17 +8727,17 @@
           "title": "​Control subagent capabilities",
           "paragraphs": [
             "You can control what subagents can do through tool access, permission modes, and conditional rules.",
-            "Subagents can use any of Claude Code’s internal tools. By default, subagents inherit all tools from the main conversation, including MCP tools.",
+            "Subagents inherit the internal tools and MCP tools available in the main conversation by default. The following tools depend on the main conversation’s UI or session state and are not available to subagents, even when listed in the tools field:",
+            "AskUserQuestion",
+            "EnterPlanMode",
+            "ExitPlanMode, unless the subagent’s permissionMode is plan",
+            "ScheduleWakeup",
+            "WaitForMcpServers",
             "To restrict tools, use either the tools field (allowlist) or the disallowedTools field (denylist). This example uses tools to exclusively allow Read, Grep, Glob, and Bash. The subagent can’t edit files, write files, or use any MCP tools:",
             "This example uses disallowedTools to inherit every tool from the main conversation except Write and Edit. The subagent keeps Bash, MCP tools, and everything else:",
             "If both are set, disallowedTools is applied first, then tools is resolved against the remaining pool. A tool listed in both is removed.",
             "When an agent runs as the main thread with claude --agent, it can spawn subagents using the Agent tool. To restrict which subagent types it can spawn, use Agent(agent_type) syntax in the tools field.",
-            "This is an allowlist: only the worker and researcher subagents can be spawned. If the agent tries to spawn any other type, the request fails and the agent sees only the allowed types in its prompt. To block specific agents while allowing all others, use permissions.deny instead.",
-            "To allow spawning any subagent without restrictions, use Agent without parentheses:",
-            "If Agent is omitted from the tools list entirely, the agent cannot spawn any subagents. This restriction only applies to agents running as the main thread with claude --agent. Subagents cannot spawn other subagents, so Agent(agent_type) has no effect in subagent definitions.",
-            "Use the mcpServers field to give a subagent access to MCP servers that aren’t available in the main conversation. Inline servers defined here are connected when the subagent starts and disconnected when it finishes. String references share the parent session’s connection.",
-            "The mcpServers field applies in both contexts where an agent file can run:",
-            "As a subagent, spawned through the Agent tool or an @-mention"
+            "This is an allowlist: only the worker and researcher subagents can be spawned. If the agent tries to spawn any other type, the request fails and the agent sees only the allowed types in its prompt. To block specific agents while allowing all others, use permissions.deny instead."
           ],
           "codeBlocks": [
             "---\nname: safe-researcher\ndescription: Research agent with restricted capabilities\ntools: Read, Grep, Glob, Bash\n---",
@@ -9105,7 +9114,8 @@
         "Press Enter or → on a selected row to attach. Agent view is replaced by the full interactive session, exactly as if you had run claude in that directory. When you attach, Claude posts a short recap of what happened while you were away.",
         "While attached, the session behaves like any other Claude Code session: every command, keyboard shortcut, and feature works.",
         "Press ← on an empty prompt to detach and return to agent view. If a dialog has focus and isn’t responding to ←, press Ctrl+Z to detach immediately.",
-        "Detaching never stops a background session: ←, Ctrl+C, Ctrl+D, Ctrl+Z, and /exit all leave it running. To end a session from inside it, run /stop.",
+        "Ctrl+C keeps its standard interrupt behavior while attached: it cancels a running response or ! shell command rather than detaching. Pressing Ctrl+C twice on an empty prompt detaches, the same as in any session.",
+        "Detaching never stops a background session: ←, Ctrl+Z, /exit, and double Ctrl+C or double Ctrl+D all leave it running. To end a session from inside it, run /stop.",
         "After you’ve dispatched or backgrounded a session, pressing ← on an empty prompt works from any Claude Code session, not only ones you attached to from agent view. It backgrounds the current session and opens agent view with that row selected, so you can switch sessions without leaving the terminal. The row is created even from a fresh session with no conversation history, so → returns to it. When that row is the only one, agent view shows an onboarding hint below it. You can turn this shortcut off in /config (the leftArrowOpensAgents setting).",
         "Agent view groups sessions so the ones that need input are at the top, with Ready for review and Needs input above Working and Completed. These group names don’t map one-to-one to the states above: a session moves to Ready for review when it has an open pull request, and Completed collects finished, failed, and stopped sessions together. Press Ctrl+S to group by directory instead. Your choice persists across runs.",
         "Within a group:",
@@ -9327,7 +9337,8 @@
             "Press Enter or → on a selected row to attach. Agent view is replaced by the full interactive session, exactly as if you had run claude in that directory. When you attach, Claude posts a short recap of what happened while you were away.",
             "While attached, the session behaves like any other Claude Code session: every command, keyboard shortcut, and feature works.",
             "Press ← on an empty prompt to detach and return to agent view. If a dialog has focus and isn’t responding to ←, press Ctrl+Z to detach immediately.",
-            "Detaching never stops a background session: ←, Ctrl+C, Ctrl+D, Ctrl+Z, and /exit all leave it running. To end a session from inside it, run /stop.",
+            "Ctrl+C keeps its standard interrupt behavior while attached: it cancels a running response or ! shell command rather than detaching. Pressing Ctrl+C twice on an empty prompt detaches, the same as in any session.",
+            "Detaching never stops a background session: ←, Ctrl+Z, /exit, and double Ctrl+C or double Ctrl+D all leave it running. To end a session from inside it, run /stop.",
             "After you’ve dispatched or backgrounded a session, pressing ← on an empty prompt works from any Claude Code session, not only ones you attached to from agent view. It backgrounds the current session and opens agent view with that row selected, so you can switch sessions without leaving the terminal. The row is created even from a fresh session with no conversation history, so → returns to it. When that row is the only one, agent view shows an onboarding hint below it. You can turn this shortcut off in /config (the leftArrowOpensAgents setting)."
           ],
           "codeBlocks": []
@@ -10482,7 +10493,7 @@
         "You can also have Claude scaffold a server for you with the official mcp-server-dev plugin.",
         "Install the plugin",
         "In a Claude Code session, run:",
-        "Then run /reload-plugins to activate it in the current session.",
+        "If Claude Code reports that the marketplace is not found, run /plugin marketplace add anthropics/claude-plugins-official first, then retry the install. Once installed, run /reload-plugins to activate it in the current session.",
         "Run the build skill",
         "Claude asks about your use case and scaffolds a remote HTTP or local stdio server.",
         "MCP servers can be configured in three different ways depending on your needs:",
@@ -10686,7 +10697,7 @@
             "You can also have Claude scaffold a server for you with the official mcp-server-dev plugin.",
             "Install the plugin",
             "In a Claude Code session, run:",
-            "Then run /reload-plugins to activate it in the current session.",
+            "If Claude Code reports that the marketplace is not found, run /plugin marketplace add anthropics/claude-plugins-official first, then retry the install. Once installed, run /reload-plugins to activate it in the current session.",
             "Run the build skill",
             "Claude asks about your use case and scaffolds a remote HTTP or local stdio server."
           ],
@@ -11309,7 +11320,7 @@
         "/plugin marketplace add anthropics/claude-plugins-community",
         "/plugin install <plugin-name>@claude-community",
         "/plugin marketplace add anthropics/claude-code",
-        "/plugin install commit-commands@anthropics-claude-code",
+        "/plugin install commit-commands@claude-code-plugins",
         "/commit-commands:commit",
         "/plugin marketplace add https://gitlab.com/company/plugins.git",
         "/plugin marketplace add git@gitlab.com:company/plugins.git",
@@ -11460,7 +11471,7 @@
           ],
           "codeBlocks": [
             "/plugin marketplace add anthropics/claude-code",
-            "/plugin install commit-commands@anthropics-claude-code",
+            "/plugin install commit-commands@claude-code-plugins",
             "/commit-commands:commit"
           ]
         },
@@ -12238,6 +12249,7 @@
         "Configure skills",
         "Types of skill content",
         "Frontmatter reference",
+        "How a skill gets its command name",
         "Available string substitutions",
         "Add supporting files",
         "Control who invokes a skill",
@@ -12245,8 +12257,7 @@
         "Pre-approve tools for a skill",
         "Pass arguments to skills",
         "Advanced patterns",
-        "Inject dynamic context",
-        "Run skills in a subagent"
+        "Inject dynamic context"
       ],
       "paragraphs": [
         "Bundled skillsRun and verify your app",
@@ -12257,9 +12268,10 @@
         "Live change detection",
         "Automatic discovery from parent and nested directories",
         "Skills from additional directories",
-        "Configure skillsTypes of skill contentFrontmatter referenceAvailable string substitutionsAdd supporting filesControl who invokes a skillSkill content lifecyclePre-approve tools for a skillPass arguments to skills",
+        "Configure skillsTypes of skill contentFrontmatter referenceHow a skill gets its command nameAvailable string substitutionsAdd supporting filesControl who invokes a skillSkill content lifecyclePre-approve tools for a skillPass arguments to skills",
         "Types of skill content",
         "Frontmatter reference",
+        "How a skill gets its command name",
         "Available string substitutions",
         "Add supporting files",
         "Control who invokes a skill",
@@ -12312,7 +12324,7 @@
         "Each skill is a directory with SKILL.md as the entrypoint:",
         "The SKILL.md contains the main instructions and is required. Other files are optional and let you build more powerful skills: templates for Claude to fill in, example outputs showing the expected format, scripts Claude can execute, or detailed reference documentation. Reference these files from your SKILL.md so Claude knows what they contain and when to load them. See Add supporting files for more details.",
         "Files in .claude/commands/ still work and support the same frontmatter. Skills are recommended since they support additional features like supporting files.",
-        "The --add-dir flag grants file access rather than configuration discovery, but skills are an exception: .claude/skills/ within an added directory is loaded automatically. See Live change detection for how edits are picked up during a session.",
+        "The --add-dir flag and /add-dir command grant file access rather than configuration discovery, but skills are an exception: .claude/skills/ within an added directory is loaded automatically. This exception applies only to --add-dir and /add-dir. The permissions.additionalDirectories setting in settings.json grants file access only and does not load skills. See Live change detection for how edits are picked up during a session.",
         "Other .claude/ configuration such as subagents, commands, and output styles is not loaded from additional directories. See the exceptions table for the complete list of what is and isn’t loaded, and the recommended ways to share configuration across projects.",
         "CLAUDE.md files from --add-dir directories are not loaded by default. To load them, set CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1. See Load from additional directories.",
         "Skills are configured through YAML frontmatter at the top of SKILL.md and the markdown content that follows.",
@@ -12323,6 +12335,9 @@
         "Keep the body itself concise. Once a skill loads, its content stays in context across turns, so every line is a recurring token cost. State what to do rather than narrating how or why, and apply the same conciseness test you would for CLAUDE.md content.",
         "Beyond the markdown content, you can configure skill behavior using YAML frontmatter fields between --- markers at the top of your SKILL.md file:",
         "All fields are optional. Only description is recommended so Claude knows when to use the skill.",
+        "The command you type to invoke a skill comes from where the skill file lives. The frontmatter name field sets the display label shown in skill listings and, except for a plugin-root SKILL.md, does not change what you type after /.",
+        "The table below shows where the command name comes from for each layout:",
+        "The plugin-root case is the one place where name does set the command name, because there is no skill directory to take it from. If name is not set in the frontmatter, the plugin’s directory name is used instead.",
         "Skills support string substitution for dynamic values in the skill content:",
         "Indexed arguments use shell-style quoting, so wrap multi-word values in quotes to pass them as a single argument. For example, /my-skill \"hello world\" second makes $0 expand to hello world and $1 to second. The $ARGUMENTS placeholder always expands to the full argument string as typed.",
         "Example using substitutions:",
@@ -12453,10 +12468,10 @@
             "Live change detection",
             "Automatic discovery from parent and nested directories",
             "Skills from additional directories",
-            "Configure skillsTypes of skill contentFrontmatter referenceAvailable string substitutionsAdd supporting filesControl who invokes a skillSkill content lifecyclePre-approve tools for a skillPass arguments to skills",
+            "Configure skillsTypes of skill contentFrontmatter referenceHow a skill gets its command nameAvailable string substitutionsAdd supporting filesControl who invokes a skillSkill content lifecyclePre-approve tools for a skillPass arguments to skills",
             "Types of skill content",
             "Frontmatter reference",
-            "Available string substitutions"
+            "How a skill gets its command name"
           ],
           "codeBlocks": []
         },
@@ -12529,7 +12544,7 @@
             "Each skill is a directory with SKILL.md as the entrypoint:",
             "The SKILL.md contains the main instructions and is required. Other files are optional and let you build more powerful skills: templates for Claude to fill in, example outputs showing the expected format, scripts Claude can execute, or detailed reference documentation. Reference these files from your SKILL.md so Claude knows what they contain and when to load them. See Add supporting files for more details.",
             "Files in .claude/commands/ still work and support the same frontmatter. Skills are recommended since they support additional features like supporting files.",
-            "The --add-dir flag grants file access rather than configuration discovery, but skills are an exception: .claude/skills/ within an added directory is loaded automatically. See Live change detection for how edits are picked up during a session.",
+            "The --add-dir flag and /add-dir command grant file access rather than configuration discovery, but skills are an exception: .claude/skills/ within an added directory is loaded automatically. This exception applies only to --add-dir and /add-dir. The permissions.additionalDirectories setting in settings.json grants file access only and does not load skills. See Live change detection for how edits are picked up during a session.",
             "Other .claude/ configuration such as subagents, commands, and output styles is not loaded from additional directories. See the exceptions table for the complete list of what is and isn’t loaded, and the recommended ways to share configuration across projects.",
             "CLAUDE.md files from --add-dir directories are not loaded by default. To load them, set CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1. See Load from additional directories."
           ],
@@ -12563,6 +12578,9 @@
           "paragraphs": [
             "Beyond the markdown content, you can configure skill behavior using YAML frontmatter fields between --- markers at the top of your SKILL.md file:",
             "All fields are optional. Only description is recommended so Claude knows when to use the skill.",
+            "The command you type to invoke a skill comes from where the skill file lives. The frontmatter name field sets the display label shown in skill listings and, except for a plugin-root SKILL.md, does not change what you type after /.",
+            "The table below shows where the command name comes from for each layout:",
+            "The plugin-root case is the one place where name does set the command name, because there is no skill directory to take it from. If name is not set in the frontmatter, the plugin’s directory name is used instead.",
             "Skills support string substitution for dynamic values in the skill content:",
             "Indexed arguments use shell-style quoting, so wrap multi-word values in quotes to pass them as a single argument. For example, /my-skill \"hello world\" second makes $0 expand to hello world and $1 to second. The $ARGUMENTS placeholder always expands to the full argument string as typed.",
             "Example using substitutions:"
@@ -18135,6 +18153,7 @@
         "​Authenticate with per-user credentials",
         "​Validate the configuration",
         "​Disable MCP entirely",
+        "​Allow claude.ai connectors alongside the managed set",
         "​Policy-based control with allowlists and denylists",
         "​Match servers by URL, command, or name",
         "​How a server is evaluated",
@@ -18151,6 +18170,7 @@
         "Authenticate with per-user credentials",
         "Validate the configuration",
         "Disable MCP entirely",
+        "Allow claude.ai connectors alongside the managed set",
         "Policy-based control with allowlists and denylists",
         "Match servers by URL, command, or name",
         "How a server is evaluated",
@@ -18163,10 +18183,11 @@
       ],
       "paragraphs": [
         "Choose a pattern",
-        "Exclusive control with managed-mcp.jsonAuthenticate with per-user credentialsValidate the configurationDisable MCP entirely",
+        "Exclusive control with managed-mcp.jsonAuthenticate with per-user credentialsValidate the configurationDisable MCP entirelyAllow claude.ai connectors alongside the managed set",
         "Authenticate with per-user credentials",
         "Validate the configuration",
         "Disable MCP entirely",
+        "Allow claude.ai connectors alongside the managed set",
         "Policy-based control with allowlists and denylistsMatch servers by URL, command, or nameHow a server is evaluatedExample configurationRestrict the allowlist to managed settings only",
         "Match servers by URL, command, or name",
         "How a server is evaluated",
@@ -18189,7 +18210,7 @@
         "The Security page covers the MCP threat model and how to evaluate a server before approving it. Decide what to enforce covers MCP restrictions alongside the other administrative controls.",
         "Claude Code supports a range of restriction levels. Each pattern uses one or both of the mechanisms covered below: managed-mcp.json for deploying a fixed set, and allowedMcpServers/deniedMcpServers for filtering what users configure.",
         "Claude Code doesn’t have a built-in MCP server registry that users can browse and install from. For the approved-catalog pattern, share the approved list and its claude mcp add commands somewhere your users will find them, such as an internal wiki, or distribute the servers as plugins through a managed plugin marketplace so users can browse and install them from /plugin.",
-        "If you deploy a managed-mcp.json file, Claude Code loads only the servers that file defines. Users cannot add, modify, or use any other MCP servers, including plugin-provided servers and claude.ai connectors.",
+        "If you deploy a managed-mcp.json file, Claude Code loads only the servers that file defines. Users cannot add, modify, or use any other MCP servers, including plugin-provided servers. The file also suppresses claude.ai connectors unless you allow them alongside the managed set.",
         "Two other settings can further filter the managed set:",
         "allowedMcpServers and deniedMcpServers apply to managed servers too, so a managed server that doesn’t pass them won’t load.",
         "A user’s own deniedMcpServers merges in from their settings, so users can block a managed server for themselves.",
@@ -18205,6 +18226,9 @@
         "claude mcp add --transport http test https://example.com/mcp fails with Cannot add MCP server: enterprise MCP configuration is active and has exclusive control over MCP servers. The URL doesn’t need to be a real server, since the policy check rejects the command before anything is contacted.",
         "Deploy a managed-mcp.json containing an empty server map to block every MCP server:",
         "Users see no MCP servers in /mcp, and claude mcp add fails with the enterprise-policy error above. Servers users had previously configured stop loading the next time they start a session, with no warning that policy is the reason.",
+        "Deploying managed-mcp.json suppresses claude.ai connectors by default, including connectors an administrator configured for the organization in the claude.ai admin console. To load those connectors alongside the servers in managed-mcp.json, set \"allowAllClaudeAiMcps\": true in a managed settings source. Requires Claude Code v2.1.149 or later.",
+        "With the setting enabled, Claude Code loads the same claude.ai connectors it would load if managed-mcp.json were not deployed. Allowlists and denylists still apply to those connectors, so you can block specific ones with deniedMcpServers. The setting affects only claude.ai connectors; plugin-provided servers stay suppressed.",
+        "Claude Code reads this setting only from admin-controlled policy tiers: server-managed settings, an MDM-deployed plist or HKLM registry key, or a system managed-settings.json file. Placing it in user or project settings has no effect, so users cannot re-enable connectors that exclusive control suppressed.",
         "Allowlists and denylists filter which configured servers are allowed to load. They aren’t a registry: a server still has to be added by a user, a plugin, or managed-mcp.json before the allowlist or denylist applies to it. To deploy servers to users, use managed-mcp.json.",
         "To make the allowlist authoritative, set allowedMcpServers and allowManagedMcpServersOnly: true together in a managed settings source, such as server-managed settings or a deployed managed-settings.json file. Restrict the allowlist to managed settings only shows the configuration. Without allowManagedMcpServersOnly, allowlists from every settings source merge, including a user’s own ~/.claude/settings.json, so a user can broaden what your allowlist permits. Denylists merge from every source regardless.",
         "allowManagedMcpServersOnly is separate from allowManagedPermissionRulesOnly, which locks down permission rules only. Setting that flag does not enforce the MCP allowlist.",
@@ -18259,17 +18283,17 @@
           "title": "On this page",
           "paragraphs": [
             "Choose a pattern",
-            "Exclusive control with managed-mcp.jsonAuthenticate with per-user credentialsValidate the configurationDisable MCP entirely",
+            "Exclusive control with managed-mcp.jsonAuthenticate with per-user credentialsValidate the configurationDisable MCP entirelyAllow claude.ai connectors alongside the managed set",
             "Authenticate with per-user credentials",
             "Validate the configuration",
             "Disable MCP entirely",
+            "Allow claude.ai connectors alongside the managed set",
             "Policy-based control with allowlists and denylistsMatch servers by URL, command, or nameHow a server is evaluatedExample configurationRestrict the allowlist to managed settings only",
             "Match servers by URL, command, or name",
             "How a server is evaluated",
             "Example configuration",
             "Restrict the allowlist to managed settings only",
-            "How restrictions appear to users",
-            "Monitor MCP usage"
+            "How restrictions appear to users"
           ],
           "codeBlocks": []
         },
@@ -18300,7 +18324,7 @@
         {
           "title": "​Exclusive control with managed-mcp.json",
           "paragraphs": [
-            "If you deploy a managed-mcp.json file, Claude Code loads only the servers that file defines. Users cannot add, modify, or use any other MCP servers, including plugin-provided servers and claude.ai connectors.",
+            "If you deploy a managed-mcp.json file, Claude Code loads only the servers that file defines. Users cannot add, modify, or use any other MCP servers, including plugin-provided servers. The file also suppresses claude.ai connectors unless you allow them alongside the managed set.",
             "Two other settings can further filter the managed set:",
             "allowedMcpServers and deniedMcpServers apply to managed servers too, so a managed server that doesn’t pass them won’t load.",
             "A user’s own deniedMcpServers merges in from their settings, so users can block a managed server for themselves.",
@@ -18340,6 +18364,15 @@
           "codeBlocks": [
             "{\n  \"mcpServers\": {}\n}"
           ]
+        },
+        {
+          "title": "​Allow claude.ai connectors alongside the managed set",
+          "paragraphs": [
+            "Deploying managed-mcp.json suppresses claude.ai connectors by default, including connectors an administrator configured for the organization in the claude.ai admin console. To load those connectors alongside the servers in managed-mcp.json, set \"allowAllClaudeAiMcps\": true in a managed settings source. Requires Claude Code v2.1.149 or later.",
+            "With the setting enabled, Claude Code loads the same claude.ai connectors it would load if managed-mcp.json were not deployed. Allowlists and denylists still apply to those connectors, so you can block specific ones with deniedMcpServers. The setting affects only claude.ai connectors; plugin-provided servers stay suppressed.",
+            "Claude Code reads this setting only from admin-controlled policy tiers: server-managed settings, an MDM-deployed plist or HKLM registry key, or a system managed-settings.json file. Placing it in user or project settings has no effect, so users cannot re-enable connectors that exclusive control suppressed."
+          ],
+          "codeBlocks": []
         },
         {
           "title": "​Policy-based control with allowlists and denylists",
@@ -21042,7 +21075,12 @@
         "Additional content-bearing attributes such as new_context, system_prompt_preview, user_system_prompt, tool_input, and response.model_output are emitted only when detailed beta tracing is active. They are not part of the stable span schema. user_system_prompt additionally requires OTEL_LOG_USER_PROMPTS=1. It carries only the system prompt text you provide via the systemPrompt SDK option or --system-prompt and --append-system-prompt flags, truncated at 60 KB, and is emitted once per session rather than per request.",
         "For enterprise environments that require dynamic authentication, you can configure a script to generate headers dynamically. Dynamic headers apply only to the http/protobuf and http/json protocols. The grpc exporter uses only the static OTEL_EXPORTER_OTLP_HEADERS value.",
         "Add to your .claude/settings.json:",
+        "The value can be the path to an executable file, including a path that contains spaces, or a shell command line with arguments. On Windows, the value always runs through the shell, so quote a path that contains spaces inside the JSON value.",
         "The script must output valid JSON with string key-value pairs representing HTTP headers:",
+        "If the helper fails or prints output that doesn’t meet these requirements, Claude Code reports the error in:",
+        "/doctor output",
+        "The debug log, when running with --debug or after running /debug in the session",
+        "stderr, in non-interactive sessions started with -p",
         "The headers helper script runs at startup and periodically thereafter to support token refresh. By default, the script runs every 29 minutes. Customize the interval with the CLAUDE_CODE_OTEL_HEADERS_HELPER_DEBOUNCE_MS environment variable.",
         "Organizations with multiple teams or departments can add custom attributes to distinguish between different groups using the OTEL_RESOURCE_ATTRIBUTES environment variable:",
         "These custom attributes will be included in all metrics and events, allowing you to:",
@@ -21105,19 +21143,14 @@
         "prompt: Prompt content (redacted by default, enable with OTEL_LOG_USER_PROMPTS=1)",
         "command_name: Command name when the prompt invokes one. Built-in and bundled command names such as compact or debug are emitted as-is; aliases such as reset emit as typed rather than the canonical name. Custom, plugin, and MCP command names collapse to custom or mcp unless OTEL_LOG_TOOL_DETAILS=1 is set",
         "command_source: Origin of the command when present: builtin, custom, or mcp. Plugin-provided commands report as custom",
-        "Logged when a tool completes execution.",
+        "Logged when a tool completes execution. Not emitted if the tool call was rejected; see the Tool decision event for rejections.",
         "Event Name: claude_code.tool_result",
         "event.name: \"tool_result\"",
         "tool_name: Name of the tool",
         "tool_use_id: Unique identifier for this tool invocation. Matches the tool_use_id passed to hooks, allowing correlation between OTel events and hook-captured data.",
         "success: \"true\" or \"false\"",
         "duration_ms: Execution time in milliseconds",
-        "error_type: Error category string when the tool failed, such as \"Error:ENOENT\" or \"ShellError\"",
-        "error (when OTEL_LOG_TOOL_DETAILS=1): Full error message when the tool failed",
-        "decision_type: Either \"accept\" or \"reject\"",
-        "decision_source: Where the decision came from. One of \"config\", \"hook\", \"user_permanent\", \"user_temporary\", \"user_abort\", or \"user_reject\". See the Tool decision event for what each value means.",
-        "tool_input_size_bytes: Size of the JSON-serialized tool input in bytes",
-        "tool_result_size_bytes: Size of the tool result in bytes"
+        "error_type: Error category string when the tool failed, such as \"Error:ENOENT\" or \"ShellError\""
       ],
       "codeBlocks": [
         "# 1. Enable telemetry\nexport CLAUDE_CODE_ENABLE_TELEMETRY=1\n\n# 2. Choose exporters (both are optional - configure only what you need)\nexport OTEL_METRICS_EXPORTER=otlp       # Options: otlp, prometheus, console, none\nexport OTEL_LOGS_EXPORTER=otlp          # Options: otlp, console, none\n\n# 3. Configure OTLP endpoint (for OTLP exporter)\nexport OTEL_EXPORTER_OTLP_PROTOCOL=grpc\nexport OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317\n\n# 4. Set authentication (if required)\nexport OTEL_EXPORTER_OTLP_HEADERS=\"Authorization=Bearer your-token\"\n\n# 5. For debugging: reduce export intervals\nexport OTEL_METRIC_EXPORT_INTERVAL=10000  # 10 seconds (default: 60000ms)\nexport OTEL_LOGS_EXPORT_INTERVAL=5000     # 5 seconds (default: 5000ms)\n\n# 6. Run Claude Code\nclaude",
@@ -21233,7 +21266,12 @@
           "paragraphs": [
             "For enterprise environments that require dynamic authentication, you can configure a script to generate headers dynamically. Dynamic headers apply only to the http/protobuf and http/json protocols. The grpc exporter uses only the static OTEL_EXPORTER_OTLP_HEADERS value.",
             "Add to your .claude/settings.json:",
+            "The value can be the path to an executable file, including a path that contains spaces, or a shell command line with arguments. On Windows, the value always runs through the shell, so quote a path that contains spaces inside the JSON value.",
             "The script must output valid JSON with string key-value pairs representing HTTP headers:",
+            "If the helper fails or prints output that doesn’t meet these requirements, Claude Code reports the error in:",
+            "/doctor output",
+            "The debug log, when running with --debug or after running /debug in the session",
+            "stderr, in non-interactive sessions started with -p",
             "The headers helper script runs at startup and periodically thereafter to support token refresh. By default, the script runs every 29 minutes. Customize the interval with the CLAUDE_CODE_OTEL_HEADERS_HELPER_DEBOUNCE_MS environment variable."
           ],
           "codeBlocks": [
@@ -21540,9 +21578,11 @@
         "Claude Code charges by API token consumption. For subscription plan pricing (Pro, Max, Team, Enterprise), see claude.com/pricing. Per-developer costs vary widely based on model selection, codebase size, and usage patterns such as running multiple instances or automation.",
         "Across enterprise deployments, the average cost is around $13 per developer per active day and $150-250 per developer per month, with costs remaining below $30 per active day for 90% of users. To estimate spend for your own team, start with a small pilot group and use the tracking tools below to establish a baseline before wider rollout.",
         "This page covers how to track your costs, manage costs for teams, and reduce token usage.",
-        "The Session block in /usage shows API token usage and is intended for API users. Claude Max and Pro subscribers have usage included in their subscription, so the session cost figure isn’t relevant for billing purposes. Subscribers see plan usage bars and activity stats on the same screen.",
-        "The /usage command provides detailed token usage statistics for your current session. The dollar figure is an estimate computed locally from token counts and may differ from your actual bill. For authoritative billing, see the Usage page in the Claude Console.",
+        "The Session block in /usage shows API token usage and is intended for API users. Claude Max and Pro subscribers have usage included in their subscription, so the session cost figure isn’t relevant for billing purposes. Subscribers see plan usage bars, activity stats, and a usage breakdown on the same screen.",
+        "The Session block at the top of /usage shows detailed token usage statistics for your current session. The dollar figure is an estimate computed locally from token counts and may differ from your actual bill. For authoritative billing, see the Usage page in the Claude Console.",
+        "On a Pro, Max, Team, or Enterprise plan, /usage also shows a breakdown of what counts against your plan limits. It attributes recent usage to skills, subagents, plugins, and individual MCP servers, with each shown as a percentage of the total. Press d or w to switch between the last 24 hours and the last 7 days. The figures are approximate and computed from local session history on this machine, so usage from other devices or claude.ai is not included.",
         "When using Claude API, you can set workspace spend limits on the total Claude Code workspace spend. Admins can view cost and usage reporting in the Console.",
+        "On Pro and Max plans, you can set a monthly spend limit on usage credits with the /usage-credits command. If you reach that limit while you still have usage credits available, Claude Code prompts you to raise or remove the limit so you can continue without leaving the CLI. Changing the limit requires billing access on the account.",
         "When you first authenticate Claude Code with your Claude Console account, a workspace called “Claude Code” is automatically created for you. This workspace provides centralized cost tracking and management for all Claude Code usage in your organization. You cannot create API keys for this workspace; it is exclusively for Claude Code authentication and usage.",
         "For organizations with custom rate limits, Claude Code traffic in this workspace counts toward your organization’s overall API rate limits. You can set a workspace rate limit on this workspace’s Limits page in the Claude Console to cap Claude Code’s share and protect other production workloads.",
         "On Bedrock, Vertex, and Foundry, Claude Code does not send metrics from your cloud. To get cost metrics, several large enterprises reported using LiteLLM, which is an open-source tool that helps companies track spend by key. This project is unaffiliated with Anthropic and has not been audited for security.",
@@ -21636,8 +21676,9 @@
         {
           "title": "​Using the /usage command",
           "paragraphs": [
-            "The Session block in /usage shows API token usage and is intended for API users. Claude Max and Pro subscribers have usage included in their subscription, so the session cost figure isn’t relevant for billing purposes. Subscribers see plan usage bars and activity stats on the same screen.",
-            "The /usage command provides detailed token usage statistics for your current session. The dollar figure is an estimate computed locally from token counts and may differ from your actual bill. For authoritative billing, see the Usage page in the Claude Console."
+            "The Session block in /usage shows API token usage and is intended for API users. Claude Max and Pro subscribers have usage included in their subscription, so the session cost figure isn’t relevant for billing purposes. Subscribers see plan usage bars, activity stats, and a usage breakdown on the same screen.",
+            "The Session block at the top of /usage shows detailed token usage statistics for your current session. The dollar figure is an estimate computed locally from token counts and may differ from your actual bill. For authoritative billing, see the Usage page in the Claude Console.",
+            "On a Pro, Max, Team, or Enterprise plan, /usage also shows a breakdown of what counts against your plan limits. It attributes recent usage to skills, subagents, plugins, and individual MCP servers, with each shown as a percentage of the total. Press d or w to switch between the last 24 hours and the last 7 days. The figures are approximate and computed from local session history on this machine, so usage from other devices or claude.ai is not included."
           ],
           "codeBlocks": [
             "Total cost:            $0.55\nTotal duration (API):  6m 19.7s\nTotal duration (wall): 6h 33m 10.2s\nTotal code changes:    0 lines added, 0 lines removed"
@@ -21647,6 +21688,7 @@
           "title": "​Managing costs for teams",
           "paragraphs": [
             "When using Claude API, you can set workspace spend limits on the total Claude Code workspace spend. Admins can view cost and usage reporting in the Console.",
+            "On Pro and Max plans, you can set a monthly spend limit on usage credits with the /usage-credits command. If you reach that limit while you still have usage credits available, Claude Code prompts you to raise or remove the limit so you can continue without leaving the CLI. Changing the limit requires billing access on the account.",
             "When you first authenticate Claude Code with your Claude Console account, a workspace called “Claude Code” is automatically created for you. This workspace provides centralized cost tracking and management for all Claude Code usage in your organization. You cannot create API keys for this workspace; it is exclusively for Claude Code authentication and usage.",
             "For organizations with custom rate limits, Claude Code traffic in this workspace counts toward your organization’s overall API rate limits. You can set a workspace rate limit on this workspace’s Limits page in the Claude Console to cap Claude Code’s share and protect other production workloads.",
             "On Bedrock, Vertex, and Foundry, Claude Code does not send metrics from your cloud. To get cost metrics, several large enterprises reported using LiteLLM, which is an open-source tool that helps companies track spend by key. This project is unaffiliated with Anthropic and has not been audited for security."
@@ -25285,6 +25327,7 @@
         "Persistent configuration: add to additionalDirectories in settings files",
         "Files in additional directories follow the same permission rules as the original working directory: they become readable without prompts, and file editing permissions follow the current permission mode.",
         "Adding a directory extends where Claude can read and edit files. It does not make that directory a full configuration root: most .claude/ configuration is not discovered from additional directories, though a few types are loaded as exceptions.",
+        "These exceptions apply only to directories added with the --add-dir flag or the /add-dir command. Directories listed in permissions.additionalDirectories in a settings file grant file access only and do not load any of the configuration below.",
         "The following configuration types are loaded from --add-dir directories:",
         "Subagents, commands, and output styles are discovered from the current working directory and its parents, your user directory at ~/.claude/, and managed settings. Hooks and other settings.json keys load from the current working directory’s .claude/ folder with no parent-directory fallback, alongside your user ~/.claude/settings.json and managed settings. To share that configuration across projects, use one of these approaches:",
         "User-level configuration: place files in ~/.claude/agents/, ~/.claude/output-styles/, or ~/.claude/settings.json to make them available in every project",
@@ -25521,6 +25564,7 @@
           "title": "​Additional directories grant file access, not configuration",
           "paragraphs": [
             "Adding a directory extends where Claude can read and edit files. It does not make that directory a full configuration root: most .claude/ configuration is not discovered from additional directories, though a few types are loaded as exceptions.",
+            "These exceptions apply only to directories added with the --add-dir flag or the /add-dir command. Directories listed in permissions.additionalDirectories in a settings file grant file access only and do not load any of the configuration below.",
             "The following configuration types are loaded from --add-dir directories:",
             "Subagents, commands, and output styles are discovered from the current working directory and its parents, your user directory at ~/.claude/, and managed settings. Hooks and other settings.json keys load from the current working directory’s .claude/ folder with no parent-directory fallback, alongside your user ~/.claude/settings.json and managed settings. To share that configuration across projects, use one of these approaches:",
             "User-level configuration: place files in ~/.claude/agents/, ~/.claude/output-styles/, or ~/.claude/settings.json to make them available in every project",
@@ -26884,7 +26928,7 @@
         "Fast mode requires Claude Code v2.1.36 or later. Check your version with claude --version.",
         "What to know:",
         "Use /fast to toggle on fast mode in Claude Code CLI. Also available via /fast in Claude Code VS Code Extension.",
-        "Fast mode pricing is 30/30/30/150 MTok on both Opus 4.7 and Opus 4.6.",
+        "Fast mode pricing is $30/$150 MTok on both Opus 4.7 and Opus 4.6.",
         "Available to all Claude Code users on subscription plans (Pro/Max/Team/Enterprise) and Claude Console.",
         "For Claude Code users on subscription plans (Pro/Max/Team/Enterprise), fast mode is available via usage credits only and not included in the subscription rate limits.",
         "This page covers how to toggle fast mode, its cost tradeoff, when to use it, requirements, per-session opt-in, and rate limit behavior.",
@@ -26973,7 +27017,7 @@
             "Fast mode requires Claude Code v2.1.36 or later. Check your version with claude --version.",
             "What to know:",
             "Use /fast to toggle on fast mode in Claude Code CLI. Also available via /fast in Claude Code VS Code Extension.",
-            "Fast mode pricing is 30/30/30/150 MTok on both Opus 4.7 and Opus 4.6.",
+            "Fast mode pricing is $30/$150 MTok on both Opus 4.7 and Opus 4.6.",
             "Available to all Claude Code users on subscription plans (Pro/Max/Team/Enterprise) and Claude Console.",
             "For Claude Code users on subscription plans (Pro/Max/Team/Enterprise), fast mode is available via usage credits only and not included in the subscription rate limits.",
             "This page covers how to toggle fast mode, its cost tradeoff, when to use it, requirements, per-session opt-in, and rate limit behavior."
@@ -28712,6 +28756,7 @@
         "Actions available in the Footer context:",
         "Actions available in the MessageSelector context:",
         "Actions available in the DiffDialog context:",
+        "The diff detail view also binds pager-style keys to the standard scroll actions. These bindings are part of the DiffDialog context and apply only in the detail view; the Scroll context defaults listed under Scroll actions are unchanged.",
         "Actions available in the ModelPicker context:",
         "Actions available in the Select context:",
         "Actions available in the Plugin context:",
@@ -28924,7 +28969,8 @@
         {
           "title": "​Diff actions",
           "paragraphs": [
-            "Actions available in the DiffDialog context:"
+            "Actions available in the DiffDialog context:",
+            "The diff detail view also binds pager-style keys to the standard scroll actions. These bindings are part of the DiffDialog context and apply only in the detail view; the Scroll context defaults listed under Scroll actions are unchanged."
           ],
           "codeBlocks": []
         },

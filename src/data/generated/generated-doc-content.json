@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-25T06:47:29.144Z",
-  "sourceGeneratedAt": "2026-05-25T06:47:28.814Z",
+  "generatedAt": "2026-05-26T06:18:01.258Z",
+  "sourceGeneratedAt": "2026-05-26T06:18:00.931Z",
   "items": {
     "overview": {
       "sourceLabel": "Overview",
@@ -1350,6 +1350,13 @@
           "title": "Switching models",
           "paragraphs": [
             "这一段主要是在把\"Switching models\"讲实，不是只摆个标题给你看。",
+            "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
+          ]
+        },
+        {
+          "title": "Changing effort level",
+          "paragraphs": [
+            "这一段不只是挂个标题，它是在说明\"Changing effort level\"这一块到底负责什么。",
             "看这段时要特别盯工具和权限边界，别为了省事一把全开。"
           ]
         },
@@ -7342,7 +7349,7 @@
             {
               "title": "原页关键片段：Try it: add the demo marketplace 2",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "/plugin install commit-commands@anthropics-claude-code",
+              "code": "/plugin install commit-commands@claude-code-plugins",
               "kind": "command"
             },
             {
@@ -7486,7 +7493,7 @@
             {
               "title": "Try it: add the demo marketplace 2",
               "body": "真到动手的时候了，下面这条直接敲一遍，看它回什么。",
-              "code": "/plugin install commit-commands@anthropics-claude-code",
+              "code": "/plugin install commit-commands@claude-code-plugins",
               "kind": "command"
             },
             {
@@ -12834,7 +12841,7 @@
           "paragraphs": [
             "你可以把\"Managed MCP configuration\"理解成 Setup and access 这一栏里的一把专门工具。这页不是让你背书，而是教你什么时候该把这把工具拿出来。",
             "原文这页大多会按 Choose a pattern、Exclusive control with managed-mcp.json、Authenticate with per-user credentials、Validate the configuration 这些环节往下讲。",
-            "翻成人话，大概就是：Exclusive control with managed-mcp.jsonAuthenticate with per-user credentialsValidate the configurationDisable MCP entirely"
+            "翻成人话，大概就是：Exclusive control with managed-mcp.jsonAuthenticate with per-user credentialsValidate the configurationDisable MCP entirelyAllow claude.ai connectors alongside the managed set"
           ]
         },
         {
@@ -12946,6 +12953,13 @@
               "code": "{\n  \"mcpServers\": {}\n}",
               "kind": "config"
             }
+          ]
+        },
+        {
+          "title": "Allow claude.ai connectors alongside the managed set",
+          "paragraphs": [
+            "看到这里，就把\"Allow claude.ai connectors alongside the managed set\"当成一件真要上手的活来看。",
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ]
         },
         {
@@ -15214,7 +15228,7 @@
           "title": "Dynamic headers",
           "paragraphs": [
             "这一块主要是在说\"Dynamic headers\"真到手上该怎么用，哪里最容易踩坑。",
-            "如果你看到环境变量或 settings.json，意思通常都是：这不是会话里临时喊一声就行，而是要把开关真正写进环境或配置。"
+            "这里还牵扯作用域，意思就是这条规则到底管当前项目、你个人，还是只管这一趟会话。"
           ],
           "steps": [
             {
