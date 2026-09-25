@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T07:35:44.028Z",
+  "generatedAt": "2026-09-25T07:47:56.517Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
     {
@@ -9,6 +9,10 @@
     {
       "title": "Build with Claude Code",
       "path": "/docs/en/agents"
+    },
+    {
+      "title": "Plugins",
+      "path": "/docs/en/plugins/overview"
     },
     {
       "title": "Administration",
