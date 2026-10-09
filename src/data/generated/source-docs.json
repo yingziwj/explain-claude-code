@@ -1,35 +1,7 @@
 {
-  "generatedAt": "2026-10-08T08:57:17.298Z",
+  "generatedAt": "2026-10-09T09:03:24.842Z",
   "source": "https://code.claude.com/docs/en/overview",
   "topTabs": [
-    {
-      "title": "Getting started",
-      "path": "/docs/en/overview"
-    },
-    {
-      "title": "Build with Claude Code",
-      "path": "/docs/en/agents"
-    },
-    {
-      "title": "Plugins",
-      "path": "/docs/en/plugins/overview"
-    },
-    {
-      "title": "Administration",
-      "path": "/docs/en/admin-setup"
-    },
-    {
-      "title": "Configuration",
-      "path": "/docs/en/settings"
-    },
-    {
-      "title": "Reference",
-      "path": "/docs/en/cli-reference"
-    },
-    {
-      "title": "Agent SDK",
-      "path": "/docs/en/agent-sdk/overview"
-    },
     {
       "title": "What's New",
       "path": "/docs/en/whats-new"
